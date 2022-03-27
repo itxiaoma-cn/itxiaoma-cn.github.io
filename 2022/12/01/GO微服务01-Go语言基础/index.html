@@ -6,18 +6,12 @@
   <meta name="keywords" content=" GO微服务 , GO ">
   <meta name="description" content="01-Go语言基础20问 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="1 Go语言的变量命名规范是什么？以字母或下划线开头，后面可以跟任意数量的字母，数字，下划线。 变量名称一般遵循驼峰法，变量为私有则首字母小写，共有则首字母大写。 2  如何获取变量的地址？如何取到地址中的值？一个指针的值是另一个变量的地址。 如var x int声明变量x，则&amp;x是变量x的内存地址； p :&#x3D; &amp;x 表示指向该地址的指针，*p指向地址中的值。 3  变量的生命周期">
-<meta property="og:type" content="article">
-<meta property="og:title" content="01-Go语言基础20问">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/12/01/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="IT小马">
+<meta property="og:url" content="https://blog.itxiaoma.cn/archives/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="1 Go语言的变量命名规范是什么？以字母或下划线开头，后面可以跟任意数量的字母，数字，下划线。 变量名称一般遵循驼峰法，变量为私有则首字母小写，共有则首字母大写。 2  如何获取变量的地址？如何取到地址中的值？一个指针的值是另一个变量的地址。 如var x int声明变量x，则&amp;x是变量x的内存地址； p :&#x3D; &amp;x 表示指向该地址的指针，*p指向地址中的值。 3  变量的生命周期">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-30T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-27T14:47:27.000Z">
 <meta property="article:author" content="IT小马">
-<meta property="article:tag" content="GO微服务">
-<meta property="article:tag" content="GO">
 <meta name="twitter:card" content="summary">
 
 
@@ -232,7 +226,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-03-27 22:47:27'>2022-12-01 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-03-27 22:50:27'>2022-12-01 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -243,7 +237,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-Go%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1 Go语言的变量命名规范是什么？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E5%8F%98%E9%87%8F%E7%9A%84%E5%9C%B0%E5%9D%80%EF%BC%9F%E5%A6%82%E4%BD%95%E5%8F%96%E5%88%B0%E5%9C%B0%E5%9D%80%E4%B8%AD%E7%9A%84%E5%80%BC%EF%BC%9F"><span class="toc-text">2  如何获取变量的地址？如何取到地址中的值？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%8F%98%E9%87%8F%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">3  变量的生命周期是什么？作用域是什么？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BA%E5%8F%98%E9%87%8F%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">4  创建变量有哪几种方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-Go%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">5  Go语言简单数据类型都有哪些？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E7%BB%84%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="toc-text">6  初始化数组的几种方式？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84"><span class="toc-text">7  遍历数组</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%87%E7%89%87%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="toc-text">8  初始化切片的几种方式？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9-%E9%81%8D%E5%8E%86%E5%88%87%E7%89%87"><span class="toc-text">9  遍历切片</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10-%E5%A6%82%E4%BD%95%E5%A4%8D%E5%88%B6%E5%88%87%E7%89%87"><span class="toc-text">10 如何复制切片</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11-%E5%AE%9E%E7%8E%B0%E5%88%87%E7%89%87%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5"><span class="toc-text">11 实现切片的增删改查</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#12-%E4%B8%8B%E9%9D%A2%E4%BB%A3%E7%A0%81%E6%98%AF%E5%90%A6%E6%9C%89%E9%97%AE%E9%A2%98%EF%BC%9F%E5%B9%B6%E8%AF%B4%E5%87%BA%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F-%E5%A6%82%E6%9E%9C%E6%9C%89%E9%97%AE%E9%A2%98%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BF%AE%E6%AD%A3%EF%BC%9F"><span class="toc-text">12 下面代码是否有问题？并说出为什么？ 如果有问题，如何修正？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11-%E5%88%86%E5%88%AB%E5%86%99%E4%B8%80%E4%B8%AA-if-%E5%92%8C-switch%E3%80%81%E6%9E%9A%E4%B8%BE-%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">11 分别写一个 if 和 switch、枚举 的例子</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#12-map%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F"><span class="toc-text">12 map有什么特点？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#13-%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%8F%AF%E4%BB%A5%E5%81%9Amap%E7%9A%84key"><span class="toc-text">13 什么样的类型可以做map的key</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#14-%E5%86%99%E4%B8%80%E4%B8%AAmap%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5"><span class="toc-text">14 写一个map的增删改查</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#15-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">15 函数的定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#16-%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82%EF%BC%8C%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E4%BC%A0%E5%BC%95%E7%94%A8%EF%BC%9F"><span class="toc-text">16 函数传参，传值还是传引用？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#17-%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%E7%9A%84%E5%A4%9A%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%9F"><span class="toc-text">17 定义函数的多返回值？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#18-%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E-%E5%87%BD%E6%95%B0%E5%8F%98%E9%87%8F%E3%80%81%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E3%80%81%E9%97%AD%E5%8C%85%E3%80%81%E5%8F%98%E9%95%BF%E5%87%BD%E6%95%B0%EF%BC%9F"><span class="toc-text">18 举例说明 函数变量、匿名函数、闭包、变长函数？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#19-%E8%AF%B4%E4%B8%80%E4%B8%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="toc-text">19 说一下面向对象设计的好处？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#20-%E6%96%B9%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">20 方法的定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#21-%E6%8C%87%E9%92%88%E6%8E%A5%E6%94%B6%E8%80%85%E5%92%8C%E5%80%BC%E6%8E%A5%E6%94%B6%E8%80%85%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C"><span class="toc-text">21 指针接收者和值接收者有何不同</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Go%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1 Go语言的变量命名规范是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E5%8F%98%E9%87%8F%E7%9A%84%E5%9C%B0%E5%9D%80%EF%BC%9F%E5%A6%82%E4%BD%95%E5%8F%96%E5%88%B0%E5%9C%B0%E5%9D%80%E4%B8%AD%E7%9A%84%E5%80%BC%EF%BC%9F"><span class="toc-text">2  如何获取变量的地址？如何取到地址中的值？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8F%98%E9%87%8F%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">3  变量的生命周期是什么？作用域是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%88%9B%E5%BB%BA%E5%8F%98%E9%87%8F%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">4  创建变量有哪几种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Go%E8%AF%AD%E8%A8%80%E7%AE%80%E5%8D%95%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">5  Go语言简单数据类型都有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E7%BB%84%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="toc-text">6  初始化数组的几种方式？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84"><span class="toc-text">7  遍历数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%87%E7%89%87%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="toc-text">8  初始化切片的几种方式？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E9%81%8D%E5%8E%86%E5%88%87%E7%89%87"><span class="toc-text">9  遍历切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E5%A6%82%E4%BD%95%E5%A4%8D%E5%88%B6%E5%88%87%E7%89%87"><span class="toc-text">10 如何复制切片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E5%AE%9E%E7%8E%B0%E5%88%87%E7%89%87%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5"><span class="toc-text">11 实现切片的增删改查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E4%B8%8B%E9%9D%A2%E4%BB%A3%E7%A0%81%E6%98%AF%E5%90%A6%E6%9C%89%E9%97%AE%E9%A2%98%EF%BC%9F%E5%B9%B6%E8%AF%B4%E5%87%BA%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F-%E5%A6%82%E6%9E%9C%E6%9C%89%E9%97%AE%E9%A2%98%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BF%AE%E6%AD%A3%EF%BC%9F"><span class="toc-text">12 下面代码是否有问题？并说出为什么？ 如果有问题，如何修正？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E5%88%86%E5%88%AB%E5%86%99%E4%B8%80%E4%B8%AA-if-%E5%92%8C-switch%E3%80%81%E6%9E%9A%E4%B8%BE-%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">11 分别写一个 if 和 switch、枚举 的例子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-map%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F"><span class="toc-text">12 map有什么特点？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%8F%AF%E4%BB%A5%E5%81%9Amap%E7%9A%84key"><span class="toc-text">13 什么样的类型可以做map的key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E5%86%99%E4%B8%80%E4%B8%AAmap%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5"><span class="toc-text">14 写一个map的增删改查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">15 函数的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E5%87%BD%E6%95%B0%E4%BC%A0%E5%8F%82%EF%BC%8C%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E4%BC%A0%E5%BC%95%E7%94%A8%EF%BC%9F"><span class="toc-text">16 函数传参，传值还是传引用？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0%E7%9A%84%E5%A4%9A%E8%BF%94%E5%9B%9E%E5%80%BC%EF%BC%9F"><span class="toc-text">17 定义函数的多返回值？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E-%E5%87%BD%E6%95%B0%E5%8F%98%E9%87%8F%E3%80%81%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E3%80%81%E9%97%AD%E5%8C%85%E3%80%81%E5%8F%98%E9%95%BF%E5%87%BD%E6%95%B0%EF%BC%9F"><span class="toc-text">18 举例说明 函数变量、匿名函数、闭包、变长函数？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-%E8%AF%B4%E4%B8%80%E4%B8%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="toc-text">19 说一下面向对象设计的好处？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-%E6%96%B9%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">20 方法的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E6%8C%87%E9%92%88%E6%8E%A5%E6%94%B6%E8%80%85%E5%92%8C%E5%80%BC%E6%8E%A5%E6%94%B6%E8%80%85%E6%9C%89%E4%BD%95%E4%B8%8D%E5%90%8C"><span class="toc-text">21 指针接收者和值接收者有何不同</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -259,12 +253,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="1-Go语言的变量命名规范是什么？"><a href="#1-Go语言的变量命名规范是什么？" class="headerlink" title="1 Go语言的变量命名规范是什么？"></a>1 Go语言的变量命名规范是什么？</h5><p>以字母或下划线开头，后面可以跟任意数量的字母，数字，下划线。</p>
+        <h3 id="1-Go语言的变量命名规范是什么？"><a href="#1-Go语言的变量命名规范是什么？" class="headerlink" title="1 Go语言的变量命名规范是什么？"></a>1 Go语言的变量命名规范是什么？</h3><p>以字母或下划线开头，后面可以跟任意数量的字母，数字，下划线。</p>
 <p>变量名称一般遵循驼峰法，变量为私有则首字母小写，共有则首字母大写。</p>
-<h5 id="2-如何获取变量的地址？如何取到地址中的值？"><a href="#2-如何获取变量的地址？如何取到地址中的值？" class="headerlink" title="2  如何获取变量的地址？如何取到地址中的值？"></a>2  如何获取变量的地址？如何取到地址中的值？</h5><p>一个指针的值是另一个变量的地址。</p>
+<h3 id="2-如何获取变量的地址？如何取到地址中的值？"><a href="#2-如何获取变量的地址？如何取到地址中的值？" class="headerlink" title="2  如何获取变量的地址？如何取到地址中的值？"></a>2  如何获取变量的地址？如何取到地址中的值？</h3><p>一个指针的值是另一个变量的地址。</p>
 <p>如var x int声明变量x，则&amp;x是变量x的内存地址；</p>
 <p>p := &amp;x 表示指向该地址的指针，*p指向地址中的值。</p>
-<h5 id="3-变量的生命周期是什么？作用域是什么？"><a href="#3-变量的生命周期是什么？作用域是什么？" class="headerlink" title="3  变量的生命周期是什么？作用域是什么？"></a>3  变量的生命周期是什么？作用域是什么？</h5><p>变量的生命周期指的是在程序运行期间变量有效存在的时间段。</p>
+<h3 id="3-变量的生命周期是什么？作用域是什么？"><a href="#3-变量的生命周期是什么？作用域是什么？" class="headerlink" title="3  变量的生命周期是什么？作用域是什么？"></a>3  变量的生命周期是什么？作用域是什么？</h3><p>变量的生命周期指的是在程序运行期间变量有效存在的时间段。</p>
 <p>包一级声明的变量来说，它们的生命周期和整个程序的运行周期是一致的。</p>
 <p>局部变量的生命周期是：每次从创建一个新变量的声明语句开始，直到该变量不再被引用为止，然后变量的存储空间可能被回收。</p>
 <p>函数的形式参数和返回值：都属于局部变量，在函数被调用的时候创建，函数调用结束后被销毁。</p>
@@ -273,33 +267,33 @@
 <p>作用域是一个编译时的属性，变量的生命周期是一个运行时的概念。</p>
 <p>在函数体内声明的变量称之为局部变量，它们的作用域只在函数体内，函数的参数和返回值变量都属于局部变量。</p>
 <p>在函数体外声明的变量称之为全局变量，全局变量只需要在一个源文件中定义，就可以在所有源文件中使用，当然，不包含这个全局变量的源文件需要使用“import”关键字引入全局变量所在的源文件之后才能使用这个全局变量。</p>
-<h5 id="4-创建变量有哪几种方式"><a href="#4-创建变量有哪几种方式" class="headerlink" title="4  创建变量有哪几种方式"></a>4  创建变量有哪几种方式</h5><pre><code>var a int    
+<h3 id="4-创建变量有哪几种方式"><a href="#4-创建变量有哪几种方式" class="headerlink" title="4  创建变量有哪几种方式"></a>4  创建变量有哪几种方式</h3><pre><code>var a int    
 var b int = 1
 var c = 2
 d := 3
 var e, f int = 4, 5
 var g, h = 6, &quot;abc&quot;
 </code></pre>
-<h5 id="5-Go语言简单数据类型都有哪些？"><a href="#5-Go语言简单数据类型都有哪些？" class="headerlink" title="5  Go语言简单数据类型都有哪些？"></a>5  Go语言简单数据类型都有哪些？</h5><p>整型，浮点型，布尔型，字符串</p>
-<h5 id="6-初始化数组的几种方式？"><a href="#6-初始化数组的几种方式？" class="headerlink" title="6  初始化数组的几种方式？"></a>6  初始化数组的几种方式？</h5><pre><code>var array [5]int
+<h3 id="5-Go语言简单数据类型都有哪些？"><a href="#5-Go语言简单数据类型都有哪些？" class="headerlink" title="5  Go语言简单数据类型都有哪些？"></a>5  Go语言简单数据类型都有哪些？</h3><p>整型，浮点型，布尔型，字符串</p>
+<h3 id="6-初始化数组的几种方式？"><a href="#6-初始化数组的几种方式？" class="headerlink" title="6  初始化数组的几种方式？"></a>6  初始化数组的几种方式？</h3><pre><code>var array [5]int
 var array = [5]int&#123;1, 2, 3, 4, 5&#125;
 var array = [...]int&#123;1, 2, 3, 4, 5&#125;
 array :=[5]int&#123;1, 2, 3, 4, 5&#125;
 array :=[...]int&#123;1, 2, 3, 4, 5&#125;
 </code></pre>
-<h5 id="7-遍历数组"><a href="#7-遍历数组" class="headerlink" title="7  遍历数组"></a>7  遍历数组</h5><pre><code>for i := 0; i &lt; len(arr1); i++ &#123;
+<h3 id="7-遍历数组"><a href="#7-遍历数组" class="headerlink" title="7  遍历数组"></a>7  遍历数组</h3><pre><code>for i := 0; i &lt; len(arr1); i++ &#123;
         fmt.Println(arr1[i])
 &#125;
 for k, v := range arr1 &#123;
         fmt.Printf(&quot;key:%d value:%s\n&quot;, k, v)
 &#125;
 </code></pre>
-<h5 id="8-初始化切片的几种方式？"><a href="#8-初始化切片的几种方式？" class="headerlink" title="8  初始化切片的几种方式？"></a>8  初始化切片的几种方式？</h5><pre><code>slice := make([]int, 3, 5)
+<h3 id="8-初始化切片的几种方式？"><a href="#8-初始化切片的几种方式？" class="headerlink" title="8  初始化切片的几种方式？"></a>8  初始化切片的几种方式？</h3><pre><code>slice := make([]int, 3, 5)
 slice := make([]int, 5)
 slice := []int&#123;&#125;
 slice := []int&#123;1, 2, 3, 4, 5&#125;
 </code></pre>
-<h5 id="9-遍历切片"><a href="#9-遍历切片" class="headerlink" title="9  遍历切片"></a>9  遍历切片</h5><pre><code>var arr [5]int = [...]int&#123;10,20,30,40,50&#125;
+<h3 id="9-遍历切片"><a href="#9-遍历切片" class="headerlink" title="9  遍历切片"></a>9  遍历切片</h3><pre><code>var arr [5]int = [...]int&#123;10,20,30,40,50&#125;
 slice := arr[1:4]
 // for循环方式
 for i := 0; i &lt; len(slice); i++ &#123;
@@ -311,12 +305,12 @@ for i, v := range slice &#123;
     fmt.Printf(&quot;i=%v v=%v\n&quot;, i, v)
 &#125;
 </code></pre>
-<h5 id="10-如何复制切片"><a href="#10-如何复制切片" class="headerlink" title="10 如何复制切片"></a>10 如何复制切片</h5><pre><code>s := []int&#123;1,2,3&#125;
+<h3 id="10-如何复制切片"><a href="#10-如何复制切片" class="headerlink" title="10 如何复制切片"></a>10 如何复制切片</h3><pre><code>s := []int&#123;1,2,3&#125;
 s1 := s[0:2]
 s2 := make([]int, 3)
 copy(s2, s)//将s中的值，依次copy到s2
 </code></pre>
-<h5 id="11-实现切片的增删改查"><a href="#11-实现切片的增删改查" class="headerlink" title="11 实现切片的增删改查"></a>11 实现切片的增删改查</h5><pre><code>func main() &#123;
+<h3 id="11-实现切片的增删改查"><a href="#11-实现切片的增删改查" class="headerlink" title="11 实现切片的增删改查"></a>11 实现切片的增删改查</h3><pre><code>func main() &#123;
     arr := []int&#123;1, 2, 3&#125;
     slice := arr[:]
     //增
@@ -333,14 +327,14 @@ copy(s2, s)//将s中的值，依次copy到s2
     fmt.Println(slice[1]) //100
 &#125;
 </code></pre>
-<h5 id="12-下面代码是否有问题？并说出为什么？-如果有问题，如何修正？"><a href="#12-下面代码是否有问题？并说出为什么？-如果有问题，如何修正？" class="headerlink" title="12 下面代码是否有问题？并说出为什么？ 如果有问题，如何修正？"></a>12 下面代码是否有问题？并说出为什么？ 如果有问题，如何修正？</h5><pre><code>s := []string&#123;&quot;炭烤生蚝&quot;, &quot;麻辣小龙虾&quot;, &quot;干锅鸭&quot;&#125;
+<h3 id="12-下面代码是否有问题？并说出为什么？-如果有问题，如何修正？"><a href="#12-下面代码是否有问题？并说出为什么？-如果有问题，如何修正？" class="headerlink" title="12 下面代码是否有问题？并说出为什么？ 如果有问题，如何修正？"></a>12 下面代码是否有问题？并说出为什么？ 如果有问题，如何修正？</h3><pre><code>s := []string&#123;&quot;炭烤生蚝&quot;, &quot;麻辣小龙虾&quot;, &quot;干锅鸭&quot;&#125;
 s2 := make([]*string, len(s))
 for i, v := range s &#123;
     s2[i] = &amp;v
 &#125;
 </code></pre>
 <p>切片本身就是引用传值，应该把星号和&amp;去掉</p>
-<h5 id="11-分别写一个-if-和-switch、枚举-的例子"><a href="#11-分别写一个-if-和-switch、枚举-的例子" class="headerlink" title="11 分别写一个 if 和 switch、枚举 的例子"></a>11 分别写一个 if 和 switch、枚举 的例子</h5><pre><code>func main() &#123;
+<h3 id="11-分别写一个-if-和-switch、枚举-的例子"><a href="#11-分别写一个-if-和-switch、枚举-的例子" class="headerlink" title="11 分别写一个 if 和 switch、枚举 的例子"></a>11 分别写一个 if 和 switch、枚举 的例子</h3><pre><code>func main() &#123;
     a := 10
     if a == 10 &#123;
         fmt.Println(&quot;a=10&quot;)
@@ -353,13 +347,13 @@ for i, v := range s &#123;
     &#125;
 &#125;
 </code></pre>
-<h5 id="12-map有什么特点？"><a href="#12-map有什么特点？" class="headerlink" title="12 map有什么特点？"></a>12 map有什么特点？</h5><pre><code>1.map是无序的key/value对的集合
+<h3 id="12-map有什么特点？"><a href="#12-map有什么特点？" class="headerlink" title="12 map有什么特点？"></a>12 map有什么特点？</h3><pre><code>1.map是无序的key/value对的集合
 2.map中所有的key都有相同的类型，所有的value也有着相同的类型，但是key和value之间可以是不同的数据类型。
 3.key必须是支持==比较运算符的数据类型，map可以通过测试key是否相等来判断是否已经存在
 4.value数据类型则没有任何的限制。
 </code></pre>
-<h5 id="13-什么样的类型可以做map的key"><a href="#13-什么样的类型可以做map的key" class="headerlink" title="13 什么样的类型可以做map的key"></a>13 什么样的类型可以做map的key</h5><p>必须是支持==比较运算符的数据类型，map可以通过测试key是否相等来判断是否已经存在</p>
-<h5 id="14-写一个map的增删改查"><a href="#14-写一个map的增删改查" class="headerlink" title="14 写一个map的增删改查"></a>14 写一个map的增删改查</h5><pre><code>func main() &#123;
+<h3 id="13-什么样的类型可以做map的key"><a href="#13-什么样的类型可以做map的key" class="headerlink" title="13 什么样的类型可以做map的key"></a>13 什么样的类型可以做map的key</h3><p>必须是支持==比较运算符的数据类型，map可以通过测试key是否相等来判断是否已经存在</p>
+<h3 id="14-写一个map的增删改查"><a href="#14-写一个map的增删改查" class="headerlink" title="14 写一个map的增删改查"></a>14 写一个map的增删改查</h3><pre><code>func main() &#123;
     s := make(map[int]string)
     //增
     s[0] = &quot;aaa&quot;
@@ -377,17 +371,17 @@ for i, v := range s &#123;
     &#125;
 &#125;
 </code></pre>
-<h5 id="15-函数的定义"><a href="#15-函数的定义" class="headerlink" title="15 函数的定义"></a>15 函数的定义</h5><p>函数是基本的代码块，用于执行一个任务。</p>
-<h5 id="16-函数传参，传值还是传引用？"><a href="#16-函数传参，传值还是传引用？" class="headerlink" title="16 函数传参，传值还是传引用？"></a>16 函数传参，传值还是传引用？</h5><p>Go语言中所有的传参都是值传递（传值），都是一个副本，一个拷贝。</p>
+<h3 id="15-函数的定义"><a href="#15-函数的定义" class="headerlink" title="15 函数的定义"></a>15 函数的定义</h3><p>函数是基本的代码块，用于执行一个任务。</p>
+<h3 id="16-函数传参，传值还是传引用？"><a href="#16-函数传参，传值还是传引用？" class="headerlink" title="16 函数传参，传值还是传引用？"></a>16 函数传参，传值还是传引用？</h3><p>Go语言中所有的传参都是值传递（传值），都是一个副本，一个拷贝。</p>
 <p>非引用类型（int、string、struct等这些），这样就在函数中就无法修改原内容数据；引用类型（指针、map、slice、chan等这些），这样就可以修改原内容数据。</p>
-<h5 id="17-定义函数的多返回值？"><a href="#17-定义函数的多返回值？" class="headerlink" title="17 定义函数的多返回值？"></a>17 定义函数的多返回值？</h5><pre><code>func test() (int, error) &#123;
+<h3 id="17-定义函数的多返回值？"><a href="#17-定义函数的多返回值？" class="headerlink" title="17 定义函数的多返回值？"></a>17 定义函数的多返回值？</h3><pre><code>func test() (int, error) &#123;
     return 0, nil
 &#125;
 func main() &#123;
     fmt.Println(test())//0 &lt;nil&gt;
 &#125;
 </code></pre>
-<h5 id="18-举例说明-函数变量、匿名函数、闭包、变长函数？"><a href="#18-举例说明-函数变量、匿名函数、闭包、变长函数？" class="headerlink" title="18 举例说明 函数变量、匿名函数、闭包、变长函数？"></a>18 举例说明 函数变量、匿名函数、闭包、变长函数？</h5><pre><code>package main
+<h3 id="18-举例说明-函数变量、匿名函数、闭包、变长函数？"><a href="#18-举例说明-函数变量、匿名函数、闭包、变长函数？" class="headerlink" title="18 举例说明 函数变量、匿名函数、闭包、变长函数？"></a>18 举例说明 函数变量、匿名函数、闭包、变长函数？</h3><pre><code>package main
 
 import &quot;fmt&quot;
 
@@ -434,12 +428,12 @@ func main() &#123;
     PrintBookNames(&quot;AAA&quot;, &quot;BBB&quot;, &quot;CCC&quot;)
 &#125;
 </code></pre>
-<h5 id="19-说一下面向对象设计的好处？"><a href="#19-说一下面向对象设计的好处？" class="headerlink" title="19 说一下面向对象设计的好处？"></a>19 说一下面向对象设计的好处？</h5><p>面向对象的三大特性：封装，继承，多态</p>
+<h3 id="19-说一下面向对象设计的好处？"><a href="#19-说一下面向对象设计的好处？" class="headerlink" title="19 说一下面向对象设计的好处？"></a>19 说一下面向对象设计的好处？</h3><p>面向对象的三大特性：封装，继承，多态</p>
 <p>使用面向对象思想进行开发有以下优点：</p>
 <p>1、易维护<br>采用面向对象思想设计的结构，可读性高，由于继承的存在，即使改变需求，那么维护也只是在局部模块，所以维护起来是非常方便和较低成本的。<br>2、质量高<br>在设计时，可重用现有的，在以前的项目的领域中已被测试过的类使系统满足业务需求并具有较高的质量。<br>3、效率高<br>在软件开发时，根据设计的需要对现实世界的事物进行抽象，产生类。使用这样的方法解决问题，接近于日常生活和自然的思考方式，势必提高软件开发的效率和质量。<br>4、易扩展<br>由于继承、封装、多态的特性，自然设计出高内聚、低耦合的系统结构，使得系统更灵活、更容易扩展，而且成本较低。</p>
-<h5 id="20-方法的定义"><a href="#20-方法的定义" class="headerlink" title="20 方法的定义"></a>20 方法的定义</h5><p>关键字 func 和函数名之间的参数被称作接收者，将函数与接收者的类型绑在一起。</p>
+<h3 id="20-方法的定义"><a href="#20-方法的定义" class="headerlink" title="20 方法的定义"></a>20 方法的定义</h3><p>关键字 func 和函数名之间的参数被称作接收者，将函数与接收者的类型绑在一起。</p>
 <p>如果一个函数有接收者，这个函数就被称为方法</p>
-<h5 id="21-指针接收者和值接收者有何不同"><a href="#21-指针接收者和值接收者有何不同" class="headerlink" title="21 指针接收者和值接收者有何不同"></a>21 指针接收者和值接收者有何不同</h5><p>值接收者，是接收者的类型是一个值，是一个副本，方法内部无法对其真正的接收者做更改；</p>
+<h3 id="21-指针接收者和值接收者有何不同"><a href="#21-指针接收者和值接收者有何不同" class="headerlink" title="21 指针接收者和值接收者有何不同"></a>21 指针接收者和值接收者有何不同</h3><p>值接收者，是接收者的类型是一个值，是一个副本，方法内部无法对其真正的接收者做更改；</p>
 <p>指针接收者，接收者的类型是一个指针，是接收者的引用，对这个引用的修改之间影响真正的接收者。</p>
 
       
