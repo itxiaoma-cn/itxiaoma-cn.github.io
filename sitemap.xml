@@ -26,6 +26,13 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://blog.itxiaoma.cn/tags/GO/</loc>
+    <lastmod>2022-03-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
