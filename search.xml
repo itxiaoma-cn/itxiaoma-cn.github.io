@@ -120,6 +120,31 @@
     
     
     <entry>
+      <title>单词本</title>
+      <link href="/2022/01/01/%E5%8D%95%E8%AF%8D%E6%9C%AC/"/>
+      <url>/2022/01/01/%E5%8D%95%E8%AF%8D%E6%9C%AC/</url>
+      
+        <content type="html"><![CDATA[<table><thead><tr><th>单词</th><th>翻译</th><th>原文</th><th>翻译</th><th>来源</th></tr></thead><tbody><tr><td>reliable</td><td>可信赖的</td><td>Build fast, reliable, and efficient software at scale</td><td>大规模构建快速、可靠、高效的软件</td><td><a href="https://go.dev/">go.dev</a></td></tr><tr><td>scale</td><td>规模</td><td></td><td></td><td></td></tr><tr><td>concurrency</td><td>并发性</td><td>Built-in concurrency and a robust standard library</td><td>内置并发性和强大的标准库</td><td></td></tr><tr><td>robust</td><td>强大的</td><td></td><td></td><td></td></tr><tr><td>ecosystem</td><td>生态环境</td><td>Growing ecosystem of partners, communities, and tools</td><td>不断增长的合作伙伴、社区和工具生态系统</td><td></td></tr><tr><td>communities</td><td>社区</td><td>community</td><td>社区</td><td></td></tr><tr><td>organization</td><td>组织机构</td><td></td><td></td><td></td></tr><tr><td>flexibility</td><td>灵活性</td><td></td><td></td><td></td></tr><tr><td>concept</td><td>概念</td><td></td><td></td><td></td></tr><tr><td>garbage</td><td>垃圾</td><td>garbage collection</td><td>垃圾回收</td><td></td></tr><tr><td>beat</td><td>打败</td><td>Who can beat that cute mascot!</td><td>谁能打败那个可爱的吉祥物！</td><td></td></tr><tr><td>mascot</td><td>吉祥物</td><td></td><td></td><td></td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> 单词本 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 单词本 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>01-Go语言基础20问</title>
       <link href="/2021/12/01/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
       <url>/2021/12/01/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/</url>
