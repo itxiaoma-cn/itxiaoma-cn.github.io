@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>02-常用五大数据类型 | IT小马</title>
+  <meta name="keywords" content=" REDIS , 后端 ">
+  <meta name="description" content="02-常用五大数据类型 | IT小马">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="3.常用五大数据类型Redis常见数据类型操作命令：http:&#x2F;&#x2F;redis.cn&#x2F;commands.html 3.1 键 KeyKey值操作： keys * 查看当前库所有key  set key value 设置key值与value  exists key 判断key是否存在  type key 查看key是什么类型  del key 删除指定的key数据  unlink key 根据valu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="02-常用五大数据类型">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:site_name" content="IT小马">
+<meta property="og:description" content="3.常用五大数据类型Redis常见数据类型操作命令：http:&#x2F;&#x2F;redis.cn&#x2F;commands.html 3.1 键 KeyKey值操作： keys * 查看当前库所有key  set key value 设置key值与value  exists key 判断key是否存在  type key 查看key是什么类型  del key 删除指定的key数据  unlink key 根据valu">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618164459005.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203718979.png">
+<meta property="article:published_time" content="2022-02-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-28T02:36:55.000Z">
+<meta property="article:author" content="IT小马">
+<meta property="article:tag" content="REDIS">
+<meta property="article:tag" content="后端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618164459005.png">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>IT小马</span>
+</div>
+
+<div class="icon">
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(3)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="GO微服务">
+                        
+                        GO微服务
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="REDIS">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        REDIS
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="REDIS<--->REDIS学习笔记">
+                                        
+                                        REDIS学习笔记
+                                        
+                                            <small>(2
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="3">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>后端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GO微服务</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>REDIS</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="全部文章 REDIS REDIS学习笔记 "
+           href="/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="02-常用五大数据类型">02-常用五大数据类型</span>
+            <span class="post-date" title="2022-02-02 00:00:00">2022/02/02</span>
+        </a>
+        
+        <a  class="全部文章 REDIS REDIS学习笔记 "
+           href="/2022/02/01/Redis01-%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%AE%89%E8%A3%85/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="01-基础及安装">01-基础及安装</span>
+            <span class="post-date" title="2022-02-01 00:00:00">2022/02/01</span>
+        </a>
+        
+        <a  class="全部文章 GO微服务 "
+           href="/2021/12/01/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"
+           data-tag="GO微服务,GO"
+           data-author="" >
+            <span class="post-title" title="01-Go语言基础20问">01-Go语言基础20问</span>
+            <span class="post-date" title="2021-12-01 00:00:00">2021/12/01</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-Redis02-五大数据类型" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">02-常用五大数据类型</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="REDIS">REDIS</a> > 
+            
+            <a  data-rel="REDIS&lt;---&gt;REDIS学习笔记">REDIS学习笔记</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">REDIS</a>
+            
+            <a class="color3">后端</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2022-03-28 10:36:55'>2022-02-02 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%B8%B8%E7%94%A8%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">3.常用五大数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E9%94%AE-Key"><span class="toc-text">3.1 键 Key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2%E5%AD%97%E7%AC%A6%E4%B8%B2-String"><span class="toc-text">3.2字符串 String</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-text">基本操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">数据结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%88%97%E8%A1%A8-List"><span class="toc-text">3.3 列表 List</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E9%94%AE%E5%A4%9A%E5%80%BC"><span class="toc-text">单键多值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-1"><span class="toc-text">数据结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E9%9B%86%E5%90%88-Set"><span class="toc-text">3.4 集合 Set</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-1"><span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-2"><span class="toc-text">数据结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E5%93%88%E5%B8%8C-Hash"><span class="toc-text">3.5 哈希 Hash</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-2"><span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-3"><span class="toc-text">数据结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88-Zset-Sorted-Set"><span class="toc-text">3.6 有序集合 Zset (Sorted Set)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4-3"><span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-4"><span class="toc-text">数据结构</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="3-常用五大数据类型"><a href="#3-常用五大数据类型" class="headerlink" title="3.常用五大数据类型"></a>3.常用五大数据类型</h2><p>Redis常见数据类型操作命令：<a target="_blank" rel="noopener" href="http://redis.cn/commands.html">http://redis.cn/commands.html</a></p>
+<h3 id="3-1-键-Key"><a href="#3-1-键-Key" class="headerlink" title="3.1 键 Key"></a>3.1 键 Key</h3><p>Key值操作：</p>
+<pre><code>keys * 查看当前库所有key
+
+set key value 设置key值与value
+
+exists key 判断key是否存在
+
+type key 查看key是什么类型
+
+del key 删除指定的key数据
+
+unlink key 根据value选择非阻塞删除
+------仅将keys从keyspace元数据中删除，真正的删除会在后续异步操作。
+
+expire key 10 10秒钟：为给定的key设置过期时间
+
+ttl key 查看还有多少秒过期，-1表示永不过期，-2表示已过期
+</code></pre>
+<h3 id="3-2字符串-String"><a href="#3-2字符串-String" class="headerlink" title="3.2字符串 String"></a>3.2字符串 String</h3><blockquote>
+<p>一个Redis字符串value最多可以是512M</p>
+</blockquote>
+<blockquote>
+<p>原子操作，不会被打断，从开始到结束（单线程不会被打断）</p>
+</blockquote>
+<h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><pre><code>set key value 设置key值
+
+get key 查询key值
+
+append key value 将给定的value追加到原值末尾
+
+strlen key 获取值的长度
+
+setnx key value 只有在key不存在的时候，设置key值
+
+incr key 将key值存储的数字增1，只对数字值操作，如果为空，结果为1
+decr key 将key值存储的数字减1，只对数字值操作，如果为空，结果为-1
+
+incrby/decrby key &lt;步长&gt; 将key值存储的数字增减如步长
+</code></pre>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><pre><code>mset key value key value..同时设置一个或者多个key-value
+mget key key...同时获取一个或多个value
+msetnx key value key value..同时设置一个或者多个key-value.当且仅当所有给定key都不存在
+getrange key &lt;起始位置&gt; &lt;结束位置&gt; 获取key的起始位置和结束位置的值(起始0)
+setrange key &lt;起始位置&gt; value 将value的值覆盖起始位置开始
+setex key &lt;&gt; value 设置键值的同时,设置过期时间
+getset key value 用新值换旧值
+</code></pre>
+<h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><p>String 的数据结构为简单动态字符串 (Simple Dynamic String, 缩写 SDS)，是可以修改的字符串，内部结构实现上类似于 Java 的 ArrayList，采用预分配冗余空间的方式来减少内存的频繁分配。</p>
+<p>当前字符串实际分配的空间 capacity 一般要高于实际字符串长度 len。当字符串长度小于 1M 时，扩容都是加倍现有的空间，如果超过 1M，扩容时一次只会多扩 1M 的空间。需要注意的是字符串最大长度为 512M。</p>
+<h3 id="3-3-列表-List"><a href="#3-3-列表-List" class="headerlink" title="3.3 列表 List"></a>3.3 列表 List</h3><h4 id="单键多值"><a href="#单键多值" class="headerlink" title="单键多值"></a>单键多值</h4><ul>
+<li>Redis列表是简单的字符串列表，按照插入顺序排序，可以添加元素到列表的头(左)尾(右)。</li>
+<li>Redis列表底层是双向链表，对两端的操作性能很高，通过索引下标操作中间节点性能较差。</li>
+</ul>
+<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><pre><code>lpush/rpush key value value...从左或者右插入一个或者多个值(头插与尾插)
+
+lpop/rpop key 从左或者右吐出一个或者多个值(值在键在,值都没,键都没)
+
+rpoplpush key1 key2 从key1列表右边吐出一个值,插入到key2的左边
+
+lrange key start stop 按照索引下标获取元素(从左到右)
+
+lrange key 0 -1 获取所有值
+
+lindex key index 按照索引下标获得元素
+
+llen key 获取列表长度
+
+linsert key before/after value newvalue 在value的前面插入一个新值
+
+lrem key n value 从左边删除n个value值
+
+lset key index value 在列表key中的下标index中修改值value
+</code></pre>
+<h4 id="数据结构-1"><a href="#数据结构-1" class="headerlink" title="数据结构"></a>数据结构</h4><p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618164459005.png" alt="image-20210618164459005"></p>
+<ul>
+<li>List 的数据结构为快速链表 quickList。</li>
+<li>首先在列表元素较少的情况下会使用一块连续的内存存储，这个结构是 ziplist，也即是压缩列表。它将所有的元素紧挨着一起存储，分配的是一块连续的内存。</li>
+<li>当数据量比较多的时候才会改成 quicklist。因为普通的链表需要的附加指针空间太大，会比较浪费空间。比如这个列表里存 的只是 int 类型的数据，结构上还需要两个额外的指针 prev 和 next。</li>
+<li>Redis 将链表和 ziplist 结合起来组成了 quicklist。也就是将多个 ziplist 使用双向指针串起来使用。这样既满足了快速的插入删除性能，又不会出现太大的空间冗余。</li>
+</ul>
+<h3 id="3-4-集合-Set"><a href="#3-4-集合-Set" class="headerlink" title="3.4 集合 Set"></a>3.4 集合 Set</h3><ul>
+<li>Set是自动排重的列表</li>
+<li>Redis的Set是string类型的无序集合，底层是value为null的hash表，所以添加，删除，查找的复杂度都是O(1)</li>
+<li><strong>O(1)</strong> : 常量级的时间复杂度,并不是说只执行了一条语句,只要执行语句的数量是常量,都可以用它来表示。</li>
+</ul>
+<h4 id="常用命令-1"><a href="#常用命令-1" class="headerlink" title="常用命令"></a>常用命令</h4><pre><code>sadd key value value... 将一个或者多个member元素加入集合key中,已经存在的member元素被忽略
+
+smembers key 取出该集合的所有值
+
+sismember key value 判断该集合key是否含有改值
+
+scard key 返回该集合的元素个数
+
+srem key value value 删除集合中的某个元素
+
+spop key 随机从集合中取出一个元素
+
+srandmember key n 随即从该集合中取出n个值，不会从集合中删除
+
+smove &lt;一个集合a&gt;&lt;一个集合b&gt;value 将一个集合a的某个value移动到另一个集合b
+
+sinter key1 key2 返回两个集合的交集元素
+
+sunion key1 key2 返回两个集合的并集元素
+
+sdiff key1 key2 返回两个集合的差集元素（key1有的，key2没有）
+</code></pre>
+<h4 id="数据结构-2"><a href="#数据结构-2" class="headerlink" title="数据结构"></a>数据结构</h4><ul>
+<li>Set 数据结构是 dict 字典，字典是用哈希表实现的。</li>
+<li>Java 中 HashSet 的内部实现使用的是 HashMap，只不过所有的 value 都指向同一个对象。Redis 的 set 结构也是一样，它的内部也使用 hash 结构，所有的 value 都指向同一个内部值。</li>
+</ul>
+<h3 id="3-5-哈希-Hash"><a href="#3-5-哈希-Hash" class="headerlink" title="3.5 哈希 Hash"></a>3.5 哈希 Hash</h3><ul>
+<li><p>Redis hash 是一个键值对集合。</p>
+</li>
+<li><p>Redis hash 是一个 string 类型的 field 和 value 的映射表，hash 特别适合用于存储对象。</p>
+</li>
+<li><p>类似 Java 里面的 Map&lt;String,Object&gt;。</p>
+</li>
+<li><p>通过 key (用户 ID) + field (属性标签) 就可以操作对应属性数据了，既不需要重复存储数据，也不会带来序列化和并发修改控制的问题。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203718979.png" alt="image-20210618203718979"></p>
+</li>
+</ul>
+<h4 id="常用命令-2"><a href="#常用命令-2" class="headerlink" title="常用命令"></a>常用命令</h4><pre><code>hset key field value 给key集合中的filed键赋值value
+
+hget key1 field 集合field取出value
+
+hmset key1 field1 value1 field2 value2 批量设置hash的值
+
+hexists key1 field 查看哈希表key中，给定域field是否存在
+
+hkeys key 列出该hash集合的所有field
+
+hvals key 列出该hash集合的所有value
+
+hincrby key field increment 为哈希表key中的域field的值加上增量1 -1
+
+hsetnx key field value 将哈希表key中的域field的值设置为value，当且仅当域field不存在
+</code></pre>
+<p>示例</p>
+<pre><code>127.0.0.1:6379&gt; hset user:1001 id 1
+(integer) 1
+127.0.0.1:6379&gt; hset user:1002 id 2
+(integer) 1
+127.0.0.1:6379&gt; hset user:1001 name AAA
+(integer) 1
+127.0.0.1:6379&gt; hset user:1001 name AAA age 20
+(integer) 1
+127.0.0.1:6379&gt; hkeys user:1001
+1) &quot;id&quot;
+2) &quot;name&quot;
+3) &quot;age&quot;
+127.0.0.1:6379&gt; hkeys user:1002
+1) &quot;id&quot;
+127.0.0.1:6379&gt; hexists user:1001 id
+(integer) 1
+127.0.0.1:6379&gt; hvals user:1001
+1) &quot;1&quot;
+2) &quot;AAA&quot;
+3) &quot;20&quot;
+127.0.0.1:6379&gt; hincrby user:1001 age 2
+(integer) 22
+127.0.0.1:6379&gt; hsetnx user:1002 age 18
+(integer) 1
+127.0.0.1:6379&gt; hkeys user:1002
+1) &quot;id&quot;
+2) &quot;age&quot;
+</code></pre>
+<h4 id="数据结构-3"><a href="#数据结构-3" class="headerlink" title="数据结构"></a>数据结构</h4><p>Hash 类型对应的数据结构是两种：ziplist（压缩列表），hashtable（哈希表）。当 field-value 长度较短且个数较少时，使用 ziplist，否则使用 hashtable。</p>
+<h3 id="3-6-有序集合-Zset-Sorted-Set"><a href="#3-6-有序集合-Zset-Sorted-Set" class="headerlink" title="3.6 有序集合 Zset (Sorted Set)"></a>3.6 有序集合 Zset (Sorted Set)</h3><ul>
+<li>Redis 有序集合 zset 与普通集合 set 非常相似，是一个没有重复元素的字符串集合。</li>
+<li>不同之处是有序集合的每个成员都关联了一个<strong>评分（</strong>score），这个评分（score）被用来按照从最低分到最高分的方式排序集合中的成员。集合的成员是唯一的，但是评分可以是重复了 。</li>
+<li>因为元素是有序的，所以你也可以很快的根据评分（score）或者次序（position）来获取一个范围的元素。</li>
+<li>访问有序集合的中间元素也是非常快的，因此你能够使用有序集合作为一个没有重复成员的智能列表。</li>
+</ul>
+<h4 id="常用命令-3"><a href="#常用命令-3" class="headerlink" title="常用命令"></a>常用命令</h4><pre><code>zadd key score1 value1 score2 value2 将一个或多个member元素及其score值加入到有序key中
+
+zrange key start stop (withscores) 返回有序集key，下标在start与stop之间的元素，带withscores，可以让分数一起和值返回到结果集。
+
+zrangebyscore key min max(withscores) 返回有序集key，所有score值介于min和max之间（包括等于min或max）的成员。有序集成员按score的值递增次序排列
+
+zrevrangebyscore key max min （withscores）同上，改为从大到小排列
+
+zincrby key increment value 为元素的score加上增量
+
+zrem key value 删除该集合下，指定值的元素
+
+zcount key min max 统计该集合，分数区间内的元素个数
+
+zrank key value 返回该值在集合中的排名，从0开始
+</code></pre>
+<h4 id="数据结构-4"><a href="#数据结构-4" class="headerlink" title="数据结构"></a>数据结构</h4><p>zset 底层使用了两个数据结构：</p>
+<ol>
+<li>hash，hash 的作用就是关联元素 value 和权重 score，保障元素 value 的唯一性，可以通过元素 value 找到相应的 score 值。</li>
+<li>跳跃表(skiplist)，跳跃表的目的在于给元素 value 排序，根据 score 的范围获取元素列表。</li>
+</ol>
+<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+<p>视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
+<p>参考笔记：<a target="_blank" rel="noopener" href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
+<p>参考笔记：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry"><span class="miit">
+                <img src="/img/gov.png" title="中华人民共和国工业和信息化部">
+                <a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">辽ICP备20002229号-1</a>
+        </span>
+    
+    ©2012-2022 itxiaoma.cn
+</p>
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

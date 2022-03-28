@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>IT小马</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="IT小马">
+  <title>01-基础及安装 | IT小马</title>
+  <meta name="keywords" content=" REDIS , 后端 ">
+  <meta name="description" content="01-基础及安装 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="3.常用五大数据类型Redis常见数据类型操作命令：http:&#x2F;&#x2F;redis.cn&#x2F;commands.html 3.1 键 KeyKey值操作： keys * 查看当前库所有key  set key value 设置key值与value  exists key 判断key是否存在  type key 查看key是什么类型  del key 删除指定的key数据  unlink key 根据valu">
 <meta property="og:type" content="article">
@@ -61,7 +61,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -263,12 +263,51 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-Redis01-基础及安装" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IT%E5%B0%8F%E9%A9%AC"><span class="toc-text">IT小马</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="toc-text">技术栈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li></ol>
+        <h1 class="article-title">01-基础及安装</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="REDIS">REDIS</a> > 
+            
+            <a  data-rel="REDIS&lt;---&gt;REDIS学习笔记">REDIS学习笔记</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">REDIS</a>
+            
+            <a class="color3">后端</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2022-03-28 10:34:09'>2022-02-01 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-NoSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E4%BB%8B"><span class="toc-text">1.NoSQL数据库简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%8A%80%E6%9C%AF%E5%88%86%E7%B1%BB"><span class="toc-text">1.1 技术分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-NoSQL%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">1.2 NoSQL数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">不适用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81NoSQL"><span class="toc-text">常见NoSQL</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Redis%E6%A6%82%E8%BF%B0%E5%AE%89%E8%A3%85"><span class="toc-text">2.Redis概述安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Redis%E4%BB%8B%E7%BB%8D"><span class="toc-text">Redis介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Redis%E5%AE%89%E8%A3%85"><span class="toc-text">Redis安装</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#docker%E5%AE%89%E8%A3%85redis"><span class="toc-text">docker安装redis</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="toc-text">相关知识</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Redis%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B-%E5%A4%9A%E8%B7%AFIO%E5%A4%8D%E7%94%A8"><span class="toc-text">Redis是单线程+多路IO复用</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -281,159 +320,109 @@
     }
 </style>
 </div>
-            <h1 id="IT小马"><a href="#IT小马" class="headerlink" title="IT小马"></a>IT小马</h1><blockquote>
-<p>技术的长河奔涌向前，永不停歇。我愿取一瓢于此地，与君同饮。</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-NoSQL数据库简介"><a href="#1-NoSQL数据库简介" class="headerlink" title="1.NoSQL数据库简介"></a>1.NoSQL数据库简介</h2><h3 id="1-1-技术分类"><a href="#1-1-技术分类" class="headerlink" title="1.1 技术分类"></a>1.1 技术分类</h3><ol>
+<li>解决功能性问题</li>
+<li>解决扩展性问题</li>
+<li>解决性能问题</li>
+</ol>
+<h3 id="1-2-NoSQL数据库"><a href="#1-2-NoSQL数据库" class="headerlink" title="1.2 NoSQL数据库"></a>1.2 NoSQL数据库</h3><blockquote>
+<p>NoSql = Not Only SQL 非关系型数据库，以key-value模式存储。</p>
 </blockquote>
-<p><img src="/img/index.png" alt="2021 · 荔波"></p>
-<h3 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h3><table>
-<thead>
-<tr>
-<th>方向</th>
-<th>技术</th>
-<th>熟练度</th>
-<th>相关文章</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>后端</td>
-<td>Php</td>
-<td>★★★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Go</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Java</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td>数据库</td>
-<td>Mysql</td>
-<td>★★★★</td>
-<td></td>
-</tr>
-<tr>
-<td>缓存</td>
-<td>Redis</td>
-<td>★★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Mongo</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td>前端</td>
-<td>Vue</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Angular</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Layui</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>微服务</td>
-<td>Go + Grpc</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td>容器化</td>
-<td>Docker</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>容器编排</td>
-<td>K8s</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>代码仓库</td>
-<td>Gitlab</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td>持续集成</td>
-<td>Jenkins</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>消息队列</td>
-<td>Beanstalk</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>RocketMQ</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Kafka</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>日志系统</td>
-<td>Loki</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>ELK</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>守护进程</td>
-<td>Supervisor</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td>运维</td>
-<td>Shell</td>
-<td>★★</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>无：没有使用过，正在学习中；</p>
-<p>★：使用过基础功能；</p>
-<p>★★：使用过，可以搭建和配置环境；</p>
-<p>★★★：可以熟练使用；</p>
-<p>★★★★：可以独立完成项目；</p>
-<p>★★★★★：项目经验丰富</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>SegmentFault个人主页：<a target="_blank" rel="noopener" href="https://segmentfault.com/u/itxiaoma">https://segmentfault.com/u/itxiaoma</a></p>
-<p>本站全部内容均为原创，欢迎转载，但请注明出处。</p>
-<p>本站通过 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> 生成，部署在 <a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a>主题 <a target="_blank" rel="noopener" href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> </p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>不遵循SQL标准</li>
+<li>不支持ACID</li>
+<li>远超于SQL的性能</li>
+</ul>
+<h4 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h4><ul>
+<li>数据高并发读写</li>
+<li>海量数据读写</li>
+<li>数据高可扩展性</li>
+</ul>
+<h4 id="不适用场景"><a href="#不适用场景" class="headerlink" title="不适用场景"></a>不适用场景</h4><ul>
+<li>需要事务支持</li>
+<li>结构化查询存储，处理复杂关系</li>
+</ul>
+<h4 id="常见NoSQL"><a href="#常见NoSQL" class="headerlink" title="常见NoSQL"></a>常见NoSQL</h4><ul>
+<li>Memcache：数据在内存中，不支持持久化，一般作为缓存数据库。</li>
+<li>Redis：数据在内存中，支持持久化，支持多种数据结构，一般作为缓存数据库。</li>
+<li>MongoDB：<ul>
+<li>文档型数据库</li>
+<li>数据在内存中，内存不足时保存到硬盘</li>
+<li>支持二进制数据和大型对象</li>
+<li>配合/替代关系型数据库(RDBMS)存储特定数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-Redis概述安装"><a href="#2-Redis概述安装" class="headerlink" title="2.Redis概述安装"></a>2.Redis概述安装</h2><p>官网：<a target="_blank" rel="noopener" href="https://redis.io/">https://redis.io/</a></p>
+<h4 id="Redis介绍"><a href="#Redis介绍" class="headerlink" title="Redis介绍"></a>Redis介绍</h4><ul>
+<li>Redis 是一个开源的 key-value 存储系统。</li>
+<li>和 Memcached 类似，它支持存储的 value 类型相对更多，包括 string (字符串)、list (链表)、set (集合)、zset (sorted set –有序集合) 和 hash（哈希类型）。</li>
+<li>这些数据类型都支持 push/pop、add/remove 及取交集并集和差集及更丰富的操作，而且<strong>这些操作都是原子性的</strong>。</li>
+<li>在此基础上，Redis 支持各种不同方式的排序。</li>
+<li>与 memcached 一样，为了保证效率，数据都是缓存在内存中。</li>
+<li>区别的是 Redis 会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件。</li>
+<li>并且在此基础上实现了 master-slave (主从) 同步。</li>
+</ul>
+<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><ul>
+<li>高频次，热门访问的数据，降低数据库 IO。</li>
+<li>分布式架构，做 session 共享。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618160101040.png" alt="image-20210618160101040"></p>
+<h4 id="Redis安装"><a href="#Redis安装" class="headerlink" title="Redis安装"></a>Redis安装</h4><p>官方教程：<a target="_blank" rel="noopener" href="https://redis.io/docs/getting-started/installation/">https://redis.io/docs/getting-started/installation/</a></p>
+<h5 id="docker安装redis"><a href="#docker安装redis" class="headerlink" title="docker安装redis"></a>docker安装redis</h5><p>docker-compose.yml</p>
+<pre><code>version: &#39;3.5&#39;
 
-        </article>
-        
-        
+services:
+  redis:
+    image: redis
+    container_name: redis
+    restart: always
+    ports:
+      - &quot;6379:6379&quot;
+    volumes:
+      - ./redis-data/:/data  
+</code></pre>
+<p>测试</p>
+<pre><code>docker exec -it redis /bin/bash
+
+redis-cli
+</code></pre>
+<h4 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h4><ol>
+<li>默认有16个数据库，所有库密码相同，初始默认使用0号库</li>
+<li>切换数据库：<code>select 数据库ID</code></li>
+<li>查看当前数据key数量：<code>dbsize</code></li>
+<li>清空当前库：<code>flushdb</code></li>
+<li>清空全部库：<code>flushall</code></li>
+</ol>
+<h5 id="Redis是单线程-多路IO复用"><a href="#Redis是单线程-多路IO复用" class="headerlink" title="Redis是单线程+多路IO复用"></a>Redis是单线程+多路IO复用</h5><ul>
+<li>Memcache是多线程 + 锁</li>
+<li>Redis与 Memcache 三点不同：支持多数据类型，支持持久化，单线程 + 多路 IO 复用</li>
+</ul>
+<p>多路复用是指使用一个线程来检查多个文件描述符（Socket）的就绪状态，比如调用 select 和 poll 函数，传入多个文件描述符，如果有一个文件描述符就绪，则返回，否则阻塞直到超时。得到就绪状态后进行真正的操作可以在同一个线程里执行，也可以启动线程执行（比如使用线程池）。</p>
+<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+<p>视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
+<p>参考笔记：<a target="_blank" rel="noopener" href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
+<p>参考笔记：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry"><span class="miit">
@@ -444,11 +433,11 @@
     ©2012-2022 itxiaoma.cn
 </p>
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 </body>
