@@ -33,6 +33,35 @@
     
     
     <entry>
+      <title>03-配置文件、发布和订阅</title>
+      <link href="/2022/02/02/Redis03-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/"/>
+      <url>/2022/02/02/Redis03-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/</url>
+      
+        <content type="html"><![CDATA[<h2 id="4-配置文件"><a href="#4-配置文件" class="headerlink" title="4.配置文件"></a>4.配置文件</h2><p>官网下载：<a href="http://download.redis.io/redis-stable/redis.conf">http://download.redis.io/redis-stable/redis.conf</a></p><h4 id="Units-单位"><a href="#Units-单位" class="headerlink" title="Units 单位"></a>Units 单位</h4><h5 id="配置大小单位，只支持bytes，不支持bit"><a href="#配置大小单位，只支持bytes，不支持bit" class="headerlink" title="配置大小单位，只支持bytes，不支持bit"></a>配置大小单位，只支持bytes，不支持bit</h5><p>大小写不敏感</p><h4 id="INCLUDES-包含"><a href="#INCLUDES-包含" class="headerlink" title="INCLUDES 包含"></a>INCLUDES 包含</h4><h5 id="提取公共配置文件"><a href="#提取公共配置文件" class="headerlink" title="提取公共配置文件"></a>提取公共配置文件</h5><p>####NETWORK 网络</p><h5 id="配置支持原创连接"><a href="#配置支持原创连接" class="headerlink" title="配置支持原创连接"></a>配置支持原创连接</h5><pre><code>#bind 127.0.0.1 -::1 //注释绑定本地连接protected-mode no         //关闭保护模式</code></pre><p>端口号：默认6379</p><pre><code>port 6379</code></pre><h4 id="GENERAL-通用"><a href="#GENERAL-通用" class="headerlink" title="GENERAL 通用"></a>GENERAL 通用</h4><h5 id="开启后台启动"><a href="#开启后台启动" class="headerlink" title="开启后台启动"></a>开启后台启动</h5><pre><code>daemonize yes</code></pre><h5 id="进程号的路径"><a href="#进程号的路径" class="headerlink" title="进程号的路径"></a>进程号的路径</h5><pre><code>pidfile /var/run/redis_6379.pid</code></pre><h5 id="日志级别"><a href="#日志级别" class="headerlink" title="日志级别"></a>日志级别</h5><pre><code>loglevel notice</code></pre><h5 id="日志输出路径"><a href="#日志输出路径" class="headerlink" title="日志输出路径"></a>日志输出路径</h5><pre><code>logfile &quot;&quot;</code></pre><h5 id="数据库数数量"><a href="#数据库数数量" class="headerlink" title="数据库数数量"></a>数据库数数量</h5><pre><code>databases 16</code></pre><h4 id="SECURITY-安全"><a href="#SECURITY-安全" class="headerlink" title="SECURITY 安全"></a>SECURITY 安全</h4><h5 id="开启访问密码"><a href="#开启访问密码" class="headerlink" title="开启访问密码"></a>开启访问密码</h5><pre><code>requirepass foobared</code></pre><h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><h5 id="最大客户端连接数"><a href="#最大客户端连接数" class="headerlink" title="最大客户端连接数"></a>最大客户端连接数</h5><pre><code>maxclients 10000</code></pre><h5 id="设置最大内存"><a href="#设置最大内存" class="headerlink" title="设置最大内存"></a>设置最大内存</h5><pre><code>maxmemory &lt;bytes&gt;</code></pre><h5 id="内存超出上限：按规则移除"><a href="#内存超出上限：按规则移除" class="headerlink" title="内存超出上限：按规则移除"></a>内存超出上限：按规则移除</h5><pre><code>maxmemory-policy noeviction</code></pre><p>注：如果redis无法按规则移除，或者设置了“不允许移除”，则：</p><ul><li><p>需要申请内存的指令(SET/LPUSH等)会返回错误信息</p></li><li><p>无内存申请的指令(GET等)仍会正常响应</p></li></ul><h5 id="样本数量"><a href="#样本数量" class="headerlink" title="样本数量"></a>样本数量</h5><pre><code>maxmemory-samples 5</code></pre><p>注：数值越小越不准确，但性能消耗较小</p><h5 id="内存移除规则"><a href="#内存移除规则" class="headerlink" title="内存移除规则"></a>内存移除规则</h5><pre><code># volatile-lru -&gt; 使用LRU算法移除key，只对设置了过期时间的键(少用)# allkeys-lru -&gt; 在所有集合key中，使用LRU算法移除key# volatile-lfu -&gt; LFU算法# allkeys-lfu -&gt; LFU算法# volatile-random -&gt; 在过期集合中移除随机的key，只对设置了过期时间的键# allkeys-random -&gt; 在所有集合中移除随机的key，只对设置了过期时间的键# volatile-ttl -&gt; 移除TTL最小(快要过期)的key# noeviction -&gt; 不进行移除</code></pre><h5 id="Redis淘汰算法"><a href="#Redis淘汰算法" class="headerlink" title="Redis淘汰算法"></a>Redis淘汰算法</h5><ul><li>随机</li><li>TTL 过期时间</li><li>LRU（Least Recently Used，最近最少使用）</li><li>LFU（Least Frequently Used，最不经常使用）</li></ul><h2 id="5-发布和订阅"><a href="#5-发布和订阅" class="headerlink" title="5.发布和订阅"></a>5.发布和订阅</h2><blockquote><p>Redis发布订阅(pub/sub)是一种消息通信模式：发送者(pub)发送消息，订阅者(sub)接收消息</p></blockquote><blockquote><p>Redis客户端可以订阅任意数量的频道</p></blockquote><h5 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h5><p>客户端1：</p><pre><code>127.0.0.1:6379&gt; publish channel1 hello(integer) 1</code></pre><p>客户端2：</p><pre><code>127.0.0.1:6379&gt; subscribe channel1Reading messages... (press Ctrl-C to quit)1) &quot;subscribe&quot;2) &quot;channel1&quot;3) (integer) 11) &quot;message&quot;2) &quot;channel1&quot;3) &quot;hello&quot;</code></pre><p>注：多个客户端订阅相同频道，都可以收到消息</p><h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p><p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p><p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p><p>参考笔记：<a href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> REDIS </category>
+          
+          <category> REDIS学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> REDIS </tag>
+            
+            <tag> 后端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>01-基础及安装</title>
       <link href="/2022/02/01/Redis01-%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%AE%89%E8%A3%85/"/>
       <url>/2022/02/01/Redis01-%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%AE%89%E8%A3%85/</url>
