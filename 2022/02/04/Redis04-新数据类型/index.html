@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>IT小马</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="IT小马">
+  <title>04-新数据类型 | IT小马</title>
+  <meta name="keywords" content=" REDIS , 后端 ">
+  <meta name="description" content="04-新数据类型 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="6.新数据类型###Bitmaps 位操作字符串  Bitmaps实际上就是字符串(k-v)，但是可以对字符串进行位操作 可以把Bitmas想象成以位为单位，只能存0和1的数组，数组下标叫做偏移量  常用命令setbit key offset value  &#x2F;&#x2F;设置值  getbit key offset              &#x2F;&#x2F;取值  bitcount （start end     &#x2F;&#x2F;统">
 <meta property="og:type" content="article">
@@ -58,7 +58,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -276,12 +276,51 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-Redis04-新数据类型" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IT%E5%B0%8F%E9%A9%AC"><span class="toc-text">IT小马</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="toc-text">技术栈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li></ol>
+        <h1 class="article-title">04-新数据类型</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="REDIS">REDIS</a> > 
+            
+            <a  data-rel="REDIS&lt;---&gt;REDIS学习笔记">REDIS学习笔记</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">REDIS</a>
+            
+            <a class="color3">后端</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2022-03-28 15:48:28'>2022-02-04 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">6.新数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HyperLogLog"><span class="toc-text">HyperLogLog</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E9%97%AE%E9%A2%98"><span class="toc-text">基数问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E7%BB%9F%E8%AE%A1"><span class="toc-text">基数统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-text">常用操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Geospatial-%E7%BB%8F%E7%BA%AC%E5%BA%A6"><span class="toc-text">Geospatial 经纬度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C-1"><span class="toc-text">常用操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -294,159 +333,105 @@
     }
 </style>
 </div>
-            <h1 id="IT小马"><a href="#IT小马" class="headerlink" title="IT小马"></a>IT小马</h1><blockquote>
-<p>技术的长河奔涌向前，永不停歇。我愿取一瓢于此地，与君同饮。</p>
-</blockquote>
-<p><img src="/img/index.png" alt="2021 · 荔波"></p>
-<h3 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h3><table>
-<thead>
-<tr>
-<th>方向</th>
-<th>技术</th>
-<th>熟练度</th>
-<th>相关文章</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>后端</td>
-<td>Php</td>
-<td>★★★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Go</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Java</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td>数据库</td>
-<td>Mysql</td>
-<td>★★★★</td>
-<td></td>
-</tr>
-<tr>
-<td>缓存</td>
-<td>Redis</td>
-<td>★★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Mongo</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td>前端</td>
-<td>Vue</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Angular</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Layui</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>微服务</td>
-<td>Go + Grpc</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td>容器化</td>
-<td>Docker</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>容器编排</td>
-<td>K8s</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>代码仓库</td>
-<td>Gitlab</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td>持续集成</td>
-<td>Jenkins</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>消息队列</td>
-<td>Beanstalk</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>RocketMQ</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Kafka</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>日志系统</td>
-<td>Loki</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>ELK</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>守护进程</td>
-<td>Supervisor</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td>运维</td>
-<td>Shell</td>
-<td>★★</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>无：没有使用过，正在学习中；</p>
-<p>★：使用过基础功能；</p>
-<p>★★：使用过，可以搭建和配置环境；</p>
-<p>★★★：可以熟练使用；</p>
-<p>★★★★：可以独立完成项目；</p>
-<p>★★★★★：项目经验丰富</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>SegmentFault个人主页：<a target="_blank" rel="noopener" href="https://segmentfault.com/u/itxiaoma">https://segmentfault.com/u/itxiaoma</a></p>
-<p>本站全部内容均为原创，欢迎转载，但请注明出处。</p>
-<p>本站通过 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> 生成，部署在 <a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a>主题 <a target="_blank" rel="noopener" href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> </p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="6-新数据类型"><a href="#6-新数据类型" class="headerlink" title="6.新数据类型"></a>6.新数据类型</h2><p>###Bitmaps 位操作字符串</p>
+<ul>
+<li>Bitmaps实际上就是字符串(k-v)，但是可以对字符串进行位操作</li>
+<li>可以把Bitmas想象成以位为单位，只能存0和1的数组，数组下标叫做偏移量</li>
+</ul>
+<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><pre><code>setbit key offset value  //设置值
 
-        </article>
-        
-        
+getbit key offset              //取值
+
+bitcount （start end     //统计数值
+
+bitop and/or/not/xor destkey key1 key2  //复合操作，交并非异或，结果保存在destkey
+</code></pre>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><pre><code>127.0.0.1:6379&gt; setbit k1 1 1
+(integer) 0
+127.0.0.1:6379&gt; setbit k1 2 1
+(integer) 0
+127.0.0.1:6379&gt; setbit k1 4 1
+(integer) 0
+127.0.0.1:6379&gt; getbit k1 1
+(integer) 1
+127.0.0.1:6379&gt; getbit k1 3
+(integer) 0
+127.0.0.1:6379&gt; bitcount k1
+(integer) 3
+127.0.0.1:6379&gt; setbit k2 3 1
+(integer) 0
+127.0.0.1:6379&gt; bitop and k1_and_k2 k1 k2 //k1和k2都有值 
+(integer) 1
+127.0.0.1:6379&gt; bitcount k1_and_k2
+(integer) 0
+127.0.0.1:6379&gt; bitop or k1_or_k2 k1 k2 //k1或k2有值 
+(integer) 1
+127.0.0.1:6379&gt; bitcount k1_or_k2
+(integer) 4
+</code></pre>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>但 Bitmaps 并不是万金油， 假如该网站每天的独立访问用户很少， 例如只有 10 万（大量的僵尸用户） ， 那么两者的对比如下表所示， 很显然， 这时候使用 Bitmaps 就不太合适了， 因为基本上大部分位都是 0。</p>
+<p>Bitmaps适合百万级以上数据量存储。</p>
+<h3 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h3><h4 id="基数问题"><a href="#基数问题" class="headerlink" title="基数问题"></a>基数问题</h4><blockquote>
+<p>求集合中不重复元素个数的问题称为基数问题</p>
+</blockquote>
+<p>解决方案：</p>
+<ul>
+<li>Mysql使用distinct count计算</li>
+<li>Redis使用hash，set，bitmaos等数据结构处理</li>
+</ul>
+<h4 id="基数统计"><a href="#基数统计" class="headerlink" title="基数统计"></a>基数统计</h4><p>基数统计就是在误差可接受的范围内，快速计算基数。</p>
+<ul>
+<li>Redis HyperLogLog是用来做基数统计的算法，优点是输入大量数据时，所需空间固定(很小)。</li>
+<li>在 Redis 里面，每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基数。</li>
+<li>HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以 HyperLogLog 不能像集合那样，返回输入的各个元素。</li>
+</ul>
+<h4 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h4><pre><code>pfadd key element //添加元素 基数变化返回1，不变返回0
+
+pfcount key                //统计基数
+
+pfmerge destkey key1 key2  //合并
+</code></pre>
+<h3 id="Geospatial-经纬度"><a href="#Geospatial-经纬度" class="headerlink" title="Geospatial 经纬度"></a>Geospatial 经纬度</h3><p>Redis3.2新增，提供经纬度设置，查询范围，距离查询等操作</p>
+<blockquote>
+<p>求集合中不重复元素个数的问题称为基数问题</p>
+</blockquote>
+<p>解决方案：</p>
+<ul>
+<li>Mysql使用distinct count计算</li>
+<li>Redis使用hash，set，bitmaos等数据结构处理</li>
+</ul>
+<h4 id="常用操作-1"><a href="#常用操作-1" class="headerlink" title="常用操作"></a>常用操作</h4><pre><code>geoadd key longitude latitude member //设置经纬度
+
+geopos key member                        //获取经纬度
+
+geodist key member1 member2 (m km ft mi) //计算两个位置之间的直线距离
+
+georadius key longitude latitude radius (m km ft mi) //以给定的经纬度为中心，找出某一半径的内元素
+</code></pre>
+<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+<p>视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
+<p>参考笔记：<a target="_blank" rel="noopener" href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
+<p>参考笔记：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry"><span class="miit">
@@ -457,11 +442,11 @@
     ©2012-2022 itxiaoma.cn
 </p>
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 </body>

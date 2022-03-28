@@ -1,4 +1,5 @@
-https://blog.itxiaoma.cn/2022/02/02/Redis03-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/
+https://blog.itxiaoma.cn/2022/02/04/Redis04-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/
+https://blog.itxiaoma.cn/2022/02/03/Redis03-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/
 https://blog.itxiaoma.cn/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/
 https://blog.itxiaoma.cn/2022/02/01/Redis01-%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%AE%89%E8%A3%85/
 https://blog.itxiaoma.cn/2021/12/01/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/
