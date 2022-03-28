@@ -6,15 +6,15 @@
   <meta name="keywords" content=" REDIS , 后端 ">
   <meta name="description" content="04-新数据类型 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="6.新数据类型###Bitmaps 位操作字符串  Bitmaps实际上就是字符串(k-v)，但是可以对字符串进行位操作 可以把Bitmas想象成以位为单位，只能存0和1的数组，数组下标叫做偏移量  常用命令setbit key offset value  &#x2F;&#x2F;设置值  getbit key offset              &#x2F;&#x2F;取值  bitcount （start end     &#x2F;&#x2F;统">
+<meta name="description" content="6.新数据类型Bitmaps 位操作字符串 Bitmaps实际上就是字符串(k-v)，但是可以对字符串进行位操作 可以把Bitmas想象成以位为单位，只能存0和1的数组，数组下标叫做偏移量  常用命令setbit key offset value  &#x2F;&#x2F;设置值  getbit key offset              &#x2F;&#x2F;取值  bitcount （start end     &#x2F;&#x2F;统计数值">
 <meta property="og:type" content="article">
 <meta property="og:title" content="04-新数据类型">
 <meta property="og:url" content="https://blog.itxiaoma.cn/2022/02/04/Redis04-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="6.新数据类型###Bitmaps 位操作字符串  Bitmaps实际上就是字符串(k-v)，但是可以对字符串进行位操作 可以把Bitmas想象成以位为单位，只能存0和1的数组，数组下标叫做偏移量  常用命令setbit key offset value  &#x2F;&#x2F;设置值  getbit key offset              &#x2F;&#x2F;取值  bitcount （start end     &#x2F;&#x2F;统">
+<meta property="og:description" content="6.新数据类型Bitmaps 位操作字符串 Bitmaps实际上就是字符串(k-v)，但是可以对字符串进行位操作 可以把Bitmas想象成以位为单位，只能存0和1的数组，数组下标叫做偏移量  常用命令setbit key offset value  &#x2F;&#x2F;设置值  getbit key offset              &#x2F;&#x2F;取值  bitcount （start end     &#x2F;&#x2F;统计数值">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-03T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-28T07:48:28.000Z">
+<meta property="article:modified_time" content="2022-03-28T07:50:44.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="REDIS">
 <meta property="article:tag" content="后端">
@@ -80,7 +80,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(5)</small>
+                <small>(6)</small>
             
         </div>
     </li>
@@ -94,6 +94,37 @@
                         <small>(1)</small>
                         
                     </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="MYSQL">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        MYSQL
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="MYSQL<--->MYSQL45讲">
+                                        
+                                        MYSQL45讲
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
                     
                 </li>
             
@@ -134,6 +165,10 @@
             
         
     
+        
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -147,7 +182,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="5">
+<input type="hidden" id="yelog_site_posts_number" value="6">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -206,6 +241,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MYSQL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>REDIS</a>
             </li>
         
@@ -260,6 +299,14 @@
             <span class="post-date" title="2021-12-01 00:00:00">2021/12/01</span>
         </a>
         
+        <a  class="全部文章 MYSQL MYSQL45讲 "
+           href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="01-基础架构">01-基础架构</span>
+            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
+        </a>
+        
         <div id="no-item-tips">
 
         </div>
@@ -309,7 +356,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-03-28 15:48:28'>2022-02-04 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-03-28 15:50:44'>2022-02-04 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -320,7 +367,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">6.新数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HyperLogLog"><span class="toc-text">HyperLogLog</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E9%97%AE%E9%A2%98"><span class="toc-text">基数问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E7%BB%9F%E8%AE%A1"><span class="toc-text">基数统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-text">常用操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Geospatial-%E7%BB%8F%E7%BA%AC%E5%BA%A6"><span class="toc-text">Geospatial 经纬度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C-1"><span class="toc-text">常用操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">6.新数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bitmaps-%E4%BD%8D%E6%93%8D%E4%BD%9C%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">Bitmaps 位操作字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HyperLogLog"><span class="toc-text">HyperLogLog</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E9%97%AE%E9%A2%98"><span class="toc-text">基数问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E7%BB%9F%E8%AE%A1"><span class="toc-text">基数统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-text">常用操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Geospatial-%E7%BB%8F%E7%BA%AC%E5%BA%A6"><span class="toc-text">Geospatial 经纬度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C-1"><span class="toc-text">常用操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -336,8 +383,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="6-新数据类型"><a href="#6-新数据类型" class="headerlink" title="6.新数据类型"></a>6.新数据类型</h2><p>###Bitmaps 位操作字符串</p>
-<ul>
+        <h2 id="6-新数据类型"><a href="#6-新数据类型" class="headerlink" title="6.新数据类型"></a>6.新数据类型</h2><h3 id="Bitmaps-位操作字符串"><a href="#Bitmaps-位操作字符串" class="headerlink" title="Bitmaps 位操作字符串"></a>Bitmaps 位操作字符串</h3><ul>
 <li>Bitmaps实际上就是字符串(k-v)，但是可以对字符串进行位操作</li>
 <li>可以把Bitmas想象成以位为单位，只能存0和1的数组，数组下标叫做偏移量</li>
 </ul>

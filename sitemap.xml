@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.itxiaoma.cn/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/</loc>
+    
+    <lastmod>2022-03-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.itxiaoma.cn/2022/02/04/Redis04-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
     
     <lastmod>2022-03-28</lastmod>
@@ -83,6 +92,13 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://blog.itxiaoma.cn/tags/MYSQL/</loc>
+    <lastmod>2022-03-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -101,6 +117,20 @@
   
   <url>
     <loc>https://blog.itxiaoma.cn/categories/REDIS/REDIS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2022-03-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.itxiaoma.cn/categories/MYSQL/</loc>
+    <lastmod>2022-03-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.itxiaoma.cn/categories/MYSQL/MYSQL45%E8%AE%B2/</loc>
     <lastmod>2022-03-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
