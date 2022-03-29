@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>21-分布式事务 | IT小马</title>
+  <meta name="keywords" content=" GO微服务 , GO ">
+  <meta name="description" content="21-分布式事务 | IT小马">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="分布式事务分布式事务是指会涉及到操作多个数据库的事务，其实就是将对同一库事务的概念扩大到了对多个库的事务。目的是为了保证分布式系统中的数据一致性。 分布式事务处理的关键是：  需要记录事务在任何节点所做的所有动作； 事务进行的所有操作要么全部提交，要么全部回滚。  1.CAP理论 分布式系统的三个指标：  一致性 Consistency：对于客户端的每次读操作，要么读到的是最新的数据，要么读取失败">
+<meta property="og:type" content="article">
+<meta property="og:title" content="21-分布式事务">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/03/21/GO%E5%BE%AE%E6%9C%8D%E5%8A%A121-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/index.html">
+<meta property="og:site_name" content="IT小马">
+<meta property="og:description" content="分布式事务分布式事务是指会涉及到操作多个数据库的事务，其实就是将对同一库事务的概念扩大到了对多个库的事务。目的是为了保证分布式系统中的数据一致性。 分布式事务处理的关键是：  需要记录事务在任何节点所做的所有动作； 事务进行的所有操作要么全部提交，要么全部回滚。  1.CAP理论 分布式系统的三个指标：  一致性 Consistency：对于客户端的每次读操作，要么读到的是最新的数据，要么读取失败">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1198758/201906/1198758-20190619200110722-2841888.jpg">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1198758/201906/1198758-20190619200314879-719232581.png">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1198758/201906/1198758-20190619200345436-2065071594.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-b5357157b8937d2599dcfda280314b61_720w.jpg">
+<meta property="og:image" content="https://pics7.baidu.com/feed/0b7b02087bf40ad149838a1606a421d7a8ecce74.jpeg?token=e0c07a3108cdba820e2ddd9c8bd16cd6&s=549CED3B8306494B52D1BCDB020050B1">
+<meta property="article:published_time" content="2022-03-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-29T13:27:47.000Z">
+<meta property="article:author" content="IT小马">
+<meta property="article:tag" content="GO微服务">
+<meta property="article:tag" content="GO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1198758/201906/1198758-20190619200110722-2841888.jpg">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>IT小马</span>
+</div>
+
+<div class="icon">
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(9)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="GO微服务">
+                        
+                        GO微服务
+                        <small>(2)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="MYSQL">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        MYSQL
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="MYSQL<--->MYSQL45讲">
+                                        
+                                        MYSQL45讲
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="REDIS">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        REDIS
+                        <small>(5)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="REDIS<--->REDIS学习笔记">
+                                        
+                                        REDIS学习笔记
+                                        
+                                            <small>(5
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="单词本">
+                        
+                        单词本
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="9">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>单词本</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>后端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GO微服务</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MYSQL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>REDIS</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="全部文章 GO微服务 "
+           href="/2022/03/21/GO%E5%BE%AE%E6%9C%8D%E5%8A%A121-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"
+           data-tag="GO微服务,GO"
+           data-author="" >
+            <span class="post-title" title="21-分布式事务">21-分布式事务</span>
+            <span class="post-date" title="2022-03-21 00:00:00">2022/03/21</span>
+        </a>
+        
+        <a  class="全部文章 GO微服务 "
+           href="/2022/03/01/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"
+           data-tag="GO微服务,GO"
+           data-author="" >
+            <span class="post-title" title="01-Go语言基础20问">01-Go语言基础20问</span>
+            <span class="post-date" title="2022-03-01 00:00:00">2022/03/01</span>
+        </a>
+        
+        <a  class="全部文章 REDIS REDIS学习笔记 "
+           href="/2022/02/05/Redis05-Jedis%E3%80%81SprintBoot%E6%95%B4%E5%90%88Redis/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="05-Jedis、SprintBoot整合Redis">05-Jedis、SprintBoot整合Redis</span>
+            <span class="post-date" title="2022-02-05 00:00:00">2022/02/05</span>
+        </a>
+        
+        <a  class="全部文章 REDIS REDIS学习笔记 "
+           href="/2022/02/04/Redis04-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="04-新数据类型">04-新数据类型</span>
+            <span class="post-date" title="2022-02-04 00:00:00">2022/02/04</span>
+        </a>
+        
+        <a  class="全部文章 REDIS REDIS学习笔记 "
+           href="/2022/02/03/Redis03-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="03-配置文件、发布和订阅">03-配置文件、发布和订阅</span>
+            <span class="post-date" title="2022-02-03 00:00:00">2022/02/03</span>
+        </a>
+        
+        <a  class="全部文章 REDIS REDIS学习笔记 "
+           href="/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="02-常用五大数据类型">02-常用五大数据类型</span>
+            <span class="post-date" title="2022-02-02 00:00:00">2022/02/02</span>
+        </a>
+        
+        <a  class="全部文章 REDIS REDIS学习笔记 "
+           href="/2022/02/01/Redis01-%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%AE%89%E8%A3%85/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="01-基础及安装">01-基础及安装</span>
+            <span class="post-date" title="2022-02-01 00:00:00">2022/02/01</span>
+        </a>
+        
+        <a  class="全部文章 单词本 "
+           href="/2022/01/01/%E5%8D%95%E8%AF%8D%E6%9C%AC/"
+           data-tag="单词本"
+           data-author="" >
+            <span class="post-title" title="单词本">单词本</span>
+            <span class="post-date" title="2022-01-01 00:00:00">2022/01/01</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL MYSQL45讲 "
+           href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="01-基础架构">01-基础架构</span>
+            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-GO微服务21-分布式事务" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">21-分布式事务</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="GO微服务">GO微服务</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">GO微服务</a>
+            
+            <a class="color3">GO</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2022-03-29 21:27:47'>2022-03-21 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1"><span class="toc-text">分布式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-CAP%E7%90%86%E8%AE%BA"><span class="toc-text">1.CAP理论</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CP%E6%9E%B6%E6%9E%84"><span class="toc-text">CP架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AP%E6%9E%B6%E6%9E%84"><span class="toc-text">AP架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Base%E7%90%86%E8%AE%BA"><span class="toc-text">2.Base理论</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Basically-Available-%E5%9F%BA%E6%9C%AC%E5%8F%AF%E7%94%A8"><span class="toc-text">Basically Available 基本可用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Soft-state-%E8%BD%AF%E7%8A%B6%E6%80%81"><span class="toc-text">Soft state(软状态)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Eventually-consistent-%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-text">Eventually consistent(最终一致性)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">3.最终一致性解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-text">注意</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#XA%E8%A7%84%E8%8C%83"><span class="toc-text">XA规范</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#XA%E8%A7%84%E8%8C%83%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-text">XA规范的组成</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#XA%E8%A7%84%E8%8C%83%E5%AE%9A%E4%B9%89"><span class="toc-text">XA规范定义</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#XA%E7%BC%96%E7%A8%8B%E8%A7%84%E8%8C%83"><span class="toc-text">XA编程规范</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%8D%8F%E8%AE%AE-2PC"><span class="toc-text">二阶段提交协议 2PC</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5"><span class="toc-text">准备阶段</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E9%98%B6%E6%AE%B5"><span class="toc-text">提交阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E6%8F%90%E4%BA%A4"><span class="toc-text">事务提交</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%BA%8B%E5%8A%A1"><span class="toc-text">中断事务</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-text">问题</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCC-%E4%BA%8B%E5%8A%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">TCC 事务模式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-text">三个阶段</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-text">三种异常处理</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Refenrence-%E5%8F%82%E8%80%83"><span class="toc-text">Refenrence 参考</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h2><p>分布式事务是指会涉及到操作多个数据库的事务，其实就是将对同一库事务的概念扩大到了对多个库的事务。目的是为了保证分布式系统中的数据一致性。</p>
+<p>分布式事务处理的关键是：</p>
+<ol>
+<li>需要记录事务在任何节点所做的所有动作；</li>
+<li>事务进行的所有操作要么全部提交，要么全部回滚。</li>
+</ol>
+<h3 id="1-CAP理论"><a href="#1-CAP理论" class="headerlink" title="1.CAP理论"></a>1.CAP理论</h3><p><img src="https://img2018.cnblogs.com/blog/1198758/201906/1198758-20190619200110722-2841888.jpg" alt="img"></p>
+<p>分布式系统的三个指标：</p>
+<ul>
+<li>一致性 Consistency：对于客户端的每次读操作，要么读到的是最新的数据，要么读取失败。</li>
+<li>可用性 Availability：任何客户端的请求都能得到响应数据，不会出现响应错误。</li>
+<li>分区容错性 Partition tolerance：由于分布式系统通过网络进行通信，网络是不可靠的。当任意数量的消息丢失或延迟到达时，系统仍会继续提供服务，不会挂掉。</li>
+</ul>
+<p>一个分布式系统，不可能同时做到这三点；</p>
+<p>对于一个分布式系统而言，P是前提，必须保证，因为只要有网络交互就一定会有延迟和数据丢失，这种状况我们必须接受，必须保证系统不能挂掉。所以只剩下C、A可以选择。要么保证数据一致性（保证数据绝对正确），要么保证可用性（保证系统不出错）。</p>
+<p>当选择了C（一致性）时，如果由于网络分区而无法保证特定信息是最新的，则系统将返回错误或超时。</p>
+<p>当选择了A（可用性）时，系统将始终处理客户端的查询并尝试返回最新的可用的信息版本，即使由于网络分区而无法保证其是最新的。</p>
+<h4 id="CP架构"><a href="#CP架构" class="headerlink" title="CP架构"></a>CP架构</h4><p><img src="https://img2018.cnblogs.com/blog/1198758/201906/1198758-20190619200314879-719232581.png" alt="img"></p>
+<p>由于网络问题，节点A和节点B之前不能互相通讯。当有客户端（上图Actor）向节点A进行写入请求时（准备写入Message 2），节点A会不接收写入操作，导致写入失败，这样就保证了节点A和节点B的数据一致性，即保证了Consisteny（一致性）。</p>
+<p>然后，如果有另一个客户端（上图另一个Actor）向B节点进行读请求的时候，B请求返回的是网络故障之前所保存的信息（Message 1），并且这个信息是与节点A一致的，是整个系统最后一次成功写入的信息，是能正常提供服务的，即保证了Partition tolerance（分区容错性）。</p>
+<h4 id="AP架构"><a href="#AP架构" class="headerlink" title="AP架构"></a>AP架构</h4><p><img src="https://img2018.cnblogs.com/blog/1198758/201906/1198758-20190619200345436-2065071594.png" alt="img"></p>
+<p>由于网络问题，节点A和节点B之前不能互相通讯。当有客户端（上图Actor）向节点A进行写入请求时（准备写入Message 2），节点A允许写入，请求操作成功。但此时，由于A和B节点之前无法通讯，所以B节点的数据还是旧的（Message 1）。当有客户端向B节点发起读请求时候，读到的数据是旧数据，与在A节点读到的数据不一致。但由于系统能照常提供服务，所以满足了Availability（可用性）要求。</p>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><p>对于开发者而言，构建服务的时候需要根据业务特性作出权衡考虑，哪些点是当前系统可以取舍的，哪些是应该重点保障的。</p>
+<p>如在某个电商系统中，属于用户模块的数据（账密、钱包余额等）对一致性的要求很高，就可以采用CP架构。</p>
+<p>而对于一些商品信息方面的数据对一致性要求没那么高，但为了照顾用户体验，所以对可用性要求更高一些，那么这个模块的数据就可以采用AP架构。</p>
+<p>注：只能选择CP和AP，无法选择CA，这句话成立的前提条件是在系统发生了网络故障的情况下。在网络正常情况下，CA是可以实现的，我们也需要去保证在绝大多数时间下的CA架构。</p>
+<h3 id="2-Base理论"><a href="#2-Base理论" class="headerlink" title="2.Base理论"></a>2.Base理论</h3><blockquote>
+<p>核心思想：既是无法做到强一致性（Strong consistency），但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性（Eventual consistency）。</p>
+</blockquote>
+<h4 id="Basically-Available-基本可用"><a href="#Basically-Available-基本可用" class="headerlink" title="Basically Available 基本可用"></a>Basically Available 基本可用</h4><p>假设系统，出现了不可预知的故障，但还是能用，相比较正常的系统而言会有响应时间和功能上的损失：</p>
+<ol>
+<li><strong>响应时间上的损失</strong>：正常情况下的搜索引擎0.5秒即返回给用户结果，而基本可用的搜索引擎可以在2秒作用返回结果。</li>
+<li><strong>功能上的损失</strong>：在一个电商网站上，正常情况下，用户可以顺利完成每一笔订单。但是到了大促期间，为了保护购物系统的稳定性，部分消费者可能会被引导到一个降级页面。</li>
+</ol>
+<h4 id="Soft-state-软状态"><a href="#Soft-state-软状态" class="headerlink" title="Soft state(软状态)"></a>Soft state(软状态)</h4><p>相对于原子性而言，要求多个节点的数据副本都是一致的，这是一种“硬状态”。</p>
+<p>软状态指的是：允许系统中的数据存在中间状态，并认为该状态不影响系统的整体可用性，即允许系统在多个不同节点的数据副本存在数据延时。</p>
+<p>如先把订单状态改成已支付成功，然后告诉用户已经成功了；剩下在异步发送mq消息通知库存服务减库存，即使消费失败,MQ消息也会重新发送（重试）。</p>
+<p>注：不可能一直是软状态，必须有个时间期限。在期限过后，应当保证所有副本保持数据一致性，从而达到数据的最终一致性。这个时间期限取决于网络延时、系统负载、数据复制方案设计等等因素。</p>
+<h4 id="Eventually-consistent-最终一致性"><a href="#Eventually-consistent-最终一致性" class="headerlink" title="Eventually consistent(最终一致性)"></a>Eventually consistent(最终一致性)</h4><ul>
+<li>强一致性读操作要么处于阻塞状态，要么读到的是最新的数据</li>
+<li>最终一致性通常是异步完成的，读到的数据刚开始可能是旧数据，但是过一段时间后读到的就是最新的数据</li>
+</ul>
+<h3 id="3-最终一致性解决方案"><a href="#3-最终一致性解决方案" class="headerlink" title="3.最终一致性解决方案"></a>3.最终一致性解决方案</h3><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ul>
+<li>可查询操作：业务方需要提供可查询接口，来查询数据信息和状态，供其他服务知道数据状态。</li>
+<li>幂等操作：同样的参数执行同一个方法，返回的结果都一样。在分布式环境，难免会出现数据的不一致，很多时候为了保证数据的一致，我们都会进行重试。如果不保证幂等，即使重试成功了，也无法保证数据的一致性。我们可以通过业务本身实现实现幂等，比如数据库的唯一索引来约束；也可以缓存（记录）请求和操作结果，当检测到一样的请求时，返回之前的结果。</li>
+<li>补偿操作：某些数据存在不正常的状态，需要通过额外的方式使数据达到最终一致性的操作。</li>
+</ul>
+<h4 id="XA规范"><a href="#XA规范" class="headerlink" title="XA规范"></a>XA规范</h4><blockquote>
+<p>XA规范是由 X/Open组织（即现在的 Open Group ）定义的分布式事务处理模型。</p>
+</blockquote>
+<h5 id="XA规范的组成"><a href="#XA规范的组成" class="headerlink" title="XA规范的组成"></a>XA规范的组成</h5><ul>
+<li>应用程序（ AP ）</li>
+<li>事务管理器（ TM ）：交易中间件等</li>
+<li>资源管理器（ RM ）：关系型数据库等</li>
+<li>通信资源管理器（ CRM ）：消息中间件等</li>
+</ul>
+<h5 id="XA规范定义"><a href="#XA规范定义" class="headerlink" title="XA规范定义"></a>XA规范定义</h5><p>XA规范定义了交易中间件与数据库之间的接口规范（即接口函数），交易中间件用它来通知数据库事务的开始、结束以及提交、回滚等。而XA接口函数由数据库厂商提供。</p>
+<p>二阶提交协议和三阶提交协议就是基于XA规范提出的其中，二阶段提交就是实现XA分布式事务的关键。</p>
+<h5 id="XA编程规范"><a href="#XA编程规范" class="headerlink" title="XA编程规范"></a>XA编程规范</h5><ol>
+<li>配置TM，给TM注册RM作为数据源。其中，一个TM可以注册多个RM。</li>
+<li>AP向TM发起一个全局事务。这时，TM会发送一个XID（全局事务ID）通知各个RM。</li>
+<li>AP从TM获取资源管理器的代理（例如：使用JTA接口，从TM管理的上下文中，获取出这个TM所管理的RM的JDBC连接或JMS连接）。</li>
+<li>AP通过从TM中获取的连接，间接操作RM进行业务操作。TM在每次AP操作时把XID传递给RM，RM正是通过这个XID关联来操作和事务的关系的。</li>
+<li>AP结束全局事务时，TM会通知RM全局事务结束。开始二段提交，也就是prepare - commit的过程。</li>
+</ol>
+<p><img src="https://pic2.zhimg.com/80/v2-b5357157b8937d2599dcfda280314b61_720w.jpg" alt="img"></p>
+<h4 id="二阶段提交协议-2PC"><a href="#二阶段提交协议-2PC" class="headerlink" title="二阶段提交协议 2PC"></a>二阶段提交协议 2PC</h4><blockquote>
+<p>思路：每个参与者将操作成败通知协调者，再由协调者根据所有参与者的反馈情报，决定各参与者是否要提交操作还是中止操作。</p>
+</blockquote>
+<ul>
+<li>第一阶段：准备阶段（投票阶段）</li>
+<li>第二阶段：提交阶段（执行阶段）</li>
+</ul>
+<h5 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h5><p>a. 事务询问</p>
+<blockquote>
+<p>协调者向所有的参与者询问，是否准备好了执行事务，并开始等待各参与者的响应。</p>
+</blockquote>
+<p>b. 执行事务</p>
+<blockquote>
+<p>各参与者节点执行事务操作。如果本地事务成功，将Undo和Redo信息记入事务日志中，但不提交；否则，直接返回失败，退出执行。</p>
+</blockquote>
+<p>c. 各参与者向协调者反馈事务询问的响应</p>
+<blockquote>
+<p>如果参与者成功执行了事务操作，那么就反馈给协调者 Yes响应，表示事务可以执行提交；如果参与者没有成功执行事务，就返回No给协调者，表示事务不可以执行提交。</p>
+</blockquote>
+<h5 id="提交阶段"><a href="#提交阶段" class="headerlink" title="提交阶段"></a>提交阶段</h5><p>在提交阶段中，会根据准备阶段的投票结果执行2种操作：执行事务提交，中断事务。</p>
+<h6 id="事务提交"><a href="#事务提交" class="headerlink" title="事务提交"></a>事务提交</h6><p>a. 发送提交请求</p>
+<blockquote>
+<p>协调者向所有参与者发出commit请求。</p>
+</blockquote>
+<p>b. 事务提交</p>
+<blockquote>
+<p>参与者收到commit请求后，会正式执行事务提交操作，并在完成提交之后，释放整个事务执行期间占用的事务资源。</p>
+</blockquote>
+<p>c. 反馈事务提交结果</p>
+<blockquote>
+<p>参与者在完成事务提交之后，向协调者发送Ack信息。</p>
+</blockquote>
+<p>d. 事务提交确认</p>
+<blockquote>
+<p>协调者接收到所有参与者反馈的Ack信息后，完成事务。</p>
+</blockquote>
+<h6 id="中断事务"><a href="#中断事务" class="headerlink" title="中断事务"></a>中断事务</h6><p>a. 发送回滚请求</p>
+<blockquote>
+<p>协调者向所有参与者发出Rollback请求。</p>
+</blockquote>
+<p>b. 事务回滚</p>
+<blockquote>
+<p>参与者接收到Rollback请求后，会利用其在提交阶段种记录的Undo信息，来执行事务回滚操作。在完成回滚之后，释放在整个事务执行期间占用的资源。</p>
+</blockquote>
+<p>c. 反馈事务回滚结果</p>
+<blockquote>
+<p>参与者在完成事务回滚之后，向协调者发送Ack信息。</p>
+</blockquote>
+<p>d. 事务中断确认</p>
+<blockquote>
+<p>协调者接收到所有参与者反馈的Ack信息后，完成事务中断。</p>
+</blockquote>
+<h5 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h5><ul>
+<li>优点：原理简单，实现方便。</li>
+<li>缺点：同步阻塞，单点问题，数据不一致，容错性不好。</li>
+</ul>
+<h5 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h5><p><strong>1、同步阻塞问题</strong>。执行过程中，所有参与节点都是事务阻塞型的。当参与者占有公共资源时，其他第三方节点访问公共资源不得不处于阻塞状态。</p>
+<p><strong>2、单点故障</strong>。由于协调者的重要性，一旦协调者发生故障。参与者会一直阻塞下去。尤其在第二阶段，协调者发生故障，那么所有的参与者还都处于锁定事务资源的状态中，而无法继续完成事务操作。（如果是协调者挂掉，可以重新选举一个协调者，但是无法解决因为协调者宕机导致的参与者处于阻塞状态的问题）</p>
+<p><strong>3、数据不一致</strong>。在二阶段提交的阶段二中，当协调者向参与者发送commit请求之后，发生了局部网络异常或者在发送commit请求过程中协调者发生了故障，这回导致只有一部分参与者接受到了commit请求。而在这部分参与者接到commit请求之后就会执行commit操作。但是其他部分未接到commit请求的机器则无法执行事务提交。于是整个分布式系统便出现了数据部一致性的现象。</p>
+<p><strong>4、二阶段无法解决的问题</strong>：协调者再发出commit消息之后宕机，而唯一接收到这条消息的参与者同时也宕机了。那么即使协调者通过选举协议产生了新的协调者，这条事务的状态也是不确定的，没人知道事务是否被已经提交</p>
+<h4 id="TCC-事务模式"><a href="#TCC-事务模式" class="headerlink" title="TCC 事务模式"></a>TCC 事务模式</h4><blockquote>
+<p>TCC：Try（预处理）、Confirm（确认）、Cancel（取消）</p>
+</blockquote>
+<p><img src="https://pics7.baidu.com/feed/0b7b02087bf40ad149838a1606a421d7a8ecce74.jpeg?token=e0c07a3108cdba820e2ddd9c8bd16cd6&s=549CED3B8306494B52D1BCDB020050B1" alt="img"></p>
+<h5 id="三个阶段"><a href="#三个阶段" class="headerlink" title="三个阶段"></a>三个阶段</h5><ul>
+<li>Try阶段：主要是对业务系统做检测及资源预留</li>
+<li>Confirm阶段：主要是对业务系统做确认提交，Try阶段执行成功并开始执行 Confirm阶段时，默认 Confirm阶段是不会出错的。即：只要Try成功，Confirm一定成功。如果confirm出错了，那么就需要引入补偿机制或者人工处理。</li>
+<li>Cancel阶段：主要是在业务执行错误，需要回滚的状态下执行的业务取消，预留资源释放。同样TCC中我们认为cancel阶段一定会执行成功，如果失败也需要引入重试或者人工处理。</li>
+</ul>
+<h5 id="三种异常处理"><a href="#三种异常处理" class="headerlink" title="三种异常处理"></a>三种异常处理</h5><ul>
+<li><p>空回滚：分支事务异常调用失败，并未执行try方法，当恢复后事务执行回滚操作就会调用此分支事务的cancel方法，如果cancel方法不能处理此种情况就会出现空回滚。</p>
+<p>解决：记录全局事务ID，当cancel执行时，先判断是否有该全局事务ID，有则回滚，否则不做任何操作。</p>
+</li>
+<li><p>幂等：由于服务宕机或者网络问题，方法的调用可能出现超时，为了保证事务正常执行我们往往会加入重试的机制，因此就需要保证confirm和cancel阶段操作的幂等性。</p>
+<p>解决：在分支事务记录表中增加事务执行状态，每次执行confirm和cancel方法时都查询该事务的执行状态，以此判断事务的幂等性。</p>
+</li>
+<li><p>悬挂：调用try之前会先注册分支事务，注册分支事务之后，调用出现超时，此时try请求还未到达对应的服务，因为调用超时了，所以会执行cancel调用，此时cancel已经执行完了，然而这个时候try请求到达了，这个时候执行了try之后就没有后续的操作了，就会导致资源挂起，无法释放。</p>
+<p>解决：执行try方法时我们可以判断confirm或者cancel方法是否执行，如果执行了那么就不执行try阶段。同样借助分支事务表中事务的执行状态。如果已经执行了confirm或者cancel那么try就执行。</p>
+</li>
+</ul>
+<p><strong>优点</strong>： 跟2PC比起来，实现以及流程相对简单了一些，但数据的一致性比2PC也要差一些</p>
+<p><strong>缺点</strong>： 缺点还是比较明显的，在2,3步中都有可能失败。TCC属于应用层的一种补偿方式，所以需要程序员在实现的时候多写很多补偿的代码，在一些场景中，一些业务流程可能用TCC不太好定义及处理。</p>
+<h2 id="Refenrence-参考"><a href="#Refenrence-参考" class="headerlink" title="Refenrence 参考"></a>Refenrence 参考</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/column/c_1027859566523920384">https://www.zhihu.com/column/c_1027859566523920384</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45137477">https://zhuanlan.zhihu.com/p/45137477</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liushiqiang123/p/11054230.html">https://www.cnblogs.com/liushiqiang123/p/11054230.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/amei0/p/8522403.html">分布式事务解决方案（一） 2阶段提交 &amp; 3阶段提交 &amp; TCC</a></p>
+<p><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1718448134798842379&wfr=spider&for=pc">分布式事务-最终一致性方案之TCC</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry"><span class="miit">
+                <img src="/img/gov.png" title="中华人民共和国工业和信息化部">
+                <a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">辽ICP备20002229号-1</a>
+        </span>
+    
+    ©2012-2022 itxiaoma.cn
+</p>
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
