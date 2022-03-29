@@ -80,7 +80,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(7)</small>
+                <small>(8)</small>
             
         </div>
     </li>
@@ -137,7 +137,7 @@
                         <i class="fold iconfont icon-right"></i>
                         
                         REDIS
-                        <small>(4)</small>
+                        <small>(5)</small>
                         
                     </div>
                     
@@ -148,7 +148,7 @@
                                         
                                         REDIS学习笔记
                                         
-                                            <small>(4
+                                            <small>(5
                                                 )</small>
                                         
                                     </div>
@@ -196,7 +196,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="7">
+<input type="hidden" id="yelog_site_posts_number" value="8">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -276,6 +276,14 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        <a  class="全部文章 REDIS REDIS学习笔记 "
+           href="/2022/02/05/Redis05-Jedis%E3%80%81SprintBoot%E6%95%B4%E5%90%88Redis/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="05-Jedis、SprintBoot整合Redis">05-Jedis、SprintBoot整合Redis</span>
+            <span class="post-date" title="2022-02-05 00:00:00">2022/02/05</span>
+        </a>
         
         <a  class="全部文章 REDIS REDIS学习笔记 "
            href="/2022/02/04/Redis04-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
@@ -382,7 +390,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-03-28 22:26:13'>2022-02-02 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-03-29 18:55:43'>2022-02-02 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -595,6 +603,8 @@ zrevrangebyscore key max min （withscores）同上，改为从大到小排列
 zincrby key increment value 为元素的score加上增量
 
 zrem key value 删除该集合下，指定值的元素
+
+zcard key 返回集合中元素个数
 
 zcount key min max 统计该集合，分数区间内的元素个数
 

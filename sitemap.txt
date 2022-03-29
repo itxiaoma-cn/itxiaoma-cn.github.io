@@ -1,5 +1,6 @@
-https://blog.itxiaoma.cn/2022/01/01/%E5%8D%95%E8%AF%8D%E6%9C%AC/
+https://blog.itxiaoma.cn/2022/02/05/Redis05-Jedis%E3%80%81SprintBoot%E6%95%B4%E5%90%88Redis/
 https://blog.itxiaoma.cn/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/
+https://blog.itxiaoma.cn/2022/01/01/%E5%8D%95%E8%AF%8D%E6%9C%AC/
 https://blog.itxiaoma.cn/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/
 https://blog.itxiaoma.cn/2022/02/04/Redis04-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/
 https://blog.itxiaoma.cn/2022/02/03/Redis03-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/

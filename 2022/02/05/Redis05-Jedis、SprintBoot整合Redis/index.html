@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>05-Jedis、SprintBoot整合Redis | IT小马</title>
+  <meta name="keywords" content=" REDIS , 后端 ">
+  <meta name="description" content="05-Jedis、SprintBoot整合Redis | IT小马">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="6.新数据类型Bitmaps 位操作字符串 Bitmaps实际上就是字符串(k-v)，但是可以对字符串进行位操作 可以把Bitmas想象成以位为单位，只能存0和1的数组，数组下标叫做偏移量  常用命令setbit key offset value  &#x2F;&#x2F;设置值  getbit key offset              &#x2F;&#x2F;取值  bitcount （start end     &#x2F;&#x2F;统计数值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="04-新数据类型">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/02/04/Redis04-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:site_name" content="IT小马">
+<meta property="og:description" content="6.新数据类型Bitmaps 位操作字符串 Bitmaps实际上就是字符串(k-v)，但是可以对字符串进行位操作 可以把Bitmas想象成以位为单位，只能存0和1的数组，数组下标叫做偏移量  常用命令setbit key offset value  &#x2F;&#x2F;设置值  getbit key offset              &#x2F;&#x2F;取值  bitcount （start end     &#x2F;&#x2F;统计数值">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-28T07:50:44.000Z">
+<meta property="article:author" content="IT小马">
+<meta property="article:tag" content="REDIS">
+<meta property="article:tag" content="后端">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>IT小马</span>
+</div>
+
+<div class="icon">
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(8)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="GO微服务">
+                        
+                        GO微服务
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="MYSQL">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        MYSQL
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="MYSQL<--->MYSQL45讲">
+                                        
+                                        MYSQL45讲
+                                        
+                                            <small>(1
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="REDIS">
+                        <i class="fold iconfont icon-right"></i>
+                        
+                        REDIS
+                        <small>(5)</small>
+                        
+                    </div>
+                    
+                        <ul class="sub hide">
+                            
+                                <li>
+                                    <div data-rel="REDIS<--->REDIS学习笔记">
+                                        
+                                        REDIS学习笔记
+                                        
+                                            <small>(5
+                                                )</small>
+                                        
+                                    </div>
+                                    
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="单词本">
+                        
+                        单词本
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="8">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>单词本</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>后端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GO微服务</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MYSQL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>REDIS</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="全部文章 REDIS REDIS学习笔记 "
+           href="/2022/02/05/Redis05-Jedis%E3%80%81SprintBoot%E6%95%B4%E5%90%88Redis/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="05-Jedis、SprintBoot整合Redis">05-Jedis、SprintBoot整合Redis</span>
+            <span class="post-date" title="2022-02-05 00:00:00">2022/02/05</span>
+        </a>
+        
+        <a  class="全部文章 REDIS REDIS学习笔记 "
+           href="/2022/02/04/Redis04-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="04-新数据类型">04-新数据类型</span>
+            <span class="post-date" title="2022-02-04 00:00:00">2022/02/04</span>
+        </a>
+        
+        <a  class="全部文章 REDIS REDIS学习笔记 "
+           href="/2022/02/03/Redis03-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="03-配置文件、发布和订阅">03-配置文件、发布和订阅</span>
+            <span class="post-date" title="2022-02-03 00:00:00">2022/02/03</span>
+        </a>
+        
+        <a  class="全部文章 REDIS REDIS学习笔记 "
+           href="/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="02-常用五大数据类型">02-常用五大数据类型</span>
+            <span class="post-date" title="2022-02-02 00:00:00">2022/02/02</span>
+        </a>
+        
+        <a  class="全部文章 REDIS REDIS学习笔记 "
+           href="/2022/02/01/Redis01-%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%AE%89%E8%A3%85/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="01-基础及安装">01-基础及安装</span>
+            <span class="post-date" title="2022-02-01 00:00:00">2022/02/01</span>
+        </a>
+        
+        <a  class="全部文章 单词本 "
+           href="/2022/01/01/%E5%8D%95%E8%AF%8D%E6%9C%AC/"
+           data-tag="单词本"
+           data-author="" >
+            <span class="post-title" title="单词本">单词本</span>
+            <span class="post-date" title="2022-01-01 00:00:00">2022/01/01</span>
+        </a>
+        
+        <a  class="全部文章 GO微服务 "
+           href="/2021/12/01/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"
+           data-tag="GO微服务,GO"
+           data-author="" >
+            <span class="post-title" title="01-Go语言基础20问">01-Go语言基础20问</span>
+            <span class="post-date" title="2021-12-01 00:00:00">2021/12/01</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL MYSQL45讲 "
+           href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="01-基础架构">01-基础架构</span>
+            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-Redis05-Jedis、SprintBoot整合Redis" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">05-Jedis、SprintBoot整合Redis</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="REDIS">REDIS</a> > 
+            
+            <a  data-rel="REDIS&lt;---&gt;REDIS学习笔记">REDIS学习笔记</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">REDIS</a>
+            
+            <a class="color3">后端</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2022-03-29 21:01:39'>2022-02-05 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Jedis"><span class="toc-text">7.Jedis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-text">基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IDEA%E6%96%B0%E5%BB%BA%E5%B7%A5%E7%A8%8B"><span class="toc-text">IDEA新建工程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96"><span class="toc-text">添加依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E6%B5%8B%E8%AF%95%E7%B1%BB"><span class="toc-text">新建测试类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E7%9B%B8%E5%85%B3%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">测试相关数据类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E9%AA%8C%E8%AF%81%E7%A0%81%E5%8F%91%E9%80%81"><span class="toc-text">模拟验证码发送</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-SprintBoot%E6%95%B4%E5%90%88Redis"><span class="toc-text">8.SprintBoot整合Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BASpringBoot%E5%B7%A5%E7%A8%8B"><span class="toc-text">创建SpringBoot工程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%BE%9D%E8%B5%96%E6%96%87%E4%BB%B6"><span class="toc-text">1.依赖文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-redis%E9%85%8D%E7%BD%AE"><span class="toc-text">2.redis配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-redis%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="toc-text">3.redis配置类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E8%B0%83%E8%AF%95"><span class="toc-text">4.调试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="7-Jedis"><a href="#7-Jedis" class="headerlink" title="7.Jedis"></a>7.Jedis</h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><h4 id="IDEA新建工程"><a href="#IDEA新建工程" class="headerlink" title="IDEA新建工程"></a>IDEA新建工程</h4><p>New Project  &gt;  Maven  &gt;  Next  &gt;  配置项目名 &gt; Finish</p>
+<pre><code>GroupId: cn.itxiaoma
+ArtifactId: jedis_redis_demo
+</code></pre>
+<h4 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h4><p>Jedis 所需要的jar包到pom.xml</p>
+<pre><code>&lt;!-- https://mvnrepository.com/artifact/redis.clients/jedis --&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;redis.clients&lt;/groupId&gt;
+            &lt;artifactId&gt;jedis&lt;/artifactId&gt;
+            &lt;version&gt;3.6.1&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+</code></pre>
+<p>刷新Maven</p>
+<p><img src="https://img2020.cnblogs.com/blog/1808298/202007/1808298-20200730102617363-503723516.png" alt="img"></p>
+<h4 id="新建测试类"><a href="#新建测试类" class="headerlink" title="新建测试类"></a>新建测试类</h4><p>New package:  cn.itxiaoma.jedis</p>
+<p>New Java Class:  JedisDemo1.java</p>
+<pre><code>package cn.itxiaoma.jedis;
+
+import redis.clients.jedis.Jedis;
+
+public class JedisDemo1 &#123;
+    public static void main(String[] args) &#123;
+        //创建Jedis对象
+        Jedis jedis = new Jedis(&quot;192.168.31.51&quot;, 6379);
+        //测试
+        String res = jedis.ping();
+        System.out.println(res);
+    &#125;
+&#125;
+</code></pre>
+<h4 id="测试相关数据类型"><a href="#测试相关数据类型" class="headerlink" title="测试相关数据类型"></a>测试相关数据类型</h4><pre><code>package cn.itxiaoma.jedis;
+
+import org.junit.jupiter.api.Test;
+import redis.clients.jedis.Jedis;
+
+import java.util.List;
+import java.util.Set;
+
+public class JedisDemo1 &#123;
+    public static void main(String[] args) &#123;
+        //创建Jedis对象
+        Jedis jedis = new Jedis(&quot;192.168.31.51&quot;, 6379);
+        //测试
+        String res = jedis.ping();
+        System.out.println(res);
+    &#125;
+
+    //操作key string
+    @Test
+    public void demo1() &#123;
+        //创建Jedis对象
+        Jedis jedis = new Jedis(&quot;192.168.31.51&quot;, 6379);
+
+        //添加
+        jedis.set(&quot;name&quot;, &quot;lucy&quot;);
+
+        //获取
+        String name = jedis.get(&quot;name&quot;);
+        System.out.println(name);
+
+        //设置多个key-value
+        jedis.mset(&quot;k1&quot;, &quot;v1&quot;, &quot;k2&quot;, &quot;v2&quot;);
+        List&lt;String&gt; mget = jedis.mget(&quot;k1&quot;, &quot;k2&quot;);
+        System.out.println(mget);
+
+        Set&lt;String&gt; keys = jedis.keys(&quot;*&quot;);
+        for (String key : keys) &#123;
+            System.out.println(key);
+        &#125;
+        jedis.close();
+    &#125;
+
+    //操作list
+    @Test
+    public void demo2() &#123;
+        //创建Jedis对象
+        Jedis jedis = new Jedis(&quot;192.168.31.51&quot;, 6379);
+
+        jedis.lpush(&quot;key1&quot;, &quot;lucy&quot;, &quot;mary&quot;, &quot;jack&quot;);
+        List&lt;String&gt; values = jedis.lrange(&quot;key1&quot;, 0, -1);
+        System.out.println(values);
+        jedis.close();
+    &#125;
+
+    //操作set
+    @Test
+    public void demo3() &#123;
+        //创建Jedis对象
+        Jedis jedis = new Jedis(&quot;192.168.31.51&quot;, 6379);
+
+        jedis.sadd(&quot;names&quot;,&quot;lucy&quot;);
+        jedis.sadd(&quot;names&quot;,&quot;mary&quot;);
+
+        Set&lt;String&gt; names = jedis.smembers(&quot;names&quot;);
+        System.out.println(names);
+        jedis.close();
+    &#125;
+
+    //操作hash
+    @Test
+    public void demo4() &#123;
+        //创建Jedis对象
+        Jedis jedis = new Jedis(&quot;192.168.31.51&quot;, 6379);
+
+        jedis.hset(&quot;users&quot;,&quot;age&quot;,&quot;20&quot;);
+        String hget = jedis.hget(&quot;users&quot;, &quot;age&quot;);
+        System.out.println(hget);
+        jedis.close();
+    &#125;
+
+    //操作zset
+    @Test
+    public void demo5() &#123;
+        //创建Jedis对象
+        Jedis jedis = new Jedis(&quot;192.168.31.51&quot;, 6379);
+
+        jedis.zadd(&quot;china&quot;,100d,&quot;shanghai&quot;);
+
+        Set&lt;String&gt; china = jedis.zrange(&quot;china&quot;, 0, -1);
+        System.out.println(china);
+
+        jedis.close();
+    &#125;
+&#125;
+</code></pre>
+<h3 id="模拟验证码发送"><a href="#模拟验证码发送" class="headerlink" title="模拟验证码发送"></a>模拟验证码发送</h3><blockquote>
+<p>1、输入手机号，点击发送后随机生成6位数字码，2分钟有效<br>2、输入验证码，点击验证，返回成功或失败<br>3、每个手机号每天只能输入3次</p>
+</blockquote>
+<pre><code>package cn.itxiaoma.jedis;
+
+import redis.clients.jedis.Jedis;
+
+import java.util.Random;
+
+public class PhoneCode &#123;
+
+    public static void main(String[] args) &#123;
+        //模拟验证码发送
+        verifyCode(&quot;13678765435&quot;);
+
+        //模拟验证码校验
+        //getRedisCode(&quot;13678765435&quot;,&quot;4444&quot;);
+    &#125;
+
+    //3 验证码校验
+    public static void getRedisCode(String phone, String code) &#123;
+        //从redis获取验证码
+        Jedis jedis = new Jedis(&quot;192.168.31.51&quot;, 6379);
+        //验证码key
+        String codeKey = &quot;VerifyCode&quot; + phone + &quot;:code&quot;;
+        String redisCode = jedis.get(codeKey);
+        //判断
+        if (redisCode.equals(code)) &#123;
+            System.out.println(&quot;成功&quot;);
+        &#125; else &#123;
+            System.out.println(&quot;失败&quot;);
+        &#125;
+        jedis.close();
+    &#125;
+
+    //2 每个手机每天只能发送三次，验证码放到redis中，设置过期时间120
+    public static void verifyCode(String phone) &#123;
+        //连接redis
+        Jedis jedis = new Jedis(&quot;192.168.31.51&quot;, 6379);
+
+        //拼接key
+        //手机发送次数key
+        String countKey = &quot;VerifyCode&quot; + phone + &quot;:count&quot;;
+        //验证码key
+        String codeKey = &quot;VerifyCode&quot; + phone + &quot;:code&quot;;
+
+        //每个手机每天只能发送三次
+        String count = jedis.get(countKey);
+        if (count == null) &#123;
+            //没有发送次数，第一次发送
+            //设置发送次数是1
+            jedis.setex(countKey, 24 * 60 * 60, &quot;1&quot;);
+        &#125; else if (Integer.parseInt(count) &lt;= 2) &#123;
+            //发送次数+1
+            jedis.incr(countKey);
+        &#125; else if (Integer.parseInt(count) &gt; 2) &#123;
+            //发送三次，不能再发送
+            System.out.println(&quot;今天发送次数已经超过三次&quot;);
+            jedis.close();
+            return;//超过三次之后就会自动退出不会再发送了，不添加这一行，即使显示发送次数，但还会有验证码接收到
+        &#125;
+
+        //发送验证码放到redis里面
+        String vcode = getCode();//调用生成的验证码
+        jedis.setex(codeKey, 120, vcode);//设置生成的验证码只有120秒的时间
+        System.out.println(&quot;发送成功&quot;);
+        jedis.close();
+    &#125;
+
+    //1 生成6位数字验证码，code是验证码
+    public static String getCode() &#123;
+        Random random = new Random();
+        String code = &quot;&quot;;
+        for (int i = 0; i &lt; 6; i++) &#123;
+            int rand = random.nextInt(10);
+            code += rand;
+        &#125;
+        return code;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="8-SprintBoot整合Redis"><a href="#8-SprintBoot整合Redis" class="headerlink" title="8.SprintBoot整合Redis"></a>8.SprintBoot整合Redis</h2><h4 id="创建SpringBoot工程"><a href="#创建SpringBoot工程" class="headerlink" title="创建SpringBoot工程"></a>创建SpringBoot工程</h4><p>New Project  &gt;  Spring Initializr  &gt;   配置项目 &gt; Next</p>
+<h4 id="1-依赖文件"><a href="#1-依赖文件" class="headerlink" title="1.依赖文件"></a>1.依赖文件</h4><pre><code>&lt;!-- redis --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+&lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;!-- spring2.X集成redis所需common-pool2--&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+&lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;
+&lt;version&gt;2.6.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h4 id="2-redis配置"><a href="#2-redis配置" class="headerlink" title="2.redis配置"></a>2.redis配置</h4><p>src/main/resources/application.properties</p>
+<pre><code>#Redis服务器地址
+spring.redis.host=192.168.31.51
+#Redis服务器连接端口
+spring.redis.port=6379
+#Redis数据库索引（默认为0）
+spring.redis.database= 0
+#连接超时时间（毫秒）
+spring.redis.timeout=1800000
+#连接池最大连接数（使用负值表示没有限制）
+spring.redis.lettuce.pool.max-active=20
+#最大阻塞等待时间(负数表示没限制)
+spring.redis.lettuce.pool.max-wait=-1
+#连接池中的最大空闲连接
+spring.redis.lettuce.pool.max-idle=5
+#连接池中的最小空闲连接
+spring.redis.lettuce.pool.min-idle=0
+</code></pre>
+<h4 id="3-redis配置类"><a href="#3-redis配置类" class="headerlink" title="3.redis配置类"></a>3.<strong>redis配置类</strong></h4><p>src/main/java/cn/itxiaoma/redis_springboot/config/RedisConfig.java</p>
+<pre><code>package cn.itxiaoma.redis_springboot.config;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.time.Duration;
+
+
+@EnableCaching
+@Configuration
+public class RedisConfig extends CachingConfigurerSupport &#123;
+
+    @Bean
+    public RedisTemplate&lt;String, Object&gt; redisTemplate(RedisConnectionFactory factory) &#123;
+        RedisTemplate&lt;String, Object&gt; template = new RedisTemplate&lt;&gt;();
+        RedisSerializer&lt;String&gt; redisSerializer = new StringRedisSerializer();
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+        template.setConnectionFactory(factory);
+        //key序列化方式
+        template.setKeySerializer(redisSerializer);
+        //value序列化
+        template.setValueSerializer(jackson2JsonRedisSerializer);
+        //value hashmap序列化
+        template.setHashValueSerializer(jackson2JsonRedisSerializer);
+        return template;
+    &#125;
+
+    @Bean
+    public CacheManager cacheManager(RedisConnectionFactory factory) &#123;
+        RedisSerializer&lt;String&gt; redisSerializer = new StringRedisSerializer();
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        //解决查询缓存转换异常的问题
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+        // 配置序列化（解决乱码的问题）,过期时间600秒
+        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofSeconds(600))
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))
+                .disableCachingNullValues();
+        RedisCacheManager cacheManager = RedisCacheManager.builder(factory)
+                .cacheDefaults(config)
+                .build();
+        return cacheManager;
+    &#125;
+&#125;
+</code></pre>
+<p><code>@EnableCaching</code>开启缓存类<br><code>@Configuration</code>配置类</p>
+<h4 id="4-调试"><a href="#4-调试" class="headerlink" title="4.调试"></a>4.调试</h4><p>src/main/java/cn/itxiaoma/redis_springboot/controller/RedisTestController.java</p>
+<pre><code>package cn.itxiaoma.redis_springboot.controller;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(&quot;/redisTest&quot;)
+public class RedisTestController &#123;
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @GetMapping
+    public String testRedis() &#123;
+        //设置值到redis
+        redisTemplate.opsForValue().set(&quot;name&quot;, &quot;ITXiaoMa&quot;);
+        //从redis获取值
+        String name = (String) redisTemplate.opsForValue().get(&quot;name&quot;);
+        return name;
+    &#125;
+&#125;
+</code></pre>
+<p>访问：<a target="_blank" rel="noopener" href="http://localhost:8080/redisTest">http://localhost:8080/redisTest</a></p>
+<p>返回：ITXiaoMa</p>
+<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+<p>视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
+<p>参考笔记：<a target="_blank" rel="noopener" href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
+<p>参考笔记：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry"><span class="miit">
+                <img src="/img/gov.png" title="中华人民共和国工业和信息化部">
+                <a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">辽ICP备20002229号-1</a>
+        </span>
+    
+    ©2012-2022 itxiaoma.cn
+</p>
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
