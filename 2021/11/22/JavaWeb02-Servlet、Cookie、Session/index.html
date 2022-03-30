@@ -482,7 +482,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-03-30 21:07:21'>2021-11-22 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-03-30 21:22:05'>2021-11-22 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -542,12 +542,9 @@
 <p>依赖下载地址:<a target="_blank" rel="noopener" href="https://mvnrepository.com/">https://mvnrepository.com/</a></p>
 </li>
 <li><p>新建Module子模块servlet01（maven-archetype-webapp）</p>
-<pre><code> 父项目中的java子项目可以直接使用，反之不可以
-
- 问题1:子项目pom中没有parent标签
-
- 解决：在子项目的pom.xml中手动添加parent标签并刷新maven
-</code></pre>
+<p>父项目中的java子项目可以直接使用，反之不可以</p>
+<p> 问题1:子项目pom中没有parent标签</p>
+<p>解决：在子项目的pom.xml中手动添加parent标签并刷新maven</p>
 </li>
 <li><pre><code>&lt;parent&gt;
   &lt;groupId&gt;cn.itxiaoma&lt;/groupId&gt;
@@ -569,7 +566,9 @@
 &lt;/web-app&gt;
 </code></pre>
 </li>
-<li><p>在java目录下新建package包cn..itxiaoma.servlet</p>
+<li><p>在java目录下新建package包cn.itxiaoma.servlet</p>
+<p>问题：右键New没有package选项</p>
+<p>解决：右键 Mark Directory as &gt; Sources Root</p>
 </li>
 <li><p>在包下新建java类HelloServlet，并实现Servlet接口(继承HttpServlet)</p>
 <pre><code>package cn.itxiaoma.servlet;
@@ -615,9 +614,9 @@ public class HelloServlet extends HttpServlet &#123;
 <p>Application Context: /servlet01_war_exploded</p>
 </li>
 <li><p>启动测试</p>
-<p><a target="_blank" rel="noopener" href="http://localhost:8081/servlet01_war_exploded/hello">http://localhost:8081/servlet01_war_exploded/hello</a></p>
 </li>
 </ol>
+<p>   <a target="_blank" rel="noopener" href="http://localhost:8081/servlet01_war_exploded/hello">http://localhost:8081/servlet01_war_exploded/hello</a></p>
 <h4 id="Servlet原理"><a href="#Servlet原理" class="headerlink" title="Servlet原理"></a>Servlet原理</h4><ol>
 <li>浏览器发送http请求(service)到web容器(Tomcat)</li>
 <li>首次访问的请求会加载Servlet类到内存</li>
