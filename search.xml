@@ -383,7 +383,7 @@ lset key index value 在列表key中的下标index中修改值value
 
 smembers key 取出该集合的所有值
 
-sismember key value 判断该集合key是否含有改值
+sismember key value 判断该集合key是否含有该值
 
 scard key 返回该集合的元素个数
 
@@ -1473,6 +1473,362 @@ func CancelPoint()&#123;&#125;
       <tags>
         <tag>GO微服务</tag>
         <tag>GO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>06-事务、锁、秒杀</title>
+    <url>/2022/02/06/Redis06-%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E3%80%81%E7%A7%92%E6%9D%80/</url>
+    <content><![CDATA[<h2 id="9-事务"><a href="#9-事务" class="headerlink" title="9.事务"></a>9.事务</h2><p>Redis 事务是一个单独的隔离操作：事务中的所有命令都会序列化、按顺序地执行。事务在执行的过程中，不会被其他客户端发送来的命令请求所打断。</p>
+<p>Redis 事务的主要作用就是<strong>串联多个命令</strong>防止别的命令插队。</p>
+<h3 id="multi、exec、discard"><a href="#multi、exec、discard" class="headerlink" title="multi、exec、discard"></a>multi、exec、discard</h3><p>从输入multi开始，输入的命令会依次进入命令队列中，但不会执行；直到输入exec后，会将之前命令队列中的命令依次执行。</p>
+<p>组队的过程中可以通过discard来放弃组队。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s1gd6snij20n607laal.jpg" alt="image-20220330173052359"></p>
+<pre><code>127.0.0.1:6379&gt; multi
+OK
+127.0.0.1:6379(TX)&gt; set k1 v1
+QUEUED
+127.0.0.1:6379(TX)&gt; set k2 v2
+QUEUED
+127.0.0.1:6379(TX)&gt; exec
+1) OK
+2) OK
+127.0.0.1:6379&gt; multi
+OK
+127.0.0.1:6379(TX)&gt; set k3 v3
+QUEUED
+127.0.0.1:6379(TX)&gt; discard
+OK
+</code></pre>
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s24xp2bgj20mp09i0tc.jpg" alt="image-20220330175429278"></p>
+<ul>
+<li>组队中某个命令出现了错误报告，执行时整个队列中的命令都会被取消</li>
+<li>执行阶段某个命令报错，则只有报错的命令不会被执行，其他的命令都会执行，不会回滚。</li>
+</ul>
+<h2 id="10-锁"><a href="#10-锁" class="headerlink" title="10.锁"></a>10.锁</h2><h3 id="悲观锁-Pessimistic-Lock"><a href="#悲观锁-Pessimistic-Lock" class="headerlink" title="悲观锁 (Pessimistic Lock)"></a>悲观锁 (Pessimistic Lock)</h3><p>每次在拿数据的时候都会上锁，这样别人想拿这个数据就会 block 直到它拿到锁。</p>
+<p>传统的关系型数据库里边就用到了很多这种锁机制<strong>，比如</strong>行锁<strong>，</strong>表锁<strong>等，</strong>读锁<strong>，</strong>写锁**等，都是在做操作之前先上锁。</p>
+<h3 id="乐观锁-Optimistic-Lock"><a href="#乐观锁-Optimistic-Lock" class="headerlink" title="乐观锁 (Optimistic Lock)"></a>乐观锁 (Optimistic Lock)</h3><p>每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机制。</p>
+<p>乐观锁适用于多读的应用类型，这样可以提高吞吐量。Redis 就是利用这种 <strong>check-and-set 机制</strong>实现事务的。</p>
+<h2 id="11-秒杀案例"><a href="#11-秒杀案例" class="headerlink" title="11.秒杀案例"></a>11.秒杀案例</h2><h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+<p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
+<p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
+<p>参考笔记：<a href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+]]></content>
+      <categories>
+        <category>REDIS</category>
+        <category>REDIS学习笔记</category>
+      </categories>
+      <tags>
+        <tag>REDIS</tag>
+        <tag>后端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>07-持久化操作</title>
+    <url>/2022/02/07/Redis07-%E6%8C%81%E4%B9%85%E5%8C%96%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+<p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
+<p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
+<p>参考笔记：<a href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+]]></content>
+      <categories>
+        <category>REDIS</category>
+        <category>REDIS学习笔记</category>
+      </categories>
+      <tags>
+        <tag>REDIS</tag>
+        <tag>后端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>08-主从复制、集群</title>
+    <url>/2022/02/08/Redis08-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E3%80%81%E9%9B%86%E7%BE%A4/</url>
+    <content><![CDATA[<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+<p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
+<p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
+<p>参考笔记：<a href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+]]></content>
+      <categories>
+        <category>REDIS</category>
+        <category>REDIS学习笔记</category>
+      </categories>
+      <tags>
+        <tag>REDIS</tag>
+        <tag>后端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>10-新功能介绍</title>
+    <url>/2022/02/10/Redis10-%E6%96%B0%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+<p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
+<p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
+<p>参考笔记：<a href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+]]></content>
+      <categories>
+        <category>REDIS</category>
+        <category>REDIS学习笔记</category>
+      </categories>
+      <tags>
+        <tag>REDIS</tag>
+        <tag>后端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>09-缓存穿透/击穿/雪崩、分布式锁</title>
+    <url>/2022/02/09/Redis09-%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%C2%B7%E5%87%BB%E7%A9%BF%C2%B7%E9%9B%AA%E5%B4%A9%E3%80%81%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</url>
+    <content><![CDATA[<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+<p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
+<p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
+<p>参考笔记：<a href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+]]></content>
+      <categories>
+        <category>REDIS</category>
+        <category>REDIS学习笔记</category>
+      </categories>
+      <tags>
+        <tag>REDIS</tag>
+        <tag>后端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>01-Tomcat，Maven配置</title>
+    <url>/2021/11/20/JavaWeb01-Tomcat%EF%BC%8CMaven%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="web应用程序"><a href="#web应用程序" class="headerlink" title="web应用程序"></a>web应用程序</h3><h4 id="web组成"><a href="#web组成" class="headerlink" title="web组成"></a>web组成</h4><p>html, css, js</p>
+<p>Jsp, servlet</p>
+<p>java程序</p>
+<p>jar包</p>
+<p>配置文件（Properties）</p>
+<h4 id="JSP-Servlet"><a href="#JSP-Servlet" class="headerlink" title="JSP/Servlet"></a>JSP/Servlet</h4><blockquote>
+<p>sun公司主推的B/S架构，基于Java语言，可以承载三高（高并发，高可用，高性能）</p>
+</blockquote>
+<p>B/S：浏览器和服务器</p>
+<p>C/S：客户端和服务器</p>
+<h4 id="Web服务器"><a href="#Web服务器" class="headerlink" title="Web服务器"></a>Web服务器</h4><p>IIS：微软，ASP，WIndows自带</p>
+<p>Tomcat：Apache基金会的核心项目，是开源免费的轻量级服务器</p>
+<h4 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h4><table>
+<thead>
+<tr>
+<th>文件夹</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bin</td>
+<td>启动，关闭的脚本文件</td>
+</tr>
+<tr>
+<td>conf</td>
+<td>配置</td>
+</tr>
+<tr>
+<td>lib</td>
+<td>依赖的jar包</td>
+</tr>
+<tr>
+<td>logs</td>
+<td>日志</td>
+</tr>
+<tr>
+<td>webapps</td>
+<td>存放网站内容</td>
+</tr>
+</tbody></table>
+<h5 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h5><blockquote>
+<p>vim docker-compose.yml</p>
+</blockquote>
+<pre><code>version: &#39;3.5&#39;
+services:
+  tomcat:
+    restart: always
+    image: tomcat
+    container_name: tomcat
+    ports:
+      - 8080:8080
+    volumes:
+      - ./courage/ROOT/:/usr/local/tomcat/webapps/ROOT
+    environment:
+      TZ: Asia/Shanghai
+</code></pre>
+<p>启动：<code>docker-compose up -d</code></p>
+<h5 id="本地安装"><a href="#本地安装" class="headerlink" title="本地安装"></a>本地安装</h5><p>下载地址：<a href="https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.55/bin/apache-tomcat-9.0.55.zip">https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.55/bin/apache-tomcat-9.0.55.zip</a></p>
+<p>解压并复制到<code>/usr/local/ApacheTomcat/ </code></p>
+<pre><code>cd /usr/local/ApacheTomcat/bin 
+chmod u+x *.sh
+./startup.sh
+</code></pre>
+<p>安装完成</p>
+<pre><code>Using CATALINA_BASE:   /usr/local/ApacheTomcat
+Using CATALINA_HOME:   /usr/local/ApacheTomcat
+Using CATALINA_TMPDIR: /usr/local/ApacheTomcat/temp
+Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home
+Using CLASSPATH:       /usr/local/ApacheTomcat/bin/bootstrap.jar:/usr/local/ApacheTomcat/bin/tomcat-juli.jar
+Using CATALINA_OPTS:   
+Tomcat started.
+</code></pre>
+<p>访问：<a href="http://localhost:8080/">http://localhost:8080</a></p>
+<p>tomcat默认端口号：8080</p>
+<p>mysql默认端口号：3306</p>
+<p>http默认端口号：80</p>
+<p>https默认端口号：443</p>
+<pre><code>&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot;
+               connectionTimeout=&quot;20000&quot;
+               redirectPort=&quot;8443&quot; /&gt;       
+</code></pre>
+<p>主机名：localhost</p>
+<p>默认网站存放位置：webapps/ROOT/</p>
+<pre><code>&lt;Host name=&quot;localhost&quot;  appBase=&quot;webapps&quot;
+            unpackWARs=&quot;true&quot; autoDeploy=&quot;true&quot;&gt;        
+</code></pre>
+<p>网站结构</p>
+<pre><code>- webapps        Tomacat服务器web目录
+        - ROOT
+            - project        项目目录
+                - index.html    项目首页
+                - WEB-INF
+                    - classes        java程序
+                    -lib                web应用依赖的jar包
+                    -web.xml        网站配置文件
+                - static            静态资源
+            - css
+            -js
+            -img
+        
+</code></pre>
+<h4 id="Http（超文本传输协议）"><a href="#Http（超文本传输协议）" class="headerlink" title="Http（超文本传输协议）"></a>Http（超文本传输协议）</h4><ol>
+<li><p>请求行：GET，POST…</p>
+</li>
+<li><p>消息头</p>
+<pre><code>Accept: text/html 数据类型
+Accept-Encoding: gzip 编码
+Accept-Language: 语言
+Cache-Control: 缓存
+Connection: Keep-Alive 请求完成后断开/保持连接
+Host: 主机
+</code></pre>
+</li>
+<li><p>响应体</p>
+<pre><code>Refrush: 刷新频率
+Locaton: 让网页重新定位
+</code></pre>
+</li>
+<li><p>响应状态码</p>
+<pre><code>200        请求成功
+300        重定向
+400        找不到资源
+500        服务器错误
+</code></pre>
+</li>
+</ol>
+<h4 id="Maven-项目架构管理工具"><a href="#Maven-项目架构管理工具" class="headerlink" title="Maven 项目架构管理工具"></a>Maven 项目架构管理工具</h4><blockquote>
+<p>作用：自动导入和配置jar包</p>
+</blockquote>
+<p>核心思想：约定大于配置（不要违反约束）</p>
+<h5 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h5><p>下载地址：<a href="https://dlcdn.apache.org/maven/maven-3/3.8.3/binaries/apache-maven-3.8.3-bin.zip">https://dlcdn.apache.org/maven/maven-3/3.8.3/binaries/apache-maven-3.8.3-bin.zip</a></p>
+<pre><code>sudo unzip apache-maven-3.8.3-bin.zip -d /usr/local
+</code></pre>
+<p>vim ~/.bash_profile</p>
+<pre><code>export MAVEN_HOME=/usr/local/apache-maven-3.6.3
+export PATH=$PATH:$MAVEN_HOME/bin
+</code></pre>
+<pre><code class="bash">source ~/.bash_profile 
+</code></pre>
+<p>验证是否安装成功</p>
+<pre><code>mvn -v
+</code></pre>
+<h5 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h5><h5 id="配置阿里云镜像"><a href="#配置阿里云镜像" class="headerlink" title="配置阿里云镜像"></a>配置阿里云镜像</h5><blockquote>
+<p>settings.xml</p>
+</blockquote>
+<pre><code>&lt;mirror&gt;
+    &lt;id&gt;nexus-aliyun&lt;/id&gt;
+    &lt;mirrorOf&gt;*,!jeecg,!jeecg-snapshots&lt;/mirrorOf&gt;
+    &lt;name&gt;Nexus aliyun&lt;/name&gt;
+    &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt; 
+&lt;/mirror&gt;
+</code></pre>
+<h5 id="配置本地仓库-localRepository"><a href="#配置本地仓库-localRepository" class="headerlink" title="配置本地仓库 localRepository"></a>配置本地仓库 localRepository</h5><p>建立仓库：</p>
+<pre><code>&lt;localRepository&gt;\xxx\maven-repo&lt;/localRepository&gt;
+</code></pre>
+<h5 id="在IDEA项目中使用maven"><a href="#在IDEA项目中使用maven" class="headerlink" title="在IDEA项目中使用maven"></a>在IDEA项目中使用maven</h5><blockquote>
+<p>New Project &gt; Maven &gt; create from archetype &gt; maven-archetype-webapp </p>
+</blockquote>
+<p>项目名</p>
+<pre><code>GroupId:组id cn.itxiaoma
+ArtifactId：项目id javaweb-01-maven
+</code></pre>
+<p>maven路径</p>
+<pre><code>Maven home path: /usr/local/apache-maven-3.8.3
+User settings file: /usr/local/apache-maven-3.8.3/conf/settings.xml
+Local respository: /usr/local/apache-maven-3.8.3/maven-repo
+</code></pre>
+<p>等待项目初始化完成</p>
+<pre><code>BUILD SUCCESS
+</code></pre>
+<p>IEDA中的maven配置</p>
+<blockquote>
+<p>Preference &gt; Build &gt; Build Tools &gt; Maven</p>
+</blockquote>
+<p>标记文件夹: 新建java, resources文件夹</p>
+<pre><code>File &gt; Project Structure &gt; Modules =&gt;指定Sources和Resources
+</code></pre>
+<h5 id="在IDEA中配置Tomcat"><a href="#在IDEA中配置Tomcat" class="headerlink" title="在IDEA中配置Tomcat"></a>在IDEA中配置Tomcat</h5><blockquote>
+<p>Run &gt; Edit Configurations &gt; + &gt; Tomcat Server - Local &gt; Application server:选择Tomcat目录</p>
+<p>Deployment &gt; + &gt; javaweb-01-maven.war（指定访问目录）</p>
+</blockquote>
+<h5 id="Maven核心配置pom-xml"><a href="#Maven核心配置pom-xml" class="headerlink" title="Maven核心配置pom.xml"></a>Maven核心配置pom.xml</h5><blockquote>
+<p>Maven的高级之处在于，他会帮你导入JAR包依赖的其他jar</p>
+</blockquote>
+<p>打包方式：jar java应用 war java web应用</p>
+<pre><code>&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.11&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<p>注：Maven由于约定大于配置，可能会无法导出资源</p>
+<p>解决方案：在build中配置resources，防止资源导出失败</p>
+<pre><code>&lt;!--在build中配置resources,来防止我们资源导出失败的问题--&gt;
+&lt;build&gt;
+    &lt;resources&gt;
+        &lt;resource&gt;
+            &lt;directory&gt;src/main/resources&lt;/directory&gt;
+            &lt;excludes&gt;
+                &lt;exclude&gt;**/*.properties&lt;/exclude&gt;
+                &lt;exclude&gt;**/*.xml&lt;/exclude&gt;
+            &lt;/excludes&gt;
+            &lt;filtering&gt;false&lt;/filtering&gt;
+        &lt;/resource&gt;
+        &lt;resource&gt;
+            &lt;directory&gt;src/main/java&lt;/directory&gt;
+            &lt;includes&gt;
+                &lt;include&gt;**/*.properties&lt;/include&gt;
+                &lt;include&gt;**/*.xml&lt;/include&gt;
+            &lt;/includes&gt;
+            &lt;filtering&gt;false&lt;/filtering&gt;
+        &lt;/resource&gt;
+    &lt;/resources&gt;
+&lt;/build&gt;
+</code></pre>
+<p>maven默认web项目中的web.xml替换版本（参照Tomact的/webapps/ROOT/WEB-INF/web.xml）</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+         version=&quot;4.0&quot;
+         metadata-complete=&quot;true&quot;&gt;
+&lt;/web-app&gt;
+</code></pre>
+]]></content>
+      <categories>
+        <category>JAVA</category>
+        <category>JavaWeb学习笔记</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
 </search>
