@@ -1503,7 +1503,54 @@ OK
 <p>传统的关系型数据库里边就用到了很多这种锁机制<strong>，比如</strong>行锁<strong>，</strong>表锁<strong>等，</strong>读锁<strong>，</strong>写锁**等，都是在做操作之前先上锁。</p>
 <h3 id="乐观锁-Optimistic-Lock"><a href="#乐观锁-Optimistic-Lock" class="headerlink" title="乐观锁 (Optimistic Lock)"></a>乐观锁 (Optimistic Lock)</h3><p>每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机制。</p>
 <p>乐观锁适用于多读的应用类型，这样可以提高吞吐量。Redis 就是利用这种 <strong>check-and-set 机制</strong>实现事务的。</p>
-<h2 id="11-秒杀案例"><a href="#11-秒杀案例" class="headerlink" title="11.秒杀案例"></a>11.秒杀案例</h2><p>Java配置参考：<a href="https://blog.itxiaoma.cn/2021/11/20/JavaWeb01-Tomcat%EF%BC%8CMaven%E9%85%8D%E7%BD%AE/">01-Tomcat，Maven配置</a></p>
+<h2 id="11-秒杀案例"><a href="#11-秒杀案例" class="headerlink" title="11.秒杀案例"></a>11.秒杀案例</h2><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s6ga8wkej20d903aq2z.jpg" alt="image-20220330202345429"></p>
+<p>Java配置参考：<a href="https://blog.itxiaoma.cn/2021/11/20/JavaWeb01-Tomcat%EF%BC%8CMaven%E9%85%8D%E7%BD%AE/">JavaWeb01-Tomcat，Maven配置</a></p>
+<p>JSP引入pom.xml</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;javax.servlet.jsp.jstl&lt;/groupId&gt;
+  &lt;artifactId&gt;jstl-api&lt;/artifactId&gt;
+  &lt;version&gt;1.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;taglibs&lt;/groupId&gt;
+  &lt;artifactId&gt;standard&lt;/artifactId&gt;
+  &lt;version&gt;1.1.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>src/main/webapp/index.jsp</p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;
+         pageEncoding=&quot;UTF-8&quot;%&gt;
+&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+    &lt;title&gt;Insert title here&lt;/title&gt;
+    &lt;script src=&quot;http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;iPhone 13 Pro !!!  1元秒杀！！！
+&lt;/h1&gt;
+&lt;form id=&quot;msform&quot; action=&quot;&lt;%=request.getContextPath()%&gt;/doseckill&quot; enctype=&quot;application/x-www-form-urlencoded&quot;&gt;
+    &lt;input type=&quot;hidden&quot; id=&quot;prodid&quot; name=&quot;prodid&quot; value=&quot;0101&quot;&gt;
+    &lt;input type=&quot;button&quot;  id=&quot;miaosha_btn&quot; name=&quot;seckill_btn&quot; value=&quot;秒杀点我&quot;/&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;script  type=&quot;text/javascript&quot;&gt;
+    $(function()&#123;
+        $(&quot;#miaosha_btn&quot;).click(function()&#123;
+            var url=$(&quot;#msform&quot;).attr(&quot;action&quot;);
+            $.post(url,$(&quot;#msform&quot;).serialize(),function(data)&#123;
+                if(data==&quot;false&quot;)&#123;
+                    alert(&quot;抢光了&quot; );
+                    $(&quot;#miaosha_btn&quot;).attr(&quot;disabled&quot;,true);
+                &#125;
+            &#125; );
+        &#125;)
+    &#125;)
+&lt;/script&gt;
+&lt;/html&gt;
+</code></pre>
 <h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
 <p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
 <p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
@@ -1583,7 +1630,7 @@ OK
   </entry>
   <entry>
     <title>JavaWeb01-Tomcat，Maven配置</title>
-    <url>/2021/11/20/JavaWeb01-Tomcat%EF%BC%8CMaven%E9%85%8D%E7%BD%AE/</url>
+    <url>/2021/11/21/JavaWeb01-Tomcat%EF%BC%8CMaven%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="web应用程序"><a href="#web应用程序" class="headerlink" title="web应用程序"></a>web应用程序</h3><h4 id="web组成"><a href="#web组成" class="headerlink" title="web组成"></a>web组成</h4><p>html, css, js</p>
 <p>Jsp, servlet</p>
 <p>java程序</p>
@@ -1811,6 +1858,555 @@ Local respository: /usr/local/apache-maven-3.8.3/maven-repo
          version=&quot;4.0&quot;
          metadata-complete=&quot;true&quot;&gt;
 &lt;/web-app&gt;
+</code></pre>
+]]></content>
+      <categories>
+        <category>JAVA</category>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaWeb02 - Servlet，Cookie，Session</title>
+    <url>/2021/11/22/JavaWeb02%20-%20Servlet%EF%BC%8CCookie%EF%BC%8CSession/</url>
+    <content><![CDATA[<h2 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h2><blockquote>
+<p>Servlet是sun公司开发的处理动态web的技术</p>
+<p>Servlet有两个默认的实现类：HttpServlet、GenericServlet</p>
+</blockquote>
+<p>开发Servlet程序的步骤：</p>
+<ol>
+<li>编写一个类，实现Servlet接口</li>
+<li>把开发好的Java类部署到web服务器中</li>
+</ol>
+<p>实现了Servlet接口的java程序称为Servlet</p>
+<h4 id="创建HelloServlet项目"><a href="#创建HelloServlet项目" class="headerlink" title="创建HelloServlet项目"></a>创建HelloServlet项目</h4><ol>
+<li><p>构建一个普通的maven项目，删除src文件夹，这个空的工程作为maven主工程</p>
+</li>
+<li><p>引入servlet jsp依赖到pom.xml</p>
+<pre><code>&lt;dependencies&gt;
+  &lt;!--添加Servlet和JSP依赖--&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+    &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+    &lt;version&gt;4.0.1&lt;/version&gt;
+  &lt;/dependency
+  &lt;!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api --&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;
+    &lt;artifactId&gt;javax.servlet.jsp-api&lt;/artifactId&gt;
+    &lt;version&gt;2.3.3&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<p>或手动下载jar包到文件夹中</p>
+<p>依赖下载地址:<a href="https://mvnrepository.com/">https://mvnrepository.com/</a></p>
+</li>
+<li><p>新建Module子模块servlet01（maven-archetype-webapp）</p>
+<pre><code> 父项目中的java子项目可以直接使用，反之不可以
+
+ 问题1:子项目pom中没有parent标签
+
+ 解决：在子项目的pom.xml中手动添加parent标签并刷新maven
+</code></pre>
+</li>
+<li><pre><code>&lt;parent&gt;
+  &lt;groupId&gt;cn.itxiaoma&lt;/groupId&gt;
+  &lt;artifactId&gt;HelloMaven&lt;/artifactId&gt;
+  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+&lt;/parent&gt;
+</code></pre>
+<p>问题2：子项目pom文件有一条横线并变灰</p>
+<p>解决：file –&gt;setting–&gt;maven–&gt;Ignored Files 将清单中对应项目的pom.xml文件取消选中</p>
+</li>
+<li><p>将servlet01中的web.xml改为最新，在main目录下新建java和resources</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+         version=&quot;4.0&quot;
+         metadata-complete=&quot;true&quot;&gt;
+&lt;/web-app&gt;
+</code></pre>
+</li>
+<li><p>在java目录下新建package包cn..itxiaoma.servlet</p>
+</li>
+<li><p>在包下新建java类HelloServlet，并实现Servlet接口(继承HttpServlet)</p>
+<pre><code>package cn.itxiaoma.servlet;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class HelloServlet extends HttpServlet &#123;
+    //get和post只是请求实现的不同方式，业务逻辑一样，因此可以互相调用
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        PrintWriter printWriter = resp.getWriter();
+        printWriter.print(&quot;Hello Servlet&quot;);
+    &#125;
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        doGet(req, resp);
+    &#125;
+&#125;
+</code></pre>
+</li>
+<li><p>编写Servlet的映射</p>
+<p>浏览器连接的是web服务，因此需要在web服务中注册我们写的Servlet，并配置浏览器能够访问的路径</p>
+<pre><code>&lt;!--  注册Servlet--&gt;
+&lt;servlet&gt;
+  &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;cn.itxiaoma.servlet.HelloServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;!--  Servlet的请求路径--&gt;
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+</li>
+<li><p>配置Tomcat</p>
+<p>Run &gt; Edit Configurations &gt; + &gt; Tomcat Server - Local &gt; Application server:选择Tomcat目录</p>
+<p>Deployment &gt; + &gt; servlet01:war exploed</p>
+<p>Application Context: /servlet01_war_exploded</p>
+</li>
+<li><p>启动测试</p>
+<p><a href="http://localhost:8081/servlet01_war_exploded/hello">http://localhost:8081/servlet01_war_exploded/hello</a></p>
+</li>
+</ol>
+<h4 id="Servlet原理"><a href="#Servlet原理" class="headerlink" title="Servlet原理"></a>Servlet原理</h4><ol>
+<li>浏览器发送http请求(service)到web容器(Tomcat)</li>
+<li>首次访问的请求会加载Servlet类到内存</li>
+<li>web容器生成请求(Request)和响应(Response)两个对象，并调用Servlet的service方法</li>
+<li>Request会从service拿到请求，并执行我们重写的处理方法，得到响应信息传给Response</li>
+<li>web容器读取响应信息传回浏览器</li>
+</ol>
+<h4 id="Servlet-Mapping问题"><a href="#Servlet-Mapping问题" class="headerlink" title="Servlet Mapping问题"></a>Servlet Mapping问题</h4><p>指定映射路径</p>
+<pre><code>&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+<p>多映射路径</p>
+<pre><code>&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/hello/*&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+<p>默认请求路径(会覆盖首页)</p>
+<pre><code>&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+<p>指定后缀/前缀</p>
+<pre><code>&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;*.test&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+<p>注：自定义后缀/前缀 * 前不能有映射路径</p>
+<h4 id="自定义异常处理ErrorServlet"><a href="#自定义异常处理ErrorServlet" class="headerlink" title="自定义异常处理ErrorServlet"></a>自定义异常处理ErrorServlet</h4><blockquote>
+<p>cn/itxiaoma/servlet/ErrorServlet.java</p>
+</blockquote>
+<pre><code>package cn.itxiaoma.servlet;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class ErrorServlet extends HttpServlet &#123;
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        resp.setContentType(&quot;text/html&quot;);
+        resp.setCharacterEncoding(&quot;utf-8&quot;);
+        PrintWriter pw = resp.getWriter();
+        pw.print(&quot;&lt;h1&gt;404&lt;/h1&gt;&quot;);
+    &#125;
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        doGet(req, resp);
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>src/main/webapp/WEB-INF/web.xml</p>
+</blockquote>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+         version=&quot;4.0&quot;
+         metadata-complete=&quot;true&quot;&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;cn.itxiaoma.servlet.HelloServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;error&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;cn.itxiaoma.servlet.ErrorServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;error&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre>
+<p>优先级问题：制定了固有的映射路径优先级最高，找不到再走默认的映射</p>
+<h4 id="ServletContext对象"><a href="#ServletContext对象" class="headerlink" title="ServletContext对象"></a>ServletContext对象</h4><blockquote>
+<p> web容器在启动的时候，它会为每个web程序创建一个ServletContext对象，代表当前的web应用</p>
+</blockquote>
+<h5 id="1-共享数据"><a href="#1-共享数据" class="headerlink" title="1. 共享数据"></a>1. 共享数据</h5><blockquote>
+<p>在一个Servlet中保存的数据，可以在其他Servlet中获取</p>
+</blockquote>
+<p>web.xml</p>
+<pre><code>&lt;servlet&gt;
+  &lt;servlet-name&gt;get&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;cn.itxiaoma.servlet.GetServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;get&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/get&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+<p>HelloServlet.java</p>
+<pre><code>package cn.itxiaoma.servlet;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+public class HelloServlet extends HttpServlet &#123;
+    //get和post只是请求实现的不同方式，业务逻辑一样，因此可以互相调用
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        ServletContext context= this.getServletContext();
+        String username = &quot;Apple&quot;;
+        context.setAttribute(&quot;username&quot;, username);
+        System.out.println(username);
+    &#125;
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        doGet(req, resp);
+    &#125;
+&#125;
+</code></pre>
+<p>GetServlet.java</p>
+<pre><code>package cn.itxiaoma.servlet;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class GetServlet extends HttpServlet &#123;
+    //get和post只是请求实现的不同方式，业务逻辑一样，因此可以互相调用
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        ServletContext context = this.getServletContext();
+        PrintWriter printWriter = resp.getWriter();
+        resp.setContentType(&quot;text/html&quot;);
+        resp.setCharacterEncoding(&quot;utf-8&quot;);
+        printWriter.print(&quot;Username:&quot; + context.getAttribute(&quot;username&quot;));
+    &#125;
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        doGet(req, resp);
+    &#125;
+&#125;
+</code></pre>
+<h5 id="2-获取初始化参数"><a href="#2-获取初始化参数" class="headerlink" title="2. 获取初始化参数"></a>2. 获取初始化参数</h5><p>web.xml</p>
+<pre><code>&lt;context-param&gt;
+  &lt;param-name&gt;url&lt;/param-name&gt;
+  &lt;param-value&gt;jdbc:mysql://localhost:3306/testdb&lt;/param-value&gt;
+&lt;/context-param&gt;
+</code></pre>
+<p>HelloServlet.java</p>
+<pre><code>package cn.itxiaoma.servlet;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class HelloServlet extends HttpServlet &#123;
+    //get和post只是请求实现的不同方式，业务逻辑一样，因此可以互相调用
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        ServletContext context= this.getServletContext();
+        String url = context.getInitParameter(&quot;url&quot;);
+        resp.getWriter().print(url);
+    &#125;
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        doGet(req, resp);
+    &#125;
+&#125;
+</code></pre>
+<h5 id="3-请求转发"><a href="#3-请求转发" class="headerlink" title="3. 请求转发"></a>3. 请求转发</h5><pre><code>ServletContext context= this.getServletContext();
+RequestDispatcher requestDispatcher = context.getRequestDispatcher(&quot;/gp&quot;);//转发的请求路径
+requestDispatcher.forward(req, resp);
+</code></pre>
+<h5 id="4-读取资源文件"><a href="#4-读取资源文件" class="headerlink" title="4. 读取资源文件"></a>4. 读取资源文件</h5><p>resources文件夹下新建db.properties（会打包到classes路径下，称为classpath）</p>
+<pre><code>username=root
+password=123456
+</code></pre>
+<p>读取资源文件</p>
+<pre><code>ServletContext context= this.getServletContext();
+InputStream inputStream = context.getResourceAsStream(&quot;/WEB-INF/classes/db.properties&quot;);
+Properties properties = new Properties();
+properties.load(inputStream);
+String username = properties.getProperty(&quot;username&quot;);
+String password = properties.getProperty(&quot;password&quot;);
+resp.getWriter().print(username + password);
+</code></pre>
+<h4 id="HttpServletResponse"><a href="#HttpServletResponse" class="headerlink" title="HttpServletResponse"></a>HttpServletResponse</h4><blockquote>
+<p>web服务器接收到客户端的http请求，针对这个请求，分表创建一个代表请求的HttpServletRequest对象，和一个代表响应的HttpServletResponse对象</p>
+</blockquote>
+<p>javax/servlet/ServletResponse.java</p>
+<h6 id="负责向浏览器发送数据的方法"><a href="#负责向浏览器发送数据的方法" class="headerlink" title="负责向浏览器发送数据的方法"></a>负责向浏览器发送数据的方法</h6><pre><code>public ServletOutputStream getOutputStream() throws IOException;
+public PrintWriter getWriter() throws IOException;
+</code></pre>
+<h6 id="负责向浏览器发送响应头的方法"><a href="#负责向浏览器发送响应头的方法" class="headerlink" title="负责向浏览器发送响应头的方法"></a>负责向浏览器发送响应头的方法</h6><pre><code>public void setCharacterEncoding(String charset);
+public void setContentLength(int len);
+public void setContentLengthLong(long len);
+public void setContentType(String type);
+</code></pre>
+<h5 id="常见应用"><a href="#常见应用" class="headerlink" title="常见应用"></a>常见应用</h5><ol>
+<li><p>向浏览器输出消息</p>
+</li>
+<li><p>下载文件</p>
+<ol>
+<li>获取下载文件路径，文件名</li>
+<li>获取下载文件的输入流</li>
+<li>创建缓冲区</li>
+<li>获取OutputStream对象</li>
+<li>将FileOutputStream流写入Buffer缓冲区</li>
+<li>使用OutputStream将缓冲区中的数据输出到客户端 </li>
+</ol>
+<pre><code>String realPath = &quot;/Users/4wheels/Downloads/test.jpg&quot;;
+String filename = realPath.substring(realPath.lastIndexOf(&quot;/&quot;) + 1);
+resp.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;filename=&quot; + URLEncoder.encode(filename, &quot;UTF-8&quot;));
+//获取文件输入流
+FileInputStream inputStream = new FileInputStream(realPath);
+//缓冲区
+int len = 0;
+byte[] buffer = new byte[1024];
+ServletOutputStream servletOutputStream = resp.getOutputStream();
+while ((len = inputStream.read(buffer)) &gt; 0) &#123;
+    servletOutputStream.write(buffer, 0, len);
+&#125;
+inputStream.close();
+servletOutputStream.close();
+</code></pre>
+</li>
+<li><p>验证码功能</p>
+<pre><code>protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+    //浏览器3秒自动刷新
+    resp.setHeader(&quot;refresh&quot;, &quot;3&quot;);
+    //在内存中创建图片
+    BufferedImage image = new BufferedImage(80, 20, BufferedImage.TYPE_INT_RGB);
+    //绘制图片
+    Graphics2D g = (Graphics2D) image.getGraphics();
+    g.setColor(Color.white);
+    g.fillRect(0, 0, 80, 20);//绘制填色矩形
+    g.setColor(Color.BLACK);
+    g.setFont(new Font(null, Font.BOLD, 20));
+    g.drawString(makeNum(), 2, 20);
+    resp.setContentType(&quot;image/jpeg&quot;);
+    resp.setDateHeader(&quot;expires&quot;, -1);//浏览器不缓存
+    resp.setHeader(&quot;Cache-COntrol&quot;, &quot;no-cache&quot;);
+    resp.setHeader(&quot;Pragma&quot;, &quot;no-cache&quot;);
+    ImageIO.write(image, &quot;jpg&quot;, resp.getOutputStream());
+&#125;
+
+private String makeNum() &#123;
+    Random random = new Random();
+    String num = random.nextInt(9999999) + &quot;&quot;;
+    StringBuffer sb = new StringBuffer();
+    for (int i = 0; i &lt; 7 - num.length(); i++) &#123;
+        sb.append(&quot;0&quot;);
+    &#125;
+    num = sb.toString() + num;
+    return num;
+&#125;
+</code></pre>
+</li>
+<li><p>重定向</p>
+<pre><code>resp.sendRedirect(&quot;/test&quot;);
+</code></pre>
+</li>
+</ol>
+<h4 id="HttpServletRequest"><a href="#HttpServletRequest" class="headerlink" title="HttpServletRequest"></a>HttpServletRequest</h4><h5 id="处理登录请求"><a href="#处理登录请求" class="headerlink" title="处理登录请求"></a>处理登录请求</h5><pre><code>&lt;html&gt;
+&lt;body&gt;
+&lt;form action=&quot;$&#123;pageContext.request.contextPath&#125;/login&quot; method=&quot;post&quot;&gt;
+    Username&lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;&lt;br&gt;
+    Password&lt;input type=&quot;password&quot; name=&quot;password&quot;/&gt;&lt;br&gt;
+    Hobby&lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;1&quot;/&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;2&quot;/&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;3&quot;/&gt;
+    &lt;input type=&quot;submit&quot;/&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>web.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+         version=&quot;4.0&quot;
+         metadata-complete=&quot;true&quot;&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;login&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;cn.itxiaoma.servlet.LoginServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;login&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/login&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre>
+<p>LoginServlet.java</p>
+<pre><code>package cn.itxiaoma.servlet;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Arrays;
+public class LoginServlet extends HttpServlet &#123;
+    //get和post只是请求实现的不同方式，业务逻辑一样，因此可以互相调用
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        req.setCharacterEncoding(&quot;utf-8&quot;);
+        resp.setCharacterEncoding(&quot;utf-8&quot;);
+        String username = req.getParameter(&quot;username&quot;);
+        String password = req.getParameter(&quot;password&quot;);
+        String[] hobby = req.getParameterValues(&quot;hobby&quot;);
+        System.out.println(username);
+        System.out.println(password);
+        System.out.println(Arrays.toString(hobby));
+//        req.getRequestDispatcher(&quot;/success.jsp&quot;).forward(req, resp);
+    &#125;
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        doGet(req, resp);
+    &#125;
+&#125;
+</code></pre>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><ol>
+<li>cookie只能保存字符串，不能保存对象</li>
+<li>一个cookie只能保存一个信息，最大4kb</li>
+<li>一个web站点可以给浏览器发送多个cookie，一个站点最多20个</li>
+<li>浏览器最多存300个左右cookie</li>
+<li>cookie不设置有效期或设为0，关闭浏览器自动失效   </li>
+</ol>
+<pre><code>req.setCharacterEncoding(&quot;utf-8&quot;);
+resp.setCharacterEncoding(&quot;utf-8&quot;);
+resp.setContentType(&quot;text/html;charset=utf-8&quot;);
+PrintWriter printWriter = resp.getWriter();
+Cookie[] cookies = req.getCookies();
+if (cookies != null) &#123;
+    printWriter.print(&quot;Last Time:&quot;);
+    for (int i = 0; i &lt; cookies.length; i++) &#123;
+        Cookie cookie = cookies[i];
+        if (cookie.getName().equals(&quot;lastLoginTime&quot;)) &#123;
+            long lastLoginTime = Long.parseLong(cookie.getValue());
+            Date date = new Date(lastLoginTime);
+            printWriter.write(date.toLocaleString());
+        &#125;
+    &#125;
+&#125; else &#123;
+    printWriter.print(&quot;First Visit.&quot;);
+&#125;
+Cookie cookie = new Cookie(&quot;lastLoginTime&quot;, System.currentTimeMillis()+&quot;&quot;);
+resp.addCookie(cookie);
+</code></pre>
+<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><blockquote>
+<p>服务器会给每个用户（浏览器）创建一个Session，只有浏览器没有关闭，session就存在</p>
+</blockquote>
+<p>Session和Cookie的区别：Cookie由客户端创建在浏览器保存，Session在服务器端创建和保存</p>
+<p>Session和ServletContext区别：ServletContext作用域是全局（Web应用），Session作用域是会话（浏览器）</p>
+<pre><code>&lt;servlet&gt;
+  &lt;servlet-name&gt;setSession&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;cn.itxiaoma.servlet.SetSession&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;setSession&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/set&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+&lt;servlet&gt;
+  &lt;servlet-name&gt;getSession&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;cn.itxiaoma.servlet.GetSession&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;getSession&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/get&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+&lt;servlet&gt;
+  &lt;servlet-name&gt;delSession&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;cn.itxiaoma.servlet.DelSession&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;delSession&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/del&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+&lt;!--  设置session默认失效时间--&gt;
+&lt;session-config&gt;
+  &lt;!-- 15分钟后自动失效--&gt;
+  &lt;session-timeout&gt;15&lt;/session-timeout&gt;
+&lt;/session-config&gt;
+</code></pre>
+<p>SetSession.java</p>
+<pre><code>req.setCharacterEncoding(&quot;utf-8&quot;);
+resp.setCharacterEncoding(&quot;utf-8&quot;);
+resp.setContentType(&quot;text/html;charset=utf-8&quot;);
+PrintWriter printWriter = resp.getWriter();
+HttpSession session = req.getSession();
+session.setAttribute(&quot;name&quot;, &quot;test&quot;);
+String sessionId = session.getId();
+if (session.isNew()) &#123;
+    printWriter.write(&quot;Session创建成功，Id：&quot; + sessionId);
+&#125; else &#123;
+    printWriter.write(&quot;Session已存在，Id：&quot; + sessionId);
+&#125;
+</code></pre>
+<p>GetSession.java</p>
+<pre><code>req.setCharacterEncoding(&quot;utf-8&quot;);
+resp.setCharacterEncoding(&quot;utf-8&quot;);
+resp.setContentType(&quot;text/html;charset=utf-8&quot;);
+PrintWriter printWriter = resp.getWriter();
+HttpSession session = req.getSession();
+String sessionId = session.getId();
+String sessionName = (String) session.getAttribute(&quot;name&quot;);
+printWriter.write(&quot;Session Id:&quot; + sessionId);
+printWriter.write(&quot;Session Name:&quot; + sessionName);
+</code></pre>
+<p>DelSession.java</p>
+<pre><code>HttpSession session = req.getSession();
+//删除指定session
+session.removeAttribute(&quot;name&quot;);
+//手动注销session
+session.invalidate();
 </code></pre>
 ]]></content>
       <categories>
