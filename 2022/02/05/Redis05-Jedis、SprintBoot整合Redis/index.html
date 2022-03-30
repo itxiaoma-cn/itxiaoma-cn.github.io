@@ -2,13 +2,13 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>05-Jedis、SprintBoot整合Redis | IT小马</title>
+  <title>Redis05-Jedis、SprintBoot整合Redis | IT小马</title>
   <meta name="keywords" content=" REDIS , 后端 ">
-  <meta name="description" content="05-Jedis、SprintBoot整合Redis | IT小马">
+  <meta name="description" content="Redis05-Jedis、SprintBoot整合Redis | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="事务普通事务的ACID特性，即原子性（A）、一致性（C）、隔离性（I）、持久性（D） 本地事务 在单个数据库的本地并且限制在单个进程内的事务 本地事务不涉及多个数据来源   分布式事务分布式事务是指会涉及到操作多个数据库的事务，其实就是将对同一库事务的概念扩大到了对多个库的事务。目的是为了保证分布式系统中的数据一致性。 分布式事务处理的关键是：  需要记录事务在任何节点所做的所有动作； 事务进行的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="21-分布式事务">
+<meta property="og:title" content="GO微服务21-分布式事务">
 <meta property="og:url" content="https://blog.itxiaoma.cn/2022/03/21/GO%E5%BE%AE%E6%9C%8D%E5%8A%A121-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/index.html">
 <meta property="og:site_name" content="IT小马">
 <meta property="og:description" content="事务普通事务的ACID特性，即原子性（A）、一致性（C）、隔离性（I）、持久性（D） 本地事务 在单个数据库的本地并且限制在单个进程内的事务 本地事务不涉及多个数据来源   分布式事务分布式事务是指会涉及到操作多个数据库的事务，其实就是将对同一库事务的概念扩大到了对多个库的事务。目的是为了保证分布式系统中的数据一致性。 分布式事务处理的关键是：  需要记录事务在任何节点所做的所有动作； 事务进行的">
@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://github.com/csy512889371/learnDoc/raw/master/image/2018/fbs1/7.png">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h0rxftotwkj20qq0gp3zj.jpg">
 <meta property="article:published_time" content="2022-03-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-30T08:45:27.000Z">
+<meta property="article:modified_time" content="2022-03-30T11:19:54.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO微服务">
 <meta property="article:tag" content="GO">
@@ -113,28 +113,11 @@
             
                 <li>
                     <div data-rel="MYSQL">
-                        <i class="fold iconfont icon-right"></i>
                         
                         MYSQL
                         <small>(1)</small>
                         
                     </div>
-                    
-                        <ul class="sub hide">
-                            
-                                <li>
-                                    <div data-rel="MYSQL<--->MYSQL45讲">
-                                        
-                                        MYSQL45讲
-                                        
-                                            <small>(1
-                                                )</small>
-                                        
-                                    </div>
-                                    
-                                </li>
-                            
-                        </ul>
                     
                 </li>
             
@@ -144,28 +127,11 @@
             
                 <li>
                     <div data-rel="REDIS">
-                        <i class="fold iconfont icon-right"></i>
                         
                         REDIS
                         <small>(10)</small>
                         
                     </div>
-                    
-                        <ul class="sub hide">
-                            
-                                <li>
-                                    <div data-rel="REDIS<--->REDIS学习笔记">
-                                        
-                                        REDIS学习笔记
-                                        
-                                            <small>(10
-                                                )</small>
-                                        
-                                    </div>
-                                    
-                                </li>
-                            
-                        </ul>
                     
                 </li>
             
@@ -185,9 +151,9 @@
                         <ul class="sub hide">
                             
                                 <li>
-                                    <div data-rel="JAVA<--->JavaWeb学习笔记">
+                                    <div data-rel="JAVA<--->JavaWeb">
                                         
-                                        JavaWeb学习笔记
+                                        JavaWeb
                                         
                                             <small>(1
                                                 )</small>
@@ -213,14 +179,6 @@
                     </div>
                     
                 </li>
-            
-        
-    
-        
-            
-        
-    
-        
             
         
     
@@ -330,7 +288,7 @@
            href="/2022/03/21/GO%E5%BE%AE%E6%9C%8D%E5%8A%A121-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"
            data-tag="GO微服务,GO"
            data-author="" >
-            <span class="post-title" title="21-分布式事务">21-分布式事务</span>
+            <span class="post-title" title="GO微服务21-分布式事务">GO微服务21-分布式事务</span>
             <span class="post-date" title="2022-03-21 00:00:00">2022/03/21</span>
         </a>
         
@@ -338,87 +296,87 @@
            href="/2022/03/01/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"
            data-tag="GO微服务,GO"
            data-author="" >
-            <span class="post-title" title="01-Go语言基础20问">01-Go语言基础20问</span>
+            <span class="post-title" title="GO微服务01-Go语言基础20问">GO微服务01-Go语言基础20问</span>
             <span class="post-date" title="2022-03-01 00:00:00">2022/03/01</span>
         </a>
         
-        <a  class="全部文章 REDIS REDIS学习笔记 "
+        <a  class="全部文章 REDIS "
            href="/2022/02/10/Redis10-%E6%96%B0%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/"
            data-tag="REDIS,后端"
            data-author="" >
-            <span class="post-title" title="10-新功能介绍">10-新功能介绍</span>
+            <span class="post-title" title="Redis10-新功能介绍">Redis10-新功能介绍</span>
             <span class="post-date" title="2022-02-10 00:00:00">2022/02/10</span>
         </a>
         
-        <a  class="全部文章 REDIS REDIS学习笔记 "
+        <a  class="全部文章 REDIS "
            href="/2022/02/09/Redis09-%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%C2%B7%E5%87%BB%E7%A9%BF%C2%B7%E9%9B%AA%E5%B4%A9%E3%80%81%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"
            data-tag="REDIS,后端"
            data-author="" >
-            <span class="post-title" title="09-缓存穿透/击穿/雪崩、分布式锁">09-缓存穿透/击穿/雪崩、分布式锁</span>
+            <span class="post-title" title="Redis09-缓存穿透/击穿/雪崩、分布式锁">Redis09-缓存穿透/击穿/雪崩、分布式锁</span>
             <span class="post-date" title="2022-02-09 00:00:00">2022/02/09</span>
         </a>
         
-        <a  class="全部文章 REDIS REDIS学习笔记 "
+        <a  class="全部文章 REDIS "
            href="/2022/02/08/Redis08-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E3%80%81%E9%9B%86%E7%BE%A4/"
            data-tag="REDIS,后端"
            data-author="" >
-            <span class="post-title" title="08-主从复制、集群">08-主从复制、集群</span>
+            <span class="post-title" title="Redis08-主从复制、集群">Redis08-主从复制、集群</span>
             <span class="post-date" title="2022-02-08 00:00:00">2022/02/08</span>
         </a>
         
-        <a  class="全部文章 REDIS REDIS学习笔记 "
+        <a  class="全部文章 REDIS "
            href="/2022/02/07/Redis07-%E6%8C%81%E4%B9%85%E5%8C%96%E6%93%8D%E4%BD%9C/"
            data-tag="REDIS,后端"
            data-author="" >
-            <span class="post-title" title="07-持久化操作">07-持久化操作</span>
+            <span class="post-title" title="Redis07-持久化操作">Redis07-持久化操作</span>
             <span class="post-date" title="2022-02-07 00:00:00">2022/02/07</span>
         </a>
         
-        <a  class="全部文章 REDIS REDIS学习笔记 "
+        <a  class="全部文章 REDIS "
            href="/2022/02/06/Redis06-%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E3%80%81%E7%A7%92%E6%9D%80/"
            data-tag="REDIS,后端"
            data-author="" >
-            <span class="post-title" title="06-事务、锁、秒杀">06-事务、锁、秒杀</span>
+            <span class="post-title" title="Redis06-事务、锁、秒杀">Redis06-事务、锁、秒杀</span>
             <span class="post-date" title="2022-02-06 00:00:00">2022/02/06</span>
         </a>
         
-        <a  class="全部文章 REDIS REDIS学习笔记 "
+        <a  class="全部文章 REDIS "
            href="/2022/02/05/Redis05-Jedis%E3%80%81SprintBoot%E6%95%B4%E5%90%88Redis/"
            data-tag="REDIS,后端"
            data-author="" >
-            <span class="post-title" title="05-Jedis、SprintBoot整合Redis">05-Jedis、SprintBoot整合Redis</span>
+            <span class="post-title" title="Redis05-Jedis、SprintBoot整合Redis">Redis05-Jedis、SprintBoot整合Redis</span>
             <span class="post-date" title="2022-02-05 00:00:00">2022/02/05</span>
         </a>
         
-        <a  class="全部文章 REDIS REDIS学习笔记 "
+        <a  class="全部文章 REDIS "
            href="/2022/02/04/Redis04-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
            data-tag="REDIS,后端"
            data-author="" >
-            <span class="post-title" title="04-新数据类型">04-新数据类型</span>
+            <span class="post-title" title="Redis04-新数据类型">Redis04-新数据类型</span>
             <span class="post-date" title="2022-02-04 00:00:00">2022/02/04</span>
         </a>
         
-        <a  class="全部文章 REDIS REDIS学习笔记 "
+        <a  class="全部文章 REDIS "
            href="/2022/02/03/Redis03-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/"
            data-tag="REDIS,后端"
            data-author="" >
-            <span class="post-title" title="03-配置文件、发布和订阅">03-配置文件、发布和订阅</span>
+            <span class="post-title" title="Redis03-配置文件、发布和订阅">Redis03-配置文件、发布和订阅</span>
             <span class="post-date" title="2022-02-03 00:00:00">2022/02/03</span>
         </a>
         
-        <a  class="全部文章 REDIS REDIS学习笔记 "
+        <a  class="全部文章 REDIS "
            href="/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
            data-tag="REDIS,后端"
            data-author="" >
-            <span class="post-title" title="02-常用五大数据类型">02-常用五大数据类型</span>
+            <span class="post-title" title="Redis02-常用五大数据类型">Redis02-常用五大数据类型</span>
             <span class="post-date" title="2022-02-02 00:00:00">2022/02/02</span>
         </a>
         
-        <a  class="全部文章 REDIS REDIS学习笔记 "
+        <a  class="全部文章 REDIS "
            href="/2022/02/01/Redis01-%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%AE%89%E8%A3%85/"
            data-tag="REDIS,后端"
            data-author="" >
-            <span class="post-title" title="01-基础及安装">01-基础及安装</span>
+            <span class="post-title" title="Redis01-基础及安装">Redis01-基础及安装</span>
             <span class="post-date" title="2022-02-01 00:00:00">2022/02/01</span>
         </a>
         
@@ -430,19 +388,19 @@
             <span class="post-date" title="2022-01-01 00:00:00">2022/01/01</span>
         </a>
         
-        <a  class="全部文章 JAVA JavaWeb学习笔记 "
+        <a  class="全部文章 JAVA JavaWeb "
            href="/2021/11/20/JavaWeb01-Tomcat%EF%BC%8CMaven%E9%85%8D%E7%BD%AE/"
            data-tag="后端,Java"
            data-author="" >
-            <span class="post-title" title="01-Tomcat，Maven配置">01-Tomcat，Maven配置</span>
+            <span class="post-title" title="JavaWeb01-Tomcat，Maven配置">JavaWeb01-Tomcat，Maven配置</span>
             <span class="post-date" title="2021-11-20 00:00:00">2021/11/20</span>
         </a>
         
-        <a  class="全部文章 MYSQL MYSQL45讲 "
+        <a  class="全部文章 MYSQL "
            href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
            data-tag="后端,MYSQL"
            data-author="" >
-            <span class="post-title" title="01-基础架构">01-基础架构</span>
+            <span class="post-title" title="Mysql01-基础架构">Mysql01-基础架构</span>
             <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
         </a>
         
@@ -466,7 +424,7 @@
     <div class="pjax">
         <article id="post-Redis05-Jedis、SprintBoot整合Redis" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">05-Jedis、SprintBoot整合Redis</h1>
+        <h1 class="article-title">Redis05-Jedis、SprintBoot整合Redis</h1>
     
     <div class="article-meta">
         
@@ -476,9 +434,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="REDIS">REDIS</a> > 
-            
-            <a  data-rel="REDIS&lt;---&gt;REDIS学习笔记">REDIS学习笔记</a>
+            <a  data-rel="REDIS">REDIS</a>
             
         </span>
         
@@ -495,7 +451,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-03-29 21:04:52'>2022-02-05 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-03-30 19:18:33'>2022-02-05 00:00</time>
         
     </div>
     <div class="article-meta">
