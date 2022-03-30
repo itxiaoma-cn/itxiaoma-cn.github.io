@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.itxiaoma.cn/2021/11/21/JavaWeb01-Tomcat%EF%BC%8CMaven%E9%85%8D%E7%BD%AE/</loc>
+    <loc>https://blog.itxiaoma.cn/2021/11/22/JavaWeb02-Servlet%E3%80%81Cookie%E3%80%81Session/</loc>
     
     <lastmod>2022-03-30</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://blog.itxiaoma.cn/2021/11/22/JavaWeb02%20-%20Servlet%EF%BC%8CCookie%EF%BC%8CSession/</loc>
+    <loc>https://blog.itxiaoma.cn/2021/11/21/JavaWeb01-Tomcat%E3%80%81Maven%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2022-03-30</lastmod>
     
