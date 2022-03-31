@@ -6,29 +6,21 @@
   <meta name="keywords" content=" REDIS , 后端 ">
   <meta name="description" content="Redis06-事务、锁、秒杀 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="事务普通事务的ACID特性，即原子性（A）、一致性（C）、隔离性（I）、持久性（D） 本地事务 在单个数据库的本地并且限制在单个进程内的事务 本地事务不涉及多个数据来源   分布式事务分布式事务是指会涉及到操作多个数据库的事务，其实就是将对同一库事务的概念扩大到了对多个库的事务。目的是为了保证分布式系统中的数据一致性。 分布式事务处理的关键是：  需要记录事务在任何节点所做的所有动作； 事务进行的">
+<meta name="description" content="可靠消息实现最终一致性 发送事务消息Demopackage main  import (     &quot;context&quot;     &quot;fmt&quot;     &quot;time&quot;      &quot;github.com&#x2F;apache&#x2F;rocketmq-client-go&#x2F;v2&quot;     &quot;github.com&#x2F;apache&#x2F;rocke">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GO微服务21-分布式事务">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/03/21/GO%E5%BE%AE%E6%9C%8D%E5%8A%A121-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/index.html">
+<meta property="og:title" content="GO微服务22-分布式事务实现">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/03/22/GO%E5%BE%AE%E6%9C%8D%E5%8A%A122-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="事务普通事务的ACID特性，即原子性（A）、一致性（C）、隔离性（I）、持久性（D） 本地事务 在单个数据库的本地并且限制在单个进程内的事务 本地事务不涉及多个数据来源   分布式事务分布式事务是指会涉及到操作多个数据库的事务，其实就是将对同一库事务的概念扩大到了对多个库的事务。目的是为了保证分布式系统中的数据一致性。 分布式事务处理的关键是：  需要记录事务在任何节点所做的所有动作； 事务进行的">
+<meta property="og:description" content="可靠消息实现最终一致性 发送事务消息Demopackage main  import (     &quot;context&quot;     &quot;fmt&quot;     &quot;time&quot;      &quot;github.com&#x2F;apache&#x2F;rocketmq-client-go&#x2F;v2&quot;     &quot;github.com&#x2F;apache&#x2F;rocke">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s045wt08j20fh09xgmq.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s04bqg0zj20gk0bit8x.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s04wzs1rj20gz0bg3yn.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s052j1cdj20hp0qtwfx.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h0r4jjrq94j20uv0j73zz.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h0ro6vaf9cj20pw0eoaap.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h0rx86eovij20o80bpgmc.jpg">
-<meta property="og:image" content="https://github.com/csy512889371/learnDoc/raw/master/image/2018/fbs1/7.png">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h0rxftotwkj20qq0gp3zj.jpg">
-<meta property="article:published_time" content="2022-03-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-30T11:19:54.000Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h0t0wpugxqj20nt0e23zc.jpg">
+<meta property="article:published_time" content="2022-03-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-03-31T14:45:56.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO微服务">
 <meta property="article:tag" content="GO">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s045wt08j20fh09xgmq.jpg">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h0t0wpugxqj20nt0e23zc.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -90,7 +82,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(16)</small>
+                <small>(18)</small>
             
         </div>
     </li>
@@ -101,7 +93,7 @@
                     <div data-rel="GO微服务">
                         
                         GO微服务
-                        <small>(2)</small>
+                        <small>(4)</small>
                         
                     </div>
                     
@@ -220,7 +212,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="16">
+<input type="hidden" id="yelog_site_posts_number" value="18">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -306,11 +298,27 @@
     <nav id="title-list-nav">
         
         <a  class="全部文章 GO微服务 "
+           href="/2022/03/22/GO%E5%BE%AE%E6%9C%8D%E5%8A%A122-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E5%AE%9E%E7%8E%B0/"
+           data-tag="GO微服务,GO"
+           data-author="" >
+            <span class="post-title" title="GO微服务22-分布式事务实现">GO微服务22-分布式事务实现</span>
+            <span class="post-date" title="2022-03-22 00:00:00">2022/03/22</span>
+        </a>
+        
+        <a  class="全部文章 GO微服务 "
            href="/2022/03/21/GO%E5%BE%AE%E6%9C%8D%E5%8A%A121-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"
            data-tag="GO微服务,GO"
            data-author="" >
             <span class="post-title" title="GO微服务21-分布式事务">GO微服务21-分布式事务</span>
             <span class="post-date" title="2022-03-21 00:00:00">2022/03/21</span>
+        </a>
+        
+        <a  class="全部文章 GO微服务 "
+           href="/2022/03/19/GO%E5%BE%AE%E6%9C%8D%E5%8A%A119-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"
+           data-tag="GO微服务,GO"
+           data-author="" >
+            <span class="post-title" title="GO微服务19-消息队列">GO微服务19-消息队列</span>
+            <span class="post-date" title="2022-03-19 00:00:00">2022/03/19</span>
         </a>
         
         <a  class="全部文章 GO微服务 "
@@ -480,7 +488,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-03-31 00:05:46'>2022-02-06 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-03-31 10:46:07'>2022-02-06 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -491,7 +499,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E4%BA%8B%E5%8A%A1"><span class="toc-text">9.事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#multi%E3%80%81exec%E3%80%81discard"><span class="toc-text">multi、exec、discard</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-text">错误处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E9%94%81"><span class="toc-text">10.锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%82%B2%E8%A7%82%E9%94%81-Pessimistic-Lock"><span class="toc-text">悲观锁 (Pessimistic Lock)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%90%E8%A7%82%E9%94%81-Optimistic-Lock"><span class="toc-text">乐观锁 (Optimistic Lock)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E7%A7%92%E6%9D%80%E6%A1%88%E4%BE%8B"><span class="toc-text">11.秒杀案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-text">流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ab%E5%B9%B6%E5%8F%91%E6%B5%8B%E8%AF%95"><span class="toc-text">ab并发测试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="toc-text">常用参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="toc-text">问题解决</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="toc-text">连接超时问题：增加连接池</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E5%8D%96%E9%97%AE%E9%A2%98%EF%BC%9A%E5%A2%9E%E5%8A%A0%E4%B9%90%E8%A7%82%E9%94%81"><span class="toc-text">超卖问题：增加乐观锁</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%95%86%E5%93%81%E9%81%97%E7%95%99%E9%97%AE%E9%A2%98"><span class="toc-text">商品遗留问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LUA%E8%84%9A%E6%9C%AC"><span class="toc-text">LUA脚本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E4%BA%8B%E5%8A%A1"><span class="toc-text">9.事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#multi%E3%80%81exec%E3%80%81discard"><span class="toc-text">multi、exec、discard</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-text">错误处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E9%94%81"><span class="toc-text">10.锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%82%B2%E8%A7%82%E9%94%81-Pessimistic-Lock"><span class="toc-text">悲观锁 (Pessimistic Lock)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%90%E8%A7%82%E9%94%81-Optimistic-Lock"><span class="toc-text">乐观锁 (Optimistic Lock)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-%E7%A7%92%E6%9D%80%E6%A1%88%E4%BE%8B"><span class="toc-text">11.秒杀案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-text">流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ab%E5%B9%B6%E5%8F%91%E6%B5%8B%E8%AF%95"><span class="toc-text">ab并发测试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="toc-text">常用参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="toc-text">问题解决</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="toc-text">连接超时问题：增加连接池</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E5%8D%96%E9%97%AE%E9%A2%98%EF%BC%9A%E5%A2%9E%E5%8A%A0%E4%B9%90%E8%A7%82%E9%94%81"><span class="toc-text">超卖问题：增加乐观锁</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%95%86%E5%93%81%E9%81%97%E7%95%99%E9%97%AE%E9%A2%98"><span class="toc-text">商品遗留问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LUA%E8%84%9A%E6%9C%AC"><span class="toc-text">LUA脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LUA%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="toc-text">LUA基础语法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%98%E9%87%8F"><span class="toc-text">变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B5%8B%E5%80%BC%E8%AF%AD%E5%8F%A5"><span class="toc-text">赋值语句</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF"><span class="toc-text">循环</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="toc-text">流程控制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">常用函数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B-1"><span class="toc-text">代码示例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -852,7 +860,202 @@ return true;
 <li>利用lua脚本淘汰用户，解决超卖问题。</li>
 <li>redis 2.6版本以后，通过lua脚本解决争抢问题，实际上是redis 利用其单线程的特性，用任务队列的方式解决多任务并发问题。</li>
 </ul>
-<p>lua脚本：</p>
+<h4 id="LUA基础语法"><a href="#LUA基础语法" class="headerlink" title="LUA基础语法"></a>LUA基础语法</h4><h5 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h5><table>
+<thead>
+<tr>
+<th align="left">数据类型</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">nil</td>
+<td align="left">这个最简单，只有值nil属于该类，表示一个无效值（在条件表达式中相当于false）。</td>
+</tr>
+<tr>
+<td align="left">boolean</td>
+<td align="left">包含两个值：false和true。</td>
+</tr>
+<tr>
+<td align="left">number</td>
+<td align="left">表示双精度类型的实浮点数</td>
+</tr>
+<tr>
+<td align="left">string</td>
+<td align="left">字符串由一对双引号或单引号来表示</td>
+</tr>
+<tr>
+<td align="left">function</td>
+<td align="left">由 C 或 Lua 编写的函数</td>
+</tr>
+<tr>
+<td align="left">userdata</td>
+<td align="left">表示任意存储在变量中的C数据结构</td>
+</tr>
+<tr>
+<td align="left">thread</td>
+<td align="left">表示执行的独立线路，用于执行协同程序</td>
+</tr>
+<tr>
+<td align="left">table</td>
+<td align="left">Lua 中的表（table）其实是一个”关联数组”（associative arrays），数组的索引可以是数字或者是字符串。在 Lua 里，table 的创建是通过”构造表达式”来完成，最简单构造表达式是{}，用来创建一个空表。</td>
+</tr>
+</tbody></table>
+<h5 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h5><ul>
+<li><p>变量在使用前，必须在代码中进行声明，即创建该变量。</p>
+</li>
+<li><p>Lua 变量有三种类型：全局变量、局部变量、表中的域。</p>
+</li>
+<li><p>Lua 中的变量全是全局变量，那怕是语句块或是函数里，除非用 local 显式声明为局部变量。</p>
+</li>
+<li><p>局部变量的作用域为从声明位置开始到所在语句块结束。</p>
+</li>
+<li><p>变量的默认值均为 nil。</p>
+</li>
+</ul>
+<pre><code class="lua">-- test.lua 文件脚本
+a = 5               -- 全局变量
+local b = 5         -- 局部变量
+
+function joke()
+    c = 5           -- 全局变量
+    local d = 6     -- 局部变量
+end
+
+joke()
+print(c,d)          --&gt; 5 nil
+
+do 
+    local a = 6     -- 局部变量
+    b = 6           -- 全局变量
+    print(a,b);     --&gt; 6 6
+end
+
+print(a,b)      --&gt; 5 6
+</code></pre>
+<p>应该尽可能的使用局部变量，有两个好处：</p>
+<ol>
+<li>避免命名冲突。</li>
+<li>访问局部变量的速度比全局变量更快。</li>
+</ol>
+<h5 id="赋值语句"><a href="#赋值语句" class="headerlink" title="赋值语句"></a>赋值语句</h5><pre><code>a = &quot;hello&quot; .. &quot;world&quot;
+t.n = t.n + 1
+x, y = y, x                     -- swap &#39;x&#39; for &#39;y&#39;
+a[i], a[j] = a[j], a[i]         -- swap &#39;a[i]&#39; for &#39;a[j]&#39;
+a, b = f()                                            -- 多值赋值经常用来交换变量，或将函数调用返回给变量：
+</code></pre>
+<p>变量个数 &gt; 值的个数             按变量个数补足nil</p>
+<p>变量个数 &lt; 值的个数             多余的值会被忽略</p>
+<h5 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h5><pre><code>t[i]
+t.i                 -- 当索引为字符串类型时的一种简化写法
+gettable_event(t,i) -- 采用索引访问本质上是一个类似这样的函数调用
+</code></pre>
+<h5 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h5><table>
+<thead>
+<tr>
+<th align="left">循环类型</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">while 循环</td>
+<td align="left">在条件为 true 时，让程序重复地执行某些语句。执行语句前会先检查条件是否为 true。</td>
+</tr>
+<tr>
+<td align="left"><a target="_blank" rel="noopener" href="https://edu.aliyun.com/lua/lua-for-loop.html">for 循环</a></td>
+<td align="left">重复执行指定语句，重复次数可在 for 语句中控制。</td>
+</tr>
+<tr>
+<td align="left">repeat…until</td>
+<td align="left">重复执行循环，直到 指定的条件为真时为止</td>
+</tr>
+<tr>
+<td align="left">循环嵌套</td>
+<td align="left">可以在循环内嵌套一个或多个循环语句（while、for、do..while）</td>
+</tr>
+<tr>
+<td align="left">无限循环</td>
+<td align="left"><code>while( true )do 换行 print(&quot;循环将永远执行下去&quot;)end</code></td>
+</tr>
+</tbody></table>
+<h5 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h5><table>
+<thead>
+<tr>
+<th align="left">语句</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">if 语句</td>
+<td align="left"><strong>if 语句</strong> 由一个布尔表达式作为条件判断，其后紧跟其他语句组成。</td>
+</tr>
+<tr>
+<td align="left">if…else 语句</td>
+<td align="left"><strong>if 语句</strong> 可以与 <strong>else 语句</strong>搭配使用, 在 if 条件表达式为 false 时执行 else 语句代码。</td>
+</tr>
+<tr>
+<td align="left">if 嵌套语句</td>
+<td align="left">你可以在<strong>if</strong> 或 <strong>else if</strong>中使用一个或多个 <strong>if</strong> 或 <strong>else if</strong> 语句 。</td>
+</tr>
+</tbody></table>
+<pre><code>if a&gt;b then
+    print(&quot;0 为 true&quot;)end
+</code></pre>
+<h5 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h5><p>库函数</p>
+<pre><code>assert(value) - 检查一个值是否为非nil, 若不是则(如果在wow.exe打开调试命令)显示对话框以及输出错误调试信息
+
+date(format, time) - 返回当前用户机器上的时间.
+
+error(&quot;error message&quot;,level) - 发生错误时,输出一条定义的错误信息.使用pcall() (见下面)捕捉错误.
+
+loadstring(&quot;Lua code&quot;) - 分析字符串中的lua代码块并且将结果作为一个函数返回
+
+time(table) - 返回从一个unix时间值
+
+type(var) - 判断当前变量的类型, &quot;number&quot;, &quot;string&quot;, &quot;table&quot;, &quot;function&quot; 或者 &quot;userdata&quot;.
+</code></pre>
+<p>数学函数</p>
+<pre><code>abs(value) - 返回当前数值的绝对值
+
+ceil(value) - 返回一个整数, 不管小数点后面是多少, 整数部分都进1
+
+floor(value) - 返回此值的整数值
+
+max(value[, values...]) - 在一堆值中查找最大值
+
+min(value[,values...]) - 在一堆值中查找最小值
+
+mod(value,modulus) - 返回此值的余数
+
+random([ [lower,] upper]) - 返回一个随机数字 (可选界限为整数值)
+</code></pre>
+<p>字符串函数</p>
+<pre><code>format(formatstring[, value[, ...]]) - 格式化字符串
+
+gsub(string,pattern,replacement[, limitCount]) - 全局替换
+
+strbyte(string[, index]) - 转换字符串为整数值(可以指定某个字符).
+
+strchar(asciiCode[, ...]) - 转换整数为相对应的字符
+
+strfind(string, pattern[, initpos[, plain]]) - 在一个指定的目标字符串中搜索指定的内容(第三个参数为索引),返回其具体位置.
+
+strlen(string) - 返回当前字符串的字符数
+
+strlower(string) - 将字符串的字母转换为小写格式
+
+strmatch(string, pattern[, initpos]) - 与strfind不同的是,macth返回的是具体值,而find返回的是此值的位置
+
+strrep(seed,count) - 返回一个字符串种子副本的个数
+
+strsub(string, index[, endIndex]) - 返回字符串指定位置的值.
+
+strupper(string) - 将字符串的字母转为大写格式
+
+tonumber(arg[, base]) - 若参数能转为数字则返回一个数值.可以指定转换的类型.默认为十进制整数
+
+tostring(arg) - 转换参数为字符串
+</code></pre>
+<h4 id="代码示例-1"><a href="#代码示例-1" class="headerlink" title="代码示例"></a>代码示例</h4><p>lua脚本：</p>
 <pre><code class="lua">local userid=KEYS[1]; 
 local prodid=KEYS[2];
 local qtkey=&quot;sk:&quot;..prodid..&quot;:qt&quot;;
@@ -870,60 +1073,64 @@ else
 end
 return 1;
 </code></pre>
-<p>与java代码结合：</p>
-<pre><code class="java">public class SecKill_redisByScript &#123;
-    
-    private static final  org.slf4j.Logger logger =LoggerFactory.getLogger(SecKill_redisByScript.class) ;
+<p>java代码：</p>
+<p>src/main/java/cn/itxiaoma/servlet/SecKill_redisByScript.java</p>
+<pre><code class="java">package cn.itxiaoma.servlet;
+
+import redis.clients.jedis.HostAndPort;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
+public class SecKill_redisByScript &#123;
 
     public static void main(String[] args) &#123;
-        JedisPool jedispool =  JedisPoolUtil.getJedisPoolInstance();
- 
-        Jedis jedis=jedispool.getResource();
+        JedisPool jedispool = JedisPoolUtil.getJedisPoolInstance();
+
+        Jedis jedis = jedispool.getResource();
         System.out.println(jedis.ping());
-        
-        Set&lt;HostAndPort&gt; set=new HashSet&lt;HostAndPort&gt;();
 
-    //    doSecKill(&quot;201&quot;,&quot;sk:0101&quot;);
+        Set&lt;HostAndPort&gt; set = new HashSet&lt;HostAndPort&gt;();
+
+        //    doSecKill(&quot;201&quot;,&quot;sk:0101&quot;);
     &#125;
-    
-    static String secKillScript =&quot;local userid=KEYS[1];\r\n&quot; + 
-            &quot;local prodid=KEYS[2];\r\n&quot; + 
-            &quot;local qtkey=&#39;sk:&#39;..prodid..\&quot;:qt\&quot;;\r\n&quot; + 
-            &quot;local usersKey=&#39;sk:&#39;..prodid..\&quot;:usr\&quot;;\r\n&quot; + 
-            &quot;local userExists=redis.call(\&quot;sismember\&quot;,usersKey,userid);\r\n&quot; + 
-            &quot;if tonumber(userExists)==1 then \r\n&quot; + 
-            &quot;   return 2;\r\n&quot; + 
-            &quot;end\r\n&quot; + 
-            &quot;local num= redis.call(\&quot;get\&quot; ,qtkey);\r\n&quot; + 
-            &quot;if tonumber(num)&lt;=0 then \r\n&quot; + 
-            &quot;   return 0;\r\n&quot; + 
-            &quot;else \r\n&quot; + 
-            &quot;   redis.call(\&quot;decr\&quot;,qtkey);\r\n&quot; + 
-            &quot;   redis.call(\&quot;sadd\&quot;,usersKey,userid);\r\n&quot; + 
-            &quot;end\r\n&quot; + 
-            &quot;return 1&quot; ;
-             
-    static String secKillScript2 = 
-            &quot;local userExists=redis.call(\&quot;sismember\&quot;,\&quot;&#123;sk&#125;:0101:usr\&quot;,userid);\r\n&quot; +
-            &quot; return 1&quot;;
 
-    public static boolean doSecKill(String uid,String prodid) throws IOException &#123;
+    static String secKillScript = &quot;local userid=KEYS[1];\r\n&quot; +
+            &quot;local prodid=KEYS[2];\r\n&quot; +
+            &quot;local qtkey=&#39;sk:&#39;..prodid..\&quot;:qt\&quot;;\r\n&quot; +
+            &quot;local usersKey=&#39;sk:&#39;..prodid..\&quot;:usr\&quot;;\r\n&quot; +
+            &quot;local userExists=redis.call(\&quot;sismember\&quot;,usersKey,userid);\r\n&quot; +
+            &quot;if tonumber(userExists)==1 then \r\n&quot; +
+            &quot;   return 2;\r\n&quot; +
+            &quot;end\r\n&quot; +
+            &quot;local num= redis.call(\&quot;get\&quot; ,qtkey);\r\n&quot; +
+            &quot;if tonumber(num)&lt;=0 then \r\n&quot; +
+            &quot;   return 0;\r\n&quot; +
+            &quot;else \r\n&quot; +
+            &quot;   redis.call(\&quot;decr\&quot;,qtkey);\r\n&quot; +
+            &quot;   redis.call(\&quot;sadd\&quot;,usersKey,userid);\r\n&quot; +
+            &quot;end\r\n&quot; +
+            &quot;return 1&quot;;
 
-        JedisPool jedispool =  JedisPoolUtil.getJedisPoolInstance();
-        Jedis jedis=jedispool.getResource();
+    public static boolean doSecKill(String uid, String prodid) throws IOException &#123;
 
-         //String sha1=  .secKillScript;
-        String sha1=  jedis.scriptLoad(secKillScript);
-        Object result= jedis.evalsha(sha1, 2, uid,prodid);
+        JedisPool jedispool = JedisPoolUtil.getJedisPoolInstance();
+        Jedis jedis = jedispool.getResource();
 
-          String reString=String.valueOf(result);
-        if (&quot;0&quot;.equals( reString )  ) &#123;
+        String sha1 = jedis.scriptLoad(secKillScript);
+        Object result = jedis.evalsha(sha1, 2, uid, prodid);
+
+        String reString = String.valueOf(result);
+        if (&quot;0&quot;.equals(reString)) &#123;
             System.err.println(&quot;已抢空！！&quot;);
-        &#125;else if(&quot;1&quot;.equals( reString )  )  &#123;
+        &#125; else if (&quot;1&quot;.equals(reString)) &#123;
             System.out.println(&quot;抢购成功！！！！&quot;);
-        &#125;else if(&quot;2&quot;.equals( reString )  )  &#123;
+        &#125; else if (&quot;2&quot;.equals(reString)) &#123;
             System.err.println(&quot;该用户已抢过！！&quot;);
-        &#125;else&#123;
+        &#125; else &#123;
             System.err.println(&quot;抢购异常！！&quot;);
         &#125;
         jedis.close();
@@ -931,11 +1138,16 @@ return 1;
     &#125;
 &#125;
 </code></pre>
+<p>方法调用</p>
+<p>src/main/java/cn/itxiaoma/servlet/SecKillServlet.java</p>
+<pre><code>boolean isSuccess= SecKill_redisByScript.doSecKill(userid,prodid);
+</code></pre>
 <h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
 <p>视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
 <p>参考笔记：<a target="_blank" rel="noopener" href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
 <p>参考笔记：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
 <p>Redis watch命令——监控事务：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/4544.html">http://c.biancheng.net/view/4544.html</a></p>
+<p>Lua完全自学手册（图文教程）：<a target="_blank" rel="noopener" href="https://edu.aliyun.com/course/506?spm=5176.10731542.0.0.5dd72a1d8kr9YJ">https://edu.aliyun.com/course/506?spm=5176.10731542.0.0.5dd72a1d8kr9YJ</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>

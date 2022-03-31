@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Redis04-新数据类型 | IT小马</title>
-  <meta name="keywords" content=" REDIS , 后端 ">
-  <meta name="description" content="Redis04-新数据类型 | IT小马">
+  <title>GO微服务19-消息队列 | IT小马</title>
+  <meta name="keywords" content=" GO微服务 , GO ">
+  <meta name="description" content="GO微服务19-消息队列 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="可靠消息实现最终一致性 发送事务消息Demopackage main  import (     &quot;context&quot;     &quot;fmt&quot;     &quot;time&quot;      &quot;github.com&#x2F;apache&#x2F;rocketmq-client-go&#x2F;v2&quot;     &quot;github.com&#x2F;apache&#x2F;rocke">
 <meta property="og:type" content="article">
@@ -459,9 +459,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Redis04-新数据类型" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-GO微服务19-消息队列" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Redis04-新数据类型</h1>
+        <h1 class="article-title">GO微服务19-消息队列</h1>
     
     <div class="article-meta">
         
@@ -471,7 +471,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="REDIS">REDIS</a>
+            <a  data-rel="GO微服务">GO微服务</a>
             
         </span>
         
@@ -479,16 +479,16 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color1">REDIS</a>
+            <a class="color1">GO微服务</a>
             
-            <a class="color3">后端</a>
+            <a class="color3">GO</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-03-30 19:18:36'>2022-02-04 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-03-31 20:50:51'>2022-03-19 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -499,7 +499,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">6.新数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bitmaps-%E4%BD%8D%E6%93%8D%E4%BD%9C%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">Bitmaps 位操作字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HyperLogLog"><span class="toc-text">HyperLogLog</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E9%97%AE%E9%A2%98"><span class="toc-text">基数问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E7%BB%9F%E8%AE%A1"><span class="toc-text">基数统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-text">常用操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Geospatial-%E7%BB%8F%E7%BA%AC%E5%BA%A6"><span class="toc-text">Geospatial 经纬度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C-1"><span class="toc-text">常用操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="toc-text">消息队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RocketMQ"><span class="toc-text">RocketMQ</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85-Producer"><span class="toc-text">生产者 Producer</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85-Consumer"><span class="toc-text">消费者 Consumer</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-Broker-Server"><span class="toc-text">代理服务器 Broker Server</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98%EF%BC%88Topic%EF%BC%89"><span class="toc-text">主题（Topic）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97-Message-Queue"><span class="toc-text">消息队列 Message Queue</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%8D%E5%AD%97%E6%9C%8D%E5%8A%A1%EF%BC%88Name-Server%EF%BC%89"><span class="toc-text">名字服务（Name Server）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E7%BB%84%EF%BC%88Producer-Group%EF%BC%89"><span class="toc-text">生产者组（Producer Group）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%EF%BC%88Consumer-Group%EF%BC%89"><span class="toc-text">消费者组（Consumer Group）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4%E6%B6%88%E8%B4%B9%EF%BC%88Clustering%EF%BC%89"><span class="toc-text">集群消费（Clustering）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B9%BF%E6%92%AD%E6%B6%88%E8%B4%B9%EF%BC%88Broadcasting%EF%BC%89"><span class="toc-text">广播消费（Broadcasting）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%EF%BC%88Message%EF%BC%89"><span class="toc-text">消息（Message）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%EF%BC%88Tag%EF%BC%89"><span class="toc-text">标签（Tag）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="toc-text">安装配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B"><span class="toc-text">类型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E6%96%B9%E5%BC%8F"><span class="toc-text">发送方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B"><span class="toc-text">消息类型</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Go%E7%BB%93%E5%90%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="toc-text">Go结合消息队列</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B0%E5%A2%9E%E9%85%8D%E7%BD%AE"><span class="toc-text">新增配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF"><span class="toc-text">发送消息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E6%B6%88%E6%81%AF"><span class="toc-text">读取消息</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8MQ%E8%A7%A3%E5%86%B3%E8%AE%A2%E5%8D%95%E8%B6%85%E6%97%B6%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">利用MQ解决订单超时的问题</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -515,84 +515,304 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="6-新数据类型"><a href="#6-新数据类型" class="headerlink" title="6.新数据类型"></a>6.新数据类型</h2><h3 id="Bitmaps-位操作字符串"><a href="#Bitmaps-位操作字符串" class="headerlink" title="Bitmaps 位操作字符串"></a>Bitmaps 位操作字符串</h3><ul>
-<li>Bitmaps实际上就是字符串(k-v)，但是可以对字符串进行位操作</li>
-<li>可以把Bitmas想象成以位为单位，只能存0和1的数组，数组下标叫做偏移量</li>
-</ul>
-<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><pre><code>setbit key offset value  //设置值
-
-getbit key offset              //取值
-
-bitcount （start end     //统计数值
-
-bitop and/or/not/xor destkey key1 key2  //复合操作，交并非异或，结果保存在destkey
-</code></pre>
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><pre><code>127.0.0.1:6379&gt; setbit k1 1 1
-(integer) 0
-127.0.0.1:6379&gt; setbit k1 2 1
-(integer) 0
-127.0.0.1:6379&gt; setbit k1 4 1
-(integer) 0
-127.0.0.1:6379&gt; getbit k1 1
-(integer) 1
-127.0.0.1:6379&gt; getbit k1 3
-(integer) 0
-127.0.0.1:6379&gt; bitcount k1
-(integer) 3
-127.0.0.1:6379&gt; setbit k2 3 1
-(integer) 0
-127.0.0.1:6379&gt; bitop and k1_and_k2 k1 k2 //k1和k2都有值 
-(integer) 1
-127.0.0.1:6379&gt; bitcount k1_and_k2
-(integer) 0
-127.0.0.1:6379&gt; bitop or k1_or_k2 k1 k2 //k1或k2有值 
-(integer) 1
-127.0.0.1:6379&gt; bitcount k1_or_k2
-(integer) 4
-</code></pre>
-<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>但 Bitmaps 并不是万金油， 假如该网站每天的独立访问用户很少， 例如只有 10 万（大量的僵尸用户） ， 那么两者的对比如下表所示， 很显然， 这时候使用 Bitmaps 就不太合适了， 因为基本上大部分位都是 0。</p>
-<p>Bitmaps适合百万级以上数据量存储。</p>
-<h3 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h3><h4 id="基数问题"><a href="#基数问题" class="headerlink" title="基数问题"></a>基数问题</h4><blockquote>
-<p>求集合中不重复元素个数的问题称为基数问题</p>
+        <h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><p>选型：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/JsBLbEuXVJDFosOX6T0ysw">https://mp.weixin.qq.com/s/JsBLbEuXVJDFosOX6T0ysw</a></p>
+<h3 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h3><p>中文文档：<a target="_blank" rel="noopener" href="https://github.com/apache/rocketmq/tree/master/docs/cn">https://github.com/apache/rocketmq/tree/master/docs/cn</a></p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><blockquote>
+<p>RocketMQ主要由 Producer、Broker、Consumer 三部分组成，其中Producer 负责生产消息，Consumer 负责消费消息，Broker 负责存储消息</p>
 </blockquote>
-<p>解决方案：</p>
-<ul>
-<li>Mysql使用distinct count计算</li>
-<li>Redis使用hash，set，bitmaos等数据结构处理</li>
-</ul>
-<h4 id="基数统计"><a href="#基数统计" class="headerlink" title="基数统计"></a>基数统计</h4><p>基数统计就是在误差可接受的范围内，快速计算基数。</p>
-<ul>
-<li>Redis HyperLogLog是用来做基数统计的算法，优点是输入大量数据时，所需空间固定(很小)。</li>
-<li>在 Redis 里面，每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基数。</li>
-<li>HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以 HyperLogLog 不能像集合那样，返回输入的各个元素。</li>
-</ul>
-<h4 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h4><pre><code>pfadd key element //添加元素 基数变化返回1，不变返回0
-
-pfcount key                //统计基数
-
-pfmerge destkey key1 key2  //合并
+<h5 id="生产者-Producer"><a href="#生产者-Producer" class="headerlink" title="生产者 Producer"></a>生产者 Producer</h5><p>把业务应用系统里产生的消息发送到broker服务器。</p>
+<p>RocketMQ提供多种发送方式，同步发送、异步发送、顺序发送、单向发送。</p>
+<p>同步和异步方式均需要Broker返回确认信息，单向发送不需要。</p>
+<h5 id="消费者-Consumer"><a href="#消费者-Consumer" class="headerlink" title="消费者 Consumer"></a>消费者 Consumer</h5><p>从Broker服务器拉取消息、并将其提供给应用程序</p>
+<h5 id="代理服务器-Broker-Server"><a href="#代理服务器-Broker-Server" class="headerlink" title="代理服务器 Broker Server"></a>代理服务器 Broker Server</h5><p>负责存储消息、转发消息。Broker 在实际部署过程中对应一台服务器，每个 Broker 可以存储多个Topic的消息，每个Topic的消息也可以分片存储于不同的 Broker。</p>
+<h5 id="主题（Topic）"><a href="#主题（Topic）" class="headerlink" title="主题（Topic）"></a>主题（Topic）</h5><p>表示一类消息的集合，每个主题包含若干条消息，每条消息只能属于一个主题，是RocketMQ进行消息订阅的基本单位。</p>
+<h5 id="消息队列-Message-Queue"><a href="#消息队列-Message-Queue" class="headerlink" title="消息队列 Message Queue"></a>消息队列 Message Queue</h5><p>普通顺序消费模式下，消费者通过同一个消息队列（ Topic 分区，称作 Message Queue） 收到的消息是有顺序的，不同消息队列收到的消息则可能是无顺序的。</p>
+<p>严格顺序消息模式下，消费者收到的所有消息均是有顺序的。</p>
+<h5 id="名字服务（Name-Server）"><a href="#名字服务（Name-Server）" class="headerlink" title="名字服务（Name Server）"></a>名字服务（Name Server）</h5><p>生产者或消费者能够通过名字服务查找各主题相应的Broker IP列表。</p>
+<h5 id="生产者组（Producer-Group）"><a href="#生产者组（Producer-Group）" class="headerlink" title="生产者组（Producer Group）"></a>生产者组（Producer Group）</h5><p>同一类Producer的集合，这类Producer发送同一类消息且发送逻辑一致。如果发送的是事务消息且原始生产者在发送之后崩溃，则Broker服务器会联系同一生产者组的其他生产者实例以提交或回溯消费。</p>
+<h5 id="消费者组（Consumer-Group）"><a href="#消费者组（Consumer-Group）" class="headerlink" title="消费者组（Consumer Group）"></a>消费者组（Consumer Group）</h5><p>同一类Consumer的集合，这类Consumer通常消费同一类消息且消费逻辑一致。消费者组使得在消息消费方面，实现负载均衡和容错的目标变得非常容易。要注意的是，消费者组的消费者实例必须订阅完全相同的Topic。RocketMQ 支持两种消息模式：集群消费（Clustering）和广播消费（Broadcasting）。</p>
+<h5 id="集群消费（Clustering）"><a href="#集群消费（Clustering）" class="headerlink" title="集群消费（Clustering）"></a>集群消费（Clustering）</h5><p>集群消费模式下,相同Consumer Group的每个Consumer实例平均分摊消息。</p>
+<h5 id="广播消费（Broadcasting）"><a href="#广播消费（Broadcasting）" class="headerlink" title="广播消费（Broadcasting）"></a>广播消费（Broadcasting）</h5><p>广播消费模式下，相同Consumer Group的每个Consumer实例都接收全量的消息。</p>
+<h5 id="消息（Message）"><a href="#消息（Message）" class="headerlink" title="消息（Message）"></a>消息（Message）</h5><p>消息系统所传输信息的物理载体，生产和消费数据的最小单位，每条消息必须属于一个主题。</p>
+<p>RocketMQ中每个消息拥有唯一的Message ID，且可以携带具有业务标识的Key。</p>
+<h5 id="标签（Tag）"><a href="#标签（Tag）" class="headerlink" title="标签（Tag）"></a>标签（Tag）</h5><p>为消息设置的标志，用于同一主题下区分不同类型的消息。</p>
+<h4 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h4><p>micro/cartorder/rocketmq/docker-compose.yml</p>
+<pre><code>version: &#39;3.5&#39;
+services:
+  rmqnamesrv:
+    image: foxiswho/rocketmq:server
+    container_name: rmqnamesrv
+    restart: always
+    ports:
+      - 9876:9876
+    volumes:
+      - ./logs:/opt/logs
+      - ./store:/opt/store
+    networks:
+      rmq:
+        aliases:
+          - rmqnamesrv
+          
+  rmqbroker:
+    image: foxiswho/rocketmq:broker
+    container_name: rmqbroker
+    restart: always
+    ports:
+      - 10909:10909
+      - 10911:10911
+    volumes:
+      - ./logs:/opt/logs
+      - ./store:/opt/store
+      - ./conf/broker.conf:/etc/rocketmq/broker.conf
+    environment:
+      NAMESRV_ADDR: &quot;rmqnamesrv:9876&quot;
+      JAVA_OPTS: &quot; -Duser.home=/opt&quot;
+      JAVA_OPT_EXT: &quot;-server -Xms128m -Xmx128m -Xmn128m&quot;
+    command: mqbroker -c /etc/rocketmq/broker.conf 
+    depends_on:
+      - rmqnamesrv
+    networks:
+      rmq:
+        aliases:
+          - rmqbroker
+          
+  rmqconsole:
+    image: styletang/rocketmq-console-ng
+    container_name: rmqconsole
+    restart: always
+    ports:
+      - 9877:8080
+    depends_on:
+      - rmqnamesrv
+    environment:
+      JAVA_OPTS: &quot;-Drocketmq.namesrv.addr=rmqnamesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false&quot;
+    networks:
+      rmq:
+        aliases:
+          - rmqconsole
+          
+networks:
+  rmq:
+    name: rmq
+    driver: bridge
 </code></pre>
-<h3 id="Geospatial-经纬度"><a href="#Geospatial-经纬度" class="headerlink" title="Geospatial 经纬度"></a>Geospatial 经纬度</h3><p>Redis3.2新增，提供经纬度设置，查询范围，距离查询等操作</p>
-<blockquote>
-<p>求集合中不重复元素个数的问题称为基数问题</p>
-</blockquote>
-<p>解决方案：</p>
-<ul>
-<li>Mysql使用distinct count计算</li>
-<li>Redis使用hash，set，bitmaos等数据结构处理</li>
-</ul>
-<h4 id="常用操作-1"><a href="#常用操作-1" class="headerlink" title="常用操作"></a>常用操作</h4><pre><code>geoadd key longitude latitude member //设置经纬度
+<p>micro/cartorder/rocketmq/conf/broker.conf</p>
+<pre><code>brokerClusterName=DefaultCluster
+brokerName=broker-a
+brokerId=0
+# 修改为你宿主机的 IP
+# 这个很有讲究 如果是正式环境 这里一定要填写内网地址（安全）
+# 如果是用于测试或者本地这里建议要填外网地址,因为你的本地代码是无法连接到阿里云内网,只能连接外网
+brokerIP1=192.168.31.51
 
-geopos key member                        //获取经纬度
+defaultTopicQueueNums=4
 
-geodist key member1 member2 (m km ft mi) //计算两个位置之间的直线距离
+autoCreateTopicEnable=true
+autoCreateSubscriptionGroup=true
 
-georadius key longitude latitude radius (m km ft mi) //以给定的经纬度为中心，找出某一半径的内元素
+# Broker 对外服务的监听端口,
+listenPort=10911
+deleteWhen=04
+
+# 文件回收120h
+fileReservedTime=24
+mapedFileSizeCommitLog=1073741824
+
+mapedFileSizeConsumeQueue=300000
+
+diskMaxUsedSpaceRatio=75%
+
+maxMessageSize=65536
+# Broker角色
+# - ASYNC_MASTER 异步复制Master
+# - SYNC_MASTER 同步双写Master
+# - SLAVE
+brokerRole=ASYNC_MASTER
+# 刷盘方式
+# - ASYNC_FLUSH 异步刷盘
+# - SYNC_FLUSH 同步刷盘
+flushDiskType=ASYNC_FLUSH
 </code></pre>
-<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
-<p>视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
-<p>参考笔记：<a target="_blank" rel="noopener" href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
-<p>参考笔记：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+<p>访问：<a target="_blank" rel="noopener" href="http://192.168.31.51:9877/">http://192.168.31.51:9877/</a></p>
+<h4 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h4><h5 id="发送方式"><a href="#发送方式" class="headerlink" title="发送方式"></a>发送方式</h5><p>同步，异步，单向</p>
+<h5 id="消息类型"><a href="#消息类型" class="headerlink" title="消息类型"></a>消息类型</h5><p>普通消息，顺序消息，延迟消息，事务消息</p>
+<h4 id="Go结合消息队列"><a href="#Go结合消息队列" class="headerlink" title="Go结合消息队列"></a>Go结合消息队列</h4><p>Github：<a target="_blank" rel="noopener" href="https://github.com/apache/rocketmq-client-go">https://github.com/apache/rocketmq-client-go</a></p>
+<pre><code>go get github.com/apache/rocketmq-client-go/v2
+</code></pre>
+<h5 id="新增配置"><a href="#新增配置" class="headerlink" title="新增配置"></a>新增配置</h5><p>micro/cartorder/internal/config.go</p>
+<pre><code>type RocketMQConfig struct &#123;
+    Host string `mapstructure:&quot;host&quot; json:&quot;host&quot;`
+    Port int    `mapstructure:&quot;port&quot; json:&quot;port&quot;`
+&#125;
+</code></pre>
+<p>micro/cartorder/internal/app.go</p>
+<pre><code>type AppConfig struct &#123;
+    DBConfig           DBConfig           `mapstructure:&quot;db&quot; json:&quot;db&quot;`
+    RedisConfig        RedisConfig        `mapstructure:&quot;redis&quot; json:&quot;redis&quot;`
+    ConsulConfig       ConsulConfig       `mapstructure:&quot;consul&quot; json:&quot;consul&quot;`
+    JaegerConfig       JaegerConfig       `mapstructure:&quot;jaeger&quot; json:&quot;jaeger&quot;`
+    RocketMQConfig     RocketMQConfig     `mapstructure:&quot;rocket&quot; json:&quot;rocket&quot;`
+    CartOrderSrvConfig CartOrderSrvConfig `mapstructure:&quot;cartorder_srv&quot; json:&quot;cartorder_srv&quot;`
+    CartOrderWebConfig CartOrderWebConfig `mapstructure:&quot;cartorder_web&quot; json:&quot;cartorder_web&quot;`
+    JWTConfig          JWTConfig          `mapstructure:&quot;jwt_op&quot; json:&quot;jwt_op&quot;`
+    Debug              bool               `mapstructure:&quot;debug&quot; json:&quot;debug&quot;`
+&#125;
+</code></pre>
+<p>Nacos配置新增：</p>
+<pre><code>&quot;rocket&quot;: &#123;
+    &quot;agentHost&quot;: &quot;192.168.31.51&quot;, 
+    &quot;agentPort&quot;: &quot;9876&quot;
+&#125;,
+</code></pre>
+<h5 id="发送消息"><a href="#发送消息" class="headerlink" title="发送消息"></a>发送消息</h5><pre><code>package main
+
+import (
+    &quot;context&quot;
+    &quot;fmt&quot;
+    &quot;hello/micro/cartorder/internal&quot;
+    &quot;os&quot;
+    &quot;strconv&quot;
+
+    &quot;github.com/apache/rocketmq-client-go/v2&quot;
+    &quot;github.com/apache/rocketmq-client-go/v2/primitive&quot;
+    &quot;github.com/apache/rocketmq-client-go/v2/producer&quot;
+    &quot;go.uber.org/zap&quot;
+)
+
+func main() &#123;
+    addr := fmt.Sprintf(&quot;%s:%d&quot;, internal.AppConf.RocketMQConfig.Host, internal.AppConf.RocketMQConfig.Port)
+    fmt.Println(&quot;Rocketmq Addr:&quot;, addr)
+    p, err := rocketmq.NewProducer(
+        // producer.WithNameServer(endPoint),
+        producer.WithNsResolver(primitive.NewPassthroughResolver([]string&#123;addr&#125;)),
+        producer.WithRetry(2),
+        // producer.WithGroupName(&quot;GID_xxxxxx&quot;),
+    )
+    if err != nil &#123;
+        panic(err)
+    &#125;
+    err = p.Start()
+    if err != nil &#123;
+        zap.S().Error(&quot;Producer Error:&quot; + err.Error())
+        os.Exit(1)
+    &#125;
+    topic := &quot;TestMall&quot;
+    for i := 0; i &lt; 10; i++ &#123;
+        msg := &amp;primitive.Message&#123;
+            Topic: topic,
+            Body:  []byte(&quot;Hello Test Mall&quot; + strconv.Itoa(i)),
+        &#125;
+        res, err := p.SendSync(context.Background(), msg)
+        if err != nil &#123;
+            fmt.Println(&quot;Send Error:&quot;, err.Error())
+        &#125; else &#123;
+            fmt.Println(&quot;Send Success:&quot;, res.String())
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h5 id="读取消息"><a href="#读取消息" class="headerlink" title="读取消息"></a>读取消息</h5><pre><code>package main
+
+import (
+    &quot;context&quot;
+    &quot;fmt&quot;
+    &quot;hello/micro/cartorder/internal&quot;
+    &quot;os&quot;
+    &quot;strconv&quot;
+    &quot;time&quot;
+
+    &quot;github.com/apache/rocketmq-client-go/v2&quot;
+    &quot;github.com/apache/rocketmq-client-go/v2/consumer&quot;
+    &quot;github.com/apache/rocketmq-client-go/v2/primitive&quot;
+    &quot;github.com/apache/rocketmq-client-go/v2/producer&quot;
+    &quot;go.uber.org/zap&quot;
+)
+
+const groupName string = &quot;testGroup&quot;
+
+func GetMQAddr() string &#123;
+    addr := fmt.Sprintf(&quot;%s:%d&quot;, internal.AppConf.RocketMQConfig.Host, internal.AppConf.RocketMQConfig.Port)
+    fmt.Println(&quot;Rocketmq Addr:&quot;, addr)
+    return addr
+&#125;
+
+func ProduceMsg(addr, topic string) &#123;
+    p, err := rocketmq.NewProducer(
+        producer.WithGroupName(groupName),
+        producer.WithNsResolver(primitive.NewPassthroughResolver([]string&#123;addr&#125;)),
+        producer.WithRetry(2),
+        // producer.WithGroupName(&quot;GID_xxxxxx&quot;),
+    )
+    if err != nil &#123;
+        panic(err)
+    &#125;
+    err = p.Start()
+    if err != nil &#123;
+        zap.S().Error(&quot;Producer Error:&quot; + err.Error())
+        os.Exit(1)
+    &#125;
+    for i := 0; i &lt; 10; i++ &#123;
+        msg := &amp;primitive.Message&#123;
+            Topic: topic,
+            Body:  []byte(&quot;Hello Test Mall&quot; + strconv.Itoa(i)),
+        &#125;
+        res, err := p.SendSync(context.Background(), msg)
+        if err != nil &#123;
+            fmt.Println(&quot;Send Error:&quot;, err.Error())
+        &#125; else &#123;
+            fmt.Println(&quot;Send Success:&quot;, res.String())
+        &#125;
+    &#125;
+    err = p.Shutdown()
+    if err != nil &#123;
+        zap.S().Error(&quot;Producer Shutdown:&quot; + err.Error())
+        os.Exit(1)
+    &#125;
+&#125;
+
+func ConsumeMsg(addr, topic string) &#123;
+    c, err := rocketmq.NewPushConsumer(
+        consumer.WithGroupName(groupName),
+        consumer.WithNsResolver(primitive.NewPassthroughResolver([]string&#123;addr&#125;)),
+    )
+    if err != nil &#123;
+        panic(err)
+    &#125;
+    err = c.Subscribe(topic,
+        consumer.MessageSelector&#123;&#125;,
+        func(ctx context.Context, msgList ...*primitive.MessageExt) (consumer.ConsumeResult, error) &#123;
+            for i := range msgList &#123;
+                fmt.Println(&quot;Consume Message:&quot;, msgList[i])
+            &#125;
+            return consumer.ConsumeSuccess, nil
+        &#125;)
+    if err != nil &#123;
+        zap.S().Error(&quot;Consumer Error:&quot; + err.Error())
+        os.Exit(1)
+    &#125;
+    err = c.Start()
+    if err != nil &#123;
+        zap.S().Error(&quot;Start Consumer Error:&quot; + err.Error())
+        os.Exit(1)
+    &#125;
+    time.Sleep(time.Hour)
+    err = c.Shutdown()
+    if err != nil &#123;
+        zap.S().Error(&quot;Shutdown Consumer Error:&quot; + err.Error())
+        os.Exit(1)
+    &#125;
+&#125;
+
+func main() &#123;
+    addr := GetMQAddr()
+    topic := &quot;TestMall&quot;
+    // ProduceMsg(addr, topic)
+    ConsumeMsg(addr, topic)
+&#125;
+</code></pre>
+<h4 id="利用MQ解决订单超时的问题"><a href="#利用MQ解决订单超时的问题" class="headerlink" title="利用MQ解决订单超时的问题"></a>利用MQ解决订单超时的问题</h4><pre><code>msg.WithDelayTimeLevel(3) //10s
+res, err := p.SendSync(context.Background(), msg)
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>

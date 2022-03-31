@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Redis04-新数据类型 | IT小马</title>
-  <meta name="keywords" content=" REDIS , 后端 ">
-  <meta name="description" content="Redis04-新数据类型 | IT小马">
+  <title>GO微服务22-分布式事务实现 | IT小马</title>
+  <meta name="keywords" content=" GO微服务 , GO ">
+  <meta name="description" content="GO微服务22-分布式事务实现 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="可靠消息实现最终一致性 发送事务消息Demopackage main  import (     &quot;context&quot;     &quot;fmt&quot;     &quot;time&quot;      &quot;github.com&#x2F;apache&#x2F;rocketmq-client-go&#x2F;v2&quot;     &quot;github.com&#x2F;apache&#x2F;rocke">
 <meta property="og:type" content="article">
@@ -459,9 +459,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Redis04-新数据类型" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-GO微服务22-分布式事务实现" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Redis04-新数据类型</h1>
+        <h1 class="article-title">GO微服务22-分布式事务实现</h1>
     
     <div class="article-meta">
         
@@ -471,7 +471,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="REDIS">REDIS</a>
+            <a  data-rel="GO微服务">GO微服务</a>
             
         </span>
         
@@ -479,16 +479,16 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color1">REDIS</a>
+            <a class="color1">GO微服务</a>
             
-            <a class="color3">后端</a>
+            <a class="color3">GO</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-03-30 19:18:36'>2022-02-04 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-03-31 22:45:56'>2022-03-22 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -499,7 +499,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">6.新数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bitmaps-%E4%BD%8D%E6%93%8D%E4%BD%9C%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">Bitmaps 位操作字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HyperLogLog"><span class="toc-text">HyperLogLog</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E9%97%AE%E9%A2%98"><span class="toc-text">基数问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%95%B0%E7%BB%9F%E8%AE%A1"><span class="toc-text">基数统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-text">常用操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Geospatial-%E7%BB%8F%E7%BA%AC%E5%BA%A6"><span class="toc-text">Geospatial 经纬度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C-1"><span class="toc-text">常用操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E6%B6%88%E6%81%AF%E5%AE%9E%E7%8E%B0%E6%9C%80%E7%BB%88%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-text">可靠消息实现最终一致性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AFDemo"><span class="toc-text">发送事务消息Demo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E5%90%88%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="toc-text">整合服务端</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%AE%A2%E5%8D%95"><span class="toc-text">创建订单</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1"><span class="toc-text">执行本地事务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9E%E6%9F%A5%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1"><span class="toc-text">回查本地事务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%BA%93%E5%AD%98%E5%BD%92%E8%BF%98%E8%A1%A8"><span class="toc-text">配置库存归还表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E5%9B%9E%E8%B0%83"><span class="toc-text">监听回调</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF"><span class="toc-text">延迟消息</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF"><span class="toc-text">发送延迟消息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF"><span class="toc-text">监听延迟消息</span></a></li></ol></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -515,84 +515,447 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="6-新数据类型"><a href="#6-新数据类型" class="headerlink" title="6.新数据类型"></a>6.新数据类型</h2><h3 id="Bitmaps-位操作字符串"><a href="#Bitmaps-位操作字符串" class="headerlink" title="Bitmaps 位操作字符串"></a>Bitmaps 位操作字符串</h3><ul>
-<li>Bitmaps实际上就是字符串(k-v)，但是可以对字符串进行位操作</li>
-<li>可以把Bitmas想象成以位为单位，只能存0和1的数组，数组下标叫做偏移量</li>
-</ul>
-<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><pre><code>setbit key offset value  //设置值
+        <h2 id="可靠消息实现最终一致性"><a href="#可靠消息实现最终一致性" class="headerlink" title="可靠消息实现最终一致性"></a>可靠消息实现最终一致性</h2><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0t0wpugxqj20nt0e23zc.jpg"></p>
+<h3 id="发送事务消息Demo"><a href="#发送事务消息Demo" class="headerlink" title="发送事务消息Demo"></a>发送事务消息Demo</h3><pre><code>package main
 
-getbit key offset              //取值
+import (
+    &quot;context&quot;
+    &quot;fmt&quot;
+    &quot;time&quot;
 
-bitcount （start end     //统计数值
+    &quot;github.com/apache/rocketmq-client-go/v2&quot;
+    &quot;github.com/apache/rocketmq-client-go/v2/primitive&quot;
+    &quot;github.com/apache/rocketmq-client-go/v2/producer&quot;
+)
 
-bitop and/or/not/xor destkey key1 key2  //复合操作，交并非异或，结果保存在destkey
+//实现primitive.TransactionListener
+type HappyListener struct&#123;&#125;
+
+func (h HappyListener) ExecuteLocalTransaction(*primitive.Message) primitive.LocalTransactionState &#123;
+    return primitive.CommitMessageState
+&#125;
+func (h HappyListener) CheckLocalTransaction(*primitive.MessageExt) primitive.LocalTransactionState &#123;
+    return primitive.CommitMessageState
+&#125;
+
+func main() &#123;
+    mqAddr := &quot;192.168.31.51:9876&quot;
+    p, err := rocketmq.NewTransactionProducer(
+        HappyListener&#123;&#125;,
+        producer.WithNameServer([]string&#123;mqAddr&#125;),
+    )
+    if err != nil &#123;
+        panic(err)
+    &#125;
+    err = p.Start()
+    if err != nil &#123;
+        panic(err)
+    &#125;
+    res, err := p.SendMessageInTransaction(context.Background(),
+        primitive.NewMessage(
+            &quot;TestTransactionTopic&quot;,
+            []byte(&quot;Test Message&quot;),
+        ),
+    )
+    fmt.Println(res)
+    if err != nil &#123;
+        panic(err)
+    &#125;
+    fmt.Println(&quot;发送成功...&quot;)
+    time.Sleep(time.Second * 3600)
+    err = p.Shutdown()
+    if err != nil &#123;
+        panic(err)
+    &#125;
+&#125;
 </code></pre>
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><pre><code>127.0.0.1:6379&gt; setbit k1 1 1
-(integer) 0
-127.0.0.1:6379&gt; setbit k1 2 1
-(integer) 0
-127.0.0.1:6379&gt; setbit k1 4 1
-(integer) 0
-127.0.0.1:6379&gt; getbit k1 1
-(integer) 1
-127.0.0.1:6379&gt; getbit k1 3
-(integer) 0
-127.0.0.1:6379&gt; bitcount k1
-(integer) 3
-127.0.0.1:6379&gt; setbit k2 3 1
-(integer) 0
-127.0.0.1:6379&gt; bitop and k1_and_k2 k1 k2 //k1和k2都有值 
-(integer) 1
-127.0.0.1:6379&gt; bitcount k1_and_k2
-(integer) 0
-127.0.0.1:6379&gt; bitop or k1_or_k2 k1 k2 //k1或k2有值 
-(integer) 1
-127.0.0.1:6379&gt; bitcount k1_or_k2
-(integer) 4
+<h3 id="整合服务端"><a href="#整合服务端" class="headerlink" title="整合服务端"></a>整合服务端</h3><h4 id="创建订单"><a href="#创建订单" class="headerlink" title="创建订单"></a>创建订单</h4><p>micro/cartorder/cartorder_srv/biz/order.go</p>
+<pre><code>func (s CartOrderServer) CreateOrder(ctx context.Context, in *pb.OrderItemReq) (*pb.OrderItemRes, error) &#123;
+    mqAddr := &quot;192.168.31.51:9876&quot;
+    orderListener := &amp;OrderListener&#123;&#125;
+    p, err := rocketmq.NewTransactionProducer(
+        orderListener,
+        producer.WithNameServer([]string&#123;mqAddr&#125;),
+    )
+    if err != nil &#123;
+        zap.S().Error(err)
+        return nil, err
+    &#125;
+    err = p.Start()
+    if err != nil &#123;
+        zap.S().Error(err)
+        return nil, err
+    &#125;
+    orderItem := model.OrderItem&#123;
+        AccountId:      in.AccountId,
+        OrderNo:        uuid.NewV4().String(),
+        Addr:           in.Addr,
+        Receiver:       in.Receiver,
+        ReceiverMobile: in.Mobile,
+        PostCode:       in.PostCode,
+    &#125;
+    orderItemBytesSlice, err := json.Marshal(orderItem)
+    if err != nil &#123;
+        zap.S().Error(err)
+        return nil, err
+    &#125;
+    //1.发送库存归还half消息
+    res, err := p.SendMessageInTransaction(context.Background(),
+        primitive.NewMessage(
+            &quot;BackStockTopic&quot;,
+            orderItemBytesSlice,
+        ),
+    )
+    fmt.Println(res)
+    if orderListener.Status != codes.OK &#123;
+        zap.S().Error(err)
+        return nil, errors.New(&quot;新建订单失败&quot;)
+    &#125;
+    r := pb.OrderItemRes&#123;
+        Id:      orderListener.ID,
+        OrderNo: orderListener.OrderNo,
+        Amount:  orderListener.OrderAmount,
+    &#125;
+    return &amp;r, nil
+&#125;
 </code></pre>
-<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>但 Bitmaps 并不是万金油， 假如该网站每天的独立访问用户很少， 例如只有 10 万（大量的僵尸用户） ， 那么两者的对比如下表所示， 很显然， 这时候使用 Bitmaps 就不太合适了， 因为基本上大部分位都是 0。</p>
-<p>Bitmaps适合百万级以上数据量存储。</p>
-<h3 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h3><h4 id="基数问题"><a href="#基数问题" class="headerlink" title="基数问题"></a>基数问题</h4><blockquote>
-<p>求集合中不重复元素个数的问题称为基数问题</p>
-</blockquote>
-<p>解决方案：</p>
-<ul>
-<li>Mysql使用distinct count计算</li>
-<li>Redis使用hash，set，bitmaos等数据结构处理</li>
-</ul>
-<h4 id="基数统计"><a href="#基数统计" class="headerlink" title="基数统计"></a>基数统计</h4><p>基数统计就是在误差可接受的范围内，快速计算基数。</p>
-<ul>
-<li>Redis HyperLogLog是用来做基数统计的算法，优点是输入大量数据时，所需空间固定(很小)。</li>
-<li>在 Redis 里面，每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基数。</li>
-<li>HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以 HyperLogLog 不能像集合那样，返回输入的各个元素。</li>
-</ul>
-<h4 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h4><pre><code>pfadd key element //添加元素 基数变化返回1，不变返回0
+<h4 id="执行本地事务"><a href="#执行本地事务" class="headerlink" title="执行本地事务"></a>执行本地事务</h4><p>micro/cartorder/cartorder_srv/biz/order.go</p>
+<pre><code>type OrderListener struct &#123;
+    ID          int32
+    Detail      string
+    OrderNo     string
+    OrderAmount float32
+    AccountId   int32
+    Status      codes.Code
+    Receiver    string
+    Addr        string
+    PostCode    string
+    Mobile      string
+&#125;
 
-pfcount key                //统计基数
-
-pfmerge destkey key1 key2  //合并
+//执行本地事务
+func (in *OrderListener) ExecuteLocalTransaction(message *primitive.Message) primitive.LocalTransactionState &#123;
+    var orderItem model.OrderItem
+    err := json.Unmarshal(message.Body, &amp;orderItem)
+    if err != nil &#123;
+        zap.S().Error(&quot;ExecuteLocalTransaction-Unmarshal-Error&quot; + err.Error())
+        in.Detail = &quot;ExecuteLocalTransaction-Unmarshal-Error&quot; + err.Error()
+        return primitive.RollbackMessageState
+    &#125;
+    var productIds []int32
+    var carList []model.ShopCart
+    productNumMap := make(map[int32]int32)
+    r := internal.DB.Where(&amp;model.ShopCart&#123;AccountId: in.AccountId, Checked: true&#125;).Find(&amp;carList)
+    if r.RowsAffected == 0 &#123;
+        in.Detail = custom_error.ProductNotChecked
+        in.OrderAmount = 0
+        return primitive.RollbackMessageState
+    &#125;
+    for _, cart := range carList &#123;
+        productIds = append(productIds, cart.ProductId)
+        productNumMap[cart.ProductId] = cart.Num
+    &#125;
+    fmt.Println(&quot;productNumMap:&quot;, productNumMap)
+    fmt.Println(&quot;productIds:&quot;, productIds)
+    productRes, err := internal.ProductClient.BatchGetProduct(context.Background(), &amp;pb.BatchProductIdReq&#123;Ids: productIds&#125;)
+    if err != nil &#123;
+        in.Detail = custom_error.ProductNotFound
+        in.OrderAmount = 0
+        return primitive.RollbackMessageState
+    &#125;
+    var amount float32 //总价 = 单价 * 数量
+    var orderProductList []model.OrderProduct
+    var stockItemList []*pb.ProductStockItem
+    for _, p := range productRes.ItemList &#123;
+        amount += p.RealPrice * float32(productNumMap[p.Id])
+        stockItem := &amp;pb.ProductStockItem&#123;
+            ProductId: p.Id,
+            Num:       productNumMap[p.Id],
+        &#125;
+        stockItemList = append(stockItemList, stockItem)
+    &#125;
+    fmt.Println(&quot;stockItemList:&quot;, stockItemList)
+    //微服务原则：尽量使用List，减少请求次数
+    _, err = internal.StockClient.Sell(context.Background(), &amp;pb.SellItem&#123;
+        StockItemList: stockItemList,
+    &#125;)
+    if err != nil &#123;
+        in.Detail = custom_error.SotckNotEnough
+        in.OrderAmount = 0
+        return primitive.RollbackMessageState
+    &#125;
+    tx := internal.DB.Begin()
+    orderItem.Status = &quot;unPay&quot;
+    orderItem.OrderAmount = amount
+    result := tx.Save(&amp;orderItem)
+    //事务执行失败，提交回滚
+    if result.Error != nil || result.RowsAffected &lt; 1 &#123;
+        tx.Rollback()
+        in.Detail = custom_error.CreateOrderFail
+        in.OrderAmount = 0
+        return primitive.CommitMessageState
+    &#125;
+    for _, p := range productRes.ItemList &#123;
+        var orderProduct = model.OrderProduct&#123;
+            ProductId:    p.Id,
+            ProductName:  p.Name,
+            ConvertImage: p.CoverImage,
+            RealPrice:    p.RealPrice,
+            OrderId:      orderItem.ID,
+            Num:          productNumMap[p.Id],
+        &#125;
+        orderProductList = append(orderProductList, orderProduct)
+    &#125;
+    fmt.Println(&quot;orderProductList:&quot;, orderProductList)
+    result = tx.CreateInBatches(orderProductList, 50)
+    if result.Error != nil || result.RowsAffected &lt; 1 &#123;
+        tx.Rollback()
+        in.Detail = custom_error.CreateOrderFail
+        in.OrderAmount = 0
+        return primitive.CommitMessageState
+    &#125;
+    result = tx.Where(&amp;model.ShopCart&#123;AccountId: in.AccountId, Checked: true&#125;).Delete(&amp;model.ShopCart&#123;&#125;)
+    if result.Error != nil || result.RowsAffected &lt; 1 &#123;
+        tx.Rollback()
+        in.Detail = custom_error.CreateOrderFail
+        in.OrderAmount = 0
+        return primitive.CommitMessageState
+    &#125;
+    tx.Commit()
+    //库存和订单都执行成功
+    return primitive.RollbackMessageState
+&#125;
 </code></pre>
-<h3 id="Geospatial-经纬度"><a href="#Geospatial-经纬度" class="headerlink" title="Geospatial 经纬度"></a>Geospatial 经纬度</h3><p>Redis3.2新增，提供经纬度设置，查询范围，距离查询等操作</p>
-<blockquote>
-<p>求集合中不重复元素个数的问题称为基数问题</p>
-</blockquote>
-<p>解决方案：</p>
-<ul>
-<li>Mysql使用distinct count计算</li>
-<li>Redis使用hash，set，bitmaos等数据结构处理</li>
-</ul>
-<h4 id="常用操作-1"><a href="#常用操作-1" class="headerlink" title="常用操作"></a>常用操作</h4><pre><code>geoadd key longitude latitude member //设置经纬度
-
-geopos key member                        //获取经纬度
-
-geodist key member1 member2 (m km ft mi) //计算两个位置之间的直线距离
-
-georadius key longitude latitude radius (m km ft mi) //以给定的经纬度为中心，找出某一半径的内元素
+<h4 id="回查本地事务"><a href="#回查本地事务" class="headerlink" title="回查本地事务"></a>回查本地事务</h4><p>micro/cartorder/cartorder_srv/biz/order.go</p>
+<pre><code>//7.回查本地事务
+func (in *OrderListener) CheckLocalTransaction(message *primitive.MessageExt) primitive.LocalTransactionState &#123;
+    var orderItem model.OrderItem
+    err := json.Unmarshal(message.Body, &amp;orderItem)
+    if err != nil &#123;
+        zap.S().Error(&quot;CheckLocalTransaction-Unmarshal-Error&quot; + err.Error())
+        return primitive.UnknowState
+    &#125;
+    var temp model.OrderItem
+    r := internal.DB.Model(&amp;model.OrderItem&#123;&#125;).Where(model.OrderItem&#123;OrderNo: in.OrderNo&#125;).First(temp)
+    //订单创建失败，提交回滚(归还库存)
+    if r.RowsAffected &lt; 1 &#123;
+        return primitive.CommitMessageState
+    &#125;
+    return primitive.RollbackMessageState
+&#125;
 </code></pre>
-<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
-<p>视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
-<p>参考笔记：<a target="_blank" rel="noopener" href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
-<p>参考笔记：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+<h4 id="配置库存归还表"><a href="#配置库存归还表" class="headerlink" title="配置库存归还表"></a>配置库存归还表</h4><p>micro/stock/model/stock.go</p>
+<pre><code>package model
+
+import (
+    &quot;database/sql/driver&quot;
+    &quot;encoding/json&quot;
+    &quot;time&quot;
+
+    &quot;gorm.io/gorm&quot;
+)
+
+type OrderStatus int32
+
+const (
+    HasSell OrderStatus = 1
+    HasBack OrderStatus = 2
+)
+
+type ProductDetail struct &#123;
+    ProductId int32
+    Num       int32
+&#125;
+
+type ProductDetailList []ProductDetail
+
+func (p ProductDetailList) Value() (driver.Value, error) &#123;
+    return json.Marshal(p)
+&#125;
+func (p ProductDetailList) Scan(value interface&#123;&#125;) error &#123;
+    return json.Unmarshal(value.([]byte), &amp;p)
+&#125;
+
+type StockItemDetail struct &#123;
+    OrderNo    string            `gorm:&quot;type:varchar(128);index;unique&quot;`
+    Status     OrderStatus       `gorm:&quot;type:int&quot;`
+    DetailList ProductDetailList `gorm:&quot;type:varchar(128)&quot;`
+&#125;
+
+type BaseModel struct &#123;
+    ID        int32          `gorm:&quot;primary_key&quot;`
+    CreatedAt *time.Time     `gorm:&quot;column:add_time&quot;`
+    UpdatedAt *time.Time     `gorm:&quot;column:update_time&quot;`
+    DeletedAt gorm.DeletedAt `gorm:&quot;index&quot;`
+&#125;
+
+type Stock struct &#123;
+    BaseModel
+    ProductId int32 `gorm:&quot;type:int;index&quot;`
+    Num       int32 `gorm:&quot;type:int&quot;`
+    Version   int32 `gorm:&quot;type:int&quot;`
+&#125;
+</code></pre>
+<p>micro/stock/internal/db.go</p>
+<pre><code>DB.AutoMigrate(&amp;model.Stock&#123;&#125;, &amp;model.StockItemDetail&#123;&#125;)
+</code></pre>
+<p>单元测试：</p>
+<pre><code>func TestCreateStockItemDetail(t *testing.T) &#123;
+    item := model.StockItemDetail&#123;
+        OrderNo: &quot;123456789&quot;,
+        Status:  model.HasSell,
+        DetailList: []model.ProductDetail&#123;
+            &#123;ProductId: 1, Num: 10&#125;,
+            &#123;ProductId: 2, Num: 20&#125;,
+        &#125;,
+    &#125;
+    internal.DB.Save(&amp;item)
+&#125;
+
+func TestFindStockItemDetail(t *testing.T) &#123;
+    var itemDetail model.StockItemDetail
+    internal.DB.Model(&amp;model.StockItemDetail&#123;&#125;).Where(model.StockItemDetail&#123;
+        OrderNo: &quot;123456789&quot;,
+    &#125;).First(itemDetail)
+    fmt.Println(itemDetail)
+&#125;
+</code></pre>
+<h4 id="监听回调"><a href="#监听回调" class="headerlink" title="监听回调"></a>监听回调</h4><p>micro/stock/model/order.go</p>
+<pre><code>package model
+
+type Order struct &#123;
+    OrderNo string
+&#125;
+</code></pre>
+<p>micro/stock/stock_srv/main.go</p>
+<pre><code>pushConsumer, _ := rocketmq.NewPushConsumer(
+    consumer.WithNameServer([]string&#123;&quot;192.168.31.51:9876&quot;&#125;),
+    consumer.WithGroupName(&quot;StockGroup&quot;),
+)
+pushConsumer.Subscribe(&quot;BackStockTopic&quot;,
+    consumer.MessageSelector&#123;&#125;,
+    func(ctx context.Context, me ...*primitive.MessageExt) (consumer.ConsumeResult, error) &#123;
+        for i := range me &#123;
+            var order model.Order
+            err := json.Unmarshal(me[i].Body, &amp;order)
+            if err != nil &#123;
+                zap.S().Error(&quot;Unmarshal Error:&quot; + err.Error())
+                return consumer.ConsumeSuccess, nil
+            &#125;
+            tx := internal.DB.Begin()
+            var detail model.StockItemDetail
+            r1 := tx.Where(&amp;model.StockItemDetail&#123;
+                OrderNo: order.OrderNo,
+                Status:  model.HasSell,
+            &#125;).First(&amp;detail)
+            if r1.RowsAffected &lt; 1 &#123;
+                zap.S().Error(&quot;StockItemDetail Not Found:&quot; + err.Error())
+                return consumer.ConsumeSuccess, nil
+            &#125;
+            //库存归还
+            for _, item := range detail.DetailList &#123;
+                r2 := tx.Model(&amp;model.Stock&#123;ProductId: item.ProductId&#125;).Update(
+                    &quot;num&quot;, gorm.Expr(&quot;num+?&quot;, item.Num),
+                )
+                if r2.RowsAffected &lt; 1 &#123;
+                    tx.Rollback()
+                    return consumer.ConsumeRetryLater, nil
+                &#125;
+            &#125;
+            r3 := tx.Where(&amp;model.StockItemDetail&#123;
+                OrderNo: order.OrderNo,
+            &#125;).Update(&quot;status&quot;, model.HasBack)
+            if r3.RowsAffected &lt; 1 &#123;
+                tx.Rollback()
+                return consumer.ConsumeRetryLater, nil
+            &#125;
+            tx.Commit()
+        &#125;
+        return consumer.ConsumeSuccess, nil
+    &#125;)
+</code></pre>
+<h4 id="延迟消息"><a href="#延迟消息" class="headerlink" title="延迟消息"></a>延迟消息</h4><p>用户支付超时，归还库存</p>
+<h5 id="发送延迟消息"><a href="#发送延迟消息" class="headerlink" title="发送延迟消息"></a>发送延迟消息</h5><p>micro/cartorder/cartorder_srv/biz/order.go</p>
+<pre><code>//执行本地事务
+func (in *OrderListener) ExecuteLocalTransaction(message *primitive.Message) primitive.LocalTransactionState &#123;
+    ...
+    //发送延迟消息
+    p, err := rocketmq.NewProducer(producer.WithNameServer([]string&#123;&quot;192.168.31.51:9876&quot;&#125;))
+    if err != nil &#123;
+        zap.S().Error(&quot;NewProducer Error&quot; + err.Error())
+        in.Detail = &quot;NewProducer Error&quot; + err.Error()
+        in.Status = codes.Internal
+        tx.Rollback()
+        return primitive.CommitMessageState
+    &#125;
+    err = p.Start()
+    if err != nil &#123;
+        zap.S().Error(&quot;Producer Start Error&quot; + err.Error())
+        in.Detail = &quot;Producer Start Error&quot; + err.Error()
+        in.Status = codes.Internal
+        tx.Rollback()
+        return primitive.CommitMessageState
+    &#125;
+    msg := primitive.NewMessage(&quot;timeout_order_info&quot;, message.Body)
+    msg.WithDelayTimeLevel(6)
+    _, err = p.SendSync(context.Background(), msg)
+    if err != nil &#123;
+        zap.S().Error(&quot;Producer SendSync Error&quot; + err.Error())
+        in.Detail = &quot;Producer SendSync Error&quot; + err.Error()
+        in.Status = codes.Internal
+        tx.Rollback()
+        return primitive.CommitMessageState
+    &#125;
+    tx.Commit()
+    //库存和订单都执行成功
+    in.ID = orderItem.ID
+    in.OrderAmount = orderItem.OrderAmount
+    in.Status = codes.OK
+    return primitive.RollbackMessageState
+&#125;
+</code></pre>
+<h5 id="监听延迟消息"><a href="#监听延迟消息" class="headerlink" title="监听延迟消息"></a>监听延迟消息</h5><p>micro/cartorder/cartorder_srv/main.go</p>
+<pre><code>newProducer, _ := rocketmq.NewProducer(producer.WithNameServer([]string&#123;&quot;192.168.31.51:9876&quot;&#125;))
+    newProducer.Start()
+    pushConsumer, _ := rocketmq.NewPushConsumer(
+        consumer.WithNameServer([]string&#123;&quot;192.168.31.51:9876&quot;&#125;),
+        consumer.WithGroupName(&quot;OrderTimeOut&quot;),
+    )
+    pushConsumer.Subscribe(&quot;timeout_order_info&quot;,
+        consumer.MessageSelector&#123;&#125;,
+        func(ctx context.Context, me ...*primitive.MessageExt) (consumer.ConsumeResult, error) &#123;
+            for i := range me &#123;
+                var order model.OrderItem
+                err := json.Unmarshal(me[i].Body, &amp;order)
+                if err != nil &#123;
+                    zap.S().Error(&quot;Unmarshal Error:&quot; + err.Error())
+                    return consumer.ConsumeSuccess, nil
+                &#125;
+                var temp model.OrderItem
+                r1 := internal.DB.Where(&amp;model.OrderItem&#123;OrderNo: order.OrderNo&#125;).First(&amp;temp)
+                if r1.RowsAffected &lt; 1 &#123;
+                    zap.S().Error(&quot;OrderItem Not Found:&quot; + err.Error())
+                    return consumer.ConsumeSuccess, nil
+                &#125;
+                //未支付完成，通知库存回归
+                if temp.Status != &quot;PaySuc&quot; &#123;
+                    tx := internal.DB.Begin()
+                    order.Status = &quot;OrderClosed&quot;
+                    tx.Save(&amp;order)
+                    _, err := newProducer.SendSync(context.Background(), primitive.NewMessage(
+                        &quot;BackStockTopic&quot;,
+                        me[i].Body,
+                    ))
+                    if err != nil &#123;
+                        zap.S().Error(&quot;Unmarshal Error:&quot; + err.Error())
+                        tx.Rollback()
+                        return consumer.ConsumeRetryLater, nil
+                    &#125;
+                &#125;
+            &#125;
+            return consumer.ConsumeSuccess, nil
+        &#125;)
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
