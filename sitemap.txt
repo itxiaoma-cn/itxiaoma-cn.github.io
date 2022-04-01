@@ -1,7 +1,7 @@
-https://blog.itxiaoma.cn/2021/10/01/Laravel%E5%BA%95%E5%B1%8204-%E5%8A%A0%E8%BD%BD%E5%B9%B6%E5%90%AF%E5%8A%A8ServiceProvider/
+https://blog.itxiaoma.cn/2021/10/04/Laravel%E5%BA%95%E5%B1%8204-%E5%8A%A0%E8%BD%BD%E5%B9%B6%E5%90%AF%E5%8A%A8ServiceProvider/
+https://blog.itxiaoma.cn/2021/10/01/Laravel%E5%BA%95%E5%B1%8201-%E6%A1%86%E6%9E%B6%E6%A0%B8%E5%BF%83%EF%BC%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E9%97%AD%E5%8C%85/
 https://blog.itxiaoma.cn/2021/10/03/Laravel%E5%BA%95%E5%B1%8203-make%E5%92%8Cbuild/
 https://blog.itxiaoma.cn/2021/10/02/Laravel%E5%BA%95%E5%B1%8202-%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%EF%BC%8C%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85/
-https://blog.itxiaoma.cn/2021/10/01/Laravel%E5%BA%95%E5%B1%8201-%E6%A1%86%E6%9E%B6%E6%A0%B8%E5%BF%83%EF%BC%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E9%97%AD%E5%8C%85/
 https://blog.itxiaoma.cn/2022/03/01/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/
 https://blog.itxiaoma.cn/2021/05/01/%E9%AB%98%E6%80%A7%E8%83%BDWeb01-%E7%BB%AA%E8%AE%BA/
 https://blog.itxiaoma.cn/2021/05/02/%E9%AB%98%E6%80%A7%E8%83%BDWeb02-%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93/
