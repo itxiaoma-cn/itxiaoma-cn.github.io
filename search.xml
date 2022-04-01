@@ -2629,7 +2629,6 @@ georadius key longitude latitude radius (m km ft mi) //以给定的经纬度为�
 ]]></content>
       <categories>
         <category>MYSQL</category>
-        <category>Mysql45讲</category>
       </categories>
       <tags>
         <tag>后端</tag>
@@ -3954,7 +3953,6 @@ Local respository: /usr/local/apache-maven-3.8.3/maven-repo
 ]]></content>
       <categories>
         <category>JAVA</category>
-        <category>JavaWeb</category>
       </categories>
       <tags>
         <tag>后端</tag>
@@ -4502,7 +4500,6 @@ session.invalidate();
 ]]></content>
       <categories>
         <category>JAVA</category>
-        <category>JavaWeb</category>
       </categories>
       <tags>
         <tag>后端</tag>
@@ -7081,7 +7078,6 @@ public void doFilter(ServletRequest request, ServletResponse response, FilterCha
 ]]></content>
       <categories>
         <category>JAVA</category>
-        <category>JavaWeb</category>
       </categories>
       <tags>
         <tag>后端</tag>
