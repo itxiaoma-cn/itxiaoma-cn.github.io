@@ -5,11 +5,11 @@
     <url>/2022/03/01/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[]]></content>
       <categories>
-        <category>GO微服务</category>
+        <category>微服务</category>
       </categories>
       <tags>
-        <tag>GO微服务</tag>
         <tag>GO</tag>
+        <tag>微服务</tag>
       </tags>
   </entry>
   <entry>
@@ -3721,54 +3721,6 @@ public class SecKill_redisByScript &#123;
       </tags>
   </entry>
   <entry>
-    <title>Redis08-主从复制、集群</title>
-    <url>/2022/02/08/Redis08-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E3%80%81%E9%9B%86%E7%BE%A4/</url>
-    <content><![CDATA[<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
-<p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
-<p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
-<p>参考笔记：<a href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
-]]></content>
-      <categories>
-        <category>REDIS</category>
-      </categories>
-      <tags>
-        <tag>REDIS</tag>
-        <tag>后端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis10-新功能介绍</title>
-    <url>/2022/02/10/Redis10-%E6%96%B0%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
-<p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
-<p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
-<p>参考笔记：<a href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
-]]></content>
-      <categories>
-        <category>REDIS</category>
-      </categories>
-      <tags>
-        <tag>REDIS</tag>
-        <tag>后端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Redis09-缓存穿透/击穿/雪崩、分布式锁</title>
-    <url>/2022/02/09/Redis09-%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%C2%B7%E5%87%BB%E7%A9%BF%C2%B7%E9%9B%AA%E5%B4%A9%E3%80%81%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</url>
-    <content><![CDATA[<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
-<p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
-<p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
-<p>参考笔记：<a href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
-]]></content>
-      <categories>
-        <category>REDIS</category>
-      </categories>
-      <tags>
-        <tag>REDIS</tag>
-        <tag>后端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaWeb01-Tomcat、Maven配置</title>
     <url>/2021/11/21/JavaWeb01-Tomcat%E3%80%81Maven%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="web应用程序"><a href="#web应用程序" class="headerlink" title="web应用程序"></a>web应用程序</h3><h4 id="web组成"><a href="#web组成" class="headerlink" title="web组成"></a>web组成</h4><p>html, css, js</p>
@@ -5558,6 +5510,2775 @@ services:
       <tags>
         <tag>DOCKER</tag>
         <tag>容器</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java01-JavaSE</title>
+    <url>/2021/11/14/Java01-JavaSE/</url>
+    <content><![CDATA[<h3 id="在线工具"><a href="#在线工具" class="headerlink" title="在线工具"></a>在线工具</h3><p>java <a href="https://link.segmentfault.com/?enc=pSwXjyuKCDGOKlwqmZrR9Q==.ZIcUuUBgXU0F/91XNbqChwKoMi5lukMGuwLVoZsEk1k=">https://c.runoob.com/compile/10</a></p>
+<p>在线编写运行 Java 8 <a href="https://link.segmentfault.com/?enc=DLF8OTMlmJAvzTGijV4r7Q==.e90gpnv6r+QumTO7Te7dKSrNlA43KblQeye/an+vdWTGvvZkxDu0RBvPVlU3OpSRVif31v50KghbZR6btHTn2Q==">https://www.tutorialspoint.co…</a></p>
+<p>SQL 在线运行 <a href="https://link.segmentfault.com/?enc=4/xYJ+72PdKtq13YO5r5Bw==.OYA43Q2LobFXraGof5HAnld++cjBaOAC37M+cY/PeUzS9RI83dsT3LPWX+nmwl44">https://www.bejson.com/runcod…</a></p>
+<p>Java牛客题库 <a href="https://link.segmentfault.com/?enc=h4Quq6GxGUkDr8mj0h72mw==.LFZZfNDR1EQmg9Z876F5tNKt0+1eZc3gl2MQR04Wl0ZFHYaRYWdg80ULBjPzLUs+">https://www.nowcoder.com/inte…</a></p>
+<h3 id="JDK-JRE-JVM"><a href="#JDK-JRE-JVM" class="headerlink" title="JDK, JRE, JVM"></a>JDK, JRE, JVM</h3><ul>
+<li>JDK : Java Development Kit</li>
+<li>JRE : Java Runtime Enviroment</li>
+<li>JVM : Java Virtual Machine</li>
+</ul>
+<h3 id="输出Hello-Wolrd"><a href="#输出Hello-Wolrd" class="headerlink" title="输出Hello Wolrd"></a>输出Hello Wolrd</h3><blockquote>
+<p>vim Hello.java</p>
+</blockquote>
+<pre><code class="typescript">public class Hello&#123;
+    public static void main(String[] args)&#123;
+        System.out.print(&quot;Hello World!&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>编译</p>
+<pre><code>javac Hello.java
+</code></pre>
+<p>执行</p>
+<pre><code>java Hello
+</code></pre>
+<p>输出</p>
+<pre><code class="erlang-repl">Hello World!
+</code></pre>
+<h3 id="Java程序运行机制"><a href="#Java程序运行机制" class="headerlink" title="Java程序运行机制"></a>Java程序运行机制</h3><ul>
+<li><p>编译型：</p>
+</li>
+<li><p>解释型：</p>
+</li>
+<li><p>程序运行机制：</p>
+<blockquote>
+<p>源文件(*.java) =&gt; Java编译器 =&gt; 字节码(.class)</p>
+<p>=&gt; JVM ( 类装载器 =&gt;字节码校验器 =&gt; 解释器 )</p>
+<p>=&gt; 操作系统平台</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="IDEA"><a href="#IDEA" class="headerlink" title="IDEA"></a>IDEA</h3><h4 id="新建工程"><a href="#新建工程" class="headerlink" title="新建工程"></a>新建工程</h4><blockquote>
+<p>File =&gt; New =&gt; Project… =&gt; Empty Project</p>
+<p>File =&gt; Project Structure =&gt; Project =&gt; Project SDK (1.8.0) =&gt; Project language level (8) =&gt; OK</p>
+</blockquote>
+<h3 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h3><h4 id="1-注释，标识符，关键字"><a href="#1-注释，标识符，关键字" class="headerlink" title="1.注释，标识符，关键字"></a>1.注释，标识符，关键字</h4><h5 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h5><pre><code class="java">//单行注释
+/* 多行注释 */
+/**
+  * 文档注释
+  * @Author itxiaoma
+  */
+</code></pre>
+<h5 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h5><blockquote>
+<p>类名，变量名，方法名都称为标识符</p>
+</blockquote>
+<ul>
+<li>标识符以字母，美元($)，下划线(_)开始</li>
+<li>首字母后可以是字母，美元($)，下划线(_)，数字的组合</li>
+<li>不能使用关键字作为变量名，方法名</li>
+<li>大小写敏感</li>
+</ul>
+<h5 id="关键字-50"><a href="#关键字-50" class="headerlink" title="关键字(50+)"></a>关键字(50+)</h5><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0ujyec8e8j20iw09gt9m.jpg" alt="image-20220401214200426"></p>
+<h4 id="2-数据类型"><a href="#2-数据类型" class="headerlink" title="2.数据类型"></a>2.数据类型</h4><blockquote>
+<p>强类型语言：变量使用必须严格符合规定，所有变量都必须先定义后才能使用</p>
+</blockquote>
+<h5 id="Java数据类型"><a href="#Java数据类型" class="headerlink" title="Java数据类型"></a>Java数据类型</h5><ol>
+<li><p>基本类型：（8大基本类型）</p>
+<ol>
+<li>数值<ol>
+<li>整数<ol>
+<li><strong>byte</strong>：1个字节（-128~127）</li>
+<li><strong>short</strong>：2个字节（-32768~32767）</li>
+<li><strong>int</strong>：4个字节（-2147483648~2147483647）21亿+</li>
+<li><strong>long</strong>：8个字节（例：long num=40L;）</li>
+</ol>
+</li>
+<li>浮点<ol>
+<li><strong>float</strong>：4个字节（例：float num=40F;）</li>
+<li><strong>double</strong>：8个字节</li>
+</ol>
+</li>
+<li>字符串<strong>char</strong>：2个字节</li>
+</ol>
+</li>
+<li><strong>boolean</strong>：1位，true/false</li>
+</ol>
+</li>
+<li><p>引用类型：类，接口，数组</p>
+</li>
+</ol>
+<p>注1：String不是数据类型，是类</p>
+<p>注2：1bit表示1位；（bit是计算机内部数据存储的最小单位）</p>
+<p> 1Byte表示1个字节，1B=8b；</p>
+<p> 1KB = 1024B；</p>
+<p> 1MB = 1024KB；</p>
+<p> 1GB = 1024MB；</p>
+<p> 1TB = 1024GB；</p>
+<h5 id="Java数据类型的常见问题"><a href="#Java数据类型的常见问题" class="headerlink" title="Java数据类型的常见问题"></a>Java数据类型的常见问题</h5><ol>
+<li><p>整数扩展</p>
+<pre><code class="abnf">int a = 10;
+int b = 010;//八进制
+int c = 0x10;//十六进制
+</code></pre>
+</li>
+<li><p>浮点型扩展</p>
+<pre><code class="angelscript">float f = 0.1f;
+double d = 1.0/10;
+System.out.println(f==d);//false
+
+float d1 = 123123123123f;
+float d2 = d1 + 1;
+System.out.println(d1==d2);//true
+
+//float 有限 离散 舍入误差 接近但不等于
+//不要用浮点数进行比较
+//数学工具类BigDecimal
+</code></pre>
+</li>
+<li><p>字符类扩展</p>
+<pre><code class="csharp">char a = &#39;a&#39;;
+System.out.println((int)a);//97
+char a1 = &#39;\u0061&#39;;
+System.out.println(a1);//a
+//所有的字符本质还是数字
+
+转义字符:
+\t 制表符
+\n 换行
+...
+</code></pre>
+</li>
+</ol>
+<h4 id="3-类型转换"><a href="#3-类型转换" class="headerlink" title="3.类型转换"></a>3.类型转换</h4><blockquote>
+<p>运算中，不同类型的数据会先转换位同一类型，再进行计算</p>
+</blockquote>
+<p>优先级：低 ==&gt; 高</p>
+<blockquote>
+<p>byte,short,char =&gt; int =&gt; long =&gt; float =&gt; double</p>
+</blockquote>
+<p>自动转化：低 =&gt; 高</p>
+<p>强制转换： 高 =&gt; 低 (类型)变量名</p>
+<p>注1：</p>
+<ol>
+<li>不能对布尔值进行转换</li>
+<li>不能把对象类型转为不相干的类型</li>
+<li>高容量转低容量，会有内存溢出或精度问题</li>
+</ol>
+<p>注2：JDK7的新特性，数字间可以用下划线分割(1000 = 1_000)</p>
+<h4 id="4-变量、常量、作用域"><a href="#4-变量、常量、作用域" class="headerlink" title="4.变量、常量、作用域"></a>4.变量、常量、作用域</h4><h5 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h5><pre><code class="abnf">int a = 1;
+</code></pre>
+<h5 id="常量-final"><a href="#常量-final" class="headerlink" title="常量 - final"></a>常量 - final</h5><blockquote>
+<p>常量：初始化后不能改变，一般为大写</p>
+</blockquote>
+<pre><code class="processing">static final double PI = 3.14;
+</code></pre>
+<h5 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h5><ol>
+<li>类变量</li>
+<li>实例变量</li>
+<li>局部变量</li>
+</ol>
+<pre><code class="csharp">public class Hello &#123;
+    //类变量：static
+    static int a = 1;
+    //实例变量：属于对象，不需要初始化(会自动初始化为类型默认值)
+    //布尔值默认false，除基本类型以外其他变量都是null
+    String b;
+    public static void main(String[] args) &#123;
+        System.out.println(a);
+
+        int c = 3;//局部变量：必须声明和初始化
+        System.out.println(c);
+
+        Hello obj = new Hello();
+        System.out.println(obj.b);//null
+    &#125;
+&#125;
+</code></pre>
+<h5 id="命名规则："><a href="#命名规则：" class="headerlink" title="命名规则："></a>命名规则：</h5><ol>
+<li>类变量，局部变量，方法名：驼峰（首字母小写）</li>
+<li>常量：大写 + 下划线</li>
+<li>类型：驼峰（首字母大写）</li>
+</ol>
+<h4 id="5-基本运算符"><a href="#5-基本运算符" class="headerlink" title="5.基本运算符"></a>5.基本运算符</h4><ol>
+<li>算术运算符：+, -, *, /, %, ++, –</li>
+<li>赋值运算符：=</li>
+<li>关系运算符：&gt;, &lt;, &gt;=, &lt;=, ==, !=, instanceof</li>
+<li>逻辑运算符：&amp;&amp;,||,!</li>
+<li>位运算符：&amp;, |, ^, ~, &gt;&gt;, &lt;&lt; , &gt;&gt;&gt;</li>
+<li>条件运算符：? :</li>
+<li>扩展赋值运算符：+=, -=, *= ,/=</li>
+</ol>
+<p>例：</p>
+<pre><code class="csharp">long a = 123L;
+int b = 123;
+short c = 10;
+byte d = 8;
+System.out.println(a+d);//long
+System.out.println(b+c);//int
+System.out.println(c+d);//int
+//结论：有long类型时转long，否则转int
+</code></pre>
+<p>幂运算：2^3</p>
+<pre><code class="glsl">double pow = Math.pow(2, 3);
+System.out.println(pow);//8.0
+</code></pre>
+<p>位运算</p>
+<pre><code class="ruby">&lt;&lt; 乘2 
+&gt;&gt; 除2
+</code></pre>
+<h4 id="6-包机制"><a href="#6-包机制" class="headerlink" title="6.包机制"></a>6.包机制</h4><blockquote>
+<p>包的本质就是文件夹</p>
+</blockquote>
+<ol>
+<li>包机制是为了更好地组织类，用于区别类名的命名空间</li>
+<li>一般用公司名倒置作为报名 pakage com.baidu.www;</li>
+<li>使用import导入包（import 包名.* 表示导入包下所有类）</li>
+</ol>
+<h4 id="7-JavaDoc生成文档"><a href="#7-JavaDoc生成文档" class="headerlink" title="7.JavaDoc生成文档"></a>7.JavaDoc生成文档</h4><p>注释参数</p>
+<pre><code class="php">/**
+ * @author 作者
+ * @version 版本
+ * @since 需要最早使用的jdk版本
+ * @param 参数
+ * @return 返回值
+ * @throws 异常抛出
+ */
+</code></pre>
+<p>中文编码</p>
+<pre><code class="apache">javadoc -encoding UTF-8 -charset UTF-8 Demo.java
+</code></pre>
+<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><h4 id="1-用户交互Scanner-Java5新特性"><a href="#1-用户交互Scanner-Java5新特性" class="headerlink" title="1.用户交互Scanner (Java5新特性)"></a>1.用户交互Scanner (Java5新特性)</h4><p>基础使用</p>
+<pre><code class="java">import java.util.Scanner;
+
+public class Demo &#123;
+    public static void main(String[] args) &#123;
+        //创建扫描器对象，用于接收键盘数据
+        Scanner s = new Scanner(System.in);
+        //判断用户输入
+        if(s.hasNextLine())&#123;
+            String str = s.nextLine();
+            System.out.println(str);
+        &#125;
+        //IO流的类会一直占用内存，用完需要关闭
+        s.close();
+    &#125;
+&#125;
+//next()以空格为结束符，nextLine()以回车为结束符
+</code></pre>
+<p>使用进阶</p>
+<blockquote>
+<p>计算多个数字的总和与平均数，非数字结束</p>
+</blockquote>
+<pre><code class="pgsql">Scanner s = new Scanner(System.in);
+double sum = 0;
+int num = 0;
+while(s.hasNextDouble())&#123;
+    double x = s.nextDouble();
+    sum += x;
+    num++;
+&#125;
+System.out.println(&quot;和是：&quot; + sum);
+System.out.println(&quot;平均值是&quot; + (sum/num));
+s.close();
+</code></pre>
+<h4 id="2-九九乘法表"><a href="#2-九九乘法表" class="headerlink" title="2.九九乘法表"></a>2.九九乘法表</h4><pre><code class="java">/*
+1*1=1    
+2*1=2    2*2=4    
+3*1=3    3*2=6    3*3=9    
+4*1=4    4*2=8    4*3=12    4*4=16    
+5*1=5    5*2=10    5*3=15    5*4=20    5*5=25    
+6*1=6    6*2=12    6*3=18    6*4=24    6*5=30    6*6=36    
+7*1=7    7*2=14    7*3=21    7*4=28    7*5=35    7*6=42    7*7=49    
+8*1=8    8*2=16    8*3=24    8*4=32    8*5=40    8*6=48    8*7=56    8*8=64    
+9*1=9    9*2=18    9*3=27    9*4=36    9*5=45    9*6=54    9*7=63    9*8=72    9*9=81    
+*/
+for (int m = 1; m &lt;= 9; m++) &#123;
+    for (int n = 1; n &lt;= m; n++) &#123;
+        System.out.print(m + &quot;*&quot; + n + &quot;=&quot; + (m * n) + &quot;\t&quot;);
+    &#125;
+    System.out.println();
+&#125;
+//System.out.print 不换行输出
+</code></pre>
+<h4 id="3-增强for循环-JDK1-5新特性"><a href="#3-增强for循环-JDK1-5新特性" class="headerlink" title="3.增强for循环(JDK1.5新特性)"></a>3.增强for循环(JDK1.5新特性)</h4><pre><code class="pgsql">int[] numbers = &#123;1, 2, 3, 4, 5&#125;;
+for (int x : numbers) &#123;
+     System.out.println(x);
+&#125;
+</code></pre>
+<h4 id="4-label"><a href="#4-label" class="headerlink" title="4.label"></a>4.label</h4><blockquote>
+<p>打印101 - 150间的所有质数</p>
+</blockquote>
+<pre><code class="pgsql">outer:for (int i = 101; i &lt;= 150; i++) &#123;
+    for (int j = 2; j &lt; i / 2; j++) &#123;
+        if (i % j == 0) &#123;
+            continue outer;
+        &#125;
+    &#125;
+    System.out.println(i);
+&#125;
+</code></pre>
+<h3 id="Java方法"><a href="#Java方法" class="headerlink" title="Java方法"></a>Java方法</h3><blockquote>
+<p>方法是用来完成特定功能的代码片段，由方法名和方法体组成</p>
+</blockquote>
+<p>方法名：修饰符 返回值类型 方法名 （参数类型 参数名）{}</p>
+<p>方法体：return 返回值;</p>
+<p>参数类型：实参，形参</p>
+<p>注：java都是值传递，没有引用传递</p>
+<h4 id="1-方法的重载"><a href="#1-方法的重载" class="headerlink" title="1.方法的重载"></a>1.方法的重载</h4><blockquote>
+<p>重载就是在一个类中，有相同的函数名称，但形参不同的函数</p>
+</blockquote>
+<p>方法重载规则：</p>
+<ol>
+<li>方法名称必须相同</li>
+<li>参数列表必须不同（个数，类型，参数顺序不同）</li>
+<li>返回类型可相同可不同</li>
+</ol>
+<h4 id="2-命令行传参"><a href="#2-命令行传参" class="headerlink" title="2.命令行传参"></a>2.命令行传参</h4><blockquote>
+<p>程序运行时传递参数，可以通过main方法传递</p>
+</blockquote>
+<pre><code class="arduino">public static void main(String[] args) &#123;
+    for (int i = 0; i &lt; args.length; i++) &#123;
+        System.out.println(args[i]);
+    &#125;
+&#125;
+</code></pre>
+<h4 id="3-可变参数-JDK1-5新特性"><a href="#3-可变参数-JDK1-5新特性" class="headerlink" title="3.可变参数(JDK1.5新特性)"></a>3.可变参数(JDK1.5新特性)</h4><pre><code class="csharp">public static void main(String[] args) &#123;
+    test(1,2,3);
+&#125;
+public static void test(int... i)&#123;
+    System.out.println(i[0]);
+    System.out.println(i[1]);
+    System.out.println(i[2]);
+&#125;
+</code></pre>
+<h4 id="4-递归"><a href="#4-递归" class="headerlink" title="4.递归"></a>4.递归</h4><p>递归头：什么时候不调用自身方法。如果没有头，将陷入死循环。</p>
+<p>递归体：什么时候需要调用自身方法。</p>
+<h3 id="Java数组"><a href="#Java数组" class="headerlink" title="Java数组"></a>Java数组</h3><blockquote>
+<p>数组是相同类型数据的有序集合</p>
+</blockquote>
+<pre><code class="arduino">dataType[] arrayRefVar = new dataType[size];
+
+int nums[] = new int[10];
+//二维数组
+int[][] n = new int[2][2];
+int[][] n = &#123;&#123;1,2&#125;,&#123;3,4&#125;&#125; 
+</code></pre>
+<h4 id="基本特点"><a href="#基本特点" class="headerlink" title="基本特点"></a>基本特点</h4><ol>
+<li>长度是确定的，一旦创建，长度不可变</li>
+<li>元素类型必须相同</li>
+<li>数组对象本身在堆中（数组是引用类型，可看做对象，数组元素相当于对象的成员变量，Java的对象在堆中）</li>
+</ol>
+<h4 id="内存分析"><a href="#内存分析" class="headerlink" title="内存分析"></a>内存分析</h4><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0ujyyqbl5j20ii0fegmf.jpg" alt="image-20220401214232300"></p>
+<pre><code class="awk">//1.声明数组
+int[] nums;//在栈中
+//2.创建数组
+nums = new int[10];//在堆中
+</code></pre>
+<h4 id="三种初始化状态"><a href="#三种初始化状态" class="headerlink" title="三种初始化状态"></a>三种初始化状态</h4><pre><code class="reasonml">//静态初始化
+int[] a = &#123;1, 2, 3&#125;;
+Man[] mans = &#123;new Man(1),new Man(2)&#125;
+
+//动态初始化(包含默认初始化)
+int[] b = new int[10];//默认分配10个0
+b[0] = 10;
+</code></pre>
+<p>注：数组是引用类型，数组元素相当于类的实例变量，数组创建时分配空间，数组元素也会按默认值初始化。</p>
+<h4 id="数组工具类java-util-Arrays"><a href="#数组工具类java-util-Arrays" class="headerlink" title="数组工具类java.util.Arrays"></a>数组工具类java.util.Arrays</h4><table>
+<thead>
+<tr>
+<th>打印数组元素</th>
+<th>Arrays.toString(a);</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数组填充</td>
+<td>Arrays.fill(a, 0 , 1, 0);</td>
+<td>数组下标0-1的元素用0填充</td>
+</tr>
+<tr>
+<td>数组排序</td>
+<td>Arrays.sort(a);</td>
+<td></td>
+</tr>
+<tr>
+<td>比较数组</td>
+<td>equals</td>
+<td></td>
+</tr>
+<tr>
+<td>查找数组元素</td>
+<td>binarySearch</td>
+<td>对排序好的数组进行二分法查找</td>
+</tr>
+</tbody></table>
+<h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><ol>
+<li>共有八大排序</li>
+<li>时间复杂度为O(n2)</li>
+</ol>
+<h4 id="稀疏数组"><a href="#稀疏数组" class="headerlink" title="稀疏数组"></a>稀疏数组</h4><blockquote>
+<p>当一个数组中大部分元素为0或值相同时，可以使用稀疏数组保存</p>
+</blockquote>
+<p>处理方式：</p>
+<p>1.记录数组行列数，不同值数</p>
+<p>2.把不同值的元素行列信息，元素值记录在小规模数组中</p>
+<pre><code class="tap">/*
+稀疏数组
+1    2    1
+2    3    2
+还原数组
+0    0    0    0    0    0    0    0    0    0    0    
+0    0    1    0    0    0    0    0    0    0    0    
+0    0    0    2    0    0    0    0    0    0    0    
+0    0    0    0    0    0    0    0    0    0    0    
+0    0    0    0    0    0    0    0    0    0    0    
+0    0    0    0    0    0    0    0    0    0    0    
+0    0    0    0    0    0    0    0    0    0    0    
+0    0    0    0    0    0    0    0    0    0    0    
+0    0    0    0    0    0    0    0    0    0    0    
+0    0    0    0    0    0    0    0    0    0    0    
+0    0    0    0    0    0    0    0    0    0    0    
+*/
+public class Demo &#123;
+    public static void main(String[] args) &#123;
+        int[][] array1 = new int[11][11];
+        array1[1][2] = 1;
+        array1[2][3] = 2;
+        int sum = 0;
+        for (int i = 0; i &lt; 11; i++) &#123;
+            for (int j = 0; j &lt; 11; j++) &#123;
+                if (array1[i][j] != 0) &#123;
+                    sum++;
+                &#125;
+            &#125;
+        &#125;
+        int[][] array2 = new int[sum + 1][3];
+        array2[0][0] = 11;
+        array2[0][1] = 11;
+        array2[0][2] = sum;
+        int count = 0;
+        for (int i = 0; i &lt; array1.length; i++) &#123;
+            for (int j = 0; j &lt; array1[i].length; j++) &#123;
+                if (array1[i][j] != 0) &#123;
+                    count++;
+                    array2[count][0] = i;
+                    array2[count][1] = j;
+                    array2[count][2] = array1[i][j];
+                &#125;
+            &#125;
+        &#125;
+        System.out.println(&quot;稀疏数组&quot;);
+        for (int j = 1; j &lt; array2.length; j++) &#123;
+            System.out.println(array2[j][0] + &quot;\t&quot; + array2[j][1] + &quot;\t&quot; + array2[j][2]);
+        &#125;
+        System.out.println(&quot;还原数组&quot;);
+        int[][] array3 = new int[array2[0][0]][array2[0][1]];
+        for (int j = 1; j &lt; array2.length; j++) &#123;
+            array3[array2[j][0]][array2[j][1]] = array2[j][2];
+        &#125;
+        for (int[] ints : array3) &#123;
+            for (int num : ints) &#123;
+                System.out.print(num + &quot;\t&quot;);
+            &#125;
+            System.out.println();
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><blockquote>
+<p>以类的方式组织代码。以对象组织(封装)数据</p>
+</blockquote>
+<p>三大特性：封装，继承，多态</p>
+<h4 id="1-创建类与对象"><a href="#1-创建类与对象" class="headerlink" title="1.创建类与对象"></a>1.创建类与对象</h4><blockquote>
+<p>一个项目应该只存在一个main方法</p>
+</blockquote>
+<h5 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h5><blockquote>
+<p>使用new创建对象时，除了分配内存空间，还会给创建好的对象进行默认初始化，及调用类中的构造器。</p>
+</blockquote>
+<p>com/oop/demo/Application.java</p>
+<pre><code class="pgsql">package com.oop.demo;
+public class Application &#123;
+    public static void main(String[] args) &#123;
+        //类：抽象的，实例化后会返回一个自己的对象
+        Student xiaoming = new Student();
+        Student xiaohong = new Student();
+        xiaoming.name = &quot;小明&quot;;
+        xiaoming.age = 20;
+        xiaohong.name = &quot;小红&quot;;
+        xiaohong.age = 21;
+        System.out.println(&quot;姓名：&quot; + xiaoming.name + &quot;\t年龄：&quot; + xiaoming.age);
+        xiaoming.study();
+        System.out.println(&quot;姓名：&quot; + xiaohong.name + &quot;\t年龄：&quot; + xiaohong.age);
+        xiaohong.study();
+    &#125;
+&#125;
+</code></pre>
+<p>com/oop/demo/Student.java</p>
+<pre><code class="csharp">package com.oop.demo;
+public class Student &#123;
+    //属性
+    String name;
+    int age;
+    //方法
+    public void study() &#123;
+        System.out.println(this.name + &quot;在学习&quot;);
+    &#125;
+&#125;
+</code></pre>
+<h5 id="构造器-构造方法"><a href="#构造器-构造方法" class="headerlink" title="构造器(构造方法)"></a>构造器(构造方法)</h5><ol>
+<li>必须和类名相同</li>
+<li>必须没有返回类型（不能写void）</li>
+<li>一旦定义了有参数的构造器，new对象时想不传参数，就必须写一个无参数构造器</li>
+</ol>
+<pre><code class="arduino">public class Student &#123;
+    //属性
+    String name;
+    int age;
+    //无参(默认)构造器
+    public Student()&#123;
+        
+    &#125;
+    //有参
+    public Student(String name)&#123;
+        this.name = name;
+    &#125;
+    public Student(String name,int age)&#123;
+        this.name = name;
+        this.age = age;
+    &#125; 
+&#125;
+</code></pre>
+<h4 id="创建对象内存分析"><a href="#创建对象内存分析" class="headerlink" title="创建对象内存分析"></a>创建对象内存分析</h4><pre><code class="pgsql">public class Application &#123;
+    public static void main(String[] args) &#123;
+        //类：抽象的，实例化后会返回一个自己的对象
+        Student xiaoming = new Student();
+        Student xiaohong = new Student();
+        xiaoming.name = &quot;小明&quot;;
+        xiaoming.age = 20;
+        xiaohong.name = &quot;小红&quot;;
+        xiaohong.age = 21;
+        System.out.println(&quot;姓名：&quot; + xiaoming.name + &quot;\t年龄：&quot; + xiaoming.age);
+        xiaoming.study();
+        System.out.println(&quot;姓名：&quot; + xiaohong.name + &quot;\t年龄：&quot; + xiaohong.age);
+        xiaohong.study();
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>方法区也在堆中；</p>
+<p>静态方法区和类一起加载，所以静态方法可以直接调用，不需要实例化</p>
+</blockquote>
+<ol>
+<li>加载Application和Student类信息到方法区</li>
+<li>加载main()方法到栈中</li>
+<li>加载xiaoming和xiaohong引用变量名到栈中</li>
+<li>加载Student xiaoming = new Student();和Student xiaohong = new Student();实例到堆中</li>
+<li>xiaoming和xiaohong调用方法区的study方法</li>
+</ol>
+<p>注：基本类型外的变量都是引用类型，是通过引用来操作的；引用名在栈中，指向对象实体在堆中的地址。</p>
+<h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><blockquote>
+<p>禁止直接访问一个对象中数据的实际表示，应通过接口操作来访问。</p>
+<p>属性私有(private)，get/set</p>
+</blockquote>
+<pre><code class="typescript">public class Student &#123;
+    private String name;
+    private int age;
+    public String getName() &#123;
+        return this.name;
+    &#125;
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+    public void setAge(int age) &#123;
+        this.age = age;
+    &#125;
+    public int getAge() &#123;
+        return age;
+    &#125;
+&#125;
+</code></pre>
+<h4 id="继承extends"><a href="#继承extends" class="headerlink" title="继承extends"></a>继承extends</h4><blockquote>
+<p>继承的本质是对某一批类的抽象，从而实现更好的建模；</p>
+<p>继承是类之间的关系，子类继承(extends)父类的全部public方法；</p>
+<p>私有的属性和方法无法被继承</p>
+</blockquote>
+<p>注：</p>
+<ol>
+<li>Java中只有单继承，没有多继承 （一个子类只能有一个父类）</li>
+<li>Java中所有类，都默认直接或间接继承Object类</li>
+</ol>
+<h4 id="Super"><a href="#Super" class="headerlink" title="Super"></a>Super</h4><h5 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h5><ol>
+<li>super调用父类的构造方法，必须在构造方法的第一行</li>
+<li>super只能出现在子类的方法或构造方法中</li>
+<li>super和this不能同时在构造方法中调用（都需要在第一行）</li>
+</ol>
+<h5 id="super和this的区别"><a href="#super和this的区别" class="headerlink" title="super和this的区别"></a>super和this的区别</h5><table>
+<thead>
+<tr>
+<th></th>
+<th>this</th>
+<th>super</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>代表对象不同</td>
+<td>调用者本身的对象</td>
+<td>父类对象的引用</td>
+</tr>
+<tr>
+<td>使用前提不同</td>
+<td>没有继承也能使用</td>
+<td>只能在有继承时使用</td>
+</tr>
+<tr>
+<td>调用构造方法不同</td>
+<td>调用本类的构造方法</td>
+<td>调用父类的构造方法</td>
+</tr>
+</tbody></table>
+<p>com/oop/demo/Application.java</p>
+<pre><code class="haxe">package com.oop.demo;
+
+public class Application &#123;
+    public static void main(String[] args) &#123;
+        Student xiaoming = new Student();
+        xiaoming.test1();
+        //Person无参构造
+        //Student无参构造
+        //Student
+        //Student
+        //Person
+    &#125;
+&#125;
+</code></pre>
+<p>com/oop/demo/Person.java</p>
+<pre><code class="csharp">package com.oop.demo;
+
+public class Person &#123;
+    public Person() &#123;
+        System.out.println(&quot;Person无参构造&quot;);
+    &#125;
+    public void print()&#123;
+        System.out.println(&quot;Person&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>com/oop/demo/Student.java</p>
+<pre><code class="gradle">package com.oop.demo;
+
+public class Student extends Person&#123;
+    public Student() &#123;
+        //隐藏代码：调用了父类的无参构造super();
+        //super();
+        System.out.println(&quot;Student无参构造&quot;);
+    &#125;
+    public void print()&#123;
+        System.out.println(&quot;Student&quot;);
+    &#125;
+    public void test1()&#123;
+        print();
+        this.print();
+        super.print();
+    &#125;
+&#125;
+</code></pre>
+<h4 id="方法重写-Override"><a href="#方法重写-Override" class="headerlink" title="方法重写@Override"></a>方法重写@Override</h4><blockquote>
+<p>子类的方法和父类必须要一致，方法体不同</p>
+<p>重写都是方法的重写，和属性无关</p>
+<p>静态方法不能被重写 !</p>
+</blockquote>
+<h5 id="注意点-1"><a href="#注意点-1" class="headerlink" title="注意点"></a>注意点</h5><ol>
+<li>方法名，参数列表必须相同</li>
+<li>修饰符范围可以扩大不能缩小</li>
+<li>抛出异常范围可以缩小不能扩大</li>
+</ol>
+<h5 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h5><p>静态方法</p>
+<pre><code class="csharp">public class B &#123;
+    public static void test()&#123;
+        System.out.println(&quot;B=&gt;test()&quot;);
+    &#125;
+&#125;
+public class A extends B&#123;
+    public static void test()&#123;
+        System.out.println(&quot;A=&gt;test()&quot;);
+    &#125;
+&#125;
+public class Application &#123;
+    public static void main(String[] args) &#123;
+        //静态方法：方法调用只和左边定义的数据类型有关
+        A a = new A();
+        a.test();//A=&gt;test()
+        //父类的引用指向了子类
+        B b = new A();
+        b.test();//B=&gt;test()
+    &#125;
+&#125;
+</code></pre>
+<p>方法重写</p>
+<pre><code class="typescript">public class B &#123;
+    public void test()&#123;
+        System.out.println(&quot;B=&gt;test()&quot;);
+    &#125;
+&#125;
+public class A extends B&#123;
+    @Override
+    public void test() &#123;
+        System.out.println(&quot;A=&gt;test()&quot;);
+    &#125;
+&#125;
+public class Application &#123;
+    public static void main(String[] args) &#123;
+        A a = new A();
+        a.test();//A=&gt;test()
+        B b = new A();
+        b.test();//A=&gt;test()
+    &#125;
+&#125;
+</code></pre>
+<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><blockquote>
+<p>同一方法根据发送对象不同，采用多种不同的行为方式；</p>
+<p>一个对象的类型是确定的，但可以指向对象的引用类型有很多（可以是子类，父类，Object）</p>
+</blockquote>
+<p>多态存在的条件：</p>
+<ol>
+<li>有继承关系</li>
+<li>子类重写父类方法</li>
+<li>父类引用指向子类对象</li>
+</ol>
+<p>注：多态是方法的多态，属性没有多态。</p>
+<h5 id="无法重写的方法"><a href="#无法重写的方法" class="headerlink" title="无法重写的方法"></a>无法重写的方法</h5><ol>
+<li>static方法，属于类，不属于实例</li>
+<li>final 常量 (final修饰的类不能被继承)</li>
+<li>private方法</li>
+</ol>
+<pre><code class="awk">//子类能调用的方法都是自己的或继承父类的
+A a = new A();
+B b = new B();
+//对象能执行哪些方法看左边的引用类型
+//父类引用可以指向子类，但不能调用子类独有的方法
+B c = new A();
+a.test();//A=&gt;test()
+b.test();//B=&gt;test()
+//子类重写了父类方法，会执行子类的方法
+c.test();//A=&gt;test()
+</code></pre>
+<h4 id="instanceof和类型转化"><a href="#instanceof和类型转化" class="headerlink" title="instanceof和类型转化"></a>instanceof和类型转化</h4><ol>
+<li>父类引用可以指向子类的对象，反过来不行</li>
+<li>子类转换为父类称为向上转型，可能丢失自己本来的一些方法</li>
+<li>父类转换为子类称为向下转型，需要强制转换</li>
+</ol>
+<pre><code class="java">public class Application &#123;
+    public static void main(String[] args) &#123;
+        //子类特有方法go
+        Student s = new Student();
+        s.go();
+        //向上转型，转型后无法再调用go方法
+        Person p = s;
+        //向下转型
+        ((Student) p).go();
+    &#125;
+&#125;
+</code></pre>
+<h4 id="static关键字"><a href="#static关键字" class="headerlink" title="static关键字"></a>static关键字</h4><h5 id="静态变量"><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h5><pre><code class="arduino">private static int age;
+</code></pre>
+<h5 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h5><pre><code class="typescript">public class Application &#123;
+    private static void test()&#123;
+        System.out.println(&quot;Static Function&quot;);
+    &#125;
+    public static void main(String[] args) &#123;
+        test();
+    &#125;
+&#125;
+</code></pre>
+<h5 id="静态代码块"><a href="#静态代码块" class="headerlink" title="静态代码块"></a>静态代码块</h5><pre><code class="csharp">public class Person &#123;
+    &#123;
+        System.out.println(&quot;匿名代码块&quot;);
+    &#125;
+    static &#123;
+        System.out.println(&quot;静态代码块&quot;);//只会在类加载时执行一次
+    &#125;
+    public Person() &#123;
+        System.out.println(&quot;构造方法&quot;);
+    &#125;
+    public static void main(String[] args) &#123;
+        Person p = new Person();
+        //静态代码块
+        //匿名代码块
+        //构造方法
+    &#125;
+&#125;
+</code></pre>
+<h5 id="静态导入包"><a href="#静态导入包" class="headerlink" title="静态导入包"></a>静态导入包</h5><pre><code class="arduino">import static java.lang.Math.random;
+public class Person &#123;
+    public static void main(String[] args) &#123;
+        System.out.println(random());
+    &#125;
+&#125;
+</code></pre>
+<h4 id="抽象类-abstract"><a href="#抽象类-abstract" class="headerlink" title="抽象类 abstract"></a>抽象类 abstract</h4><pre><code class="csharp">//抽象类 (接口可以多继承)
+abstract class Person &#123;
+    public abstract void doSomething();//抽象方法：只有方法名，没有方法体
+&#125;
+</code></pre>
+<p>注：</p>
+<ol>
+<li>抽象类不能new，只能靠子类实现</li>
+<li>抽象方法必须在抽象类中，但抽象类可以包含普通方法</li>
+</ol>
+<h4 id="接口-interface"><a href="#接口-interface" class="headerlink" title="接口 interface"></a>接口 interface</h4><blockquote>
+<p>对对象的抽象，约束和实现分离：面向接口编程</p>
+</blockquote>
+<p>注：</p>
+<ol>
+<li>接口不能被实例化，接口中没有构造方法</li>
+<li>接口中所有方法都是抽象的(public abstract)</li>
+<li>接口中只有常量(public static final)</li>
+<li>类通过implements实现接口，一个类可以实现多个接口，实现多继承</li>
+<li>实现接口的类，必须重写接口中所有方法</li>
+</ol>
+<pre><code class="less">public interface UserService &#123;
+    void userTest1();
+    void userTest2();
+&#125;
+public interface TimeService &#123;
+    void time1();
+    void time2();
+&#125;
+public class UserTime implements UserService,TimeService&#123;
+    @Override
+    public void userTest1() &#123;
+    &#125;
+    @Override
+    public void userTest2() &#123;
+    &#125;
+    @Override
+    public void time1() &#123;
+    &#125;
+    @Override
+    public void time2() &#123;
+    &#125;
+&#125;
+</code></pre>
+<h4 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h4><p>匿名对象：不将实例保存到变量(栈)中，只在堆内存中使用对象</p>
+<pre><code class="typescript">public class Application &#123;
+    public static void main(String[] args) &#123;
+        new Apple().eat();
+    &#125;
+&#125;
+class Apple&#123;
+    public void eat()&#123;
+        System.out.println(&quot;吃苹果&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>匿名内部类</p>
+<pre><code class="csharp">public interface UserService &#123;
+    void userTest1();
+    void userTest2();
+&#125;
+public class Application &#123;
+    UserService u = new UserService() &#123;
+        @Override
+        public void userTest1() &#123;
+        &#125;
+        @Override
+        public void userTest2() &#123;
+        &#125;
+    &#125;;
+&#125;
+</code></pre>
+<h3 id="异常Error-Exception"><a href="#异常Error-Exception" class="headerlink" title="异常Error Exception"></a>异常Error Exception</h3><h4 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h4><blockquote>
+<p>Error类对象由JVM生成并抛出，大多数错误与操作无关，发生错误时JVM一般会终止线程；</p>
+<p>如内存溢出(OutOfMemeryError)，栈溢出，类定义错误(NoClassDefFoundError)，链接错误(LinkageError)</p>
+</blockquote>
+<h4 id="Exception"><a href="#Exception" class="headerlink" title="Exception"></a>Exception</h4><blockquote>
+<p>异常通常由逻辑错误引起，应尽量避免</p>
+</blockquote>
+<ol>
+<li>非运行时异常(IO异常…)</li>
+<li>运行时异常(RuntimeException)</li>
+</ol>
+<p>注：Error通常是致命性错误，程序无法处理；Exception通常可以且应该尽可能的处理。</p>
+<h4 id="异常处理机制"><a href="#异常处理机制" class="headerlink" title="异常处理机制"></a>异常处理机制</h4><ol>
+<li>try 监控区域 （必要）</li>
+<li>catch 捕获异常 (必要)</li>
+<li>finally 最终处理 (释放占用资源)</li>
+<li>throw 抛出异常(一般在方法中使用 )</li>
+<li>throws</li>
+</ol>
+<p>注：捕获多个异常需要从小到大XXXException &lt; XXXException &lt; Throwable</p>
+<pre><code class="csharp">public class Application &#123;
+    public static void main(String[] args) &#123;
+        int a = 1;
+        int b = 0;
+        try&#123;
+            if(b == 0)&#123;
+                throw new ArithmeticException();
+            &#125;
+            System.out.println(a/b);
+        &#125;catch (ArithmeticException e)&#123;
+            e.printStackTrace();//打印错误的栈信息
+        &#125;catch (Exception e)&#123;
+            
+        &#125;catch (Throwable e)&#123;
+            
+        &#125;finally &#123;
+            
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h4 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h4><blockquote>
+<p>用户自定义异常类，只需要继承Exception类即可</p>
+</blockquote>
+<pre><code class="typescript">public class MyException extends Exception &#123;
+    String msg;
+
+    public MyException(String msg) &#123;
+        this.msg = msg;
+    &#125;
+
+    @Override
+    public String toString() &#123;
+        return &quot;MyException&#123;&quot; + msg + &quot;&#125;&quot;;
+    &#125;
+&#125;
+public class Application &#123;
+    static void test(String msg) throws MyException&#123;
+        throw new MyException(msg);
+    &#125;
+    public static void main(String[] args) &#123;
+        try&#123;
+            test(&quot;test&quot;);
+        &#125;catch (MyException e)&#123;
+            System.out.println(e);//MyException&#123;test&#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java01-JDBC</title>
+    <url>/2021/11/15/Java02-JDBC/</url>
+    <content><![CDATA[<blockquote>
+<p>JAVA操作数据库的规范，称为JDBC</p>
+</blockquote>
+<p>引入包：java.sql Javax.sql</p>
+<p>数据库驱动包：mysql-connector-java-5.1.47.jar</p>
+<p>下载地址：<a href="https://link.segmentfault.com/?enc=FFQMMOpLxdUncMbKqfIOxA==.5VJqClfMmKO61Dv6/d8WSYKamcC+iNc8V7VWhhI86uCoC8EGS/ynPwBOU5mfSJj11MTLdOACqksDDlJsAFZWiQ==">https://mvnrepository.com/art…</a></p>
+<p>Mac OS10.12对应Docker下载地址(2.2.1.0)：<a href="https://link.segmentfault.com/?enc=P90bhQKY2kP9A3C2xR5AQQ==.fLy5693IQb7SM6RNm5H38VmXs04PjZluFp6Pau0noLPYMLyRK7SBu+9WhhWqQG7I9vkt3jt9Aj4I4h7N4tF/zFZ9K5NZ/chsK1RWvPr/Fsc=">https://docs.docker.com/deskt…</a></p>
+<p>Docker安装Mysql5.7</p>
+<blockquote>
+<p>vim docker-compose.yml</p>
+<p>docker-compose up -d</p>
+</blockquote>
+<pre><code class="nestedtext">version: &#39;3.5&#39;
+
+services:
+
+  dbm:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - &#39;./storage/mysql:/var/lib/mysql&#39;
+    ports:
+      - 3306:3306
+</code></pre>
+<p>注：mysql5.7.11对应的JDBC驱动是5.1版本。</p>
+<h4 id="第一个JDBC程序"><a href="#第一个JDBC程序" class="headerlink" title="第一个JDBC程序"></a>第一个JDBC程序</h4><ol>
+<li>创建一个普通项目</li>
+<li>导入数据库驱动：驱动包放入lib文件夹（和src同级），Add as Library</li>
+<li>编写测试代码</li>
+</ol>
+<pre><code class="pgsql">import java.sql.*;
+
+public class Application &#123;
+    public static void main(String[] args) throws ClassNotFoundException, SQLException &#123;
+        //1.加载驱动
+        Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+        //2.配置连接信息
+        String url = &quot;jdbc:mysql://localhost:3306/testDB?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&quot;;
+        String username = &quot;root&quot;;
+        String password = &quot;root&quot;;
+        //3.连接成功，获取connection对象
+        Connection connection = DriverManager.getConnection(url, username, password);
+        //4.获取执行Sql的对象statement
+        Statement statement = connection.createStatement();
+        //5.执行Sql
+        String sql = &quot;SELECT * FROM users&quot;;
+        ResultSet resultSet = statement.executeQuery(sql);
+        while (resultSet.next()) &#123;
+            System.out.println(&quot;id=&quot; + resultSet.getObject(&quot;id&quot;));
+        &#125;
+        //6.释放资源
+        resultSet.close();
+        statement.close();
+        connection.close();
+    &#125;
+&#125;
+</code></pre>
+<h4 id="JDBC对象解释"><a href="#JDBC对象解释" class="headerlink" title="JDBC对象解释"></a>JDBC对象解释</h4><blockquote>
+<p>statement</p>
+</blockquote>
+<pre><code class="pgsql">statement.executeQuery(sql);//查询操作 返回resultSet
+statement.execute(sql);//执行任何Sql
+statement.executeUpdate(sql);//更新、插入、删除操作，返回受影响的行数
+</code></pre>
+<blockquote>
+<p>遍历，指针</p>
+</blockquote>
+<pre><code class="awk">resultSet.beforeFirst();//移动到最前面
+resultSet.afterLast();//移动到最后面
+resultSet.next();//下一行数据
+resultSet.previous();//前一行
+resultSet.absolute(row);//移动到指定行
+</code></pre>
+<h4 id="statement对象"><a href="#statement对象" class="headerlink" title="statement对象"></a>statement对象</h4><blockquote>
+<p>JDBC中的statement对象用于向数据库发送Sql语句。</p>
+</blockquote>
+<p>配置文件 db.properties</p>
+<pre><code class="ini">driver=com.mysql.jdbc.Driver
+url=jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false
+username=root
+password=root
+</code></pre>
+<p>工具类 JdbcUtils</p>
+<pre><code class="java">package com.oop.demo;
+
+import java.io.InputStream;
+import java.sql.*;
+import java.util.Properties;
+
+public class JdbcUtils &#123;
+    private static String driver = null;
+    private static String url = null;
+    private static String username = null;
+    private static String password = null;
+
+    static &#123;
+        try &#123;
+            //getClassLoader 类加载器
+            InputStream in = JdbcUtils.class.getClassLoader().getResourceAsStream(&quot;db.properties&quot;);
+            Properties properties = new Properties();
+            properties.load(in);
+            driver = properties.getProperty(&quot;driver&quot;);
+            url = properties.getProperty(&quot;url&quot;);
+            username = properties.getProperty(&quot;username&quot;);
+            password = properties.getProperty(&quot;password&quot;);
+            Class.forName(driver);//驱动只需要加载一次
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+
+    //获取连接
+    public static Connection getConnection() throws SQLException &#123;
+        return DriverManager.getConnection(url, username, password);
+    &#125;
+
+    //释放连接
+    public static void release(Connection conn, Statement st, ResultSet rs) &#123;
+        try &#123;
+            if (conn != null) &#123;
+                conn.close();
+            &#125;
+            if (st != null) &#123;
+                st.close();
+            &#125;
+            if (rs != null) &#123;
+                rs.close();
+            &#125;
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>使用工具类</p>
+<pre><code class="java">package com.oop.demo;
+
+import java.sql.*;
+
+public class Application &#123;
+    public static void main(String[] args) throws SQLException &#123;
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
+        try &#123;
+            conn = JdbcUtils.getConnection();
+            st = conn.createStatement();
+            String sql = &quot;INSERT INTO users(id,name) VALUES(3,&#39;xxx&#39;)&quot;;
+            int i = st.executeUpdate(sql);
+            if (i &gt; 0) &#123;
+                System.out.println(&quot;插入成功&quot;);
+            &#125;
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125; finally &#123;
+            JdbcUtils.release(conn, st, rs);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h4 id="prepareStatement对象"><a href="#prepareStatement对象" class="headerlink" title="prepareStatement对象"></a>prepareStatement对象</h4><blockquote>
+<p>效率更高，可以防止Sql注入</p>
+</blockquote>
+<pre><code class="java">package com.oop.demo;
+
+import java.sql.*;
+
+public class Application &#123;
+    public static void main(String[] args) throws SQLException &#123;
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try &#123;
+            conn = JdbcUtils.getConnection();
+            String sql = &quot;INSERT INTO users(id,name) VALUES(?,?)&quot;;//?占位符
+            st = conn.prepareStatement(sql);//预编译sql
+            st.setInt(1,4);
+            st.setString(2,&quot;xxx&quot;);
+            //st.setDate(3,new java.sql.Date(new Date().getTime()));
+            int i = st.executeUpdate();//直接执行
+            if (i &gt; 0) &#123;
+                System.out.println(&quot;插入成功&quot;);
+            &#125;
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125; finally &#123;
+            JdbcUtils.release(conn, st, rs);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h4 id="JDBC操作事务"><a href="#JDBC操作事务" class="headerlink" title="JDBC操作事务"></a>JDBC操作事务</h4><blockquote>
+<p>ACID原则：原子性，一致性，隔离性，持久性</p>
+</blockquote>
+<p>原子性：要么全部完成，要么全不完成</p>
+<p>一致性：总数不变</p>
+<p>隔离性：多个进程互不干扰</p>
+<p>持久性：提交后不可逆，持久化到数据库了</p>
+<h5 id="隔离性常见问题："><a href="#隔离性常见问题：" class="headerlink" title="隔离性常见问题："></a>隔离性常见问题：</h5><p>脏读：一个事务读取了另一个没有提交的事务</p>
+<p>不可重复读：同一事务内，重复读取表数据，表数据发生改变（不知道用哪个数据了）</p>
+<p>虚读(幻读)：事务内读取到别人插入的数据，导致前后结果不一致（读着读着数据变多了）</p>
+<pre><code class="java">package com.oop.demo;
+
+import java.sql.*;
+
+public class Application &#123;
+    public static void main(String[] args) throws SQLException &#123;
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try &#123;
+            conn = JdbcUtils.getConnection();
+            //关闭数据库的自动提交功能，会自动开启事务
+            conn.setAutoCommit(false);
+            String sql1 = &quot;UPDATE users SET name=&#39;xxx&#39; WHERE id=1&quot;;
+            st = conn.prepareStatement(sql1);
+            st.executeUpdate();
+            String sql2 = &quot;UPDATE users SET name=&#39;yyy&#39; WHERE id=2&quot;;
+            st = conn.prepareStatement(sql2);
+            st.executeUpdate();
+            //业务完毕，提交事务
+            conn.commit();
+        &#125; catch (Exception e) &#123;
+            try &#123;
+                //失败回滚
+                conn.rollback();
+            &#125; catch (SQLException e1) &#123;
+                e1.printStackTrace();
+            &#125;
+            e.printStackTrace();
+        &#125; finally &#123;
+            JdbcUtils.release(conn, st, rs);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h4 id="数据库连接池"><a href="#数据库连接池" class="headerlink" title="数据库连接池"></a>数据库连接池</h4><blockquote>
+<p>池化技术：预先准备一些资源，请求过来连接预先准备好的资源</p>
+</blockquote>
+<p>常用概念：最小连接数，最大连接数，等待超时</p>
+<p>原理：编写连接池，实现DataSource接口</p>
+<h5 id="开源数据实现：DBCP，C3P0，Druid"><a href="#开源数据实现：DBCP，C3P0，Druid" class="headerlink" title="开源数据实现：DBCP，C3P0，Druid"></a>开源数据实现：DBCP，C3P0，Druid</h5><blockquote>
+<p>DBCP</p>
+</blockquote>
+<p>需要用到的jar包：commons-dbsp-1.4.jar commons-pool-1.6.jar</p>
+<pre><code class="reasonml">//加载配置文件
+InputStream in = JdbcUtils_DBCP.class.getClassLoader().getResourceAsStream(&quot;dbcpconfig.properties&quot;);
+Properties properties = new Properties();
+properties.load(in);
+//创建数据源
+dataSOurce = BasicDataSOurceFactory.createDataSource(properties);
+//获取连接
+public static Connection getConnection() throws SQLException &#123;
+    return dataSource.getConnection();//使用数据源获取连接
+&#125;
+</code></pre>
+<blockquote>
+<p>C3P0</p>
+</blockquote>
+<p>需要用到的jar包：c3p0-0.9.5.5.jar mchange-commons-java-0.2.19.jar</p>
+<p>/src/c3p0-config.xml <code>&lt;named-config name=&quot;MYSQL&quot;&gt;...&lt;/named-config&gt;</code></p>
+<pre><code class="abnf">//代码版
+dataSource = new ComboPooledDataSource();
+dataSource.setDriverClass();
+dataSource.setUser();
+dataSource.setPassword();
+dataSource.setJdbcUrl();
+
+//配置文件
+dataSource = new ComboPooledDataSource(&quot;MYSQL&quot;);
+//获取连接
+public static Connection getConnection() throws SQLException &#123;
+    return dataSource.getConnection();
+&#125;
+</code></pre>
+<p>结论：无论是哪种连接池，DataSource接口不变，方法就不会变</p>
+]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis08-主从复制</title>
+    <url>/2022/02/08/Redis08-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/</url>
+    <content><![CDATA[<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+<p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
+<p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
+<p>参考笔记：<a href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+]]></content>
+      <categories>
+        <category>REDIS</category>
+      </categories>
+      <tags>
+        <tag>REDIS</tag>
+        <tag>后端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis09-集群</title>
+    <url>/2022/02/09/Redis09-%E9%9B%86%E7%BE%A4/</url>
+    <content><![CDATA[<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+<p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
+<p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
+<p>参考笔记：<a href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+]]></content>
+      <categories>
+        <category>REDIS</category>
+      </categories>
+      <tags>
+        <tag>REDIS</tag>
+        <tag>后端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis10-缓存穿透·击穿·雪崩</title>
+    <url>/2022/02/10/Redis10-%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%C2%B7%E5%87%BB%E7%A9%BF%C2%B7%E9%9B%AA%E5%B4%A9/</url>
+    <content><![CDATA[<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+<p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
+<p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
+<p>参考笔记：<a href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+]]></content>
+      <categories>
+        <category>REDIS</category>
+      </categories>
+      <tags>
+        <tag>REDIS</tag>
+        <tag>后端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis11-分布式锁</title>
+    <url>/2022/02/11/Redis11-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</url>
+    <content><![CDATA[<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+<p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
+<p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
+<p>参考笔记：<a href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+]]></content>
+      <categories>
+        <category>REDIS</category>
+      </categories>
+      <tags>
+        <tag>REDIS</tag>
+        <tag>后端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis12-新功能介绍</title>
+    <url>/2022/02/12/Redis12-%E6%96%B0%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+<p>视频教程：<a href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
+<p>参考笔记：<a href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
+<p>参考笔记：<a href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
+]]></content>
+      <categories>
+        <category>REDIS</category>
+      </categories>
+      <tags>
+        <tag>REDIS</tag>
+        <tag>后端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaWeb03-JSP</title>
+    <url>/2021/11/25/JavaWeb03-JSP/</url>
+    <content><![CDATA[<h3 id="JSP原理"><a href="#JSP原理" class="headerlink" title="JSP原理"></a>JSP原理</h3><blockquote>
+<p>浏览器向服务器发送请求，不管访问什么资源，其实都是在访问Servlet</p>
+</blockquote>
+<blockquote>
+<p>JSP 本质也是Servlet，实现了HttpServlet</p>
+</blockquote>
+<ol>
+<li>判断请求</li>
+<li>内置对象(pageContext,session,application,config,out,page,request,response)</li>
+<li>输出页面前增加的代码</li>
+<li>在JSP中，JAVA代码会原封不动的输出，HTML会被转为<code>out.write(&quot;&lt;html&gt;&quot;);</code>的格式输出</li>
+</ol>
+<h3 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h3><p>引入JSTL表达式依赖包javax.servlet.jsp.jstl 和standard标签库</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;javax.servlet.jsp.jstl&lt;/groupId&gt;
+  &lt;artifactId&gt;jstl-api&lt;/artifactId&gt;
+  &lt;version&gt;1.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;taglibs&lt;/groupId&gt;
+  &lt;artifactId&gt;standard&lt;/artifactId&gt;
+  &lt;version&gt;1.1.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h5 id="表达式：-lt-变量或表达式-gt"><a href="#表达式：-lt-变量或表达式-gt" class="headerlink" title="表达式：&lt;%= 变量或表达式 %&gt;"></a>表达式：&lt;%= 变量或表达式 %&gt;</h5><blockquote>
+<p>用来将程序输出到客户端</p>
+</blockquote>
+<pre><code>&lt;%= new java.util.Date()%&gt; //Tue Nov 23 21:19:01 CST 2021
+</code></pre>
+<h5 id="脚本片段：-lt-java代码-gt"><a href="#脚本片段：-lt-java代码-gt" class="headerlink" title="脚本片段：&lt;% java代码 %&gt;"></a>脚本片段：&lt;% java代码 %&gt;</h5><pre><code>&lt;% out.println(&quot;test&quot;);%&gt;
+</code></pre>
+<h5 id="代码嵌入HTML元素："><a href="#代码嵌入HTML元素：" class="headerlink" title="代码嵌入HTML元素： ${}"></a>代码嵌入HTML元素： ${}</h5><pre><code>&lt;% for(int i=0;i&lt;10;i++)&#123;%&gt;
+    &lt;p&gt;$&#123;i&#125;&lt;/p&gt;
+&lt;% &#125;%&gt;
+</code></pre>
+<h5 id="声明：-lt-gt"><a href="#声明：-lt-gt" class="headerlink" title="声明：&lt;%! %&gt;"></a>声明：&lt;%! %&gt;</h5><blockquote>
+<p>JSP的声明，会被编译到JSP生成的类中；其他会生成到_jspService方法中</p>
+</blockquote>
+<pre><code>&lt;%!
+    static &#123;
+        System.out.println(&quot;test&quot;);
+    &#125;
+%&gt;
+</code></pre>
+<p>#####注释：&lt;%–  注释 –%&gt;</p>
+<pre><code>&lt;%-- JSP的注释，不会在客户端显示 --%&gt;
+</code></pre>
+<h5 id="指令：-lt-page-gt-lt-include-gt"><a href="#指令：-lt-page-gt-lt-include-gt" class="headerlink" title="指令：&lt;%@ page %&gt; &lt;%@ include %&gt;"></a>指令：&lt;%@ page %&gt; &lt;%@ include %&gt;</h5><pre><code>&lt;%@ page errorPage=&quot;error/500.jsp&quot; %&gt; //指定500页面
+</code></pre>
+<h5 id="标签-lt-jsp-include-gt"><a href="#标签-lt-jsp-include-gt" class="headerlink" title="标签 &lt;jsp:include /&gt;"></a>标签 &lt;jsp:include /&gt;</h5><pre><code>&lt;jsp:include page=&quot;/common/header.jsp&quot;/&gt;
+</code></pre>
+<p>&lt;%@include %&gt;和&lt;jsp:include /&gt; 的区别：1会合并页面 2不会</p>
+<h3 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h3><ul>
+<li>PageContext</li>
+<li>Request</li>
+<li>Response</li>
+<li>Session</li>
+<li>Application (ServletContext)</li>
+<li>Config  (ServletConfig)</li>
+<li>out</li>
+<li>page</li>
+<li>Exception</li>
+</ul>
+<pre><code>&lt;%
+    pageContext.setAttribute(&quot;name1&quot;,&quot;Name1&quot;);//在一个页面中有效
+    request.setAttribute(&quot;name2&quot;,&quot;Name2&quot;);    //在一次请求中有效
+    session.setAttribute(&quot;name3&quot;,&quot;Name3&quot;);    //在一次对话中有效
+    application.setAttribute(&quot;name4&quot;,&quot;Name4&quot;);//在服务器一次开关中有效
+%&gt;
+&lt;%
+    //从底层到高层（作用域）：page &gt; request &gt; session &gt; application
+    //双亲委派机制：
+    String name1 = (String) pageContext.findAttribute(&quot;name1&quot;);
+    String name2 = (String) pageContext.findAttribute(&quot;name2&quot;);
+    String name3 = (String) pageContext.findAttribute(&quot;name3&quot;);
+    String name4 = (String) pageContext.findAttribute(&quot;name4&quot;);
+%&gt;
+&lt;h1&gt;$&#123;name1&#125;&lt;/h1&gt;
+&lt;h2&gt;$&#123;name2&#125;&lt;/h2&gt;
+&lt;h3&gt;$&#123;name3&#125;&lt;/h3&gt;
+&lt;h4&gt;$&#123;name4&#125;&lt;/h4&gt;
+</code></pre>
+<h3 id="EL表达式"><a href="#EL表达式" class="headerlink" title="EL表达式"></a>EL表达式</h3><blockquote>
+<p>EL表达式：获取数据，执行运算，获取web开发的常用对象</p>
+</blockquote>
+<pre><code>&lt;jsp:forward page=&quot;/test.jsp&quot;&gt;
+    &lt;jsp:param name=&quot;name&quot; value=&quot;xiaoma&quot;/&gt;
+    &lt;jsp:param name=&quot;phone&quot; value=&quot;13511112222&quot;/&gt;
+&lt;/jsp:forward&gt;
+EL表达式获取参数：&lt;%= request.getParameter(&quot;name&quot;)%&gt;
+EL表达式获取表单数据：$&#123;param.参数名&#125;
+</code></pre>
+<h3 id="JSTL表达式"><a href="#JSTL表达式" class="headerlink" title="JSTL表达式"></a>JSTL表达式</h3><blockquote>
+<p>JSP标签集货，封装了JSP应用的通用核心功能</p>
+</blockquote>
+<ol>
+<li><p>引用核心标签库：</p>
+<pre><code>&lt;%@taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jstl/core&quot; %&gt;
+</code></pre>
+</li>
+<li><p>常用标签</p>
+<pre><code>&lt;%--判断表单参数--%&gt;
+&lt;c:if test=&quot;$&#123;param.name&#125; == &#39;admin&#39;&quot;&gt;
+    &lt;c:out value=&quot;登录成功&quot;&gt;&lt;/c:out&gt;
+&lt;/c:if&gt;
+
+&lt;%--其他--%&gt;
+&lt;c:choose&gt;
+&lt;c:when&gt;
+&lt;c:set&gt;
+&lt;c:forEach var=&quot;item&quot; items=&quot;$&#123;list&#125;&quot;&gt;
+</code></pre>
+</li>
+</ol>
+<h3 id="JavaBean"><a href="#JavaBean" class="headerlink" title="JavaBean"></a>JavaBean</h3><blockquote>
+<p>一般用来做数据库字段做映射ORM（对象关系映射）：表 -&gt; 类，字段 -&gt; 属性，行记录 -&gt; 对象</p>
+</blockquote>
+<ol>
+<li>必须有一个无参构造</li>
+<li>属性必须私有化</li>
+<li>必须有对应的get/set方法</li>
+</ol>
+<pre><code>class People &#123;
+        private int id;
+        private String name;
+        private int age;
+&#125;
+</code></pre>
+<h3 id="过滤器-Filter"><a href="#过滤器-Filter" class="headerlink" title="过滤器 Filter"></a>过滤器 Filter</h3><ol>
+<li><p>过滤器中的代码，在过滤特定请求时都会执行</p>
+</li>
+<li><p>必须要让过滤器继续通行</p>
+</li>
+</ol>
+<p>cn/itxiaoma/filter/TestFilter.java</p>
+<pre><code>package cn.itxiaoma.filter;
+import javax.servlet.*;
+import java.io.IOException;
+public class TestFilter implements Filter &#123;
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException &#123;
+        System.out.println(&quot;过滤器开始&quot;);
+    &#125;
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException &#123;
+        System.out.println(&quot;过滤器执行前...&quot;);
+        chain.doFilter(request, response);//让过滤器继续执行
+        System.out.println(&quot;过滤器执行后...&quot;);
+    &#125;
+    @Override
+    public void destroy() &#123;
+        System.out.println(&quot;过滤器销毁&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>src/main/webapp/WEB-INF/web.xml</p>
+<pre><code>&lt;filter&gt;
+  &lt;filter-name&gt;TestFilter&lt;/filter-name&gt;
+  &lt;filter-class&gt;cn.itxiaoma.filter.TestFilter&lt;/filter-class&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+  &lt;filter-name&gt;TestFilter&lt;/filter-name&gt;
+  &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+</code></pre>
+<h3 id="监听器-Listener"><a href="#监听器-Listener" class="headerlink" title="监听器 Listener"></a>监听器 Listener</h3><pre><code>public class TestListener implements HttpSessionListener &#123;
+    ...
+&#125;
+</code></pre>
+<pre><code>&lt;!--注册监听器--&gt;
+&lt;listener&gt;
+  &lt;listener-class&gt;cn.itxiaoma.listener.TestListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre>
+<h3 id="Filter实现权限拦截"><a href="#Filter实现权限拦截" class="headerlink" title="Filter实现权限拦截"></a>Filter实现权限拦截</h3><p>src/main/webapp/login.jsp</p>
+<pre><code>&lt;form action=&quot;servlet/login&quot; method=&quot;post&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Login&quot;&gt;
+&lt;/form&gt;
+</code></pre>
+<p>src/main/webapp/WEB-INF/web.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+         version=&quot;4.0&quot;
+         metadata-complete=&quot;true&quot;&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;LoginServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;cn.itxiaoma.servlet.LoginServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;LoginServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/servlet/login&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+  &lt;filter&gt;
+    &lt;filter-name&gt;SysFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;cn.itxiaoma.filter.SysFilter&lt;/filter-class&gt;
+  &lt;/filter&gt;
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;SysFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/sys/*&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+&lt;/web-app&gt;
+</code></pre>
+<p>cn/itxiaoma/servlet/LoginServlet.java</p>
+<pre><code>package cn.itxiaoma.servlet;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+public class LoginServlet extends HttpServlet &#123;
+    //get和post只是请求实现的不同方式，业务逻辑一样，因此可以互相调用
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        String username = req.getParameter(&quot;username&quot;);
+        if (username.equals(&quot;admin&quot;)) &#123;
+            req.getSession().setAttribute(&quot;USER_SESSION&quot;, req.getSession().getId());
+            resp.sendRedirect(&quot;/sys/success.jsp&quot;);
+        &#125;else&#123;
+            resp.sendRedirect(&quot;/error.jsp&quot;);
+        &#125;
+    &#125;
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        doGet(req, resp);
+    &#125;
+&#125;
+</code></pre>
+<p>cn/itxiaoma/filter/SysFilter.java</p>
+<pre><code>@Override
+public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException &#123;
+    HttpServletRequest req = (HttpServletRequest) request;
+    HttpServletResponse resp = (HttpServletResponse) response;
+    if (req.getSession().getAttribute(&quot;USER_SESSION&quot;) == null) &#123;
+        resp.sendRedirect(&quot;/error.jsp&quot;);
+    &#125;
+    chain.doFilter(request, response);
+&#125;
+</code></pre>
+]]></content>
+      <categories>
+        <category>JAVA</category>
+        <category>JavaWeb</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>构建高性能Web站点01</title>
+    <url>/2021/05/01/%E9%AB%98%E6%80%A7%E8%83%BDWeb01-%E7%BB%AA%E8%AE%BA/</url>
+    <content><![CDATA[<h2 id="第一章-绪论"><a href="#第一章-绪论" class="headerlink" title="第一章 绪论"></a>第一章 绪论</h2><h4 id="1-1-等待的真相："><a href="#1-1-等待的真相：" class="headerlink" title="1.1 等待的真相："></a>1.1 等待的真相：</h4><p>在用户等待的时间里，到底发生了什么？</p>
+<ul>
+<li>数据在网络上传输的时间</li>
+<li>站点服务器处理请求并生成回应数据的时间</li>
+<li>浏览器本地计算和渲染的时间</li>
+</ul>
+<h4 id="1-2-瓶颈在哪里"><a href="#1-2-瓶颈在哪里" class="headerlink" title="1.2 瓶颈在哪里"></a>1.2 瓶颈在哪里</h4><ul>
+<li>影响性能的关键因素，随着系统的运行会不断的变化和迁移。如用户多样性和习惯差异，不同时段系统瓶颈各不相同；如数据存储量增长到不同级别时，瓶颈也会迁移。</li>
+<li>长尾效应：对多个子因素的优化结果叠加在一起，带来性能上可观的提升。</li>
+</ul>
+<h4 id="1-3-增加带宽"><a href="#1-3-增加带宽" class="headerlink" title="1.3 增加带宽"></a>1.3 增加带宽</h4><ul>
+<li>什么是带宽？</li>
+<li>如何计算站点现在和未来使用的带宽？</li>
+</ul>
+<h4 id="1-4-减少网页中的HTTP请求"><a href="#1-4-减少网页中的HTTP请求" class="headerlink" title="1.4 减少网页中的HTTP请求"></a>1.4 减少网页中的HTTP请求</h4><ul>
+<li>减少图片和脚本</li>
+<li>图片合并，CSS背景图片偏移</li>
+<li>合并JS和CSS文件</li>
+<li>利用浏览器缓存，减少重复下载</li>
+</ul>
+<h4 id="1-5-加快服务器脚本计算速度"><a href="#1-5-加快服务器脚本计算速度" class="headerlink" title="1.5 加快服务器脚本计算速度"></a>1.5 加快服务器脚本计算速度</h4><ul>
+<li>PHP之APC缓存组件（PHP5.5以后相关功能已内置）</li>
+<li><a href="https://link.segmentfault.com/?enc=oqGKAYoLht8q7gHa8dBHjw==.zs3nT7tFWaUo/SzwRXKQse/+u2UrlcFe7Zg4OhP2Px3tA2T1BclPnFOd8+15xfj51PV0W20ZdOtDyULNR10BDA==">PHP的apcu是什么，opcache又是什么？</a></li>
+</ul>
+<h4 id="1-6-使用动态内容缓存"><a href="#1-6-使用动态内容缓存" class="headerlink" title="1.6 使用动态内容缓存"></a>1.6 使用动态内容缓存</h4><ul>
+<li>缓存文件如何存储？</li>
+<li>缓存的命中率如何？</li>
+<li>在Web分布式站点上应用动态内容缓存需要考虑什么?</li>
+</ul>
+<h4 id="1-7-使用数据缓存"><a href="#1-7-使用数据缓存" class="headerlink" title="1.7 使用数据缓存"></a>1.7 使用数据缓存</h4><ul>
+<li>如何协调网页缓存和数据缓存呢？</li>
+<li>同一主机不同进程，不同主机间如何共享缓存？</li>
+</ul>
+<h4 id="1-8-将动态内容静态化"><a href="#1-8-将动态内容静态化" class="headerlink" title="1.8 将动态内容静态化"></a>1.8 将动态内容静态化</h4><ul>
+<li>静态化：直接让浏览器访问动态内容的缓存</li>
+</ul>
+<h4 id="1-9-更换Web服务器软件"><a href="#1-9-更换Web服务器软件" class="headerlink" title="1.9 更换Web服务器软件"></a>1.9 更换Web服务器软件</h4><ul>
+<li>Web服务器在并发策略方面的各种设计和动机本质</li>
+</ul>
+<h4 id="1-10-页面组件分离"><a href="#1-10-页面组件分离" class="headerlink" title="1.10 页面组件分离"></a>1.10 页面组件分离</h4><ul>
+<li>根据不同组件需求，有针对性的采用不同的并发策略，并提供最佳的物理资源</li>
+</ul>
+<h4 id="1-11-合理部署服务器"><a href="#1-11-合理部署服务器" class="headerlink" title="1.11 合理部署服务器"></a>1.11 合理部署服务器</h4><ul>
+<li>如何实现Web站点的用户和服务器位于同一个互联网运营商的网络内呢？</li>
+</ul>
+<h4 id="1-12-使用负载均衡"><a href="#1-12-使用负载均衡" class="headerlink" title="1.12 使用负载均衡"></a>1.12 使用负载均衡</h4><ul>
+<li>HTTP重定向，DNS轮询解析，反向代理服务器负载均衡调度，LVS服务器集群</li>
+</ul>
+<h4 id="1-13-优化数据库"><a href="#1-13-优化数据库" class="headerlink" title="1.13 优化数据库"></a>1.13 优化数据库</h4><ul>
+<li>如何合理使用各种类型的索引</li>
+<li>存储引擎的特性</li>
+<li>数据库横向扩展和负载均衡</li>
+</ul>
+<h4 id="1-14-考虑可扩展性"><a href="#1-14-考虑可扩展性" class="headerlink" title="1.14 考虑可扩展性"></a>1.14 考虑可扩展性</h4><ul>
+<li>可扩展性是指当系统负载增大时，通过增加资源来提高性能的能力</li>
+</ul>
+<h4 id="1-15-减少视觉等待"><a href="#1-15-减少视觉等待" class="headerlink" title="1.15 减少视觉等待"></a>1.15 减少视觉等待</h4><h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《构建高性能Web站点》</p>
+]]></content>
+      <categories>
+        <category>WEB</category>
+      </categories>
+      <tags>
+        <tag>WEB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>高性能Web02-网络传输</title>
+    <url>/2021/05/02/%E9%AB%98%E6%80%A7%E8%83%BDWeb02-%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93/</url>
+    <content><![CDATA[<h2 id="第2章-数据的网络传输"><a href="#第2章-数据的网络传输" class="headerlink" title="第2章 数据的网络传输"></a>第2章 数据的网络传输</h2><h4 id="2-1-分层网络模型"><a href="#2-1-分层网络模型" class="headerlink" title="2.1 分层网络模型"></a>2.1 分层网络模型</h4><h5 id="基础知识：OSI七层模型、TCP-IP四层模型"><a href="#基础知识：OSI七层模型、TCP-IP四层模型" class="headerlink" title="基础知识：OSI七层模型、TCP/IP四层模型"></a>基础知识：<a href="https://link.segmentfault.com/?enc=68ZOnmjhvwSewzHcxU+uXQ==.JypXesKWailpgQmHlp54Ispyn/aHLhIYu0KResm049UZc5IZLEyLYTgaR7ThxNmIPCzT5g1nX2vck9XswLM0y7x9CiBPaMHgyXqoAOpqSM1HMGufsi3Pn/lamxv3prCt">OSI七层模型</a>、<a href="https://link.segmentfault.com/?enc=X/Or25q5JfPKrfUG8E2h3g==.n3UxfuE4uVkOPq0T4EWq1chWVjh92RMyo9VGTg1YBIB79KowjHD7mbaUmIZKwbdNCtOxEj6XHbsVUmQlmJUdGttunEpHjZM062z9t0Z8I52o8SDZzyxRgDDSYHZYTpSx">TCP/IP四层模型</a></h5><ul>
+<li>OSI(Open System Interconnection)七层模型：<ul>
+<li>应用层：网络服务与用户的接口。(HTTP,FTP,DNS,TELNET,POP3…)</li>
+<li>表示层：定义数据格式及加密。(JPEG,ASCII…)</li>
+<li>会话层：建立，管理，终止会话。(RPC,SQL…)</li>
+<li>传输层：定义数据传输的协议端口号，流控，差错校验。(TPC,UDP…)</li>
+<li>网络层：逻辑地址寻址，实现不同网络间的路径选择。(IPV4,IPV6…)</li>
+<li>数据链路层：建立逻辑连接，进行硬件地址寻址、差错校验等。</li>
+<li>物理层：建立，维护，断开物理连接。</li>
+</ul>
+</li>
+<li>TCP/IP四层模型：<ul>
+<li>应用层: 为用户提供所需要的各种服务。</li>
+<li>传输层: 为应用层实体提供端到端的通信功能，保证了数据包的顺序传送及数据的完整性。</li>
+<li>网际互联层: 主要解决主机到主机的通信问题。(OSI模型的网络层)</li>
+<li>网络接入层: 负责监视数据在主机和网络之间的交换。 (OSI模型的物理层和数据链路层相对应)</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-带宽"><a href="#2-2-带宽" class="headerlink" title="2.2 带宽"></a>2.2 带宽</h4><h5 id="数据如何发送"><a href="#数据如何发送" class="headerlink" title="数据如何发送"></a>数据如何发送</h5><ul>
+<li>1.数据写入<strong>内存地址空间</strong>（变量赋值）</li>
+<li>2.通过系统函数库接口向内核发出系统调用，将数据从用户态内存区复制到<strong>内核缓冲区</strong>。</li>
+<li>3.内核通知网卡控制器取数据；网卡控制器根据网卡驱动信息将要发送的数据复制到<strong>网卡缓冲区</strong>。</li>
+<li>4.对数据进行字节到位的转换，将数字信号发送到线路中，同时释放缓冲区。</li>
+<li>5.网卡通过物理装置生成可以传播的各种信号（电信号/光信号）</li>
+</ul>
+<h5 id="数据发送速度"><a href="#数据发送速度" class="headerlink" title="数据发送速度"></a>数据发送速度</h5><ul>
+<li>数据发送装置将二进制信号传送至线路的能力，称为信号传输频率。数据链路层对于数据帧传输的控制机制是按照接收能力来确定发送速度的。</li>
+<li>要提高计算机总线宽度，可以提高频率和总线宽度。</li>
+</ul>
+<h4 id="2-3-响应时间"><a href="#2-3-响应时间" class="headerlink" title="2.3 响应时间"></a>2.3 响应时间</h4><h5 id="下载速度"><a href="#下载速度" class="headerlink" title="下载速度"></a>下载速度</h5><ul>
+<li>下载速度：单位时间内从服务器到达用户PC的数据量大小，一般用字节数来描述Bytes/s。</li>
+<li>数据从服务器开始发送到完全到达用户PC的时间，称为响应时间。</li>
+<li>处理时间：数据在交换节点中为存储转发而进行处理花费的时间。</li>
+<li>响应时间 = 发送时间 + 传播时间 + 处理时间</li>
+</ul>
+<h4 id="2-4-互联互通"><a href="#2-4-互联互通" class="headerlink" title="2.4 互联互通"></a>2.4 互联互通</h4><h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《构建高性能Web站点》</p>
+]]></content>
+      <categories>
+        <category>WEB</category>
+      </categories>
+      <tags>
+        <tag>WEB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>高性能Web03-并发处理</title>
+    <url>/2021/05/03/%E9%AB%98%E6%80%A7%E8%83%BDWeb03-%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h2 id="第3章-服务器并发处理能力"><a href="#第3章-服务器并发处理能力" class="headerlink" title="第3章 服务器并发处理能力"></a>第3章 服务器并发处理能力</h2><h5 id="3-1-吞吐率"><a href="#3-1-吞吐率" class="headerlink" title="3.1 吞吐率"></a>3.1 吞吐率</h5><ul>
+<li>吞吐率：Web服务器单位时间内处理的请求数</li>
+<li>最大吞吐率：单位时间内服务器能够处理的最大请求数</li>
+<li>压力测试：模拟大量并发用户持续发送HTTP请求，统计测试持续的总时间，据此计算吞吐率。(一般会简化模型，对有代表性的特定请求进行压力测试)</li>
+</ul>
+<h6 id="3-1-1-压力测试的前提条件"><a href="#3-1-1-压力测试的前提条件" class="headerlink" title="3.1.1 压力测试的前提条件"></a>3.1.1 压力测试的前提条件</h6><ul>
+<li>并发用户数：某一时刻同时向服务器发送请求的用户总数。</li>
+<li>总请求数</li>
+<li>请求资源描述</li>
+</ul>
+<h6 id="3-1-2-请求等待时间"><a href="#3-1-2-请求等待时间" class="headerlink" title="3.1.2 请求等待时间"></a>3.1.2 请求等待时间</h6><ul>
+<li>用户平均请求等待时间：一定并发用户数下，对于单个用户的服务质量</li>
+<li>服务器平均请求处理时间：吞吐率的倒数</li>
+<li>Web服务器使用多个执行流并发处理请求（交错使用CPU时间片），单个用户的请求等待时间会拉长，但服务器平均请求时间可能减少。</li>
+</ul>
+<h6 id="3-1-3-来一次压力测试"><a href="#3-1-3-来一次压力测试" class="headerlink" title="3.1.3 来一次压力测试"></a>3.1.3 来一次压力测试</h6><ul>
+<li><p>压力测试软件：ab，LoadRunner，Jmeter</p>
+</li>
+<li><p>ab测试：</p>
+<pre><code class="awk">ab -n1000 -c10 http://xxx.com/test.html
+
+#-n1000 表示总请求数1000
+#-c10   表示并发用户数10
+</code></pre>
+<p>请求结果</p>
+<pre><code class="yaml">Concurrency Level:      10
+Time taken for tests:   7.616 seconds
+Complete requests:      1000
+Failed requests:        0
+Non-2xx responses:      1000
+Total transferred:      374000 bytes
+HTML transferred:       178000 bytes
+Requests per second:    131.30 [#/sec] (mean)
+Time per request:       76.161 [ms] (mean)
+Time per request:       7.616 [ms] (mean, across all concurrent requests)
+Transfer rate:          47.96 [Kbytes/sec] received
+</code></pre>
+<p>吞吐率<br><code>Requests per second = Complete requests / Time taken for tests</code><br>用户平均请求等待时间<br><code>Time per request = Time per request / (Complete requests / Concurrency Level)</code><br>服务器平均请求处理时间<br><code>Time per request(across all concurrent requests) = Time taken for tests / Complete requests</code></p>
+</li>
+</ul>
+<h6 id="3-1-4-继续压力测试"><a href="#3-1-4-继续压力测试" class="headerlink" title="3.1.4 继续压力测试"></a>3.1.4 继续压力测试</h6><ul>
+<li>并发策略的设计，就是在服务器同时处理较多请求的时候，合理协调并充分利用CPU计算和I/O操作，使其在较大并发用户的情况下提供较高吞吐率。</li>
+</ul>
+<h5 id="3-2-CPU并发计算"><a href="#3-2-CPU并发计算" class="headerlink" title="3.2 CPU并发计算"></a>3.2 CPU并发计算</h5><ul>
+<li><p>进程（fork）：由内核调度，担当分配资源的实体，通过进程描述符与数据关联</p>
+</li>
+<li><p>子进程：将父进程所以数据复制到自己的地址空间，继承父进程所有上下文信息</p>
+</li>
+<li><p>轻量级进程（clone）：允许共享地址空间，文件，支持数据共享</p>
+</li>
+<li><p>线程：pthread 在用户态完成多线程管理；LinuxThreads 将线程和轻量级进程一对一关联，由内核进程调度器管理</p>
+</li>
+<li><p>进程调度器（Scheduler）：维护所有可运行进程队列（Run Quere），和一个包括所有休眠进程，僵尸进程的列表</p>
+</li>
+<li><p>进程优先级：通过top观察</p>
+<pre><code class="apache">PR 优先级属性：进程调度器分配给进程的时间片长度，单位为时钟个数，Linux一般为10ms
+NI 优先级动态调整值
+</code></pre>
+</li>
+<li><p>系统负载：运行队列中任何时刻至少存在一个进程，那就是正在运行的进程。</p>
+<pre><code class="awk">cat /proc/loadavg
+0.00 0.01 0.00 1/382 4154 前3个数 最近1，5，15分钟的系统负载
+// 1 此时运行队列中的进程数
+// 382 进程总数
+// 4154 最后创建的进程ID
+</code></pre>
+</li>
+<li><p>进程切换：挂起正在运行的进程，恢复以前挂起的进程，称为进程切换（上下文切换）</p>
+</li>
+<li><p>进程挂起：将进程在CPU寄存器中的数据拿出来暂存在内核态堆栈中</p>
+</li>
+<li><p>Nmon监控：ContextSwitch 上下文每秒切换次数</p>
+</li>
+<li><p>查看某时刻httpd进程数</p>
+<pre><code class="coq">ps afx | grep httpd | wc -l
+</code></pre>
+</li>
+<li><p>总结：如果希望服务器支持较大并发数，就要尽量减少上下文切换次数，最简单的做法就是减少进程数，使用线程并配合其他I/O模型来设计并发策略</p>
+</li>
+<li><p><strong>IOWait</strong>：CPU空闲并且等待I/O操作完成的时间比例(通过Nmon得到CPU监控数据)</p>
+</li>
+<li><p>锁竞争：当一个任务占用锁住资源的时候，其他任务都在等待锁的释放。要尽量减少并发请求对于共享资源的占用。</p>
+</li>
+</ul>
+<h5 id="3-3-系统调用"><a href="#3-3-系统调用" class="headerlink" title="3.3 系统调用"></a>3.3 系统调用</h5><ul>
+<li>系统调用（英语：system call），又称为系统呼叫，指运行在用户空间的程序向操作系统内核请求需要更高权限运行的服务。</li>
+<li>用户态和内核态是Linux进程的两种运行级别，进程可以在两种模式间切换。</li>
+<li>Linux系统上，应用代码通过glibc库封装的函数，间接使用系统调用。</li>
+<li>系统调用涉及进程从用户态到内核态的切换，导致一定的内存空间交换，所以Web服务器优化要减少不必要的系统调用。</li>
+<li>使用strace跟踪子进程</li>
+</ul>
+<h5 id="3-4-内存分配"><a href="#3-4-内存分配" class="headerlink" title="3.4 内存分配"></a>3.4 内存分配</h5><ul>
+<li>频发的内存分配和释放会引发一定时间的内存整理，影响性能</li>
+<li>Apache是多进程模型，使用内存池管理内存，开始运行时一次性申请大片内存作为内存池</li>
+<li>Nginx是单进程模型，使用多线程处理请求，线程间可以共享内存资源</li>
+</ul>
+<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《构建高性能Web站点》</p>
+]]></content>
+      <categories>
+        <category>WEB</category>
+      </categories>
+      <tags>
+        <tag>WEB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Laravel底层02-服务容器，服务提供者</title>
+    <url>/2021/10/02/Laravel%E5%BA%95%E5%B1%8202-%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%EF%BC%8C%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85/</url>
+    <content><![CDATA[<h2 id="服务容器和服务提供者"><a href="#服务容器和服务提供者" class="headerlink" title="服务容器和服务提供者"></a>服务容器和服务提供者</h2><h3 id="服务容器-ServiceContainner"><a href="#服务容器-ServiceContainner" class="headerlink" title="服务容器 ServiceContainner"></a>服务容器 ServiceContainner</h3><blockquote>
+<p>ServiceContainner通过依赖注入将ServiceProvider提供的能力注册进服务容器内部。</p>
+<p>Laravel直接通过容器的实例化对象，找到对应的服务，就可以直接使用其提供的能力了。</p>
+</blockquote>
+<p><code>ServiceContainner就是一个类的实例化对象，启动时加载所有可用服务，用的时候再解析调用其中的方法。</code></p>
+<h3 id="服务提供者-ServiceProvider"><a href="#服务提供者-ServiceProvider" class="headerlink" title="服务提供者 ServiceProvider"></a>服务提供者 ServiceProvider</h3><blockquote>
+<p>有能力提供服务的服务提供者 </p>
+</blockquote>
+<pre><code>//Laravel 的服务提供者 config/app.php
+&#39;providers&#39; =&gt; [
+    /*
+     * Laravel Framework Service Providers...
+     */  
+    //框架自带 Service Provider
+    
+    /*
+     * Package Service Providers...
+     */
+    //需要引入的 Service Provider
+]
+</code></pre>
+<h2 id="Laravel源码解析"><a href="#Laravel源码解析" class="headerlink" title="Laravel源码解析"></a>Laravel源码解析</h2><h3 id="服务容器-app"><a href="#服务容器-app" class="headerlink" title="服务容器 $app"></a>服务容器 $app</h3><blockquote>
+<p>/bootstrap/app.php</p>
+</blockquote>
+<pre><code>$app = new Illuminate\Foundation\Application(
+    realpath(__DIR__.&#39;/../&#39;)
+);
+</code></pre>
+<h3 id="app服务容器，就是Application类的实例化对象。"><a href="#app服务容器，就是Application类的实例化对象。" class="headerlink" title="$app服务容器，就是Application类的实例化对象。"></a>$app服务容器，就是Application类的实例化对象。</h3><blockquote>
+<p>src/Illuminate/Foundation/Application.php</p>
+</blockquote>
+<pre><code>public function __construct($basePath = null)
+&#123;
+    if ($basePath) &#123;
+        $this-&gt;setBasePath($basePath);//设置基础路径
+    &#125;
+    $this-&gt;registerBaseBindings();//注册基础绑定
+    $this-&gt;registerBaseServiceProviders();//注册基础服务提供者
+    $this-&gt;registerCoreContainerAliases();//注册核心服务容器别名
+&#125;
+</code></pre>
+<h3 id="注册基础绑定"><a href="#注册基础绑定" class="headerlink" title="注册基础绑定"></a>注册基础绑定</h3><blockquote>
+<p>src/Illuminate/Foundation/Application.php</p>
+</blockquote>
+<pre><code>protected function registerBaseBindings()
+&#123;
+    static::setInstance($this);//实例化自己
+    $this-&gt;instance(&#39;app&#39;, $this);//将app注册到instances数组中
+    $this-&gt;instance(Container::class, $this);//将Container注册到instances数组中
+    $this-&gt;singleton(Mix::class);
+    $this-&gt;singleton(PackageManifest::class, function () &#123;
+        return new PackageManifest(
+            new Filesystem, $this-&gt;basePath(), $this-&gt;getCachedPackagesPath()
+        );
+    &#125;);
+&#125;
+</code></pre>
+<h4 id="instance函数"><a href="#instance函数" class="headerlink" title="instance函数"></a>instance函数</h4><blockquote>
+<p>vendor/laravel/framework/src/Illuminate/Container/Container.php</p>
+</blockquote>
+<pre><code>/**
+ * $abstract &#39;app&#39;            $instance Application
+ * $abstract Container::class $instance Application
+ */
+public function instance($abstract, $instance)
+&#123;
+    $this-&gt;removeAbstractAlias($abstract); //删除抽象别名
+    $isBound = $this-&gt;bound($abstract);//判断是否实例化
+    unset($this-&gt;aliases[$abstract]); //删除别名
+
+    //将实例加入instances数组
+    $this-&gt;instances[$abstract] = $instance;
+    //如果之前存在实例化 则运行
+    if ($isBound) &#123;
+        $this-&gt;rebound($abstract);
+    &#125;
+    return $instance;
+&#125;
+</code></pre>
+<h4 id="register函数"><a href="#register函数" class="headerlink" title="register函数"></a>register函数</h4><blockquote>
+<p>src/Illuminate/Foundation/Application.php</p>
+</blockquote>
+<pre><code>protected function registerBaseServiceProviders()
+&#123;
+    $this-&gt;register(new EventServiceProvider($this));
+    $this-&gt;register(new LogServiceProvider($this));
+    $this-&gt;register(new RoutingServiceProvider($this));
+&#125;
+
+public function register($provider, $options = [], $force = false)
+&#123;
+    if (($registered = $this-&gt;getProvider($provider)) &amp;&amp; ! $force) &#123;
+        return $registered;
+    &#125;
+    if (is_string($provider)) &#123;
+        $provider = $this-&gt;resolveProvider($provider);
+    &#125;
+    if (method_exists($provider, &#39;register&#39;)) &#123;
+        $provider-&gt;register();//调用ServiceProvider实例的register方法
+    &#125;
+    //标记为已注册
+    $this-&gt;markAsRegistered($provider);
+    //判断App是否已启动，已创建则调用$provider的启动(boot)方法
+    if ($this-&gt;booted) &#123;
+        $this-&gt;bootProvider($provider);
+    &#125;
+    return $provider;
+&#125;
+</code></pre>
+<p>EventServiceProvider中的register函数</p>
+<pre><code>public function register()
+&#123;
+    $this-&gt;app-&gt;singleton(&#39;events&#39;, function ($app) &#123;
+        return (new Dispatcher($app))-&gt;setQueueResolver(function () use ($app) &#123;
+            return $app-&gt;make(QueueFactoryContract::class);
+        &#125;);
+    &#125;);
+&#125;
+</code></pre>
+<h4 id="singleton-bind-getClosure函数"><a href="#singleton-bind-getClosure函数" class="headerlink" title="singleton,bind,getClosure函数"></a>singleton,bind,getClosure函数</h4><blockquote>
+<p>vendor/laravel/framework/src/Illuminate/Container/Container.php</p>
+</blockquote>
+<p>singleton函数</p>
+<pre><code>public function singleton($abstract, $concrete = null)
+&#123;
+    $this-&gt;bind($abstract, $concrete, true);
+&#125;
+</code></pre>
+<p>bind函数</p>
+<pre><code>public function bind($abstract, $concrete = null, $shared = false)
+&#123;
+    //从instances和aliases数组中移除$abstract
+    $this-&gt;dropStaleInstances($abstract);
+    
+    if (is_null($concrete)) &#123;
+        $concrete = $abstract;
+    &#125;
+    //如果$concrete不是匿名函数，则将$concrete转化为匿名函数
+    if (! $concrete instanceof Closure) &#123;
+        $concrete = $this-&gt;getClosure($abstract, $concrete);
+    &#125;
+    //$abstract加入bindings数组
+    $this-&gt;bindings[$abstract] = compact(&#39;concrete&#39;, &#39;shared&#39;);
+    //如果抽象类型已在此容器中解析，我们将触发恢复侦听器，以便已解析的任何对象可以通过侦听器回调更新对象的副本。
+    if ($this-&gt;resolved($abstract)) &#123;
+        $this-&gt;rebound($abstract);
+    &#125;
+&#125;
+</code></pre>
+<p>getClosure函数</p>
+<pre><code>/**
+ *  $abstract Mix $concrete Mix =&gt; Closure
+ */
+protected function getClosure($abstract, $concrete)
+&#123;
+    return function ($container, $parameters = []) use ($abstract, $concrete) &#123;
+        if ($abstract == $concrete) &#123;
+            return $container-&gt;build($concrete);
+        &#125;
+        return $container-&gt;make($concrete, $parameters);
+    &#125;;
+&#125;
+</code></pre>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="生成服务容器的过程："><a href="#生成服务容器的过程：" class="headerlink" title="生成服务容器的过程："></a>生成服务容器的过程：</h4><p>1.通过instance和register方法注册到instances数组<br>2.通过singleton和bind方法绑定到bindings数组</p>
+<h4 id="app-php基本流程"><a href="#app-php基本流程" class="headerlink" title="app.php基本流程"></a>app.php基本流程</h4><ol>
+<li>实例化app (<code>new Illuminate\Foundation\Application()</code>)<br> 1.1    运行构造函数 <code>__construct()</code><pre><code> 1.1.1 设置基础路径 `$this-&gt;setBasePath($basePath);`
+ 1.1.2 创建并绑定基础服务容器（app,Container） `$this-&gt;registerBaseBindings();`
+ 1.1.3 注册基础服务提供者 ​`$this-&gt;registerBaseServiceProviders();`
+ 1.1.3 注册基础服务别名`$this-&gt;registerCoreContainerAliases();`
+</code></pre>
+</li>
+<li>把App\Http\Kernel::class类下的参数映射到lluminate\Contracts\Http\Kernel::class类中<pre><code>$app-&gt;singleton(
+ Illuminate\Contracts\Http\Kernel::class,
+ App\Http\Kernel::class
+);
+</code></pre>
+</li>
+<li>把App\Console\Kernel::class类下的参数映射到Illuminate\Contracts\Console\Kernel::class类中<pre><code>$app-&gt;singleton(
+ Illuminate\Contracts\Console\Kernel::class,
+ App\Console\Kernel::class
+);
+</code></pre>
+</li>
+<li>把App\Exceptions\Handler::class类下的参数映射到Illuminate\Contracts\Debug\ExceptionHandler::class类中<pre><code>$app-&gt;singleton(
+ Illuminate\Contracts\Debug\ExceptionHandler::class,
+ App\Exceptions\Handler::class
+);
+</code></pre>
+</li>
+<li>返回app资源 <code>return $app;</code></li>
+</ol>
+<h2 id="创建ServiceProvider"><a href="#创建ServiceProvider" class="headerlink" title="创建ServiceProvider"></a>创建ServiceProvider</h2><h3 id="bind的调用方式"><a href="#bind的调用方式" class="headerlink" title="bind的调用方式"></a>bind的调用方式</h3><pre><code>第一种
+$abstract  &#39;events&#39; //别名
+$concrete  匿名函数(功能是创建实例化对象) //比较自由，可以自由给属性赋值
+
+第二种
+$abstract  &#39;Illuminate\Foundation\Mix&#39;
+$concrete  &#39;Illuminate\Foundation\Mix&#39; =&gt; 匿名函数
+
+第三种
+$abstract  &#39;Illuminate\Contracts\Http\Kernel::class&#39;
+$concrete  &#39;App\Http\Kernel::class&#39; =&gt; 匿名函数 //只能实现构造函数中声明的属性和依赖
+</code></pre>
+<p>结果：绑定到$this-&gt;bindings数组，并执行构造函数</p>
+<h3 id="自定义ServiceProvider"><a href="#自定义ServiceProvider" class="headerlink" title="自定义ServiceProvider"></a>自定义ServiceProvider</h3><h4 id="服务容器类（声明依赖关系）"><a href="#服务容器类（声明依赖关系）" class="headerlink" title="服务容器类（声明依赖关系）"></a>服务容器类（声明依赖关系）</h4><blockquote>
+<p>/Service/Family/FamilyService.php</p>
+</blockquote>
+<pre><code>&lt;?php
+namespace App\Service\Family;
+class FamilyService&#123;
+    public function __construct(PersonService $person,TvService $tv)&#123;
+        $this-&gt;person = $person;
+        $this-&gt;tv = $tv;
+        echo &#39;Instance FamilyService&#39;;
+    &#125;
+    public function testPerson()&#123;
+       $this-&gt;persion-&gt;test();
+    &#125; 
+&#125;
+</code></pre>
+<blockquote>
+<p>/Service/Family/PersonService.php</p>
+</blockquote>
+<pre><code>&lt;?php
+namespace App\Service\Family;
+class PersonService&#123;
+    public function __construct()&#123;
+        echo &#39;Instance PersonService&#39;;
+    &#125;
+    public function test()&#123;
+        echo &#39;PersonService test()&#39;;
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>/Service/Family/TvService.php</p>
+</blockquote>
+<pre><code>&lt;?php
+namespace App\Service\Family;
+class TService&#123;
+    public function __construct()&#123;
+        echo &#39;Instance TvService&#39;;
+    &#125;
+    public function test()&#123;
+        echo &#39;TvService test()&#39;;
+    &#125;
+&#125;
+</code></pre>
+<h4 id="创建ServiceProvider-1"><a href="#创建ServiceProvider-1" class="headerlink" title="创建ServiceProvider"></a>创建ServiceProvider</h4><blockquote>
+<p>/Providers/FamilyServiceProvider.php</p>
+</blockquote>
+<pre><code>/**
+ * 将可以提供服务的对象绑定到bindings中
+ */
+public function register()&#123;
+    $this-&gt;app-&gt;bind(&#39;Family&#39;,&#39;App\Service\Family\FamilyService&#39;);
+&#125;
+</code></pre>
+<h4 id="配置别名"><a href="#配置别名" class="headerlink" title="配置别名"></a>配置别名</h4><blockquote>
+<p>/config/app.php</p>
+</blockquote>
+<pre><code>&#39;providers&#39; =&gt; [
+    App\Providers\FamilyServiceProvider::class,
+]
+</code></pre>
+<h4 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h4><pre><code>//通过别名调用服务
+app(&#39;Family&#39;)-&gt;testPerson();//app()调用make()方法创建实例
+
+//通过服务名调用服务
+app(&#39;App\Service\Family\FamilyService&#39;)-&gt;testPerson();
+</code></pre>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.bilibili.com/video/BV1yz411i7AJ">laravel底层核心代码分析核心概念</a><br><a href="https://www.bbsmax.com/A/ke5jkQomdr/">Laravel (5.5.33) 加载过程—instance方法</a></p>
+]]></content>
+      <categories>
+        <category>PHP</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>PHP</tag>
+        <tag>Laravel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Laravel底层03-make和build</title>
+    <url>/2021/10/03/Laravel%E5%BA%95%E5%B1%8203-make%E5%92%8Cbuild/</url>
+    <content><![CDATA[<h3 id="实例化Illuminate-Contracts-Http-Kernel"><a href="#实例化Illuminate-Contracts-Http-Kernel" class="headerlink" title="实例化Illuminate\Contracts\Http\Kernel"></a>实例化Illuminate\Contracts\Http\Kernel</h3><h4 id="make方法"><a href="#make方法" class="headerlink" title="make方法"></a>make方法</h4><blockquote>
+<p>/public/index.php</p>
+</blockquote>
+<pre><code>$app = require_once __DIR__.&#39;/../bootstrap/app.php&#39;;
+
+$kernel = $app-&gt;make(Illuminate\Contracts\Http\Kernel::class);
+</code></pre>
+<blockquote>
+<p>$app-&gt;make()  =&gt; 父类Application中的make()  =&gt; resolve()方法</p>
+</blockquote>
+<h4 id="resolve方法"><a href="#resolve方法" class="headerlink" title="resolve方法"></a>resolve方法</h4><blockquote>
+<p>vendor/laravel/framework/src/Illuminate/Container/Container.php</p>
+</blockquote>
+<pre><code>/**
+ * 第一次调用
+ * $abstract Illuminate\Contracts\Http\Kernel::class
+ * $concrete 匿名函数
+ * 
+ * 第二次调用
+ * $abstract &#39;App\Http\Kernel&#39;
+ * $concrete &#39;App\Http\Kernel&#39; （getConcrete方法返回）
+ * 执行build()方法获取App\Http\Kernel的实例化对象，返回给getClosure()
+ */
+protected function resolve($abstract, $parameters = [], $raiseEvents = true)
+&#123;   
+    ...
+    //根据$abstract从bindings数组中获取$concrete匿名函数
+    $concrete = $this-&gt;getConcrete($abstract);
+    //判断$concrete和$abstract是否相同，或者$concrete是一个匿名函数
+    if ($this-&gt;isBuildable($concrete, $abstract)) &#123;
+        //实例化$concrete的类
+        $object = $this-&gt;build($concrete);
+    &#125; else &#123;
+        //递归执行make
+        $object = $this-&gt;make($concrete);
+    &#125;
+    ...
+ &#125;   
+</code></pre>
+<h4 id="getClosure-方法递归调用"><a href="#getClosure-方法递归调用" class="headerlink" title="getClosure()方法递归调用"></a>getClosure()方法递归调用</h4><pre><code>/**
+ * 第一次调用
+ * $abstract &#39;Illuminate\Contracts\Http\Kernel&#39;
+ * $concrete &#39;App\Http\Kernel&#39;
+ * 
+ * 第二次调用
+ * 获取App\Http\Kernel的实例，向上返回给build()方法
+ */
+protected function getClosure($abstract, $concrete)
+&#123;
+    return function ($container, $parameters = []) use ($abstract, $concrete) &#123;
+        if ($abstract == $concrete) &#123;
+            return $container-&gt;build($concrete);
+        &#125;
+        return $container-&gt;resolve($concrete, $parameters, $raiseEvents = false);
+    &#125;;
+&#125;
+</code></pre>
+<h4 id="build方法"><a href="#build方法" class="headerlink" title="build方法"></a>build方法</h4><blockquote>
+<p>vendor/laravel/framework/src/Illuminate/Container/Container.php</p>
+</blockquote>
+<pre><code>/**
+ * 第一次调用
+ * $concrete 匿名函数
+ * 
+ * 第二次调用
+ * $concrete &#39;App\Http\Kernel&#39; 
+ * 执行反射，获取App\Http\Kernel类的实例化对象
+ * 返回给resolve()方法
+ */
+public function build($concrete)
+&#123;
+    if ($concrete instanceof Closure) &#123;
+        //bind()方法中$concrete = $this-&gt;getClosure($abstract, $concrete);
+        return $concrete($this, $this-&gt;getLastParameterOverride());
+    &#125;
+    $reflector = new ReflectionClass($concrete);
+    if (! $reflector-&gt;isInstantiable()) &#123;
+        return $this-&gt;notInstantiable($concrete);
+    &#125;
+    $this-&gt;buildStack[] = $concrete;
+    $constructor = $reflector-&gt;getConstructor();
+    if (is_null($constructor)) &#123;
+        array_pop($this-&gt;buildStack);
+        return new $concrete;
+    &#125;
+    $dependencies = $constructor-&gt;getParameters();
+    $instances = $this-&gt;resolveDependencies(
+        $dependencies
+    );
+    array_pop($this-&gt;buildStack);
+    return $reflector-&gt;newInstanceArgs($instances);
+&#125;
+</code></pre>
+<p>流程图示例</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0ul4gh5caj211e0mrjug.jpg" alt="image-20220401222224640"></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.bilibili.com/video/BV1ga4y1e7mS">php:laravel底层核心代码分析之make方法的实现</a><br><a href="https://www.bbsmax.com/A/obzbpnNQ5E/">Laravel加载过程—make方法</a></p>
+]]></content>
+      <categories>
+        <category>PHP</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>PHP</tag>
+        <tag>Laravel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Laravel底层04-加载并启动ServiceProvider</title>
+    <url>/2021/10/01/Laravel%E5%BA%95%E5%B1%8204-%E5%8A%A0%E8%BD%BD%E5%B9%B6%E5%90%AF%E5%8A%A8ServiceProvider/</url>
+    <content><![CDATA[<h2 id="加载并启动ServiceProvider"><a href="#加载并启动ServiceProvider" class="headerlink" title="加载并启动ServiceProvider"></a>加载并启动ServiceProvider</h2><h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><blockquote>
+<p>public/index.php</p>
+</blockquote>
+<pre><code>$kernel = $app-&gt;make(Illuminate\Contracts\Http\Kernel::class);
+//1. Illuminate\Contracts\Http\Kernel::class 是别名
+//2. $kernel是App\Http\Kernel的实例化对象
+//3. App\Http\Kernel::class继承src/Illuminate/Foundation/Http/Kernel
+</code></pre>
+<blockquote>
+<p>vim src/Illuminate/Foundation/Http/Kernel.php</p>
+</blockquote>
+<pre><code>//处理HTTP请求
+public function handle($request) ...
+</code></pre>
+<blockquote>
+<p>vim vendor/symfony/http-foundation/Request.php</p>
+</blockquote>
+<pre><code>//发送请求穿过中间件和路由
+protected function sendRequestThroughRouter($request) ...
+//为HTTP请求引导应用程序
+public function bootstrap()
+&#123;
+    if (! $this-&gt;app-&gt;hasBeenBootstrapped()) &#123;
+        $this-&gt;app-&gt;bootstrapWith($this-&gt;bootstrappers());
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>vim vendor/laravel/framework/src/Illuminate/Foundation/Application.php</p>
+</blockquote>
+<pre><code>/**
+ * 运行给定的引导类数组 Kernel::class $this-&gt;bootstrappers
+ * 
+ * \Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables::class, 
+ * 加载环境变量
+ * \Illuminate\Foundation\Bootstrap\LoadConfiguration::class,
+ * 加载配置文件
+ * \Illuminate\Foundation\Bootstrap\HandleExceptions::class,
+ * 加载异常处理
+ * \Illuminate\Foundation\Bootstrap\RegisterFacades::class,
+ * 注册门面模式
+ * \Illuminate\Foundation\Bootstrap\SetRequestForConsole::class,
+ * 设置Console请求
+ * \Illuminate\Foundation\Bootstrap\RegisterProviders::class,
+ * 注册Providers
+ * \Illuminate\Foundation\Bootstrap\BootProviders::class,
+ * 启动Providers
+ */
+public function bootstrapWith(array $bootstrappers)
+&#123;
+    $this-&gt;hasBeenBootstrapped = true;
+    foreach ($bootstrappers as $bootstrapper) &#123;
+        $this[&#39;events&#39;]-&gt;fire(&#39;bootstrapping: &#39;.$bootstrapper, [$this]);
+        //调用$bootstrapper实例中的bootstrap方法
+        $this-&gt;make($bootstrapper)-&gt;bootstrap($this);
+        //Container引用了ArrayAccess
+        //$this[&#39;events&#39;]相当于$this-&gt;make(&#39;events&#39;)
+        $this[&#39;events&#39;]-&gt;fire(&#39;bootstrapped: &#39;.$bootstrapper, [$this]);
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>vim vendor/laravel/framework/src/Illuminate/Events/Dispatcher.php</p>
+</blockquote>
+<pre><code>//启动事件并调用监听者
+public function fire($event, $payload = [], $halt = false)
+&#123;
+    return $this-&gt;dispatch($event, $payload, $halt);
+&#125;
+</code></pre>
+<h3 id="注册Providers"><a href="#注册Providers" class="headerlink" title="注册Providers"></a>注册Providers</h3><blockquote>
+<p>vim Illuminate/Foundation/Bootstrap/RegisterProviders.php</p>
+</blockquote>
+<pre><code>public function bootstrap(Application $app)
+&#123;
+    $app-&gt;registerConfiguredProviders();
+&#125;
+</code></pre>
+<blockquote>
+<p>vim Illuminate/Foundation/Application.php</p>
+</blockquote>
+<pre><code>// 将所有配置的providers载入框架
+public function registerConfiguredProviders()&#123;
+    //$this-&gt;config[&#39;app.providers&#39;]是app/config的providers
+    //将是否以Illuminate开头的providers分割到两个Collection数组中
+    $providers = Collection::make($this-&gt;config[&#39;app.providers&#39;])//return static 延时加载
+                        -&gt;partition(function ($provider) &#123;
+                            return Str::startsWith($provider, &#39;Illuminate\\&#39;);
+                        &#125;);
+    //引入第三方的Service Providers加入Collection数组中
+    $providers-&gt;splice(1, 0, [$this-&gt;make(PackageManifest::class)-&gt;providers()]);
+    // 
+    (new ProviderRepository($this, new Filesystem, $this-&gt;getCachedServicesPath()))
+                    -&gt;load($providers-&gt;collapse()-&gt;toArray());
+&#125;
+</code></pre>
+<blockquote>
+<p>vim src/Illuminate/Foundation/ProviderRepository.php</p>
+</blockquote>
+<pre><code>//注册Service Providers
+public function load(array $providers)
+&#123;
+    //加载bootstrap/cache/services.php
+    $manifest = $this-&gt;loadManifest();
+    //判断是否需要重新编译$manifest
+    if ($this-&gt;shouldRecompile($manifest, $providers)) &#123;
+        $manifest = $this-&gt;compileManifest($providers);
+    &#125;
+    //注册需要延迟加载的Serivice Provider($defer=true)
+    foreach ($manifest[&#39;when&#39;] as $provider =&gt; $events) &#123;
+        $this-&gt;registerLoadEvents($provider, $events);
+    &#125;
+    //注册非延迟加载的Serivice Provider（通过调用register方法）
+    foreach ($manifest[&#39;eager&#39;] as $provider) &#123;
+        $this-&gt;app-&gt;register($provider);
+    &#125;
+    //将延迟加载的Serivice Provider加入容器的deferredServices数组
+    $this-&gt;app-&gt;addDeferredServices($manifest[&#39;deferred&#39;]);
+&#125;
+</code></pre>
+<h3 id="启动Providers"><a href="#启动Providers" class="headerlink" title="启动Providers"></a>启动Providers</h3><pre><code>public function boot()
+&#123;
+    if ($this-&gt;booted) &#123;
+        return;
+    &#125;
+    $this-&gt;fireAppCallbacks($this-&gt;bootingCallbacks);
+    array_walk($this-&gt;serviceProviders, function ($p) &#123;
+            $this-&gt;bootProvider($p);
+    &#125;);
+    $this-&gt;booted = true;
+    $this-&gt;fireAppCallbacks($this-&gt;bootedCallbacks);
+&#125;
+//调用serviceProviders中Provider实例的boot方法
+protected function bootProvider(ServiceProvider $provider)
+&#123;
+    if (method_exists($provider, &#39;boot&#39;)) &#123;
+        return $this-&gt;call([$provider, &#39;boot&#39;]);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="new-self-和new-static"><a href="#new-self-和new-static" class="headerlink" title="new self 和new static"></a>new self 和new static</h3><blockquote>
+<p>new self() 返回的是self所在类<br>new static() 返回调用者所在类</p>
+</blockquote>
+<pre><code>class Father&#123;
+    public function getSelf()&#123;
+        return new self();
+    &#125;
+    public function getStatic()&#123;
+        return new static();
+    &#125;
+&#125;
+$f = new Father();
+echo get_class($f-&gt;getSelf());//Father
+echo get_class($f-&gt;getStatic());//Father
+class Son extends Father&#123;
+&#125;
+$s = new Son();
+echo get_class($s-&gt;getSelf());//Father
+echo get_class($s-&gt;getStatic());//Son
+</code></pre>
+<h3 id="boot和register方法的区别"><a href="#boot和register方法的区别" class="headerlink" title="boot和register方法的区别"></a>boot和register方法的区别</h3><blockquote>
+<p>register方法是必须的，boot方法不是</p>
+</blockquote>
+<pre><code>register 方法用于绑定服务到容器，框架会先调用所有 provider 的 register 方法，等所有服务都注册完毕再去调用每一个服务的 boot 方法。
+
+所以不能在 register 方法里面调用其他 provider 提供的服务，因为我们无法保证其他服务已经注册完毕。
+
+而在 boot 方法里面你可以干任何事情！
+</code></pre>
+<h3 id="延迟加载"><a href="#延迟加载" class="headerlink" title="延迟加载"></a>延迟加载</h3><h4 id="开启延迟加载"><a href="#开启延迟加载" class="headerlink" title="开启延迟加载"></a>开启延迟加载</h4><blockquote>
+<p>vim FamilyServiceProvider.php</p>
+</blockquote>
+<pre><code>class FamilyServiceProvider extends DeferrableProvider&#123;
+    $defer = true;
+    public function register()&#123;
+    &#125;
+    public function providers()&#123;
+        return [&#39;Family&#39;];
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>除编译生成的文件(optimize的反向操作)</p>
+</blockquote>
+<pre><code>php artisan clear-compiled
+</code></pre>
+<blockquote>
+<p>调用</p>
+</blockquote>
+<pre><code>//Application的make会调用deferServices数组中Family对应的实例
+app(&#39;Family&#39;)-&gt;test();
+
+//没有实现providers()时的调用方法
+app(&#39;App\Service\Family\FamilyService&#39;)-&gt;test();
+//providers()方法等价于
+app(&#39;app&#39;)-&gt;bind(&#39;Family&#39;,&#39;App\Service\Family\FamilyService&#39;);
+</code></pre>
+<h4 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h4><blockquote>
+<p>vim Illuminate/Foundation/Application.php</p>
+</blockquote>
+<pre><code>public function make($abstract, array $parameters = [])
+&#123;
+    $abstract = $this-&gt;getAlias($abstract);
+    if (isset($this-&gt;deferredServices[$abstract]) &amp;&amp; ! isset($this-&gt;instances[$abstract])) &#123;
+        $this-&gt;loadDeferredProvider($abstract);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="事件和监听者"><a href="#事件和监听者" class="headerlink" title="事件和监听者"></a>事件和监听者</h3><h4 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h4><blockquote>
+<p>观察者模式能够便利的创建查看目标对象状态的对象，并且提供与核心对象非耦合的指定性功能。</p>
+<p>为软件添加由某个动作或状态变化激活的，但是松散耦合的新功能时，应当创建基于观察者模式的对象。</p>
+</blockquote>
+<h4 id="模拟创建订单时发送短信邮件"><a href="#模拟创建订单时发送短信邮件" class="headerlink" title="模拟创建订单时发送短信邮件"></a>模拟创建订单时发送短信邮件</h4><h6 id="非观察者模式"><a href="#非观察者模式" class="headerlink" title="非观察者模式"></a>非观察者模式</h6><pre><code>class order&#123;
+    public function add()&#123;
+        $a = new Message();$a-&gt;send();
+        $b = new Email();$b-&gt;send();
+    &#125;
+&#125;
+class Message&#123;
+    public function send()&#123;
+        echo &#39;发送短信&#39;;
+    &#125;
+&#125;
+class Email&#123;
+    public function send()&#123;
+        echo &#39;发送邮件&#39;;
+    &#125;
+&#125;
+$order = new Order();
+$order-&gt;add();//发送短信发送邮件
+</code></pre>
+<h6 id="观察者模式-1"><a href="#观察者模式-1" class="headerlink" title="观察者模式"></a>观察者模式</h6><pre><code>&lt;?php
+//被观察者接口
+interface Observable&#123;
+    function add(Observe $observe);//新增观察者
+    function del(Observe $observe);//删除观察者
+&#125;
+class order implements Observable&#123;
+    private $instance = array();
+    public function add(Observe $observe)&#123;
+        if(array_search($observe, $this-&gt;instance) === false)&#123;
+            $this-&gt;instance[] = $observe;
+        &#125;
+    &#125;
+    public function del(Observe $observe)&#123;
+        if($key = array_search($observe, $this-&gt;instance) !== false)&#123;
+            unset($this-&gt;instance[$key]);
+        &#125;
+    &#125;
+    public function notify()&#123;
+        foreach ($this-&gt;instance as $observe)&#123;
+            $observe-&gt;send();
+        &#125;
+    &#125;
+&#125;
+//观察者
+interface Observe&#123;
+    function send();
+&#125;
+class Message implements Observe&#123;
+    public function send()&#123;
+        echo &#39;发送短信&#39;;
+    &#125;
+&#125;
+class Email implements Observe&#123;
+    public function send()&#123;
+        echo &#39;发送邮件&#39;;
+    &#125;
+&#125;
+$order = new Order();
+$order-&gt;add(new Message());
+$order-&gt;add(new Email());
+$order-&gt;notify();//发送短信发送邮件
+</code></pre>
+<p>如果再想发送钉钉提醒，则只需要实现Observe接口类即可</p>
+<pre><code>class DingTalk implements Observe&#123;
+    public function send()&#123;
+        echo &#39;发送钉钉提醒&#39;;
+    &#125;
+&#125;
+$order = new Order();
+$order-&gt;add(new DingTalk());
+$order-&gt;notify();//发送钉钉提醒
+</code></pre>
+<h4 id="创建事件和监听者"><a href="#创建事件和监听者" class="headerlink" title="创建事件和监听者"></a>创建事件和监听者</h4><p>创建事件和监听者</p>
+<pre><code>php artisan make:event EventTest
+php artisan make:listener EventTestListener
+php artisan make:listener OtherListener
+</code></pre>
+<p>注册事件和监听者</p>
+<blockquote>
+<p>vim app/Providers/EventServiceProvider.php</p>
+</blockquote>
+<pre><code>&#39;App\Events\EventTest&#39; =&gt; [
+    &#39;App\Listeners\EventListener&#39;,
+    &#39;App\Listeners\OtherListener&#39;,
+],
+</code></pre>
+<p>调用事件</p>
+<pre><code>event(new EventTest());
+</code></pre>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.bilibili.com/video/BV1oZ4y1u7vv">php:laravel底层核心代码分析之加载并启动serviceProvider</a><br><a href="https://www.cnblogs.com/hanyouchun/p/5504315.html">Laravel Service Provider 中 boot 方法和 register 方法的区别</a><br><a href="https://www.cnblogs.com/suriski/p/5489347.html">php artisan 命令</a></p>
+]]></content>
+      <categories>
+        <category>PHP</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>PHP</tag>
+        <tag>Laravel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GO微服务01-框架核心，依赖注入，闭包</title>
+    <url>/2021/10/01/Laravel%E5%BA%95%E5%B1%8201-%E6%A1%86%E6%9E%B6%E6%A0%B8%E5%BF%83%EF%BC%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E9%97%AD%E5%8C%85/</url>
+    <content><![CDATA[<h2 id="Laravel框架核心"><a href="#Laravel框架核心" class="headerlink" title="Laravel框架核心"></a>Laravel框架核心</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>集成了composer</li>
+<li>实现了依赖注入，更好的管理类的依赖关系，方便扩展（相对于MVC模式）</li>
+<li>高级特性：控制台console，事件event，队列queue，中间件middleware，门面模式facades</li>
+<li>核心概念：服务容器 serviceProvider</li>
+</ol>
+<h3 id="缺点及优化"><a href="#缺点及优化" class="headerlink" title="缺点及优化"></a>缺点及优化</h3><h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ol>
+<li>加载文件太多，访问速度慢</li>
+</ol>
+<h4 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h4><ol>
+<li>缓存配置文件</li>
+<li>去掉不必要的加载文件（主要是serviceProvider）</li>
+<li>开启Opcache</li>
+</ol>
+<h4 id="框架启动流程（生命周期）"><a href="#框架启动流程（生命周期）" class="headerlink" title="框架启动流程（生命周期）"></a>框架启动流程（生命周期）</h4><ol>
+<li>引用自动加载文件</li>
+<li>生成服务容器<ol>
+<li>注册基础的bingings</li>
+<li>通过bind注册服务容器，事件，路由，日志服务</li>
+<li>通过bind绑定接口</li>
+</ol>
+</li>
+<li>获取Request对象</li>
+<li>逻辑处理<ol>
+<li>解析启动项（基础服务）如路由，异常处理，门面，服务容器</li>
+<li>通过管道模式，用中间件过滤用户请求，处理业务逻辑</li>
+</ol>
+</li>
+<li>返回Response对象</li>
+</ol>
+<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><blockquote>
+<p>单例模式，观察者模式，管道模式<br>依赖注入，匿名函数，反射<br>预定义接口ArrayAccess</p>
+</blockquote>
+<h2 id="控制反转和依赖注入"><a href="#控制反转和依赖注入" class="headerlink" title="控制反转和依赖注入"></a>控制反转和依赖注入</h2><h4 id="控制反转-IOC（inversion-of-control）"><a href="#控制反转-IOC（inversion-of-control）" class="headerlink" title="控制反转 IOC（inversion of control）"></a>控制反转 IOC（inversion of control）</h4><blockquote>
+<p>将组件间的依赖关系从程序内部提到外部来管理</p>
+</blockquote>
+<p>解释：不在A类中直接新建B类实例，而是通过IOC容器将B类的实例传给A</p>
+<h4 id="依赖注入-DI（dependency-injection）"><a href="#依赖注入-DI（dependency-injection）" class="headerlink" title="依赖注入 DI（dependency injection）"></a>依赖注入 DI（dependency injection）</h4><blockquote>
+<p>将组件的依赖通过外部以参数或其他形式注入</p>
+</blockquote>
+<p>示例：</p>
+<pre><code>class DbMysql
+&#123;
+    public function query()&#123;&#125;
+&#125;
+class IOC
+&#123;
+    public $db;
+    public function __construct($dbMysql)
+    &#123;
+        $this-&gt;db = $dbMysql;
+    &#125;
+    public function action()
+    &#123;
+        $this-&gt;db-&gt;query();
+    &#125;
+&#125;
+$db = new DbMysql();
+$c = new IOC($db);
+$c-&gt;action();
+</code></pre>
+<p>IOC类中不需要实例化DbMysql，而是将DbMysql的实例作为参数传入，仅调用DbMysql的方法。这种模式就是<strong>依赖注入</strong>。</p>
+<p>将B类的实例化动作提出到IOC类的外面，就叫做<strong>控制反转</strong>。</p>
+<h4 id="PHP的反射机制"><a href="#PHP的反射机制" class="headerlink" title="PHP的反射机制"></a>PHP的反射机制</h4><blockquote>
+<p>在PHP运行时，扩展分析程序，导出或提出关于类，方法，属性，参数的详细信息，这种动态获取和调用信息的功能称为反射API。</p>
+</blockquote>
+<pre><code>class A 
+&#123;
+    public function __construct(B $b)
+    &#123;
+    &#125;
+&#125;
+class B 
+&#123;
+&#125;
+//获取类的反射信息(所有信息)
+$reflector = new ReflectionClass(&#39;A&#39;);
+//获取构造函数
+$constructor = $reflector-&gt;getConstructor();
+//获取构造函数参数
+$dependencies = $constructor-&gt;getParameters();
+//获取依赖的类名
+foreach ($dependencies as $dependency)&#123;
+    if(!is_null($dependency-&gt;getClass()))&#123;
+        $classname = $dependency-&gt;getClass()-&gt;name;
+        $p[] = new $classname();
+    &#125;
+&#125;
+//从给出的参数创建一个新的类实例
+$a = $reflector-&gt;newInstanceArgs($p);
+</code></pre>
+<p>如果B类也有依赖的类，则需要通过递归创建</p>
+<pre><code>&lt;?php 
+class A
+&#123;
+    public function __construct(B $b)
+    &#123;
+        $this-&gt;b = $b;
+    &#125;
+    public function getB()
+    &#123;
+        $this-&gt;b-&gt;bMethod();
+    &#125;
+&#125;
+class B
+&#123;
+    public function __construct(C $c,D $d)
+    &#123;
+        $this-&gt;c = $c;
+        $this-&gt;d = $d;
+    &#125;
+    public  function bMethod()
+    &#123;
+        echo &quot;我是B中的方法bMethod()&quot;;
+    &#125;
+&#125;
+
+class C&#123;
+    public function __construct()
+    &#123;
+    &#125;
+    public function cMethod()&#123;
+        echo &quot;我是C中的方法cMethod()&quot;;
+    &#125;
+&#125;
+
+class D&#123;
+    public function __construct()
+    &#123;
+    &#125;
+    public function dMethod()&#123;
+        echo &quot;我是D中的方法dMethod()&quot;;
+    &#125;
+&#125;
+class Ioc
+&#123;
+    protected $instances = [];
+    public function __construct()
+    &#123;
+    &#125;
+    public function getInstance($classname)&#123;
+        $reflector = new ReflectionClass($classname);
+        $constructor = $reflector-&gt;getConstructor();
+        $dependencies = $constructor-&gt;getParameters();
+        if(!$dependencies)&#123;
+            return new $classname();
+        &#125;
+        foreach ($dependencies as $dependency)&#123;
+            if(!is_null($dependency-&gt;getClass()))&#123;
+                $instances[] = $this-&gt;make($dependency-&gt;getClass()-&gt;name);
+            &#125;
+        &#125;
+        return $reflector-&gt;newInstanceArgs($instances);
+    &#125;
+    public function make($classname)&#123;
+        return $this-&gt;getInstance($classname);
+    &#125;
+&#125;
+$ioc = new Ioc();
+$a = $ioc-&gt;make(&#39;A&#39;);
+$a-&gt;getB();
+</code></pre>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><blockquote>
+<p>PHP程序运行的本质：包含文件，获取实例化对象。<br>传统框架：通过include/require来管理类的依赖关系。<br>Laravel：通过namespace和use，实现了自动加载机制，找到类所在文件，然后通过反射获取类的实例化对象。</p>
+</blockquote>
+<p>学习资料：<br><a href="https://www.bilibili.com/video/BV1dC4y1a7Qp">laravel底层核心代码分析之匿名函数</a><br><a href="https://learnku.com/articles/24118">闭包匿名函数，还在傻傻搞不清楚吗?</a></p>
+<h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><blockquote>
+<p>调用函数的时候将另一个函数作为参数传递到调用的函数中，而不是传递一个普通的变量作为参数</p>
+<p>使用回调函数是为了可以将一段自己定义的功能传到函数内部使用</p>
+</blockquote>
+<pre><code>function test($v)&#123;
+    return $v * $v;
+&#125;
+$a = array(1, 2, 3);
+print_r(array_map(&quot;test&quot;, $a)); //[1, 4, 9]
+</code></pre>
+<h3 id="匿名函数-1"><a href="#匿名函数-1" class="headerlink" title="匿名函数"></a>匿名函数</h3><blockquote>
+<p>没有名字的函数就是匿名函数</p>
+</blockquote>
+<h4 id="1-普通使用"><a href="#1-普通使用" class="headerlink" title="1.普通使用"></a>1.普通使用</h4><pre><code>$func = function($str)&#123;
+    echo $str;
+&#125;;
+$func(&#39;Hello&#39;);
+</code></pre>
+<h4 id="2-使用use传递外部变量"><a href="#2-使用use传递外部变量" class="headerlink" title="2.使用use传递外部变量"></a>2.使用use传递外部变量</h4><pre><code>$b = &quot;World&quot;;
+$func = function($str) use($b)&#123;
+    echo $str. &quot; &quot;. $b;
+&#125;;
+$func(&quot;Hello&quot;);
+</code></pre>
+<h3 id="闭包（closures）"><a href="#闭包（closures）" class="headerlink" title="闭包（closures）"></a>闭包（closures）</h3><blockquote>
+<p>php的闭包(Closure)也就是匿名函数。是PHP5.3引入的。<br>闭包函数就是能够读取其他函数内部变量的函数<br>闭包 = 匿名函数 + use</p>
+</blockquote>
+<pre><code>function getMoney($a, $b)&#123;
+    return function($p) use ($a, $b)&#123;
+        echo $p. &#39;-&#39;. $a. &#39;-&#39;. $b;
+    &#125;;
+&#125;
+$closure = getMoney(&#39;1&#39;, &#39;2&#39;);
+var_dump($closure instanceof Closure);//true
+$closure(&#39;test&#39;);//test-1-2
+</code></pre>
+<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><h4 id="1-当做回调函数"><a href="#1-当做回调函数" class="headerlink" title="1. 当做回调函数"></a>1. 当做回调函数</h4><blockquote>
+<p>src/Illuminate/Routing/Router.php</p>
+</blockquote>
+<pre><code>    public function gatherRouteMiddleware(Route $route)
+    &#123;
+        $middleware = collect($route-&gt;gatherMiddleware())-&gt;map(function ($name) &#123;
+            return (array) MiddlewareNameResolver::resolve($name, $this-&gt;middleware, $this-&gt;middlewareGroups);
+        &#125;)-&gt;flatten();
+
+        return $this-&gt;sortMiddleware($middleware);
+    &#125;
+</code></pre>
+<h4 id="2-当做闭包"><a href="#2-当做闭包" class="headerlink" title="2. 当做闭包"></a>2. 当做闭包</h4><blockquote>
+<p>src/Illuminate/Container/Container.php</p>
+</blockquote>
+<pre><code>    //创建
+    protected function getClosure($abstract, $concrete)
+    &#123;
+        return function ($container, $parameters = []) use ($abstract, $concrete) &#123;
+            if ($abstract == $concrete) &#123;
+                return $container-&gt;build($concrete);
+            &#125;
+
+            return $container-&gt;make($concrete, $parameters);
+        &#125;;
+    &#125;
+    //绑定
+    function bind($abstract, $concrete = null, $shared = false)
+    &#123;
+       ...
+        if (! $concrete instanceof Closure) &#123;
+            $concrete = $this-&gt;getClosure($abstract, $concrete);
+        &#125;
+        ...
+    &#125;
+    //调用
+    public function build($concrete)
+    &#123;
+        if ($concrete instanceof Closure) &#123;
+            return $concrete($this, $this-&gt;getLastParameterOverride());
+        &#125;
+        ...
+    &#125;
+</code></pre>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><h5 id="1-匿名函数只有在调用的时候才会真正解析"><a href="#1-匿名函数只有在调用的时候才会真正解析" class="headerlink" title="1. 匿名函数只有在调用的时候才会真正解析"></a>1. 匿名函数只有在调用的时候才会真正解析</h5><h5 id="2-调用匿名函数时需要传递function后面的参数"><a href="#2-调用匿名函数时需要传递function后面的参数" class="headerlink" title="2. 调用匿名函数时需要传递function后面的参数"></a>2. 调用匿名函数时需要传递function后面的参数</h5><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.bilibili.com/video/BV1Gt4y1y721">laravel底层核心代码分析之核心概念讲解</a><br><a href="https://zhuanlan.zhihu.com/p/93270244">PHP控制反转(IOC)和依赖注入(DI)</a><br><a href="https://learnku.com/articles/24118">闭包匿名函数，还在傻傻搞不清楚吗?</a></p>
+]]></content>
+      <categories>
+        <category>PHP</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>PHP</tag>
+        <tag>Laravel</tag>
       </tags>
   </entry>
 </search>
