@@ -640,7 +640,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-01 21:47:12'>2022-02-08 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-04-02 22:28:05'>2022-02-08 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -651,7 +651,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-text">主从复制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%B6%E5%8E%9F%E7%90%86"><span class="toc-text">复制原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-text">操作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%B8%BB%E4%B8%A4%E4%BB%86"><span class="toc-text">一主两仆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%96%AA%E7%81%AB%E7%9B%B8%E4%BC%A0"><span class="toc-text">薪火相传</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%AE%A2%E4%B8%BA%E4%B8%BB"><span class="toc-text">反客为主</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F"><span class="toc-text">哨兵模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B-1"><span class="toc-text">操作流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-text">缺点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#java%E5%AE%9E%E7%8E%B0%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F"><span class="toc-text">java实现哨兵模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -667,7 +667,112 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+        <h2 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h2><blockquote>
+<p>主机数据更新后根据配置和策略， 自动同步到备机的master/slaver机制，Master以写为主，Slave以读为主</p>
+</blockquote>
+<ul>
+<li>读写分离</li>
+<li>容灾快速恢复</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0v4uw1wwfj20dl08w74l.jpg"></p>
+<h3 id="复制原理"><a href="#复制原理" class="headerlink" title="复制原理"></a>复制原理</h3><ul>
+<li>Slave启动成功连接到master后，从机slave会发送一个sync命令</li>
+<li>Master接到命令启动后台的存盘进程，同时收集所有接收到的用于修改数据集命令， 在后台进程执行完毕之后，master将传送整个数据文件到slave，以完成一次完全同步</li>
+<li>Slave断开之后重新连接到master，一次完全同步（全量复制）将被自动执行，rdb的数据就会给从机。<ul>
+<li>全量复制：而slave服务在接收到数据库文件数据后，将其存盘并加载到内存中。（刚开始从机连接主机，主机一次给）</li>
+<li>增量复制：Master继续将新的所有收集到的修改命令依次传给slave,完成同步 （主机修改了数据会给予从机修改的数据同步，叫做增量复制）</li>
+</ul>
+</li>
+<li>主机负责写，从机负责读</li>
+</ul>
+<ul>
+<li>增量复制：Master继续将新的所有收集到的修改命令依次传给slave,完成同步 （主机修改了数据会给予从机修改的数据同步，叫做增量复制）</li>
+</ul>
+<h3 id="操作流程"><a href="#操作流程" class="headerlink" title="操作流程"></a>操作流程</h3><ol>
+<li><p>新建一个redis6379.conf文件</p>
+<pre><code>include /myredis/redis.conf
+pidfile /var/run/redis_6379.pid
+port 6379
+dbfilename dump6379.rdb
+</code></pre>
+<p>其他两个文件同理，只需要修改其pid进程号以及端口号，生成的rdb文件名</p>
+</li>
+<li><p>启动三台服务器</p>
+</li>
+<li><p>登录进入之后，查看其主机运行的情况：info replication</p>
+</li>
+<li><p>从机上输入：<code>slaveof &lt;ip&gt; &lt;port&gt;</code></p>
+</li>
+</ol>
+<h4 id="一主两仆"><a href="#一主两仆" class="headerlink" title="一主两仆"></a>一主两仆</h4><ul>
+<li>主机挂掉，从机<code>info replication</code>还是显示其主机是挂掉的哪个</li>
+<li>从机挂掉，重启时恢复数据是从主机从头开始追加的（全量复制）</li>
+</ul>
+<h4 id="薪火相传"><a href="#薪火相传" class="headerlink" title="薪火相传"></a>薪火相传</h4><ul>
+<li><p>一个Slave可以是另一个slave的Master，Slave同样可以接收其他 slaves的连接和同步请求，那么该slave作为了链条中下一个的master，可以有效减轻master的写压力，去中心化降低风险。</p>
+</li>
+<li><p><code>slaveof &lt;ip&gt;&lt;port&gt; </code>中途变更转向:会清除之前的数据，重新建立拷贝最新的</p>
+</li>
+<li><p>风险是一旦某个slave宕机，后面的slave都没法备份</p>
+</li>
+<li><p>主机挂了，从机还是从机，无法写数据了</p>
+</li>
+</ul>
+<h4 id="反客为主"><a href="#反客为主" class="headerlink" title="反客为主"></a>反客为主</h4><ul>
+<li><p>当一个master宕机后，后面的slave可以立刻升为master，其后面的slave不用做任何修改</p>
+</li>
+<li><p>手动执行命令：<code>slaveof no one</code> 将从机变为主机</p>
+</li>
+</ul>
+<h3 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h3><p>主要是为了监控主机宕机之后，从机可以立马变为主机，就和上面的反客为主一样，不用手动设置<br>能够后台监控主机是否故障，如果故障了根据投票数自动将从库转换为主库</p>
+<h4 id="操作流程-1"><a href="#操作流程-1" class="headerlink" title="操作流程"></a>操作流程</h4><ol>
+<li><p>新建文件<code>sentinel.conf</code></p>
+<pre><code>sentinel monitor mymaster 127.0.0.1 6379 1
+</code></pre>
+<p>代码的含义为 <code>sentinel</code>哨兵，监控，一个id（别名），ip加端口号</p>
+<p>其中mymaster为监控对象起的服务器名称， 1 为至少有多少个哨兵同意迁移的数量。</p>
+</li>
+<li><p>启动哨兵模式</p>
+<pre><code>redis-sentinel /sentinel.conf
+</code></pre>
+</li>
+<li><p>从机会变成主机判定规则：优先级 &gt; 偏移量 &gt; runid</p>
+<ol>
+<li>优先级：在redis.conf中默认：slave-priority 100，值越小优先级越高</li>
+<li>偏移量：指获得原主机数据最全的，也就是数据越多，变主机的机会越大</li>
+<li>runid：每个redis实例启动后都会随机生成一个40位的runid</li>
+</ol>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0vd6l668tj20la09j3zr.jpg" alt="image-20220402143315210"></p>
+</li>
+</ol>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>复制会有延时</li>
+<li>由于所有的写操作都是先在Master上操作，然后同步更新到Slave上，所以从Master同步到Slave机器有一定的延迟，当系统很繁忙的时候，延迟问题会更加严重，Slave机器数量的增加也会使这个问题更加严重。</li>
+</ul>
+<h4 id="java实现哨兵模式"><a href="#java实现哨兵模式" class="headerlink" title="java实现哨兵模式"></a>java实现哨兵模式</h4><p>主要是配置ip，端口号，主机名称</p>
+<pre><code class="java">private static JedisSentinelPool jedisSentinelPool=null;
+
+public static  Jedis getJedisFromSentinel()&#123;
+    if(jedisSentinelPool==null)&#123;
+        Set&lt;String&gt; sentinelSet=new HashSet&lt;&gt;();
+        sentinelSet.add(&quot;192.168.11.103:26379&quot;);
+
+        JedisPoolConfig jedisPoolConfig =new JedisPoolConfig();
+        jedisPoolConfig.setMaxTotal(10); //最大可用连接数
+        jedisPoolConfig.setMaxIdle(5); //最大闲置连接数
+        jedisPoolConfig.setMinIdle(5); //最小闲置连接数
+        jedisPoolConfig.setBlockWhenExhausted(true); //连接耗尽是否等待
+        jedisPoolConfig.setMaxWaitMillis(2000); //等待时间
+        jedisPoolConfig.setTestOnBorrow(true); //取连接的时候进行一下测试 ping pong
+
+        jedisSentinelPool=new JedisSentinelPool(&quot;mymaster&quot;,sentinelSet,jedisPoolConfig);
+        return jedisSentinelPool.getResource();
+    &#125;else&#123;
+        return jedisSentinelPool.getResource();
+    &#125;
+&#125;
+</code></pre>
+<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
 <p>视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
 <p>参考笔记：<a target="_blank" rel="noopener" href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
 <p>参考笔记：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
