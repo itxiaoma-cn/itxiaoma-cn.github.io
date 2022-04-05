@@ -333,7 +333,7 @@
            href="/2022/02/11/Redis11-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"
            data-tag="REDIS,后端"
            data-author="" >
-            <span class="post-title" title="Redis11-分布式锁">Redis11-分布式锁</span>
+            <span class="post-title" title=""></span>
             <span class="post-date" title="2022-02-11 00:00:00">2022/02/11</span>
         </a>
         
@@ -640,7 +640,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-01 21:47:34'>2022-02-09 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-04-03 14:57:42'>2022-02-09 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -651,7 +651,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4"><span class="toc-text">集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4"><span class="toc-text">搭建步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E7%82%B9%E5%88%86%E9%85%8D"><span class="toc-text">节点分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker%E6%90%AD%E5%BB%BA%E9%9B%86%E7%BE%A4"><span class="toc-text">Docker搭建集群</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E5%BB%BA%E9%9B%86%E7%BE%A4"><span class="toc-text">组建集群</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E9%9B%86%E7%BE%A4"><span class="toc-text">连接集群</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-text">常见问题：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#slots-%E6%8F%92%E6%A7%BD"><span class="toc-text">slots 插槽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%85%E9%9A%9C%E6%81%A2%E5%A4%8D"><span class="toc-text">故障恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Jedis%E9%9B%86%E7%BE%A4%E5%BC%80%E5%8F%91"><span class="toc-text">Jedis集群开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-text">缺点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -667,7 +667,212 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+        <h2 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h2><p>容量不够，并发写操作等问题，可以通过引入集群，也就是可以多个主机可以操作。</p>
+<p>主从模式，薪火相传模式，主机宕机，导致ip地址发生变化，应用程序中配置需要修改对应的主机地址、端口等信息。之前通过代理主机来解决，但是<strong>Redis3.0中提供了解决方案。就是无中心化集群配置</strong>。</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
+<li>Redis 集群实现了对Redis的水平扩容，即启动N个redis节点，将整个数据库分布存储在这N个节点中，每个节点存储总数据的1/N</li>
+<li>Redis 集群通过分区（partition）来提供一定程度的可用性（availability）： 即使集群中有一部分节点失效或者无法进行通讯， 集群也可以继续处理命令请求</li>
+</ul>
+<h3 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h3><ol>
+<li><p>重新配置配置文件(redis_6391.conf ~ redis_6396.conf)</p>
+<pre><code>include /myredis/redis.conf
+pidfile &quot;/var/run/redis_6391.pid&quot;
+port 6391
+dbfilename &quot;dump6391.rdb&quot;
+#集群配置
+cluster-enabled yes                  #开启集群
+cluster-config-file nodes-6391.conf  #节点名字
+cluster-node-timeout 15000           #超时时间
+</code></pre>
+</li>
+<li><p>启动redis服务</p>
+</li>
+<li><p>到redis的src目录中执行命令组建集群：</p>
+<pre><code>redis-cli --cluster create --cluster-replicas 1 192.168.31.51:6391 192.168.31.51:6392 192.168.31.51:6393 192.168.31.51:6394 192.168.31.51:6395 192.168.31.51:6396
+</code></pre>
+<ul>
+<li><p>–replicas 1 采用最简单的方式配置集群，一台主机，一台从机，正好三组</p>
+</li>
+<li><p>分配原则尽量保证每个主数据库运行在不同的IP地址，每个从库和主库不在一个IP地址上</p>
+</li>
+</ul>
+</li>
+<li><p>连接redis集群：加一个<code>- c</code>的参数</p>
+<pre><code>redis-cli -c -p 6391
+</code></pre>
+</li>
+<li><p>查看集群信息</p>
+<pre><code>cluster nodes
+</code></pre>
+</li>
+</ol>
+<h3 id="节点分配"><a href="#节点分配" class="headerlink" title="节点分配"></a>节点分配</h3><ul>
+<li><p>一个集群至少要有三个主节点</p>
+</li>
+<li><p>–replicas 1 采用最简单的方式配置集群，一台主机，一台从机，正好三组</p>
+</li>
+<li><p>分配原则尽量保证每个主数据库运行在不同的IP地址，每个从库和主库不在一个IP地址上</p>
+</li>
+</ul>
+<h3 id="Docker搭建集群"><a href="#Docker搭建集群" class="headerlink" title="Docker搭建集群"></a>Docker搭建集群</h3><p>docker-comose.yml</p>
+<pre><code>version: &#39;3.5&#39;
+
+services:
+  redis6391:
+    image: redis
+    container_name: redis6391
+    restart: always
+    command: redis-server /usr/local/redis/redis6391.conf
+    ports:
+      - 6391:6391
+      - 16391:16391
+    volumes:
+      - ./data:/data:rw
+      - ./config:/usr/local/redis
+      - ./logs:/logs
+  redis6392:
+    image: redis
+    container_name: redis6392
+    restart: always
+    command: redis-server /usr/local/redis/redis6392.conf
+    ports:
+      - 6392:6392
+      - 16392:16392
+    volumes:
+      - ./data:/data:rw
+      - ./config:/usr/local/redis
+      - ./logs:/logs
+  redis6393:
+    image: redis
+    container_name: redis6393
+    restart: always
+    command: redis-server /usr/local/redis/redis6393.conf
+    ports:
+      - 6393:6393
+      - 16393:16393
+    volumes:
+      - ./data:/data:rw
+      - ./config:/usr/local/redis
+      - ./logs:/logs
+  redis6394:
+    image: redis
+    container_name: redis6394
+    restart: always
+    command: redis-server /usr/local/redis/redis6394.conf
+    ports:
+      - 6394:6394
+      - 16394:16394
+    volumes:
+      - ./data:/data:rw
+      - ./config:/usr/local/redis
+      - ./logs:/logs
+  redis6395:
+    image: redis
+    container_name: redis6395
+    restart: always
+    command: redis-server /usr/local/redis/redis6395.conf
+    ports:
+      - 6395:6395
+      - 16395:16395
+    volumes:
+      - ./data:/data:rw
+      - ./config:/usr/local/redis
+      - ./logs:/logs            
+  redis6396:
+    image: redis
+    container_name: redis6396
+    restart: always
+    command: redis-server /usr/local/redis/redis6396.conf
+    ports:
+      - 6396:6396
+      - 16396:16396
+    volumes:
+      - ./data:/data:rw
+      - ./config:/usr/local/redis
+      - ./logs:/logs      
+</code></pre>
+<p>/config/redis.conf</p>
+<pre><code>protected-mode no
+daemonize no
+</code></pre>
+<p>/config/redis6391.conf ~ /config/redis6396.conf</p>
+<pre><code>include /usr/local/redis/redis.conf
+pidfile &quot;/var/run/redis.pid&quot;
+port 6391
+dbfilename &quot;dump6391.rdb&quot;
+logfile /logs/redis6391.log
+#集群配置
+cluster-enabled yes
+cluster-config-file nodes-6391.conf
+cluster-node-timeout 15000
+</code></pre>
+<h4 id="组建集群"><a href="#组建集群" class="headerlink" title="组建集群"></a>组建集群</h4><pre><code>docker exec -it redis6391 /bin/bash -c &quot;redis-cli --cluster create --cluster-replicas 1 192.168.31.51:6391 192.168.31.51:6392 192.168.31.51:6393 192.168.31.51:6394 192.168.31.51:6395 192.168.31.51:6396&quot;
+</code></pre>
+<h4 id="连接集群"><a href="#连接集群" class="headerlink" title="连接集群"></a>连接集群</h4><pre><code>docker exec -it redis6391 /bin/bash -c &quot;redis-cli -c -p 6391&quot;
+</code></pre>
+<h4 id="常见问题："><a href="#常见问题：" class="headerlink" title="常见问题："></a>常见问题：</h4><p>A：Waiting for the cluster to join…..</p>
+<p>Q：需要开放redis实例端口号+10000的端口</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0wf7px1rgj20ow0b777p.jpg"></p>
+<h3 id="slots-插槽"><a href="#slots-插槽" class="headerlink" title="slots 插槽"></a>slots 插槽</h3><p> 一个 Redis 集群包含 16384 个插槽（hash slot），数据库中的每个键都属于这 16384 个插槽的其中一个。集群使用公式 CRC16 (key) % 16384 来计算键 key 属于哪个槽， 其中 CRC16 (key) 语句用于计算键 key 的 CRC16 校验和 。</p>
+<p>集群中的每个节点负责处理一部分插槽。 举个例子， 如果一个集群可以有主节点， 其中：</p>
+<ul>
+<li>节点 A 负责处理 0 号至 5460 号插槽。</li>
+<li>节点 B 负责处理 5461 号至 10922 号插槽。</li>
+<li>节点 C 负责处理 10923 号至 16383 号插槽。</li>
+</ul>
+<p>在redis-cli每次录入、查询键值，redis都会计算出该key应该送往的插槽，如果不是该客户端对应服务器的插槽，redis会报错，并告知应前往的redis实例地址和端口</p>
+<ul>
+<li>查询集群中的值，<code>CLUSTER KEYSLOT k1</code></li>
+<li>查询卡槽中key的数量，<code>CLUSTER COUNTKEYSINSLOT 12706</code></li>
+<li>查询指定卡槽返回key的数量，<code>CLUSTER GETKEYSINSLOT 5474 2</code></li>
+</ul>
+<p>如果在集群中录入值，录一个值，会根据计算进入到某个主从的卡槽值</p>
+<p>如果传输多个值，要使用到分组的技术，在用mset 同时设置多个值的时候，需要把这些key放到同一个组中，不然会报错。</p>
+<p>可以通过{}来定义组的概念，从而使key中{}内相同内容的键值对放到一个slot中去</p>
+<pre><code>192.168.144.1:6393&gt; mset k1&#123;g1&#125; v1 k2&#123;g1&#125; v2
+OK
+192.168.144.1:6393&gt; get k1
+&quot;v1&quot;
+192.168.144.1:6393&gt; get k2
+-&gt; Redirected to slot [449] located at 192.168.144.1:6391
+(nil)
+192.168.144.1:6391&gt; get k2&#123;g1&#125;
+-&gt; Redirected to slot [13519] located at 192.168.144.1:6393
+&quot;v2&quot;
+</code></pre>
+<h3 id="故障恢复"><a href="#故障恢复" class="headerlink" title="故障恢复"></a>故障恢复</h3><ol>
+<li><p>如果某个主机宕机了，从机上位变主机（注意配置：cluster-node-timeout 默认<strong>15</strong> 秒超时）</p>
+</li>
+<li><p>挂掉的主机上线之后，会变成从机</p>
+</li>
+<li><p>如果所有某一段插槽的主从节点都宕掉，redis 服务是否还能继续？</p>
+<ul>
+<li>如果某一段插槽的主从都挂掉，而 cluster-require-full-coverage 为 yes ，那么整个集群都挂掉。</li>
+<li>如果某一段插槽的主从都挂掉，而 cluster-require-full-coverage 为 no ，那么，该插槽数据全都不能使用，也无法存储。</li>
+</ul>
+</li>
+</ol>
+<h3 id="Jedis集群开发"><a href="#Jedis集群开发" class="headerlink" title="Jedis集群开发"></a>Jedis集群开发</h3><pre><code>public class JedisClusterTest &#123;
+    public static void main(String[] args) &#123;
+        HostAndPort hostAndPort = new HostAndPort(&quot;192.168.242.110&quot;, 6381);
+        JedisCluster jedisCluster = new JedisCluster(hostAndPort);
+        jedisCluster.set(&quot;k1&quot;,&quot;v1&quot;);
+        String k1 = jedisCluster.get(&quot;k1&quot;);
+        System.out.println(k1);
+    &#125;
+&#125;
+</code></pre>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>实现扩容</li>
+<li>分摊压力</li>
+<li>无中心配置相对简单</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>多键操作是不被支持的（例如mset，需要用组操作）。</li>
+<li>多键的 Redis 事务是不被支持的，lua 脚本不被支持。</li>
+<li>由于集群方案出现较晚，很多公司已经采用了其他的集群方案，而代理或者客户端分片的方案想要迁移至 redis cluster，需要整体迁移而不是逐步过渡，复杂度较大。</li>
+</ul>
+<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
 <p>视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
 <p>参考笔记：<a target="_blank" rel="noopener" href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
 <p>参考笔记：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>

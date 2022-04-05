@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Redis11-分布式锁 | IT小马</title>
+  <title>IT小马</title>
   <meta name="keywords" content=" REDIS , 后端 ">
-  <meta name="description" content="Redis11-分布式锁 | IT小马">
+  <meta name="description" content="IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GO微服务01-Go语言基础">
@@ -333,7 +333,7 @@
            href="/2022/02/11/Redis11-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"
            data-tag="REDIS,后端"
            data-author="" >
-            <span class="post-title" title="Redis11-分布式锁">Redis11-分布式锁</span>
+            <span class="post-title" title=""></span>
             <span class="post-date" title="2022-02-11 00:00:00">2022/02/11</span>
         </a>
         
@@ -613,8 +613,6 @@
     <div class="pjax">
         <article id="post-Redis11-分布式锁" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Redis11-分布式锁</h1>
-    
     <div class="article-meta">
         
         
@@ -640,7 +638,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-01 21:48:16'>2022-02-11 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-04-05 12:15:09'>2022-02-11 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -651,7 +649,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-text">分布式锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="toc-text">实现方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Redis%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-text">使用Redis实现分布式锁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#setnx"><span class="toc-text">setnx</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#set-key-nx-ex-time"><span class="toc-text">set key nx ex time</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#uuid-%E9%98%B2%E6%AD%A2%E8%AF%AF%E5%88%A0"><span class="toc-text">uuid 防止误删</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lua%E4%BF%9D%E8%AF%81%E5%8E%9F%E5%AD%90%E6%80%A7"><span class="toc-text">Lua保证原子性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83-Reference"><span class="toc-text">参考 Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -667,7 +665,94 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
+        <h2 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>单机部署系统演化成分布式集群系统后，由于分布式系统多线程，多进程且分布在不同机器上，单机部署的并发控制锁策略失效。</p>
+<p>分布式锁是一种跨服务器的互斥机制来控制共享资源访问的问题解决方案。</p>
+<h3 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h3><p>主流实现方案：</p>
+<ol>
+<li>基于数据库实现</li>
+<li>基于缓存（Redis等）——性能最高</li>
+<li>基于Zookeeper——可靠性最高</li>
+</ol>
+<p>根据实现方式，分布式锁还可以分为类 CAS 自旋式分布式锁以及 event 事件类型分布式锁：</p>
+<ul>
+<li>类 CAS 自旋式分布式锁：询问的方式，类似 java 并发编程中的线程获询问的方式尝试加锁，如 mysql、redis。</li>
+<li>另外一类是 event 事件通知进程后续锁的变化，轮询向外的过程，如 zookeeper、etcd。</li>
+</ul>
+<h3 id="使用Redis实现分布式锁"><a href="#使用Redis实现分布式锁" class="headerlink" title="使用Redis实现分布式锁"></a>使用Redis实现分布式锁</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xpbd9u7cj20et0d9755.jpg" alt="image-20220404150410343"></p>
+<h4 id="setnx"><a href="#setnx" class="headerlink" title="setnx"></a>setnx</h4><p>通过该命令尝试获得锁，没有获得锁的线程会不断等待尝试。</p>
+<ul>
+<li>setnx 上锁，通过del 删除，ttl查看过期时间</li>
+<li>锁一直没有释放，可以通过设置过期时间来自动释放</li>
+</ul>
+<p>set key ex 3000nx：设置过期时间，自动释放锁，解决当某一个业务异常而导致锁无法释放的问题。但是当业务运行超过过期时间时，开辟监控线程增加该业务的运行时间，直到运行结束，释放锁。</p>
+<p>uuid：设置 uuid，释放前获取这个值，判断是否自己的锁，防止误删锁，造成没锁的情况。</p>
+<pre><code>192.168.144.1:6393&gt; setnx users 20
+(integer) 0
+192.168.144.1:6393&gt; get users
+&quot;20&quot;
+192.168.144.1:6393&gt; ttl users
+(integer) -1
+192.168.144.1:6393&gt; expire users 10
+(integer) 1
+192.168.144.1:6393&gt; ttl users
+(integer) 8
+192.168.144.1:6393&gt; ttl users
+(integer) -2
+192.168.144.1:6393&gt; get users
+(nil)
+192.168.144.1:6393&gt; del users
+(integer) 1
+</code></pre>
+<h4 id="set-key-nx-ex-time"><a href="#set-key-nx-ex-time" class="headerlink" title="set key nx ex time"></a>set key nx ex time</h4><p>nx为上锁，ex为过期时间</p>
+<p>设置过期时间，自动释放锁，解决当某一个业务异常而导致锁无法释放的问题。但是当业务运行超过过期时间时，开辟监控线程增加该业务的运行时间，直到运行结束，释放锁。</p>
+<p>nx为上锁，ex为过期时间（秒）</p>
+<pre><code>set users 10 nx ex 3600
+</code></pre>
+<h4 id="uuid-防止误删"><a href="#uuid-防止误删" class="headerlink" title="uuid 防止误删"></a>uuid 防止误删</h4><p>设置 uuid，释放前获取这个值，判断是否自己的锁，防止误删锁，造成没锁的情况。</p>
+<p> <img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xqki4u3hj20u60bswfy.jpg" alt="image-20220404154733198"></p>
+<pre><code>@GetMapping(&quot;testLock&quot;)
+public void testLock()&#123;
+    String uuid = UUID.randomUUID().toString();
+    //1获取锁，setne ,顺便设置过期时间
+    Boolean lock = redisTemplate.opsForValue().setIfAbsent(&quot;lock&quot;, uuid,3,TimeUnit.SECONDS);
+    //2获取锁成功、查询num的值
+    if(lock)&#123;
+       ...
+        String lockUuid = (String)redisTemplate.opsForValue().get(&quot;lock&quot;);
+        if(uuid.equals(lockUuid))&#123;
+             //2.4释放锁，del
+            redisTemplate.delete(&quot;lock&quot;);
+        &#125;
+    &#125;else&#123;
+       ...
+    &#125;
+&#125;
+</code></pre>
+<h4 id="Lua保证原子性"><a href="#Lua保证原子性" class="headerlink" title="Lua保证原子性"></a>Lua保证原子性</h4><p>加锁</p>
+<pre><code>// 1. 从redis中获取锁,set k1 v1 px 20000 nx
+String uuid = UUID.randomUUID().toString();
+Boolean lock = this.redisTemplate.opsForValue()
+      .setIfAbsent(&quot;lock&quot;, uuid, 2, TimeUnit.SECONDS);
+</code></pre>
+<p>释放锁（防止误删）</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0yq0lrjbjj20dc0e90tn.jpg" alt="image-20220405121356871"></p>
+<pre><code>// 2. 释放锁 del
+String script = &quot;if redis.call(&#39;get&#39;, KEYS[1]) == ARGV[1] then return redis.call(&#39;del&#39;, KEYS[1]) else return 0 end&quot;;
+// 设置lua脚本返回的数据类型
+DefaultRedisScript&lt;Long&gt; redisScript = new DefaultRedisScript&lt;&gt;();
+// 设置lua脚本返回类型为Long
+redisScript.setResultType(Long.class);
+redisScript.setScriptText(script);
+redisTemplate.execute(redisScript, Arrays.asList(&quot;lock&quot;),uuid);
+</code></pre>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>为了确保分布式锁可用，我们至少要确保锁的实现同时满足以下四个条件：<br>同一时间只有一个人有锁，而且开锁解锁都是同一个人，不会死锁</p>
+<ul>
+<li>互斥性。在任意时刻，只有一个客户端能持有锁。</li>
+<li>不会发生死锁。即使有一个客户端在持有锁的期间崩溃而没有主动解锁，也能保证后续其他客户端能加锁。</li>
+<li>解铃还须系铃人。加锁和解锁必须是同一个客户端，客户端自己不能把别人加的锁给解了。</li>
+<li>加锁和解锁必须具有原子性</li>
+</ul>
+<h2 id="参考-Reference"><a href="#参考-Reference" class="headerlink" title="参考 Reference"></a>参考 Reference</h2><p>参考资料：《Redis开发与运维》</p>
 <p>视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Rv41177Af">https://www.bilibili.com/video/BV1Rv41177Af</a></p>
 <p>参考笔记：<a target="_blank" rel="noopener" href="https://zhangc233.github.io/2021/05/02/Redis/">https://zhangc233.github.io/2021/05/02/Redis/</a></p>
 <p>参考笔记：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_47872288/article/details/118410080">https://blog.csdn.net/weixin_47872288/article/details/118410080</a></p>
