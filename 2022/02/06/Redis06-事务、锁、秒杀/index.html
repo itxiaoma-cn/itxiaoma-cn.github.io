@@ -640,7 +640,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-03-31 10:46:07'>2022-02-06 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-04-05 17:50:28'>2022-02-06 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -671,7 +671,7 @@
 <p>Redis 事务的主要作用就是<strong>串联多个命令</strong>防止别的命令插队。</p>
 <h3 id="multi、exec、discard"><a href="#multi、exec、discard" class="headerlink" title="multi、exec、discard"></a>multi、exec、discard</h3><p>从输入multi开始，输入的命令会依次进入命令队列中，但不会执行；直到输入exec后，会将之前命令队列中的命令依次执行。</p>
 <p>组队的过程中可以通过discard来放弃组队。</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s1gd6snij20n607laal.jpg" alt="image-20220330173052359"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s1gd6snij20n607laal.jpg"></p>
 <pre><code>127.0.0.1:6379&gt; multi
 OK
 127.0.0.1:6379(TX)&gt; set k1 v1
@@ -688,7 +688,7 @@ QUEUED
 127.0.0.1:6379(TX)&gt; discard
 OK
 </code></pre>
-<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s24xp2bgj20mp09i0tc.jpg" alt="image-20220330175429278"></p>
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s24xp2bgj20mp09i0tc.jpg"></p>
 <ul>
 <li>组队中某个命令出现了错误报告，执行时整个队列中的命令都会被取消</li>
 <li>执行阶段某个命令报错，则只有报错的命令不会被执行，其他的命令都会执行，不会回滚。</li>
@@ -697,7 +697,7 @@ OK
 <p>传统的关系型数据库里边就用到了很多这种锁机制<strong>，比如</strong>行锁<strong>，</strong>表锁<strong>等，</strong>读锁<strong>，</strong>写锁**等，都是在做操作之前先上锁。</p>
 <h3 id="乐观锁-Optimistic-Lock"><a href="#乐观锁-Optimistic-Lock" class="headerlink" title="乐观锁 (Optimistic Lock)"></a>乐观锁 (Optimistic Lock)</h3><p>每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机制。</p>
 <p>乐观锁适用于多读的应用类型，这样可以提高吞吐量。Redis 就是利用这种 <strong>check-and-set 机制</strong>实现事务的。</p>
-<h2 id="11-秒杀案例"><a href="#11-秒杀案例" class="headerlink" title="11.秒杀案例"></a>11.秒杀案例</h2><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s6ga8wkej20d903aq2z.jpg" alt="image-20220330202345429"></p>
+<h2 id="11-秒杀案例"><a href="#11-秒杀案例" class="headerlink" title="11.秒杀案例"></a>11.秒杀案例</h2><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s6ga8wkej20d903aq2z.jpg"></p>
 <h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
 <li>先判断这两个有一个为空，则返回false</li>
 <li>通过jedis来连接服务器的redis</li>
@@ -978,7 +978,7 @@ Jedis jedis = jedisPoolInstance.getResource();
 </ul>
 <p>Redis Watch 命令用于监视一个(或多个) key ，如果在事务执行之前这个(或这些) key 被其他命令所改动，那么事务将被打断。</p>
 <p>当事务执行时,也就是服务器收到了 exec 指令要顺序执行缓存的事务队列时, <em>Redis</em> 会检查关键变量自 <em>Watch</em> 之后,是否被修改了。</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0sbxcim5qj20f50ataak.jpg" alt="image-20220330233311281"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0sbxcim5qj20f50ataak.jpg"></p>
 <pre><code>//加入一个监视的watch
 jedis.watch(kcKey);
 

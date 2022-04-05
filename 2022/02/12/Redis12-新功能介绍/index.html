@@ -640,7 +640,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-05 12:27:56'>2022-02-12 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-04-05 17:49:04'>2022-02-12 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -681,7 +681,7 @@
 <li>acl set user命令创建和编辑用户ACL</li>
 </ul>
 <h3 id="IO多线程"><a href="#IO多线程" class="headerlink" title="IO多线程"></a>IO多线程</h3><p>IO多线程其实指客户端交互部分的网络IO交互处理模块多线程，而非执行命令多线程。</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0yqavt0njj20f909hweu.jpg" alt="image-20220405122350602"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0yqavt0njj20f909hweu.jpg"></p>
 <p><strong>Redis6执行命令依然是单线程</strong></p>
 <p>Redis 6 加入多线程,但跟 Memcached 这种从 IO处理到数据访问多线程的实现模式有些差异。Redis 的多线程部分只是用来处理网络数据的读写和协议解析，执行命令仍然是单线程。之所以这么设计是不想因为多线程而变得复杂，需要去控制 key、lua、事务，LPUSH/LPOP 等等的并发问题</p>
 <p>另外，多线程IO默认也是不开启的，需要在配置文件中配置</p>

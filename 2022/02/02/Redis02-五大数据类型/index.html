@@ -640,7 +640,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-03-30 19:18:45'>2022-02-02 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-04-05 17:51:09'>2022-02-02 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -741,7 +741,7 @@ lrem key n value 从左边删除n个value值
 
 lset key index value 在列表key中的下标index中修改值value
 </code></pre>
-<h4 id="数据结构-1"><a href="#数据结构-1" class="headerlink" title="数据结构"></a>数据结构</h4><p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618164459005.png" alt="image-20210618164459005"></p>
+<h4 id="数据结构-1"><a href="#数据结构-1" class="headerlink" title="数据结构"></a>数据结构</h4><p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618164459005.png"></p>
 <ul>
 <li>List 的数据结构为快速链表 quickList。</li>
 <li>首先在列表元素较少的情况下会使用一块连续的内存存储，这个结构是 ziplist，也即是压缩列表。它将所有的元素紧挨着一起存储，分配的是一块连续的内存。</li>
@@ -787,7 +787,7 @@ sdiff key1 key2 返回两个集合的差集元素（key1有的，key2没有）
 <li><p>类似 Java 里面的 Map&lt;String,Object&gt;。</p>
 </li>
 <li><p>通过 key (用户 ID) + field (属性标签) 就可以操作对应属性数据了，既不需要重复存储数据，也不会带来序列化和并发修改控制的问题。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203718979.png" alt="image-20210618203718979"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203718979.png"></p>
 </li>
 </ul>
 <h4 id="常用命令-2"><a href="#常用命令-2" class="headerlink" title="常用命令"></a>常用命令</h4><pre><code>hset key field value 给key集合中的filed键赋值value

@@ -640,7 +640,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-04 14:44:07'>2022-02-10 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-04-05 17:49:26'>2022-02-10 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -705,8 +705,8 @@
 </ol>
 </li>
 </ol>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xokk7cj6j20cc0bdt99.jpg" alt="image-20220404143824923"></p>
-<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xoq73f6ij21040dlta4.jpg" alt="image-20220404144349166"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xokk7cj6j20cc0bdt99.jpg"></p>
+<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xoq73f6ij21040dlta4.jpg"></p>
 <h3 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h3><p>key 对应的数据存在，但在 redis 中过期，此时若有大量并发请求过来，这些请求发现缓存过期一般都会从后端数据库加载数据并回设到缓存，这个时候大并发的请求可能会瞬间把后端数据库压垮。</p>
 <p>缓存雪崩与缓存击穿的区别在于这里针对很多 key 缓存，前者则是某一个 key 正常访问。</p>
 <h3 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h3><ol>

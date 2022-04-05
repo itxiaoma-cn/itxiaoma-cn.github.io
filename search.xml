@@ -2242,7 +2242,7 @@ lrem key n value 从左边删除n个value值
 
 lset key index value 在列表key中的下标index中修改值value
 </code></pre>
-<h4 id="数据结构-1"><a href="#数据结构-1" class="headerlink" title="数据结构"></a>数据结构</h4><p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618164459005.png" alt="image-20210618164459005"></p>
+<h4 id="数据结构-1"><a href="#数据结构-1" class="headerlink" title="数据结构"></a>数据结构</h4><p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618164459005.png"></p>
 <ul>
 <li>List 的数据结构为快速链表 quickList。</li>
 <li>首先在列表元素较少的情况下会使用一块连续的内存存储，这个结构是 ziplist，也即是压缩列表。它将所有的元素紧挨着一起存储，分配的是一块连续的内存。</li>
@@ -2288,7 +2288,7 @@ sdiff key1 key2 返回两个集合的差集元素（key1有的，key2没有）
 <li><p>类似 Java 里面的 Map&lt;String,Object&gt;。</p>
 </li>
 <li><p>通过 key (用户 ID) + field (属性标签) 就可以操作对应属性数据了，既不需要重复存储数据，也不会带来序列化和并发修改控制的问题。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203718979.png" alt="image-20210618203718979"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/zhangc233/pic@master/img/image-20210618203718979.png"></p>
 </li>
 </ul>
 <h4 id="常用命令-2"><a href="#常用命令-2" class="headerlink" title="常用命令"></a>常用命令</h4><pre><code>hset key field value 给key集合中的filed键赋值value
@@ -3195,7 +3195,7 @@ public class RedisTestController &#123;
 <p>Redis 事务的主要作用就是<strong>串联多个命令</strong>防止别的命令插队。</p>
 <h3 id="multi、exec、discard"><a href="#multi、exec、discard" class="headerlink" title="multi、exec、discard"></a>multi、exec、discard</h3><p>从输入multi开始，输入的命令会依次进入命令队列中，但不会执行；直到输入exec后，会将之前命令队列中的命令依次执行。</p>
 <p>组队的过程中可以通过discard来放弃组队。</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s1gd6snij20n607laal.jpg" alt="image-20220330173052359"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s1gd6snij20n607laal.jpg"></p>
 <pre><code>127.0.0.1:6379&gt; multi
 OK
 127.0.0.1:6379(TX)&gt; set k1 v1
@@ -3212,7 +3212,7 @@ QUEUED
 127.0.0.1:6379(TX)&gt; discard
 OK
 </code></pre>
-<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s24xp2bgj20mp09i0tc.jpg" alt="image-20220330175429278"></p>
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s24xp2bgj20mp09i0tc.jpg"></p>
 <ul>
 <li>组队中某个命令出现了错误报告，执行时整个队列中的命令都会被取消</li>
 <li>执行阶段某个命令报错，则只有报错的命令不会被执行，其他的命令都会执行，不会回滚。</li>
@@ -3221,7 +3221,7 @@ OK
 <p>传统的关系型数据库里边就用到了很多这种锁机制<strong>，比如</strong>行锁<strong>，</strong>表锁<strong>等，</strong>读锁<strong>，</strong>写锁**等，都是在做操作之前先上锁。</p>
 <h3 id="乐观锁-Optimistic-Lock"><a href="#乐观锁-Optimistic-Lock" class="headerlink" title="乐观锁 (Optimistic Lock)"></a>乐观锁 (Optimistic Lock)</h3><p>每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数据，可以使用版本号等机制。</p>
 <p>乐观锁适用于多读的应用类型，这样可以提高吞吐量。Redis 就是利用这种 <strong>check-and-set 机制</strong>实现事务的。</p>
-<h2 id="11-秒杀案例"><a href="#11-秒杀案例" class="headerlink" title="11.秒杀案例"></a>11.秒杀案例</h2><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s6ga8wkej20d903aq2z.jpg" alt="image-20220330202345429"></p>
+<h2 id="11-秒杀案例"><a href="#11-秒杀案例" class="headerlink" title="11.秒杀案例"></a>11.秒杀案例</h2><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0s6ga8wkej20d903aq2z.jpg"></p>
 <h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ol>
 <li>先判断这两个有一个为空，则返回false</li>
 <li>通过jedis来连接服务器的redis</li>
@@ -3502,7 +3502,7 @@ Jedis jedis = jedisPoolInstance.getResource();
 </ul>
 <p>Redis Watch 命令用于监视一个(或多个) key ，如果在事务执行之前这个(或这些) key 被其他命令所改动，那么事务将被打断。</p>
 <p>当事务执行时,也就是服务器收到了 exec 指令要顺序执行缓存的事务队列时, <em>Redis</em> 会检查关键变量自 <em>Watch</em> 之后,是否被修改了。</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0sbxcim5qj20f50ataak.jpg" alt="image-20220330233311281"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0sbxcim5qj20f50ataak.jpg"></p>
 <pre><code>//加入一个监视的watch
 jedis.watch(kcKey);
 
@@ -4642,7 +4642,7 @@ session.invalidate();
 <li>在Linux程序中，fork()会产生一个和父进程完全相同的子进程，但子进程在此后会exec系统调用，出于效率考虑，引入了“写时复制技术”</li>
 <li><strong>一般情况父进程和子进程共用同一段物理内存</strong>，只有进程空间的各段内容要发生变化时，才会将父进程的内容复制一份给子进程</li>
 </ul>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0tys53ifrj20cy08n74h.jpg" alt="image-20220401092922689"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0tys53ifrj20cy08n74h.jpg"></p>
 <h4 id="配置文件-SNAPSHOTTING"><a href="#配置文件-SNAPSHOTTING" class="headerlink" title="配置文件 SNAPSHOTTING"></a>配置文件 SNAPSHOTTING</h4><p>在redis.conf中配置文件名称，默认为dump.db</p>
 <pre><code>dbfilename dump.rdb                                    #持久化文件     
 dir ./                                                            #在启动目录中生成rdb文件    
@@ -4728,7 +4728,7 @@ appendfilename &quot;appendonly.aof&quot;
 <li>如果 Redis 的 AOF 当前大小 &gt;= base_size +base_size*100% (默认) 且当前大小 &gt;=64mb (默认) 的情况下，Redis 会对 AOF 进行重写。</li>
 <li>例如：文件达到 70MB 开始重写，降到 50MB，下次什么时候开始重写？100MB</li>
 </ul>
-<h5 id="重写流程"><a href="#重写流程" class="headerlink" title="重写流程"></a>重写流程</h5><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0u9wy5ubtj20gb0ewmy0.jpg" alt="image-20220401155437546"></p>
+<h5 id="重写流程"><a href="#重写流程" class="headerlink" title="重写流程"></a>重写流程</h5><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0u9wy5ubtj20gb0ewmy0.jpg"></p>
 <ol>
 <li>bgrewriteaof 触发重写，判断是否当前有 bgsave 或 bgrewriteaof 在运行，如果有，则等待该命令结束后再继续执行；</li>
 <li>主进程 fork 出子进程执行重写操作，保证主进程不会阻塞；</li>
@@ -6949,7 +6949,7 @@ dbfilename dump6379.rdb
 <li>偏移量：指获得原主机数据最全的，也就是数据越多，变主机的机会越大</li>
 <li>runid：每个redis实例启动后都会随机生成一个40位的runid</li>
 </ol>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0vd6l668tj20la09j3zr.jpg" alt="image-20220402143315210"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0vd6l668tj20la09j3zr.jpg"></p>
 </li>
 </ol>
 <h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
@@ -7254,8 +7254,8 @@ OK
 </ol>
 </li>
 </ol>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xokk7cj6j20cc0bdt99.jpg" alt="image-20220404143824923"></p>
-<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xoq73f6ij21040dlta4.jpg" alt="image-20220404144349166"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xokk7cj6j20cc0bdt99.jpg"></p>
+<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xoq73f6ij21040dlta4.jpg"></p>
 <h3 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h3><p>key 对应的数据存在，但在 redis 中过期，此时若有大量并发请求过来，这些请求发现缓存过期一般都会从后端数据库加载数据并回设到缓存，这个时候大并发的请求可能会瞬间把后端数据库压垮。</p>
 <p>缓存雪崩与缓存击穿的区别在于这里针对很多 key 缓存，前者则是某一个 key 正常访问。</p>
 <h3 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h3><ol>
@@ -7293,7 +7293,7 @@ OK
 <li>类 CAS 自旋式分布式锁：询问的方式，类似 java 并发编程中的线程获询问的方式尝试加锁，如 mysql、redis。</li>
 <li>另外一类是 event 事件通知进程后续锁的变化，轮询向外的过程，如 zookeeper、etcd。</li>
 </ul>
-<h3 id="使用Redis实现分布式锁"><a href="#使用Redis实现分布式锁" class="headerlink" title="使用Redis实现分布式锁"></a>使用Redis实现分布式锁</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xpbd9u7cj20et0d9755.jpg" alt="image-20220404150410343"></p>
+<h3 id="使用Redis实现分布式锁"><a href="#使用Redis实现分布式锁" class="headerlink" title="使用Redis实现分布式锁"></a>使用Redis实现分布式锁</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xpbd9u7cj20et0d9755.jpg"></p>
 <h4 id="setnx"><a href="#setnx" class="headerlink" title="setnx"></a>setnx</h4><p>通过该命令尝试获得锁，没有获得锁的线程会不断等待尝试。</p>
 <ul>
 <li>setnx 上锁，通过del 删除，ttl查看过期时间</li>
@@ -7324,7 +7324,7 @@ OK
 <pre><code>set users 10 nx ex 3600
 </code></pre>
 <h4 id="uuid-防止误删"><a href="#uuid-防止误删" class="headerlink" title="uuid 防止误删"></a>uuid 防止误删</h4><p>设置 uuid，释放前获取这个值，判断是否自己的锁，防止误删锁，造成没锁的情况。</p>
-<p> <img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xqki4u3hj20u60bswfy.jpg" alt="image-20220404154733198"></p>
+<p> <img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xqki4u3hj20u60bswfy.jpg"></p>
 <pre><code>@GetMapping(&quot;testLock&quot;)
 public void testLock()&#123;
     String uuid = UUID.randomUUID().toString();
@@ -7350,7 +7350,7 @@ Boolean lock = this.redisTemplate.opsForValue()
       .setIfAbsent(&quot;lock&quot;, uuid, 2, TimeUnit.SECONDS);
 </code></pre>
 <p>释放锁（防止误删）</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0yq0lrjbjj20dc0e90tn.jpg" alt="image-20220405121356871"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0yq0lrjbjj20dc0e90tn.jpg"></p>
 <pre><code>// 2. 释放锁 del
 String script = &quot;if redis.call(&#39;get&#39;, KEYS[1]) == ARGV[1] then return redis.call(&#39;del&#39;, KEYS[1]) else return 0 end&quot;;
 // 设置lua脚本返回的数据类型
@@ -7397,7 +7397,7 @@ redisTemplate.execute(redisScript, Arrays.asList(&quot;lock&quot;),uuid);
 <li>acl set user命令创建和编辑用户ACL</li>
 </ul>
 <h3 id="IO多线程"><a href="#IO多线程" class="headerlink" title="IO多线程"></a>IO多线程</h3><p>IO多线程其实指客户端交互部分的网络IO交互处理模块多线程，而非执行命令多线程。</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0yqavt0njj20f909hweu.jpg" alt="image-20220405122350602"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0yqavt0njj20f909hweu.jpg"></p>
 <p><strong>Redis6执行命令依然是单线程</strong></p>
 <p>Redis 6 加入多线程,但跟 Memcached 这种从 IO处理到数据访问多线程的实现模式有些差异。Redis 的多线程部分只是用来处理网络数据的读写和协议解析，执行命令仍然是单线程。之所以这么设计是不想因为多线程而变得复杂，需要去控制 key、lua、事务，LPUSH/LPOP 等等的并发问题</p>
 <p>另外，多线程IO默认也是不开启的，需要在配置文件中配置</p>

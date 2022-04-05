@@ -638,7 +638,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-05 12:15:09'>2022-02-11 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-04-05 17:49:14'>2022-02-11 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -678,7 +678,7 @@
 <li>类 CAS 自旋式分布式锁：询问的方式，类似 java 并发编程中的线程获询问的方式尝试加锁，如 mysql、redis。</li>
 <li>另外一类是 event 事件通知进程后续锁的变化，轮询向外的过程，如 zookeeper、etcd。</li>
 </ul>
-<h3 id="使用Redis实现分布式锁"><a href="#使用Redis实现分布式锁" class="headerlink" title="使用Redis实现分布式锁"></a>使用Redis实现分布式锁</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xpbd9u7cj20et0d9755.jpg" alt="image-20220404150410343"></p>
+<h3 id="使用Redis实现分布式锁"><a href="#使用Redis实现分布式锁" class="headerlink" title="使用Redis实现分布式锁"></a>使用Redis实现分布式锁</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xpbd9u7cj20et0d9755.jpg"></p>
 <h4 id="setnx"><a href="#setnx" class="headerlink" title="setnx"></a>setnx</h4><p>通过该命令尝试获得锁，没有获得锁的线程会不断等待尝试。</p>
 <ul>
 <li>setnx 上锁，通过del 删除，ttl查看过期时间</li>
@@ -709,7 +709,7 @@
 <pre><code>set users 10 nx ex 3600
 </code></pre>
 <h4 id="uuid-防止误删"><a href="#uuid-防止误删" class="headerlink" title="uuid 防止误删"></a>uuid 防止误删</h4><p>设置 uuid，释放前获取这个值，判断是否自己的锁，防止误删锁，造成没锁的情况。</p>
-<p> <img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xqki4u3hj20u60bswfy.jpg" alt="image-20220404154733198"></p>
+<p> <img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0xqki4u3hj20u60bswfy.jpg"></p>
 <pre><code>@GetMapping(&quot;testLock&quot;)
 public void testLock()&#123;
     String uuid = UUID.randomUUID().toString();
@@ -735,7 +735,7 @@ Boolean lock = this.redisTemplate.opsForValue()
       .setIfAbsent(&quot;lock&quot;, uuid, 2, TimeUnit.SECONDS);
 </code></pre>
 <p>释放锁（防止误删）</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0yq0lrjbjj20dc0e90tn.jpg" alt="image-20220405121356871"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0yq0lrjbjj20dc0e90tn.jpg"></p>
 <pre><code>// 2. 释放锁 del
 String script = &quot;if redis.call(&#39;get&#39;, KEYS[1]) == ARGV[1] then return redis.call(&#39;del&#39;, KEYS[1]) else return 0 end&quot;;
 // 设置lua脚本返回的数据类型

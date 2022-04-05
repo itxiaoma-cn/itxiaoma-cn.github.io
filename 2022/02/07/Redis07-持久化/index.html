@@ -640,7 +640,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-01 15:55:17'>2022-02-07 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-04-05 17:49:55'>2022-02-07 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -686,7 +686,7 @@
 <li>在Linux程序中，fork()会产生一个和父进程完全相同的子进程，但子进程在此后会exec系统调用，出于效率考虑，引入了“写时复制技术”</li>
 <li><strong>一般情况父进程和子进程共用同一段物理内存</strong>，只有进程空间的各段内容要发生变化时，才会将父进程的内容复制一份给子进程</li>
 </ul>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0tys53ifrj20cy08n74h.jpg" alt="image-20220401092922689"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0tys53ifrj20cy08n74h.jpg"></p>
 <h4 id="配置文件-SNAPSHOTTING"><a href="#配置文件-SNAPSHOTTING" class="headerlink" title="配置文件 SNAPSHOTTING"></a>配置文件 SNAPSHOTTING</h4><p>在redis.conf中配置文件名称，默认为dump.db</p>
 <pre><code>dbfilename dump.rdb                                    #持久化文件     
 dir ./                                                            #在启动目录中生成rdb文件    
@@ -772,7 +772,7 @@ appendfilename &quot;appendonly.aof&quot;
 <li>如果 Redis 的 AOF 当前大小 &gt;= base_size +base_size*100% (默认) 且当前大小 &gt;=64mb (默认) 的情况下，Redis 会对 AOF 进行重写。</li>
 <li>例如：文件达到 70MB 开始重写，降到 50MB，下次什么时候开始重写？100MB</li>
 </ul>
-<h5 id="重写流程"><a href="#重写流程" class="headerlink" title="重写流程"></a>重写流程</h5><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0u9wy5ubtj20gb0ewmy0.jpg" alt="image-20220401155437546"></p>
+<h5 id="重写流程"><a href="#重写流程" class="headerlink" title="重写流程"></a>重写流程</h5><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h0u9wy5ubtj20gb0ewmy0.jpg"></p>
 <ol>
 <li>bgrewriteaof 触发重写，判断是否当前有 bgsave 或 bgrewriteaof 在运行，如果有，则等待该命令结束后再继续执行；</li>
 <li>主进程 fork 出子进程执行重写操作，保证主进程不会阻塞；</li>
