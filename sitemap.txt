@@ -1,3 +1,16 @@
+https://blog.itxiaoma.cn/2021/08/21/K8S11-%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/
+https://blog.itxiaoma.cn/2021/08/22/K8S12-%E9%83%A8%E7%BD%B2Java%E9%A1%B9%E7%9B%AE/
+https://blog.itxiaoma.cn/2021/08/20/K8S10-%E7%9B%91%E6%8E%A7%E5%B9%B3%E5%8F%B0/
+https://blog.itxiaoma.cn/2021/08/19/K8S09-%E6%8C%81%E4%B9%85%E5%8C%96%E5%AD%98%E5%82%A8/
+https://blog.itxiaoma.cn/2021/08/17/K8S07-Ingress/
+https://blog.itxiaoma.cn/2021/08/18/K8S08-Helm/
+https://blog.itxiaoma.cn/2021/08/14/K8S04-Controller%E5%92%8CService/
+https://blog.itxiaoma.cn/2021/08/15/K8S05-%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86/
+https://blog.itxiaoma.cn/2021/08/16/K8S06-%E9%9B%86%E7%BE%A4%E5%AE%89%E5%85%A8%E6%9C%BA%E5%88%B6/
+https://blog.itxiaoma.cn/2021/08/13/K8S03-YAML%E5%92%8CPOD/
+https://blog.itxiaoma.cn/2021/08/12/K8S02-Kubectl/
+https://blog.itxiaoma.cn/2021/08/11/K8S02-kubectl/
+https://blog.itxiaoma.cn/2021/08/11/K8S01-%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83/
 https://blog.itxiaoma.cn/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/
 https://blog.itxiaoma.cn/2022/02/06/Redis06-%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E3%80%81%E7%A7%92%E6%9D%80/
 https://blog.itxiaoma.cn/2022/02/07/Redis07-%E6%8C%81%E4%B9%85%E5%8C%96/
@@ -46,6 +59,7 @@ https://blog.itxiaoma.cn/tags/WEB/
 https://blog.itxiaoma.cn/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/
 https://blog.itxiaoma.cn/tags/PHP/
 https://blog.itxiaoma.cn/tags/Laravel/
+https://blog.itxiaoma.cn/tags/K8S/
 https://blog.itxiaoma.cn/categories/REDIS/
 https://blog.itxiaoma.cn/categories/MYSQL/
 https://blog.itxiaoma.cn/categories/%E5%8D%95%E8%AF%8D%E6%9C%AC/
@@ -54,3 +68,4 @@ https://blog.itxiaoma.cn/categories/DOCKER/
 https://blog.itxiaoma.cn/categories/WEB/
 https://blog.itxiaoma.cn/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/
 https://blog.itxiaoma.cn/categories/PHP/
+https://blog.itxiaoma.cn/categories/K8S/
