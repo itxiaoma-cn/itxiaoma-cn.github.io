@@ -2,23 +2,28 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>K8S14-部署项目 | IT小马</title>
+  <title>K8S06-Service-Job | IT小马</title>
   <meta name="keywords" content=" 容器 , K8S ">
-  <meta name="description" content="K8S14-部署项目 | IT小马">
+  <meta name="description" content="K8S06-Service-Job | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Reference【尚硅谷】Kubernetes（k8s）入门到实战教程丨全新升级完整版">
+<meta name="description" content="环境搭建K8S部署Mysql1.创建ConfigMap存储配置文件mysql-config.yaml apiVersion: v1 kind: ConfigMap metadata:   name: mysql-config   labels:     app: mysql data:   my.cnf: |-     [client]     default-character-set&#x3D;utf8">
 <meta property="og:type" content="article">
-<meta property="og:title" content="K8S13-高可用集群">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/04/13/K8S13-%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/index.html">
+<meta property="og:title" content="GO微服务01-环境搭建">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/04/16/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="Reference【尚硅谷】Kubernetes（k8s）入门到实战教程丨全新升级完整版">
+<meta property="og:description" content="环境搭建K8S部署Mysql1.创建ConfigMap存储配置文件mysql-config.yaml apiVersion: v1 kind: ConfigMap metadata:   name: mysql-config   labels:     app: mysql data:   my.cnf: |-     [client]     default-character-set&#x3D;utf8">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-04-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-04-11T08:33:24.000Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h18jfkgidwj20cq0aljrv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h199we7b1wj212q09yjsc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h19ac8zychj209u07fq32.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h199vtllttj20km07njrl.jpg">
+<meta property="article:published_time" content="2022-04-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-04-15T02:08:17.000Z">
 <meta property="article:author" content="IT小马">
-<meta property="article:tag" content="容器">
-<meta property="article:tag" content="K8S">
+<meta property="article:tag" content="GO">
+<meta property="article:tag" content="微服务">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h18jfkgidwj20cq0aljrv.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -84,6 +89,20 @@
             
         </div>
     </li>
+    
+        
+            
+                <li>
+                    <div data-rel="GO">
+                        
+                        GO
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
     
         
             
@@ -161,7 +180,7 @@
                     <div data-rel="K8S">
                         
                         K8S
-                        <small>(15)</small>
+                        <small>(14)</small>
                         
                     </div>
                     
@@ -295,6 +314,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GOPL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>Java</a>
             </li>
         
@@ -332,6 +355,22 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/04/16/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务01-环境搭建">GO微服务01-环境搭建</span>
+            <span class="post-date" title="2022-04-16 00:00:00">2022/04/16</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务-架构设计">GO微服务-架构设计</span>
+            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
+        </a>
         
         <a  class="全部文章 K8S "
            href="/2022/04/13/K8S13-%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/"
@@ -390,6 +429,14 @@
         </a>
         
         <a  class="全部文章 K8S "
+           href="/2022/04/06/K8S06-Service-Job/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S06-Service-Job">K8S06-Service-Job</span>
+            <span class="post-date" title="2022-04-06 00:00:00">2022/04/06</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
            href="/2022/04/05/K8S05-Controller%E6%8E%A7%E5%88%B6%E5%99%A8/"
            data-tag="容器,K8S"
            data-author="" >
@@ -427,22 +474,6 @@
            data-author="" >
             <span class="post-title" title="K8S01-安装环境">K8S01-安装环境</span>
             <span class="post-date" title="2022-04-01 00:00:00">2022/04/01</span>
-        </a>
-        
-        <a  class="全部文章 微服务 "
-           href="/2022/03/31/GO%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"
-           data-tag="GO,微服务"
-           data-author="" >
-            <span class="post-title" title="GO微服务-架构设计">GO微服务-架构设计</span>
-            <span class="post-date" title="2022-03-31 00:00:00">2022/03/31</span>
-        </a>
-        
-        <a  class="全部文章 微服务 "
-           href="/2022/03/27/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
-           data-tag="GO,微服务"
-           data-author="" >
-            <span class="post-title" title="GO微服务01-Go语言基础">GO微服务01-Go语言基础</span>
-            <span class="post-date" title="2022-03-27 19:27:23">2022/03/27</span>
         </a>
         
         <a  class="全部文章 REDIS "
@@ -693,6 +724,14 @@
             <span class="post-date" title="2021-08-01 00:00:00">2021/08/01</span>
         </a>
         
+        <a  class="全部文章 GO "
+           href="/2021/08/01/GOPL01-%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL01-程序结构">GOPL01-程序结构</span>
+            <span class="post-date" title="2021-08-01 00:00:00">2021/08/01</span>
+        </a>
+        
         <a  class="全部文章 MYSQL "
            href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
            data-tag="后端,MYSQL"
@@ -725,22 +764,6 @@
             <span class="post-date" title="2021-05-01 00:00:00">2021/05/01</span>
         </a>
         
-        <a  class="全部文章 K8S "
-           href="/2021/04/14/K8S14-%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/"
-           data-tag="容器,K8S"
-           data-author="" >
-            <span class="post-title" title="K8S14-部署项目">K8S14-部署项目</span>
-            <span class="post-date" title="2021-04-14 00:00:00">2021/04/14</span>
-        </a>
-        
-        <a  class="全部文章 K8S "
-           href="/2021/04/06/K8S06-Service-Job/"
-           data-tag="容器,K8S"
-           data-author="" >
-            <span class="post-title" title="K8S06-Service-Job">K8S06-Service-Job</span>
-            <span class="post-date" title="2021-04-06 00:00:00">2021/04/06</span>
-        </a>
-        
         <div id="no-item-tips">
 
         </div>
@@ -759,9 +782,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-K8S14-部署项目" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-K8S06-Service-Job" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">K8S14-部署项目</h1>
+        <h1 class="article-title">K8S06-Service-Job</h1>
     
     <div class="article-meta">
         
@@ -788,7 +811,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-11 16:33:47'>2021-04-14 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-04-15 12:22:58'>2022-04-06 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -799,7 +822,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Service"><span class="toc-text">Service</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Service%E5%AD%98%E5%9C%A8%E7%9A%84%E6%84%8F%E4%B9%89"><span class="toc-text">Service存在的意义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%98%B2%E6%AD%A2Pod%E5%A4%B1%E8%81%94%E3%80%90%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E3%80%91"><span class="toc-text">1 防止Pod失联【服务发现】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AE%9A%E4%B9%89Pod%E8%AE%BF%E9%97%AE%E7%AD%96%E7%95%A5%E3%80%90%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E3%80%91"><span class="toc-text">2  定义Pod访问策略【负载均衡】</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pod%E5%92%8CService%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">Pod和Service的关系</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Service%E5%B8%B8%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-text">Service常用类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BE%E4%BE%8B"><span class="toc-text">举例</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#LoadBalanced"><span class="toc-text">LoadBalanced</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Statefulset-%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8"><span class="toc-text">Statefulset 有状态应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8"><span class="toc-text">无状态应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8"><span class="toc-text">有状态应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E6%9C%89%E7%8A%B6%E6%80%81%E5%BA%94%E7%94%A8"><span class="toc-text">部署有状态应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D"><span class="toc-text">域名</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BE%E4%BE%8B-1"><span class="toc-text">举例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DeamonSet-%E5%90%8E%E5%8F%B0%E6%94%AF%E6%92%91%E5%9E%8B%E6%9C%8D%E5%8A%A1"><span class="toc-text">DeamonSet 后台支撑型服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Job%E5%92%8CCronJob"><span class="toc-text">Job和CronJob</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Job-%E4%B8%80%E6%AC%A1%E6%80%A7%E4%BB%BB%E5%8A%A1"><span class="toc-text">Job 一次性任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CronJob-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-text">CronJob 定时任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -815,7 +838,349 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GT4y1A756">【尚硅谷】Kubernetes（k8s）入门到实战教程丨全新升级完整版</a></p>
+        <h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><ul>
+<li>Service可以为一组具有相同功能的容器应用提供一个统一的入口地址，并且将请求负载分发到后端的各个容器应用上。</li>
+<li>每个Service会对应一个集群内部有效的虚拟IP，集群内部通过虚拟IP访问一个服务。</li>
+</ul>
+<p>在K8S集群中，微服务的负载均衡是由kube-proxy实现的。kube-proxy是k8s集群内部的负载均衡器。它是一个分布式代理服务器，在K8S的每个节点上都有一个；这一设计体现了它的伸缩性优势，需要访问服务的节点越多，提供负载均衡能力的kube-proxy就越多，高可用节点也随之增多。与之相比，我们平时在服务器端使用反向代理作负载均衡，还要进一步解决反向代理的高可用问题。</p>
+<h3 id="Service存在的意义"><a href="#Service存在的意义" class="headerlink" title="Service存在的意义"></a>Service存在的意义</h3><h4 id="1-防止Pod失联【服务发现】"><a href="#1-防止Pod失联【服务发现】" class="headerlink" title="1 防止Pod失联【服务发现】"></a>1 防止Pod失联【服务发现】</h4><p>因为Pod每次创建都对应一个IP地址，而这个IP地址是短暂的，每次随着Pod的更新都会变化，假设当我们的前端页面有多个Pod时候，同时后端也多个Pod，这个时候，他们之间的相互访问，就需要通过注册中心，拿到Pod的IP地址，然后去访问对应的Pod</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h15vds6gr5j20n70b7js5.jpg"></p>
+<h4 id="2-定义Pod访问策略【负载均衡】"><a href="#2-定义Pod访问策略【负载均衡】" class="headerlink" title="2  定义Pod访问策略【负载均衡】"></a>2  定义Pod访问策略【负载均衡】</h4><p>页面前端的Pod访问到后端的Pod，中间会通过Service一层，而Service在这里还能做负载均衡，负载均衡的策略有很多种实现策略，例如：</p>
+<ul>
+<li>随机</li>
+<li>轮询</li>
+<li>响应比</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h15venogdmj20dt08xwem.jpg"></p>
+<h3 id="Pod和Service的关系"><a href="#Pod和Service的关系" class="headerlink" title="Pod和Service的关系"></a>Pod和Service的关系</h3><p>这里Pod 和 Service 之间还是根据 label 和 selector 建立关联的 【和Controller一样】</p>
+<p>访问service的时候，需要一个虚拟IP <code>vip</code></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h15vfu1g5rj20nn09ot93.jpg"></p>
+<h4 id="Service常用类型"><a href="#Service常用类型" class="headerlink" title="Service常用类型"></a>Service常用类型</h4><ul>
+<li>ClusterIp：集群内部访问</li>
+<li>NodePort：对外访问应用使用</li>
+<li>LoadBalancer：对外访问应用使用，公有云</li>
+</ul>
+<h4 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h4><p>我们可以导出一个文件 包含service的配置信息</p>
+<pre><code>kubectl expose deployment web --port=80 --target-port=80 --dry-run -o yaml &gt; service.yaml
+</code></pre>
+<p>service.yaml</p>
+<pre><code>apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: web
+  name: web
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: web
+status:
+  loadBalancer: &#123;&#125;
+</code></pre>
+<p>默认使用的是第一种方式 ClusterIp，也就是只能在集群内部使用，我们可以添加一个type字段，用来设置我们的service类型</p>
+<pre><code>apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: web
+  name: web
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: web
+  type: NodePort
+status:
+  loadBalancer: &#123;&#125;
+</code></pre>
+<p>创建一个pod</p>
+<pre><code>kubectl apply -f service.yaml
+</code></pre>
+<p>然后能够看到，已经成功修改为 NodePort类型了</p>
+<pre><code>kubectl get svc
+
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes   ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP        19h
+web          NodePort    10.102.71.240   &lt;none&gt;        80:32360/TCP   6s
+</code></pre>
+<h5 id="LoadBalanced"><a href="#LoadBalanced" class="headerlink" title="LoadBalanced"></a>LoadBalanced</h5><p>对外访问应用使用公有云</p>
+<p>node一般是在内网进行部署，而外网一般是不能访问到的，那么如何访问的呢？</p>
+<ul>
+<li>找到一台可以通过外网访问机器，安装nginx，反向代理</li>
+<li>手动把可以访问的节点添加到nginx中</li>
+</ul>
+<p>如果我们使用LoadBalancer，就会有负载均衡的控制器，类似于nginx的功能，就不需要自己添加到nginx上</p>
+<h2 id="Statefulset-有状态应用"><a href="#Statefulset-有状态应用" class="headerlink" title="Statefulset 有状态应用"></a>Statefulset 有状态应用</h2><p>Statefulset主要是用来部署有状态应用</p>
+<p>对于StatefulSet中的Pod，每个Pod挂载自己独立的存储，如果一个Pod出现故障，从其他节点启动一个同样名字的Pod，要挂载上原来Pod的存储继续以它的状态提供服务。</p>
+<p>适合StatefulSet的业务包括数据库服务MySQL 和 PostgreSQL，集群化管理服务Zookeeper、etcd等有状态服务</p>
+<p>使用StatefulSet，Pod可以通过漂移到不同节点提供高可用，而存储也可以通过外挂的存储来提供高可靠性，StatefulSet做的只是将确定的Pod与确定的存储关联起来保证状态的连续性。</p>
+<h3 id="无状态应用"><a href="#无状态应用" class="headerlink" title="无状态应用"></a>无状态应用</h3><p>deployment部署的都是无状态的应用</p>
+<ul>
+<li>认为Pod都是一样的</li>
+<li>没有顺序要求</li>
+<li>不考虑应用在哪个node上运行</li>
+<li>能够进行随意伸缩和扩展</li>
+</ul>
+<h3 id="有状态应用"><a href="#有状态应用" class="headerlink" title="有状态应用"></a>有状态应用</h3><ul>
+<li>每个Pod是独立的</li>
+<li>保持Pod启动顺序和唯一性</li>
+<li>唯一的网络标识符，持久存储</li>
+<li>有序，比如mysql中的主从</li>
+</ul>
+<h3 id="部署有状态应用"><a href="#部署有状态应用" class="headerlink" title="部署有状态应用"></a>部署有状态应用</h3><ol>
+<li><p>创建无头service</p>
+<blockquote>
+<p>Headless Services是一种特殊的service，其spec:clusterIP表示为None，这样在实际运行时就不会被分配ClusterIP。也被称为无头服务。</p>
+</blockquote>
+</li>
+<li><p>部署有状态应用</p>
+<ul>
+<li>headless service可以通过解析service的DNS，返回所有Pod的地址和DNS(statefulSet部署的Pod才有DNS)</li>
+<li>没有部署HeadlessService的话，PetSet/StatefulSet下的pod，无法通过域名进行访问</li>
+<li>StatefulSet在Headless Service的基础上又为StatefulSet控制的每个Pod实力创建了一个DNS域名,这个域名的格式为： <code>$&#123;podname&#125;.$&#123;headless service name&#125;</code></li>
+</ul>
+<p>vim sts.yaml </p>
+<pre><code>apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    apps: nginx
+spec:
+  ports:
+  - port: 80
+    name: web
+  clusterIP: None
+  selector:
+    app: nginx
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx-statefulset
+  namespace: default
+spec:
+  serviceName: nginx
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.15
+        ports:
+        - containerPort: 80
+</code></pre>
+<pre><code>kubectl apply -f sts.yaml 
+</code></pre>
+</li>
+<li><p>查看部署状态</p>
+<pre><code>kubectl get pods
+
+NAME                  READY   STATUS    RESTARTS   AGE
+nginx-statefulset-0   1/1     Running   0          2m45s
+nginx-statefulset-1   1/1     Running   0          2m43s
+</code></pre>
+<pre><code>kubectl get svc
+
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   19h
+nginx        ClusterIP   None         &lt;none&gt;        80/TCP    41s
+</code></pre>
+</li>
+<li><p>删除</p>
+<pre><code>kubectl get statefulset
+
+kubectl delete statefulset --all
+</code></pre>
+</li>
+</ol>
+<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>这里有状态的约定，肯定不是简简单单通过名称来进行约定，而是更加复杂的操作</p>
+<ul>
+<li>deployment：是有身份的，有唯一标识</li>
+<li>statefulset：根据主机名 + 按照一定规则生成域名</li>
+</ul>
+<p>每个pod有唯一的主机名，并且有唯一的域名</p>
+<ul>
+<li>格式：主机名称.service名称.名称空间.svc.cluster.local</li>
+<li>举例：nginx-statefulset-0.default.svc.cluster.local</li>
+</ul>
+<h4 id="举例-1"><a href="#举例-1" class="headerlink" title="举例"></a>举例</h4><p>1.查看服务Endpoints</p>
+<p>endpoint是k8s集群中的一个资源对象，存储在etcd中，用来记录一个service对应的所有pod的访问地址。</p>
+<pre><code>kubectl describe svc nginx
+
+Name:              nginx
+Namespace:         default
+Labels:            apps=nginx
+Annotations:       Selector:  app=nginx
+Type:              ClusterIP
+IP:                None
+Port:              web  80/TCP
+TargetPort:        80/TCP
+Endpoints:         10.244.0.9:80,10.244.1.10:80
+Session Affinity:  None
+Events:            &lt;none&gt;
+</code></pre>
+<p>2.解析DNS</p>
+<pre><code>docker ps|grep nginx
+
+6f9c40380425   nginx                                               &quot;nginx -g &#39;daemon of…&quot;   15 minutes ago   Up 15 minutes             k8s_nginx_nginx-statefulset-1_default_33a0456b-98bc-4988-b05c-7c6547f34a3c_0
+6c60f6e72884   registry.aliyuncs.com/google_containers/pause:3.2   &quot;/pause&quot;                 15 minutes ago   Up 15 minutes             k8s_POD_nginx-statefulset-1_default_33a0456b-98bc-4988-b05c-7c6547f34a3c_0
+</code></pre>
+<pre><code>docker exec -it 6f9c40380425 /bin/bash
+</code></pre>
+<pre><code>apt-get update
+apt-get install dnsutils
+</code></pre>
+<pre><code>nslookup nginx.default.svc.cluster.local
+Server:        10.96.0.10
+Address:    10.96.0.10#53
+
+Name:    nginx.default.svc.cluster.local
+Address: 10.244.1.10
+Name:    nginx.default.svc.cluster.local
+Address: 10.244.0.9
+</code></pre>
+<p>根据结果看到，dns查询会返回2个pod地址和DNS，通过解析pod的DNS也能返回Pod的IP</p>
+<h2 id="DeamonSet-后台支撑型服务"><a href="#DeamonSet-后台支撑型服务" class="headerlink" title="DeamonSet 后台支撑型服务"></a>DeamonSet 后台支撑型服务</h2><p>DaemonSet 即后台支撑型服务，主要是用来部署守护进程</p>
+<p>长期伺服型和批处理型的核心在业务应用，可能有些节点运行多个同类业务的Pod，有些节点上又没有这类的Pod运行；而后台支撑型服务的核心关注点在K8S集群中的节点(物理机或虚拟机)，要保证每个节点上都有一个此类Pod运行。节点可能是所有集群节点，也可能是通过 nodeSelector选定的一些特定节点。典型的后台支撑型服务包括：存储、日志和监控等。在每个节点上支撑K8S集群运行的服务。</p>
+<p>守护进程在我们每个节点上，运行的是同一个pod，新加入的节点也同样运行在同一个pod里面</p>
+<p>例子：在每个node节点安装数据采集工具</p>
+<p>ds-test.yaml</p>
+<pre><code>apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: filebeat
+  name: ds-test
+spec:
+  selector:
+    matchLabels:
+      app: filebeat
+  template:
+    metadata:
+      labels:
+        app: filebeat
+    spec:
+      containers:
+      - image: nginx
+        name: logs
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: varlog
+          mountPath: /tmp/log
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log
+</code></pre>
+<pre><code>#创建POD
+kubectl apply -f ds-test.yaml 
+
+#查看POD
+kubectl get pods
+NAME                  READY   STATUS    RESTARTS   AGE
+ds-test-j2ql7         1/1     Running   0          9s
+ds-test-ntrpj         1/1     Running   0          9s
+nginx-statefulset-0   1/1     Running   0          83m
+nginx-statefulset-1   1/1     Running   0          83m
+
+#进入POD
+kubectl exec -it ds-test-j2ql7 bash
+
+#查看日志(在节点/var/log/目录下新建test.log测试)
+ls /tmp/log/
+</code></pre>
+<p>删除</p>
+<pre><code>kubectl delete -f ds-test.yaml
+</code></pre>
+<h2 id="Job和CronJob"><a href="#Job和CronJob" class="headerlink" title="Job和CronJob"></a>Job和CronJob</h2><p>一次性任务 和 定时任务</p>
+<ul>
+<li>一次性任务：一次性执行完就结束</li>
+<li>定时任务：周期性执行</li>
+</ul>
+<p>Job是K8S中用来控制批处理型任务的API对象。批处理业务与长期伺服业务的主要区别就是批处理业务的运行有头有尾，而长期伺服业务在用户不停止的情况下永远运行。</p>
+<p>Job管理的Pod根据用户的设置把任务成功完成就自动退出了。成功完成的标志根据不同的 spec.completions 策略而不同：</p>
+<ul>
+<li>单Pod型任务有一个Pod成功就标志完成；</li>
+<li>定数成功行任务保证有N个任务全部成功；</li>
+<li>工作队列性任务根据应用确定的全局成功而标志成功。</li>
+</ul>
+<h3 id="Job-一次性任务"><a href="#Job-一次性任务" class="headerlink" title="Job 一次性任务"></a>Job 一次性任务</h3><p>job.yaml</p>
+<pre><code>apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  template:
+    spec:
+      containers:
+      - name: pi
+        image: resouer/ubuntu-bc
+        command: [&quot;sh&quot;, &quot;-c&quot;, &quot;echo &#39;scale=10000; 4*a(1)&#39; | bc -l &quot;]
+      restartPolicy: Never
+  backoffLimit: 4
+</code></pre>
+<p>创建Job</p>
+<pre><code>kubectl create -f job.yaml
+
+kubectl get jobs
+kubectl get pods
+kubectl logs pi-r5grf
+</code></pre>
+<h3 id="CronJob-定时任务"><a href="#CronJob-定时任务" class="headerlink" title="CronJob 定时任务"></a>CronJob 定时任务</h3><p>cronjob.yaml</p>
+<pre><code>apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: &quot;*/1 * * * *&quot;
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox
+            args:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure
+</code></pre>
+<pre><code>kubectl create -f ./cronjob.yaml
+
+kubectl get cronjob hello
+kubectl logs hello-1599100140-wkn79
+</code></pre>
+<p>需要注意的是，由于定时任务的特殊性，很可能某个 Job 还没有执行完，另外一个新 Job 就产生 了。这时候，你可以通过 spec.concurrencyPolicy 字段来定义具体的处理策略。</p>
+<p>比如：</p>
+<ul>
+<li>concurrencyPolicy=Allow，这也是默认情况，这意味着这些 Job 可以同时存在；</li>
+<li>concurrencyPolicy=Forbid，这意味着不会创建新的 Pod，该创建周期被跳过；</li>
+<li>concurrencyPolicy=Replace，这意味着新产生的 Job 会替换旧的、没有执行完的 Job。</li>
+</ul>
+<p>如果某一次 Job 创建失败，这次创建就会被标记为“miss”。当在指定的时间窗口内，miss 的数 目达到 100 时，那么 CronJob 会停止再创建这个 Job。</p>
+<p>这个时间窗口，可以由 spec.startingDeadlineSeconds 字段指定。比如 startingDeadlineSeconds=200，意味着在过去 200 s 里，如果 miss 的数目达到了 100 次，那么 这个 Job 就不会被创建执行了。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GT4y1A756">【尚硅谷】Kubernetes（k8s）入门到实战教程丨全新升级完整版</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zjz5740/article/details/115652274">Headless Services无头服务</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44782815/article/details/109390341">Kubernetes之Endpoints</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/crazymagic/p/10571259.html">Kubernetes — Job与CronJob</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>

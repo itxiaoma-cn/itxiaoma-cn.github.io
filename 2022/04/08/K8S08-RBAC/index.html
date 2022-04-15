@@ -6,19 +6,24 @@
   <meta name="keywords" content=" 容器 , K8S ">
   <meta name="description" content="K8S08-RBAC | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Reference【尚硅谷】Kubernetes（k8s）入门到实战教程丨全新升级完整版">
+<meta name="description" content="环境搭建K8S部署Mysql1.创建ConfigMap存储配置文件mysql-config.yaml apiVersion: v1 kind: ConfigMap metadata:   name: mysql-config   labels:     app: mysql data:   my.cnf: |-     [client]     default-character-set&#x3D;utf8">
 <meta property="og:type" content="article">
-<meta property="og:title" content="K8S13-高可用集群">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/04/13/K8S13-%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/index.html">
+<meta property="og:title" content="GO微服务01-环境搭建">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/04/16/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="Reference【尚硅谷】Kubernetes（k8s）入门到实战教程丨全新升级完整版">
+<meta property="og:description" content="环境搭建K8S部署Mysql1.创建ConfigMap存储配置文件mysql-config.yaml apiVersion: v1 kind: ConfigMap metadata:   name: mysql-config   labels:     app: mysql data:   my.cnf: |-     [client]     default-character-set&#x3D;utf8">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-04-12T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-04-11T08:33:24.000Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h18jfkgidwj20cq0aljrv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h199we7b1wj212q09yjsc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h19ac8zychj209u07fq32.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h199vtllttj20km07njrl.jpg">
+<meta property="article:published_time" content="2022-04-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-04-15T02:08:17.000Z">
 <meta property="article:author" content="IT小马">
-<meta property="article:tag" content="容器">
-<meta property="article:tag" content="K8S">
+<meta property="article:tag" content="GO">
+<meta property="article:tag" content="微服务">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h18jfkgidwj20cq0aljrv.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -84,6 +89,20 @@
             
         </div>
     </li>
+    
+        
+            
+                <li>
+                    <div data-rel="GO">
+                        
+                        GO
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
     
         
             
@@ -161,7 +180,7 @@
                     <div data-rel="K8S">
                         
                         K8S
-                        <small>(15)</small>
+                        <small>(14)</small>
                         
                     </div>
                     
@@ -295,6 +314,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GOPL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>Java</a>
             </li>
         
@@ -332,6 +355,22 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/04/16/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务01-环境搭建">GO微服务01-环境搭建</span>
+            <span class="post-date" title="2022-04-16 00:00:00">2022/04/16</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务-架构设计">GO微服务-架构设计</span>
+            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
+        </a>
         
         <a  class="全部文章 K8S "
            href="/2022/04/13/K8S13-%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/"
@@ -390,6 +429,14 @@
         </a>
         
         <a  class="全部文章 K8S "
+           href="/2022/04/06/K8S06-Service-Job/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S06-Service-Job">K8S06-Service-Job</span>
+            <span class="post-date" title="2022-04-06 00:00:00">2022/04/06</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
            href="/2022/04/05/K8S05-Controller%E6%8E%A7%E5%88%B6%E5%99%A8/"
            data-tag="容器,K8S"
            data-author="" >
@@ -427,22 +474,6 @@
            data-author="" >
             <span class="post-title" title="K8S01-安装环境">K8S01-安装环境</span>
             <span class="post-date" title="2022-04-01 00:00:00">2022/04/01</span>
-        </a>
-        
-        <a  class="全部文章 微服务 "
-           href="/2022/03/31/GO%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"
-           data-tag="GO,微服务"
-           data-author="" >
-            <span class="post-title" title="GO微服务-架构设计">GO微服务-架构设计</span>
-            <span class="post-date" title="2022-03-31 00:00:00">2022/03/31</span>
-        </a>
-        
-        <a  class="全部文章 微服务 "
-           href="/2022/03/27/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
-           data-tag="GO,微服务"
-           data-author="" >
-            <span class="post-title" title="GO微服务01-Go语言基础">GO微服务01-Go语言基础</span>
-            <span class="post-date" title="2022-03-27 19:27:23">2022/03/27</span>
         </a>
         
         <a  class="全部文章 REDIS "
@@ -693,6 +724,14 @@
             <span class="post-date" title="2021-08-01 00:00:00">2021/08/01</span>
         </a>
         
+        <a  class="全部文章 GO "
+           href="/2021/08/01/GOPL01-%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL01-程序结构">GOPL01-程序结构</span>
+            <span class="post-date" title="2021-08-01 00:00:00">2021/08/01</span>
+        </a>
+        
         <a  class="全部文章 MYSQL "
            href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
            data-tag="后端,MYSQL"
@@ -723,22 +762,6 @@
            data-author="" >
             <span class="post-title" title="构建高性能Web站点01">构建高性能Web站点01</span>
             <span class="post-date" title="2021-05-01 00:00:00">2021/05/01</span>
-        </a>
-        
-        <a  class="全部文章 K8S "
-           href="/2021/04/14/K8S14-%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/"
-           data-tag="容器,K8S"
-           data-author="" >
-            <span class="post-title" title="K8S14-部署项目">K8S14-部署项目</span>
-            <span class="post-date" title="2021-04-14 00:00:00">2021/04/14</span>
-        </a>
-        
-        <a  class="全部文章 K8S "
-           href="/2021/04/06/K8S06-Service-Job/"
-           data-tag="容器,K8S"
-           data-author="" >
-            <span class="post-title" title="K8S06-Service-Job">K8S06-Service-Job</span>
-            <span class="post-date" title="2021-04-06 00:00:00">2021/04/06</span>
         </a>
         
         <div id="no-item-tips">
