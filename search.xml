@@ -9358,7 +9358,8 @@ k8sworker1   Ready    &lt;none&gt;   15m   v1.18.0
   <entry>
     <title>GO微服务01-环境搭建</title>
     <url>/2022/04/16/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h3 id="K8S部署Mysql"><a href="#K8S部署Mysql" class="headerlink" title="K8S部署Mysql"></a>K8S部署Mysql</h3><h4 id="1-创建ConfigMap存储配置文件"><a href="#1-创建ConfigMap存储配置文件" class="headerlink" title="1.创建ConfigMap存储配置文件"></a>1.创建ConfigMap存储配置文件</h4><p>mysql-config.yaml</p>
+    <content><![CDATA[<p>[TOC]</p>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h3 id="K8S部署Mysql"><a href="#K8S部署Mysql" class="headerlink" title="K8S部署Mysql"></a>K8S部署Mysql</h3><h4 id="1-创建ConfigMap存储配置文件"><a href="#1-创建ConfigMap存储配置文件" class="headerlink" title="1.创建ConfigMap存储配置文件"></a>1.创建ConfigMap存储配置文件</h4><p>mysql-config.yaml</p>
 <pre><code>apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -12566,7 +12567,7 @@ func init() &#123;
     &#125;
 &#125;
 </code></pre>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="http://books.studygolang.com/gopl-zh">Go语言圣经（中文版）</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://books.studygolang.com/gopl-zh">Go语言圣经（中文版）</a></p>
 <p><a href="https://github.com/adonovan/gopl.io/">Gopl源码</a></p>
 ]]></content>
       <categories>
@@ -12578,8 +12579,8 @@ func init() &#123;
       </tags>
   </entry>
   <entry>
-    <title>GOPL02-数据类型</title>
-    <url>/2021/07/02/GOPL02-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <title>GOPL02-基础数据类型</title>
+    <url>/2021/07/02/GOPL02-%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<p>[TOC]</p>
 <h1 id="基础数据类型"><a href="#基础数据类型" class="headerlink" title="基础数据类型"></a>基础数据类型</h1><p>Go语言将数据类型分为四类：基础类型、复合类型、引用类型和接口类型。</p>
 <ul>
@@ -12595,8 +12596,427 @@ func init() &#123;
 <li><p>接口类型</p>
 </li>
 </ul>
-<h2 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h2><h1 id="复合数据类型"><a href="#复合数据类型" class="headerlink" title="复合数据类型"></a>复合数据类型</h1><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="http://books.studygolang.com/gopl-zh">Go语言圣经（中文版）</a></p>
+<h2 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h2><p>Go语言的数值类型包括几种不同大小的整数、浮点数和复数。</p>
+<p>Go语言同时提供了有符号和无符号类型的整数运算：</p>
+<ul>
+<li>有符号：int8、int16、int32和int64，对应8、16、32、64bit大小的有符号整数</li>
+<li>无符号：uint8、uint16、uint32和uint64，对应8、16、32、64bit大小的无符号整数</li>
+</ul>
+<p>对应特定CPU平台机器字大小的有符号和无符号整数int和uint：根据硬件平台，大小32或64bit</p>
+<p>int和int32是不同的类型，即使int的大小也是32bit，在需要将int当作int32类型的地方需要一个显式的类型转换操作，反之亦然。</p>
+<h3 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h3><p>Unicode字符rune类型是和int32等价的类型，通常用于表示一个Unicode码点。这两个名称可以互换使用。</p>
+<h3 id="byte"><a href="#byte" class="headerlink" title="byte"></a>byte</h3><p>byte也是uint8类型的等价类型，byte类型一般用于强调数值是一个原始的数据而不是一个小的整数。</p>
+<h3 id="uintptr"><a href="#uintptr" class="headerlink" title="uintptr"></a>uintptr</h3><p>无符号的整数类型，没有指定具体的bit大小但是足以容纳指针。</p>
+<p>uintptr类型只有在底层编程时才需要，特别是Go语言和C语言函数库或操作系统接口相交互的地方。</p>
+<h3 id="二元运算符"><a href="#二元运算符" class="headerlink" title="二元运算符"></a>二元运算符</h3><p>优先级递减：</p>
+<pre><code>*      /      %      &lt;&lt;       &gt;&gt;     &amp;       &amp;^
++      -      |      ^
+==     !=     &lt;      &lt;=       &gt;      &gt;=
+&amp;&amp;
+||
+</code></pre>
+<p>二元运算符有五种优先级。在同一个优先级，使用左优先结合规则，但是使用括号可以明确优先顺序，使用括号也可以用于提升优先级，例如<code>mask &amp; (1 &lt;&lt; 28)</code>。</p>
+<p><code>&amp;&amp;</code>的优先级比<code>||</code>高（助记：<code>&amp;&amp;</code>对应逻辑乘法，<code>||</code>对应逻辑加法，乘法比加法优先级要高）。</p>
+<h4 id="取模运算符"><a href="#取模运算符" class="headerlink" title="取模运算符"></a>取模运算符</h4><p>取模运算符%仅用于整数间的运算。</p>
+<p>取模运算符的符号和被取模数的符号总是一致的，因此<code>-5%3</code>和<code>-5%-3</code>结果都是-2。</p>
+<h4 id="溢出"><a href="#溢出" class="headerlink" title="溢出"></a>溢出</h4><p>一个算术运算的结果，不管是有符号或者是无符号的，如果需要更多的bit位才能正确表示的话，就说明计算结果是溢出了。</p>
+<pre><code>var u uint8 = 255
+fmt.Println(u, u+1, u*u) // &quot;255 0 1&quot;
+
+var i int8 = 127
+fmt.Println(i, i+1, i*i) // &quot;127 -128 1&quot;
+</code></pre>
+<h3 id="一元运算符"><a href="#一元运算符" class="headerlink" title="一元运算符"></a>一元运算符</h3><pre><code>+      一元加法（无效果）
+-      负数
+</code></pre>
+<p>对于整数，+x是0+x的简写，-x则是0-x的简写；对于浮点数和复数，+x就是x，-x则是x 的负数。</p>
+<h3 id="bit位操作运算符"><a href="#bit位操作运算符" class="headerlink" title="bit位操作运算符"></a>bit位操作运算符</h3><pre><code>//位运算：不区分是有符号还是无符号数
+&amp;      位运算 AND
+|      位运算 OR
+^      位运算 XOR
+&amp;^     位清空（AND NOT）
+
+//移位运算
+&lt;&lt;     左移
+&gt;&gt;     右移
+</code></pre>
+<h4 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h4><ul>
+<li><p>按位异或（XOR）：</p>
+<ul>
+<li>相同时为0，不同时为1</li>
+<li>当用作一元运算符时表示按位取反，返回一个每个bit位都取反的数</li>
+</ul>
+</li>
+<li><p>按位置零（AND NOT）：z = x &amp;^ y，如果y非零，则z为0，如果y为零，则z为x</p>
+</li>
+</ul>
+<pre><code>var x uint8 = 1&lt;&lt;1 | 1&lt;&lt;5
+var y uint8 = 1&lt;&lt;1 | 1&lt;&lt;2
+
+fmt.Printf(&quot;%08b\n&quot;, x) // &quot;00100010&quot;, the set &#123;1, 5&#125;
+fmt.Printf(&quot;%08b\n&quot;, y) // &quot;00000110&quot;, the set &#123;1, 2&#125;
+
+fmt.Printf(&quot;%08b\n&quot;, x&amp;y)  // &quot;00000010&quot;, the intersection &#123;1&#125;
+fmt.Printf(&quot;%08b\n&quot;, x|y)  // &quot;00100110&quot;, the union &#123;1, 2, 5&#125;
+fmt.Printf(&quot;%08b\n&quot;, x^y)  // &quot;00100100&quot;, the symmetric difference &#123;2, 5&#125;
+fmt.Printf(&quot;%08b\n&quot;, x&amp;^y) // &quot;00100000&quot;, the difference &#123;5&#125;
+</code></pre>
+<h4 id="移位运算"><a href="#移位运算" class="headerlink" title="移位运算"></a>移位运算</h4><p>移位操作的bit数部分必须是无符号数；被操作的x可以是有符号数或无符号数。</p>
+<p>算术上，一个<code>x&lt;&lt;n</code>左移运算等价于乘以$2^n$，一个<code>x&gt;&gt;n</code>右移运算等价于除以$2^n$。</p>
+<p>移位运算最好用无符号运算。</p>
+<h3 id="有无符号"><a href="#有无符号" class="headerlink" title="有无符号"></a>有无符号</h3><p>倾向于使用有符号的int类型，因为无符号永远<code>i&gt;=0</code>。</p>
+<p><code>i == 0</code>时，i–语句将不会产生-1，而是变成一个uint类型的最大值，运行时将发生panic异常，试图访问一个slice范围以外的元素。</p>
+<p><strong>无符号数往往只有在位运算或其它特殊的运算场景才会使用，就像bit集合、分析二进制文件格式或者是哈希和加密操作等。</strong></p>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p>需要一个显式的转换将一个值从一种类型转化为另一种类型，并且算术和逻辑运算的二元操作中必须是相同的类型。</p>
+<pre><code>var apples int32 = 1
+var oranges int16 = 2
+var compote int = apples + oranges // compile error
+var compote = int(apples) + int(oranges)
+</code></pre>
+<ul>
+<li><p>对于将一个大尺寸的整数类型转为一个小尺寸的整数类型，或者是将一个浮点数转为整数，可能会改变数值或丢失精度</p>
+</li>
+<li><p>浮点数到整数的转换将丢失任何小数部分，然后向数轴零方向截断。</p>
+</li>
+</ul>
+<pre><code>f := 3.141 // a float64
+i := int(f)
+fmt.Println(f, i) // &quot;3.141 3&quot;
+f = 1.99
+fmt.Println(int(f)) // &quot;1&quot;
+</code></pre>
+<p>任何大小的整数字面值都可以用以0开始的八进制格式书写，例如0666</p>
+<pre><code>o := 0666
+fmt.Printf(&quot;%d %[1]o %#[1]o\n&quot;, o) // &quot;438 666 0666&quot;
+x := int64(0xdeadbeef)
+fmt.Printf(&quot;%d %[1]x %#[1]x %#[1]X\n&quot;, x)
+// Output:
+// 3735928559 deadbeef 0xdeadbeef 0XDEADBEEF
+</code></pre>
+<p>请注意fmt的两个使用技巧。通常Printf格式化字符串包含多个%参数时将会包含对应相同数量的额外操作数，但是%之后的<code>[1]</code>副词告诉Printf函数再次使用第一个操作数。第二，%后的<code>#</code>副词告诉Printf在用%o、%x或%X输出时生成0、0x或0X前缀。</p>
+<p>##浮点数</p>
+<p>Go语言提供了两种精度的浮点数，float32和float64。</p>
+<p>一个float32类型的浮点数可以提供大约6个十进制数的精度，而float64则可以提供约15个十进制数的精度；通常<strong>应该优先使用float64类型</strong>。</p>
+<p>浮点数的字面值可以直接写小数部分，小数点前面或后面的数字都可能被省略（例如.707或1.）。很小或很大的数最好用科学计数法书写，通过e或E来指定指数部分。</p>
+<pre><code>const e = 2.71828 // (approximately)
+const Avogadro = 6.02214129e23  // 阿伏伽德罗常数
+const Planck   = 6.62606957e-34 // 普朗克常数
+</code></pre>
+<h3 id="math包"><a href="#math包" class="headerlink" title="math包"></a>math包</h3><p>math包中除了提供大量常用的数学函数外，还提供了IEEE754浮点数标准中定义的特殊值的创建和测试：正无穷大和负无穷大，分别用于表示太大溢出的数字和除零的结果；还有NaN非数，一般用于表示无效的除法操作结果0/0或Sqrt(-1).</p>
+<pre><code>var z float64
+fmt.Println(z, -z, 1/z, -1/z, z/z) // &quot;0 -0 +Inf -Inf NaN&quot;
+</code></pre>
+<p>函数math.IsNaN用于测试一个数是否是非数NaN，math.NaN则返回非数对应的值。</p>
+<p>NaN和任何数都是不相等的。</p>
+<pre><code>nan := math.NaN()
+fmt.Println(nan == nan, nan &lt; nan, nan &gt; nan) // &quot;false false false&quot;
+</code></pre>
+<p>如果一个函数返回的浮点数结果可能失败，最好的做法是用单独的标志报告失败</p>
+<pre><code>func compute() (value float64, ok bool) &#123;
+    // ...
+    if failed &#123;
+        return 0, false
+    &#125;
+    return result, true
+&#125;
+</code></pre>
+<h2 id="复数"><a href="#复数" class="headerlink" title="复数"></a>复数</h2><blockquote>
+<p>我们把形如 z=a+bi（a、b均为实数）的数称为复数。其中，a 称为<a href="https://baike.baidu.com/item/%E5%AE%9E%E9%83%A8/53626919">实部</a>，b 称为虚部，i 称为<a href="https://baike.baidu.com/item/%E8%99%9A%E6%95%B0">虚数</a>单位。当 z 的虚部 b＝0 时，则 z 为实数；当 z 的<a href="https://baike.baidu.com/item/%E8%99%9A%E9%83%A8/5231815">虚部</a> b≠0 时，实部 a＝0 时，常称 z 为<a href="https://baike.baidu.com/item/%E7%BA%AF%E8%99%9A%E6%95%B0/3386848">纯虚数</a>。</p>
+</blockquote>
+<p>Go语言提供了两种精度的复数类型：complex64和complex128，分别对应float32和float64两种浮点数精度。</p>
+<p>内置的complex函数用于构建复数，内建的real和imag函数分别返回复数的实部和虚部：</p>
+<pre><code>var x complex128 = complex(1, 2) // 1+2i
+//或 x := 1 + 2i
+var y complex128 = complex(3, 4) // 3+4i
+//或 y := 3 + 4i
+fmt.Println(x*y)                 // &quot;(-5+10i)&quot;
+fmt.Println(real(x*y))           // &quot;-5&quot;
+fmt.Println(imag(x*y))           // &quot;10&quot;
+</code></pre>
+<p>如果一个浮点数面值或一个十进制整数面值后面跟着一个i，例如3.141592i或2i，它将构成一个复数的虚部，复数的实部是0：</p>
+<pre><code>fmt.Println(1i * 1i) // &quot;(-1+0i)&quot;, i^2 = -1
+</code></pre>
+<p>复数也可以用==和!=进行相等比较。只有两个复数的实部和虚部都相等的时候它们才是相等的。</p>
+<h2 id="布尔型"><a href="#布尔型" class="headerlink" title="布尔型"></a>布尔型</h2><p>一个布尔类型的值只有两种：true和false。</p>
+<p>布尔值可以和&amp;&amp;（AND）和||（OR）操作符结合。</p>
+<p>短路行为：如果运算符左边值已经可以确定整个布尔表达式的值，那么运算符右边的值将不再被求值，因此下面的表达式总是安全的</p>
+<pre><code>s != &quot;&quot; &amp;&amp; s[0] == &#39;x&#39; //s[0]操作如果应用于空字符串将会导致panic异常
+</code></pre>
+<h4 id="类型转换-1"><a href="#类型转换-1" class="headerlink" title="类型转换"></a>类型转换</h4><p>布尔值并不会隐式转换为数字值0或1，反之亦然。必须使用一个显式的if语句辅助转换。</p>
+<pre><code>// 布尔 =&gt; 数字
+func btoi(b bool) int &#123;
+    if b &#123;
+        return 1
+    &#125;
+    return 0
+&#125;
+// 数字 =&gt; 布尔
+func itob(i int) bool &#123; return i != 0 &#125;
+</code></pre>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>一个字符串是一个不可改变的字节序列。</p>
+<p>字符串可以包含任意的数据，包括byte值0，但是通常是用来包含人类可读的文本。</p>
+<p>文本字符串通常被解释为采用UTF8编码的Unicode码点（rune）序列。</p>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><h4 id="len函数"><a href="#len函数" class="headerlink" title="len函数"></a>len函数</h4><p>内置的len函数可以返回一个字符串中的字节数目（不是rune字符数目），索引操作s[i]返回第i个字节的字节值，i必须满足0 ≤ i&lt; len(s)条件约束。</p>
+<pre><code>s := &quot;hello, world&quot;
+fmt.Println(len(s))     // &quot;12&quot;
+fmt.Println(s[0], s[7]) // &quot;104 119&quot; (&#39;h&#39; and &#39;w&#39;)
+c := s[len(s)] // panic: index out of range
+
+fmt.Println(s[0:5]) // &quot;hello&quot;
+fmt.Println(s[:5]) // &quot;hello&quot;
+fmt.Println(s[7:]) // &quot;world&quot;
+fmt.Println(s[:])  // &quot;hello, world&quot;
+fmt.Println(&quot;goodbye&quot; + s[5:]) // &quot;goodbye, world&quot;
+</code></pre>
+<h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><p>字符串可以用==和&lt;进行比较，比较通过逐个字节比较完成的，因此比较的结果是字符串自然编码的顺序。</p>
+<h4 id="不可修改"><a href="#不可修改" class="headerlink" title="不可修改"></a>不可修改</h4><p>字符串的值是不可变的。</p>
+<pre><code>s := &quot;left foot&quot;
+t := s
+s += &quot;, right foot&quot;
+</code></pre>
+<p>变量s将因为+=语句持有一个新的字符串值，t依然是包含原先的字符串值。</p>
+<h3 id="字符串面值"><a href="#字符串面值" class="headerlink" title="字符串面值"></a>字符串面值</h3><p>字符串值也可以用字符串面值方式编写，只要将一系列字节序列包含在双引号内即可。</p>
+<p>Go语言源文件总是用UTF8编码，并且Go语言的文本字符串也以UTF8编码的方式处理，因此我们可以将Unicode码点也写到字符串面值中。</p>
+<p>在一个双引号包含的字符串面值中，可以用以反斜杠<code>\</code>开头的转义序列插入任意的数据。</p>
+<h4 id="ASCII码转义"><a href="#ASCII码转义" class="headerlink" title="ASCII码转义"></a>ASCII码转义</h4><pre><code>\a      响铃
+\b      退格
+\f      换页
+\n      换行
+\r      回车
+\t      制表符
+\v      垂直制表符
+\&#39;      单引号（只用在 &#39;\&#39;&#39; 形式的rune符号面值中）
+\&quot;      双引号（只用在 &quot;...&quot; 形式的字符串面值中）
+\\      反斜杠
+</code></pre>
+<h4 id="数字转义"><a href="#数字转义" class="headerlink" title="数字转义"></a>数字转义</h4><pre><code>\xhh    十六进制数字（大写或小写都可以）
+\o      八进制转义
+</code></pre>
+<h3 id="Unicode-1"><a href="#Unicode-1" class="headerlink" title="Unicode"></a>Unicode</h3><p>Unicode码点对应Go语言中的rune整数类型（译注：rune是int32等价类型）。</p>
+<h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><p>UTF8是一个将Unicode码点编码为字节序列的变长编码。</p>
+<p>UTF8编码使用1到4个字节来表示每个Unicode码点，ASCII部分字符只使用1个字节，常用字符部分使用2或3个字节表示</p>
+<p>Go语言的源文件采用UTF8编码，并且Go语言处理UTF8编码的文本也很出色。</p>
+<p>unicode包提供了诸多处理rune字符相关功能的函数（比如区分字母和数字，或者是字母的大写和小写转换等）</p>
+<p>unicode/utf8包则提供了用于rune字符序列的UTF8编码和解码的功能。</p>
+<pre><code>&quot;世界&quot;
+&quot;\xe4\xb8\x96\xe7\x95\x8c&quot;
+&quot;\u4e16\u754c&quot;
+&quot;\U00004e16\U0000754c&quot;
+</code></pre>
+<p>上面三个转义序列都为第一个字符串提供替代写法，但是它们的值都是相同的。</p>
+<p>Unicode转义也可以使用在rune字符中。下面三个字符是等价的：</p>
+<pre><code>&#39;世&#39; &#39;\u4e16&#39; &#39;\U00004e16&#39;
+</code></pre>
+<p>UTF8解码器</p>
+<pre><code class="go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;unicode/utf8&quot;
+)
+
+func main() &#123;
+    s := &quot;Hello, 世界&quot;
+    for i := 0; i &lt; len(s); &#123;
+    r, size := utf8.DecodeRuneInString(s[i:])
+    fmt.Printf(&quot;%c&quot;, r) //Hello, 世界
+    i += size
+    &#125; 
+&#125;
+</code></pre>
+<p>Go语言的range循环在处理字符串的时候，会自动隐式解码UTF8字符串。</p>
+<pre><code>for i, r := range &quot;Hello, 世界&quot; &#123;
+    fmt.Printf(&quot;%d\t%q\t%d\n&quot;, i, r, r)
+&#125;
+</code></pre>
+<h4 id="错误编码"><a href="#错误编码" class="headerlink" title="错误编码"></a>错误编码</h4><p>如果遇到一个错误的UTF8编码输入，将生成一个特别的Unicode字符<code>\uFFFD</code>，在印刷中这个符号通常是一个黑色六角或钻石形状，里面包含一个白色的问号”?”。</p>
+<p>这样的一个字符，通常是一个危险信号，说明输入并不是一个完美没有错误的UTF8字符串。</p>
+<p>将[]rune类型转换应用到UTF8编码的字符串，将返回字符串编码的Unicode码点序列：</p>
+<pre><code>s := &quot;一二三&quot;
+fmt.Printf(&quot;% x\n&quot;, s) // e4 b8 80 e4 ba 8c e4 b8 89
+r := []rune(s)
+fmt.Printf(&quot;%x\n&quot;, r)  // [4e00 4e8c 4e09]
+fmt.Println(string(r)) // 一二三
+
+fmt.Println(string(65))     // &quot;A&quot;, not &quot;65&quot;
+fmt.Println(string(0x4eac)) // &quot;京&quot;
+fmt.Println(string(1234567)) // &quot;?&quot; 对应码点的字符是无效的，则用\uFFFD无效字符作为替换
+</code></pre>
+<h3 id="字符串和Byte切片"><a href="#字符串和Byte切片" class="headerlink" title="字符串和Byte切片"></a>字符串和Byte切片</h3><p>标准库中有四个包对字符串处理尤为重要：bytes、strings、strconv和unicode包。</p>
+<h4 id="strings包"><a href="#strings包" class="headerlink" title="strings包"></a>strings包</h4><p>strings包提供了许多如字符串的查询、替换、比较、截断、拆分和合并等功能。</p>
+<p>ToUpper和ToLower，将原始字符串的每个字符都做相应的转换，然后返回新的字符串。</p>
+<p>示例：</p>
+<p>basename(s)：将看起来像是系统路径的前缀删除，同时将看似文件类型的后缀名部分删除：</p>
+<pre><code>fmt.Println(basename(&quot;a/b/c.go&quot;)) // &quot;c&quot;
+fmt.Println(basename(&quot;c.d.go&quot;))   // &quot;c.d&quot;
+fmt.Println(basename(&quot;abc&quot;))      // &quot;abc&quot;
+
+func basename(s string) string &#123;
+    slash := strings.LastIndex(s, &quot;/&quot;) // -1 if &quot;/&quot; not found
+    s = s[slash+1:]
+    if dot := strings.LastIndex(s, &quot;.&quot;); dot &gt;= 0 &#123;
+        s = s[:dot]
+    &#125;
+    return s
+&#125;
+</code></pre>
+<h4 id="bytes包"><a href="#bytes包" class="headerlink" title="bytes包"></a>bytes包</h4><p>bytes包也提供了很多类似功能的函数，但是针对和字符串有着相同结构的[]byte类型。</p>
+<p>因为字符串是只读的，因此逐步构建字符串会导致很多分配和复制。在这种情况下，使用bytes.Buffer类型将会更有效。</p>
+<h5 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h5><p>一个字符串是包含只读字节的数组，一旦创建，是不可变的。</p>
+<p>相比之下，一个字节slice的元素则可以自由地修改。</p>
+<p>一个[]byte(s)转换是分配了一个新的字节数组用于保存字符串数据的拷贝，然后引用这个底层的字节数组。</p>
+<pre><code>s := &quot;abc&quot;
+b := []byte(s)
+s2 := string(b)
+</code></pre>
+<p>将一个字节slice转换到字符串的string(b)操作则是构造一个字符串拷贝，以确保s2字符串是只读的。</p>
+<p>strings包中的六个函数：</p>
+<pre><code class="Go">func Contains(s, substr string) bool
+func Count(s, sep string) int
+func Fields(s string) []string
+func HasPrefix(s, prefix string) bool
+func Index(s, sep string) int
+func Join(a []string, sep string) string
+</code></pre>
+<p>bytes包中也对应的六个函数：</p>
+<pre><code class="Go">func Contains(b, subslice []byte) bool
+func Count(s, sep []byte) int
+func Fields(s []byte) [][]byte
+func HasPrefix(s, prefix []byte) bool
+func Index(s, sep []byte) int
+func Join(s [][]byte, sep []byte) []byte
+</code></pre>
+<p>它们之间唯一的区别是字符串类型参数被替换成了字节slice类型的参数。</p>
+<h5 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h5><p>bytes包还提供了Buffer类型用于字节slice的缓存。</p>
+<p>一个Buffer开始是空的，但是随着string、byte或[]byte等类型数据的写入可以动态增长</p>
+<p>一个bytes.Buffer变量并不需要初始化，因为零值也是有效的：</p>
+<pre><code>package main
+
+import (
+    &quot;fmt&quot;
+    &quot;bytes&quot;
+)
+
+func intsToString(values []int) string &#123;
+    var buf bytes.Buffer
+    buf.WriteByte(&#39;[&#39;)
+    for i, v := range values &#123;
+        if i &gt; 0 &#123;
+            buf.WriteString(&quot;, &quot;)
+        &#125;
+        fmt.Fprintf(&amp;buf, &quot;%d&quot;, v)
+    &#125;
+    buf.WriteByte(&#39;]&#39;)
+    return buf.String()
+&#125;
+
+func main() &#123;
+    fmt.Println(intsToString([]int&#123;1, 2, 3&#125;)) // &quot;[1, 2, 3]&quot;
+&#125;
+</code></pre>
+<p>当向bytes.Buffer添加任意字符的UTF8编码时，最好使用bytes.Buffer的WriteRune方法，但是WriteByte方法对于写入类似’[‘和’]’等ASCII字符则会更加有效。</p>
+<h4 id="strconv包"><a href="#strconv包" class="headerlink" title="strconv包"></a>strconv包</h4><p>strconv包提供了布尔型、整型数、浮点数和对应字符串的相互转换，还提供了双引号转义相关的转换。</p>
+<h4 id="unicode包"><a href="#unicode包" class="headerlink" title="unicode包"></a>unicode包</h4><p>unicode包提供了IsDigit、IsLetter、IsUpper和IsLower等类似功能，它们用于给字符分类。</p>
+<p>每个函数有一个单一的rune类型的参数，然后返回一个布尔值。</p>
+<p>ToUpper和ToLower之类的转换函数将用于rune字符的大小写转换。</p>
+<h3 id="字符串和数字的转换"><a href="#字符串和数字的转换" class="headerlink" title="字符串和数字的转换"></a>字符串和数字的转换</h3><p>除了字符串、字符、字节之间的转换，字符串和数值之间的转换也比较常见。由strconv包提供这类转换功能。</p>
+<p>将一个整数转为字符串:</p>
+<pre><code class="Go">x := 123
+y := fmt.Sprintf(&quot;%d&quot;, x)
+fmt.Println(y, strconv.Itoa(x)) // &quot;123 123&quot;
+</code></pre>
+<p>用不同的进制来格式化数字：</p>
+<pre><code>x := 123
+fmt.Println(strconv.FormatInt(int64(x), 2)) // &quot;1111011&quot;
+fmt.Println(strconv.FormatUint(uint64(x), 2)) // &quot;1111011&quot;
+</code></pre>
+<p>一个字符串解析为整数</p>
+<pre><code>x, _ := strconv.Atoi(&quot;123&quot;)             // x is an int
+fmt.Println(x) //123
+
+y, _ := strconv.ParseInt(&quot;123&quot;, 10, 64) // base 10, up to 64 bits
+fmt.Println(y) //123
+</code></pre>
+<p>ParseInt函数的第三个参数是用于指定整型数的大小；例如16表示int16，0则表示int。</p>
+<p><strong>在任何情况下，返回的结果y总是int64类型</strong>，你可以通过强制类型转换将它转为更小的整数类型。</p>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>常量表达式的值在编译期计算，而不是在运行期。</p>
+<p>每种常量的潜在类型都是基础类型：boolean、string或数字。</p>
+<p>一个常量的声明语句定义了常量的名字，和变量的声明语法类似，<strong>常量的值不可修改</strong>。</p>
+<pre><code>const pi = 3.14159
+</code></pre>
+<p>常量间的所有算术运算、逻辑运算和比较运算的结果也是常量，对常量的类型转换操作或以下函数调用都是返回常量结果：len、cap、real、imag、complex和unsafe.Sizeof</p>
+<p>因为它们的值是在编译期就确定的，因此常量可以是构成类型的一部分，例如用于指定数组类型的长度：</p>
+<pre><code>const IPv4Len = 4
+
+// parseIPv4 parses an IPv4 address (d.d.d.d).
+func parseIPv4(s string) IP &#123;
+    var p [IPv4Len]byte
+    // ...
+&#125;
+</code></pre>
+<p>一个常量的声明也可以包含一个类型和一个值，但是如果没有显式指明类型，那么将从右边的表达式推断类型。‘</p>
+<pre><code>const noDelay time.Duration = 0
+const timeout = 5 * time.Minute
+</code></pre>
+<p>如果是批量声明的常量，除了第一个外其它的常量右边的初始化表达式都可以省略，如果省略初始化表达式则表示使用前面常量的初始化表达式写法，对应的常量类型也一样的。</p>
+<pre><code>const (
+    a = 1
+    b
+    c = 2
+    d
+)
+fmt.Println(a, b, c, d) // &quot;1 1 2 2&quot;
+</code></pre>
+<h3 id="iota-常量生成器"><a href="#iota-常量生成器" class="headerlink" title="iota 常量生成器"></a>iota 常量生成器</h3><p>在一个const声明语句中，在第一个声明的常量所在的行，iota将会被置为0，然后在每一个有常量声明的行加一。</p>
+<pre><code>type Weekday int
+
+const (
+    Sunday Weekday = iota  // 0 
+    Monday                 // 1
+    Tuesday
+    Wednesday
+    Thursday
+    Friday
+    Saturday
+)
+</code></pre>
+<p>在其它编程语言中，这种类型一般被称为枚举类型。</p>
+<pre><code>const (
+    _ = 1 &lt;&lt; (10 * iota)
+    KiB // 1024
+    MiB // 1048576
+    GiB // 1073741824
+    TiB // 1099511627776             (exceeds 1 &lt;&lt; 32)
+    PiB // 1125899906842624
+    EiB // 1152921504606846976
+    ZiB // 1180591620717411303424    (exceeds 1 &lt;&lt; 64)
+    YiB // 1208925819614629174706176
+)
+</code></pre>
+<h3 id="无类型常量"><a href="#无类型常量" class="headerlink" title="无类型常量"></a>无类型常量</h3><p><strong>只有常量可以是无类型的。</strong></p>
+<p>有六种未明确类型的常量类型，分别是无类型的布尔型、无类型的整数、无类型的字符、无类型的浮点数、无类型的复数、无类型的字符串。</p>
+<pre><code>i := 0      // untyped integer;        implicit int(0)
+r := &#39;\000&#39; // untyped rune;           implicit rune(&#39;\000&#39;)
+f := 0.0    // untyped floating-point; implicit float64(0.0)
+c := 0i     // untyped complex;        implicit complex128(0i)
+</code></pre>
+<p>通过延迟明确常量的具体类型，无类型的常量不仅可以提供更高的运算精度，而且可以直接用于更多的表达式而不需要显式的类型转换。</p>
+<p>math.Pi无类型的浮点数常量，可以直接用于任意需要浮点数或复数的地方：</p>
+<pre><code>var x float32 = math.Pi
+var y float64 = math.Pi
+var z complex128 = math.Pi
+</code></pre>
+<p>对于常量面值，不同的写法可能会对应不同的类型。例如0、0.0、0i和<code>\u0000</code>虽然有着相同的常量值，但是它们分别对应无类型的整数、无类型的浮点数、无类型的复数和无类型的字符等不同的常量类型。</p>
+<p>同样，true和false也是无类型的布尔类型，字符串面值常量是无类型的字符串类型。</p>
+<p>注：无类型整数常量转换为int，它的内存大小是不确定的，但是无类型浮点数和复数常量则转换为内存大小明确的float64和complex128。</p>
+<p>如果不知道浮点数类型的内存大小是很难写出正确的数值算法的，因此Go语言不存在整型类似的不确定内存大小的浮点数和复数类型。</p>
+<p>如果要给变量一个不同的类型，我们必须显式地将无类型的常量转化为所需的类型，或给声明的变量指定明确的类型，像下面例子这样：</p>
+<pre><code>var i = int8(0)
+var i int8 = 0
+</code></pre>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://books.studygolang.com/gopl-zh">Go语言圣经（中文版）</a></p>
 <p><a href="https://github.com/adonovan/gopl.io/">Gopl源码</a></p>
+<p><a href="https://www.cnblogs.com/saryli/p/11611280.html">go中&amp;^（按位置零）符号的含义</a></p>
 ]]></content>
       <categories>
         <category>GO</category>
