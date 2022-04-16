@@ -12175,7 +12175,7 @@ kubectl get svc -n roledmeo
   <entry>
     <title>GOPL01-程序结构</title>
     <url>/2021/07/01/GOPL01-%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<h1 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h1><p>Go是一门编译型语言，Go语言的工具链将源代码及其依赖转换成计算机的机器指令（注1：静态编译）。</p>
+    <content><![CDATA[<h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><p>Go是一门编译型语言，Go语言的工具链将源代码及其依赖转换成计算机的机器指令（注1：静态编译）。</p>
 <p>Go语言提供的工具都通过一个单独的命令<code>go</code>调用，<code>go</code>命令有一系列子命令。</p>
 <ul>
 <li><p>run命令编译一个或多个以.go结尾的源文件，链接库文件，并运行最终生成的可执行文件。</p>
@@ -12194,7 +12194,7 @@ kubectl get svc -n roledmeo
 <li><p>Go语言原生支持Unicode，它可以处理全世界任何语言的文本。</p>
 </li>
 </ol>
-<h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><p>Go语言的代码通过<strong>包</strong>（package）组织，包类似于其它语言里的库（libraries）或者模块（modules）。</p>
+<h3 id="包"><a href="#包" class="headerlink" title="包"></a>包</h3><p>Go语言的代码通过<strong>包</strong>（package）组织，包类似于其它语言里的库（libraries）或者模块（modules）。</p>
 <p>一个包由位于单个目录下的一个或多个.go源代码文件组成，<strong>目录定义包的作用</strong>。</p>
 <p>每个源文件都以一条<code>package</code>声明语句开始，这个例子里就是<code>package main</code>，表示该文件属于哪个包，紧跟着一系列导入（import）的包，之后是存储在这个文件里的程序语句。</p>
 <h4 id="main"><a href="#main" class="headerlink" title="main"></a>main</h4><p><strong><code>main</code>包比较特殊。它定义了一个独立可执行的程序，而不是一个库。</strong>在<code>main</code>里的<code>main</code> <em>函数</em> 也很特殊，它是整个程序执行时的入口，<code>main</code>函数所做的事情就是程序做的。</p>
@@ -12205,7 +12205,7 @@ kubectl get svc -n roledmeo
 <h4 id="代码格式"><a href="#代码格式" class="headerlink" title="代码格式"></a>代码格式</h4><p><strong>Go语言不需要在语句或者声明的末尾添加分号，除非一行上有多条语句。</strong>实际上，编译器会主动把特定符号后的换行符转换为分号，因此换行符添加的位置会影响Go代码的正确解析。（比如行末是标识符、整数、浮点数、虚数、字符或字符串文字、关键字<code>break</code>、<code>continue</code>、<code>fallthrough</code>或<code>return</code>中的一个、运算符和分隔符<code>++</code>、<code>--</code>、<code>)</code>、<code>]</code>或<code>&#125;</code>中的一个）</p>
 <p>举个例子，函数的左括号<code>&#123;</code>必须和<code>func</code>函数声明在同一行上，且位于末尾，不能独占一行，而在表达式<code>x + y</code>中，可在<code>+</code>后换行，不能在<code>+</code>前换行。</p>
 <p>Go语言在代码格式上采取了很强硬的态度。<code>gofmt</code>工具把代码格式化为标准格式。很多文本编辑器都可以配置为保存文件时自动执行<code>gofmt</code>，这样你的源代码总会被恰当地格式化。</p>
-<h2 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h2><h4 id="os"><a href="#os" class="headerlink" title="os"></a>os</h4><p><code>os</code>包以跨平台的方式，提供了一些与操作系统交互的函数和变量。程序的命令行参数可从os包的Args变量获取；os包外部使用os.Args访问该变量。</p>
+<h3 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h3><h4 id="os"><a href="#os" class="headerlink" title="os"></a>os</h4><p><code>os</code>包以跨平台的方式，提供了一些与操作系统交互的函数和变量。程序的命令行参数可从os包的Args变量获取；os包外部使用os.Args访问该变量。</p>
 <p>os.Args变量是一个字符串（string）的<em>切片</em>（slice）。</p>
 <p>os.Args的第一个元素：os.Args[0]，是命令本身的名字；其它的元素则是程序启动时传给它的参数。</p>
 <h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><p>Go语言只有for循环这一种循环语句。</p>
@@ -12234,7 +12234,7 @@ for k, v := range list &#123;
 </code></pre>
 <h4 id="空标识符"><a href="#空标识符" class="headerlink" title="空标识符"></a>空标识符</h4><p>空标识符（blank identifier），即_（也就是下划线）</p>
 <p>空标识符可用于在任何语法需要变量名但程序逻辑不需要的时候（如：在循环里丢弃不需要的循环索引，并保留元素值。）</p>
-<h1 id="程序结构"><a href="#程序结构" class="headerlink" title="程序结构"></a>程序结构</h1><h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><blockquote>
+<h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><blockquote>
 <p>命名规则：以字母或下划线开头，后面可以跟任意数量的字母、数字或下划线，大小写敏感。</p>
 </blockquote>
 <h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><p>25个关键字，不能用于自定义名字，只能在特定语法结构中使用。</p>
