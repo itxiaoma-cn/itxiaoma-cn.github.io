@@ -2389,7 +2389,7 @@ protected-mode no         //关闭保护模式
 </code></pre>
 <h5 id="数据库数数量"><a href="#数据库数数量" class="headerlink" title="数据库数数量"></a>数据库数数量</h5><pre><code>databases 16
 </code></pre>
-<h4 id="SECURITY-安全"><a href="#SECURITY-安全" class="headerlink" title="SECURITY 安全"></a>SECURITY 安全</h4><h5 id="开启访问密码"><a href="#开启访问密码" class="headerlink" title="开启访问密码"></a>开启访问密码</h5><pre><code>requirepass foobared
+<h4 id="SECURITY-安全"><a href="#SECURITY-安全" class="headerlink" title="SECURITY 安全"></a>SECURITY 安全</h4><h5 id="开启访问密码"><a href="#开启访问密码" class="headerlink" title="开启访问密码"></a>开启访问密码</h5><pre><code>requirepass xxxxxx
 </code></pre>
 <h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><h5 id="最大客户端连接数"><a href="#最大客户端连接数" class="headerlink" title="最大客户端连接数"></a>最大客户端连接数</h5><pre><code>maxclients 10000
 </code></pre>
@@ -9881,6 +9881,122 @@ spec:
 <h4 id="6-测试"><a href="#6-测试" class="headerlink" title="6.测试"></a>6.测试</h4><p>访问：<a href="http://consul.itxiaoma.cn/">http://consul.itxiaoma.cn/</a></p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h19ac8zychj209u07fq32.jpg"></p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h199vtllttj20km07njrl.jpg"></p>
+<h3 id="Helm部署redis"><a href="#Helm部署redis" class="headerlink" title="Helm部署redis"></a>Helm部署redis</h3><h4 id="1-新建并挂载目录-1"><a href="#1-新建并挂载目录-1" class="headerlink" title="1. 新建并挂载目录"></a>1. 新建并挂载目录</h4><pre><code>mkdir -p /data/redis
+
+vim /etc/exports
+
+/data/consul *(rw,no_root_squash)
+
+exportfs -r
+</code></pre>
+<h4 id="2-绑定PV-PVC"><a href="#2-绑定PV-PVC" class="headerlink" title="2.绑定PV-PVC"></a>2.绑定PV-PVC</h4><p>redis-pv.yaml</p>
+<pre><code>kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pv-redis
+  namespace: ingress-nginx
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /data/redis
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-redis
+  namespace: ingress-nginx
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+</code></pre>
+<pre><code>kubectl apply -f redis-pv.yaml 
+</code></pre>
+<p>redis-slave-pv.yaml</p>
+<pre><code>kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pv-redis-slave
+  namespace: ingress-nginx
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /data/redis
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-data-redis-replicas-0
+  namespace: ingress-nginx
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+</code></pre>
+<pre><code>kubectl apply -f redis-slave-pv.yaml 
+</code></pre>
+<h4 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h4><p>my-values.yaml</p>
+<pre><code>commonConfiguration: |-
+  appendonly no
+auth:
+  password: xxxxx
+master:
+  service:
+    type: NodePort
+  persistence:
+    existingClaim: &quot;pvc-redis&quot;
+replica:
+  service:
+    type: NodePort
+</code></pre>
+<p>安装</p>
+<pre><code>helm install -f my-values.yaml redis bitnami/redis -n ingress-nginx --version 16.0.0
+</code></pre>
+<pre><code>To get your password run:
+
+    export REDIS_PASSWORD=$(kubectl get secret --namespace ingress-nginx redis -o jsonpath=&quot;&#123;.data.redis-password&#125;&quot; | base64 --decode)
+
+To connect to your Redis&amp;trade; server:
+
+1. Run a Redis&amp;trade; pod that you can use as a client:
+
+   kubectl run --namespace ingress-nginx redis-client --restart=&#39;Never&#39;  --env REDIS_PASSWORD=$REDIS_PASSWORD  --image docker.io/bitnami/redis:6.2.6-debian-10-r103 --command -- sleep infinity
+
+   Use the following command to attach to the pod:
+
+   kubectl exec --tty -i redis-client \
+   --namespace ingress-nginx -- bash
+
+2. Connect using the Redis&amp;trade; CLI:
+   REDISCLI_AUTH=&quot;$REDIS_PASSWORD&quot; redis-cli -h redis-master
+   REDISCLI_AUTH=&quot;$REDIS_PASSWORD&quot; redis-cli -h redis-replicas
+
+To connect to your database from outside the cluster execute the following commands:
+
+    export NODE_IP=$(kubectl get nodes --namespace ingress-nginx -o jsonpath=&quot;&#123;.items[0].status.addresses[0].address&#125;&quot;)
+    export NODE_PORT=$(kubectl get --namespace ingress-nginx -o jsonpath=&quot;&#123;.spec.ports[0].nodePort&#125;&quot; services redis-master)
+    REDISCLI_AUTH=&quot;$REDIS_PASSWORD&quot; redis-cli -h $NODE_IP -p $NODE_PORT
+</code></pre>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><pre><code>kubectl get svc -n ingress-nginx
+</code></pre>
+<pre><code>
+</code></pre>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="http://www.mydlq.club/article/75/">Kubernetes 部署 Mysql 8.0 数据库</a></p>
 <p><a href="https://blog.csdn.net/maoxinwen1/article/details/88629313?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1.pc_relevant_default&utm_relevant_index=2">MySQL8.0登录提示caching_sha2_password问题解决方法</a></p>
 <p><a href="https://github.com/nacos-group/nacos-k8s/tree/master/helm">https://github.com/nacos-group/nacos-k8s/tree/master/helm</a></p>
@@ -9889,6 +10005,9 @@ spec:
 <p><a href="https://artifacthub.io/packages/helm/hashicorp/consul/0.41.1">Consul on Kubernetes Helm Chart</a></p>
 <p><a href="https://www.likecs.com/show-306177642.html">Nginx Ingress设置账号密码</a></p>
 <p><a href="https://kubernetes.github.io/ingress-nginx/examples/auth/basic/">NGINX Ingress Controller-Basic Authentication</a></p>
+<p><a href="https://www.jianshu.com/p/398659314dce">helm部署redis主从</a></p>
+<p><a href="https://segmentfault.com/a/1190000040364886">Helm3安装Redis集群</a></p>
+<p><a href="https://artifacthub.io/packages/helm/bitnami/redis/16.0.0">https://artifacthub.io/packages/helm/bitnami/redis/16.0.0</a></p>
 ]]></content>
       <categories>
         <category>微服务</category>
@@ -13024,6 +13143,69 @@ var i int8 = 0
       <tags>
         <tag>GO</tag>
         <tag>GOPL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GO微服务02-问题处理</title>
+    <url>/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A102-%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h2 id="1-打包viper配置文件"><a href="#1-打包viper配置文件" class="headerlink" title="1.打包viper配置文件"></a>1.打包viper配置文件</h2><p>配置文件：config/local.yaml</p>
+<pre><code>host: 192.168.1.100
+port: 80
+</code></pre>
+<p>打包配置文件</p>
+<pre><code>go-bindata -o=config/data.go -pkg=config config/...
+</code></pre>
+<p>读取配置文件</p>
+<pre><code>type NacosConfig struct &#123;
+    Host      string `mapstructure:&quot;host&quot;`
+    Port      int    `mapstructure:&quot;port&quot;`
+&#125;
+var NacosConf NacosConfig
+func InitNacos() &#123;
+    //从打包后的文件中读取配置
+    bytesContent, err := config.Asset(&quot;config/local.yaml&quot;)
+    if err != nil &#123;
+        panic(&quot;Asset() can not found setting file&quot;)
+    &#125;
+    v := viper.New()
+    //设置要读取的文件类型
+    v.SetConfigType(&quot;yaml&quot;)
+    //读取
+    v.ReadConfig(bytes.NewBuffer(bytesContent))
+    v.Unmarshal(&amp;NacosConf)
+&#125;
+</code></pre>
+<h2 id="2-带参数调试打包"><a href="#2-带参数调试打包" class="headerlink" title="2.带参数调试打包"></a>2.带参数调试打包</h2><pre><code>func main() &#123;
+    env := flag.String(&quot;env&quot;, &quot;local&quot;, &quot;输入env&quot;)
+    flag.Parse()
+    configFile := fmt.Sprintf(&quot;%s%s%s&quot;, &quot;config/&quot;, *env, &quot;.yaml&quot;)
+    fmt.Println(&quot;configFile:&quot;, configFile) 
+    //configFile: config/local.yaml
+&#125;
+</code></pre>
+<p>调试</p>
+<pre><code>go run main.go -env=local
+go run main.go -env=production
+</code></pre>
+<p>打包</p>
+<pre><code>go build
+
+/go/test -env=production
+</code></pre>
+<h2 id="3-K8S拉取私有镜像"><a href="#3-K8S拉取私有镜像" class="headerlink" title="3.K8S拉取私有镜像"></a>3.K8S拉取私有镜像</h2><p>暂未处理</p>
+<h2 id="4-Deployment滚动升级"><a href="#4-Deployment滚动升级" class="headerlink" title="4.Deployment滚动升级"></a>4.Deployment滚动升级</h2><pre><code>kubectl set image deployment account-web account-web=itxiaoma/blog_account_web:v1.0.3 -n ingress-nginx
+</code></pre>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.jianshu.com/p/602db5e43b24">goweb项目将配置文件打包进可执行文件，并用viper读取</a></p>
+<p><a href="http://t.zoukankan.com/farwish-p-12733162.html">[Go] Viper 加载项目配置，go build 打包配置文件进二进制</a></p>
+<p><a href="https://blog.csdn.net/qq_19676401/article/details/120505405">k8s篇-集群内的DNS原理与配置</a></p>
+]]></content>
+      <categories>
+        <category>微服务</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
+        <tag>微服务</tag>
       </tags>
   </entry>
 </search>

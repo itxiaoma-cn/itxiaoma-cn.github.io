@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>K8S01-安装环境 | IT小马</title>
-  <meta name="keywords" content=" 容器 , K8S ">
-  <meta name="description" content="K8S01-安装环境 | IT小马">
+  <title>GO微服务02-问题处理 | IT小马</title>
+  <meta name="keywords" content=" GO , 微服务 ">
+  <meta name="description" content="GO微服务02-问题处理 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="[TOC] 环境搭建K8S部署Mysql1.创建ConfigMap存储配置文件mysql-config.yaml apiVersion: v1 kind: ConfigMap metadata:   name: mysql-config   labels:     app: mysql data:   my.cnf: |-     [client]     default-character-se">
 <meta property="og:type" content="article">
@@ -798,9 +798,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-K8S01-安装环境" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-GO微服务02-问题处理" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">K8S01-安装环境</h1>
+        <h1 class="article-title">GO微服务02-问题处理</h1>
     
     <div class="article-meta">
         
@@ -810,7 +810,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="K8S">K8S</a>
+            <a  data-rel="微服务">微服务</a>
             
         </span>
         
@@ -818,16 +818,16 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color3">容器</a>
+            <a class="color3">GO</a>
             
-            <a class="color4">K8S</a>
+            <a class="color4">微服务</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-10 22:29:00'>2022-04-01 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-04-19 22:30:30'>2022-04-15 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -838,7 +838,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="toc-text">相关概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6"><span class="toc-text">架构组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Master-node%EF%BC%9A%E4%B8%BB%E6%8E%A7%E8%8A%82%E7%82%B9"><span class="toc-text">Master node：主控节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Worker-node%EF%BC%9A%E5%B7%A5%E4%BD%9C%E8%8A%82%E7%82%B9"><span class="toc-text">Worker node：工作节点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">核心概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-POD"><span class="toc-text">1. POD</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Controller"><span class="toc-text">2. Controller</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Service"><span class="toc-text">3.Service</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubeadm%E9%83%A8%E7%BD%B2"><span class="toc-text">Kubeadm部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-text">环境配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Docker"><span class="toc-text">安装Docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85kubelet-kubeadm-kubectl"><span class="toc-text">安装kubelet kubeadm kubectl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85kubelet-kubeadm-kubectl-1"><span class="toc-text">安装kubelet kubeadm kubectl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2Kubenetes-Master"><span class="toc-text">部署Kubenetes Master</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Node%E8%8A%82%E7%82%B9"><span class="toc-text">安装Node节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95kubernetes%E9%9B%86%E7%BE%A4"><span class="toc-text">测试kubernetes集群</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E7%BD%91%E6%90%AD%E5%BB%BA"><span class="toc-text">公网搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%89%93%E5%8C%85viper%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">1.打包viper配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B8%A6%E5%8F%82%E6%95%B0%E8%B0%83%E8%AF%95%E6%89%93%E5%8C%85"><span class="toc-text">2.带参数调试打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-K8S%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F"><span class="toc-text">3.K8S拉取私有镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Deployment%E6%BB%9A%E5%8A%A8%E5%8D%87%E7%BA%A7"><span class="toc-text">4.Deployment滚动升级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -854,220 +854,57 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h14mhqzjmvj20lq0ezab2.jpg"></p>
-<h3 id="架构组件"><a href="#架构组件" class="headerlink" title="架构组件"></a>架构组件</h3><h4 id="Master-node：主控节点"><a href="#Master-node：主控节点" class="headerlink" title="Master node：主控节点"></a>Master node：主控节点</h4><ul>
-<li>API Server：集群统一入口（对外），以restful方式交给etcd存储</li>
-<li>controller-manager：处理集群中常规后台任务，一个资源对应一个控制器</li>
-<li>scheduler：节点调度，选择node节点应用部署</li>
-<li>etcd：存储系统，用于保存集群相关的数据</li>
-</ul>
-<h4 id="Worker-node：工作节点"><a href="#Worker-node：工作节点" class="headerlink" title="Worker node：工作节点"></a>Worker node：工作节点</h4><ul>
-<li>kubelet：管理本机容器</li>
-<li>kube-proxy：提供网络</li>
-</ul>
-<h3 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h3><blockquote>
-<p>通过Service定义访问规则，通过Controller部署POD</p>
-</blockquote>
-<h4 id="1-POD"><a href="#1-POD" class="headerlink" title="1. POD"></a>1. POD</h4><ul>
-<li>最小部署单元</li>
-<li>一组容器的集合</li>
-<li>POD间共享网络</li>
-<li>生命周期短暂</li>
-</ul>
-<h4 id="2-Controller"><a href="#2-Controller" class="headerlink" title="2. Controller"></a>2. Controller</h4><ul>
-<li>确保预期的POD副本数量</li>
-<li>有状态应用部署：有特定使用条件（依赖存储/网络IP）</li>
-<li>无状态应用部署：直接可用</li>
-<li>确保所有node运行同一个POD</li>
-<li>一次性任务和定时任务</li>
-</ul>
-<h4 id="3-Service"><a href="#3-Service" class="headerlink" title="3.Service"></a>3.Service</h4><ul>
-<li>定义一组POD的访问规则</li>
-</ul>
-<h2 id="Kubeadm部署"><a href="#Kubeadm部署" class="headerlink" title="Kubeadm部署"></a>Kubeadm部署</h2><p>Kubeadm是一个K8s部署工具，提供kubeadm init和kubeadm join，用于快速部署K8s集群</p>
-<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>系统版本：Centos7</p>
-<p>关闭防火墙</p>
-<pre><code>systemctl stop firewalld
-systemctl disable firewalld
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%89%93%E5%8C%85viper%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">1.打包viper配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B8%A6%E5%8F%82%E6%95%B0%E8%B0%83%E8%AF%95%E6%89%93%E5%8C%85"><span class="toc-text">2.带参数调试打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-K8S%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F"><span class="toc-text">3.K8S拉取私有镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Deployment%E6%BB%9A%E5%8A%A8%E5%8D%87%E7%BA%A7"><span class="toc-text">4.Deployment滚动升级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></div></p>
+<h2 id="1-打包viper配置文件"><a href="#1-打包viper配置文件" class="headerlink" title="1.打包viper配置文件"></a>1.打包viper配置文件</h2><p>配置文件：config/local.yaml</p>
+<pre><code>host: 192.168.1.100
+port: 80
 </code></pre>
-<p>关闭selinux</p>
-<pre><code># 永久
-sed -i &#39;s/enforcing/disabled/&#39; /etc/selinux/config 
-
-# 临时
-setenforce 0
+<p>打包配置文件</p>
+<pre><code>go-bindata -o=config/data.go -pkg=config config/...
 </code></pre>
-<p>关闭 swap</p>
-<pre><code># 临时
-swapoff -a  
-
-# 永久
-sed -ri &#39;s/.*swap.*/#&amp;/&#39; /etc/fstab
-</code></pre>
-<p>重置主机名</p>
-<pre><code>hostnamectl set-hostname k8smaster
-</code></pre>
-<p>配置hosts</p>
-<pre><code>cat &gt;&gt; /etc/hosts &lt;&lt; EOF 
-10.206.0.15 k8s-master 
-10.206.0.17 k8s-node1 
-10.206.0.10 k8s-node2 
-EOF
-</code></pre>
-<p>配置网络</p>
-<pre><code>cat &gt; /etc/sysctl.d/k8s.conf &lt;&lt; EOF 
-net.bridge.bridge-nf-call-ip6tables = 1
-net.bridge.bridge-nf-call-iptables = 1 
-EOF
-
-# 生效
-sysctl --system 
-</code></pre>
-<p>时间同步</p>
-<pre><code>yum install ntpdate -y
-ntpdate time.windows.com
-</code></pre>
-<h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3><p>安装docker</p>
-<pre><code>wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo 
-
-yum -y install docker-ce-18.06.1.ce-3.el7 
-
-systemctl enable docker &amp;&amp; systemctl start docker 
-
-docker --version
-</code></pre>
-<p>添加阿里云YUM源</p>
-<p>设置仓库地址：<a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/60750.html">https://help.aliyun.com/document_detail/60750.html</a></p>
-<pre><code>cat &gt; /etc/docker/daemon.json &lt;&lt; EOF
-&#123; 
-  &quot;registry-mirrors&quot;: [&quot;https://xxx.mirror.aliyuncs.com&quot;] 
+<p>读取配置文件</p>
+<pre><code>type NacosConfig struct &#123;
+    Host      string `mapstructure:&quot;host&quot;`
+    Port      int    `mapstructure:&quot;port&quot;`
 &#125;
-EOF
+var NacosConf NacosConfig
+func InitNacos() &#123;
+    //从打包后的文件中读取配置
+    bytesContent, err := config.Asset(&quot;config/local.yaml&quot;)
+    if err != nil &#123;
+        panic(&quot;Asset() can not found setting file&quot;)
+    &#125;
+    v := viper.New()
+    //设置要读取的文件类型
+    v.SetConfigType(&quot;yaml&quot;)
+    //读取
+    v.ReadConfig(bytes.NewBuffer(bytesContent))
+    v.Unmarshal(&amp;NacosConf)
+&#125;
 </code></pre>
-<h3 id="安装kubelet-kubeadm-kubectl"><a href="#安装kubelet-kubeadm-kubectl" class="headerlink" title="安装kubelet kubeadm kubectl"></a>安装kubelet kubeadm kubectl</h3><p>添加 yum 源</p>
-<pre><code class="awk">cat &gt; /etc/yum.repos.d/kubernetes.repo &lt;&lt; EOF 
-[kubernetes] 
-name=Kubernetes
-baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64 
-enabled=1 
-gpgcheck=0 
-epo_gpgcheck=0 
-gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg 
-https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg 
-EOF
+<h2 id="2-带参数调试打包"><a href="#2-带参数调试打包" class="headerlink" title="2.带参数调试打包"></a>2.带参数调试打包</h2><pre><code>func main() &#123;
+    env := flag.String(&quot;env&quot;, &quot;local&quot;, &quot;输入env&quot;)
+    flag.Parse()
+    configFile := fmt.Sprintf(&quot;%s%s%s&quot;, &quot;config/&quot;, *env, &quot;.yaml&quot;)
+    fmt.Println(&quot;configFile:&quot;, configFile) 
+    //configFile: config/local.yaml
+&#125;
 </code></pre>
-<pre><code>cat &gt; /etc/yum.repos.d/kubernetes.repo &lt;&lt; EOF 
-[kubernetes] 
-name=Kubernetes
-baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64 
-enabled=1 
-gpgcheck=0 
-epo_gpgcheck=0 
-gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg 
-https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg 
-EOF
+<p>调试</p>
+<pre><code>go run main.go -env=local
+go run main.go -env=production
 </code></pre>
-<h3 id="安装kubelet-kubeadm-kubectl-1"><a href="#安装kubelet-kubeadm-kubectl-1" class="headerlink" title="安装kubelet kubeadm kubectl"></a>安装kubelet kubeadm kubectl</h3><p>安装</p>
-<pre><code>yum install -y kubelet-1.18.0 kubeadm-1.18.0 kubectl-1.18.0
+<p>打包</p>
+<pre><code>go build
 
-systemctl enable kubelet
+/go/test -env=production
 </code></pre>
-<h3 id="部署Kubenetes-Master"><a href="#部署Kubenetes-Master" class="headerlink" title="部署Kubenetes Master"></a>部署Kubenetes Master</h3><p>在Master节点执行</p>
-<pre><code>kubeadm init --apiserver-advertise-address=10.206.0.15 --image-repository registry.aliyuncs.com/google_containers --kubernetes-version v1.18.0 --service-cidr=10.96.0.0/12 --pod-network-cidr=10.244.0.0/16
+<h2 id="3-K8S拉取私有镜像"><a href="#3-K8S拉取私有镜像" class="headerlink" title="3.K8S拉取私有镜像"></a>3.K8S拉取私有镜像</h2><p>暂未处理</p>
+<h2 id="4-Deployment滚动升级"><a href="#4-Deployment滚动升级" class="headerlink" title="4.Deployment滚动升级"></a>4.Deployment滚动升级</h2><pre><code>kubectl set image deployment account-web account-web=itxiaoma/blog_account_web:v1.0.3 -n ingress-nginx
 </code></pre>
-<p>得到token</p>
-<pre><code>kubeadm join 10.206.0.15:6443 --token iv8baz.f2yagtk257ilmanr \
-    --discovery-token-ca-cert-hash sha256:b43a11c9feeab057ee3d6ee91fd7e96dfc75859911f96ff1e89e9578d0801c23 
-</code></pre>
-<p>提示使用kubectl工具</p>
-<pre><code>mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-kubectl get nodes
-</code></pre>
-<p>部署CNI网络插件</p>
-<pre><code>wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-
-#手动拉取镜像
-docker pull quay.io/coreos/flannel:v0.14.0
-
-kubectl apply -f kube-flannel.yml
-</code></pre>
-<p>部署成功</p>
-<pre><code>kubectl get pods -n kube-system
-
-NAME                                 READY   STATUS     RESTARTS   AGE
-kube-flannel-ds-2lzv7                0/1     Init:0/1   0          3m9s
-kube-flannel-ds-2qh8t                0/1     Init:0/1   0          3m9s
-kube-flannel-ds-72fb7                0/1     Init:0/1   0          3m9s
-</code></pre>
-<h3 id="安装Node节点"><a href="#安装Node节点" class="headerlink" title="安装Node节点"></a>安装Node节点</h3><p>执行kubeadm join</p>
-<pre><code>kubeadm join 10.206.0.15:6443 --token iv8baz.f2yagtk257ilmanr \
-    --discovery-token-ca-cert-hash sha256:b43a11c9feeab057ee3d6ee91fd7e96dfc75859911f96ff1e89e9578d0801c23 
-</code></pre>
-<p>节点运行成功</p>
-<pre><code>wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-
-#手动拉取镜像
-docker pull quay.io/coreos/flannel:v0.14.0
-
-kubectl apply -f kube-flannel.yml
-</code></pre>
-<p>部署成功</p>
-<pre><code>kubectl get pods -n kube-system
-
-NAME                                 READY   STATUS     RESTARTS   AGE
-kube-flannel-ds-2lzv7                0/1     Init:0/1   0          3m9s
-kube-flannel-ds-2qh8t                0/1     Init:0/1   0          3m9s
-kube-flannel-ds-72fb7                0/1     Init:0/1   0          3m9s
-</code></pre>
-<p>节点运行成功</p>
-<pre><code>kubectl get nodes
-
-NAME         STATUS   ROLES    AGE   VERSION
-k8s-master   Ready    master   54m   v1.18.0
-k8s-node1    Ready    &lt;none&gt;   44m   v1.18.0
-k8s-node2    Ready    &lt;none&gt;   44m   v1.18.0
-</code></pre>
-<h3 id="测试kubernetes集群"><a href="#测试kubernetes集群" class="headerlink" title="测试kubernetes集群"></a>测试kubernetes集群</h3><p>创建一个pod</p>
-<pre><code>kubectl create deployment nginx --image=nginx
-kubectl expose deployment nginx --port=80 --type=NodePort
-kubectl get pod,svc
-
-NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
-service/kubernetes   ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP        148m
-service/nginx        NodePort    10.97.184.183   &lt;none&gt;        80:31312/TCP   4s
-</code></pre>
-<p>测试访问</p>
-<pre><code>curl http://公网IP:31312
-</code></pre>
-<h2 id="公网搭建"><a href="#公网搭建" class="headerlink" title="公网搭建"></a>公网搭建</h2><pre><code>auto eth0:1
-iface eth0:1 inet static
-address 124.220.21.78
-netmask 255.255.255.0
-
-cat &gt;&gt; /etc/hosts &lt;&lt; EOF
-124.220.21.78 master 
-106.54.14.202 node1
-EOF
-
-echo &quot;deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main&quot; | sudo tee /etc/apt/sources.list.d/kubernetes.list
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FEEA9169307EA071
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 8B57C5C2836F4BEB
-
-
-sudo kubeadm init \
---apiserver-advertise-address=124.220.21.78 \
---image-repository registry.aliyuncs.com/google_containers \
---kubernetes-version v1.23.0 \
---control-plane-endpoint=124.220.21.78 \
---service-cidr=10.96.0.0/12 \
---pod-network-cidr=10.244.0.0/16 \
---v=5
-</code></pre>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GT4y1A756">【尚硅谷】Kubernetes（k8s）入门到实战教程丨全新升级完整版</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43988498/article/details/122639595">多个公网服务器搭建k8s集群</a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/602db5e43b24">goweb项目将配置文件打包进可执行文件，并用viper读取</a></p>
+<p><a target="_blank" rel="noopener" href="http://t.zoukankan.com/farwish-p-12733162.html">[Go] Viper 加载项目配置，go build 打包配置文件进二进制</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19676401/article/details/120505405">k8s篇-集群内的DNS原理与配置</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
