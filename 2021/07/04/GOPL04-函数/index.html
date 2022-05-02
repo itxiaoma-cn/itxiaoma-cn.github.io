@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>GOPL04-函数 | IT小马</title>
+  <meta name="keywords" content=" GO , GOPL ">
+  <meta name="description" content="GOPL04-函数 | IT小马">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="[TOC] 环境搭建K8S部署Mysql1.创建ConfigMap存储配置文件mysql-config.yaml apiVersion: v1 kind: ConfigMap metadata:   name: mysql-config   labels:     app: mysql data:   my.cnf: |-     [client]     default-character-se">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GO微服务01-环境搭建">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/04/16/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="IT小马">
+<meta property="og:description" content="[TOC] 环境搭建K8S部署Mysql1.创建ConfigMap存储配置文件mysql-config.yaml apiVersion: v1 kind: ConfigMap metadata:   name: mysql-config   labels:     app: mysql data:   my.cnf: |-     [client]     default-character-se">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h18jfkgidwj20cq0aljrv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h199we7b1wj212q09yjsc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h19ac8zychj209u07fq32.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h199vtllttj20km07njrl.jpg">
+<meta property="article:published_time" content="2022-04-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-04-16T13:57:21.000Z">
+<meta property="article:author" content="IT小马">
+<meta property="article:tag" content="GO">
+<meta property="article:tag" content="微服务">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h18jfkgidwj20cq0aljrv.jpg">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>IT小马</span>
+</div>
+
+<div class="icon">
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(64)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="GO">
+                        
+                        GO
+                        <small>(12)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="PHP">
+                        
+                        PHP
+                        <small>(4)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="JAVA">
+                        
+                        JAVA
+                        <small>(5)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="MYSQL">
+                        
+                        MYSQL
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="REDIS">
+                        
+                        REDIS
+                        <small>(12)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="DOCKER">
+                        
+                        DOCKER
+                        <small>(8)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="K8S">
+                        
+                        K8S
+                        <small>(14)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="WEB">
+                        
+                        WEB
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="微服务">
+                        
+                        微服务
+                        <small>(4)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="单词本">
+                        
+                        单词本
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="64">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>单词本</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>后端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>容器</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>微服务</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>DOCKER</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GOPL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>K8S</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Laravel</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MYSQL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>PHP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>REDIS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>WEB</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/04/16/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务01-环境搭建">GO微服务01-环境搭建</span>
+            <span class="post-date" title="2022-04-16 00:00:00">2022/04/16</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务-架构设计">GO微服务-架构设计</span>
+            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A102-%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务02-问题处理">GO微服务02-问题处理</span>
+            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务03-前端问题处理">GO微服务03-前端问题处理</span>
+            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/13/K8S13-%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S13-高可用集群">K8S13-高可用集群</span>
+            <span class="post-date" title="2022-04-13 00:00:00">2022/04/13</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/12/K8S12-%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S12-集群资源监控">K8S12-集群资源监控</span>
+            <span class="post-date" title="2022-04-12 00:00:00">2022/04/12</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/11/K8S11-NFS%E7%BD%91%E7%BB%9C%E5%AD%98%E5%82%A8/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S11-NFS网络存储">K8S11-NFS网络存储</span>
+            <span class="post-date" title="2022-04-11 00:00:00">2022/04/11</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/10/K8S10-Helm/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S10-Helm">K8S10-Helm</span>
+            <span class="post-date" title="2022-04-10 00:00:00">2022/04/10</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/09/K8S09-Ingress/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S09-Ingress">K8S09-Ingress</span>
+            <span class="post-date" title="2022-04-09 00:00:00">2022/04/09</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/08/K8S08-RBAC/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S08-RBAC">K8S08-RBAC</span>
+            <span class="post-date" title="2022-04-08 00:00:00">2022/04/08</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/07/K8S07-Secret-ConfigMap/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S07-Secret-ConfigMap">K8S07-Secret-ConfigMap</span>
+            <span class="post-date" title="2022-04-07 00:00:00">2022/04/07</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/06/K8S06-Service-Job/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S06-Service-Job">K8S06-Service-Job</span>
+            <span class="post-date" title="2022-04-06 00:00:00">2022/04/06</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/05/K8S05-Controller%E6%8E%A7%E5%88%B6%E5%99%A8/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S05-Controller控制器">K8S05-Controller控制器</span>
+            <span class="post-date" title="2022-04-05 00:00:00">2022/04/05</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/04/K8S04-POD%E5%92%8CLabel/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S04-POD和Label">K8S04-POD和Label</span>
+            <span class="post-date" title="2022-04-04 00:00:00">2022/04/04</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/03/K8S03-YAML/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S03-YAML">K8S03-YAML</span>
+            <span class="post-date" title="2022-04-03 00:00:00">2022/04/03</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/02/K8S02-Kubectl/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S02-kubectl">K8S02-kubectl</span>
+            <span class="post-date" title="2022-04-02 00:00:00">2022/04/02</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/01/K8S01-%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S01-安装环境">K8S01-安装环境</span>
+            <span class="post-date" title="2022-04-01 00:00:00">2022/04/01</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/12/Redis12-%E6%96%B0%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis12-新功能介绍">Redis12-新功能介绍</span>
+            <span class="post-date" title="2022-02-12 00:00:00">2022/02/12</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/11/Redis11-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis11-分布式锁">Redis11-分布式锁</span>
+            <span class="post-date" title="2022-02-11 00:00:00">2022/02/11</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/10/Redis10-%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%C2%B7%E5%87%BB%E7%A9%BF%C2%B7%E9%9B%AA%E5%B4%A9/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis10-缓存穿透·击穿·雪崩">Redis10-缓存穿透·击穿·雪崩</span>
+            <span class="post-date" title="2022-02-10 00:00:00">2022/02/10</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/09/Redis09-%E9%9B%86%E7%BE%A4/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis09-集群">Redis09-集群</span>
+            <span class="post-date" title="2022-02-09 00:00:00">2022/02/09</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/08/Redis08-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis08-主从复制">Redis08-主从复制</span>
+            <span class="post-date" title="2022-02-08 00:00:00">2022/02/08</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/07/Redis07-%E6%8C%81%E4%B9%85%E5%8C%96/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis07-持久化">Redis07-持久化</span>
+            <span class="post-date" title="2022-02-07 00:00:00">2022/02/07</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/06/Redis06-%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E3%80%81%E7%A7%92%E6%9D%80/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis06-事务、锁、秒杀">Redis06-事务、锁、秒杀</span>
+            <span class="post-date" title="2022-02-06 00:00:00">2022/02/06</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/05/Redis05-Jedis%E3%80%81SprintBoot%E6%95%B4%E5%90%88Redis/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis05-Jedis、SprintBoot整合Redis">Redis05-Jedis、SprintBoot整合Redis</span>
+            <span class="post-date" title="2022-02-05 00:00:00">2022/02/05</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/04/Redis04-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis04-新数据类型">Redis04-新数据类型</span>
+            <span class="post-date" title="2022-02-04 00:00:00">2022/02/04</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/03/Redis03-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis03-配置文件、发布和订阅">Redis03-配置文件、发布和订阅</span>
+            <span class="post-date" title="2022-02-03 00:00:00">2022/02/03</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis02-常用五大数据类型">Redis02-常用五大数据类型</span>
+            <span class="post-date" title="2022-02-02 00:00:00">2022/02/02</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/01/Redis01-%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%AE%89%E8%A3%85/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis01-基础及安装">Redis01-基础及安装</span>
+            <span class="post-date" title="2022-02-01 00:00:00">2022/02/01</span>
+        </a>
+        
+        <a  class="全部文章 单词本 "
+           href="/2022/01/01/%E5%8D%95%E8%AF%8D%E6%9C%AC/"
+           data-tag="单词本"
+           data-author="" >
+            <span class="post-title" title="单词本">单词本</span>
+            <span class="post-date" title="2022-01-01 00:00:00">2022/01/01</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/25/JavaWeb03-JSP/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb03-JSP">JavaWeb03-JSP</span>
+            <span class="post-date" title="2021-11-25 00:00:00">2021/11/25</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/22/JavaWeb02-Servlet%E3%80%81Cookie%E3%80%81Session/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb02-Servlet、Cookie、Session">JavaWeb02-Servlet、Cookie、Session</span>
+            <span class="post-date" title="2021-11-22 00:00:00">2021/11/22</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/21/JavaWeb01-Tomcat%E3%80%81Maven%E9%85%8D%E7%BD%AE/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb01-Tomcat、Maven配置">JavaWeb01-Tomcat、Maven配置</span>
+            <span class="post-date" title="2021-11-21 00:00:00">2021/11/21</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/15/Java02-JDBC/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="Java01-JDBC">Java01-JDBC</span>
+            <span class="post-date" title="2021-11-15 00:00:00">2021/11/15</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/14/Java01-JavaSE/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="Java01-JavaSE">Java01-JavaSE</span>
+            <span class="post-date" title="2021-11-14 00:00:00">2021/11/14</span>
+        </a>
+        
+        <a  class="全部文章 PHP "
+           href="/2021/10/04/Laravel%E5%BA%95%E5%B1%8204-%E5%8A%A0%E8%BD%BD%E5%B9%B6%E5%90%AF%E5%8A%A8ServiceProvider/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层04-加载并启动ServiceProvider">Laravel底层04-加载并启动ServiceProvider</span>
+            <span class="post-date" title="2021-10-04 00:00:00">2021/10/04</span>
+        </a>
+        
+        <a  class="全部文章 PHP "
+           href="/2021/10/03/Laravel%E5%BA%95%E5%B1%8203-make%E5%92%8Cbuild/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层03-make和build">Laravel底层03-make和build</span>
+            <span class="post-date" title="2021-10-03 00:00:00">2021/10/03</span>
+        </a>
+        
+        <a  class="全部文章 PHP "
+           href="/2021/10/02/Laravel%E5%BA%95%E5%B1%8202-%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%EF%BC%8C%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层02-服务容器，服务提供者">Laravel底层02-服务容器，服务提供者</span>
+            <span class="post-date" title="2021-10-02 00:00:00">2021/10/02</span>
+        </a>
+        
+        <a  class="全部文章 PHP "
+           href="/2021/10/01/Laravel%E5%BA%95%E5%B1%8201-%E6%A1%86%E6%9E%B6%E6%A0%B8%E5%BF%83%EF%BC%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E9%97%AD%E5%8C%85/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层01-框架核心，依赖注入，闭包">Laravel底层01-框架核心，依赖注入，闭包</span>
+            <span class="post-date" title="2021-10-01 00:00:00">2021/10/01</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2021/08/11/K8S02-kubectl/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S02-kubectl">K8S02-kubectl</span>
+            <span class="post-date" title="2021-08-11 00:00:00">2021/08/11</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/08/Docker08-DockerCompose/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker08-DockerCompose">Docker08-DockerCompose</span>
+            <span class="post-date" title="2021-08-08 00:00:00">2021/08/08</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/07/Docker07-%E7%BD%91%E7%BB%9C/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker07-网络">Docker07-网络</span>
+            <span class="post-date" title="2021-08-07 00:00:00">2021/08/07</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/06/Docker06-%E6%95%B0%E6%8D%AE%E5%8D%B7%E5%AE%B9%E5%99%A8%E5%92%8CDockerfile/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker06-数据卷容器和Dockerfile">Docker06-数据卷容器和Dockerfile</span>
+            <span class="post-date" title="2021-08-06 00:00:00">2021/08/06</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/05/Docker05-%E6%95%B0%E6%8D%AE%E6%8C%82%E8%BD%BD/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker05-数据挂载">Docker05-数据挂载</span>
+            <span class="post-date" title="2021-08-05 00:00:00">2021/08/05</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/04/Docker04-%E9%95%9C%E5%83%8F%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E6%8F%90%E4%BA%A4/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker04-镜像的原理和提交">Docker04-镜像的原理和提交</span>
+            <span class="post-date" title="2021-08-04 00:00:00">2021/08/04</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/03/Docker03-%E5%AE%89%E8%A3%85Nginx,Elasticsearch,Portainer%E5%8F%AF%E8%A7%86%E5%8C%96/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker03-安装Nginx,Elasticsearch,Portainer可视化">Docker03-安装Nginx,Elasticsearch,Portainer可视化</span>
+            <span class="post-date" title="2021-08-03 00:00:00">2021/08/03</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/02/Docker02-%E6%A6%82%E5%BF%B5%E5%92%8C%E5%91%BD%E4%BB%A4/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker02-概念和命令">Docker02-概念和命令</span>
+            <span class="post-date" title="2021-08-02 00:00:00">2021/08/02</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/01/Docker01-%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker01-安装和卸载">Docker01-安装和卸载</span>
+            <span class="post-date" title="2021-08-01 00:00:00">2021/08/01</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/12/GOPL12-%E5%BA%95%E5%B1%82%E7%BC%96%E7%A8%8B/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL12-底层编程">GOPL12-底层编程</span>
+            <span class="post-date" title="2021-07-12 00:00:00">2021/07/12</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/11/GOPL11-%E5%8F%8D%E5%B0%84/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL11-反射">GOPL11-反射</span>
+            <span class="post-date" title="2021-07-11 00:00:00">2021/07/11</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/10/GOPL10-%E6%B5%8B%E8%AF%95/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL10-测试">GOPL10-测试</span>
+            <span class="post-date" title="2021-07-10 00:00:00">2021/07/10</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/09/GOPL09-%E5%8C%85%E5%92%8C%E5%B7%A5%E5%85%B7/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL09-包和工具">GOPL09-包和工具</span>
+            <span class="post-date" title="2021-07-09 00:00:00">2021/07/09</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/08/GOPL08-%E5%9F%BA%E4%BA%8E%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL08-基于共享变量的并发">GOPL08-基于共享变量的并发</span>
+            <span class="post-date" title="2021-07-08 00:00:00">2021/07/08</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/07/GOPL07-Goroutines%E5%92%8CChannels/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL07-Goroutines和Channels">GOPL07-Goroutines和Channels</span>
+            <span class="post-date" title="2021-07-07 00:00:00">2021/07/07</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/06/GOPL06-%E6%8E%A5%E5%8F%A3/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2021-07-06 00:00:00">2021/07/06</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/05/GOPL05-%E6%96%B9%E6%B3%95/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL05-方法">GOPL05-方法</span>
+            <span class="post-date" title="2021-07-05 00:00:00">2021/07/05</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/04/GOPL04-%E5%87%BD%E6%95%B0/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL04-函数">GOPL04-函数</span>
+            <span class="post-date" title="2021-07-04 00:00:00">2021/07/04</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/03/GOPL03-%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL03-复合数据类型">GOPL03-复合数据类型</span>
+            <span class="post-date" title="2021-07-03 00:00:00">2021/07/03</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/02/GOPL02-%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL02-基础数据类型">GOPL02-基础数据类型</span>
+            <span class="post-date" title="2021-07-02 00:00:00">2021/07/02</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/01/GOPL01-%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL01-程序结构">GOPL01-程序结构</span>
+            <span class="post-date" title="2021-07-01 00:00:00">2021/07/01</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲01-基础架构">Mysql45讲01-基础架构</span>
+            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
+        </a>
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/03/%E9%AB%98%E6%80%A7%E8%83%BDWeb03-%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="高性能Web03-并发处理">高性能Web03-并发处理</span>
+            <span class="post-date" title="2021-05-03 00:00:00">2021/05/03</span>
+        </a>
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/02/%E9%AB%98%E6%80%A7%E8%83%BDWeb02-%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="高性能Web02-网络传输">高性能Web02-网络传输</span>
+            <span class="post-date" title="2021-05-02 00:00:00">2021/05/02</span>
+        </a>
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/01/%E9%AB%98%E6%80%A7%E8%83%BDWeb01-%E7%BB%AA%E8%AE%BA/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="构建高性能Web站点01">构建高性能Web站点01</span>
+            <span class="post-date" title="2021-05-01 00:00:00">2021/05/01</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-GOPL04-函数" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">GOPL04-函数</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="GO">GO</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">GO</a>
+            
+            <a class="color5">GOPL</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2022-04-26 23:24:47'>2021-07-04 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E"><span class="toc-text">函数声明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%AD%BE%E5%90%8D"><span class="toc-text">函数签名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%92%E5%BD%92"><span class="toc-text">递归</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E5%8F%98%E6%A0%88"><span class="toc-text">可变栈</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-text">多返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%99%E8%AF%AF"><span class="toc-text">错误</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5"><span class="toc-text">错误处理策略</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E4%BC%A0%E6%92%AD%E9%94%99%E8%AF%AF"><span class="toc-text">1.传播错误</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E9%87%8D%E8%AF%95"><span class="toc-text">2.重试</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E8%BE%93%E5%87%BA%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E5%B9%B6%E7%BB%93%E6%9D%9F%E7%A8%8B%E5%BA%8F"><span class="toc-text">3.输出错误信息并结束程序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E8%BE%93%E5%87%BA%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%EF%BC%8C%E4%B8%8D%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F"><span class="toc-text">4.输出错误信息，不中断程序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%BF%BD%E7%95%A5%E9%94%99%E8%AF%AF"><span class="toc-text">5.忽略错误</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC"><span class="toc-text">编码风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E5%B0%BE%E9%94%99%E8%AF%AF%EF%BC%88EOF%EF%BC%89"><span class="toc-text">文件结尾错误（EOF）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%80%BC"><span class="toc-text">函数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="toc-text">匿名函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%BC%95%E7%94%A8"><span class="toc-text">变量引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AD%A6%E5%91%8A%EF%BC%9A%E6%8D%95%E8%8E%B7%E8%BF%AD%E4%BB%A3%E5%8F%98%E9%87%8F"><span class="toc-text">警告：捕获迭代变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0"><span class="toc-text">可变参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deferred%E5%87%BD%E6%95%B0"><span class="toc-text">Deferred函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Panic%E5%BC%82%E5%B8%B8"><span class="toc-text">Panic异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Recover%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8"><span class="toc-text">Recover捕获异常</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E"><span class="toc-text">函数声明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%AD%BE%E5%90%8D"><span class="toc-text">函数签名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%92%E5%BD%92"><span class="toc-text">递归</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E5%8F%98%E6%A0%88"><span class="toc-text">可变栈</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-text">多返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%99%E8%AF%AF"><span class="toc-text">错误</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5"><span class="toc-text">错误处理策略</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E4%BC%A0%E6%92%AD%E9%94%99%E8%AF%AF"><span class="toc-text">1.传播错误</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E9%87%8D%E8%AF%95"><span class="toc-text">2.重试</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E8%BE%93%E5%87%BA%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E5%B9%B6%E7%BB%93%E6%9D%9F%E7%A8%8B%E5%BA%8F"><span class="toc-text">3.输出错误信息并结束程序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E8%BE%93%E5%87%BA%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%EF%BC%8C%E4%B8%8D%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F"><span class="toc-text">4.输出错误信息，不中断程序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E5%BF%BD%E7%95%A5%E9%94%99%E8%AF%AF"><span class="toc-text">5.忽略错误</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E9%A3%8E%E6%A0%BC"><span class="toc-text">编码风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%BB%93%E5%B0%BE%E9%94%99%E8%AF%AF%EF%BC%88EOF%EF%BC%89"><span class="toc-text">文件结尾错误（EOF）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%80%BC"><span class="toc-text">函数值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="toc-text">匿名函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%BC%95%E7%94%A8"><span class="toc-text">变量引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AD%A6%E5%91%8A%EF%BC%9A%E6%8D%95%E8%8E%B7%E8%BF%AD%E4%BB%A3%E5%8F%98%E9%87%8F"><span class="toc-text">警告：捕获迭代变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0"><span class="toc-text">可变参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deferred%E5%87%BD%E6%95%B0"><span class="toc-text">Deferred函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Panic%E5%BC%82%E5%B8%B8"><span class="toc-text">Panic异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Recover%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8"><span class="toc-text">Recover捕获异常</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></div></p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h3 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h3><p>函数声明包括函数名、形式参数列表、返回值列表（可省略）以及函数体。</p>
+<pre><code class="Go">func name(parameter-list) (result-list) &#123;
+    body
+&#125;
+</code></pre>
+<p>形式参数列表描述了函数的参数名以及参数类型。</p>
+<p>返回值列表描述了函数返回值的变量名以及类型。</p>
+<p>如果一个函数在声明时，包含返回值列表，该函数必须以 return语句结尾，除非函数明显无法运行到结尾处。</p>
+<p>如果函数返回一个无名变量或者没有返回值，返回值列表的括号是可以省略的。</p>
+<p>如果一个函数声明不包括返回值列表，那么函数体执行完毕后，不会返回任何值。</p>
+<pre><code class="Go">func hypot(x, y float64) float64 &#123;
+    return math.Sqrt(x*x + y*y)
+&#125;
+fmt.Println(hypot(3,4)) // &quot;5&quot;
+</code></pre>
+<p>x和y是形参名，3和4是调用时的传入的实参，函数返回了一个float64类型的值。 </p>
+<h4 id="函数签名"><a href="#函数签名" class="headerlink" title="函数签名"></a>函数签名</h4><p>函数的类型被称为函数的签名。</p>
+<p>如果两个函数形式参数列表和返回值列表中的变量类型一一对应，那么这两个函数被认为有相同的类型或签名。</p>
+<p>形参和返回值的变量名不影响函数签名，也不影响它们是否可以以省略参数类型的形式表示。</p>
+<p>每一次函数调用都必须按照声明顺序为所有参数提供实参（参数值）。</p>
+<p>形参和返回值的变量名对于函数调用者而言没有意义。</p>
+<p>在函数体中，函数的形参作为局部变量，被初始化为调用者提供的值。函数的形参和有名返回值作为函数最外层的局部变量，被存储在相同的词法块中。</p>
+<p>实参通过值的方式传递，因此<strong>函数的形参是实参的拷贝。对形参进行修改不会影响实参。</strong></p>
+<p>如果实参包括<strong>引用类型，如指针，slice(切片)、map、function、channel等类型，实参可能会由于函数的间接引用被修改</strong>。</p>
+<p>没有函数体的函数声明，这表示该函数不是以Go实现的。这样的声明定义了函数签名。</p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>函数可以是递归的，这意味着函数可以直接或间接的调用自身。</p>
+<pre><code class="Go">type Node struct &#123;
+    Type                    NodeType
+    Data                    string
+    Attr                    []Attribute
+    FirstChild, NextSibling *Node
+&#125;
+
+// visit appends to links each link found in n and returns the result.
+func visit(links []string, n *html.Node) []string &#123;
+    if n.Type == html.ElementNode &amp;&amp; n.Data == &quot;a&quot; &#123;
+        for _, a := range n.Attr &#123;
+            if a.Key == &quot;href&quot; &#123;
+                links = append(links, a.Val)
+            &#125;
+        &#125;
+    &#125;
+    for c := n.FirstChild; c != nil; c = c.NextSibling &#123;
+        links = visit(links, c)
+    &#125;
+    return links
+&#125;
+</code></pre>
+<p>为了遍历结点n的所有后代结点，每次遇到n的孩子结点时，visit递归的调用自身。这些孩子结点存放在FirstChild链表中。</p>
+<p>在函数outline中，我们通过递归的方式遍历整个HTML结点树，并输出树的结构。在outline内部，每遇到一个HTML元素标签，就将其入栈，并输出。</p>
+<pre><code class="Go">func main() &#123;
+    doc, err := html.Parse(os.Stdin)
+    if err != nil &#123;
+        fmt.Fprintf(os.Stderr, &quot;outline: %v\n&quot;, err)
+        os.Exit(1)
+    &#125;
+    outline(nil, doc)
+&#125;
+func outline(stack []string, n *html.Node) &#123;
+    if n.Type == html.ElementNode &#123;
+        stack = append(stack, n.Data) // push tag
+        fmt.Println(stack)
+    &#125;
+    for c := n.FirstChild; c != nil; c = c.NextSibling &#123;
+        outline(stack, c)
+    &#125;
+&#125;
+</code></pre>
+<p>当outline调用自身时，被调用者接收的是stack的拷贝。</p>
+<p><strong>被调用者对stack的元素追加操作，修改的是stack的拷贝</strong>，其可能会修改slice底层的数组甚至是申请一块新的内存空间进行扩容；但这个过程并不会修改调用方的stack。</p>
+<p>因此当函数返回时，调用方的stack与其调用自身之前完全一致。</p>
+<h4 id="可变栈"><a href="#可变栈" class="headerlink" title="可变栈"></a>可变栈</h4><ul>
+<li>大部分编程语言使用固定大小的函数调用栈，常见的大小从64KB到2MB不等。固定大小栈会限制递归的深度，当你用递归处理大量数据时，需要避免栈溢出；除此之外，还会导致安全性问题。</li>
+<li>Go语言使用可变栈，栈的大小按需增加（初始时很小）。这使得我们使用递归时不必考虑溢出和安全问题。</li>
+</ul>
+<h3 id="多返回值"><a href="#多返回值" class="headerlink" title="多返回值"></a>多返回值</h3><p>调用多返回值函数时，返回给调用者的是一组值，调用者必须显式的将这些值分配给变量:</p>
+<pre><code>links, err := findLinks(url)
+</code></pre>
+<p>如果某个值不被使用，可以将其分配给blank identifier(空白标识符):</p>
+<pre><code>links, _ := findLinks(url) // errors ignored
+</code></pre>
+<p>一个函数内部可以将另一个有多返回值的函数调用作为返回值，下面的例子展示了与findLinks有相同功能的函数，两者的区别在于下面的例子先输出参数：</p>
+<pre><code class="Go">func findLinksLog(url string) ([]string, error) &#123;
+    log.Printf(&quot;findLinks %s&quot;, url)
+    return findLinks(url)
+&#125;
+</code></pre>
+<p>按照惯例，函数的最后一个bool类型的返回值表示函数是否运行成功，error类型的返回值代表函数的错误信息。</p>
+<p>如果一个函数所有的返回值都有显式的变量名，那么该函数的return语句可以省略操作数。这称之为<strong>bare return</strong>。</p>
+<pre><code class="Go">func CountWordsAndImages(url string) (words, images int, err error) &#123;
+    resp, err := http.Get(url)
+    if err != nil &#123;
+        return
+    &#125;
+    doc, err := html.Parse(resp.Body)
+    resp.Body.Close()
+    if err != nil &#123;
+        err = fmt.Errorf(&quot;parsing HTML: %s&quot;, err)
+        return
+    &#125;
+    words, images = countWordsAndImages(doc)
+    return
+&#125;
+// return 等价于 return words, images, err
+</code></pre>
+<h3 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h3><p>对于将运行失败看作是预期结果的函数，它们会返回一个额外的返回值，通常是最后一个，来传递错误信息。</p>
+<p>如果导致失败的原因只有一个，额外的返回值可以是一个布尔值，通常被命名为ok。</p>
+<p>失败的唯一原因是key不存在：</p>
+<pre><code class="Go">value, ok := cache.Lookup(key)
+if !ok &#123;
+    // ...cache[key] does not exist…
+&#125;
+</code></pre>
+<p>额外的返回值不再是简单的布尔类型，而是error类型。</p>
+<p>内置的error是接口类型。</p>
+<p>error类型可能是nil或者non-nil。nil意味着函数运行成功，non-nil表示失败。</p>
+<p>通常，当函数返回non-nil的error时，其他的返回值是未定义的（undefined），这些未定义的返回值应该被忽略。</p>
+<p>Go使用控制流机制（如if和return）处理错误，这使得编码人员能更多的关注错误处理。</p>
+<h4 id="错误处理策略"><a href="#错误处理策略" class="headerlink" title="错误处理策略"></a>错误处理策略</h4><h5 id="1-传播错误"><a href="#1-传播错误" class="headerlink" title="1.传播错误"></a>1.传播错误</h5><pre><code class="Go">//函数中某个子程序的失败，会变成该函数的失败。
+resp, err := http.Get(url)
+if err != nil&#123;
+    return nil, err
+&#125;
+</code></pre>
+<p>当错误最终由main函数处理时，错误信息应提供清晰的从原因到后果的因果链</p>
+<p>由于错误信息经常是以链式组合在一起的，所以错误信息中应避免大写和换行符。</p>
+<p>编写错误信息时，我们要确保错误信息对问题细节的描述是详尽的。尤其是要注意错误信息表达的一致性，即相同的函数或同包内的同一组函数返回的错误在构成和处理方式上是相似的。</p>
+<p>每个错误的描述不仅仅包含错误的原因（如无权限，文件目录不存在）也包含文件名，这样调用者在构造新的错误信息时无需再添加这些信息。</p>
+<p>一般而言，被调用函数f(x)会将调用信息和参数信息作为发生错误时的上下文放在错误信息中并返回给调用者，调用者需要添加一些错误信息中不包含的信息，比如添加url到html.Parse返回的错误中。</p>
+<h5 id="2-重试"><a href="#2-重试" class="headerlink" title="2.重试"></a>2.重试</h5><p>如果错误的发生是偶然性的，或由不可预知的问题导致的。一个明智的选择是重新尝试失败的操作。</p>
+<p>在重试时，我们需要限制重试的时间间隔或重试的次数，防止无限制的重试。</p>
+<pre><code class="Go">func WaitForServer(url string) error &#123;
+    const timeout = 1 * time.Minute
+    deadline := time.Now().Add(timeout)
+    for tries := 0; time.Now().Before(deadline); tries++ &#123;
+        _, err := http.Head(url)
+        if err == nil &#123;
+            return nil // success
+        &#125;
+        log.Printf(&quot;server not responding (%s);retrying…&quot;, err)
+        time.Sleep(time.Second &lt;&lt; uint(tries)) // exponential back-off
+    &#125;
+    return fmt.Errorf(&quot;server %s failed to respond after %s&quot;, url, timeout)
+&#125;
+</code></pre>
+<h5 id="3-输出错误信息并结束程序"><a href="#3-输出错误信息并结束程序" class="headerlink" title="3.输出错误信息并结束程序"></a>3.输出错误信息并结束程序</h5><p>这种策略只应在main中执行。</p>
+<p>对库函数而言，应仅向上传播错误，除非该错误意味着程序内部包含不一致性，即遇到了bug，才能在库函数中结束程序。</p>
+<pre><code class="Go">// (In function main.)
+if err := WaitForServer(url); err != nil &#123;
+    fmt.Fprintf(os.Stderr, &quot;Site is down: %v\n&quot;, err)
+    os.Exit(1)
+&#125;
+</code></pre>
+<p>调用log.Fatalf可以更简洁的代码达到与上文相同的效果。log中的所有函数，都默认会在错误信息之前输出时间信息。</p>
+<pre><code class="Go">if err := WaitForServer(url); err != nil &#123;
+    log.Fatalf(&quot;Site is down: %v\n&quot;, err)
+&#125;
+</code></pre>
+<h5 id="4-输出错误信息，不中断程序"><a href="#4-输出错误信息，不中断程序" class="headerlink" title="4.输出错误信息，不中断程序"></a>4.输出错误信息，不中断程序</h5><pre><code class="Go">if err := Ping(); err != nil &#123;
+    log.Printf(&quot;ping failed: %v; networking disabled&quot;,err)
+&#125;
+if err := Ping(); err != nil &#123;
+    fmt.Fprintf(os.Stderr, &quot;ping failed: %v; networking disabled\n&quot;, err)
+&#125;
+</code></pre>
+<h5 id="5-忽略错误"><a href="#5-忽略错误" class="headerlink" title="5.忽略错误"></a>5.忽略错误</h5><pre><code class="Go">dir, err := ioutil.TempDir(&quot;&quot;, &quot;scratch&quot;)
+if err != nil &#123;
+    return fmt.Errorf(&quot;failed to create temp dir: %v&quot;,err)
+&#125;
+// ...use temp dir…
+os.RemoveAll(dir) // ignore errors; $TMPDIR is cleaned periodically
+</code></pre>
+<h4 id="编码风格"><a href="#编码风格" class="headerlink" title="编码风格"></a>编码风格</h4><p>检查某个子函数是否失败后，我们通常将处理失败的逻辑代码放在处理成功的代码之前。</p>
+<p>如果某个错误会导致函数返回，那么成功时的逻辑代码不应放在else语句块中，而应直接放在函数体中。</p>
+<h4 id="文件结尾错误（EOF）"><a href="#文件结尾错误（EOF）" class="headerlink" title="文件结尾错误（EOF）"></a>文件结尾错误（EOF）</h4><p>io包保证任何由文件结束引起的读取失败都返回同一个错误——io.EOF，该错误在io包中定义：</p>
+<pre><code class="Go">package io
+
+import &quot;errors&quot;
+
+// EOF is the error returned by Read when no more input is available.
+var EOF = errors.New(&quot;EOF&quot;)
+</code></pre>
+<p>从标准输入中读取字符，以及判断文件结束：</p>
+<pre><code class="Go">in := bufio.NewReader(os.Stdin)
+for &#123;
+    r, _, err := in.ReadRune()
+    if err == io.EOF &#123;
+        break // finished reading
+    &#125;
+    if err != nil &#123;
+        return fmt.Errorf(&quot;read failed:%v&quot;, err)
+    &#125;
+    // ...use r…
+&#125;
+</code></pre>
+<h3 id="函数值"><a href="#函数值" class="headerlink" title="函数值"></a>函数值</h3><p>函数被看作第一类值（first-class values）：函数像其他值一样，拥有类型，可以被赋值给其他变量，传递给函数，从函数返回。</p>
+<pre><code class="Go">func square(n int) int &#123; return n * n &#125;
+func negative(n int) int &#123; return -n &#125;
+func product(m, n int) int &#123; return m * n &#125;
+
+f := square
+fmt.Println(f(3)) // &quot;9&quot;
+f = negative
+fmt.Println(f(3))     // &quot;-3&quot;
+fmt.Printf(&quot;%T\n&quot;, f) // &quot;func(int) i
+f = product // compile error: can&#39;t assign func(int, int) int to func(int) int
+</code></pre>
+<p>函数类型的零值是nil。调用值为nil的函数值会引起panic错误：</p>
+<pre><code class="Go">var f func(int) int
+f(3) // 此处f的值为nil, 会引起panic错误
+</code></pre>
+<p>函数值可以与nil比较：</p>
+<pre><code class="Go">if f != nil &#123;
+    f(3)
+&#125;
+</code></pre>
+<p><strong>函数值之间是不可比较的，也不能用函数值作为map的key。</strong></p>
+<p>函数值使得我们不仅仅可以通过数据来参数化函数，亦可通过行为。</p>
+<p>strings.Map对字符串中的每个字符调用add1函数，并将每个add1函数的返回值组成一个新的字符串返回给调用者。</p>
+<pre><code>func add1(r rune) rune &#123; 
+    if r == &#39;e&#39; &#123; 
+        return &#39;@&#39;
+    &#125; 
+    return r
+&#125;
+
+func main() &#123;
+    fmt.Println(strings.Map(add1, &quot;Hello&quot;)) //H@llo
+&#125;
+</code></pre>
+<pre><code>func forEachNode(n *html.Node, pre, post func(n *html.Node)) &#123;
+    ...
+&#125;
+</code></pre>
+<h3 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h3><p>拥有函数名的函数只能在包级语法块中被声明</p>
+<p>通过函数字面量（function literal），我们可绕过这一限制，在任何表达式中表示一个函数值。</p>
+<p>func关键字后没有函数名，函数值字面量是一种表达式，它的值被称为匿名函数（anonymous function）。</p>
+<pre><code>strings.Map(func(r rune) rune &#123; return r + 1 &#125;, &quot;HAL-9000&quot;)
+</code></pre>
+<p>在函数中定义的内部函数可以引用该函数的变量</p>
+<pre><code class="Go">// squares返回一个匿名函数。
+// 该匿名函数每次被调用时都会返回下一个数的平方。
+func squares() func() int &#123;
+    var x int
+    return func() int &#123;
+        x++
+        return x * x
+    &#125;
+&#125;
+func main() &#123;
+    f := squares()
+    fmt.Println(f()) // &quot;1&quot;
+  
+    f = squares()
+    fmt.Println(f()) // &quot;1&quot;
+    fmt.Println(f()) // &quot;4&quot;
+    fmt.Println(f()) // &quot;9&quot;
+    fmt.Println(f()) // &quot;16&quot;
+&#125;
+</code></pre>
+<p>函数squares返回另一个类型为 func() int 的函数。</p>
+<p>对squares的一次调用会生成一个局部变量x并返回一个匿名函数。</p>
+<p>每次调用匿名函数时，该函数都会先使x的值加1，再返回x的平方。</p>
+<p>第二次调用squares时，会生成第二个x变量，并返回一个新的匿名函数。</p>
+<p>新匿名函数操作的是第二个x变量。</p>
+<h4 id="变量引用"><a href="#变量引用" class="headerlink" title="变量引用"></a>变量引用</h4><p>squares的例子证明，函数值不仅仅是一串代码，还记录了状态。</p>
+<p>在squares中定义的匿名内部函数可以访问和更新squares中的局部变量，这意味着匿名函数和squares中，存在变量引用。</p>
+<p>这就是函数值属于引用类型和函数值不可比较的原因。</p>
+<p>Go使用闭包（closures）技术实现函数值，Go程序员也把函数值叫做闭包。</p>
+<h4 id="警告：捕获迭代变量"><a href="#警告：捕获迭代变量" class="headerlink" title="警告：捕获迭代变量"></a>警告：捕获迭代变量</h4><p>正确代码</p>
+<pre><code class="Go">func main() &#123;
+    list := []int&#123;1, 2, 3, 4&#125;
+    var nums []func()
+    for _, num := range list &#123;
+        dir := num
+        nums = append(nums, func() &#123;
+            fmt.Println(dir)
+        &#125;)
+    &#125;
+    for _, f := range nums &#123;
+        f()// 1 2 3 4
+    &#125;
+&#125;
+</code></pre>
+<p>错误代码</p>
+<pre><code class="go">func main() &#123;
+    list := []int&#123;1, 2, 3, 4&#125;
+    var nums []func()
+    for _, num := range list &#123;
+        nums = append(nums, func() &#123;
+            fmt.Println(num)
+        &#125;)
+    &#125;
+    for _, f := range nums &#123;
+        f()// 4 4 4 4
+    &#125;
+&#125;
+</code></pre>
+<p>for循环语句引入了新的词法块，循环变量dir在这个词法块中被声明。</p>
+<p>在该循环中生成的所有函数值都共享相同的循环变量。</p>
+<p><strong>需要注意，函数值中记录的是循环变量的内存地址，而不是循环变量某一时刻的值。</strong></p>
+<p>以dir为例，后续的迭代会不断更新dir的值，当删除操作执行时，for循环已完成，dir中存储的值等于最后一次迭代的值。这意味着，每次对os.RemoveAll的调用删除的都是相同的目录。</p>
+<p>这个问题不仅存在基于range的循环，在下面的例子中，对循环变量i的使用也存在同样的问题：</p>
+<pre><code class="Go">var rmdirs []func()
+dirs := tempDirs()
+for i := 0; i &lt; len(dirs); i++ &#123;
+    os.MkdirAll(dirs[i], 0755) // OK
+    rmdirs = append(rmdirs, func() &#123;
+        os.RemoveAll(dirs[i]) // NOTE: incorrect!
+    &#125;)
+&#125;
+</code></pre>
+<p>这不是go或defer本身导致的，而是因为它们都会等待循环结束后，再执行函数值。</p>
+<h3 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h3><p>参数数量可变的函数称为可变参数函数。</p>
+<p>在声明可变参数函数时，需要在参数列表的最后一个参数类型之前加上省略符号“…”，这表示该函数会接收任意数量的该类型参数。</p>
+<pre><code class="Go">func sum(vals ...int) int &#123;
+    total := 0
+    for _, val := range vals &#123;
+        total += val
+    &#125;
+    return total
+&#125;
+</code></pre>
+<p>sum函数返回任意个int型参数的和。在函数体中，vals被看作是类型为[] int的切片。sum可以接收任意数量的int型参数：</p>
+<pre><code class="Go">fmt.Println(sum())           // &quot;0&quot;
+fmt.Println(sum(3))          // &quot;3&quot;
+fmt.Println(sum(1, 2, 3, 4)) // &quot;10&quot;
+</code></pre>
+<p>在上面的代码中，调用者隐式的创建一个数组，并将原始参数复制到数组中，再把数组的一个切片作为参数传给被调用函数。</p>
+<p>如果原始参数已经是切片类型，只需在最后一个参数后加上省略符。</p>
+<pre><code class="Go">values := []int&#123;1, 2, 3, 4&#125;
+fmt.Println(sum(values...)) // &quot;10&quot;
+</code></pre>
+<p>虽然在可变参数函数内部，…int 型参数的行为看起来很像切片类型，但实际上，可变参数函数和以切片作为参数的函数是不同的。</p>
+<pre><code class="Go">func f(...int) &#123;&#125;
+func g([]int) &#123;&#125;
+fmt.Printf(&quot;%T\n&quot;, f) // &quot;func(...int)&quot;
+fmt.Printf(&quot;%T\n&quot;, g) // &quot;func([]int)&quot;
+</code></pre>
+<p>可变参数函数经常被用于格式化字符串。</p>
+<p>interface{}表示函数的最后一个参数可以接收任意类型。</p>
+<h3 id="Deferred函数"><a href="#Deferred函数" class="headerlink" title="Deferred函数"></a>Deferred函数</h3><p>在调用普通函数或方法前加上关键字defer，当执行到该条语句时，函数和参数表达式得到计算，但直到包含该defer语句的函数执行完毕时，defer后的函数才会被执行，不论包含defer语句的函数是通过return正常结束，还是由于panic导致的异常结束。你可以在一个函数中执行多条defer语句，它们的执行顺序与声明顺序相反。</p>
+<p>defer语句经常被用于处理成对的操作，如打开、关闭、连接、断开连接、加锁、释放锁。</p>
+<p>通过defer机制，不论函数逻辑多复杂，都能保证在任何执行路径下，资源被释放。</p>
+<p><strong>释放资源的defer应该直接跟在请求资源的语句后。</strong></p>
+<pre><code class="Go">func title(url string) error &#123;
+    resp, err := http.Get(url)
+    if err != nil &#123;
+        return err
+    &#125;
+    defer resp.Body.Close()
+    ...
+    return nil
+&#125;
+</code></pre>
+<p>在处理其他资源时，也可以采用defer机制，比如对文件的操作</p>
+<pre><code class="Go">package ioutil
+func ReadFile(filename string) ([]byte, error) &#123;
+    f, err := os.Open(filename)
+    if err != nil &#123;
+        return nil, err
+    &#125;
+    defer f.Close()
+    return ReadAll(f)
+&#125;
+</code></pre>
+<p>或是处理互斥锁（9.2章）</p>
+<pre><code class="Go">var mu sync.Mutex
+var m = make(map[string]int)
+func lookup(key string) int &#123;
+    mu.Lock()
+    defer mu.Unlock()
+    return m[key]
+&#125;
+</code></pre>
+<p>调试复杂程序时，defer机制也常被用于记录何时进入和退出函数。</p>
+<p>通过这种方式， 我们可以只通过一条语句控制函数的入口和所有的出口，甚至可以记录函数的运行时间。</p>
+<p>需要注意一点：不要忘记defer语句后的圆括号，否则本该在进入时执行的操作会在退出时执行，而本该在退出时执行的，永远不会被执行。</p>
+<p><strong>defer语句中的函数会在return语句更新返回值变量后再执行</strong>，又因为在函数中定义的匿名函数可以访问该函数包括返回值变量在内的所有变量，所以，对匿名函数采用defer机制，可以使其观察函数的返回值。</p>
+<pre><code class="Go">func double(x int) (result int) &#123;
+    defer func() &#123; fmt.Printf(&quot;double(%d) = %d\n&quot;, x,result) &#125;()
+    return x + x
+&#125;
+_ = double(4)
+// Output:
+// &quot;double(4) = 8&quot;
+</code></pre>
+<p>被延迟执行的匿名函数甚至可以修改函数返回给调用者的返回值：</p>
+<pre><code class="Go">func triple(x int) (result int) &#123;
+    defer func() &#123; result += x &#125;()
+    return double(x)
+&#125;
+fmt.Println(triple(4)) // &quot;12&quot;
+</code></pre>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>在循环体中的defer语句需要特别注意，因为只有在函数执行完毕后，这些被延迟的函数才会执行。</p>
+<p>下面的代码会导致系统的文件描述符耗尽，因为在所有文件都被处理之前，没有文件会被关闭。</p>
+<pre><code class="Go">for _, filename := range filenames &#123;
+    f, err := os.Open(filename)
+    if err != nil &#123;
+        return err
+    &#125;
+    defer f.Close() // NOTE: risky; could run out of file descriptors
+    // ...process f…
+&#125;
+</code></pre>
+<p>一种解决方法是将循环体中的defer语句移至另外一个函数。在每次循环时，调用这个函数。</p>
+<pre><code class="Go">for _, filename := range filenames &#123;
+    if err := doFile(filename); err != nil &#123;
+        return err
+    &#125;
+&#125;
+func doFile(filename string) error &#123;
+    f, err := os.Open(filename)
+    if err != nil &#123;
+        return err
+    &#125;
+    defer f.Close()
+    // ...process f…
+&#125;
+</code></pre>
+<h3 id="Panic异常"><a href="#Panic异常" class="headerlink" title="Panic异常"></a>Panic异常</h3><p>Go的类型系统会在编译时捕获很多错误，但有些错误只能在运行时检查，如数组访问越界、空指针引用等。这些运行时错误会引起painc异常。</p>
+<p>一般而言，当panic异常发生时，程序会中断运行，并立即执行在该goroutine（可以先理解成线程，在第8章会详细介绍）中被延迟的函数（defer 机制）。</p>
+<p>随后，程序崩溃并输出日志信息。日志信息包括panic value和函数调用的堆栈跟踪信息。</p>
+<p>panic value通常是某种错误信息。</p>
+<p>对于每个goroutine，日志信息中会有与之相对的，发生panic时的函数调用堆栈跟踪信息。</p>
+<p>在我们填写问题报告时，一般会将panic异常和日志信息一并记录。</p>
+<p>panic函数接受任何值作为参数。</p>
+<p>断言函数必须满足的前置条件是明智的做法，但这很容易被滥用。除非你能提供更多的错误信息，或者能更快速的发现错误，否则不需要使用断言，编译器在运行时会帮你检查代码。</p>
+<p><strong>由于panic会引起程序的崩溃，因此panic一般用于严重错误，如程序内部的逻辑不一致。</strong></p>
+<h3 id="Recover捕获异常"><a href="#Recover捕获异常" class="headerlink" title="Recover捕获异常"></a>Recover捕获异常</h3><p>通常来说，不应该对panic异常做任何处理，但有时，也许我们可以从异常中恢复，至少我们可以在程序崩溃前，做一些操作。举个例子，当web服务器遇到不可预料的严重问题时，在崩溃前应该将所有的连接关闭；如果不做任何处理，会使得客户端一直处于等待状态。如果web服务器还在开发阶段，服务器甚至可以将异常信息反馈到客户端，帮助调试。</p>
+<p>如果在deferred函数中调用了内置函数recover，并且定义该defer语句的函数发生了panic异常，recover会使程序从panic中恢复，并返回panic value。</p>
+<p>导致panic异常的函数不会继续运行，但能正常返回。在未发生panic时调用recover，recover会返回nil。</p>
+<pre><code class="Go">func Parse(input string) (s *Syntax, err error) &#123;
+    defer func() &#123;
+        if p := recover(); p != nil &#123;
+            err = fmt.Errorf(&quot;internal error: %v&quot;, p)
+        &#125;
+    &#125;()
+    // ...parser...
+&#125;
+</code></pre>
+<p>不加区分的恢复所有的panic异常，不是可取的做法；因为在panic之后，无法保证包级变量的状态仍然和我们预期一致。比如，对数据结构的一次重要更新没有被完整完成、文件或者网络连接没有被关闭、获得的锁没有被释放。此外，如果写日志时产生的panic被不加区分的恢复，可能会导致漏洞被忽略。</p>
+<p><strong>不应该试图去恢复其他包引起的panic。</strong></p>
+<p>公有的API应该将函数的运行失败作为error返回，而不是panic。同样的，你也不应该恢复一个由他人开发的函数引起的panic，比如说调用者传入的回调函数，因为你无法确保这样做是安全的。</p>
+<p>为了标识某个panic是否应该被恢复，我们可以将panic value设置成特殊类型。在recover时对panic value进行检查，如果发现panic value是特殊类型，就将这个panic作为error处理，如果不是，则按照正常的panic进行处理。</p>
+<p>下面的例子是title函数的变形，如果HTML页面包含多个<code>&lt;title&gt;</code>，该函数会给调用者返回一个错误（error）。在soleTitle内部处理时，如果检测到有多个<code>&lt;title&gt;</code>，会调用panic，阻止函数继续递归，并将特殊类型bailout作为panic的参数。</p>
+<pre><code class="Go">// soleTitle returns the text of the first non-empty title element
+// in doc, and an error if there was not exactly one.
+func soleTitle(doc *html.Node) (title string, err error) &#123;
+    type bailout struct&#123;&#125;
+    defer func() &#123;
+        switch p := recover(); p &#123;
+        case nil:       // no panic
+        case bailout&#123;&#125;: // &quot;expected&quot; panic
+            err = fmt.Errorf(&quot;multiple title elements&quot;)
+        default:
+            panic(p) // unexpected panic; carry on panicking
+        &#125;
+    &#125;()
+    // Bail out of recursion if we find more than one nonempty title.
+    forEachNode(doc, func(n *html.Node) &#123;
+        if n.Type == html.ElementNode &amp;&amp; n.Data == &quot;title&quot; &amp;&amp;
+            n.FirstChild != nil &#123;
+            if title != &quot;&quot; &#123;
+                panic(bailout&#123;&#125;) // multiple titleelements
+            &#125;
+            title = n.FirstChild.Data
+        &#125;
+    &#125;, nil)
+    if title == &quot;&quot; &#123;
+        return &quot;&quot;, fmt.Errorf(&quot;no title element&quot;)
+    &#125;
+    return title, nil
+&#125;
+</code></pre>
+<p>有些情况下，我们无法恢复。某些致命错误会导致Go在运行时终止程序，如内存不足。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="http://books.studygolang.com/gopl-zh">Go语言圣经（中文版）</a></p>
+<p><a target="_blank" rel="noopener" href="https://vimsky.com/examples/usage/strings-map-function-in-golang-with-examples.html">Golang strings.Map()用法及代码示例</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry"><span class="miit">
+                <img src="/img/gov.png" title="中华人民共和国工业和信息化部">
+                <a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">辽ICP备20002229号-1</a>
+        </span>
+    
+    ©2012-2022 itxiaoma.cn
+</p>
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
