@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.itxiaoma.cn/2021/07/06/GOPL06-%E6%8E%A5%E5%8F%A3/</loc>
+    
+    <lastmod>2022-05-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.itxiaoma.cn/2021/07/08/GOPL08-%E5%9F%BA%E4%BA%8E%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91/</loc>
     
     <lastmod>2022-05-02</lastmod>
@@ -23,15 +32,6 @@
     <loc>https://blog.itxiaoma.cn/2021/07/07/GOPL07-Goroutines%E5%92%8CChannels/</loc>
     
     <lastmod>2022-04-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.itxiaoma.cn/2021/07/06/GOPL06-%E6%8E%A5%E5%8F%A3/</loc>
-    
-    <lastmod>2022-04-28</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
