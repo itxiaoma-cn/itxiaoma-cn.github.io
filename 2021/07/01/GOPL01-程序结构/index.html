@@ -6,23 +6,24 @@
   <meta name="keywords" content=" GO , GOPL ">
   <meta name="description" content="GOPL01-程序结构 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="[TOC] 基础存储金字塔 CPU寄存器 CPU Cache：三级Cache分别是L1、L2、L3，L1最快，L3最慢 内存 硬盘等辅助存储设备 鼠标等外接设备  从上至下的访问速度越来越慢，访问时间越来越长。 虚拟内存访问内存，实际访问的是虚拟内存，虚拟内存通过页表查看，当前要访问的虚拟内存地址，是否已经加载到了物理内存。如果已经在物理内存，则取物理内存数据，如果没有对应的物理内存，则从磁盘加载">
+<meta name="description" content="[TOC] 环境搭建K8S部署Mysql1.创建ConfigMap存储配置文件mysql-config.yaml apiVersion: v1 kind: ConfigMap metadata:   name: mysql-config   labels:     app: mysql data:   my.cnf: |-     [client]     default-character-se">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Golang内存管理">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/02/Golang%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:title" content="GO微服务01-环境搭建">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/04/16/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="[TOC] 基础存储金字塔 CPU寄存器 CPU Cache：三级Cache分别是L1、L2、L3，L1最快，L3最慢 内存 硬盘等辅助存储设备 鼠标等外接设备  从上至下的访问速度越来越慢，访问时间越来越长。 虚拟内存访问内存，实际访问的是虚拟内存，虚拟内存通过页表查看，当前要访问的虚拟内存地址，是否已经加载到了物理内存。如果已经在物理内存，则取物理内存数据，如果没有对应的物理内存，则从磁盘加载">
+<meta property="og:description" content="[TOC] 环境搭建K8S部署Mysql1.创建ConfigMap存储配置文件mysql-config.yaml apiVersion: v1 kind: ConfigMap metadata:   name: mysql-config   labels:     app: mysql data:   my.cnf: |-     [client]     default-character-se">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic4.zhimg.com/v2-d5f5de4d6d22e67887ab4861ba5e721f_b.jpg">
-<meta property="og:image" content="https://blogstatic.haohtml.com/uploads/2021/04/1bb7fe2168b7ac2e24afadf698dc6ee6.png">
-<meta property="og:image" content="https://pic4.zhimg.com/v2-1aa731ddd77b6cad73c8f68f864ea5ef_b.jpg">
-<meta property="og:image" content="https://pic4.zhimg.com/v2-0f51158704083f36561a15edc89d6f27_b.jpg">
-<meta property="article:published_time" content="2022-05-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-02T14:45:10.000Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h18jfkgidwj20cq0aljrv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h199we7b1wj212q09yjsc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h19ac8zychj209u07fq32.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h199vtllttj20km07njrl.jpg">
+<meta property="article:published_time" content="2022-04-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-04-16T13:57:21.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
+<meta property="article:tag" content="微服务">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pic4.zhimg.com/v2-d5f5de4d6d22e67887ab4861ba5e721f_b.jpg">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h18jfkgidwj20cq0aljrv.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
