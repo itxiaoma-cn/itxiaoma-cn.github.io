@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Golang的GMP详解 | IT小马</title>
+  <meta name="keywords" content=" GO ">
+  <meta name="description" content="Golang的GMP详解 | IT小马">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="##Golang调度器的由来  单进程问题 单一执行流程，计算机只能一个任务一个任务的处理 进程阻塞带来CPU时间浪费  多进程多线程问题 进程&#x2F;线程数越多，切换成本越大 多线程伴随着同步竞争（锁，资源冲突） 高内存占用：进程虚拟内存占用4GB(32bit OS)，线索占用4MB 高CPU调度消耗  协程(co-routine) 线程由CPU调度，是抢占式的，基本调度也需要陷入内核态；  协程由用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang的GMP详解">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/11/Golang%E7%9A%84GMP%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="IT小马">
+<meta property="og:description" content="##Golang调度器的由来  单进程问题 单一执行流程，计算机只能一个任务一个任务的处理 进程阻塞带来CPU时间浪费  多进程多线程问题 进程&#x2F;线程数越多，切换成本越大 多线程伴随着同步竞争（锁，资源冲突） 高内存占用：进程虚拟内存占用4GB(32bit OS)，线索占用4MB 高CPU调度消耗  协程(co-routine) 线程由CPU调度，是抢占式的，基本调度也需要陷入内核态；  协程由用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26lzuwx91j20ma0czdgl.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26m3xxe3mj20mn0jlabn.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26mkh2zu1j20pi0eg3zr.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26v7wfquyj20cl0nzq3o.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vka8s6wj20dn0d9gmy.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vq0z8ucj20nq0fcq3h.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vpt6yxij20oz0ccdgk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vqx1tmgj20nr0h1gmk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vs0uq6oj20nk0koq4a.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vsnr6kzj20nz0lpmyb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vuhb6lej20pb0bwab1.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vx76apsj20pc0ckta7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vycpw0mj20ov0fmgms.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vzxhgynj20ot0enwfk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26w13xx1ej20pf0e9tac.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26w43d1saj20qa0czdgy.jpg">
+<meta property="article:published_time" content="2022-05-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-13T09:10:20.000Z">
+<meta property="article:author" content="IT小马">
+<meta property="article:tag" content="GO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26lzuwx91j20ma0czdgl.jpg">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>IT小马</span>
+</div>
+
+<div class="icon">
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(68)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                <li>
+                    <div data-rel="GO">
+                        
+                        GO
+                        <small>(16)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="PHP">
+                        
+                        PHP
+                        <small>(4)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="JAVA">
+                        
+                        JAVA
+                        <small>(5)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="MYSQL">
+                        
+                        MYSQL
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="REDIS">
+                        
+                        REDIS
+                        <small>(12)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="DOCKER">
+                        
+                        DOCKER
+                        <small>(8)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="K8S">
+                        
+                        K8S
+                        <small>(13)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="WEB">
+                        
+                        WEB
+                        <small>(3)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="微服务">
+                        
+                        微服务
+                        <small>(4)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="面试">
+                        
+                        面试
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="单词本">
+                        
+                        单词本
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="68">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>单词本</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>后端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>面试</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>容器</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>微服务</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>DOCKER</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GOPL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>K8S</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Laravel</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MYSQL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>PHP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>REDIS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>WEB</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/12/Golang%E7%9A%84GC%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang的GC回收机制">Golang的GC回收机制</span>
+            <span class="post-date" title="2022-05-12 00:00:00">2022/05/12</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/11/Golang%E7%9A%84GMP%E8%AF%A6%E8%A7%A3/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang的GMP详解">Golang的GMP详解</span>
+            <span class="post-date" title="2022-05-11 00:00:00">2022/05/11</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2022/05/10/Mysql%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/"
+           data-tag="面试,Mysql"
+           data-author="" >
+            <span class="post-title" title="Mysql知识点梳理">Mysql知识点梳理</span>
+            <span class="post-date" title="2022-05-10 00:00:00">2022/05/10</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/10/%E5%B9%BC%E9%BA%9FGolang/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟Golang">幼麟Golang</span>
+            <span class="post-date" title="2022-05-10 00:00:00">2022/05/10</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/02/Golang%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang内存管理">Golang内存管理</span>
+            <span class="post-date" title="2022-05-02 00:00:00">2022/05/02</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/04/16/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务01-环境搭建">GO微服务01-环境搭建</span>
+            <span class="post-date" title="2022-04-16 00:00:00">2022/04/16</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务-架构设计">GO微服务-架构设计</span>
+            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A102-%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务02-问题处理">GO微服务02-问题处理</span>
+            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务03-前端问题处理">GO微服务03-前端问题处理</span>
+            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/12/K8S12-%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S12-集群资源监控">K8S12-集群资源监控</span>
+            <span class="post-date" title="2022-04-12 00:00:00">2022/04/12</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/11/K8S11-NFS%E7%BD%91%E7%BB%9C%E5%AD%98%E5%82%A8/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S11-NFS网络存储">K8S11-NFS网络存储</span>
+            <span class="post-date" title="2022-04-11 00:00:00">2022/04/11</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/10/K8S10-Helm/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S10-Helm">K8S10-Helm</span>
+            <span class="post-date" title="2022-04-10 00:00:00">2022/04/10</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/09/K8S09-Ingress/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S09-Ingress">K8S09-Ingress</span>
+            <span class="post-date" title="2022-04-09 00:00:00">2022/04/09</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/08/K8S08-RBAC/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S08-RBAC">K8S08-RBAC</span>
+            <span class="post-date" title="2022-04-08 00:00:00">2022/04/08</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/07/K8S07-Secret-ConfigMap/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S07-Secret-ConfigMap">K8S07-Secret-ConfigMap</span>
+            <span class="post-date" title="2022-04-07 00:00:00">2022/04/07</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/06/K8S06-Service-Job/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S06-Service-Job">K8S06-Service-Job</span>
+            <span class="post-date" title="2022-04-06 00:00:00">2022/04/06</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/05/K8S05-Controller-Deployment/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S05-Controller-Deployment">K8S05-Controller-Deployment</span>
+            <span class="post-date" title="2022-04-05 00:00:00">2022/04/05</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/04/K8S04-POD%E5%92%8CLabel/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S04-POD和Label">K8S04-POD和Label</span>
+            <span class="post-date" title="2022-04-04 00:00:00">2022/04/04</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/03/K8S03-YAML/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S03-YAML">K8S03-YAML</span>
+            <span class="post-date" title="2022-04-03 00:00:00">2022/04/03</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/02/K8S02-Kubectl/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S02-kubectl">K8S02-kubectl</span>
+            <span class="post-date" title="2022-04-02 00:00:00">2022/04/02</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/01/K8S01-%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S01-安装环境">K8S01-安装环境</span>
+            <span class="post-date" title="2022-04-01 00:00:00">2022/04/01</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2022/02/22/Golang%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang常见错误">Golang常见错误</span>
+            <span class="post-date" title="2022-02-22 00:00:00">2022/02/22</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/12/Redis12-%E6%96%B0%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis12-新功能介绍">Redis12-新功能介绍</span>
+            <span class="post-date" title="2022-02-12 00:00:00">2022/02/12</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/11/Redis11-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis11-分布式锁">Redis11-分布式锁</span>
+            <span class="post-date" title="2022-02-11 00:00:00">2022/02/11</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/10/Redis10-%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%C2%B7%E5%87%BB%E7%A9%BF%C2%B7%E9%9B%AA%E5%B4%A9/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis10-缓存穿透·击穿·雪崩">Redis10-缓存穿透·击穿·雪崩</span>
+            <span class="post-date" title="2022-02-10 00:00:00">2022/02/10</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/09/Redis09-%E9%9B%86%E7%BE%A4/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis09-集群">Redis09-集群</span>
+            <span class="post-date" title="2022-02-09 00:00:00">2022/02/09</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/08/Redis08-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis08-主从复制">Redis08-主从复制</span>
+            <span class="post-date" title="2022-02-08 00:00:00">2022/02/08</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/07/Redis07-%E6%8C%81%E4%B9%85%E5%8C%96/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis07-持久化">Redis07-持久化</span>
+            <span class="post-date" title="2022-02-07 00:00:00">2022/02/07</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/06/Redis06-%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E3%80%81%E7%A7%92%E6%9D%80/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis06-事务、锁、秒杀">Redis06-事务、锁、秒杀</span>
+            <span class="post-date" title="2022-02-06 00:00:00">2022/02/06</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/05/Redis05-Jedis%E3%80%81SprintBoot%E6%95%B4%E5%90%88Redis/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis05-Jedis、SprintBoot整合Redis">Redis05-Jedis、SprintBoot整合Redis</span>
+            <span class="post-date" title="2022-02-05 00:00:00">2022/02/05</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/04/Redis04-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis04-新数据类型">Redis04-新数据类型</span>
+            <span class="post-date" title="2022-02-04 00:00:00">2022/02/04</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/03/Redis03-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis03-配置文件、发布和订阅">Redis03-配置文件、发布和订阅</span>
+            <span class="post-date" title="2022-02-03 00:00:00">2022/02/03</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis02-常用五大数据类型">Redis02-常用五大数据类型</span>
+            <span class="post-date" title="2022-02-02 00:00:00">2022/02/02</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/01/Redis01-%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%AE%89%E8%A3%85/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis01-基础及安装">Redis01-基础及安装</span>
+            <span class="post-date" title="2022-02-01 00:00:00">2022/02/01</span>
+        </a>
+        
+        <a  class="全部文章 单词本 "
+           href="/2022/01/01/%E5%8D%95%E8%AF%8D%E6%9C%AC/"
+           data-tag="单词本"
+           data-author="" >
+            <span class="post-title" title="单词本">单词本</span>
+            <span class="post-date" title="2022-01-01 00:00:00">2022/01/01</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/25/JavaWeb03-JSP/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb03-JSP">JavaWeb03-JSP</span>
+            <span class="post-date" title="2021-11-25 00:00:00">2021/11/25</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/22/JavaWeb02-Servlet%E3%80%81Cookie%E3%80%81Session/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb02-Servlet、Cookie、Session">JavaWeb02-Servlet、Cookie、Session</span>
+            <span class="post-date" title="2021-11-22 00:00:00">2021/11/22</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/21/JavaWeb01-Tomcat%E3%80%81Maven%E9%85%8D%E7%BD%AE/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb01-Tomcat、Maven配置">JavaWeb01-Tomcat、Maven配置</span>
+            <span class="post-date" title="2021-11-21 00:00:00">2021/11/21</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/15/Java02-JDBC/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="Java01-JDBC">Java01-JDBC</span>
+            <span class="post-date" title="2021-11-15 00:00:00">2021/11/15</span>
+        </a>
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/14/Java01-JavaSE/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="Java01-JavaSE">Java01-JavaSE</span>
+            <span class="post-date" title="2021-11-14 00:00:00">2021/11/14</span>
+        </a>
+        
+        <a  class="全部文章 PHP "
+           href="/2021/10/04/Laravel%E5%BA%95%E5%B1%8204-%E5%8A%A0%E8%BD%BD%E5%B9%B6%E5%90%AF%E5%8A%A8ServiceProvider/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层04-加载并启动ServiceProvider">Laravel底层04-加载并启动ServiceProvider</span>
+            <span class="post-date" title="2021-10-04 00:00:00">2021/10/04</span>
+        </a>
+        
+        <a  class="全部文章 PHP "
+           href="/2021/10/03/Laravel%E5%BA%95%E5%B1%8203-make%E5%92%8Cbuild/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层03-make和build">Laravel底层03-make和build</span>
+            <span class="post-date" title="2021-10-03 00:00:00">2021/10/03</span>
+        </a>
+        
+        <a  class="全部文章 PHP "
+           href="/2021/10/02/Laravel%E5%BA%95%E5%B1%8202-%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%EF%BC%8C%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层02-服务容器，服务提供者">Laravel底层02-服务容器，服务提供者</span>
+            <span class="post-date" title="2021-10-02 00:00:00">2021/10/02</span>
+        </a>
+        
+        <a  class="全部文章 PHP "
+           href="/2021/10/01/Laravel%E5%BA%95%E5%B1%8201-%E6%A1%86%E6%9E%B6%E6%A0%B8%E5%BF%83%EF%BC%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E9%97%AD%E5%8C%85/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层01-框架核心，依赖注入，闭包">Laravel底层01-框架核心，依赖注入，闭包</span>
+            <span class="post-date" title="2021-10-01 00:00:00">2021/10/01</span>
+        </a>
+        
+        <a  class="全部文章 K8S "
+           href="/2021/08/11/K8S02-kubectl/"
+           data-tag="容器,K8S"
+           data-author="" >
+            <span class="post-title" title="K8S02-kubectl">K8S02-kubectl</span>
+            <span class="post-date" title="2021-08-11 00:00:00">2021/08/11</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/08/Docker08-DockerCompose/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker08-DockerCompose">Docker08-DockerCompose</span>
+            <span class="post-date" title="2021-08-08 00:00:00">2021/08/08</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/07/Docker07-%E7%BD%91%E7%BB%9C/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker07-网络">Docker07-网络</span>
+            <span class="post-date" title="2021-08-07 00:00:00">2021/08/07</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/06/Docker06-%E6%95%B0%E6%8D%AE%E5%8D%B7%E5%AE%B9%E5%99%A8%E5%92%8CDockerfile/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker06-数据卷容器和Dockerfile">Docker06-数据卷容器和Dockerfile</span>
+            <span class="post-date" title="2021-08-06 00:00:00">2021/08/06</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/05/Docker05-%E6%95%B0%E6%8D%AE%E6%8C%82%E8%BD%BD/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker05-数据挂载">Docker05-数据挂载</span>
+            <span class="post-date" title="2021-08-05 00:00:00">2021/08/05</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/04/Docker04-%E9%95%9C%E5%83%8F%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E6%8F%90%E4%BA%A4/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker04-镜像的原理和提交">Docker04-镜像的原理和提交</span>
+            <span class="post-date" title="2021-08-04 00:00:00">2021/08/04</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/03/Docker03-%E5%AE%89%E8%A3%85Nginx,Elasticsearch,Portainer%E5%8F%AF%E8%A7%86%E5%8C%96/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker03-安装Nginx,Elasticsearch,Portainer可视化">Docker03-安装Nginx,Elasticsearch,Portainer可视化</span>
+            <span class="post-date" title="2021-08-03 00:00:00">2021/08/03</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/02/Docker02-%E6%A6%82%E5%BF%B5%E5%92%8C%E5%91%BD%E4%BB%A4/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker02-概念和命令">Docker02-概念和命令</span>
+            <span class="post-date" title="2021-08-02 00:00:00">2021/08/02</span>
+        </a>
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/01/Docker01-%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker01-安装和卸载">Docker01-安装和卸载</span>
+            <span class="post-date" title="2021-08-01 00:00:00">2021/08/01</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/11/GOPL11-%E5%8F%8D%E5%B0%84/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL11-反射">GOPL11-反射</span>
+            <span class="post-date" title="2021-07-11 00:00:00">2021/07/11</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/10/GOPL10-%E6%B5%8B%E8%AF%95/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL10-测试">GOPL10-测试</span>
+            <span class="post-date" title="2021-07-10 00:00:00">2021/07/10</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/09/GOPL09-%E5%8C%85%E5%92%8C%E5%B7%A5%E5%85%B7/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL09-包和工具">GOPL09-包和工具</span>
+            <span class="post-date" title="2021-07-09 00:00:00">2021/07/09</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/08/GOPL08-%E5%9F%BA%E4%BA%8E%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL08-基于共享变量的并发">GOPL08-基于共享变量的并发</span>
+            <span class="post-date" title="2021-07-08 00:00:00">2021/07/08</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/07/GOPL07-Goroutines%E5%92%8CChannels/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL07-Goroutines和Channels">GOPL07-Goroutines和Channels</span>
+            <span class="post-date" title="2021-07-07 00:00:00">2021/07/07</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/06/GOPL06-%E6%8E%A5%E5%8F%A3/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL06-接口">GOPL06-接口</span>
+            <span class="post-date" title="2021-07-06 00:00:00">2021/07/06</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/05/GOPL05-%E6%96%B9%E6%B3%95/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL05-方法">GOPL05-方法</span>
+            <span class="post-date" title="2021-07-05 00:00:00">2021/07/05</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/04/GOPL04-%E5%87%BD%E6%95%B0/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL04-函数">GOPL04-函数</span>
+            <span class="post-date" title="2021-07-04 00:00:00">2021/07/04</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/03/GOPL03-%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL03-复合数据类型">GOPL03-复合数据类型</span>
+            <span class="post-date" title="2021-07-03 00:00:00">2021/07/03</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/02/GOPL02-%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL02-基础数据类型">GOPL02-基础数据类型</span>
+            <span class="post-date" title="2021-07-02 00:00:00">2021/07/02</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/01/GOPL01-%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL01-程序结构">GOPL01-程序结构</span>
+            <span class="post-date" title="2021-07-01 00:00:00">2021/07/01</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲01-基础架构">Mysql45讲01-基础架构</span>
+            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
+        </a>
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/03/%E9%AB%98%E6%80%A7%E8%83%BDWeb03-%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="高性能Web03-并发处理">高性能Web03-并发处理</span>
+            <span class="post-date" title="2021-05-03 00:00:00">2021/05/03</span>
+        </a>
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/02/%E9%AB%98%E6%80%A7%E8%83%BDWeb02-%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="高性能Web02-网络传输">高性能Web02-网络传输</span>
+            <span class="post-date" title="2021-05-02 00:00:00">2021/05/02</span>
+        </a>
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/01/%E9%AB%98%E6%80%A7%E8%83%BDWeb01-%E7%BB%AA%E8%AE%BA/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="构建高性能Web站点01">构建高性能Web站点01</span>
+            <span class="post-date" title="2021-05-01 00:00:00">2021/05/01</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-Golang的GMP详解" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Golang的GMP详解</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="GO">GO</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">GO</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2022-05-13 17:10:20'>2022-05-11 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E8%BF%9B%E7%A8%8B%E9%97%AE%E9%A2%98"><span class="toc-text">单进程问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%97%AE%E9%A2%98"><span class="toc-text">多进程多线程问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B-co-routine"><span class="toc-text">协程(co-routine)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#N-1%E5%85%B3%E7%B3%BB%EF%BC%9AN%E4%B8%AA%E5%8D%8F%E7%A8%8B%E7%BB%91%E5%AE%9A1%E4%B8%AA%E7%BA%BF%E7%A8%8B"><span class="toc-text">N:1关系：N个协程绑定1个线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1%E5%85%B3%E7%B3%BB%EF%BC%9A1%E4%B8%AA%E5%8D%8F%E7%A8%8B%E7%BB%91%E5%AE%9A1%E4%B8%AA%E7%BA%BF%E7%A8%8B"><span class="toc-text">1:1关系：1个协程绑定1个线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#M-N%E5%85%B3%E7%B3%BB%EF%BC%9AM%E4%B8%AA%E5%8D%8F%E7%A8%8B%E7%BB%91%E5%AE%9A1%E4%B8%AA%E7%BA%BF%E7%A8%8B"><span class="toc-text">M:N关系：M个协程绑定1个线程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Goroutine"><span class="toc-text">Goroutine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A9%E6%9C%9F%E8%B0%83%E5%BA%A6%E5%99%A8GM"><span class="toc-text">早期调度器GM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B"><span class="toc-text">GMP模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-text">P的数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#M%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-text">M的数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAP"><span class="toc-text">创建P</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAM"><span class="toc-text">创建M</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5"><span class="toc-text">调度器设计策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E7%94%A8%E7%BA%BF%E7%A8%8B"><span class="toc-text">复用线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%B9%B6%E8%A1%8C"><span class="toc-text">利用并行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A2%E5%8D%A0"><span class="toc-text">抢占</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80G%E9%98%9F%E5%88%97"><span class="toc-text">全局G队列</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#go-func-%E8%B0%83%E5%BA%A6%E6%B5%81%E7%A8%8B"><span class="toc-text">go func()调度流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">调度器的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E7%BC%96%E7%A8%8B"><span class="toc-text">可视化编程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-go-tool-trace"><span class="toc-text">1.go tool trace</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Debug-trace"><span class="toc-text">2.Debug trace</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E8%A7%A3%E6%9E%90"><span class="toc-text">场景解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF1%EF%BC%9A%E5%B1%80%E9%83%A8%E4%BC%98%E5%85%88%E6%80%A7"><span class="toc-text">场景1：局部优先性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF2%EF%BC%9A%E7%BA%BF%E7%A8%8B%E5%A4%8D%E7%94%A8"><span class="toc-text">场景2：线程复用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF3%EF%BC%9A%E6%9C%AC%E5%9C%B0%E9%98%9F%E5%88%97%E6%BB%A1%E4%BA%86"><span class="toc-text">场景3：本地队列满了</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF4%EF%BC%9A%E6%9C%AC%E5%9C%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-text">场景4：本地负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF5%EF%BC%9A%E5%8A%A0%E5%85%A5%E6%9C%AC%E5%9C%B0%E9%98%9F%E5%88%97"><span class="toc-text">场景5：加入本地队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF6%EF%BC%9A%E8%87%AA%E6%97%8B%E7%BA%BF%E7%A8%8B"><span class="toc-text">场景6：自旋线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF7%EF%BC%9A%E5%85%A8%E5%B1%80%E9%98%9F%E5%88%97%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-text">场景7：全局队列负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF8%EF%BC%9Awork-stealing"><span class="toc-text">场景8：work stealing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF9%EF%BC%9A%E8%87%AA%E6%97%8B%E7%BA%BF%E7%A8%8B%E6%9C%80%E5%A4%A7%E9%99%90%E5%88%B6"><span class="toc-text">场景9：自旋线程最大限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF10%EF%BC%9A%E9%98%BB%E5%A1%9E%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-text">场景10：阻塞的系统调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF11%EF%BC%9A%E9%9D%9E%E9%98%BB%E5%A1%9E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-text">场景11：非阻塞系统调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##Golang调度器的由来 </p>
+<h3 id="单进程问题"><a href="#单进程问题" class="headerlink" title="单进程问题"></a>单进程问题</h3><ol>
+<li>单一执行流程，计算机只能一个任务一个任务的处理</li>
+<li>进程阻塞带来CPU时间浪费</li>
+</ol>
+<h3 id="多进程多线程问题"><a href="#多进程多线程问题" class="headerlink" title="多进程多线程问题"></a>多进程多线程问题</h3><ol>
+<li>进程/线程数越多，切换成本越大</li>
+<li>多线程伴随着同步竞争（锁，资源冲突）</li>
+<li>高内存占用：进程虚拟内存占用4GB(32bit OS)，线索占用4MB</li>
+<li>高CPU调度消耗</li>
+</ol>
+<h3 id="协程-co-routine"><a href="#协程-co-routine" class="headerlink" title="协程(co-routine)"></a>协程(co-routine)</h3><ul>
+<li><p>线程由CPU调度，是抢占式的，基本调度也需要陷入内核态；</p>
+</li>
+<li><p>协程由用户态调度，是协作式的，一个协程让出CPU后，才执行下一个协程。</p>
+</li>
+</ul>
+<h4 id="N-1关系：N个协程绑定1个线程"><a href="#N-1关系：N个协程绑定1个线程" class="headerlink" title="N:1关系：N个协程绑定1个线程"></a>N:1关系：N个协程绑定1个线程</h4><p>优点：<strong>协程在用户态线程即完成切换，不会陷入到内核态，这种切换非常的轻量快速</strong>。</p>
+<p>缺点：无法利用多核加速能力；协程阻塞会造成其他协程都无法执行，没有并发能力。</p>
+<h4 id="1-1关系：1个协程绑定1个线程"><a href="#1-1关系：1个协程绑定1个线程" class="headerlink" title="1:1关系：1个协程绑定1个线程"></a>1:1关系：1个协程绑定1个线程</h4><p>优点：协程的调度都由CPU完成，不存在N:1缺点，</p>
+<p>缺点：协程的创建、删除和切换的代价都由CPU完成，切换协程代价过大</p>
+<h4 id="M-N关系：M个协程绑定1个线程"><a href="#M-N关系：M个协程绑定1个线程" class="headerlink" title="M:N关系：M个协程绑定1个线程"></a>M:N关系：M个协程绑定1个线程</h4><p>优点：能够利用多核</p>
+<p>缺点：过于依赖协程调度器的优化和算法</p>
+<h3 id="Goroutine"><a href="#Goroutine" class="headerlink" title="Goroutine"></a>Goroutine</h3><p>Go中协程被称为goroutine，它非常轻量，一个goroutine只占几KB，</p>
+<p>goroutine让一组可复用的函数运行在一组线程之上，即使有协程阻塞，该线程的其他协程也可以被<code>runtime</code>调度，转移到其他可运行的线程上。特点：</p>
+<ul>
+<li>占用内存更小（几kb），支持高并发</li>
+<li>调度更灵活(runtime调度)，切换成本低</li>
+</ul>
+<h3 id="早期调度器GM"><a href="#早期调度器GM" class="headerlink" title="早期调度器GM"></a>早期调度器GM</h3><p>全局Goroutine(G)队列，轮询利用多个thread(M)调度</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26lzuwx91j20ma0czdgl.jpg"></p>
+<p>缺点：</p>
+<ol>
+<li>创建、销毁、调度G都需要每个M获取锁，这就形成了<strong>激烈的锁竞争</strong>。</li>
+<li>M转移G会造成<strong>延迟和额外的系统负载</strong>。比如当G中包含创建新协程的时候，M创建了G’，为了继续执行G，需要把G’交给M’执行，也造成了<strong>很差的局部性</strong>，因为G’和G是相关的，最好放在M上执行，而不是其他M’。</li>
+<li>系统调用(CPU在M之间的切换)导致频繁的线程阻塞和取消阻塞操作增加了系统开销。</li>
+</ol>
+<p>##GMP模型设计思想</p>
+<h3 id="GMP模型"><a href="#GMP模型" class="headerlink" title="GMP模型"></a>GMP模型</h3><ul>
+<li><strong>G goroutine 协程</strong>：G中存放并发执行的代码入口地址、上下文、运行环境（关联的P和M）、运行栈等执行相关的信息。G的新建、休眠、恢复、停止都受到runtime的管理。</li>
+<li><strong>P processor 处理器</strong>：程序启动时创建，是一个管理的数据结构，P主要是降低M对G的复杂性，增加一个间接的控制层数据结构。P控制GO代码的并行度，它不是实体。上限值GOMAXPROCS个，默认CPU个数。</li>
+<li><strong>M thread OS内核线程</strong>：是操作系统层面调度和执行的实体。M仅负责执行，M不停地被唤醒或创建。然后执行。上限值10000。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26m3xxe3mj20mn0jlabn.jpg"></p>
+<p>在Go中，<strong>线程是运行goroutine的实体，调度器的功能是把可运行的goroutine分配到工作线程上</strong>。</p>
+<ol>
+<li><strong>全局队列</strong>（Global Queue）：存放等待运行的G。</li>
+<li><strong>P的本地队列</strong>：同全局队列类似，存放的也是等待运行的G，存的数量有限，不超过256个。新建G’时，G’优先加入到P的本地队列，如果队列满了，则会把本地队列中一半的G移动到全局队列。</li>
+<li><strong>P列表</strong>：所有的P都在程序启动时创建，并保存在数组中，最多有<code>GOMAXPROCS</code>(可配置)个。</li>
+<li><strong>M</strong>：线程想运行任务就得获取P，从P的本地队列获取G，P队列为空时，M也会尝试从全局队列<strong>拿</strong>一批G放到P的本地队列，或从其他P的本地队列<strong>偷</strong>一半放到自己P的本地队列。M运行G，G执行之后，M会从P获取下一个G，不断重复下去。</li>
+</ol>
+<h4 id="P的数量"><a href="#P的数量" class="headerlink" title="P的数量"></a>P的数量</h4><p>由启动时环境变量<code>$GOMAXPROCS</code>或者是由<code>runtime</code>的方法<code>GOMAXPROCS()</code>决定。这意味着在程序执行的任意时刻都只有<code>$GOMAXPROCS</code>个goroutine在同时运行。</p>
+<h4 id="M的数量"><a href="#M的数量" class="headerlink" title="M的数量"></a>M的数量</h4><ul>
+<li>go程序启动时，会设置M的最大数量，默认10000</li>
+<li>runtime/debug中的SetMaxThreads函数，设置M的最大数量</li>
+<li>一个M阻塞了，会创建新的M。</li>
+</ul>
+<h4 id="创建P"><a href="#创建P" class="headerlink" title="创建P"></a>创建P</h4><p>程序启动时，系统根据P的最大数量创建n个P。</p>
+<h4 id="创建M"><a href="#创建M" class="headerlink" title="创建M"></a>创建M</h4><p>没有足够的M来关联P并运行其中的可运行的G。</p>
+<p>比如所有的M此时都阻塞住了，而P中还有很多就绪任务，就会去寻找空闲的M，而没有空闲的，就会去创建新的M。</p>
+<h3 id="调度器设计策略"><a href="#调度器设计策略" class="headerlink" title="调度器设计策略"></a>调度器设计策略</h3><h4 id="复用线程"><a href="#复用线程" class="headerlink" title="复用线程"></a>复用线程</h4><p>避免频繁的创建、销毁线程，而是对线程的复用。</p>
+<p>1）work stealing机制</p>
+<p> 当本线程无可运行的G时，尝试从其他线程绑定的P偷取G，而不是销毁线程。</p>
+<p>2）hand off机制</p>
+<p> 当本线程因为G进行系统调用阻塞时，线程释放绑定的P，把P转移给其他空闲的线程执行。</p>
+<h4 id="利用并行"><a href="#利用并行" class="headerlink" title="利用并行"></a><strong>利用并行</strong></h4><p><code>GOMAXPROCS</code>设置P的数量，最多有<code>GOMAXPROCS</code>个线程分布在多个CPU上同时运行。<code>GOMAXPROCS</code>也限制了并发的程度，比如<code>GOMAXPROCS = 核数/2</code>，则最多利用了一半的CPU核进行并行。</p>
+<h4 id="抢占"><a href="#抢占" class="headerlink" title="抢占"></a>抢占</h4><ul>
+<li><p>在co-routine中要等待一个协程主动让出CPU才执行下一个协程</p>
+</li>
+<li><p>在Go中，一个goroutine最多占用CPU 10ms，防止其他goroutine被饿死</p>
+</li>
+</ul>
+<h4 id="全局G队列"><a href="#全局G队列" class="headerlink" title="全局G队列"></a>全局G队列</h4><p>P本地队列为空时，会尝试从全局队列<strong>拿</strong>一批G放到P的本地队列。</p>
+<h3 id="go-func-调度流程"><a href="#go-func-调度流程" class="headerlink" title="go func()调度流程"></a>go func()调度流程</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26mkh2zu1j20pi0eg3zr.jpg"></p>
+<p>1、通过 go func()来创建一个goroutine；</p>
+<p> 2、有两个存储G的队列，一个是局部调度器P的本地队列、一个是全局G队列。新创建的G会先保存在P的本地队列中，如果P的本地队列已经满了就会保存在全局的队列中；</p>
+<p> 3、G只能运行在M中，一个M必须持有一个P，M与P是1：1的关系。M会从P的本地队列弹出一个可执行状态的G来执行，如果P的本地队列为空，就会想其他的MP组合偷取一个可执行的G来执行；</p>
+<p> 4、一个M调度G执行的过程是一个循环机制；</p>
+<p> 5、当M执行某一个G时候如果发生了syscall或则其余阻塞操作，M会阻塞，如果当前有一些G在执行，runtime会把这个线程M从P中摘除(detach)，然后再创建一个新的操作系统的线程(如果有空闲的线程可用就复用空闲线程)来服务于这个P；</p>
+<p> 6、当M系统调用结束时候，这个G会尝试获取一个空闲的P执行，并放入到这个P的本地队列。如果获取不到P，那么这个线程M变成休眠状态， 加入到空闲线程中，然后这个G会被放入全局队列中。</p>
+<h3 id="调度器的生命周期"><a href="#调度器的生命周期" class="headerlink" title="调度器的生命周期"></a>调度器的生命周期</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26v7wfquyj20cl0nzq3o.jpg"></p>
+<ul>
+<li>M0：<strong>启动程序后的编号为0的主线程</strong>，这个M对应的实例会在全局变量runtime.m0中，不需要在heap上分配，M0负责执行初始化操作和启动第一个G， 在之后M0就和其他的M一样了。</li>
+<li>G0：<strong>每次启动一个M都会第一个创建的gourtine，G0仅用于负责调度的G</strong>，G0不指向任何可执行的函数, 每个M都会有一个自己的G0。在调度或系统调用时会使用G0的栈空间, 全局变量的G0是M0的G0。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="go">package main
+
+import &quot;fmt&quot;
+
+func main() &#123;
+    fmt.Println(&quot;Hello world&quot;)
+&#125;
+</code></pre>
+<ol>
+<li>runtime创建最初的线程m0和goroutine g0，并把2者关联。</li>
+<li>调度器初始化：初始化m0、栈、垃圾回收，以及创建和初始化由GOMAXPROCS个P构成的P列表。</li>
+<li>示例代码中的main函数是<code>main.main</code>，<code>runtime</code>中也有1个main函数——<code>runtime.main</code>，代码经过编译后，<code>runtime.main</code>会调用<code>main.main</code>，程序启动时会为<code>runtime.main</code>创建goroutine，称它为main goroutine吧，然后把main goroutine加入到P的本地队列。</li>
+<li>启动m0，m0已经绑定了P，会从P的本地队列获取G，获取到main goroutine。</li>
+<li>G拥有栈，M根据G中的栈信息和调度信息设置运行环境</li>
+<li>M运行G</li>
+<li>G退出，再次回到M获取可运行的G，这样重复下去，直到<code>main.main</code>退出，<code>runtime.main</code>执行Defer和Panic处理，或调用<code>runtime.exit</code>退出程序。</li>
+</ol>
+<p>调度器的生命周期几乎占满了一个Go程序的一生，<code>runtime.main</code>的goroutine执行之前都是为调度器做准备工作，<code>runtime.main</code>的goroutine运行，才是调度器的真正开始，直到<code>runtime.main</code>结束而结束。</p>
+<h3 id="可视化编程"><a href="#可视化编程" class="headerlink" title="可视化编程"></a>可视化编程</h3><h4 id="1-go-tool-trace"><a href="#1-go-tool-trace" class="headerlink" title="1.go tool trace"></a>1.go tool trace</h4><pre><code class="go">package main
+
+import (
+    &quot;os&quot;
+    &quot;fmt&quot;
+    &quot;runtime/trace&quot;
+)
+
+func main() &#123;
+
+    //创建trace文件
+    f, err := os.Create(&quot;trace.out&quot;)
+    if err != nil &#123;
+        panic(err)
+    &#125;
+
+    defer f.Close()
+
+    //启动trace goroutine
+    err = trace.Start(f)
+    if err != nil &#123;
+        panic(err)
+    &#125;
+    defer trace.Stop()
+
+    //main
+    fmt.Println(&quot;Hello World&quot;)
+&#125;
+</code></pre>
+<p>运行程序</p>
+<pre><code>$ go run trace.go 
+Hello World
+</code></pre>
+<p>会得到一个<code>trace.out</code>文件，然后我们可以用一个工具打开，来分析这个文件。</p>
+<pre><code>$ go tool trace trace.out 
+2020/02/23 10:44:11 Parsing trace...
+2020/02/23 10:44:11 Splitting trace...
+2020/02/23 10:44:11 Opening browser. Trace viewer is listening on http://127.0.0.1:33479
+</code></pre>
+<p>浏览器访问：<a target="_blank" rel="noopener" href="http://127.0.0.1:33479/">http://127.0.0.1:33479</a></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vka8s6wj20dn0d9gmy.jpg"></p>
+<p><strong>G信息</strong></p>
+<p>一共有两个G在程序中，一个是特殊的G0，是每个M必须有的一个初始化的G，这个我们不必讨论。</p>
+<p>其中G1应该就是main goroutine(执行main函数的协程)，在一段时间内处于可运行和运行的状态。</p>
+<p><strong>M信息</strong></p>
+<p> 一共有两个M在程序中，一个是特殊的M0，用于初始化使用，这个我们不必讨论。</p>
+<p>G1中调用了<code>main.main</code>，创建了<code>trace goroutine g18</code>。G1运行在P1上，G18运行在P0上。</p>
+<p>这里有两个P，我们知道，一个P必须绑定一个M才能调度G。</p>
+<p>多了一个M2应该就是P0为了执行G18而动态创建的M2.</p>
+<h4 id="2-Debug-trace"><a href="#2-Debug-trace" class="headerlink" title="2.Debug trace"></a>2.Debug trace</h4><pre><code class="go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;time&quot;
+)
+
+func main() &#123;
+    for i := 0; i &lt; 5; i++ &#123;
+        time.Sleep(time.Second)
+        fmt.Println(&quot;Hello World&quot;)
+    &#125;
+&#125;
+</code></pre>
+<p>编译</p>
+<pre><code>$ go build trace2.go
+</code></pre>
+<p>通过Debug方式运行</p>
+<pre><code>$ GODEBUG=schedtrace=1000 ./trace2 
+SCHED 0ms: gomaxprocs=2 idleprocs=0 threads=4 spinningthreads=1 idlethreads=1 runqueue=0 [0 0]
+Hello World
+SCHED 1003ms: gomaxprocs=2 idleprocs=2 threads=4 spinningthreads=0 idlethreads=2 runqueue=0 [0 0]
+Hello World
+SCHED 2014ms: gomaxprocs=2 idleprocs=2 threads=4 spinningthreads=0 idlethreads=2 runqueue=0 [0 0]
+Hello World
+SCHED 3015ms: gomaxprocs=2 idleprocs=2 threads=4 spinningthreads=0 idlethreads=2 runqueue=0 [0 0]
+Hello World
+SCHED 4023ms: gomaxprocs=2 idleprocs=2 threads=4 spinningthreads=0 idlethreads=2 runqueue=0 [0 0]
+Hello World
+</code></pre>
+<ul>
+<li><code>SCHED</code>：调试信息输出标志字符串，代表本行是goroutine调度器的输出；</li>
+<li><code>0ms</code>：即从程序启动到输出这行日志的时间；</li>
+<li><code>gomaxprocs</code>: P的数量，本例有2个P, 因为默认的P的属性是和cpu核心数量默认一致，当然也可以通过GOMAXPROCS来设置；</li>
+<li><code>idleprocs</code>: 处于idle状态的P的数量；通过gomaxprocs和idleprocs的差值，我们就可知道执行go代码的P的数量；</li>
+<li>t<code>hreads: os threads/M</code>的数量，包含scheduler使用的m数量，加上runtime自用的类似sysmon这样的thread的数量；</li>
+<li><code>spinningthreads</code>: 处于自旋状态的os thread数量；</li>
+<li><code>idlethread</code>: 处于idle状态的os thread的数量；</li>
+<li><code>runqueue=0</code>： Scheduler全局队列中G的数量；</li>
+<li><code>[0 0]</code>: 分别为2个P的local queue中的G的数量。</li>
+</ul>
+<h2 id="场景解析"><a href="#场景解析" class="headerlink" title="场景解析"></a>场景解析</h2><h3 id="场景1：局部优先性"><a href="#场景1：局部优先性" class="headerlink" title="场景1：局部优先性"></a>场景1：局部优先性</h3><p>P拥有G1，M1获取P后开始运行G1，G1使用<code>go func()</code>创建了G2，为了局部性G2优先加入到P1的本地队列。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vq0z8ucj20nq0fcq3h.jpg"></p>
+<h3 id="场景2：线程复用"><a href="#场景2：线程复用" class="headerlink" title="场景2：线程复用"></a>场景2：线程复用</h3><p>G1运行完成后(函数：<code>goexit</code>)，M上运行的goroutine切换为G0，G0负责调度时协程的切换（函数：<code>schedule</code>）。从P的本地队列取G2，从G0切换到G2，并开始运行G2(函数：<code>execute</code>)。实现了线程M1的复用。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vpt6yxij20oz0ccdgk.jpg"></p>
+<h3 id="场景3：本地队列满了"><a href="#场景3：本地队列满了" class="headerlink" title="场景3：本地队列满了"></a>场景3：本地队列满了</h3><p>假设每个P的本地队列只能存3个G。G2要创建了6个G，前3个G（G3, G4, G5）已经加入p1的本地队列，P1本地队列满了。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vqx1tmgj20nr0h1gmk.jpg"></p>
+<h3 id="场景4：本地负载均衡"><a href="#场景4：本地负载均衡" class="headerlink" title="场景4：本地负载均衡"></a>场景4：本地负载均衡</h3><p>G2在创建G7的时候，发现P1的本地队列已满，需要执行<strong>负载均衡</strong>(把P1中本地队列中前一半的G，还有新创建G<strong>转移</strong>到全局队列)。</p>
+<p>这些G被转移到全局队列时，会被打乱顺序。所以G3,G4,G7被转移到全局队列。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vs0uq6oj20nk0koq4a.jpg"></p>
+<h3 id="场景5：加入本地队列"><a href="#场景5：加入本地队列" class="headerlink" title="场景5：加入本地队列"></a>场景5：加入本地队列</h3><p>G2创建G8时，P1的本地队列未满，所以G8会被加入到P1的本地队列。</p>
+<p>G8加入到P1点本地队列的原因还是因为P1此时在与M1绑定，而G2此时是M1在执行。所以G2创建的新的G会优先放置到自己的M绑定的P上。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vsnr6kzj20nz0lpmyb.jpg"></p>
+<h3 id="场景6：自旋线程"><a href="#场景6：自旋线程" class="headerlink" title="场景6：自旋线程"></a>场景6：自旋线程</h3><p>在创建G时，运行的G会尝试唤醒其他空闲的P和M组合去执行。</p>
+<p>假定G2唤醒了M2，M2绑定了P2，并运行G0，但P2本地队列没有G，M2此时为自旋线程<strong>（没有G但为运行状态的线程，不断寻找G）</strong>。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vuhb6lej20pb0bwab1.jpg"></p>
+<h3 id="场景7：全局队列负载均衡"><a href="#场景7：全局队列负载均衡" class="headerlink" title="场景7：全局队列负载均衡"></a>场景7：全局队列负载均衡</h3><p>M2尝试从全局队列(简称“GQ”)取一批G放到P2的本地队列（函数：<code>findrunnable()</code>）。M2从全局队列取的G数量符合下面的公式：</p>
+<pre><code class="go">n =  min(len(GQ) / GOMAXPROCS +  1,  cap(LQ) / 2 )
+</code></pre>
+<p>至少从全局队列取1个g，但每次不要从全局队列移动太多的g到p本地队列，给其他p留点。这是<strong>从全局队列到P本地队列的负载均衡</strong>。</p>
+<p>假定我们场景中一共有4个P（GOMAXPROCS设置为4，那么我们允许最多就能用4个P来供M使用）。所以M2只从能从全局队列取1个G（即G3）移动P2本地队列，然后完成从G0到G3的切换，运行G3。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vx76apsj20pc0ckta7.jpg"></p>
+<h3 id="场景8：work-stealing"><a href="#场景8：work-stealing" class="headerlink" title="场景8：work stealing"></a>场景8：work stealing</h3><p>假设G2一直在M1上运行，经过2轮后，M2已经把G7、G4从全局队列获取到了P2的本地队列并完成运行，全局队列和P2的本地队列都空了,如场景8图的左半部分。</p>
+<p><strong>全局队列已经没有G，那m就要执行work stealing(偷取)：从其他有G的P哪里偷取一半G过来，放到自己的P本地队列</strong>。P2从P1的本地队列尾部取一半的G，本例中一半则只有1个G8，放到P2的本地队列并执行。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vycpw0mj20ov0fmgms.jpg"></p>
+<h3 id="场景9：自旋线程最大限制"><a href="#场景9：自旋线程最大限制" class="headerlink" title="场景9：自旋线程最大限制"></a>场景9：自旋线程最大限制</h3><p>G1本地队列G5、G6已经被其他M偷走并运行完成，当前M1和M2分别在运行G2和G8，M3和M4没有goroutine可以运行，M3和M4处于<strong>自旋状态</strong>，它们不断寻找goroutine。</p>
+<p>系统中最多有<code>GOMAXPROCS</code>个自旋的线程(当前例子中的<code>GOMAXPROCS</code>=4，所以一共4个P)，多余的没事做线程会让他们休眠。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vzxhgynj20ot0enwfk.jpg"></p>
+<h3 id="场景10：阻塞的系统调用"><a href="#场景10：阻塞的系统调用" class="headerlink" title="场景10：阻塞的系统调用"></a>场景10：阻塞的系统调用</h3><p>假定当前除了M3和M4为自旋线程，还有M5和M6为空闲的线程(没有得到P的绑定，注意我们这里最多就只能够存在4个P，所以P的数量应该永远是M&gt;=P, 大部分都是M在抢占需要运行的P)，G8创建了G9，G8进行了<strong>阻塞的系统调用</strong>，M2和P2立即解绑，P2会执行以下判断：如果P2本地队列有G、全局队列有G或有空闲的M，P2都会立马唤醒1个M和它绑定，否则P2则会加入到空闲P列表，等待M来获取可用的p。本场景中，P2本地队列有G9，可以和其他空闲的线程M5绑定。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26w13xx1ej20pf0e9tac.jpg"></p>
+<h3 id="场景11：非阻塞系统调用"><a href="#场景11：非阻塞系统调用" class="headerlink" title="场景11：非阻塞系统调用"></a>场景11：非阻塞系统调用</h3><p>G8创建了G9，假如G8进行了<strong>非阻塞系统调用</strong>。</p>
+<p>M2和P2会解绑，但M2会记住P2，然后G8和M2进入<strong>系统调用</strong>状态。当G8和M2退出系统调用时，会尝试获取P2，如果无法获取，则获取空闲的P，如果依然没有，G8会被记为可运行状态，并加入到全局队列,M2因为没有P的绑定而变成休眠状态(长时间休眠等待GC回收销毁)。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26w43d1saj20qa0czdgy.jpg"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>Go调度本质是把大量的goroutine分配到少量线程上去执行，并利用多核并行，实现更强大的并发。</strong></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.kancloud.cn/aceld/golang/1958305#2GolangGMP_2">Golang修养之路</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry"><span class="miit">
+                <img src="/img/gov.png" title="中华人民共和国工业和信息化部">
+                <a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">辽ICP备20002229号-1</a>
+        </span>
+    
+    ©2012-2022 itxiaoma.cn
+</p>
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

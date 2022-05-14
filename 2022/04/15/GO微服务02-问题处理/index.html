@@ -6,23 +6,35 @@
   <meta name="keywords" content=" GO , 微服务 ">
   <meta name="description" content="GO微服务02-问题处理 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="[TOC] 基础存储金字塔 CPU寄存器 CPU Cache：三级Cache分别是L1、L2、L3，L1最快，L3最慢 内存 硬盘等辅助存储设备 鼠标等外接设备  从上至下的访问速度越来越慢，访问时间越来越长。 虚拟内存访问内存，实际访问的是虚拟内存，虚拟内存通过页表查看，当前要访问的虚拟内存地址，是否已经加载到了物理内存。如果已经在物理内存，则取物理内存数据，如果没有对应的物理内存，则从磁盘加载">
+<meta name="description" content="##Golang调度器的由来  单进程问题 单一执行流程，计算机只能一个任务一个任务的处理 进程阻塞带来CPU时间浪费  多进程多线程问题 进程&#x2F;线程数越多，切换成本越大 多线程伴随着同步竞争（锁，资源冲突） 高内存占用：进程虚拟内存占用4GB(32bit OS)，线索占用4MB 高CPU调度消耗  协程(co-routine) 线程由CPU调度，是抢占式的，基本调度也需要陷入内核态；  协程由用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Golang内存管理">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/02/Golang%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:title" content="Golang的GMP详解">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/11/Golang%E7%9A%84GMP%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="[TOC] 基础存储金字塔 CPU寄存器 CPU Cache：三级Cache分别是L1、L2、L3，L1最快，L3最慢 内存 硬盘等辅助存储设备 鼠标等外接设备  从上至下的访问速度越来越慢，访问时间越来越长。 虚拟内存访问内存，实际访问的是虚拟内存，虚拟内存通过页表查看，当前要访问的虚拟内存地址，是否已经加载到了物理内存。如果已经在物理内存，则取物理内存数据，如果没有对应的物理内存，则从磁盘加载">
+<meta property="og:description" content="##Golang调度器的由来  单进程问题 单一执行流程，计算机只能一个任务一个任务的处理 进程阻塞带来CPU时间浪费  多进程多线程问题 进程&#x2F;线程数越多，切换成本越大 多线程伴随着同步竞争（锁，资源冲突） 高内存占用：进程虚拟内存占用4GB(32bit OS)，线索占用4MB 高CPU调度消耗  协程(co-routine) 线程由CPU调度，是抢占式的，基本调度也需要陷入内核态；  协程由用">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://pic4.zhimg.com/v2-d5f5de4d6d22e67887ab4861ba5e721f_b.jpg">
-<meta property="og:image" content="https://blogstatic.haohtml.com/uploads/2021/04/1bb7fe2168b7ac2e24afadf698dc6ee6.png">
-<meta property="og:image" content="https://pic4.zhimg.com/v2-1aa731ddd77b6cad73c8f68f864ea5ef_b.jpg">
-<meta property="og:image" content="https://pic4.zhimg.com/v2-0f51158704083f36561a15edc89d6f27_b.jpg">
-<meta property="article:published_time" content="2022-05-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-02T14:45:10.000Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26lzuwx91j20ma0czdgl.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26m3xxe3mj20mn0jlabn.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26mkh2zu1j20pi0eg3zr.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26v7wfquyj20cl0nzq3o.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vka8s6wj20dn0d9gmy.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vq0z8ucj20nq0fcq3h.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vpt6yxij20oz0ccdgk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vqx1tmgj20nr0h1gmk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vs0uq6oj20nk0koq4a.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vsnr6kzj20nz0lpmyb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vuhb6lej20pb0bwab1.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vx76apsj20pc0ckta7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vycpw0mj20ov0fmgms.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vzxhgynj20ot0enwfk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26w13xx1ej20pf0e9tac.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26w43d1saj20qa0czdgy.jpg">
+<meta property="article:published_time" content="2022-05-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-13T09:10:20.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pic4.zhimg.com/v2-d5f5de4d6d22e67887ab4861ba5e721f_b.jpg">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26lzuwx91j20ma0czdgl.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -84,7 +96,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(65)</small>
+                <small>(68)</small>
             
         </div>
     </li>
@@ -95,7 +107,7 @@
                     <div data-rel="GO">
                         
                         GO
-                        <small>(13)</small>
+                        <small>(16)</small>
                         
                     </div>
                     
@@ -179,7 +191,7 @@
                     <div data-rel="K8S">
                         
                         K8S
-                        <small>(14)</small>
+                        <small>(13)</small>
                         
                     </div>
                     
@@ -218,6 +230,20 @@
         
             
                 <li>
+                    <div data-rel="面试">
+                        
+                        面试
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
                     <div data-rel="单词本">
                         
                         单词本
@@ -242,7 +268,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="65">
+<input type="hidden" id="yelog_site_posts_number" value="68">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -297,6 +323,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>面试</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>容器</a>
             </li>
         
@@ -329,6 +359,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>MYSQL</a>
             </li>
         
@@ -354,6 +388,38 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/12/Golang%E7%9A%84GC%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang的GC回收机制">Golang的GC回收机制</span>
+            <span class="post-date" title="2022-05-12 00:00:00">2022/05/12</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/11/Golang%E7%9A%84GMP%E8%AF%A6%E8%A7%A3/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang的GMP详解">Golang的GMP详解</span>
+            <span class="post-date" title="2022-05-11 00:00:00">2022/05/11</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2022/05/10/Mysql%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/"
+           data-tag="面试,Mysql"
+           data-author="" >
+            <span class="post-title" title="Mysql知识点梳理">Mysql知识点梳理</span>
+            <span class="post-date" title="2022-05-10 00:00:00">2022/05/10</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/10/%E5%B9%BC%E9%BA%9FGolang/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟Golang">幼麟Golang</span>
+            <span class="post-date" title="2022-05-10 00:00:00">2022/05/10</span>
+        </a>
         
         <a  class="全部文章 GO "
            href="/2022/05/02/Golang%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"
@@ -393,14 +459,6 @@
            data-author="" >
             <span class="post-title" title="GO微服务03-前端问题处理">GO微服务03-前端问题处理</span>
             <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
-        </a>
-        
-        <a  class="全部文章 K8S "
-           href="/2022/04/13/K8S13-%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/"
-           data-tag="容器,K8S"
-           data-author="" >
-            <span class="post-title" title="K8S13-高可用集群">K8S13-高可用集群</span>
-            <span class="post-date" title="2022-04-13 00:00:00">2022/04/13</span>
         </a>
         
         <a  class="全部文章 K8S "
@@ -460,10 +518,10 @@
         </a>
         
         <a  class="全部文章 K8S "
-           href="/2022/04/05/K8S05-Controller%E6%8E%A7%E5%88%B6%E5%99%A8/"
+           href="/2022/04/05/K8S05-Controller-Deployment/"
            data-tag="容器,K8S"
            data-author="" >
-            <span class="post-title" title="K8S05-Controller控制器">K8S05-Controller控制器</span>
+            <span class="post-title" title="K8S05-Controller-Deployment">K8S05-Controller-Deployment</span>
             <span class="post-date" title="2022-04-05 00:00:00">2022/04/05</span>
         </a>
         
@@ -922,7 +980,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-05-06 12:32:54'>2022-04-15 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-05-07 13:49:38'>2022-04-15 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -933,7 +991,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%89%93%E5%8C%85viper%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">1.打包viper配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B8%A6%E5%8F%82%E6%95%B0%E8%B0%83%E8%AF%95%E6%89%93%E5%8C%85"><span class="toc-text">2.带参数调试打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-K8S%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F"><span class="toc-text">3.K8S拉取私有镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Deployment%E6%BB%9A%E5%8A%A8%E5%8D%87%E7%BA%A7"><span class="toc-text">4.Deployment滚动升级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-JWT%E9%80%80%E5%87%BA%E7%99%BB%E5%BD%95"><span class="toc-text">5.JWT退出登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-docker-compose%E5%9B%BA%E5%AE%9A%E5%AE%B9%E5%99%A8IP"><span class="toc-text">6.docker-compose固定容器IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-vue-admin-template-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-text">7.vue-admin-template 动态路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Mysql%E5%85%B3%E8%81%94%E5%A4%96%E9%94%AE%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E8%A1%A8"><span class="toc-text">8.Mysql关联外键无法删除表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-text">7.单元测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-proto%E6%8A%A5%E9%94%99"><span class="toc-text">8.proto报错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-Mysql%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">9.Mysql自定义数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E7%BB%93%E6%9E%84%E4%BD%93%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">10.结构体初始化</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%89%93%E5%8C%85viper%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">1.打包viper配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B8%A6%E5%8F%82%E6%95%B0%E8%B0%83%E8%AF%95%E6%89%93%E5%8C%85"><span class="toc-text">2.带参数调试打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-K8S%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F"><span class="toc-text">3.K8S拉取私有镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Deployment%E6%BB%9A%E5%8A%A8%E5%8D%87%E7%BA%A7"><span class="toc-text">4.Deployment滚动升级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-JWT%E9%80%80%E5%87%BA%E7%99%BB%E5%BD%95"><span class="toc-text">5.JWT退出登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-docker-compose%E5%9B%BA%E5%AE%9A%E5%AE%B9%E5%99%A8IP"><span class="toc-text">6.docker-compose固定容器IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-vue-admin-template-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-text">7.vue-admin-template 动态路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Mysql%E5%85%B3%E8%81%94%E5%A4%96%E9%94%AE%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E8%A1%A8"><span class="toc-text">8.Mysql关联外键无法删除表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-text">7.单元测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-proto%E6%8A%A5%E9%94%99"><span class="toc-text">8.proto报错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-Mysql%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">9.Mysql自定义数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E7%BB%93%E6%9E%84%E4%BD%93%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">10.结构体初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-protobuf%E9%9B%B6%E5%80%BC%E8%A2%AB%E5%BF%BD%E7%95%A5"><span class="toc-text">11.protobuf零值被忽略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-text">12.时间格式化</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -949,7 +1007,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%89%93%E5%8C%85viper%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">1.打包viper配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B8%A6%E5%8F%82%E6%95%B0%E8%B0%83%E8%AF%95%E6%89%93%E5%8C%85"><span class="toc-text">2.带参数调试打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-K8S%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F"><span class="toc-text">3.K8S拉取私有镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Deployment%E6%BB%9A%E5%8A%A8%E5%8D%87%E7%BA%A7"><span class="toc-text">4.Deployment滚动升级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-JWT%E9%80%80%E5%87%BA%E7%99%BB%E5%BD%95"><span class="toc-text">5.JWT退出登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-docker-compose%E5%9B%BA%E5%AE%9A%E5%AE%B9%E5%99%A8IP"><span class="toc-text">6.docker-compose固定容器IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-vue-admin-template-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-text">7.vue-admin-template 动态路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Mysql%E5%85%B3%E8%81%94%E5%A4%96%E9%94%AE%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E8%A1%A8"><span class="toc-text">8.Mysql关联外键无法删除表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-text">7.单元测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-proto%E6%8A%A5%E9%94%99"><span class="toc-text">8.proto报错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-Mysql%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">9.Mysql自定义数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E7%BB%93%E6%9E%84%E4%BD%93%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">10.结构体初始化</span></a></li></ol></div></p>
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%89%93%E5%8C%85viper%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">1.打包viper配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%B8%A6%E5%8F%82%E6%95%B0%E8%B0%83%E8%AF%95%E6%89%93%E5%8C%85"><span class="toc-text">2.带参数调试打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-K8S%E6%8B%89%E5%8F%96%E7%A7%81%E6%9C%89%E9%95%9C%E5%83%8F"><span class="toc-text">3.K8S拉取私有镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Deployment%E6%BB%9A%E5%8A%A8%E5%8D%87%E7%BA%A7"><span class="toc-text">4.Deployment滚动升级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-JWT%E9%80%80%E5%87%BA%E7%99%BB%E5%BD%95"><span class="toc-text">5.JWT退出登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-docker-compose%E5%9B%BA%E5%AE%9A%E5%AE%B9%E5%99%A8IP"><span class="toc-text">6.docker-compose固定容器IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-vue-admin-template-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-text">7.vue-admin-template 动态路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Mysql%E5%85%B3%E8%81%94%E5%A4%96%E9%94%AE%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4%E8%A1%A8"><span class="toc-text">8.Mysql关联外键无法删除表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="toc-text">7.单元测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-proto%E6%8A%A5%E9%94%99"><span class="toc-text">8.proto报错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-Mysql%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">9.Mysql自定义数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E7%BB%93%E6%9E%84%E4%BD%93%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">10.结构体初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-protobuf%E9%9B%B6%E5%80%BC%E8%A2%AB%E5%BF%BD%E7%95%A5"><span class="toc-text">11.protobuf零值被忽略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-text">12.时间格式化</span></a></li></ol></div></p>
 <h2 id="1-打包viper配置文件"><a href="#1-打包viper配置文件" class="headerlink" title="1.打包viper配置文件"></a>1.打包viper配置文件</h2><p>配置文件：config/local.yaml</p>
 <pre><code>host: 192.168.1.100
 port: 80
@@ -1053,6 +1111,35 @@ var wg sync.WaitGroup // 结构体 自动分配内存，可以直接使用
 <p>指针类型在声明的时候，Go语言没有自动分配好内存，所以不能对其进行赋值操作，这一点和值类型不一样。</p>
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4a4de0d455f3">https://www.jianshu.com/p/4a4de0d455f3</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhw21w/article/details/122018582">【Go内存分配】</a></p>
+<h2 id="11-protobuf零值被忽略"><a href="#11-protobuf零值被忽略" class="headerlink" title="11.protobuf零值被忽略"></a>11.protobuf零值被忽略</h2><p>解决方法：手动去掉生成go文件的omitempty</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/oxspirt/p/15949195.html">protoc-go-inject-tag 作用 </a></p>
+<h2 id="12-时间格式化"><a href="#12-时间格式化" class="headerlink" title="12.时间格式化"></a>12.时间格式化</h2><pre><code class="go">package main
+
+import (
+   &quot;time&quot;
+   &quot;fmt&quot;
+)
+
+//时间函数以及时间格式化
+
+func  main()&#123;
+   now  := time.Now()
+   //Year = now.Year()
+   //Mouth  = now.Month()
+   //Day  =  now.Day()
+   //时间格式化输出 Printf输出
+   fmt.Printf(&quot;当前时间为： %d-%d-%d %d:%d:%d\n&quot;,now.Year(),now.Month(),now.Day(),now.Hour(),now.Minute(),now.Second())
+//fmt.Sprintf 格式化输出
+  dateString := fmt.Sprintf(&quot;当前时间为： %d-%d-%d %d:%d:%d\n&quot;,now.Year(),now.Month(),now.Day(),now.Hour(),now.Minute(),now.Second())
+   fmt.Println(dateString)
+ //now.Format 方法格式化
+  fmt.Println(now.Format(&quot;2006-01-02 15:04:05&quot;))
+  fmt.Println(now.Format(&quot;2006/01/02 15:04:05&quot;))
+  fmt.Println(now.Format(&quot;2006/01/02&quot;))//年月日
+  fmt.Println(now.Format(&quot;15:04:05&quot;))//时分秒
+&#125;
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://studygolang.com/articles/18637?fr=sidebar">Go时间格式化的两种方法</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
