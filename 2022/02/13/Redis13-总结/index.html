@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Mysql知识点梳理 | IT小马</title>
-  <meta name="keywords" content=" 面试 , Mysql ">
-  <meta name="description" content="Mysql知识点梳理 | IT小马">
+  <title>Redis13-总结 | IT小马</title>
+  <meta name="keywords" content=" REDIS , 后端 ">
+  <meta name="description" content="Redis13-总结 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="V1.3前-标记清除法###mark and sweep GoV1.3之前的标记清除： mark and sweep   暂停程序业务逻辑STW(stop the world), 分类出可达和不可达的对象，然后做上标记。 程序找出它所有可达的对象，并做上标记。 清除未标记的对象。（对象5，6不可达，被GC清除） 停止暂停，让程序继续跑。然后循环重复这个过程，直到process程序生命周期结束。">
 <meta property="og:type" content="article">
@@ -97,7 +97,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(69)</small>
+                <small>(70)</small>
             
         </div>
     </li>
@@ -164,7 +164,7 @@
                     <div data-rel="REDIS">
                         
                         REDIS
-                        <small>(12)</small>
+                        <small>(13)</small>
                         
                     </div>
                     
@@ -269,7 +269,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="69">
+<input type="hidden" id="yelog_site_posts_number" value="70">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -360,10 +360,6 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Mysql</a>
-            </li>
-        
-            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>MYSQL</a>
             </li>
         
@@ -391,6 +387,14 @@
     <nav id="title-list-nav">
         
         <a  class="全部文章 面试 "
+           href="/2022/05/15/Go%E7%9F%A5%E8%AF%86%E7%82%B902/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go知识点02">Go知识点02</span>
+            <span class="post-date" title="2022-05-15 00:00:00">2022/05/15</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
            href="/2022/05/14/Go%E7%9F%A5%E8%AF%86%E7%82%B901/"
            data-tag="GO,面试"
            data-author="" >
@@ -412,14 +416,6 @@
            data-author="" >
             <span class="post-title" title="Golang的GMP详解">Golang的GMP详解</span>
             <span class="post-date" title="2022-05-11 00:00:00">2022/05/11</span>
-        </a>
-        
-        <a  class="全部文章 面试 "
-           href="/2022/05/10/Mysql%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/"
-           data-tag="面试,Mysql"
-           data-author="" >
-            <span class="post-title" title="Mysql知识点梳理">Mysql知识点梳理</span>
-            <span class="post-date" title="2022-05-10 00:00:00">2022/05/10</span>
         </a>
         
         <a  class="全部文章 GO "
@@ -447,14 +443,6 @@
         </a>
         
         <a  class="全部文章 微服务 "
-           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"
-           data-tag="GO,微服务"
-           data-author="" >
-            <span class="post-title" title="GO微服务-架构设计">GO微服务-架构设计</span>
-            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
-        </a>
-        
-        <a  class="全部文章 微服务 "
            href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A102-%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/"
            data-tag="GO,微服务"
            data-author="" >
@@ -468,6 +456,14 @@
            data-author="" >
             <span class="post-title" title="GO微服务03-前端问题处理">GO微服务03-前端问题处理</span>
             <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/04/14/GO%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务-架构设计">GO微服务-架构设计</span>
+            <span class="post-date" title="2022-04-14 00:00:00">2022/04/14</span>
         </a>
         
         <a  class="全部文章 K8S "
@@ -572,6 +568,14 @@
            data-author="" >
             <span class="post-title" title="Golang常见错误">Golang常见错误</span>
             <span class="post-date" title="2022-02-22 00:00:00">2022/02/22</span>
+        </a>
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/13/Redis13-%E6%80%BB%E7%BB%93/"
+           data-tag="REDIS,后端"
+           data-author="" >
+            <span class="post-title" title="Redis13-总结">Redis13-总结</span>
+            <span class="post-date" title="2022-02-13 00:00:00">2022/02/13</span>
         </a>
         
         <a  class="全部文章 REDIS "
@@ -960,9 +964,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Mysql知识点梳理" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Redis13-总结" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Mysql知识点梳理</h1>
+        <h1 class="article-title">Redis13-总结</h1>
     
     <div class="article-meta">
         
@@ -972,7 +976,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="面试">面试</a>
+            <a  data-rel="REDIS">REDIS</a>
             
         </span>
         
@@ -980,16 +984,16 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color3">面试</a>
+            <a class="color1">REDIS</a>
             
-            <a class="color1">Mysql</a>
+            <a class="color3">后端</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-05-09 15:09:27'>2022-05-10 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-05-16 22:57:38'>2022-02-13 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1000,7 +1004,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ACID%E5%8E%9F%E5%88%99"><span class="toc-text">ACID原则</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0-%E8%BF%9E%E6%8E%A5Redis"><span class="toc-text">0.连接Redis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-NoSql%E9%80%82%E7%94%A8%E5%92%8C%E4%B8%8D%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">1.NoSql适用和不适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Memcache%EF%BC%8CRedis%EF%BC%8CMongoDB%E5%8C%BA%E5%88%AB"><span class="toc-text">2.Memcache，Redis，MongoDB区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Redis%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">3.Redis适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">4.Redis数据类型及适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Key%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">5.Key常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E5%BA%93%E6%89%80%E6%9C%89key"><span class="toc-text">查看当前库所有key</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEkey%E5%80%BC%E4%B8%8Evalue"><span class="toc-text">设置key值与value</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%ADkey%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="toc-text">判断key是否存在</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Bkey%E6%98%AF%E4%BB%80%E4%B9%88%E7%B1%BB%E5%9E%8B"><span class="toc-text">查看key是什么类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E7%9A%84key%E6%95%B0%E6%8D%AE"><span class="toc-text">删除指定的key数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4"><span class="toc-text">设置过期时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%98%E6%9C%89%E5%A4%9A%E5%B0%91%E7%A7%92%E8%BF%87%E6%9C%9F"><span class="toc-text">查看还有多少秒过期</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-String%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">6.String类型数据结构及常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEkey%E5%80%BC"><span class="toc-text">设置key值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2key%E5%80%BC"><span class="toc-text">查询key值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4key%E5%80%BC"><span class="toc-text">删除key值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%86%E7%BB%99%E5%AE%9A%E7%9A%84value%E8%BF%BD%E5%8A%A0%E5%88%B0%E5%8E%9F%E5%80%BC%E6%9C%AB%E5%B0%BE"><span class="toc-text">将给定的value追加到原值末尾</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%80%BC%E7%9A%84%E9%95%BF%E5%BA%A6"><span class="toc-text">获取值的长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E5%9C%A8key%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E8%AE%BE%E7%BD%AEkey%E5%80%BC"><span class="toc-text">有在key不存在的时候，设置key值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%A2%9E"><span class="toc-text">自增</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%87%8F"><span class="toc-text">自减</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%95%BF%E5%A2%9E%E5%87%8F"><span class="toc-text">步长增减</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-List%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">7.List类型数据结构及常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E4%B8%80%E4%B8%AA%E6%88%96%E8%80%85%E5%A4%9A%E4%B8%AA%E5%80%BC"><span class="toc-text">插入一个或者多个值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%90%E5%87%BA%E4%B8%80%E4%B8%AA%E6%88%96%E8%80%85%E5%A4%9A%E4%B8%AA%E5%80%BC"><span class="toc-text">吐出一个或者多个值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#key1%E5%8F%B3%E8%BE%B9%E5%90%90%E5%87%BA%E4%B8%80%E4%B8%AA%E5%80%BC-%E6%8F%92%E5%85%A5%E5%88%B0key2%E7%9A%84%E5%B7%A6%E8%BE%B9"><span class="toc-text">key1右边吐出一个值,插入到key2的左边</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E7%85%A7%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%A0%87%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="toc-text">按照索引下标获取元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E5%80%BC"><span class="toc-text">获取所有值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%89%E7%85%A7%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%A0%87%E8%8E%B7%E5%BE%97%E5%85%83%E7%B4%A0"><span class="toc-text">按照索引下标获得元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%88%97%E8%A1%A8%E9%95%BF%E5%BA%A6"><span class="toc-text">获取列表长度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8value%E7%9A%84%E5%89%8D%E9%9D%A2-%E5%90%8E%E9%9D%A2%E6%8F%92%E5%85%A5%E4%B8%80%E4%B8%AA%E6%96%B0%E5%80%BC"><span class="toc-text">在value的前面&#x2F;后面插入一个新值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E5%B7%A6%E8%BE%B9%E5%88%A0%E9%99%A4n%E4%B8%AAvalue%E5%80%BC"><span class="toc-text">从左边删除n个value值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8%E5%88%97%E8%A1%A8key%E4%B8%AD%E7%9A%84%E4%B8%8B%E6%A0%87index%E4%B8%AD%E4%BF%AE%E6%94%B9%E5%80%BCvalue"><span class="toc-text">在列表key中的下标index中修改值value</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Set%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">8.Set数据结构及常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E5%8A%A0%E5%85%A5%E9%9B%86%E5%90%88"><span class="toc-text">元素加入集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%96%E5%87%BA%E8%AF%A5%E9%9B%86%E5%90%88%E7%9A%84%E6%89%80%E6%9C%89%E5%80%BC"><span class="toc-text">取出该集合的所有值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E8%AF%A5%E9%9B%86%E5%90%88key%E6%98%AF%E5%90%A6%E5%90%AB%E6%9C%89%E8%AF%A5%E5%80%BC"><span class="toc-text">判断该集合key是否含有该值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E8%AF%A5%E9%9B%86%E5%90%88%E7%9A%84%E5%85%83%E7%B4%A0%E4%B8%AA%E6%95%B0"><span class="toc-text">返回该集合的元素个数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84%E6%9F%90%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="toc-text">删除集合中的某个元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E4%BB%8E%E9%9B%86%E5%90%88%E4%B8%AD%E5%8F%96%E5%87%BA%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="toc-text">随机从集合中取出一个元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E4%BB%8E%E8%AF%A5%E9%9B%86%E5%90%88%E4%B8%AD%E5%8F%96%E5%87%BAn%E4%B8%AA%E5%80%BC%EF%BC%88%E4%B8%8D%E4%BC%9A%E4%BB%8E%E9%9B%86%E5%90%88%E4%B8%AD%E5%88%A0%E9%99%A4%EF%BC%89"><span class="toc-text">随机从该集合中取出n个值（不会从集合中删除）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E9%9B%86%E5%90%88a%E7%9A%84%E6%9F%90%E4%B8%AAvalue%E7%A7%BB%E5%8A%A8%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E9%9B%86%E5%90%88b"><span class="toc-text">一个集合a的某个value移动到另一个集合b</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E4%B8%A4%E4%B8%AA%E9%9B%86%E5%90%88%E7%9A%84%E4%BA%A4%E9%9B%86%E5%85%83%E7%B4%A0"><span class="toc-text">返回两个集合的交集元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E4%B8%A4%E4%B8%AA%E9%9B%86%E5%90%88%E7%9A%84%E5%B9%B6%E9%9B%86%E5%85%83%E7%B4%A0"><span class="toc-text">返回两个集合的并集元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E4%B8%A4%E4%B8%AA%E9%9B%86%E5%90%88%E7%9A%84%E5%B7%AE%E9%9B%86%E5%85%83%E7%B4%A0%EF%BC%88key1%E6%9C%89%E7%9A%84%EF%BC%8Ckey2%E6%B2%A1%E6%9C%89%EF%BC%89"><span class="toc-text">返回两个集合的差集元素（key1有的，key2没有）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-Hash%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">9.Hash数据结构及常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%99key%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84filed%E9%94%AE%E8%B5%8B%E5%80%BCvalue"><span class="toc-text">给key集合中的filed键赋值value</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E5%90%88field%E5%8F%96%E5%87%BAvalue"><span class="toc-text">集合field取出value</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E8%AE%BE%E7%BD%AEhash%E7%9A%84%E5%80%BC"><span class="toc-text">批量设置hash的值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%93%88%E5%B8%8C%E8%A1%A8key%E4%B8%AD%EF%BC%8C%E7%BB%99%E5%AE%9A%E5%9F%9Ffield%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="toc-text">查看哈希表key中，给定域field是否存在</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E5%87%BA%E8%AF%A5hash%E9%9B%86%E5%90%88%E7%9A%84%E6%89%80%E6%9C%89field"><span class="toc-text">列出该hash集合的所有field</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%97%E5%87%BA%E8%AF%A5hash%E9%9B%86%E5%90%88%E7%9A%84%E6%89%80%E6%9C%89value"><span class="toc-text">列出该hash集合的所有value</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E5%93%88%E5%B8%8C%E8%A1%A8key%E4%B8%AD%E7%9A%84%E5%9F%9Ffield%E7%9A%84%E5%80%BC%E5%8A%A0%E4%B8%8A%E5%A2%9E%E9%87%8F1"><span class="toc-text">为哈希表key中的域field的值加上增量1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%86%E5%93%88%E5%B8%8C%E8%A1%A8key%E4%B8%AD%E7%9A%84%E5%9F%9Ffield%E7%9A%84%E5%80%BC%E8%AE%BE%E7%BD%AE%E4%B8%BAvalue%EF%BC%8C%E5%BD%93%E4%B8%94%E4%BB%85%E5%BD%93%E5%9F%9Ffield%E4%B8%8D%E5%AD%98%E5%9C%A8"><span class="toc-text">将哈希表key中的域field的值设置为value，当且仅当域field不存在</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-Zset%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">10.Zset数据结构及常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E5%85%A5Set"><span class="toc-text">加入Set</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E4%B8%8B%E6%A0%87%E8%BF%94%E5%9B%9E%E5%85%83%E7%B4%A0"><span class="toc-text">根据下标返回元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B9%E6%8D%AE%E5%88%86%E6%95%B0%E8%BF%94%E5%9B%9E%E5%85%83%E7%B4%A0"><span class="toc-text">根据分数返回元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E5%A4%A7%E5%88%B0%E5%B0%8F%E6%8E%92%E5%88%97%E8%BF%94%E5%9B%9E"><span class="toc-text">从大到小排列返回</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E5%85%83%E7%B4%A0%E7%9A%84score%E5%8A%A0%E4%B8%8A%E5%A2%9E%E9%87%8F"><span class="toc-text">为元素的score加上增量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E8%AF%A5%E9%9B%86%E5%90%88%E4%B8%8B%EF%BC%8C%E6%8C%87%E5%AE%9A%E5%80%BC%E7%9A%84%E5%85%83%E7%B4%A0"><span class="toc-text">删除该集合下，指定值的元素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E4%B8%AA%E6%95%B0"><span class="toc-text">元素个数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E8%AF%A5%E9%9B%86%E5%90%88%EF%BC%8C%E5%88%86%E6%95%B0%E5%8C%BA%E9%97%B4%E5%86%85%E7%9A%84%E5%85%83%E7%B4%A0%E4%B8%AA%E6%95%B0"><span class="toc-text">统计该集合，分数区间内的元素个数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E5%9C%A8%E9%9B%86%E5%90%88%E4%B8%AD%E7%9A%84%E6%8E%92%E5%90%8D"><span class="toc-text">返回值在集合中的排名</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1016,7 +1020,184 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="ACID原则"><a href="#ACID原则" class="headerlink" title="ACID原则"></a>ACID原则</h3>
+        <h3 id="0-连接Redis"><a href="#0-连接Redis" class="headerlink" title="0.连接Redis"></a>0.连接Redis</h3><pre><code>docker exec -it redis /bin/bash -c &quot;redis-cli -c -p 6379 -a 123456&quot;
+</code></pre>
+<h3 id="1-NoSql适用和不适用场景"><a href="#1-NoSql适用和不适用场景" class="headerlink" title="1.NoSql适用和不适用场景"></a>1.NoSql适用和不适用场景</h3><ul>
+<li>适用场景：高并发、海量数据读写，高可扩展性</li>
+<li>不适用场景：需要事务支持，结构化查询存储，处理复杂关系</li>
+</ul>
+<h3 id="2-Memcache，Redis，MongoDB区别"><a href="#2-Memcache，Redis，MongoDB区别" class="headerlink" title="2.Memcache，Redis，MongoDB区别"></a>2.Memcache，Redis，MongoDB区别</h3><ul>
+<li>Memcache：数据在内存中，不支持持久化，一般作为缓存数据库。Memcache是多线程 + 锁。</li>
+<li>Redis：数据在内存中，支持持久化，支持多种数据结构，一般作为缓存数据库。Redis是单线程 + 多路 IO 复用。操作都是原子性的。</li>
+<li>MongoDB：<ul>
+<li>文档型数据库</li>
+<li>数据在内存中，内存不足时保存到硬盘</li>
+<li>支持二进制数据和大型对象</li>
+<li>配合/替代关系型数据库(RDBMS)存储特定数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Redis适用场景"><a href="#3-Redis适用场景" class="headerlink" title="3.Redis适用场景"></a>3.Redis适用场景</h3><ul>
+<li>高频次，热门访问的数据，降低数据库 IO。</li>
+<li>分布式架构，做 session 共享。</li>
+</ul>
+<h3 id="4-Redis数据类型及适用场景"><a href="#4-Redis数据类型及适用场景" class="headerlink" title="4.Redis数据类型及适用场景"></a>4.Redis数据类型及适用场景</h3><p>五大数据类型：string (字符串)、list (链表)、set (集合)、zset (sorted set –有序集合) 和 hash（哈希类型）。</p>
+<p>适用场景：</p>
+<ul>
+<li>List：<ul>
+<li>时间排序 =&gt; 最新N个数据</li>
+<li>构建队列</li>
+</ul>
+</li>
+<li>Zset：排行榜</li>
+<li>Set：大量数据去重</li>
+</ul>
+<p>特性场景：</p>
+<ul>
+<li>Expire过期时间：验证码过期时间</li>
+<li>原子性：计数器，秒杀（INCR、DECR）</li>
+<li>PUBSUB：发布订阅消息系统</li>
+</ul>
+<h3 id="5-Key常用命令"><a href="#5-Key常用命令" class="headerlink" title="5.Key常用命令"></a>5.Key常用命令</h3><h4 id="查看当前库所有key"><a href="#查看当前库所有key" class="headerlink" title="查看当前库所有key"></a>查看当前库所有key</h4><pre><code>keys *
+</code></pre>
+<h4 id="设置key值与value"><a href="#设置key值与value" class="headerlink" title="设置key值与value"></a>设置key值与value</h4><pre><code>set key value
+</code></pre>
+<h4 id="判断key是否存在"><a href="#判断key是否存在" class="headerlink" title="判断key是否存在"></a>判断key是否存在</h4><pre><code>exists key
+</code></pre>
+<h4 id="查看key是什么类型"><a href="#查看key是什么类型" class="headerlink" title="查看key是什么类型"></a>查看key是什么类型</h4><pre><code>type key
+</code></pre>
+<h4 id="删除指定的key数据"><a href="#删除指定的key数据" class="headerlink" title="删除指定的key数据"></a>删除指定的key数据</h4><pre><code>del key
+</code></pre>
+<h4 id="设置过期时间"><a href="#设置过期时间" class="headerlink" title="设置过期时间"></a>设置过期时间</h4><pre><code>expire key 10 //10秒
+</code></pre>
+<h4 id="查看还有多少秒过期"><a href="#查看还有多少秒过期" class="headerlink" title="查看还有多少秒过期"></a>查看还有多少秒过期</h4><pre><code>ttl key //-1表示永不过期，-2表示已过期
+</code></pre>
+<h3 id="6-String类型数据结构及常用命令"><a href="#6-String类型数据结构及常用命令" class="headerlink" title="6.String类型数据结构及常用命令"></a>6.String类型数据结构及常用命令</h3><p>数据结构：简单动态字符串SDS</p>
+<p>扩容：字符串长度小于 1M 时，扩容都是加倍现有的空间，如果超过 1M，扩容时一次只会多扩 1M 的空间。</p>
+<p>最大值：一个字符串value最多可以是512M</p>
+<h4 id="设置key值"><a href="#设置key值" class="headerlink" title="设置key值"></a>设置key值</h4><pre><code>set key value
+</code></pre>
+<h4 id="查询key值"><a href="#查询key值" class="headerlink" title="查询key值"></a>查询key值</h4><pre><code>get key
+</code></pre>
+<h4 id="删除key值"><a href="#删除key值" class="headerlink" title="删除key值"></a>删除key值</h4><pre><code>del key
+</code></pre>
+<h4 id="将给定的value追加到原值末尾"><a href="#将给定的value追加到原值末尾" class="headerlink" title="将给定的value追加到原值末尾"></a>将给定的value追加到原值末尾</h4><pre><code>append key value
+</code></pre>
+<h4 id="获取值的长度"><a href="#获取值的长度" class="headerlink" title="获取值的长度"></a>获取值的长度</h4><pre><code>strlen key
+</code></pre>
+<h4 id="有在key不存在的时候，设置key值"><a href="#有在key不存在的时候，设置key值" class="headerlink" title="有在key不存在的时候，设置key值"></a>有在key不存在的时候，设置key值</h4><pre><code>setnx key value
+</code></pre>
+<h4 id="自增"><a href="#自增" class="headerlink" title="自增"></a>自增</h4><pre><code>incr key
+</code></pre>
+<h4 id="自减"><a href="#自减" class="headerlink" title="自减"></a>自减</h4><pre><code>decr key
+</code></pre>
+<h4 id="步长增减"><a href="#步长增减" class="headerlink" title="步长增减"></a>步长增减</h4><pre><code>incrby/decrby key &lt;步长&gt;
+</code></pre>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><pre><code>同时设置一个或者多个key-value                                                    mset key value key value...
+同时获取一个或多个value                                                                  mget key key...
+同时设置一个或者多个key-value.当且仅当所有给定key都不存在    msetnx key value key value... 
+获取key的起始位置和结束位置的值(起始0)                                         getrange key &lt;起始位置&gt; &lt;结束位置&gt;
+将value的值覆盖起始位置开始                                                             setrange key &lt;起始位置&gt; value     
+设置键值的同时,设置过期时间                                                                setex key &lt;时间&gt; value    
+用新值换旧值                                                                                        getset key value
+</code></pre>
+<h3 id="7-List类型数据结构及常用命令"><a href="#7-List类型数据结构及常用命令" class="headerlink" title="7.List类型数据结构及常用命令"></a>7.List类型数据结构及常用命令</h3><p>List由<code>quicklist</code>组成，是由多个压缩列表组成的双向链表，也就是<strong>将多个ziplist使用双向指针串起来使用</strong>。</p>
+<h4 id="插入一个或者多个值"><a href="#插入一个或者多个值" class="headerlink" title="插入一个或者多个值"></a>插入一个或者多个值</h4><pre><code>lpush/rpush key value value...
+</code></pre>
+<h4 id="吐出一个或者多个值"><a href="#吐出一个或者多个值" class="headerlink" title="吐出一个或者多个值"></a>吐出一个或者多个值</h4><pre><code>lpop/rpop key
+</code></pre>
+<h4 id="key1右边吐出一个值-插入到key2的左边"><a href="#key1右边吐出一个值-插入到key2的左边" class="headerlink" title="key1右边吐出一个值,插入到key2的左边"></a>key1右边吐出一个值,插入到key2的左边</h4><pre><code>rpoplpush key1 key2
+</code></pre>
+<h4 id="按照索引下标获取元素"><a href="#按照索引下标获取元素" class="headerlink" title="按照索引下标获取元素"></a>按照索引下标获取元素</h4><pre><code>lrange key start stop
+</code></pre>
+<h4 id="获取所有值"><a href="#获取所有值" class="headerlink" title="获取所有值"></a>获取所有值</h4><pre><code>lrange key 0 -1
+</code></pre>
+<h4 id="按照索引下标获得元素"><a href="#按照索引下标获得元素" class="headerlink" title="按照索引下标获得元素"></a>按照索引下标获得元素</h4><pre><code>lindex key index
+</code></pre>
+<h4 id="获取列表长度"><a href="#获取列表长度" class="headerlink" title="获取列表长度"></a>获取列表长度</h4><pre><code>llen key
+</code></pre>
+<h4 id="在value的前面-后面插入一个新值"><a href="#在value的前面-后面插入一个新值" class="headerlink" title="在value的前面/后面插入一个新值"></a>在value的前面/后面插入一个新值</h4><pre><code>linsert key before/after value newvalue
+</code></pre>
+<h4 id="从左边删除n个value值"><a href="#从左边删除n个value值" class="headerlink" title="从左边删除n个value值"></a>从左边删除n个value值</h4><pre><code>lrem key n value
+</code></pre>
+<h4 id="在列表key中的下标index中修改值value"><a href="#在列表key中的下标index中修改值value" class="headerlink" title="在列表key中的下标index中修改值value"></a>在列表key中的下标index中修改值value</h4><pre><code>lset key index value //从0开始
+</code></pre>
+<h3 id="8-Set数据结构及常用命令"><a href="#8-Set数据结构及常用命令" class="headerlink" title="8.Set数据结构及常用命令"></a>8.Set数据结构及常用命令</h3><p>Set数据结构是 dict 字典，字典底层是哈希表，所以添加，删除，查找的复杂度都是O(1)</p>
+<h4 id="元素加入集合"><a href="#元素加入集合" class="headerlink" title="元素加入集合"></a>元素加入集合</h4><pre><code>sadd key value value... 
+</code></pre>
+<h4 id="取出该集合的所有值"><a href="#取出该集合的所有值" class="headerlink" title="取出该集合的所有值"></a>取出该集合的所有值</h4><pre><code>smembers key
+</code></pre>
+<h4 id="判断该集合key是否含有该值"><a href="#判断该集合key是否含有该值" class="headerlink" title="判断该集合key是否含有该值"></a>判断该集合key是否含有该值</h4><pre><code>sismember key value
+</code></pre>
+<h4 id="返回该集合的元素个数"><a href="#返回该集合的元素个数" class="headerlink" title="返回该集合的元素个数"></a>返回该集合的元素个数</h4><pre><code>scard key
+</code></pre>
+<h4 id="删除集合中的某个元素"><a href="#删除集合中的某个元素" class="headerlink" title="删除集合中的某个元素"></a>删除集合中的某个元素</h4><pre><code>srem key value value...
+</code></pre>
+<h4 id="随机从集合中取出一个元素"><a href="#随机从集合中取出一个元素" class="headerlink" title="随机从集合中取出一个元素"></a>随机从集合中取出一个元素</h4><pre><code>spop key
+</code></pre>
+<h4 id="随机从该集合中取出n个值（不会从集合中删除）"><a href="#随机从该集合中取出n个值（不会从集合中删除）" class="headerlink" title="随机从该集合中取出n个值（不会从集合中删除）"></a>随机从该集合中取出n个值（不会从集合中删除）</h4><pre><code>srandmember key n
+</code></pre>
+<h4 id="一个集合a的某个value移动到另一个集合b"><a href="#一个集合a的某个value移动到另一个集合b" class="headerlink" title="一个集合a的某个value移动到另一个集合b"></a>一个集合a的某个value移动到另一个集合b</h4><pre><code>smove a b value
+</code></pre>
+<h4 id="返回两个集合的交集元素"><a href="#返回两个集合的交集元素" class="headerlink" title="返回两个集合的交集元素"></a>返回两个集合的交集元素</h4><pre><code>sinter a b
+</code></pre>
+<h4 id="返回两个集合的并集元素"><a href="#返回两个集合的并集元素" class="headerlink" title="返回两个集合的并集元素"></a>返回两个集合的并集元素</h4><pre><code>sunion a b
+</code></pre>
+<h4 id="返回两个集合的差集元素（key1有的，key2没有）"><a href="#返回两个集合的差集元素（key1有的，key2没有）" class="headerlink" title="返回两个集合的差集元素（key1有的，key2没有）"></a>返回两个集合的差集元素（key1有的，key2没有）</h4><pre><code>sdiff a b
+</code></pre>
+<h3 id="9-Hash数据结构及常用命令"><a href="#9-Hash数据结构及常用命令" class="headerlink" title="9.Hash数据结构及常用命令"></a>9.Hash数据结构及常用命令</h3><p>Hash是键值对集合，底层是string类型的field和value映射表，适合存储对象。</p>
+<p>Hash的底层存储有两种数据编码：ziplist（压缩列表），hashtable（哈希表）。</p>
+<p>ziplist编码条件：</p>
+<ul>
+<li><p>hash对象保存的键和值字符串长度都小于64字节</p>
+</li>
+<li><p>hash对象保存的键值对数量小于512</p>
+</li>
+</ul>
+<p>redis.conf</p>
+<pre><code>hash-max-ziplist-value 64     #字符串长度都小于64字节
+hash-max-ziplist-entries 512  #元素数量小于512
+</code></pre>
+<h4 id="给key集合中的filed键赋值value"><a href="#给key集合中的filed键赋值value" class="headerlink" title="给key集合中的filed键赋值value"></a>给key集合中的filed键赋值value</h4><pre><code>hset key field value
+</code></pre>
+<h4 id="集合field取出value"><a href="#集合field取出value" class="headerlink" title="集合field取出value"></a>集合field取出value</h4><pre><code>hget key field
+</code></pre>
+<h4 id="批量设置hash的值"><a href="#批量设置hash的值" class="headerlink" title="批量设置hash的值"></a>批量设置hash的值</h4><pre><code>hmset key field1 value1 field2 value2
+</code></pre>
+<h4 id="查看哈希表key中，给定域field是否存在"><a href="#查看哈希表key中，给定域field是否存在" class="headerlink" title="查看哈希表key中，给定域field是否存在"></a>查看哈希表key中，给定域field是否存在</h4><pre><code>hexist key1 field
+</code></pre>
+<h4 id="列出该hash集合的所有field"><a href="#列出该hash集合的所有field" class="headerlink" title="列出该hash集合的所有field"></a>列出该hash集合的所有field</h4><pre><code>hkeys key
+</code></pre>
+<h4 id="列出该hash集合的所有value"><a href="#列出该hash集合的所有value" class="headerlink" title="列出该hash集合的所有value"></a>列出该hash集合的所有value</h4><pre><code>hvals key
+</code></pre>
+<h4 id="为哈希表key中的域field的值加上增量1"><a href="#为哈希表key中的域field的值加上增量1" class="headerlink" title="为哈希表key中的域field的值加上增量1"></a>为哈希表key中的域field的值加上增量1</h4><pre><code>hincrby key field increment
+</code></pre>
+<h4 id="将哈希表key中的域field的值设置为value，当且仅当域field不存在"><a href="#将哈希表key中的域field的值设置为value，当且仅当域field不存在" class="headerlink" title="将哈希表key中的域field的值设置为value，当且仅当域field不存在"></a>将哈希表key中的域field的值设置为value，当且仅当域field不存在</h4><pre><code>hsetnx key field value
+</code></pre>
+<h3 id="10-Zset数据结构及常用命令"><a href="#10-Zset数据结构及常用命令" class="headerlink" title="10.Zset数据结构及常用命令"></a>10.Zset数据结构及常用命令</h3><p>zset 底层使用了两个数据结构：</p>
+<ol>
+<li>hash，hash 的作用就是关联元素 value 和权重 score，保障元素 value 的唯一性，可以通过元素 value 找到相应的 score 值。</li>
+<li>跳跃表(skiplist)，跳跃表的目的在于给元素 value 排序，根据 score 的范围获取元素列表。</li>
+</ol>
+<h4 id="加入Set"><a href="#加入Set" class="headerlink" title="加入Set"></a>加入Set</h4><pre><code>zadd key score value
+</code></pre>
+<h4 id="根据下标返回元素"><a href="#根据下标返回元素" class="headerlink" title="根据下标返回元素"></a>根据下标返回元素</h4><pre><code>zrange key start stop (withscores) //带withscores，可以让分数一起和值返回到结果集
+</code></pre>
+<h4 id="根据分数返回元素"><a href="#根据分数返回元素" class="headerlink" title="根据分数返回元素"></a>根据分数返回元素</h4><pre><code>zrangebyscore key min max (withscores) //按score的值递增次序排列
+</code></pre>
+<h4 id="从大到小排列返回"><a href="#从大到小排列返回" class="headerlink" title="从大到小排列返回"></a>从大到小排列返回</h4><pre><code>zrevrangebyscore key max min (withscores)
+</code></pre>
+<h4 id="为元素的score加上增量"><a href="#为元素的score加上增量" class="headerlink" title="为元素的score加上增量"></a>为元素的score加上增量</h4><pre><code>zincrby key increment value
+</code></pre>
+<h4 id="删除该集合下，指定值的元素"><a href="#删除该集合下，指定值的元素" class="headerlink" title="删除该集合下，指定值的元素"></a>删除该集合下，指定值的元素</h4><pre><code>zrem key value
+</code></pre>
+<h4 id="元素个数"><a href="#元素个数" class="headerlink" title="元素个数"></a>元素个数</h4><pre><code>zcard key
+</code></pre>
+<h4 id="统计该集合，分数区间内的元素个数"><a href="#统计该集合，分数区间内的元素个数" class="headerlink" title="统计该集合，分数区间内的元素个数"></a>统计该集合，分数区间内的元素个数</h4><pre><code>zcount key min max
+</code></pre>
+<h4 id="返回值在集合中的排名"><a href="#返回值在集合中的排名" class="headerlink" title="返回值在集合中的排名"></a>返回值在集合中的排名</h4><pre><code>zrank key value //从0开始
+</code></pre>
+
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
     </div>

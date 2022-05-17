@@ -2,6 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.itxiaoma.cn/2022/02/13/Redis13-%E6%80%BB%E7%BB%93/</loc>
+    
+    <lastmod>2022-05-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.itxiaoma.cn/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
+    
+    <lastmod>2022-05-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.itxiaoma.cn/2022/05/15/Go%E7%9F%A5%E8%AF%86%E7%82%B902/</loc>
+    
+    <lastmod>2022-05-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.itxiaoma.cn/2022/04/14/GO%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</loc>
+    
+    <lastmod>2022-05-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.itxiaoma.cn/2022/05/14/Go%E7%9F%A5%E8%AF%86%E7%82%B901/</loc>
     
     <lastmod>2022-05-14</lastmod>
@@ -41,15 +77,6 @@
     <loc>https://blog.itxiaoma.cn/2021/07/04/GOPL04-%E5%87%BD%E6%95%B0/</loc>
     
     <lastmod>2022-05-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.itxiaoma.cn/2022/05/10/Mysql%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/</loc>
-    
-    <lastmod>2022-05-09</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -227,15 +254,6 @@
   </url>
   
   <url>
-    <loc>https://blog.itxiaoma.cn/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A1-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</loc>
-    
-    <lastmod>2022-04-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.itxiaoma.cn/2022/04/10/K8S10-Helm/</loc>
     
     <lastmod>2022-04-14</lastmod>
@@ -338,15 +356,6 @@
     <loc>https://blog.itxiaoma.cn/2021/08/11/K8S02-kubectl/</loc>
     
     <lastmod>2022-04-06</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.itxiaoma.cn/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
-    
-    <lastmod>2022-04-05</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -625,7 +634,7 @@
 
   <url>
     <loc>https://blog.itxiaoma.cn/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -633,112 +642,105 @@
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/GO/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/REDIS/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/%E5%90%8E%E7%AB%AF/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/MYSQL/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/%E5%8D%95%E8%AF%8D%E6%9C%AC/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/Java/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/DOCKER/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/%E5%AE%B9%E5%99%A8/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/WEB/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/PHP/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/Laravel/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/K8S/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/GOPL/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2022-05-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.itxiaoma.cn/tags/Mysql/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -747,77 +749,77 @@
   
   <url>
     <loc>https://blog.itxiaoma.cn/categories/REDIS/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/categories/MYSQL/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/categories/%E5%8D%95%E8%AF%8D%E6%9C%AC/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/categories/JAVA/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/categories/DOCKER/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/categories/WEB/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/categories/PHP/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/categories/K8S/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/categories/GO/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://blog.itxiaoma.cn/categories/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2022-05-14</lastmod>
+    <lastmod>2022-05-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
