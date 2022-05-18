@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.itxiaoma.cn/2022/05/11/Golang%E7%9A%84GMP%E8%AF%A6%E8%A7%A3/</loc>
+    <loc>https://blog.itxiaoma.cn/2022/05/17/Go%E9%9D%A2%E8%AF%95%E9%A2%9804/</loc>
     
     <lastmod>2022-05-18</lastmod>
     
@@ -11,7 +11,34 @@
   </url>
   
   <url>
-    <loc>https://blog.itxiaoma.cn/2022/05/14/Go%E7%9F%A5%E8%AF%86%E7%82%B901/</loc>
+    <loc>https://blog.itxiaoma.cn/2022/05/16/Go%E9%9D%A2%E8%AF%95%E9%A2%9803/</loc>
+    
+    <lastmod>2022-05-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.itxiaoma.cn/2022/05/15/Go%E9%9D%A2%E8%AF%95%E9%A2%9802/</loc>
+    
+    <lastmod>2022-05-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.itxiaoma.cn/2022/05/14/Go%E9%9D%A2%E8%AF%95%E9%A2%9801/</loc>
+    
+    <lastmod>2022-05-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.itxiaoma.cn/2022/05/11/Golang%E7%9A%84GMP%E8%AF%A6%E8%A7%A3/</loc>
     
     <lastmod>2022-05-18</lastmod>
     
@@ -32,15 +59,6 @@
     <loc>https://blog.itxiaoma.cn/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
     
     <lastmod>2022-05-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.itxiaoma.cn/2022/05/15/Go%E7%9F%A5%E8%AF%86%E7%82%B902/</loc>
-    
-    <lastmod>2022-05-15</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

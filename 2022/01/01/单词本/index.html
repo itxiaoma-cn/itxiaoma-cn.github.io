@@ -6,21 +6,21 @@
   <meta name="keywords" content=" 单词本 ">
   <meta name="description" content="单词本 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="1. make 和 new 的区别﹖make和new都是golang用来分配内存的內建函数，且在堆上分配内存 make用于引用类型slice、map以及channel的初始化（非零值），返回的是引用类型本身 new用于类型的内存分配，返回的是指向类型的指针，指针指向的内容的值为零(zero value) 注意: 不同的指针类型零值是不同的 参考：https:&#x2F;&#x2F;m.php.cn&#x2F;be&#x2F;go&#x2F;465">
+<meta name="description" content="01 ❤new和make的区别？ new只用于分配内存，返回一个指向地址的指针。它为每个新类型分配一片内存，初始化为0且返回类型*T的内存地址，它相当于&amp;T{} make只可用于slice,map,channel的初始化,返回的是引用。  02 Go面向对象是如何实现的？Go实现面向对象的两个关键是struct和interface。  封装：对于同一个包，对象对包内的文件可见；对不同的包，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go知识点02">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/15/Go%E7%9F%A5%E8%AF%86%E7%82%B902/index.html">
+<meta property="og:title" content="Go面试题04">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/17/Go%E9%9D%A2%E8%AF%95%E9%A2%9804/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="1. make 和 new 的区别﹖make和new都是golang用来分配内存的內建函数，且在堆上分配内存 make用于引用类型slice、map以及channel的初始化（非零值），返回的是引用类型本身 new用于类型的内存分配，返回的是指向类型的指针，指针指向的内容的值为零(zero value) 注意: 不同的指针类型零值是不同的 参考：https:&#x2F;&#x2F;m.php.cn&#x2F;be&#x2F;go&#x2F;465">
+<meta property="og:description" content="01 ❤new和make的区别？ new只用于分配内存，返回一个指向地址的指针。它为每个新类型分配一片内存，初始化为0且返回类型*T的内存地址，它相当于&amp;T{} make只可用于slice,map,channel的初始化,返回的是引用。  02 Go面向对象是如何实现的？Go实现面向对象的两个关键是struct和interface。  封装：对于同一个包，对象对包内的文件可见；对不同的包，">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11093205-a79d5ae002d02d72.png">
-<meta property="article:published_time" content="2022-05-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-15T07:12:34.000Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2cxw3740wj20k00aaglv.jpg">
+<meta property="article:published_time" content="2022-05-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-18T14:53:13.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
 <meta property="article:tag" content="面试">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/11093205-a79d5ae002d02d72.png">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2cxw3740wj20k00aaglv.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -82,7 +82,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(70)</small>
+                <small>(72)</small>
             
         </div>
     </li>
@@ -219,7 +219,7 @@
                     <div data-rel="面试">
                         
                         面试
-                        <small>(2)</small>
+                        <small>(4)</small>
                         
                     </div>
                     
@@ -254,7 +254,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="70">
+<input type="hidden" id="yelog_site_posts_number" value="72">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -372,18 +372,34 @@
     <nav id="title-list-nav">
         
         <a  class="全部文章 面试 "
-           href="/2022/05/15/Go%E7%9F%A5%E8%AF%86%E7%82%B902/"
+           href="/2022/05/17/Go%E9%9D%A2%E8%AF%95%E9%A2%9804/"
            data-tag="GO,面试"
            data-author="" >
-            <span class="post-title" title="Go知识点02">Go知识点02</span>
+            <span class="post-title" title="Go面试题04">Go面试题04</span>
+            <span class="post-date" title="2022-05-17 00:00:00">2022/05/17</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2022/05/16/Go%E9%9D%A2%E8%AF%95%E9%A2%9803/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题03">Go面试题03</span>
+            <span class="post-date" title="2022-05-16 00:00:00">2022/05/16</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2022/05/15/Go%E9%9D%A2%E8%AF%95%E9%A2%9802/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题02">Go面试题02</span>
             <span class="post-date" title="2022-05-15 00:00:00">2022/05/15</span>
         </a>
         
         <a  class="全部文章 面试 "
-           href="/2022/05/14/Go%E7%9F%A5%E8%AF%86%E7%82%B901/"
+           href="/2022/05/14/Go%E9%9D%A2%E8%AF%95%E9%A2%9801/"
            data-tag="GO,面试"
            data-author="" >
-            <span class="post-title" title="Go知识点01">Go知识点01</span>
+            <span class="post-title" title="Go面试题01">Go面试题01</span>
             <span class="post-date" title="2022-05-14 00:00:00">2022/05/14</span>
         </a>
         
