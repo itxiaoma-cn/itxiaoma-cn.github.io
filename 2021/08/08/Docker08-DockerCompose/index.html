@@ -6,36 +6,21 @@
   <meta name="keywords" content=" DOCKER , 容器 ">
   <meta name="description" content="Docker08-DockerCompose | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="V1.3前-标记清除法###mark and sweep GoV1.3之前的标记清除： mark and sweep   暂停程序业务逻辑STW(stop the world), 分类出可达和不可达的对象，然后做上标记。 程序找出它所有可达的对象，并做上标记。 清除未标记的对象。（对象5，6不可达，被GC清除） 停止暂停，让程序继续跑。然后循环重复这个过程，直到process程序生命周期结束。">
+<meta name="description" content="1. make 和 new 的区别﹖make和new都是golang用来分配内存的內建函数，且在堆上分配内存 make用于引用类型slice、map以及channel的初始化（非零值），返回的是引用类型本身 new用于类型的内存分配，返回的是指向类型的指针，指针指向的内容的值为零(zero value) 注意: 不同的指针类型零值是不同的 参考：https:&#x2F;&#x2F;m.php.cn&#x2F;be&#x2F;go&#x2F;465">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Golang的GC回收机制">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/12/Golang%E7%9A%84GC%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:title" content="Go知识点02">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/15/Go%E7%9F%A5%E8%AF%86%E7%82%B902/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="V1.3前-标记清除法###mark and sweep GoV1.3之前的标记清除： mark and sweep   暂停程序业务逻辑STW(stop the world), 分类出可达和不可达的对象，然后做上标记。 程序找出它所有可达的对象，并做上标记。 清除未标记的对象。（对象5，6不可达，被GC清除） 停止暂停，让程序继续跑。然后循环重复这个过程，直到process程序生命周期结束。">
+<meta property="og:description" content="1. make 和 new 的区别﹖make和new都是golang用来分配内存的內建函数，且在堆上分配内存 make用于引用类型slice、map以及channel的初始化（非零值），返回的是引用类型本身 new用于类型的内存分配，返回的是指向类型的指针，指针指向的内容的值为零(zero value) 注意: 不同的指针类型零值是不同的 参考：https:&#x2F;&#x2F;m.php.cn&#x2F;be&#x2F;go&#x2F;465">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25y5trso0j20pq05dmxa.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25y007lyxj20hs0f23z1.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yb3yu7vj20p305g74e.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yj09mdcj20l30btdgg.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yolid9aj20ll0b4750.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yzvwwakj20cl0atjrr.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25z03tqnsj20o00dwjsh.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25zi4vcu9j20nr0cajsc.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25zlfu7cdj20ni0cg75e.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26irwo0c0j20og0c0dgn.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26ive52k5j20n10c7gme.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26iutfleej20nx0c5js7.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26j4wfpy3j20mu0bh3zf.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26jn2x68tj20ob0e90uc.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26k0y3cm1j20mx0dcgn1.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26k5ct3y8j20n80dkjsy.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26k9x5lirj20nc0dpabl.jpg">
-<meta property="article:published_time" content="2022-05-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-13T02:29:17.000Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11093205-a79d5ae002d02d72.png">
+<meta property="article:published_time" content="2022-05-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-15T07:12:34.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
+<meta property="article:tag" content="面试">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25y5trso0j20pq05dmxa.jpg">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/11093205-a79d5ae002d02d72.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
