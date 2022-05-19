@@ -2,23 +2,40 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Go面试题03 | IT小马</title>
+  <title>Go面试题02 | IT小马</title>
   <meta name="keywords" content=" GO , 面试 ">
-  <meta name="description" content="Go面试题03 | IT小马">
+  <meta name="description" content="Go面试题02 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="基础知识01 &#x3D; 和 :&#x3D; 的区别？&#x3D;是赋值变量，:&#x3D;是定义变量。 02 指针的作用一个指针可以指向任意变量的地址，它所指向的地址在32位或64位机器上分别固定占4或8个字节。指针的作用有：  获取变量的值 改变变量的值 用指针替代值传入函数，比如类的接收器就是这样的。  03 Go 允许多个返回值吗？可以。通常函数除了一般返回值还会返回一个error。 04 Go 有异常类型吗？有。Go用err">
+<meta name="description" content="V1.3前-标记清除法###mark and sweep GoV1.3之前的标记清除： mark and sweep   暂停程序业务逻辑STW(stop the world), 分类出可达和不可达的对象，然后做上标记。 程序找出它所有可达的对象，并做上标记。 清除未标记的对象。（对象5，6不可达，被GC清除） 停止暂停，让程序继续跑。然后循环重复这个过程，直到process程序生命周期结束。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go面试题03">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/16/Go%E9%9D%A2%E8%AF%95%E9%A2%9803/index.html">
+<meta property="og:title" content="Golang的GC回收机制">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/12/Golang%E7%9A%84GC%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="基础知识01 &#x3D; 和 :&#x3D; 的区别？&#x3D;是赋值变量，:&#x3D;是定义变量。 02 指针的作用一个指针可以指向任意变量的地址，它所指向的地址在32位或64位机器上分别固定占4或8个字节。指针的作用有：  获取变量的值 改变变量的值 用指针替代值传入函数，比如类的接收器就是这样的。  03 Go 允许多个返回值吗？可以。通常函数除了一般返回值还会返回一个error。 04 Go 有异常类型吗？有。Go用err">
+<meta property="og:description" content="V1.3前-标记清除法###mark and sweep GoV1.3之前的标记清除： mark and sweep   暂停程序业务逻辑STW(stop the world), 分类出可达和不可达的对象，然后做上标记。 程序找出它所有可达的对象，并做上标记。 清除未标记的对象。（对象5，6不可达，被GC清除） 停止暂停，让程序继续跑。然后循环重复这个过程，直到process程序生命周期结束。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-15T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-18T14:25:33.000Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25y5trso0j20pq05dmxa.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25y007lyxj20hs0f23z1.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yb3yu7vj20p305g74e.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yj09mdcj20l30btdgg.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yolid9aj20ll0b4750.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yzvwwakj20cl0atjrr.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25z03tqnsj20o00dwjsh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25zi4vcu9j20nr0cajsc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25zlfu7cdj20ni0cg75e.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26irwo0c0j20og0c0dgn.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26ive52k5j20n10c7gme.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26iutfleej20nx0c5js7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26j4wfpy3j20mu0bh3zf.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26jn2x68tj20ob0e90uc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26k0y3cm1j20mx0dcgn1.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26k5ct3y8j20n80dkjsy.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26k9x5lirj20nc0dpabl.jpg">
+<meta property="article:published_time" content="2022-05-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-13T02:29:17.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
-<meta property="article:tag" content="面试">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25y5trso0j20pq05dmxa.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -368,46 +385,6 @@
     </div>
     
     <nav id="title-list-nav">
-        
-        <a  class="全部文章 面试 "
-           href="/2022/05/18/Go%E9%9D%A2%E8%AF%95%E9%A2%9805/"
-           data-tag="GO,面试"
-           data-author="" >
-            <span class="post-title" title="Go面试题05">Go面试题05</span>
-            <span class="post-date" title="2022-05-18 00:00:00">2022/05/18</span>
-        </a>
-        
-        <a  class="全部文章 面试 "
-           href="/2022/05/17/Go%E9%9D%A2%E8%AF%95%E9%A2%9804/"
-           data-tag="GO,面试"
-           data-author="" >
-            <span class="post-title" title="Go面试题04">Go面试题04</span>
-            <span class="post-date" title="2022-05-17 00:00:00">2022/05/17</span>
-        </a>
-        
-        <a  class="全部文章 面试 "
-           href="/2022/05/16/Go%E9%9D%A2%E8%AF%95%E9%A2%9803/"
-           data-tag="GO,面试"
-           data-author="" >
-            <span class="post-title" title="Go面试题03">Go面试题03</span>
-            <span class="post-date" title="2022-05-16 00:00:00">2022/05/16</span>
-        </a>
-        
-        <a  class="全部文章 面试 "
-           href="/2022/05/15/Go%E9%9D%A2%E8%AF%95%E9%A2%9802/"
-           data-tag="GO,面试"
-           data-author="" >
-            <span class="post-title" title="Go面试题02">Go面试题02</span>
-            <span class="post-date" title="2022-05-15 00:00:00">2022/05/15</span>
-        </a>
-        
-        <a  class="全部文章 面试 "
-           href="/2022/05/14/Go%E9%9D%A2%E8%AF%95%E9%A2%9801/"
-           data-tag="GO,面试"
-           data-author="" >
-            <span class="post-title" title="Go面试题01">Go面试题01</span>
-            <span class="post-date" title="2022-05-14 00:00:00">2022/05/14</span>
-        </a>
         
         <a  class="全部文章 GO "
            href="/2022/05/12/Golang%E7%9A%84GC%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"
@@ -929,6 +906,46 @@
             <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
         </a>
         
+        <a  class="全部文章 面试 "
+           href="/2021/05/18/Go%E9%9D%A2%E8%AF%95%E9%A2%9805/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题05">Go面试题05</span>
+            <span class="post-date" title="2021-05-18 00:00:00">2021/05/18</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/17/Go%E9%9D%A2%E8%AF%95%E9%A2%9804/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题04">Go面试题04</span>
+            <span class="post-date" title="2021-05-17 00:00:00">2021/05/17</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/16/Go%E9%9D%A2%E8%AF%95%E9%A2%9803/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题03">Go面试题03</span>
+            <span class="post-date" title="2021-05-16 00:00:00">2021/05/16</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/15/Go%E9%9D%A2%E8%AF%95%E9%A2%9802/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题02">Go面试题02</span>
+            <span class="post-date" title="2021-05-15 00:00:00">2021/05/15</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/14/Go%E9%9D%A2%E8%AF%95%E9%A2%9801/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题01">Go面试题01</span>
+            <span class="post-date" title="2021-05-14 00:00:00">2021/05/14</span>
+        </a>
+        
         <a  class="全部文章 WEB "
            href="/2021/05/03/%E9%AB%98%E6%80%A7%E8%83%BDWeb03-%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/"
            data-tag="WEB"
@@ -971,9 +988,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Go面试题03" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Go面试题02" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Go面试题03</h1>
+        <h1 class="article-title">Go面试题02</h1>
     
     <div class="article-meta">
         
@@ -1000,7 +1017,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-05-18 22:25:33'>2022-05-16 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-05-19 12:38:56'>2021-05-15 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1011,7 +1028,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-text">基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#01-%E5%92%8C-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">01 &#x3D; 和 :&#x3D; 的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02-%E6%8C%87%E9%92%88%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">02 指针的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-Go-%E5%85%81%E8%AE%B8%E5%A4%9A%E4%B8%AA%E8%BF%94%E5%9B%9E%E5%80%BC%E5%90%97%EF%BC%9F"><span class="toc-text">03 Go 允许多个返回值吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#04-Go-%E6%9C%89%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%9E%8B%E5%90%97%EF%BC%9F"><span class="toc-text">04 Go 有异常类型吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#05-%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%8F%E7%A8%8B%EF%BC%88Goroutine%EF%BC%89"><span class="toc-text">05 什么是协程（Goroutine）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E6%8B%BC%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">06 如何高效地拼接字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#07-%E4%BB%80%E4%B9%88%E6%98%AF-rune-%E7%B1%BB%E5%9E%8B"><span class="toc-text">07 什么是 rune 类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD-map-%E4%B8%AD%E6%98%AF%E5%90%A6%E5%8C%85%E5%90%AB%E6%9F%90%E4%B8%AA-key-%EF%BC%9F"><span class="toc-text">08 如何判断 map 中是否包含某个 key ？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-Go-%E6%94%AF%E6%8C%81%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E6%88%96%E5%8F%AF%E9%80%89%E5%8F%82%E6%95%B0%E5%90%97%EF%BC%9F"><span class="toc-text">09 Go 支持默认参数或可选参数吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-defer-%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="toc-text">10 defer 的执行顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E5%A6%82%E4%BD%95%E4%BA%A4%E6%8D%A2-2-%E4%B8%AA%E5%8F%98%E9%87%8F%E7%9A%84%E5%80%BC%EF%BC%9F"><span class="toc-text">11 如何交换 2 个变量的值？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-Go-%E8%AF%AD%E8%A8%80-tag-%E7%9A%84%E7%94%A8%E5%A4%84%EF%BC%9F"><span class="toc-text">12 Go 语言 tag 的用处？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E6%89%80%E6%9C%89tag%EF%BC%9F"><span class="toc-text">13 如何获取一个结构体的所有tag？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD-2-%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%87%E7%89%87%EF%BC%88slice-%E6%98%AF%E7%9B%B8%E7%AD%89%E7%9A%84%EF%BC%9F"><span class="toc-text">14 如何判断 2 个字符串切片（slice) 是相等的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E7%BB%93%E6%9E%84%E4%BD%93%E6%89%93%E5%8D%B0%E6%97%B6%EF%BC%8C-v-%E5%92%8C-v%E5%92%8C-v-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">15 结构体打印时，%v 和 %+v和 %#v 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-Go-%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%A6%82%E4%BD%95%E8%A1%A8%E7%A4%BA%E6%9E%9A%E4%B8%BE%E5%80%BC-enums-%EF%BC%9F"><span class="toc-text">16 Go 语言中如何表示枚举值(enums)？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-%E7%A9%BA-struct-%E7%9A%84%E7%94%A8%E9%80%94"><span class="toc-text">17 空 struct{} 的用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-go%E9%87%8C%E9%9D%A2%E7%9A%84int%E5%92%8Cint32%E6%98%AF%E5%90%8C%E4%B8%80%E4%B8%AA%E6%A6%82%E5%BF%B5%E5%90%97%EF%BC%9F"><span class="toc-text">18 go里面的int和int32是同一个概念吗？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-text">实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#01-init-%E5%87%BD%E6%95%B0%E6%98%AF%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F"><span class="toc-text">01 init() 函数是什么时候执行的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02-%E2%9D%A4%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%88%86%E9%85%8D%E5%9C%A8%E6%A0%88%E4%B8%8A%E8%BF%98%E6%98%AF%E5%A0%86%E4%B8%8A%EF%BC%9F"><span class="toc-text">02 ❤如何知道一个对象是分配在栈上还是堆上？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-2-%E4%B8%AA-interface-%E5%8F%AF%E4%BB%A5%E6%AF%94%E8%BE%83%E5%90%97-%EF%BC%9F"><span class="toc-text">03 2 个 interface 可以比较吗 ？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#04-2-%E4%B8%AA-nil-%E5%8F%AF%E8%83%BD%E4%B8%8D%E7%9B%B8%E7%AD%89%E5%90%97%EF%BC%9F"><span class="toc-text">04 2 个 nil 可能不相等吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#05-%E2%9D%A4%E7%AE%80%E8%BF%B0-Go-%E8%AF%AD%E8%A8%80GC-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">05 ❤简述 Go 语言GC(垃圾回收)的工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E7%9A%84%E6%8C%87%E9%92%88%E6%98%AF%E5%90%A6%E5%AE%89%E5%85%A8%EF%BC%9F"><span class="toc-text">06 函数返回局部变量的指针是否安全？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#07-%E9%9D%9E%E6%8E%A5%E5%8F%A3%E7%9A%84%E4%BB%BB%E6%84%8F%E7%B1%BB%E5%9E%8B-T-%E9%83%BD%E8%83%BD%E5%A4%9F%E8%B0%83%E7%94%A8-T-%E7%9A%84%E6%96%B9%E6%B3%95%E5%90%97%EF%BC%9F%E5%8F%8D%E8%BF%87%E6%9D%A5%E5%91%A2%EF%BC%9F"><span class="toc-text">07 非接口的任意类型 T() 都能够调用 *T 的方法吗？反过来呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-go-slice%E6%98%AF%E6%80%8E%E4%B9%88%E6%89%A9%E5%AE%B9%E7%9A%84%EF%BC%9F"><span class="toc-text">08 go slice是怎么扩容的？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="toc-text">并发编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#01-%E2%9D%A4%E6%97%A0%E7%BC%93%E5%86%B2%E7%9A%84-channel-%E5%92%8C%E6%9C%89%E7%BC%93%E5%86%B2%E7%9A%84-channel-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">01 ❤无缓冲的 channel 和有缓冲的 channel 的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E5%8D%8F%E7%A8%8B%E6%B3%84%E9%9C%B2-Goroutine-Leak-%EF%BC%9F"><span class="toc-text">02 为什么有协程泄露(Goroutine Leak)？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-Go-%E5%8F%AF%E4%BB%A5%E9%99%90%E5%88%B6%E8%BF%90%E8%A1%8C%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%95%B0%E9%87%8F%E5%90%97%EF%BC%9F-%E5%B8%B8%E8%A7%81%E7%9A%84goroutine%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">03 Go 可以限制运行时操作系统线程的数量吗？ 常见的goroutine操作函数有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#04-%E5%A6%82%E4%BD%95%E6%8E%A7%E5%88%B6%E5%8D%8F%E7%A8%8B%E6%95%B0%E7%9B%AE%E3%80%82"><span class="toc-text">04 如何控制协程数目。</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-make-%E5%92%8C-new-%E7%9A%84%E5%8C%BA%E5%88%AB%EF%B9%96"><span class="toc-text">1. make 和 new 的区别﹖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BA%86%E8%A7%A3%E8%BF%87golang%E7%9A%84%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%90%97"><span class="toc-text">2.了解过golang的内存管理吗?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0%E4%BC%A0%E5%85%A5%E7%BB%93%E6%9E%84%E4%BD%93%E6%97%B6%EF%BC%8C%E5%BA%94%E8%AF%A5%E4%BC%A0%E5%80%BC%E8%BF%98%E6%98%AF%E6%8C%87%E9%92%88%EF%B9%96%E8%AF%B4%E5%87%BA%E4%BD%A0%E7%9A%84%E7%90%86%E7%94%B1"><span class="toc-text">3.调用函数传入结构体时，应该传值还是指针﹖说出你的理由?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%BA%BF%E7%A8%8B%E6%9C%89%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B-Goroutine%E7%9A%84%E5%8E%9F%E7%90%86%E4%BA%86%E8%A7%A3%E8%BF%87%E5%90%97%EF%BC%8C%E8%AE%B2%E4%B8%80%E4%B8%8B%E5%AE%9E%E7%8E%B0%E5%92%8C%E4%BC%98%E5%8A%BF"><span class="toc-text">4.线程有几种模型?Goroutine的原理了解过吗，讲一下实现和优势?</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%EF%BC%9A"><span class="toc-text">三种线程模型：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Go%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%EF%BC%9A%E5%A4%9A%E5%A0%86%E5%A4%9A"><span class="toc-text">Go的线程模型：多堆多</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B"><span class="toc-text">GMP模型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Goroutine%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">Goroutine的优势</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Goroutine%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BC%9A%E5%8F%91%E7%94%9F%E9%98%BB%E5%A1%9E"><span class="toc-text">5. Goroutine什么时候会发生阻塞?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-PMG%E6%A8%A1%E5%9E%8B%E4%B8%ADGoroutine%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="toc-text">6. PMG模型中Goroutine有哪几种状态?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E6%AF%8F%E4%B8%AA%E7%BA%BF%E7%A8%8B-%E5%8D%8F%E7%A8%8B%E5%8D%A0%E7%94%A8%E5%A4%9A%E5%B0%91%E5%86%85%E5%AD%98%E7%9F%A5%E9%81%93%E5%90%97"><span class="toc-text">7. 每个线程&#x2F;协程占用多少内存知道吗?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E5%A6%82%E6%9E%9CGoroutine%E2%80%94%E7%9B%B4%E5%8D%A0%E7%94%A8%E8%B5%84%E6%BA%90%E6%80%8E%E4%B9%88%E5%8A%9E-PMG%E6%A8%A1%E5%9E%8B%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E7%9A%84%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="toc-text">8. 如果Goroutine—直占用资源怎么办,PMG模型怎么解决的这个问题?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-%E5%A6%82%E6%9E%9C%E8%8B%A5%E5%B9%B2%E7%BA%BF%E7%A8%8B%E4%B8%AD%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8BOOM%EF%BC%8C%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88-%E5%A6%82%E6%9E%9C%E6%98%AFGoroutine-%E5%91%A2-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%87%BA%E7%8E%B0%E8%BF%87OOM%E5%90%97%EF%BC%8C%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E7%9A%84"><span class="toc-text">9. 如果若干线程中一个线程OOM，会发生什么?如果是Goroutine 呢?项目中出现过OOM吗，怎么解决的?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E6%98%AF%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84"><span class="toc-text">10. 项目中错误处理是怎么做的?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-%E5%A6%82%E6%9E%9C%E8%8B%A5%E5%B9%B2%E4%B8%AAGoroutine-%E5%85%B6%E4%B8%AD%E6%9C%89%E4%B8%80%E4%B8%AApanic%EF%BC%8C%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88"><span class="toc-text">11. 如果若干个Goroutine,其中有一个panic，会发生什么?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-defer%E5%8F%AF%E4%BB%A5%E6%8D%95%E8%8E%B7%E5%88%B0%E5%85%B6Goroutine%E7%9A%84%E5%AD%90Goroutine-%E7%9A%84panic%E5%90%97"><span class="toc-text">12. defer可以捕获到其Goroutine的子Goroutine 的panic吗?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-%E5%BC%80%E5%8F%91%E7%94%A8Gin%E6%A1%86%E6%9E%B6%E5%90%97-Gin%E6%80%8E%E4%B9%88%E5%81%9A%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C"><span class="toc-text">13. 开发用Gin框架吗?Gin怎么做参数校验?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-%E4%B8%AD%E9%97%B4%E4%BB%B6%E4%BD%BF%E7%94%A8%E8%BF%87%E5%90%97-%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8%E7%9A%84%E3%80%82Gin%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E4%BD%BF%E7%94%A8%E8%BF%87%E5%90%97-Gin%E4%B8%AD%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%A1%E9%AA%8C%E8%A7%84%E5%88%99%E7%9F%A5%E9%81%93%E6%80%8E%E4%B9%88%E5%81%9A%E5%90%97-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%A1%E9%AA%8C%E5%99%A8%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC%E5%91%A2"><span class="toc-text">14. 中间件使用过吗?怎么使用的。Gin的错误处理使用过吗?Gin中自定义校验规则知道怎么做吗?自定义校验器的返回值呢?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-golang%E4%B8%AD%E8%A7%A3%E6%9E%90tag%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F%E5%8F%8D%E5%B0%84%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-text">15. golang中解析tag是怎么实现的？反射原理是什么？通过反射调用函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-golang%E7%9A%84%E9%94%81%E6%9C%BA%E5%88%B6%E4%BA%86%E8%A7%A3%E8%BF%87%E5%90%97-Mutex%E7%9A%84%E9%94%81%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%BC%8F%EF%BC%8C%E5%88%86%E5%88%AB%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B-Mutex%E9%94%81%E5%BA%95%E5%B1%82%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%BA%86%E8%A7%A3%E8%BF%87%E5%90%97"><span class="toc-text">16. golang的锁机制了解过吗? Mutex的锁有哪几种模式，分别介绍一下? Mutex锁底层如何实现了解过吗?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17-channel%E3%80%81channel%E4%BD%BF%E7%94%A8%E4%B8%AD%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%9F"><span class="toc-text">17. channel、channel使用中需要注意的地方？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#18-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%94%A8%E7%9A%84%E4%BB%80%E4%B9%88%EF%BC%9F%E6%95%B0%E6%8D%AE%E5%BA%93%E9%94%81%E6%9C%89%E4%BA%86%E8%A7%A3%E5%90%97%EF%BC%9Fmysql%E9%94%81%E6%9C%BA%E5%88%B6%E8%AE%B2%E4%B8%80%E4%B8%8B%E3%80%82mysql%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E3%80%82"><span class="toc-text">18. 数据库用的什么？数据库锁有了解吗？mysql锁机制讲一下。mysql分库分表。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#19-%E8%AE%B2%E4%B8%80%E4%B8%8Bredis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%EF%BC%9Fredis%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F%E5%92%8C%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%8C%BA%E5%88%AB%E4%BA%86%E8%A7%A3%E8%BF%87%E5%90%97%EF%BC%9Fredis%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9Fredis%E6%8C%81%E4%B9%85%E5%8C%96%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84%EF%BC%9F"><span class="toc-text">19. 讲一下redis分布式锁？redis主从模式和集群模式的区别了解过吗？redis的数据类型有哪些？redis持久化怎么做的？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#20-%E7%BC%96%E7%A8%8B%E9%A2%98%EF%BC%9A%E4%BD%A0%E4%BA%86%E8%A7%A3%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95%E6%9C%89%E4%BB%80%E4%B9%88%EF%BC%9F%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95%E3%80%82"><span class="toc-text">20. 编程题：你了解的负载均衡算法有什么？实现一个负载均衡算法。</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1027,255 +1044,178 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="01-和-的区别？"><a href="#01-和-的区别？" class="headerlink" title="01 = 和 := 的区别？"></a>01 <code>=</code> 和 <code>:=</code> 的区别？</h3><p>=是赋值变量，:=是定义变量。</p>
-<h3 id="02-指针的作用"><a href="#02-指针的作用" class="headerlink" title="02 指针的作用"></a>02 指针的作用</h3><p>一个指针可以指向任意变量的地址，它所指向的地址在32位或64位机器上分别<strong>固定</strong>占4或8个字节。指针的作用有：</p>
-<ul>
-<li>获取变量的值</li>
-<li>改变变量的值</li>
-<li>用指针替代值传入函数，比如类的接收器就是这样的。</li>
+        <h3 id="1-make-和-new-的区别﹖"><a href="#1-make-和-new-的区别﹖" class="headerlink" title="1. make 和 new 的区别﹖"></a>1. make 和 new 的区别﹖</h3><p>make和new都是golang用来分配内存的內建函数，且在堆上分配内存</p>
+<p>make用于引用类型slice、map以及channel的初始化（非零值），返回的是引用类型本身</p>
+<p>new用于类型的内存分配，返回的是指向类型的指针，指针指向的内容的值为零(zero value)</p>
+<p>注意: 不同的指针类型零值是不同的</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://m.php.cn/be/go/465883.html">https://m.php.cn/be/go/465883.html</a></p>
+<p>&amp;符号的意思是对变量取地址</p>
+<p>*符号的意思是对指针取值</p>
+<h3 id="2-了解过golang的内存管理吗"><a href="#2-了解过golang的内存管理吗" class="headerlink" title="2.了解过golang的内存管理吗?"></a>2.了解过golang的内存管理吗?</h3><ul>
+<li>Go在程序启动时，会向操作系统申请一大块内存，之后自行管理。<ul>
+<li><code>arena</code> 堆区，把内存分割成<code>8KB</code>大小的页，一些页组合起来称为<code>mspan</code>。</li>
+<li><code>bitmap</code>标识<code>arena</code>区域哪些地址保存了对象</li>
+<li><code>spans</code>存放<code>mspan</code>的指针</li>
 </ul>
-<h3 id="03-Go-允许多个返回值吗？"><a href="#03-Go-允许多个返回值吗？" class="headerlink" title="03 Go 允许多个返回值吗？"></a>03 Go 允许多个返回值吗？</h3><p>可以。通常函数除了一般返回值还会返回一个error。</p>
-<h3 id="04-Go-有异常类型吗？"><a href="#04-Go-有异常类型吗？" class="headerlink" title="04 Go 有异常类型吗？"></a>04 Go 有异常类型吗？</h3><p>有。Go用error类型代替try…catch语句，这样可以节省资源。同时增加代码可读性：</p>
-<pre><code class="go">_, err := errorDemo()
-  if err != nil&#123;
-   fmt.Println(err)
-   return
-&#125;
-</code></pre>
-<p>也可以用errors.New()来定义自己的异常。errors.Error()会返回异常的字符串表示。只要实现error接口就可以定义自己的异常，</p>
-<pre><code class="go"> type errorString struct &#123;
-  s string
- &#125;
- 
- func (e *errorString) Error() string &#123;
-  return e.s
- &#125;
- 
- // 多一个函数当作构造函数
- func New(text string) error &#123;
-  return &amp;errorString&#123;text&#125;
- &#125;
-</code></pre>
-<h3 id="05-什么是协程（Goroutine）"><a href="#05-什么是协程（Goroutine）" class="headerlink" title="05 什么是协程（Goroutine）"></a>05 什么是协程（Goroutine）</h3><p>协程是<strong>用户态轻量级线程</strong>，它是<strong>线程调度的基本单位</strong>。通常在函数前加上go关键字就能实现并发。一个Goroutine会以一个很小的栈启动2KB或4KB，当遇到栈空间不足时，栈会<strong>自动伸缩</strong>， 因此可以轻易实现成千上万个goroutine同时启动。</p>
-<h3 id="06-如何高效地拼接字符串"><a href="#06-如何高效地拼接字符串" class="headerlink" title="06 如何高效地拼接字符串"></a>06 如何高效地拼接字符串</h3><p>+, fmt.Sprintf, strings.Builder, bytes.Buffer, strings.Join</p>
-<ul>
-<li><p>+：对字符串遍历，计算并开辟一个新的空间来存储新字符串。</p>
 </li>
-<li><p>fmt.Sprintf：采用了接口参数，必须要用反射获取值，因此有性能损耗。</p>
+<li>Go内存管理的基本单元是mspan，它由若干个页组成，每种mspan可以分配特定大小的object。</li>
+<li>mcache, mcentral, mheap是Go内存管理的三大组件，层层递进。<ul>
+<li>mcache管理线程在本地缓存的mspan；</li>
+<li>mcentral管理全局的mspan供所有线程使用；</li>
+<li>mheap管理Go的所有动态分配内存。</li>
+</ul>
 </li>
-<li><p>strings.Builder：用WriteString()进行拼接，内部实现是指针+切片，同时String()返回拼接后的字符串，它是直接把[]byte转换为string，从而避免变量拷贝。</p>
-<pre><code class="go"> type Builder struct &#123;
-     addr *Builder // of receiver, to detect copies by value
-     buf  []byte // 1
- &#125;
-</code></pre>
-<p><code>addr</code>字段主要是做<code>copycheck</code>，<code>buf</code>字段是一个<code>byte</code>类型的切片，这个就是用来存放字符串内容的，提供的<code>writeString()</code>方法就是向切片<code>buf</code>中追加数据：</p>
-<pre><code class="go">func (b *Builder) WriteString(s string) (int, error) &#123;
-     b.copyCheck()
-     b.buf = append(b.buf, s...)
-     return len(s), nil
- &#125;
-</code></pre>
-<p>提供的<code>String</code>方法就是将<code>[]byte</code>转换为<code>string</code>类型，这里为了避免内存拷贝的问题，使用了强制转换来避免内存拷贝：</p>
-<pre><code class="go"> func (b *Builder) String() string &#123;
-     return *(*string)(unsafe.Pointer(&amp;b.buf))
- &#125;
-</code></pre>
+<li>极小对象会分配在一个object中，以节省资源，使用tiny分配器分配内存；一般小对象通过mspan分配内存；大对象则直接由mheap分配内存。</li>
+</ul>
+<p>参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/59125443">https://zhuanlan.zhihu.com/p/59125443</a></p>
+<h3 id="3-调用函数传入结构体时，应该传值还是指针﹖说出你的理由"><a href="#3-调用函数传入结构体时，应该传值还是指针﹖说出你的理由" class="headerlink" title="3.调用函数传入结构体时，应该传值还是指针﹖说出你的理由?"></a>3.调用函数传入结构体时，应该传值还是指针﹖说出你的理由?</h3><ul>
+<li>大多数情况下使用指针传递。<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://github.com/golang/go/wiki/CodeReviewComments%23receiver-type">google开发组的经验是</a>:“当你不知道改选择什么进行传递时，就使用指针吧”</li>
+<li>Slices, maps, channels, strings, function values, 和 interface values本身就是使用指针实现的，所以再使用指针传递是多余的</li>
+<li>对于大的结构体，或者不得不修改的结构体传指针，否则<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://github.com/golang/go/wiki/CodeReviewComments%23pass-values">传值</a>，因为由于传递指针导致结构体被修改的问题很难被排查</li>
+</ul>
+<h3 id="4-线程有几种模型-Goroutine的原理了解过吗，讲一下实现和优势"><a href="#4-线程有几种模型-Goroutine的原理了解过吗，讲一下实现和优势" class="headerlink" title="4.线程有几种模型?Goroutine的原理了解过吗，讲一下实现和优势?"></a>4.线程有几种模型?Goroutine的原理了解过吗，讲一下实现和优势?</h3><p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_37055174/article/details/104132303">https://blog.csdn.net/m0_37055174/article/details/104132303</a></p>
+<h5 id="三种线程模型："><a href="#三种线程模型：" class="headerlink" title="三种线程模型："></a>三种线程模型：</h5><ul>
+<li><p>N:1关系：N个协程绑定1个线程</p>
+<p>优点：<strong>协程在用户态线程即完成切换，不会陷入到内核态，这种切换非常的轻量快速</strong>。</p>
+<p>缺点：无法利用多核加速能力；协程阻塞会造成其他协程都无法执行，没有并发能力。</p>
 </li>
-<li><p>bytes.Buffer：是一个<code>byte</code>类型的缓冲器，存放着都是<code>byte</code>。底层也是一个<code>[]byte</code>切片，结构体如下：</p>
-<pre><code class="go">type Buffer struct &#123;
-    buf      []byte // contents are the bytes buf[off : len(buf)]
-    off      int    // read at &amp;buf[off], write at &amp;buf[len(buf)]
-    lastRead readOp // last read operation, so that Unread* can work correctly.
-&#125;
-</code></pre>
-<pre><code class="go">func (b *Buffer) WriteString(s string) (n int, err error) &#123;
-    b.lastRead = opInvalid
-    m, ok := b.tryGrowByReslice(len(s))
-    if !ok &#123;
-        m = b.grow(len(s))
-    &#125;
-    return copy(b.buf[m:], s), nil
-&#125;
-</code></pre>
-<p>切片在创建时并不会申请内存块，只有在往里写数据时才会申请，首次申请的大小即为写入数据的大小。如果写入的数据小于64字节，则按64字节申请。采用动态扩展<code>slice</code>的机制，字符串追加采用<code>copy</code>的方式将追加的部分拷贝到尾部，<code>copy</code>是内置的拷贝函数，可以减少内存分配。</p>
-<p>但是在将<code>[]byte</code>转换为<code>string</code>类型依旧使用了标准类型，所以会发生内存分配：</p>
-<pre><code class="go">func (b *Buffer) String() string &#123;
-    if b == nil &#123;
-        // Special case, useful in debugging.
-        return &quot;&lt;nil&gt;&quot;
-    &#125;
-    return string(b.buf[b.off:])
-&#125;
-</code></pre>
+<li><p>1:1关系：1个协程绑定1个线程</p>
+<p>优点：协程的调度都由CPU完成，不存在N:1缺点，</p>
+<p>缺点：协程的创建、删除和切换的代价都由CPU完成，切换协程代价过大</p>
 </li>
-<li><p>strings.join：也是基于<code>strings.builder</code>来实现的,并且可以自定义分隔符，唯一不同在于在<code>join</code>方法内调用了<code>b.Grow(n)</code>方法，这个是进行初步的容量分配，而前面计算的n的长度就是我们要拼接的slice的长度，因为我们传入切片长度固定，所以提前进行容量分配可以减少内存分配，很高效：</p>
+<li><p>M:N关系：M个协程绑定1个线程</p>
+<p>优点：能够利用多核</p>
+<p>缺点：过于依赖协程调度器的优化和算法</p>
 </li>
 </ul>
-<pre><code class="go">func main()&#123;
-    a := []string&#123;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&#125;
-    //方式1：
-    ret := a[0] + a[1] + a[2]
-    //方式2：
-    ret := fmt.Sprintf(a[0],a[1],a[2])
-    //方式3：
-    var sb strings.Builder
-    sb.WriteString(a[0])
-    sb.WriteString(a[1])
-    sb.WriteString(a[2])
-    ret := sb.String()
-    //方式4：
-    buf := new(bytes.Buffer)
-    buf.Write(a[0])
-    buf.Write(a[1])
-    buf.Write(a[2])
-    ret := buf.String()
-    //方式5：
-    ret := strings.Join(a,&quot;&quot;)
-&#125;
-</code></pre>
-<p>总结：</p>
-<p>strings.Join ≈ strings.Builder &gt; bytes.Buffer &gt; “+” &gt; fmt.Sprintf</p>
-<p>参考资料：<a href="https://link.zhihu.com/?target=https://geektutu.com/post/hpg-string-concat.html">字符串拼接性能及原理 | Go 语言高性能编程 | 极客兔兔</a></p>
-<h3 id="07-什么是-rune-类型"><a href="#07-什么是-rune-类型" class="headerlink" title="07 什么是 rune 类型"></a>07 什么是 rune 类型</h3><p>rune是int32的别名，用来区分字符值和整数值。比如utf-8汉字占3个字节，按照一般方法遍历汉字字符串得到的是乱码，这个时候要将字符串转换为rune:</p>
-<pre><code class="go">sample := &quot;我爱GO&quot;
-runeSamp := []rune(sample)
-runeSamp[0] = &#39;你&#39;
-fmt.Println(string(runeSamp)) //你爱GO
-</code></pre>
-<h3 id="08-如何判断-map-中是否包含某个-key-？"><a href="#08-如何判断-map-中是否包含某个-key-？" class="headerlink" title="08 如何判断 map 中是否包含某个 key ？"></a>08 如何判断 map 中是否包含某个 key ？</h3><pre><code class="go">var sample map[int]int
-if _, ok := sample[10];ok&#123;
-&#125;
-</code></pre>
-<h3 id="09-Go-支持默认参数或可选参数吗？"><a href="#09-Go-支持默认参数或可选参数吗？" class="headerlink" title="09 Go 支持默认参数或可选参数吗？"></a>09 Go 支持默认参数或可选参数吗？</h3><p>不支持。但是可以利用结构体参数，或者…传入参数切片</p>
-<h3 id="10-defer-的执行顺序"><a href="#10-defer-的执行顺序" class="headerlink" title="10 defer 的执行顺序"></a>10 defer 的执行顺序</h3><p>defer执行顺序和调用顺序相反，类似于栈先进后出。</p>
-<h3 id="11-如何交换-2-个变量的值？"><a href="#11-如何交换-2-个变量的值？" class="headerlink" title="11 如何交换 2 个变量的值？"></a>11 如何交换 2 个变量的值？</h3><p>对于变量而言<code>a,b = b,a</code>； 对于指针而言<code>*a,*b = *b, *a</code></p>
-<h3 id="12-Go-语言-tag-的用处？"><a href="#12-Go-语言-tag-的用处？" class="headerlink" title="12 Go 语言 tag 的用处？"></a>12 Go 语言 tag 的用处？</h3><p>tag可以为结构体成员提供属性。常见的：</p>
+<h5 id="Go的线程模型：多堆多"><a href="#Go的线程模型：多堆多" class="headerlink" title="Go的线程模型：多堆多"></a>Go的线程模型：多堆多</h5><ul>
+<li>内核线程(M) thread</li>
+<li>go协程(G) goroutine</li>
+<li>逻辑处理器（P）Processer ，<strong>包含了运行goroutine的资源</strong>，如果线程想运行goroutine，必须先获取P，P中还包含了可运行的G队列。</li>
+</ul>
+<h5 id="GMP模型"><a href="#GMP模型" class="headerlink" title="GMP模型"></a>GMP模型</h5><p>参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/fa696563c38a">https://www.jianshu.com/p/fa696563c38a</a></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/11093205-a79d5ae002d02d72.png" alt="img"></p>
 <ol>
-<li>json序列化或反序列化时字段的名称</li>
-<li>db: sqlx模块中对应的数据库字段名</li>
-<li>form: gin框架中对应的前端的数据字段名</li>
-<li>binding: 搭配 form 使用, 默认如果没查找到结构体中的某个字段则不报错值为空, binding为 required 代表没找到返回错误给前端</li>
+<li><strong>全局队列</strong>（Global Queue）：存放等待运行的G。</li>
+<li><strong>P的本地队列</strong>：同全局队列类似，存放的也是等待运行的G，存的数量有限，不超过256个。新建G’时，G’优先加入到P的本地队列，如果队列满了，则会把本地队列中一半的G移动到全局队列。</li>
+<li><strong>P列表</strong>：所有的P都在程序启动时创建，并保存在数组中，最多有<code>GOMAXPROCS</code>(可配置)个。</li>
+<li><strong>M内核线程</strong>：线程想运行任务就得获取P，从P的本地队列获取G，P队列为空时，M也会尝试从全局队列<strong>拿</strong>一批G放到P的本地队列，或从其他P的本地队列<strong>偷</strong>一半放到自己P的本地队列。M运行G，G执行之后，M会从P获取下一个G，不断重复下去。</li>
+<li>LRQ： 绑定在P上的待执行G队列</li>
+<li>GRQ：全局G队列</li>
 </ol>
-<h3 id="13-如何获取一个结构体的所有tag？"><a href="#13-如何获取一个结构体的所有tag？" class="headerlink" title="13 如何获取一个结构体的所有tag？"></a>13 如何获取一个结构体的所有tag？</h3><p>利用反射：</p>
-<pre><code class="go">type Author struct &#123;
-    Name         int      `json:Name`
-    Publications []string `json:Publication,omitempty`
+<h5 id="Goroutine的优势"><a href="#Goroutine的优势" class="headerlink" title="Goroutine的优势"></a>Goroutine的优势</h5><ol>
+<li>只在需要时才会使用更多内存</li>
+<li>启动时间比线程快</li>
+<li>原生支持利用channel安全地进行通信</li>
+<li>共享数据结构时无需使用互斥锁</li>
+</ol>
+<h3 id="5-Goroutine什么时候会发生阻塞"><a href="#5-Goroutine什么时候会发生阻塞" class="headerlink" title="5. Goroutine什么时候会发生阻塞?"></a>5. Goroutine什么时候会发生阻塞?</h3><p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/csdniter/article/details/112175118%E3%80%81">https://blog.csdn.net/csdniter/article/details/112175118、</a></p>
+<p>场景 1：由于原子、互斥量或通道操作调用导致 Goroutine 阻塞，调度器将把当前阻塞的 Goroutine 切换出去，重新调度 LRQ 上的其他 Goroutine；</p>
+<p>场景 2：由于网络请求和 IO 操作导致 Goroutine 阻塞，通过使用 NetPoller 进行网络系统调用，调度器可以防止 Goroutine 在进行这些系统调用时阻塞 M，让M 执行 P 的 LRQ 中其他的 Goroutines，而不需要创建新的 M。</p>
+<p>场景 3：当调用一些系统方法的时候，如果系统方法调用的时候发生阻塞，这种情况下，网络轮询器（NetPoller）无法使用，而进行系统调用的 Goroutine 将阻塞当前 M。调度器介入后：识别出 G1 已导致 M1 阻塞，此时，调度器将 M1 与 P 分离，同时也将 G1 带走。然后调度器引入新的 M2 来服务 P。</p>
+<p>场景 4：如果在 Goroutine 去执行一个 sleep 操作，导致 M 被阻塞了。</p>
+<p>Go 程序后台有一个监控线程 sysmon，它监控那些长时间运行的 G 任务然后设置可以强占的标识符，别的 Goroutine 就可以抢先进来执行。</p>
+<p>只要下次这个 Goroutine 进行函数调用，那么就会被强占，同时也会保护现场，然后重新放入 P 的本地队列里面等待下次执行。</p>
+<h4 id="6-PMG模型中Goroutine有哪几种状态"><a href="#6-PMG模型中Goroutine有哪几种状态" class="headerlink" title="6. PMG模型中Goroutine有哪几种状态?"></a>6. PMG模型中Goroutine有哪几种状态?</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41565755/article/details/122518091">gorutine 的9种状态</a></p>
+<ul>
+<li>_Gidle 表示这个 goroutine 刚刚被分配，还没有被初始化。</li>
+<li>_Grunnable 表示这个 goroutine 在运行队列中。 它当前没有执行用户代码。 堆栈不属于自己。</li>
+<li>_Grunning 表示这个 goroutine 可以执行用户代码。 堆栈由这个 goroutine 拥有。 它不在运行队列中。 它被分配了一个 M 和一个 P（g.m 和 g.m.p 是有效的）。</li>
+<li>_Gsyscall 表示这个 goroutine 正在执行一个系统调用。它不执行用户代码。 堆栈由这个 goroutine 拥有。 它不在运行队列中。 它被分配了一个M。</li>
+<li>_Gwaiting 表示这个 goroutine 在运行时被阻塞。</li>
+<li>_Gmoribund_unused 当前未使用，但在 gdb 脚本中进行了硬编码。</li>
+<li>_Gdead 表示这个 goroutine 当前未被使用。</li>
+<li>_Genqueue_unused 当前未使用。</li>
+<li>_Gcopystack 表示这个 goroutine 的堆栈正在被移动。 </li>
+<li>_Gpreempted 意味着这个 goroutine 停止了自己的suspendG抢占。</li>
+</ul>
+<h4 id="7-每个线程-协程占用多少内存知道吗"><a href="#7-每个线程-协程占用多少内存知道吗" class="headerlink" title="7. 每个线程/协程占用多少内存知道吗?"></a>7. 每个线程/协程占用多少内存知道吗?</h4><p>线程栈空间通常是2M，<em>Go</em>routine栈空间是2k~5k</p>
+<h4 id="8-如果Goroutine—直占用资源怎么办-PMG模型怎么解决的这个问题"><a href="#8-如果Goroutine—直占用资源怎么办-PMG模型怎么解决的这个问题" class="headerlink" title="8. 如果Goroutine—直占用资源怎么办,PMG模型怎么解决的这个问题?"></a>8. 如果Goroutine—直占用资源怎么办,PMG模型怎么解决的这个问题?</h4><p>如果有个goroutine一直占用资源，那么GMP模型会<strong>从正常模式转变为饥饿模式</strong>（类似于mutex），允许其它goroutine抢占（禁用自旋锁）。</p>
+<h4 id="9-如果若干线程中一个线程OOM，会发生什么-如果是Goroutine-呢-项目中出现过OOM吗，怎么解决的"><a href="#9-如果若干线程中一个线程OOM，会发生什么-如果是Goroutine-呢-项目中出现过OOM吗，怎么解决的" class="headerlink" title="9. 如果若干线程中一个线程OOM，会发生什么?如果是Goroutine 呢?项目中出现过OOM吗，怎么解决的?"></a>9. 如果若干线程中一个线程OOM，会发生什么?如果是Goroutine 呢?项目中出现过OOM吗，怎么解决的?</h4><p>OOM：Out of memory，内存溢出</p>
+<p>对于线程而言：发生内存溢出的线程会被kill，其它线程不受影响。</p>
+<p><strong>尽量避免在请求中直接启动 goroutine 来处理问题</strong>，而应该通过启动 worker 来进行消费，这样可以避免由于请求量过大，而导致大量创建 goroutine 从而导致 oom</p>
+<h4 id="10-项目中错误处理是怎么做的"><a href="#10-项目中错误处理是怎么做的" class="headerlink" title="10. 项目中错误处理是怎么做的?"></a>10. 项目中错误处理是怎么做的?</h4><p>在Go语言标准库的errors包中提供了error接口的实现结构体<code>errorString</code>，还额外提供了快速创建错误的函数。</p>
+<pre><code class="go">err := errors.New(&quot;this is an error&quot;)
+var err2 error
+fmt.Println(err.Error())
+fmt.Println(err2) // error的类型变量在声明后其默认值为nil
+</code></pre>
+<h4 id="11-如果若干个Goroutine-其中有一个panic，会发生什么"><a href="#11-如果若干个Goroutine-其中有一个panic，会发生什么" class="headerlink" title="11. 如果若干个Goroutine,其中有一个panic，会发生什么?"></a>11. 如果若干个Goroutine,其中有一个panic，会发生什么?</h4><p>调用该Goroutine的defer。没有捕捉panic进行recover的话，该Goroutine的所有defer完成后，剩余Goroutine也会退出，整个进程结束。</p>
+<blockquote>
+<p>参考理解：<a href="https://link.zhihu.com/?target=https://blog.csdn.net/huorongbj/article/details/123013273">goroutine配上panic会怎样</a>。</p>
+</blockquote>
+<h4 id="12-defer可以捕获到其Goroutine的子Goroutine-的panic吗"><a href="#12-defer可以捕获到其Goroutine的子Goroutine-的panic吗" class="headerlink" title="12. defer可以捕获到其Goroutine的子Goroutine 的panic吗?"></a>12. defer可以捕获到其Goroutine的子Goroutine 的panic吗?</h4><p>不可以。它们处于不同的调度器P中。对于子goroutine，正确的做法是：</p>
+<ol>
+<li>必须通过 defer 关键字来调用 recover()。</li>
+<li>当通过 goroutine 调用某个方法，一定要确保内部有 recover() 机制。</li>
+</ol>
+<h4 id="13-开发用Gin框架吗-Gin怎么做参数校验"><a href="#13-开发用Gin框架吗-Gin怎么做参数校验" class="headerlink" title="13. 开发用Gin框架吗?Gin怎么做参数校验?"></a>13. 开发用Gin框架吗?Gin怎么做参数校验?</h4><p>Gin框架通过validator库进行参数校验，只需将约束放到<code>binding</code>tag中就可以了。</p>
+<h4 id="14-中间件使用过吗-怎么使用的。Gin的错误处理使用过吗-Gin中自定义校验规则知道怎么做吗-自定义校验器的返回值呢"><a href="#14-中间件使用过吗-怎么使用的。Gin的错误处理使用过吗-Gin中自定义校验规则知道怎么做吗-自定义校验器的返回值呢" class="headerlink" title="14. 中间件使用过吗?怎么使用的。Gin的错误处理使用过吗?Gin中自定义校验规则知道怎么做吗?自定义校验器的返回值呢?"></a>14. 中间件使用过吗?怎么使用的。Gin的错误处理使用过吗?Gin中自定义校验规则知道怎么做吗?自定义校验器的返回值呢?</h4><h4 id="15-golang中解析tag是怎么实现的？反射原理是什么？通过反射调用函数"><a href="#15-golang中解析tag是怎么实现的？反射原理是什么？通过反射调用函数" class="headerlink" title="15. golang中解析tag是怎么实现的？反射原理是什么？通过反射调用函数"></a>15. golang中解析tag是怎么实现的？反射原理是什么？通过反射调用函数</h4><p>Go解析tag采用的是<strong>反射</strong>。使用reflect.TypeOf获取属性，再通过Field(i)获取field值，再.Tag获得Tag。</p>
+<pre><code class="go">type Server struct &#123;
+    ServerName string `key1:&quot;value1&quot; key11:&quot;value11&quot;`
+    ServerIP   string `key2:&quot;value2&quot;`
 &#125;
 
 func main() &#123;
-    t := reflect.TypeOf(Author&#123;&#125;)
-    for i := 0; i &lt; t.NumField(); i++ &#123;
-        name := t.Field(i).Name
-        s, _ := t.FieldByName(name)
-        fmt.Println(s.Tag)
-    &#125;
+    s := Server&#123;&#125;
+    t := reflect.TypeOf(s)       //main.Server
+    tag := t.Field(0).Tag        //key1:&quot;value1&quot; key11:&quot;value11&quot;
+    fmt.Printf(tag.Get(&quot;key1&quot;))  //value1
+    fmt.Printf(tag.Get(&quot;key11&quot;)) //value11
 &#125;
 </code></pre>
-<h3 id="14-如何判断-2-个字符串切片（slice-是相等的？"><a href="#14-如何判断-2-个字符串切片（slice-是相等的？" class="headerlink" title="14 如何判断 2 个字符串切片（slice) 是相等的？"></a>14 如何判断 2 个字符串切片（slice) 是相等的？</h3><pre><code class="go">reflect.DeepEqual(s1, s2)
-</code></pre>
-<h3 id="15-结构体打印时，-v-和-v和-v-的区别"><a href="#15-结构体打印时，-v-和-v和-v-的区别" class="headerlink" title="15 结构体打印时，%v 和 %+v和 %#v 的区别"></a>15 结构体打印时，<code>%v</code> 和 <code>%+v</code>和 <code>%#v</code> 的区别</h3><p><code>%v</code>输出结构体各成员的值；</p>
-<p><code>%+v</code>输出结构体各成员的名称和值；</p>
-<p><code>%#v</code>输出结构体名称和结构体各成员的名称和值</p>
-<h3 id="16-Go-语言中如何表示枚举值-enums-？"><a href="#16-Go-语言中如何表示枚举值-enums-？" class="headerlink" title="16 Go 语言中如何表示枚举值(enums)？"></a>16 Go 语言中如何表示枚举值(enums)？</h3><p>在常量中用iota可以表示枚举。iota从0开始。</p>
-<pre><code class="go">const (
-    B = 1 &lt;&lt; (10 * iota)
-    KiB 
-    MiB
-    GiB
-    TiB
-    PiB
-    EiB
+<p><a target="_blank" rel="noopener" href="https://vimsky.com/examples/usage/reflect-tag-get-function-in-golang-with-examples.html">Golang reflect.Tag.Get()用法及代码示例</a></p>
+<p>调用函数：</p>
+<p>通过<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%8F%8D%E5%B0%84&spm=1001.2101.3001.7020">反射</a>访问一个对象的方法，要确保此方法是可导出的，否则会报错。</p>
+<pre><code class="go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;reflect&quot;
 )
-</code></pre>
-<h3 id="17-空-struct-的用途"><a href="#17-空-struct-的用途" class="headerlink" title="17 空 struct{} 的用途"></a>17 空 struct{} 的用途</h3><ol>
-<li>用map模拟一个set，那么就要把值置为struct{}，struct{}本身不占任何空间，可以避免任何多余的内存分配。</li>
-<li>有时候给通道发送一个空结构体,channel&lt;-struct{}{}，也是节省了空间。</li>
-<li>仅有方法的结构体</li>
-</ol>
-<h3 id="18-go里面的int和int32是同一个概念吗？"><a href="#18-go里面的int和int32是同一个概念吗？" class="headerlink" title="18 go里面的int和int32是同一个概念吗？"></a><strong>18 go里面的int和int32是同一个概念吗？</strong></h3><p>不是一个概念！千万不能混淆。go语言中的int的大小是和操作系统位数相关的，如果是32位操作系统，int类型的大小就是4字节。如果是64位操作系统，int类型的大小就是8个字节。除此之外uint也与操作系统有关。</p>
-<p>int8占1个字节，int16占2个字节，int32占4个字节，int64占8个字节。</p>
-<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><h3 id="01-init-函数是什么时候执行的？"><a href="#01-init-函数是什么时候执行的？" class="headerlink" title="01 init() 函数是什么时候执行的？"></a>01 init() 函数是什么时候执行的？</h3><p>在main函数之前执行。</p>
-<h3 id="02-❤如何知道一个对象是分配在栈上还是堆上？"><a href="#02-❤如何知道一个对象是分配在栈上还是堆上？" class="headerlink" title="02 ❤如何知道一个对象是分配在栈上还是堆上？"></a>02 ❤如何知道一个对象是分配在栈上还是堆上？</h3><p>Go局部变量会进行逃逸分析。如果<strong>变量离开作用域后没有被引用</strong>，则<strong>优先</strong>分配到栈上，否则分配到堆上。</p>
-<pre><code class="go">go build -gcflags &#39;-m -m -l&#39; xxx.go .
-</code></pre>
-<p>关于逃逸的可能情况：</p>
-<ul>
-<li>变量大小不确定</li>
-<li>变量类型不确定</li>
-<li>变量分配的内存超过用户栈最大值</li>
-<li>暴露给了外部指针</li>
-</ul>
-<h3 id="03-2-个-interface-可以比较吗-？"><a href="#03-2-个-interface-可以比较吗-？" class="headerlink" title="03 2 个 interface 可以比较吗 ？"></a>03 2 个 interface 可以比较吗 ？</h3><p>不能直接比较，只有同时为nil且类型相同才可以比较。</p>
-<h3 id="04-2-个-nil-可能不相等吗？"><a href="#04-2-个-nil-可能不相等吗？" class="headerlink" title="04 2 个 nil 可能不相等吗？"></a>04 2 个 nil 可能不相等吗？</h3><p><strong>两个nil只有在类型相同时才相等</strong>。</p>
-<p>可能不等。interface在运行时绑定值，只有值为nil接口值才为nil，但是与指针的nil不相等。</p>
-<p>举个例子：</p>
-<pre><code class="go">var p *int = nil
-var i interface&#123;&#125; = nil
-if(p == i)&#123;
-    fmt.Println(&quot;Equal&quot;)
+
+type Animal struct &#123;
+&#125;
+
+func (a Animal) Eat() &#123;
+    fmt.Println(&quot;eat&quot;)
+&#125;
+func main() &#123;
+    animal := Animal&#123;&#125;
+    v := reflect.ValueOf(&amp;animal)
+    f := v.MethodByName(&quot;Eat&quot;)
+    f.Call([]reflect.Value&#123;&#125;)
 &#125;
 </code></pre>
-<h3 id="05-❤简述-Go-语言GC-垃圾回收-的工作原理"><a href="#05-❤简述-Go-语言GC-垃圾回收-的工作原理" class="headerlink" title="05 ❤简述 Go 语言GC(垃圾回收)的工作原理"></a>05 ❤简述 Go 语言GC(垃圾回收)的工作原理</h3><p>Go1.3采用<strong>标记清除法</strong>， Go1.5采用<strong>三色标记法</strong>，Go1.8采用<strong>三色标记法+混合写屏障</strong>。</p>
-<p><strong>标记清除法</strong></p>
-<p>分为两个阶段：标记和清除</p>
-<p>标记阶段：从根对象出发寻找并标记所有存活的对象。</p>
-<p>清除阶段：遍历堆中的对象，回收未标记的对象，并加入空闲链表。</p>
-<p>缺点是需要暂停程序STW。</p>
-<p><strong>三色标记法</strong>：</p>
-<p>将对象标记为白色，灰色或黑色。</p>
-<p>白色：不确定对象（默认色）；黑色：存活对象。灰色：存活对象，子对象待处理。</p>
-<p>标记开始时，先将所有对象加入白色集合（需要STW）。首先将根对象标记为灰色，然后将一个对象从灰色集合取出，遍历其子对象，放入灰色集合。同时将取出的对象放入黑色集合，直到灰色集合为空。最后的白色集合对象就是需要清理的对象。</p>
-<p>这种方法有一个缺陷，如果对象的引用被用户修改了，那么之前的标记就无效了。</p>
-<p>因此Go采用了<strong>写屏障技术</strong>，当对象新增或者更新会将其着色为灰色。</p>
-<p>一次完整的GC分为四个阶段：</p>
-<ol>
-<li>准备标记（需要STW），开启写屏障。</li>
-<li>开始标记</li>
-<li>标记结束（STW），关闭写屏障</li>
-<li>清理（并发）</li>
-</ol>
-<p><strong>混合写屏障</strong></p>
-<p>基于插入写屏障和删除写屏障在结束时需要STW来重新扫描栈，带来性能瓶颈。</p>
-<ol>
-<li>GC开始时，将栈上的全部对象标记为黑色（不需要二次扫描，无需STW）；</li>
-<li>GC期间，任何栈上创建的新对象均为黑色</li>
-<li>被删除引用的对象标记为灰色</li>
-<li>被添加引用的对象标记为灰色</li>
-</ol>
-<h3 id="06-函数返回局部变量的指针是否安全？"><a href="#06-函数返回局部变量的指针是否安全？" class="headerlink" title="06 函数返回局部变量的指针是否安全？"></a>06 函数返回局部变量的指针是否安全？</h3><p>在Go里面返回局部变量的指针是安全的。</p>
-<p>因为Go会进行<strong>逃逸分析</strong>，如果发现局部变量的作用域超过该函数则会<strong>把指针分配到堆区</strong>，避免内存泄漏。</p>
-<h3 id="07-非接口的任意类型-T-都能够调用-T-的方法吗？反过来呢？"><a href="#07-非接口的任意类型-T-都能够调用-T-的方法吗？反过来呢？" class="headerlink" title="07 非接口的任意类型 T() 都能够调用 *T 的方法吗？反过来呢？"></a>07 非接口的任意类型 T() 都能够调用 <code>*T</code> 的方法吗？反过来呢？</h3><p>一个T类型的值可以调用*T类型声明的方法，当且仅当T是<strong>可寻址的</strong>。</p>
-<p>反之：*T 可以调用T()的方法，因为指针可以解引用。</p>
-<h3 id="08-go-slice是怎么扩容的？"><a href="#08-go-slice是怎么扩容的？" class="headerlink" title="08 go slice是怎么扩容的？"></a>08 go slice是怎么扩容的？</h3><p>如果当前容量小于1024，则判断所需容量是否大于原来容量2倍，如果大于，当前容量加上所需容量；否则当前容量乘2。</p>
-<p>如果当前容量大于1024，则每次按照1.25倍速度递增容量，也就是每次加上cap/4。</p>
-<h2 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h2><h3 id="01-❤无缓冲的-channel-和有缓冲的-channel-的区别？"><a href="#01-❤无缓冲的-channel-和有缓冲的-channel-的区别？" class="headerlink" title="01 ❤无缓冲的 channel 和有缓冲的 channel 的区别？"></a>01 ❤无缓冲的 channel 和有缓冲的 channel 的区别？</h3><p>对于无缓冲区channel，<strong>一直是阻塞的</strong>；有缓冲区channel<strong>只有缓冲区满之后才会阻塞</strong>。</p>
-<p>有缓冲的channel是<strong>异步</strong>的，而无缓冲channel是<strong>同步</strong>的。</p>
-<h3 id="02-为什么有协程泄露-Goroutine-Leak-？"><a href="#02-为什么有协程泄露-Goroutine-Leak-？" class="headerlink" title="02 为什么有协程泄露(Goroutine Leak)？"></a>02 为什么有协程泄露(Goroutine Leak)？</h3><p>协程泄漏是指协程创建之后没有得到释放。主要原因有：</p>
-<ol>
-<li>缺少接收器，导致发送阻塞</li>
-<li>缺少发送器，导致接收阻塞</li>
-<li>死锁。多个协程由于竞争资源导致死锁。</li>
-<li>WaitGroup Add()和Done()不相等，前者更大。</li>
-</ol>
-<h3 id="03-Go-可以限制运行时操作系统线程的数量吗？-常见的goroutine操作函数有哪些？"><a href="#03-Go-可以限制运行时操作系统线程的数量吗？-常见的goroutine操作函数有哪些？" class="headerlink" title="03 Go 可以限制运行时操作系统线程的数量吗？ 常见的goroutine操作函数有哪些？"></a>03 Go 可以限制运行时操作系统线程的数量吗？ 常见的goroutine操作函数有哪些？</h3><p>可以，使用runtime.GOMAXPROCS(num int)可以设置线程数目。</p>
-<p>该值默认为CPU逻辑核数，如果设的太大，会引起频繁的线程切换，降低性能。</p>
-<p>runtime.Gosched()，用于让出CPU时间片，让出当前goroutine的执行权限，调度器安排其它等待的任务运行，并在下次某个时候从该位置恢复执行。</p>
-<p>runtime.Goexit()，调用此函数会立即使当前的goroutine的运行终止（终止协程），而其它的goroutine并不会受此影响。runtime.Goexit在终止当前goroutine前会先执行此goroutine的还未执行的defer语句。请注意千万别在主函数调用runtime.Goexit，因为会引发panic。</p>
-<h3 id="04-如何控制协程数目。"><a href="#04-如何控制协程数目。" class="headerlink" title="04 如何控制协程数目。"></a>04 如何控制协程数目。</h3><p>对于协程，可以用带缓冲区的channel来控制，下面的例子是协程数为1024的例子</p>
-<pre><code class="go">var wg sync.WaitGroup
-ch := make(chan struct&#123;&#125;, 1024)
-for i:=0; i&lt;20000; i++&#123;
-    wg.Add(1)
-    ch&lt;-struct&#123;&#125;&#123;&#125;
-    go func()&#123;
-        defer wg.Done()
-        &lt;-ch
-    &#125;
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/raoxiaoya/article/details/112607719">golang反射(三)：反射调用对象的方法，调用动态方法</a></p>
+<h4 id="16-golang的锁机制了解过吗-Mutex的锁有哪几种模式，分别介绍一下-Mutex锁底层如何实现了解过吗"><a href="#16-golang的锁机制了解过吗-Mutex的锁有哪几种模式，分别介绍一下-Mutex锁底层如何实现了解过吗" class="headerlink" title="16. golang的锁机制了解过吗? Mutex的锁有哪几种模式，分别介绍一下? Mutex锁底层如何实现了解过吗?"></a>16. golang的锁机制了解过吗? Mutex的锁有哪几种模式，分别介绍一下? Mutex锁底层如何实现了解过吗?</h4><p>互斥锁sync.Mutex 和 读写锁sync.RWMutex</p>
+<p>mutex有两种模式：</p>
+<p>正常模式</p>
+<p>所有goroutine按照FIFO的顺序进行锁获取，被唤醒的goroutine和新请求锁的goroutine同时进行锁获取，通常<strong>新请求锁的goroutine更容易获取锁</strong>(自旋锁，持续占有cpu)，被唤醒的goroutine则不容易获取到锁。公平性：否。</p>
+<p>饥饿模式</p>
+<p>所有尝试获取锁的goroutine进行等待排队，<strong>新请求锁的goroutine不会进行锁获取</strong>(禁用自旋)，而是加入队列尾部等待获取锁。公平性：是。</p>
+<p>底层结构：</p>
+<pre><code>type Mutex struct &#123;
+    state int32  // 表示锁当前的状态
+    sema  uint32 // 信号量 用于向处于Gwaitting的G发送信号
 &#125;
-wg.Wait()
+// 状态值：
+sema是个信号量，用来唤醒goroutine，初始为0，用于判断是否有可用资源。没有则一直等待。
+state是一个4字节（32位）的变量，由于4部分组成，是锁的本体
+(1) 0位(locked)表示该Mutex是否已被锁定，0：没有锁定 1：已被锁定。
+(2) 1位(woken)表示是否有协程已被唤醒，0：没有协程唤醒 1：已有协程唤醒，正在加锁过程中。
+(3) 2位(starving)判断当前锁是否处于饥饿状态。 0：没有饥饿 1：饥饿状态，说明有协程阻塞了超过1ms。
+(4) 3-31位(waitersCount)表示阻塞等待锁的协程个数，协程解锁时根据此值来判断是否需要释放信号量。
 </code></pre>
-<p>此外还可以用<strong>协程池</strong>：其原理无外乎是将上述代码中通道和协程函数解耦，并封装成单独的结构体。常见第三方协程池库，比如<a href="https://link.zhihu.com/?target=http://github.com/Jeffail/tunny">tunny</a>等。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/baolingye/article/details/111357407#:~:text=%E6%AF%8F%E4%B8%AAMutex%E9%83%BD,tarving%E3%80%82">GO 互斥锁（Mutex）原理</a></p>
+<h4 id="17-channel、channel使用中需要注意的地方？"><a href="#17-channel、channel使用中需要注意的地方？" class="headerlink" title="17. channel、channel使用中需要注意的地方？"></a>17. channel、channel使用中需要注意的地方？</h4><p>Go 语言中，不要通过共享内存来通信，而要通过通信来实现内存共享。</p>
+<p>Go 的并发模型CSP(Communicating Sequential Process)通信顺序进程，是通过 goroutine 和 channel 来实现的。</p>
+<p>channel内部是一个循环链表。</p>
+<p>channel是<strong>线程安全</strong>的。</p>
+<p>channel 收发遵循先进先出 FIFO 的原则。分为有缓冲区和无缓冲区，channel通过ring buffer记录实现。当 channel 因为缓冲区不足而阻塞了队列，则使用双向链表存储。</p>
+<p>channel是<strong>线程安全</strong>的。channel内部是一个循环链表。</p>
+<p>channel是<strong>线程安全</strong>的。</p>
+<h4 id="18-数据库用的什么？数据库锁有了解吗？mysql锁机制讲一下。mysql分库分表。"><a href="#18-数据库用的什么？数据库锁有了解吗？mysql锁机制讲一下。mysql分库分表。" class="headerlink" title="18. 数据库用的什么？数据库锁有了解吗？mysql锁机制讲一下。mysql分库分表。"></a>18. 数据库用的什么？数据库锁有了解吗？mysql锁机制讲一下。mysql分库分表。</h4><h4 id="19-讲一下redis分布式锁？redis主从模式和集群模式的区别了解过吗？redis的数据类型有哪些？redis持久化怎么做的？"><a href="#19-讲一下redis分布式锁？redis主从模式和集群模式的区别了解过吗？redis的数据类型有哪些？redis持久化怎么做的？" class="headerlink" title="19. 讲一下redis分布式锁？redis主从模式和集群模式的区别了解过吗？redis的数据类型有哪些？redis持久化怎么做的？"></a>19. 讲一下redis分布式锁？redis主从模式和集群模式的区别了解过吗？redis的数据类型有哪些？redis持久化怎么做的？</h4><h4 id="20-编程题：你了解的负载均衡算法有什么？实现一个负载均衡算法。"><a href="#20-编程题：你了解的负载均衡算法有什么？实现一个负载均衡算法。" class="headerlink" title="20. 编程题：你了解的负载均衡算法有什么？实现一个负载均衡算法。"></a>20. 编程题：你了解的负载均衡算法有什么？实现一个负载均衡算法。</h4><p>轮询法、随机法、源地址哈希法、加权轮询法、加权随机法、最小连接数法。 </p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
