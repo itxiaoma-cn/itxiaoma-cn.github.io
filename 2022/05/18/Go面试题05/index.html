@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>GO微服务-架构设计 | IT小马</title>
-  <meta name="keywords" content=" GO , 微服务 ">
-  <meta name="description" content="GO微服务-架构设计 | IT小马">
+  <title>Go面试题05 | IT小马</title>
+  <meta name="keywords" content=" GO , 面试 ">
+  <meta name="description" content="Go面试题05 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="基础知识01 &#x3D; 和 :&#x3D; 的区别？&#x3D;是赋值变量，:&#x3D;是定义变量。 02 指针的作用一个指针可以指向任意变量的地址，它所指向的地址在32位或64位机器上分别固定占4或8个字节。指针的作用有：  获取变量的值 改变变量的值 用指针替代值传入函数，比如类的接收器就是这样的。  03 Go 允许多个返回值吗？可以。通常函数除了一般返回值还会返回一个error。 04 Go 有异常类型吗？有。Go用err">
 <meta property="og:type" content="article">
@@ -971,9 +971,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-GO微服务-架构设计" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Go面试题05" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">GO微服务-架构设计</h1>
+        <h1 class="article-title">Go面试题05</h1>
     
     <div class="article-meta">
         
@@ -983,7 +983,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="微服务">微服务</a>
+            <a  data-rel="面试">面试</a>
             
         </span>
         
@@ -993,14 +993,14 @@
             
             <a class="color3">GO</a>
             
-            <a class="color4">微服务</a>
+            <a class="color3">面试</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-05-14 21:57:41'>2022-04-14 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-05-19 12:37:19'>2022-05-18 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1011,7 +1011,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-text">架构设计</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#01-GIN%E6%80%8E%E4%B9%88%E5%81%9A%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C%EF%BC%9F"><span class="toc-text">01 GIN怎么做参数校验？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02-%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%94%A8%E8%BF%87%E5%90%97%EF%BC%9F"><span class="toc-text">02 中间件用过吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-Go%E8%A7%A3%E6%9E%90Tag%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="toc-text">03 Go解析Tag是怎么实现的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#04-%E4%BD%A0%E9%A1%B9%E7%9B%AE%E6%9C%89%E4%BC%98%E9%9B%85%E7%9A%84%E5%90%AF%E5%81%9C%E5%90%97%EF%BC%9F"><span class="toc-text">04 你项目有优雅的启停吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#05-%E6%8C%81%E4%B9%85%E5%8C%96%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84%EF%BC%9F"><span class="toc-text">05 持久化怎么做的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-channel-%E6%AD%BB%E9%94%81%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-text">06 channel 死锁的场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#07-%E8%AF%BB%E5%86%99channel%E5%BA%94%E8%AF%A5%E5%85%88%E5%85%B3%E5%93%AA%E4%B8%AA%EF%BC%9F"><span class="toc-text">07 读写channel应该先关哪个？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-%E5%AF%B9%E5%B7%B2%E7%BB%8F%E5%85%B3%E9%97%AD%E7%9A%84chan%E8%BF%9B%E8%A1%8C%E8%AF%BB%E5%86%99%E4%BC%9A%E6%80%8E%E4%B9%88%E6%A0%B7%EF%BC%9F"><span class="toc-text">08 对已经关闭的chan进行读写会怎么样？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-%E8%AF%B4%E8%AF%B4-atomic%E5%BA%95%E5%B1%82%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84"><span class="toc-text">09 说说 atomic底层怎么实现的.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-channel%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%EF%BC%9F%E6%98%AF%E5%90%A6%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E3%80%82"><span class="toc-text">10 channel底层实现？是否线程安全。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-map%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="toc-text">11 map的底层实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-select%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="toc-text">12 select的实现原理？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-go%E7%9A%84interface%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="toc-text">13 go的interface怎么实现的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-go%E7%9A%84reflect-%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="toc-text">14 go的reflect 底层实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-go-GC%E7%9A%84%E5%8E%9F%E7%90%86%E7%9F%A5%E9%81%93%E5%90%97%EF%BC%9F"><span class="toc-text">15 go GC的原理知道吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-go%E9%87%8C%E7%94%A8%E8%BF%87%E5%93%AA%E4%BA%9B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">16 go里用过哪些设计模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-go%E7%9A%84%E8%B0%83%E8%AF%95-%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%E7%94%A8%E8%BF%87%E5%93%AA%E4%BA%9B%E3%80%82"><span class="toc-text">17 go的调试&#x2F;分析工具用过哪些。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-%E8%BF%9B%E7%A8%8B%E8%A2%ABkill%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%89%80%E6%9C%89goroutine%E9%A1%BA%E5%88%A9%E9%80%80%E5%87%BA"><span class="toc-text">18 进程被kill，如何保证所有goroutine顺利退出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-%E8%AF%B4%E8%AF%B4context%E5%8C%85%E7%9A%84%E4%BD%9C%E7%94%A8%EF%BC%9F%E4%BD%A0%E7%94%A8%E8%BF%87%E5%93%AA%E4%BA%9B%EF%BC%8C%E5%8E%9F%E7%90%86%E7%9F%A5%E9%81%93%E5%90%97%EF%BC%9F"><span class="toc-text">19 说说context包的作用？你用过哪些，原理知道吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-grpc%E4%B8%BA%E5%95%A5%E5%A5%BD%EF%BC%8C%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%92%8Chttp%E6%AF%94%E5%91%A2"><span class="toc-text">20 grpc为啥好，基本原理是什么，和http比呢</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B"><span class="toc-text">编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#01-%E6%9C%89%E4%B8%89%E4%B8%AA%E5%87%BD%E6%95%B0%EF%BC%8C%E5%88%86%E5%88%AB%E6%89%93%E5%8D%B0%E2%80%9Dcat%E2%80%9D-%E2%80%9Cfish%E2%80%9D-%E2%80%9Ddog%E2%80%9D%E8%A6%81%E6%B1%82%E6%AF%8F%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E9%83%BD%E7%94%A8%E4%B8%80%E4%B8%AAgoroutine%EF%BC%8C%E6%8C%89%E7%85%A7%E9%A1%BA%E5%BA%8F%E6%89%93%E5%8D%B0100%E6%AC%A1%E3%80%82"><span class="toc-text">01 有三个函数，分别打印”cat”, “fish”,”dog”要求每一个函数都用一个goroutine，按照顺序打印100次。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#02-%E4%B8%A4%E4%B8%AA%E5%8D%8F%E7%A8%8B%E4%BA%A4%E6%9B%BF%E6%89%93%E5%8D%B010%E4%B8%AA%E5%AD%97%E6%AF%8D%E5%92%8C%E6%95%B0%E5%AD%97"><span class="toc-text">02 两个协程交替打印10个字母和数字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-%E5%90%AF%E5%8A%A8-2%E4%B8%AAgroutine-2%E7%A7%92%E5%90%8E%E5%8F%96%E6%B6%88%EF%BC%8C-%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%8F%E7%A8%8B1%E7%A7%92%E6%89%A7%E8%A1%8C%E5%AE%8C%EF%BC%8C%E7%AC%AC%E4%BA%8C%E4%B8%AA%E5%8D%8F%E7%A8%8B3%E7%A7%92%E6%89%A7%E8%A1%8C%E5%AE%8C%E3%80%82"><span class="toc-text">03 启动 2个groutine 2秒后取消， 第一个协程1秒执行完，第二个协程3秒执行完。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#04-%E5%BD%93select%E7%9B%91%E6%8E%A7%E5%A4%9A%E4%B8%AAchan%E5%90%8C%E6%97%B6%E5%88%B0%E8%BE%BE%E5%B0%B1%E7%BB%AA%E6%80%81%E6%97%B6%EF%BC%8C%E5%A6%82%E4%BD%95%E5%85%88%E6%89%A7%E8%A1%8C%E6%9F%90%E4%B8%AA%E4%BB%BB%E5%8A%A1%EF%BC%9F"><span class="toc-text">04 当select监控多个chan同时到达就绪态时，如何先执行某个任务？</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1027,7 +1027,416 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h19o668hbtj21030s1afw.jpg" alt="微服务系统架构图"></p>
+        <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="01-GIN怎么做参数校验？"><a href="#01-GIN怎么做参数校验？" class="headerlink" title="01 GIN怎么做参数校验？"></a>01 GIN怎么做参数校验？</h3><p>go采用validator作参数校验。</p>
+<p>它具有以下独特功能：</p>
+<ul>
+<li>使用验证tag或自定义validator进行跨字段Field和跨结构体验证。</li>
+<li>允许切片、数组和哈希表，多维字段的任何或所有级别进行校验。</li>
+<li>能够对哈希表key和value进行验证</li>
+<li>通过在验证之前确定它的基础类型来处理类型接口。</li>
+<li>别名验证标签，允许将多个验证映射到单个标签，以便更轻松地定义结构体上的验证</li>
+<li>gin web 框架的默认验证器；</li>
+</ul>
+<p>参考资料：<a href="https://link.zhihu.com/?target=https://pkg.go.dev/github.com/go-playground/validator%23section-readme">validator package - pkg.go.dev</a></p>
+<h3 id="02-中间件用过吗？"><a href="#02-中间件用过吗？" class="headerlink" title="02 中间件用过吗？"></a>02 中间件用过吗？</h3><p>Middleware是Web的重要组成部分，中间件（通常）是一小段代码，它们接受一个请求，对其进行处理，每个中间件只处理一件事情，完成后将其传递给另一个中间件或最终处理程序，这样就做到了程序的解耦。</p>
+<h3 id="03-Go解析Tag是怎么实现的？"><a href="#03-Go解析Tag是怎么实现的？" class="headerlink" title="03 Go解析Tag是怎么实现的？"></a>03 Go解析Tag是怎么实现的？</h3><p>Go解析tag采用的是<strong>反射</strong>。</p>
+<p>具体来说使用reflect.ValueOf方法获取其反射值，然后获取其Type属性，之后再通过Field(i)获取第i+1个field，再.Tag获得Tag。</p>
+<p>反射实现的原理在: <code>src/reflect/type.go</code>中</p>
+<h3 id="04-你项目有优雅的启停吗？"><a href="#04-你项目有优雅的启停吗？" class="headerlink" title="04 你项目有优雅的启停吗？"></a>04 你项目有优雅的启停吗？</h3><p>所谓「优雅」启停就是在启动退出服务时要满足以下几个条件：</p>
+<ul>
+<li><strong>不可以关闭现有连接</strong>（进程）</li>
+<li>新的进程启动并「<strong>接管</strong>」旧进程</li>
+<li>连接要<strong>随时响应用户请求</strong>，不可以出现拒绝请求的情况</li>
+<li>停止的时候，必须<strong>处理完既有连接</strong>，并且<strong>停止接收新的连接</strong>。</li>
+</ul>
+<p>为此我们必须引用<strong>信号</strong>来完成这些目的：</p>
+<p>启动：</p>
+<ul>
+<li>监听SIGHUP（在用户终端连接(正常或非正常)结束时发出）；</li>
+<li>收到信号后将服务监听的文件描述符传递给新的子进程，此时新老进程同时接收请求；</li>
+</ul>
+<p>退出：</p>
+<ul>
+<li>监听SIGINT和SIGSTP和SIGQUIT等。</li>
+<li>父进程停止接收新请求，等待旧请求完成（或超时）；</li>
+<li>父进程退出。</li>
+</ul>
+<p>实现：go1.8采用Http.Server内置的Shutdown方法支持优雅关机。 然后<a href="https://link.zhihu.com/?target=http://github.com/fvbock/endless">fvbock/endless</a>可以实现优雅重启。</p>
+<blockquote>
+<p>参考资料：<a href="https://link.zhihu.com/?target=https://juejin.cn/post/6867074626427502600%23heading-3">gin框架实践连载八 | 如何优雅重启和停止 - 掘金</a>，<a href="https://link.zhihu.com/?target=http://www.phpxs.com/post/7186/">优雅地关闭或重启 go web 项目</a></p>
+</blockquote>
+<h3 id="05-持久化怎么做的？"><a href="#05-持久化怎么做的？" class="headerlink" title="05 持久化怎么做的？"></a>05 持久化怎么做的？</h3><p>所谓持久化就是将要保存的字符串写到硬盘等设备。</p>
+<ul>
+<li>最简单的方式就是采用ioutil的WriteFile()方法将字符串写到磁盘上，这种方法面临<strong>格式化</strong>方面的问题。</li>
+<li>更好的做法是将数据按照<strong>固定协议</strong>进行组织再进行读写，比如JSON，XML，csv等。</li>
+<li>如果要考虑<strong>高并发</strong>和<strong>高可用</strong>，必须把数据放入到数据库中，比如MySQL，PostgreDB，MongoDB等。</li>
+</ul>
+<p>参考链接：<a href="https://link.zhihu.com/?target=https://www.jianshu.com/p/015aca3e11ae">Golang 持久化</a></p>
+<h3 id="06-channel-死锁的场景"><a href="#06-channel-死锁的场景" class="headerlink" title="06 channel 死锁的场景"></a>06 channel 死锁的场景</h3><ul>
+<li>当一个<code>channel</code>中没有数据，而直接读取时，会发生死锁：</li>
+</ul>
+<pre><code class="text">q := make(chan int,2)
+&lt;-q
+</code></pre>
+<p>解决方案是采用select语句，再default放默认处理方式：</p>
+<pre><code class="text">q := make(chan int,2)
+select&#123;
+   case val:=&lt;-q:
+   default:
+         ...
+
+&#125;
+</code></pre>
+<ul>
+<li>当channel数据满了，再尝试写数据会造成死锁：</li>
+</ul>
+<pre><code class="text">q := make(chan int,2)
+q&lt;-1
+q&lt;-2
+q&lt;-3
+</code></pre>
+<p>解决方法，采用select</p>
+<pre><code class="text">func main() &#123;
+    q := make(chan int, 2)
+    q &lt;- 1
+    q &lt;- 2
+    select &#123;
+    case q &lt;- 3:
+        fmt.Println(&quot;ok&quot;)
+    default:
+        fmt.Println(&quot;wrong&quot;)
+    &#125;
+
+&#125;
+</code></pre>
+<ul>
+<li>向一个关闭的channel写数据。</li>
+</ul>
+<p>注意：一个已经关闭的channel，只能读数据，不能写数据。</p>
+<p>参考资料：<a href="https://link.zhihu.com/?target=https://blog.csdn.net/qq_35976351/article/details/81984117">Golang关于channel死锁情况的汇总以及解决方案</a></p>
+<h3 id="07-读写channel应该先关哪个？"><a href="#07-读写channel应该先关哪个？" class="headerlink" title="07 读写channel应该先关哪个？"></a>07 读写channel应该先关哪个？</h3><p>应该写channel先关。因为对于已经关闭的channel只能读，不能写。</p>
+<h3 id="08-对已经关闭的chan进行读写会怎么样？"><a href="#08-对已经关闭的chan进行读写会怎么样？" class="headerlink" title="08 对已经关闭的chan进行读写会怎么样？"></a>08 对已经关闭的chan进行读写会怎么样？</h3><ul>
+<li><p>读已经关闭的chan能一直读到东西，但是读到的内容根据通道内关闭前是否有元素而不同。</p>
+</li>
+<li><ul>
+<li>如果chan关闭前，buffer内有元素还未读,会正确读到chan内的值，且返回的第二个bool值（是否读成功）为true。</li>
+<li>如果chan关闭前，buffer内有元素已经被读完，chan内无值，接下来所有接收的值都会非阻塞直接成功，返回 channel 元素的零值，但是第二个bool值一直为false。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>写已经关闭的chan会panic。</li>
+</ul>
+<h3 id="09-说说-atomic底层怎么实现的"><a href="#09-说说-atomic底层怎么实现的" class="headerlink" title="09 说说 atomic底层怎么实现的."></a>09 说说 atomic底层怎么实现的.</h3><p>atomic源码位于<code>sync\atomic</code>。</p>
+<p>通过阅读源码可知，atomic采用<strong>CAS</strong>（CompareAndSwap）的方式实现的。</p>
+<p>所谓CAS就是使用了CPU中的原子性操作。在操作共享变量的时候，CAS不需要对其进行加锁，而是通过类似于乐观锁的方式进行检测，总是假设被操作的值未曾改变（即与旧值相等），并一旦确认这个假设的真实性就立即进行值替换。</p>
+<p>本质上是<strong>不断占用CPU资源来避免加锁的开销</strong>。</p>
+<blockquote>
+<p>参考资料：<a href="https://link.zhihu.com/?target=https://www.programminghunter.com/article/37392193442/">Go语言的原子操作atomic - 编程猎人</a></p>
+</blockquote>
+<h3 id="10-channel底层实现？是否线程安全。"><a href="#10-channel底层实现？是否线程安全。" class="headerlink" title="10 channel底层实现？是否线程安全。"></a>10 channel底层实现？是否线程安全。</h3><p>channel底层实现在<code>src/runtime/chan.go</code>中</p>
+<p>channel内部是一个循环链表。内部包含buf, sendx, recvx, lock ,recvq, sendq几个部分；</p>
+<p>buf是有缓冲的channel所特有的结构，用来存储缓存数据。是个循环链表；</p>
+<ul>
+<li>sendx和recvx用于记录buf这个循环链表中的发送或者接收的index；</li>
+<li>lock是个互斥锁；</li>
+<li>recvq和sendq分别是接收(&lt;-channel)或者发送(channel &lt;- xxx)的goroutine抽象出来的结构体(sudog)的队列。是个双向链表。</li>
+</ul>
+<p>channel是<strong>线程安全</strong>的。</p>
+<blockquote>
+<p>参考资料：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/264305133">Kitou：Golang 深度剖析 – channel的底层实现</a></p>
+</blockquote>
+<h3 id="11-map的底层实现"><a href="#11-map的底层实现" class="headerlink" title="11 map的底层实现"></a>11 map的底层实现</h3><p>底层实现是哈希表，包括两个部分：<strong>hmap</strong>和<strong>bucket</strong>。</p>
+<pre><code class="go">type hmap struct &#123;
+    count     int //map元素的个数，调用len()直接返回此值
+    
+    // map标记:
+    // 1. key和value是否包指针
+    // 2. 是否正在扩容
+    // 3. 是否是同样大小的扩容
+    // 4. 是否正在 `range`方式访问当前的buckets
+    // 5. 是否有 `range`方式访问旧的bucket
+    flags     uint8 
+    
+    B         uint8  // buckets 的对数 log_2, buckets 数组的长度就是 2^B
+    noverflow uint16 // overflow 的 bucket 近似数
+    hash0     uint32 // hash种子 计算 key 的哈希的时候会传入哈希函数
+    buckets   unsafe.Pointer // 指向 buckets 数组，大小为 2^B 如果元素个数为0，就为 nil
+    
+    // 扩容的时候，buckets 长度会是 oldbuckets 的两倍
+    oldbuckets unsafe.Pointer // bucket slice指针，仅当在扩容的时候不为nil
+    
+    nevacuate  uintptr // 扩容时已经移到新的map中的bucket数量
+    extra *mapextra // optional fields
+&#125;
+</code></pre>
+<p>里面最重要的是buckets（桶）。buckets是一个指针，最终它指向的是一个结构体：</p>
+<pre><code class="go">// A bucket for a Go map.
+type bmap struct &#123;
+    tophash [bucketCnt]uint8
+&#125;
+</code></pre>
+<p>每个bucket固定包含8个key和value(可以查看源码bucketCnt=8).实现上面是一个固定的大小连续内存块，分成四部分：每个条目的状态，8个key值，8个value值，指向下个bucket的指针。</p>
+<p>map查找就是将key哈希后得到64位（64位机）用最后B个比特位计算在哪个桶。在 bucket 中，从前往后找到第一个空位。这样，在查找某个 key 时，先找到对应的桶，再去遍历 bucket 中的 key。</p>
+<p>关于map的查找和扩容可以参考<a href="https://link.zhihu.com/?target=https://blog.csdn.net/chenxun_2010/article/details/103768011?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0.pc_relevant_aa&spm=1001.2101.3001.4242.1&utm_relevant_index=3">map的用法到map底层实现分析</a>。</p>
+<h3 id="12-select的实现原理？"><a href="#12-select的实现原理？" class="headerlink" title="12 select的实现原理？"></a>12 select的实现原理？</h3><p>select源码位于<code>src\runtime\select.go</code>，最重要的<code>scase</code> 数据结构为：</p>
+<pre><code class="text">type scase struct &#123;
+    c    *hchan         // chan
+    elem unsafe.Pointer // data element
+&#125;
+</code></pre>
+<p>scase.c为当前case语句所操作的channel指针，这也说明了一个case语句只能操作一个channel。</p>
+<p>scase.elem表示缓冲区地址：</p>
+<ul>
+<li>caseRecv ： scase.elem表示读出channel的数据存放地址；</li>
+<li>caseSend ： scase.elem表示将要写入channel的数据存放地址；</li>
+</ul>
+<p>select的主要实现位于：<code>selectgo</code>函数：其主要功能如下：</p>
+<pre><code class="go">//1. 锁定scase语句中所有的channel
+    //2. 按照随机顺序检测scase中的channel是否ready
+    //   2.1 如果case可读，则读取channel中数据，解锁所有的channel，然后返回(case index, true)
+    //   2.2 如果case可写，则将数据写入channel，解锁所有的channel，然后返回(case index, false)
+    //   2.3 所有case都未ready，则解锁所有的channel，然后返回（default index, false）
+    //3. 所有case都未ready，且没有default语句
+    //   3.1 将当前协程加入到所有channel的等待队列
+    //   3.2 当将协程转入阻塞，等待被唤醒
+    //4. 唤醒后返回channel对应的case index
+    //   4.1 如果是读操作，解锁所有的channel，然后返回(case index, true)
+    //   4.2 如果是写操作，解锁所有的channel，然后返回(case index, false)
+</code></pre>
+<p>参考资料：<a href="https://link.zhihu.com/?target=https://www.cnblogs.com/wuyepeng/p/13910678.html%23:~:text=%E4%B8%80%E3%80%81select%E7%AE%80%E4%BB%8B.%201.Go%E7%9A%84select%E8%AF%AD%E5%8F%A5%E6%98%AF%E4%B8%80%E7%A7%8D%E4%BB%85%E8%83%BD%E7%94%A8%E4%BA%8Echannl%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF%E7%9A%84%E4%B8%93%E7%94%A8%E8%AF%AD%E5%8F%A5%EF%BC%8C%E6%AD%A4%E8%AF%AD%E5%8F%A5%E8%BF%90%E8%A1%8C%E6%9C%9F%E9%97%B4%E6%98%AF%E9%98%BB%E5%A1%9E%E7%9A%84%EF%BC%9B%E5%BD%93select%E4%B8%AD%E6%B2%A1%E6%9C%89case%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E4%BC%9A%E9%98%BB%E5%A1%9E%E5%BD%93%E5%89%8Dgroutine%E3%80%82.%202.select%E6%98%AFGolang%E5%9C%A8%E8%AF%AD%E8%A8%80%E5%B1%82%E9%9D%A2%E6%8F%90%E4%BE%9B%E7%9A%84I/O%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%9A%84%E6%9C%BA%E5%88%B6%EF%BC%8C%E5%85%B6%E4%B8%93%E9%97%A8%E7%94%A8%E6%9D%A5%E6%A3%80%E6%B5%8B%E5%A4%9A%E4%B8%AAchannel%E6%98%AF%E5%90%A6%E5%87%86%E5%A4%87%E5%AE%8C%E6%AF%95%EF%BC%9A%E5%8F%AF%E8%AF%BB%E6%88%96%E5%8F%AF%E5%86%99%E3%80%82.,3.select%E8%AF%AD%E5%8F%A5%E4%B8%AD%E9%99%A4default%E5%A4%96%EF%BC%8C%E6%AF%8F%E4%B8%AAcase%E6%93%8D%E4%BD%9C%E4%B8%80%E4%B8%AAchannel%EF%BC%8C%E8%A6%81%E4%B9%88%E8%AF%BB%E8%A6%81%E4%B9%88%E5%86%99.%204.select%E8%AF%AD%E5%8F%A5%E4%B8%AD%E9%99%A4default%E5%A4%96%EF%BC%8C%E5%90%84case%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%E6%98%AF%E9%9A%8F%E6%9C%BA%E7%9A%84.%205.select%E8%AF%AD%E5%8F%A5%E4%B8%AD%E5%A6%82%E6%9E%9C%E6%B2%A1%E6%9C%89default%E8%AF%AD%E5%8F%A5%EF%BC%8C%E5%88%99%E4%BC%9A%E9%98%BB%E5%A1%9E%E7%AD%89%E5%BE%85%E4%BB%BB%E4%B8%80case.%206.select%E8%AF%AD%E5%8F%A5%E4%B8%AD%E8%AF%BB%E6%93%8D%E4%BD%9C%E8%A6%81%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%88%90%E5%8A%9F%E8%AF%BB%E5%8F%96%EF%BC%8C%E5%85%B3%E9%97%AD%E7%9A%84channel%E4%B9%9F%E5%8F%AF%E4%BB%A5%E8%AF%BB%E5%8F%96">Go select的使用和实现原理</a>.</p>
+<h3 id="13-go的interface怎么实现的？"><a href="#13-go的interface怎么实现的？" class="headerlink" title="13 go的interface怎么实现的？"></a>13 go的interface怎么实现的？</h3><p>go interface源码在<code>runtime\iface.go</code>中。</p>
+<p>go的接口由两种类型实现<code>iface</code>和<code>eface</code>。iface是包含方法的接口，而eface不包含方法。</p>
+<ul>
+<li><p><code>iface</code>：tab表示接口的具体结构类型，而data是接口的值。</p>
+<pre><code class="go">type iface struct &#123;
+    tab  *itab
+    data unsafe.Pointer
+&#125;
+</code></pre>
+</li>
+<li><p><code>eface</code>：<code>_type</code>直接表示类型，这样的话就无法使用方法。</p>
+<pre><code class="go">type eface struct &#123;
+    _type *_type
+    data  unsafe.Pointer
+&#125;
+</code></pre>
+</li>
+</ul>
+<p><a href="https://link.zhihu.com/?target=https://halfrost.com/go_interface/%23toc-1">深入研究 Go interface 底层实现</a></p>
+<h3 id="14-go的reflect-底层实现"><a href="#14-go的reflect-底层实现" class="headerlink" title="14 go的reflect 底层实现"></a>14 go的reflect 底层实现</h3><p>go reflect源码位于<code>src\reflect\</code>下面，作为一个库独立存在。反射是基于<strong>接口</strong>实现的。</p>
+<p>反射三大定律：</p>
+<ol>
+<li><p>从<strong>接口</strong>映射到<strong>反射对象</strong></p>
+<pre><code class="go">var x int32 = 250
+v := reflect.ValueOf(x) //250
+t := reflect.TypeOf(x)  //int32
+</code></pre>
+</li>
+<li><p>从<strong>反射对象</strong>映射到<strong>接口值</strong></p>
+<pre><code class="go">type Test int32
+var test Test = 250
+v := reflect.ValueOf(test) //250
+t := reflect.TypeOf(test)  
+fmt.Println(t)             //main.Test
+val := v.Interface().(Test)
+fmt.Println(val)               //250    
+</code></pre>
+<p>只有<strong>值可以修改</strong>(settable)，才可以<strong>修改</strong>反射对象。</p>
+<pre><code class="go">//使用反射修改值必须为可写类型
+var x int = 10
+v := reflect.ValueOf(&amp;x)
+//判断变量的值是否可以写
+fmt.Println(&quot;未修改前的值&quot;, x)
+fmt.Println(&quot;是否可修改：&quot;, v.CanSet())
+//修改变量的值
+elem := v.Elem()
+elem.SetInt(20)
+fmt.Println(&quot;是否可修改：&quot;, elem.CanSet())
+f := reflect.ValueOf(x)
+fmt.Println(&quot;修改后的值&quot;, f)
+</code></pre>
+</li>
+</ol>
+<h3 id="15-go-GC的原理知道吗？"><a href="#15-go-GC的原理知道吗？" class="headerlink" title="15 go GC的原理知道吗？"></a>15 go GC的原理知道吗？</h3><p>如果需要从源码角度解释GC，推荐阅读（非常详细，图文并茂）：</p>
+<p><a href="https://link.zhihu.com/?target=https://draveness.me/golang/docs/part3-runtime/ch07-memory/golang-garbage-collector/">https://draveness.me/golang/docs/part3-runtime/ch07-memory/golang-garbage-collector/</a></p>
+<h3 id="16-go里用过哪些设计模式"><a href="#16-go里用过哪些设计模式" class="headerlink" title="16 go里用过哪些设计模式"></a>16 go里用过哪些设计模式</h3><p>工厂模式：比如New()方法返回一个对象实例。</p>
+<p>单例模式：比如日志系统，只需要一个实例就可以完成日志记录了。</p>
+<p>更多的可以模式可以参考：<a href="https://link.zhihu.com/?target=https://www.cnblogs.com/Survivalist/p/11207789.html">Go语言设计模式汇总</a></p>
+<h3 id="17-go的调试-分析工具用过哪些。"><a href="#17-go的调试-分析工具用过哪些。" class="headerlink" title="17 go的调试/分析工具用过哪些。"></a>17 go的调试/分析工具用过哪些。</h3><p>go的自带工具链相当丰富，</p>
+<ul>
+<li>go cover : 测试代码覆盖率；</li>
+<li>godoc: 用于生成go文档；</li>
+<li>pprof：用于性能调优，针对cpu，内存和并发；</li>
+<li>race：用于竞争检测；</li>
+</ul>
+<h3 id="18-进程被kill，如何保证所有goroutine顺利退出"><a href="#18-进程被kill，如何保证所有goroutine顺利退出" class="headerlink" title="18 进程被kill，如何保证所有goroutine顺利退出"></a>18 进程被kill，如何保证所有goroutine顺利退出</h3><p>goroutine监听SIGKILL信号，一旦接收到SIGKILL，则立刻退出。可采用select方法。</p>
+<h3 id="19-说说context包的作用？你用过哪些，原理知道吗？"><a href="#19-说说context包的作用？你用过哪些，原理知道吗？" class="headerlink" title="19 说说context包的作用？你用过哪些，原理知道吗？"></a>19 说说context包的作用？你用过哪些，原理知道吗？</h3><p><code>context</code>可以用来在<code>goroutine</code>之间传递上下文信息，相同的<code>context</code>可以传递给运行在不同<code>goroutine</code>中的函数，上下文对于多个<code>goroutine</code>同时使用是安全的，<code>context</code>包定义了上下文类型，可以使用<code>background</code>、<code>TODO</code>创建一个上下文，在函数调用链之间传播<code>context</code>，也可以使用<code>WithDeadline</code>、<code>WithTimeout</code>、<code>WithCancel</code> 或 <code>WithValue</code> 创建的修改副本替换它，听起来有点绕，其实总结起就是一句话：<code>context</code>的作用就是在不同的<code>goroutine</code>之间同步请求特定的数据、取消信号以及处理请求的截止日期。</p>
+<p>关于context原理，可以参看：<a href="https://link.zhihu.com/?target=https://cloud.tencent.com/developer/article/1900658">小白也能看懂的context包详解：从入门到精通</a></p>
+<h3 id="20-grpc为啥好，基本原理是什么，和http比呢"><a href="#20-grpc为啥好，基本原理是什么，和http比呢" class="headerlink" title="20 grpc为啥好，基本原理是什么，和http比呢"></a>20 grpc为啥好，基本原理是什么，和http比呢</h3><p>官方介绍：gRPC 是一个现代开源的<strong>高性能远程过程调用</strong> (RPC) 框架，可以在<strong>任何环境</strong>中运行。它可以通过对负载平衡、跟踪、健康检查和身份验证的可插拔支持有效地连接数据中心内和跨数据中心的服务。它也适用于分布式计算的最后一英里，将设备、移动应用程序和浏览器连接到后端服务。</p>
+<p>区别：</p>
+<ul>
+<li><p>rpc是远程过程调用，就是本地去调用一个远程的函数，而http是通过 url和符合restful风格的数据包去发送和获取数据；</p>
+</li>
+<li><p>rpc的一般使用的编解码协议更加高效，比如grpc使用protobuf编解码。而http的一般使用json进行编解码，数据相比rpc更加直观，但是数据包也更大，效率低下；</p>
+</li>
+<li><p>rpc一般用在服务内部的相互调用，而http则用于和用户交互；</p>
+</li>
+</ul>
+<p>相似点：<br>都有类似的机制，例如grpc的metadata机制和http的头机制作用相似，而且web框架，和rpc框架中都有拦截器的概念。grpc使用的是http2.0协议。</p>
+<p>官网：<a href="https://link.zhihu.com/?target=https://grpc.io/">gRPC</a></p>
+<h2 id="编程"><a href="#编程" class="headerlink" title="编程"></a>编程</h2><h3 id="01-有三个函数，分别打印”cat”-“fish”-”dog”要求每一个函数都用一个goroutine，按照顺序打印100次。"><a href="#01-有三个函数，分别打印”cat”-“fish”-”dog”要求每一个函数都用一个goroutine，按照顺序打印100次。" class="headerlink" title="01 有三个函数，分别打印”cat”, “fish”,”dog”要求每一个函数都用一个goroutine，按照顺序打印100次。"></a>01 有三个函数，分别打印”cat”, “fish”,”dog”要求每一个函数都用一个goroutine，按照顺序打印100次。</h3><pre><code class="go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;time&quot;
+)
+
+var dog = make(chan struct&#123;&#125;)
+var cat = make(chan struct&#123;&#125;)
+var fish = make(chan struct&#123;&#125;)
+
+func Dog() &#123;
+    &lt;-fish
+    fmt.Println(&quot;dog&quot;)
+    dog &lt;- struct&#123;&#125;&#123;&#125;
+&#125;
+
+func Cat() &#123;
+    &lt;-dog
+    fmt.Println(&quot;cat&quot;)
+    cat &lt;- struct&#123;&#125;&#123;&#125;
+&#125;
+
+func Fish() &#123;
+    &lt;-cat
+    fmt.Println(&quot;fish&quot;)
+    fish &lt;- struct&#123;&#125;&#123;&#125;
+&#125;
+
+func main() &#123;
+    for i := 0; i &lt; 100; i++ &#123;
+        go Dog()
+        go Cat()
+        go Fish()
+    &#125;
+    fish &lt;- struct&#123;&#125;&#123;&#125;
+
+    time.Sleep(10 * time.Second)
+&#125;
+</code></pre>
+<h3 id="02-两个协程交替打印10个字母和数字"><a href="#02-两个协程交替打印10个字母和数字" class="headerlink" title="02 两个协程交替打印10个字母和数字"></a>02 两个协程交替打印10个字母和数字</h3><p>思路：采用channel来协调goroutine之间顺序。</p>
+<pre><code class="go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;sync&quot;
+)
+
+var wait sync.WaitGroup
+var letter = make(chan struct&#123;&#125;)
+var number = make(chan struct&#123;&#125;)
+
+func printNums() &#123;
+    i := 1
+    for &#123;
+        select &#123;
+        case &lt;-number:
+            if i &gt; 10 &#123;
+                wait.Done()
+                return
+            &#125;
+            fmt.Println(i)
+            i++
+            letter &lt;- struct&#123;&#125;&#123;&#125;
+        &#125;
+    &#125;
+&#125;
+
+func printWords() &#123;
+    str := &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
+    i := 0
+    for &#123;
+        select &#123;
+        case &lt;-letter:
+            fmt.Println(str[i : i+1])
+            i++
+            number &lt;- struct&#123;&#125;&#123;&#125;
+        &#125;
+    &#125;
+&#125;
+
+func main() &#123;
+    wait.Add(1)
+    go printNums()
+    go printWords()
+    number &lt;- struct&#123;&#125;&#123;&#125;
+    wait.Wait()
+&#125;
+</code></pre>
+<h3 id="03-启动-2个groutine-2秒后取消，-第一个协程1秒执行完，第二个协程3秒执行完。"><a href="#03-启动-2个groutine-2秒后取消，-第一个协程1秒执行完，第二个协程3秒执行完。" class="headerlink" title="03 启动 2个groutine 2秒后取消， 第一个协程1秒执行完，第二个协程3秒执行完。"></a>03 启动 2个groutine 2秒后取消， 第一个协程1秒执行完，第二个协程3秒执行完。</h3><pre><code class="go">package main
+
+import (
+    &quot;context&quot;
+    &quot;fmt&quot;
+    &quot;time&quot;
+)
+
+func f1(in chan struct&#123;&#125;) &#123;
+    time.Sleep(1 * time.Second)
+    in &lt;- struct&#123;&#125;&#123;&#125;
+
+&#125;
+
+func f2(in chan struct&#123;&#125;) &#123;
+    time.Sleep(3 * time.Second)
+    in &lt;- struct&#123;&#125;&#123;&#125;
+&#125;
+
+func main() &#123;
+    ch1 := make(chan struct&#123;&#125;)
+    ch2 := make(chan struct&#123;&#125;)
+    ctx, _ := context.WithTimeout(context.Background(), 2*time.Second)
+
+    go f1(ch1)
+    go f2(ch2)
+    for &#123;
+        select &#123;
+        case &lt;-ctx.Done():
+            fmt.Println(&quot;goroutine timeout&quot;)
+            return
+        case &lt;-ch1:
+            fmt.Println(&quot;f1 done&quot;)
+        case &lt;-ch2:
+            fmt.Println(&quot;f2 done&quot;)
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="04-当select监控多个chan同时到达就绪态时，如何先执行某个任务？"><a href="#04-当select监控多个chan同时到达就绪态时，如何先执行某个任务？" class="headerlink" title="04 当select监控多个chan同时到达就绪态时，如何先执行某个任务？"></a>04 当select监控多个chan同时到达就绪态时，如何先执行某个任务？</h3><p>考察select优先级：</p>
+<p>当select 存在多个 case时会随机选择一个满足条件的case执行。</p>
+<p>可以在子case再加一个for select语句，确保当ch1和ch2同时达到就绪状态时，优先执行任务1，在没有任务1的时候再去执行任务2。</p>
+<pre><code class="go">func priority_select(ch1, ch2 &lt;-chan string) &#123;
+    for &#123;
+        select &#123;
+        case val := &lt;-ch1:
+            fmt.Println(val)
+        case val2 := &lt;-ch2:
+        priority:
+            for &#123;
+                select &#123;
+                case val1 := &lt;-ch1:
+                    fmt.Println(val1)
+
+                default:
+                    break priority
+                &#125;
+            &#125;
+            fmt.Println(val2)
+        &#125;
+    &#125;
+&#125;
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>

@@ -6,21 +6,19 @@
   <meta name="keywords" content=" REDIS , 后端 ">
   <meta name="description" content="Redis09-集群 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="01 ❤new和make的区别？ new只用于分配内存，返回一个指向地址的指针。它为每个新类型分配一片内存，初始化为0且返回类型*T的内存地址，它相当于&amp;T{} make只可用于slice,map,channel的初始化,返回的是引用。  02 Go面向对象是如何实现的？Go实现面向对象的两个关键是struct和interface。  封装：对于同一个包，对象对包内的文件可见；对不同的包，">
+<meta name="description" content="基础知识01 &#x3D; 和 :&#x3D; 的区别？&#x3D;是赋值变量，:&#x3D;是定义变量。 02 指针的作用一个指针可以指向任意变量的地址，它所指向的地址在32位或64位机器上分别固定占4或8个字节。指针的作用有：  获取变量的值 改变变量的值 用指针替代值传入函数，比如类的接收器就是这样的。  03 Go 允许多个返回值吗？可以。通常函数除了一般返回值还会返回一个error。 04 Go 有异常类型吗？有。Go用err">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go面试题04">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/17/Go%E9%9D%A2%E8%AF%95%E9%A2%9804/index.html">
+<meta property="og:title" content="Go面试题03">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/16/Go%E9%9D%A2%E8%AF%95%E9%A2%9803/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="01 ❤new和make的区别？ new只用于分配内存，返回一个指向地址的指针。它为每个新类型分配一片内存，初始化为0且返回类型*T的内存地址，它相当于&amp;T{} make只可用于slice,map,channel的初始化,返回的是引用。  02 Go面向对象是如何实现的？Go实现面向对象的两个关键是struct和interface。  封装：对于同一个包，对象对包内的文件可见；对不同的包，">
+<meta property="og:description" content="基础知识01 &#x3D; 和 :&#x3D; 的区别？&#x3D;是赋值变量，:&#x3D;是定义变量。 02 指针的作用一个指针可以指向任意变量的地址，它所指向的地址在32位或64位机器上分别固定占4或8个字节。指针的作用有：  获取变量的值 改变变量的值 用指针替代值传入函数，比如类的接收器就是这样的。  03 Go 允许多个返回值吗？可以。通常函数除了一般返回值还会返回一个error。 04 Go 有异常类型吗？有。Go用err">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2cxw3740wj20k00aaglv.jpg">
-<meta property="article:published_time" content="2022-05-16T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-18T14:53:13.000Z">
+<meta property="article:published_time" content="2022-05-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-18T14:25:33.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
 <meta property="article:tag" content="面试">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2cxw3740wj20k00aaglv.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -82,7 +80,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(72)</small>
+                <small>(73)</small>
             
         </div>
     </li>
@@ -219,7 +217,7 @@
                     <div data-rel="面试">
                         
                         面试
-                        <small>(4)</small>
+                        <small>(5)</small>
                         
                     </div>
                     
@@ -254,7 +252,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="72">
+<input type="hidden" id="yelog_site_posts_number" value="73">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -370,6 +368,14 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        <a  class="全部文章 面试 "
+           href="/2022/05/18/Go%E9%9D%A2%E8%AF%95%E9%A2%9805/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题05">Go面试题05</span>
+            <span class="post-date" title="2022-05-18 00:00:00">2022/05/18</span>
+        </a>
         
         <a  class="全部文章 面试 "
            href="/2022/05/17/Go%E9%9D%A2%E8%AF%95%E9%A2%9804/"
