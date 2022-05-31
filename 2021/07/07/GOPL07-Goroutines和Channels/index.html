@@ -6,36 +6,18 @@
   <meta name="keywords" content=" GO , GOPL ">
   <meta name="description" content="GOPL07-Goroutines和Channels | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="V1.3前-标记清除法###mark and sweep GoV1.3之前的标记清除： mark and sweep   暂停程序业务逻辑STW(stop the world), 分类出可达和不可达的对象，然后做上标记。 程序找出它所有可达的对象，并做上标记。 清除未标记的对象。（对象5，6不可达，被GC清除） 停止暂停，让程序继续跑。然后循环重复这个过程，直到process程序生命周期结束。">
+<meta name="description" content="技术的长河奔涌向前，永不停歇。我愿取一瓢于此地，与君同饮。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Golang的GC回收机制">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/12/Golang%E7%9A%84GC%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:title" content="GoWeb高级03-Mysql和Redis">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/23/GoWeb03-Mysql%E5%92%8CRedis/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="V1.3前-标记清除法###mark and sweep GoV1.3之前的标记清除： mark and sweep   暂停程序业务逻辑STW(stop the world), 分类出可达和不可达的对象，然后做上标记。 程序找出它所有可达的对象，并做上标记。 清除未标记的对象。（对象5，6不可达，被GC清除） 停止暂停，让程序继续跑。然后循环重复这个过程，直到process程序生命周期结束。">
+<meta property="og:description" content="技术的长河奔涌向前，永不停歇。我愿取一瓢于此地，与君同饮。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25y5trso0j20pq05dmxa.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25y007lyxj20hs0f23z1.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yb3yu7vj20p305g74e.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yj09mdcj20l30btdgg.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yolid9aj20ll0b4750.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yzvwwakj20cl0atjrr.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25z03tqnsj20o00dwjsh.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25zi4vcu9j20nr0cajsc.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25zlfu7cdj20ni0cg75e.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26irwo0c0j20og0c0dgn.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26ive52k5j20n10c7gme.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26iutfleej20nx0c5js7.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26j4wfpy3j20mu0bh3zf.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26jn2x68tj20ob0e90uc.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26k0y3cm1j20mx0dcgn1.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26k5ct3y8j20n80dkjsy.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26k9x5lirj20nc0dpabl.jpg">
-<meta property="article:published_time" content="2022-05-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-13T02:29:17.000Z">
+<meta property="article:published_time" content="2022-05-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-22T08:12:19.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25y5trso0j20pq05dmxa.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -97,7 +79,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(73)</small>
+                <small>(85)</small>
             
         </div>
     </li>
@@ -108,7 +90,7 @@
                     <div data-rel="GO">
                         
                         GO
-                        <small>(16)</small>
+                        <small>(19)</small>
                         
                     </div>
                     
@@ -150,7 +132,7 @@
                     <div data-rel="MYSQL">
                         
                         MYSQL
-                        <small>(1)</small>
+                        <small>(7)</small>
                         
                     </div>
                     
@@ -234,7 +216,7 @@
                     <div data-rel="面试">
                         
                         面试
-                        <small>(5)</small>
+                        <small>(8)</small>
                         
                     </div>
                     
@@ -269,7 +251,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="73">
+<input type="hidden" id="yelog_site_posts_number" value="85">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -360,6 +342,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>MYSQL</a>
             </li>
         
@@ -385,6 +371,30 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/23/GoWeb03-Mysql%E5%92%8CRedis/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb高级03-Mysql和Redis">GoWeb高级03-Mysql和Redis</span>
+            <span class="post-date" title="2022-05-23 00:00:00">2022/05/23</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/22/GoWeb02-Gin%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb02-Gin源码解析">GoWeb02-Gin源码解析</span>
+            <span class="post-date" title="2022-05-22 00:00:00">2022/05/22</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/21/GoWeb01-Gin%E5%9F%BA%E7%A1%80/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb01-Gin基础">GoWeb01-Gin基础</span>
+            <span class="post-date" title="2022-05-21 00:00:00">2022/05/21</span>
+        </a>
         
         <a  class="全部文章 GO "
            href="/2022/05/12/Golang%E7%9A%84GC%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"
@@ -899,10 +909,58 @@
         </a>
         
         <a  class="全部文章 MYSQL "
+           href="/2021/06/06/Mysql45%E8%AE%B206-%E9%94%81/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲06-锁">Mysql45讲06-锁</span>
+            <span class="post-date" title="2021-06-06 00:00:00">2021/06/06</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/04/Mysql45%E8%AE%B204-05-%E7%B4%A2%E5%BC%95/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲0405-索引">Mysql45讲0405-索引</span>
+            <span class="post-date" title="2021-06-04 00:00:00">2021/06/04</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/03/Mysql45%E8%AE%B203-%E4%BA%8B%E5%8A%A1/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲03-事务">Mysql45讲03-事务</span>
+            <span class="post-date" title="2021-06-03 00:00:00">2021/06/03</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/02/Mysql45%E8%AE%B202-%E6%97%A5%E5%BF%97/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲02-日志">Mysql45讲02-日志</span>
+            <span class="post-date" title="2021-06-02 00:00:00">2021/06/02</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
            href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
            data-tag="后端,MYSQL"
            data-author="" >
             <span class="post-title" title="Mysql45讲01-基础架构">Mysql45讲01-基础架构</span>
+            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/01/Mysql45%E8%AE%B207-%E8%A1%8C%E9%94%81/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲07-行锁">Mysql45讲07-行锁</span>
+            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/01/Mysql45%E8%AE%B208-%E9%9A%94%E7%A6%BB/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲08-隔离">Mysql45讲08-隔离</span>
             <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
         </a>
         
@@ -968,6 +1026,30 @@
            data-author="" >
             <span class="post-title" title="构建高性能Web站点01">构建高性能Web站点01</span>
             <span class="post-date" title="2021-05-01 00:00:00">2021/05/01</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2021/04/11/Mysql%E9%9D%A2%E8%AF%95%E9%A2%9801/"
+           data-tag="面试,Mysql"
+           data-author="" >
+            <span class="post-title" title="Mysql面试题01">Mysql面试题01</span>
+            <span class="post-date" title="2021-04-11 00:00:00">2021/04/11</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2021/04/02/PHP%E9%9D%A2%E8%AF%95%E9%A2%9802/"
+           data-tag="PHP,面试"
+           data-author="" >
+            <span class="post-title" title="PHP面试题02">PHP面试题02</span>
+            <span class="post-date" title="2021-04-02 00:00:00">2021/04/02</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2021/04/01/PHP%E9%9D%A2%E8%AF%95%E9%A2%9801/"
+           data-tag="PHP,面试"
+           data-author="" >
+            <span class="post-title" title="PHP面试题01">PHP面试题01</span>
+            <span class="post-date" title="2021-04-01 00:00:00">2021/04/01</span>
         </a>
         
         <div id="no-item-tips">

@@ -6,36 +6,18 @@
   <meta name="keywords" content=" 后端 , MYSQL ">
   <meta name="description" content="Mysql45讲01-基础架构 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="V1.3前-标记清除法###mark and sweep GoV1.3之前的标记清除： mark and sweep   暂停程序业务逻辑STW(stop the world), 分类出可达和不可达的对象，然后做上标记。 程序找出它所有可达的对象，并做上标记。 清除未标记的对象。（对象5，6不可达，被GC清除） 停止暂停，让程序继续跑。然后循环重复这个过程，直到process程序生命周期结束。">
+<meta name="description" content="技术的长河奔涌向前，永不停歇。我愿取一瓢于此地，与君同饮。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Golang的GC回收机制">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/12/Golang%E7%9A%84GC%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:title" content="GoWeb高级03-Mysql和Redis">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/05/23/GoWeb03-Mysql%E5%92%8CRedis/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="V1.3前-标记清除法###mark and sweep GoV1.3之前的标记清除： mark and sweep   暂停程序业务逻辑STW(stop the world), 分类出可达和不可达的对象，然后做上标记。 程序找出它所有可达的对象，并做上标记。 清除未标记的对象。（对象5，6不可达，被GC清除） 停止暂停，让程序继续跑。然后循环重复这个过程，直到process程序生命周期结束。">
+<meta property="og:description" content="技术的长河奔涌向前，永不停歇。我愿取一瓢于此地，与君同饮。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25y5trso0j20pq05dmxa.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25y007lyxj20hs0f23z1.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yb3yu7vj20p305g74e.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yj09mdcj20l30btdgg.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yolid9aj20ll0b4750.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yzvwwakj20cl0atjrr.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25z03tqnsj20o00dwjsh.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25zi4vcu9j20nr0cajsc.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25zlfu7cdj20ni0cg75e.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26irwo0c0j20og0c0dgn.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26ive52k5j20n10c7gme.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26iutfleej20nx0c5js7.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26j4wfpy3j20mu0bh3zf.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26jn2x68tj20ob0e90uc.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26k0y3cm1j20mx0dcgn1.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26k5ct3y8j20n80dkjsy.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h26k9x5lirj20nc0dpabl.jpg">
-<meta property="article:published_time" content="2022-05-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-05-13T02:29:17.000Z">
+<meta property="article:published_time" content="2022-05-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-05-22T08:12:19.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h25y5trso0j20pq05dmxa.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -97,7 +79,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(73)</small>
+                <small>(85)</small>
             
         </div>
     </li>
@@ -108,7 +90,7 @@
                     <div data-rel="GO">
                         
                         GO
-                        <small>(16)</small>
+                        <small>(19)</small>
                         
                     </div>
                     
@@ -150,7 +132,7 @@
                     <div data-rel="MYSQL">
                         
                         MYSQL
-                        <small>(1)</small>
+                        <small>(7)</small>
                         
                     </div>
                     
@@ -234,7 +216,7 @@
                     <div data-rel="面试">
                         
                         面试
-                        <small>(5)</small>
+                        <small>(8)</small>
                         
                     </div>
                     
@@ -269,7 +251,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="73">
+<input type="hidden" id="yelog_site_posts_number" value="85">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -360,6 +342,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>MYSQL</a>
             </li>
         
@@ -385,6 +371,30 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/23/GoWeb03-Mysql%E5%92%8CRedis/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb高级03-Mysql和Redis">GoWeb高级03-Mysql和Redis</span>
+            <span class="post-date" title="2022-05-23 00:00:00">2022/05/23</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/22/GoWeb02-Gin%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb02-Gin源码解析">GoWeb02-Gin源码解析</span>
+            <span class="post-date" title="2022-05-22 00:00:00">2022/05/22</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/21/GoWeb01-Gin%E5%9F%BA%E7%A1%80/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb01-Gin基础">GoWeb01-Gin基础</span>
+            <span class="post-date" title="2022-05-21 00:00:00">2022/05/21</span>
+        </a>
         
         <a  class="全部文章 GO "
            href="/2022/05/12/Golang%E7%9A%84GC%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"
@@ -899,10 +909,58 @@
         </a>
         
         <a  class="全部文章 MYSQL "
+           href="/2021/06/06/Mysql45%E8%AE%B206-%E9%94%81/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲06-锁">Mysql45讲06-锁</span>
+            <span class="post-date" title="2021-06-06 00:00:00">2021/06/06</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/04/Mysql45%E8%AE%B204-05-%E7%B4%A2%E5%BC%95/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲0405-索引">Mysql45讲0405-索引</span>
+            <span class="post-date" title="2021-06-04 00:00:00">2021/06/04</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/03/Mysql45%E8%AE%B203-%E4%BA%8B%E5%8A%A1/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲03-事务">Mysql45讲03-事务</span>
+            <span class="post-date" title="2021-06-03 00:00:00">2021/06/03</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/02/Mysql45%E8%AE%B202-%E6%97%A5%E5%BF%97/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲02-日志">Mysql45讲02-日志</span>
+            <span class="post-date" title="2021-06-02 00:00:00">2021/06/02</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
            href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
            data-tag="后端,MYSQL"
            data-author="" >
             <span class="post-title" title="Mysql45讲01-基础架构">Mysql45讲01-基础架构</span>
+            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/01/Mysql45%E8%AE%B207-%E8%A1%8C%E9%94%81/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲07-行锁">Mysql45讲07-行锁</span>
+            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/01/Mysql45%E8%AE%B208-%E9%9A%94%E7%A6%BB/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲08-隔离">Mysql45讲08-隔离</span>
             <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
         </a>
         
@@ -970,6 +1028,30 @@
             <span class="post-date" title="2021-05-01 00:00:00">2021/05/01</span>
         </a>
         
+        <a  class="全部文章 面试 "
+           href="/2021/04/11/Mysql%E9%9D%A2%E8%AF%95%E9%A2%9801/"
+           data-tag="面试,Mysql"
+           data-author="" >
+            <span class="post-title" title="Mysql面试题01">Mysql面试题01</span>
+            <span class="post-date" title="2021-04-11 00:00:00">2021/04/11</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2021/04/02/PHP%E9%9D%A2%E8%AF%95%E9%A2%9802/"
+           data-tag="PHP,面试"
+           data-author="" >
+            <span class="post-title" title="PHP面试题02">PHP面试题02</span>
+            <span class="post-date" title="2021-04-02 00:00:00">2021/04/02</span>
+        </a>
+        
+        <a  class="全部文章 面试 "
+           href="/2021/04/01/PHP%E9%9D%A2%E8%AF%95%E9%A2%9801/"
+           data-tag="PHP,面试"
+           data-author="" >
+            <span class="post-title" title="PHP面试题01">PHP面试题01</span>
+            <span class="post-date" title="2021-04-01 00:00:00">2021/04/01</span>
+        </a>
+        
         <div id="no-item-tips">
 
         </div>
@@ -1017,7 +1099,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-01 22:29:55'>2021-06-01 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-05-19 14:42:05'>2021-06-01 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1028,7 +1110,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84"><span class="toc-text">01基础架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84"><span class="toc-text">逻辑架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Server%E5%B1%82"><span class="toc-text">Server层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E5%B1%82"><span class="toc-text">存储引擎层</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BF%9E%E6%8E%A5%E5%99%A8"><span class="toc-text">1.连接器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5Mysql"><span class="toc-text">连接Mysql</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A9%BA%E9%97%B2%E8%BF%9E%E6%8E%A5"><span class="toc-text">空闲连接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%9F%AD%E8%BF%9E%E6%8E%A5"><span class="toc-text">短连接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%95%BF%E8%BF%9E%E6%8E%A5-%E6%8E%A8%E8%8D%90"><span class="toc-text">长连接(推荐)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98%EF%BC%88Mysql8-0%E5%B7%B2%E5%88%A0%E9%99%A4%EF%BC%89"><span class="toc-text">2.查询缓存（Mysql8.0已删除）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%86%E6%9E%90%E5%99%A8"><span class="toc-text">3.分析器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-text">4.优化器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%89%A7%E8%A1%8C%E5%99%A8"><span class="toc-text">5.执行器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#01-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84"><span class="toc-text">01 基础架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E6%9E%B6%E6%9E%84"><span class="toc-text">逻辑架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Server%E5%B1%82"><span class="toc-text">Server层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E5%B1%82"><span class="toc-text">存储引擎层</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BF%9E%E6%8E%A5%E5%99%A8"><span class="toc-text">1.连接器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5Mysql"><span class="toc-text">连接Mysql</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A9%BA%E9%97%B2%E8%BF%9E%E6%8E%A5"><span class="toc-text">空闲连接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%9F%AD%E8%BF%9E%E6%8E%A5"><span class="toc-text">短连接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%95%BF%E8%BF%9E%E6%8E%A5-%E6%8E%A8%E8%8D%90"><span class="toc-text">长连接(推荐)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%9F%A5%E8%AF%A2%E7%BC%93%E5%AD%98%EF%BC%88Mysql8-0%E5%B7%B2%E5%88%A0%E9%99%A4%EF%BC%89"><span class="toc-text">2.查询缓存（Mysql8.0已删除）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%86%E6%9E%90%E5%99%A8"><span class="toc-text">3.分析器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-text">4.优化器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%89%A7%E8%A1%8C%E5%99%A8"><span class="toc-text">5.执行器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1044,7 +1126,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="01基础架构"><a href="#01基础架构" class="headerlink" title="01基础架构"></a>01基础架构</h2><h3 id="逻辑架构"><a href="#逻辑架构" class="headerlink" title="逻辑架构"></a>逻辑架构</h3><h4 id="Server层"><a href="#Server层" class="headerlink" title="Server层"></a>Server层</h4><ul>
+        <h2 id="01-基础架构"><a href="#01-基础架构" class="headerlink" title="01 基础架构"></a>01 基础架构</h2><h3 id="逻辑架构"><a href="#逻辑架构" class="headerlink" title="逻辑架构"></a>逻辑架构</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h2dpjx2rduj20ey0bbt9c.jpg"></p>
+<h4 id="Server层"><a href="#Server层" class="headerlink" title="Server层"></a>Server层</h4><ul>
 <li>包括连接器，查询缓存，分析器，优化器，执行器等</li>
 <li>涵盖Mysql大多数核心服务功能，和所有内置函数（日期，时间，数学，加密等）</li>
 <li>实现所有跨存储引擎的功能（存储过程，触发器，视图等）</li>
@@ -1108,7 +1191,7 @@
 <li>执行器将上述遍历过程中所有满足条件的行组成的记录集作为结果集返回给客户端。</li>
 </ol>
 <p>数据库的慢查询日志中有一个<code>rows_examined</code>字段，表示这个语句执行过程中扫描了多少行。这个值就是在执行器每次调用引擎获取数据行的时候累加的。</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>问题：如果表 T 中没有字段 k，而你执行了这个语句 select * from T where k=1, 那肯定是会报“不存在这个列”的错误： “Unknown column ‘k’ in ‘where clause’”。你觉得这个错误是在我们上面提到的哪个阶段报出来的呢？<br>答案：分析器。Oracle会在分析阶段判断语句是否正确，表是否存在，列是否存在等。<br>其他答案：预处理器。<br>解析器处理语法和解析查询, 生成一课对应的解析树。<br>预处理器进一步检查解析树的合法。比如: 数据表和数据列是否存在, 别名是否有歧义等。如果通过则生成新的解析树，再提交给优化器。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>问题：如果表 T 中没有字段 k，而你执行了这个语句 select * from T where k=1, 那肯定是会报“不存在这个列”的错误： “Unknown column ‘k’ in ‘where clause’”。你觉得这个错误是在我们上面提到的哪个阶段报出来的呢？答案：分析器。Oracle会在分析阶段判断语句是否正确，表是否存在，列是否存在等。<br>其他答案：预处理器。<br>解析器处理语法和解析查询, 生成一课对应的解析树。<br>预处理器进一步检查解析树的合法。比如: 数据表和数据列是否存在, 别名是否有歧义等。如果通过则生成新的解析树，再提交给优化器。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
