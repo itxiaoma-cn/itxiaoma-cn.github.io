@@ -22886,8 +22886,180 @@ func main() &#123;
   </entry>
   <entry>
     <title>GoWeb高级03-Mysql和Redis</title>
-    <url>/2022/05/23/GoWeb03-Mysql%E5%92%8CRedis/</url>
-    <content><![CDATA[]]></content>
+    <url>/2022/06/03/GoWeb03-Mysql%E5%92%8CRedis/</url>
+    <content><![CDATA[<h2 id="连接Mysql"><a href="#连接Mysql" class="headerlink" title="连接Mysql"></a>连接Mysql</h2><blockquote>
+<p>Go语言中的database/sql包提供了保证SQL或类SQL数据库的泛用接口，并不提供具体的数据库驱动。</p>
+</blockquote>
+<h3 id="下载依赖"><a href="#下载依赖" class="headerlink" title="下载依赖"></a>下载依赖</h3><pre><code class="go">go get -u github.com/go-sql-driver/mysql
+</code></pre>
+<h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><pre><code class="go">package main
+
+import (
+    &quot;database/sql&quot;
+    &quot;fmt&quot;
+  _ &quot;github.com/go-sql-driver/mysql&quot; //匿名导入，执行init()方法
+)
+
+var db *sql.DB
+
+func InitDB() (err error) &#123;
+    dsn := &quot;root:123456@tcp(127.0.0.1:33060)/db_test&quot;
+    db, err = sql.Open(&quot;mysql&quot;, dsn)
+    if err != nil &#123;
+        return err
+    &#125;
+    err = db.Ping()
+    if err != nil &#123;
+        return err
+    &#125;
+    return nil
+&#125;
+
+func main() &#123;
+    err := InitDB()
+    if err != nil &#123;
+        fmt.Println(&quot;Connect failed:&quot;, err)
+        return
+    &#125;
+    defer db.Close()
+    fmt.Println(&quot;Connect Success!&quot;)
+&#125;
+</code></pre>
+<ul>
+<li>sql.Open()函数只校验参数格式，并不创建连接</li>
+<li>检查数据源是否有效应使用db.Ping()</li>
+<li>返回的DB对象可以安全地被多个goroutine并发使用，并维护其自己的空闲连接池；因此，Open函数应该仅被调用一次，且很少需要关闭。</li>
+</ul>
+<h2 id="Mysql驱动注册源码"><a href="#Mysql驱动注册源码" class="headerlink" title="Mysql驱动注册源码"></a>Mysql驱动注册源码</h2><h3 id="初始化-init"><a href="#初始化-init" class="headerlink" title="初始化 init"></a>初始化 init</h3><p>/github.com/go-sql-driver/<a href="mailto:&#109;&#x79;&#115;&#x71;&#x6c;&#64;&#118;&#49;&#46;&#x36;&#x2e;&#48;">&#109;&#x79;&#115;&#x71;&#x6c;&#64;&#118;&#49;&#46;&#x36;&#x2e;&#48;</a>/driver.go</p>
+<pre><code class="go">type MySQLDriver struct&#123;&#125;
+func init() &#123;
+    sql.Register(&quot;mysql&quot;, &amp;MySQLDriver&#123;&#125;)
+&#125;
+</code></pre>
+<h3 id="注册-Register（读写锁）"><a href="#注册-Register（读写锁）" class="headerlink" title="注册 Register（读写锁）"></a>注册 Register（读写锁）</h3><p>/go/src/database/sql/sql.go</p>
+<pre><code class="go">var (
+    driversMu sync.RWMutex
+    drivers   = make(map[string]driver.Driver)
+)
+func Register(name string, driver driver.Driver) &#123;
+   driversMu.Lock()
+   defer driversMu.Unlock()
+   if driver == nil &#123;
+      panic(&quot;sql: Register driver is nil&quot;)
+   &#125;
+   if _, dup := drivers[name]; dup &#123;
+      panic(&quot;sql: Register called twice for driver &quot; + name)
+   &#125;
+   drivers[name] = driver
+&#125;
+</code></pre>
+<h3 id="连接-Open-（读锁）"><a href="#连接-Open-（读锁）" class="headerlink" title="连接 Open （读锁）"></a>连接 Open （读锁）</h3><p>/go/src/database/sql/sql.go</p>
+<pre><code class="go">func Open(driverName, dataSourceName string) (*DB, error) &#123;
+   driversMu.RLock()
+   driveri, ok := drivers[driverName]
+   driversMu.RUnlock()
+   if !ok &#123;
+      return nil, fmt.Errorf(&quot;sql: unknown driver %q (forgotten import?)&quot;, driverName)
+   &#125;
+
+   if driverCtx, ok := driveri.(driver.DriverContext); ok &#123;
+      connector, err := driverCtx.OpenConnector(dataSourceName)
+      if err != nil &#123;
+         return nil, err
+      &#125;
+      return OpenDB(connector), nil
+   &#125;
+
+   return OpenDB(dsnConnector&#123;dsn: dataSourceName, driver: driveri&#125;), nil
+&#125;
+</code></pre>
+<h2 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h2><h3 id="单行查询-QueryRow"><a href="#单行查询-QueryRow" class="headerlink" title="单行查询 QueryRow"></a>单行查询 QueryRow</h3><blockquote>
+<p>注意调用QueryRow后调用Scan，否则持有的连接不会被释放</p>
+</blockquote>
+<pre><code class="go">type user struct &#123;
+    id   int
+    name string
+&#125;
+func queryRowDemo() &#123;
+   sqlStr := &quot;select id,name from users where id=?&quot;
+   var u user
+   err := db.QueryRow(sqlStr, 1).Scan(&amp;u.id, &amp;u.name)
+   if err != nil &#123;
+      fmt.Printf(&quot;QueryRow Error:%v\n&quot;, err)
+      return
+   &#125;
+   fmt.Printf(&quot;QueryRow ID:%v NAME:%v\n&quot;, u.id, u.name)
+&#125;
+</code></pre>
+<h3 id="多行查询Query"><a href="#多行查询Query" class="headerlink" title="多行查询Query"></a>多行查询Query</h3><blockquote>
+<p>注意关闭rows，释放数据库连接</p>
+</blockquote>
+<pre><code class="go">func queryRowsDemo() &#123;
+   sqlStr := &quot;select id,name from users where id&gt;?&quot;
+   rows, err := db.Query(sqlStr, 0)
+   if err != nil &#123;
+      fmt.Printf(&quot;QueryRows Error:%v\n&quot;, err)
+      return
+   &#125;
+   //注意关闭rows，释放数据库连接
+   defer rows.Close()
+   for rows.Next() &#123;
+      var u user
+      err := rows.Scan(&amp;u.id, &amp;u.name)
+      if err != nil &#123;
+         fmt.Printf(&quot;QueryRows Scan Error:%v\n&quot;, err)
+         return
+      &#125;
+      fmt.Printf(&quot;QueryRow ID:%v NAME:%v\n&quot;, u.id, u.name)
+   &#125;
+&#125;
+</code></pre>
+<h3 id="插入数据-Exec"><a href="#插入数据-Exec" class="headerlink" title="插入数据 Exec"></a>插入数据 Exec</h3><pre><code class="go">func insertRowDemo() &#123;
+   sqlStr := &quot;insert into users(id,name) values (?,?)&quot;
+   result, err := db.Exec(sqlStr, 3, &quot;aaa&quot;)
+   if err != nil &#123;
+      fmt.Printf(&quot;insertRowDemo Error:%v\n&quot;, err)
+      return
+   &#125;
+   lastId, err := result.LastInsertId()
+   if err != nil &#123;
+      fmt.Printf(&quot;LastInsertId Error:%v\n&quot;, err)
+      return
+   &#125;
+   fmt.Printf(&quot;LastInsertId:%v\n&quot;, lastId)
+&#125;
+</code></pre>
+<h3 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h3><pre><code class="go">func updateRowDemo() &#123;
+   sqlStr := &quot;update users set name=? where id=?&quot;
+   result, err := db.Exec(sqlStr, &quot;bbb&quot;, 3)
+   if err != nil &#123;
+      fmt.Printf(&quot;updateRowDemo Error:%v\n&quot;, err)
+      return
+   &#125;
+   num, err := result.RowsAffected()
+   if err != nil &#123;
+      fmt.Printf(&quot;LastInsertId Error:%v\n&quot;, err)
+      return
+   &#125;
+   fmt.Printf(&quot;RowsAffected:%v\n&quot;, num)
+&#125;
+</code></pre>
+<h3 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h3><pre><code class="go">func deleteRowDemo() &#123;
+   sqlStr := &quot;delete from users where id=?&quot;
+   result, err := db.Exec(sqlStr, 3)
+   if err != nil &#123;
+      fmt.Printf(&quot;deleteRowDemo Error:%v\n&quot;, err)
+      return
+   &#125;
+   num, err := result.RowsAffected()
+   if err != nil &#123;
+      fmt.Printf(&quot;RowsAffected Error:%v\n&quot;, err)
+      return
+   &#125;
+   fmt.Printf(&quot;RowsAffected:%v\n&quot;, num)
+&#125;
+</code></pre>
+]]></content>
       <categories>
         <category>GO</category>
       </categories>
@@ -22897,7 +23069,7 @@ func main() &#123;
   </entry>
   <entry>
     <title>GoWeb01-Gin基础</title>
-    <url>/2022/05/21/GoWeb01-Gin%E5%9F%BA%E7%A1%80/</url>
+    <url>/2022/06/01/GoWeb01-Gin%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><blockquote>
 <p>gin 框架中采用的路由库是基于httprouter做的</p>
 </blockquote>
@@ -23704,7 +23876,7 @@ dajun CANNOT read data2
   </entry>
   <entry>
     <title>GoWeb02-Gin源码解析</title>
-    <url>/2022/05/22/GoWeb02-Gin%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <url>/2022/06/02/GoWeb02-Gin%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<h2 id="01-路由详解"><a href="#01-路由详解" class="headerlink" title="01 路由详解"></a>01 路由详解</h2><p>Gin框架路由使用的是定制版的httprouter，原理是大量使用公共前缀的树结构。</p>
 <p>特点是具有公共前缀的节点也共享一个公共父节点。</p>
 <h3 id="基数树-Radix-Tree"><a href="#基数树-Radix-Tree" class="headerlink" title="基数树 Radix Tree"></a>基数树 Radix Tree</h3><blockquote>
