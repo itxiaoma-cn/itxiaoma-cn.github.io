@@ -6,15 +6,15 @@
   <meta name="keywords" content=" REDIS , 后端 ">
   <meta name="description" content="Redis10-缓存穿透·击穿·雪崩 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="路由 gin 框架中采用的路由库是基于httprouter做的  Restful风格的APIRepresentational State Transfer 表现层状态转化，是一种互联网应用程序的API设计理念：  URL定位资源，用HTTP描述操作 增 POST &#x2F; 删 DELETE &#x2F; 改 PUT &#x2F; 查 GET   参数 API参数：Param方法 r.GET(&quot;&#x2F;:name&#x2F;*ac">
+<meta name="description" content="连接Mysql Go语言中的database&#x2F;sql包提供了保证SQL或类SQL数据库的泛用接口，并不提供具体的数据库驱动。  下载依赖go get -u github.com&#x2F;go-sql-driver&#x2F;mysql  连接package main  import (     &quot;database&#x2F;sql&quot;     &quot;fmt&quot;   _ &quot;github">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GoWeb01-Gin基础">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/06/01/GoWeb01-Gin%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:title" content="GoWeb高级03-Mysql和Redis">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/06/03/GoWeb03-Mysql%E5%92%8CRedis/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="路由 gin 框架中采用的路由库是基于httprouter做的  Restful风格的APIRepresentational State Transfer 表现层状态转化，是一种互联网应用程序的API设计理念：  URL定位资源，用HTTP描述操作 增 POST &#x2F; 删 DELETE &#x2F; 改 PUT &#x2F; 查 GET   参数 API参数：Param方法 r.GET(&quot;&#x2F;:name&#x2F;*ac">
+<meta property="og:description" content="连接Mysql Go语言中的database&#x2F;sql包提供了保证SQL或类SQL数据库的泛用接口，并不提供具体的数据库驱动。  下载依赖go get -u github.com&#x2F;go-sql-driver&#x2F;mysql  连接package main  import (     &quot;database&#x2F;sql&quot;     &quot;fmt&quot;   _ &quot;github">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-05-31T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-04T01:03:05.000Z">
+<meta property="article:published_time" content="2022-06-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-29T06:49:39.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
 <meta name="twitter:card" content="summary">
@@ -79,7 +79,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(85)</small>
+                <small>(84)</small>
             
         </div>
     </li>
@@ -216,7 +216,7 @@
                     <div data-rel="面试">
                         
                         面试
-                        <small>(8)</small>
+                        <small>(7)</small>
                         
                     </div>
                     
@@ -251,7 +251,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="85">
+<input type="hidden" id="yelog_site_posts_number" value="84">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -1034,14 +1034,6 @@
            data-author="" >
             <span class="post-title" title="Mysql面试题01">Mysql面试题01</span>
             <span class="post-date" title="2021-04-11 00:00:00">2021/04/11</span>
-        </a>
-        
-        <a  class="全部文章 面试 "
-           href="/2021/04/02/PHP%E9%9D%A2%E8%AF%95%E9%A2%9802/"
-           data-tag="PHP,面试"
-           data-author="" >
-            <span class="post-title" title="PHP面试题02">PHP面试题02</span>
-            <span class="post-date" title="2021-04-02 00:00:00">2021/04/02</span>
         </a>
         
         <a  class="全部文章 面试 "
