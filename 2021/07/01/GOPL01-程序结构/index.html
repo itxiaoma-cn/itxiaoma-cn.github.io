@@ -1091,7 +1091,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-25 19:26:18'>2021-07-01 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-07-05 21:47:55'>2021-07-01 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1140,8 +1140,8 @@
 </ol>
 <h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><p>Go语言的代码通过<strong>包</strong>（package）组织，包类似于其它语言里的库（libraries）或者模块（modules）。</p>
 <p>一个包由位于单个目录下的一个或多个.go源代码文件组成，<strong>目录定义包的作用</strong>。</p>
-<p>每个源文件都以一条<code>package</code>声明语句开始，这个例子里就是<code>package main</code>，表示该文件属于哪个包，紧跟着一系列导入（import）的包，之后是存储在这个文件里的程序语句。</p>
-<h3 id="main"><a href="#main" class="headerlink" title="main"></a>main</h3><p><strong><code>main</code>包比较特殊。它定义了一个独立可执行的程序，而不是一个库。</strong>在<code>main</code>里的<code>main</code> <em>函数</em> 也很特殊，它是整个程序执行时的入口，<code>main</code>函数所做的事情就是程序做的。</p>
+<p>每个源文件都以一条<code>package</code>声明语句开始，例如<code>package main</code>，表示该文件属于哪个包，紧跟着一系列导入（import）的包，之后是存储在这个文件里的程序语句。</p>
+<h3 id="main"><a href="#main" class="headerlink" title="main"></a>main</h3><p><strong><code>main</code>包比较特殊。它定义了一个独立可执行的程序，而不是一个库。</strong>在<code>main</code>里的<code>main</code> 函数是整个程序执行时的入口，<code>main</code>函数所做的事情就是程序做的。</p>
 <h3 id="import"><a href="#import" class="headerlink" title="import"></a>import</h3><p><code>import</code>声明必须跟在文件的<code>package</code>声明之后。随后，则是组成程序的函数、变量、常量、类型的声明语句（分别由关键字<code>func</code>、<code>var</code>、<code>const</code>、<code>type</code>定义）。</p>
 <p>var：声明包级变量</p>
 <p>const：声明包级常量</p>
@@ -1153,7 +1153,7 @@
 <p>os.Args变量是一个字符串（string）的<em>切片</em>（slice）。</p>
 <p>os.Args的第一个元素：os.Args[0]，是命令本身的名字；其它的元素则是程序启动时传给它的参数。</p>
 <h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p>Go语言只有for循环这一种循环语句。</p>
-<pre><code>//eg1:
+<pre><code class="go">//eg1:
 for initialization; condition; post &#123;
     // zero or more statements
 &#125;
@@ -1177,7 +1177,7 @@ for k, v := range list &#123;
 &#125;
 </code></pre>
 <h3 id="空标识符"><a href="#空标识符" class="headerlink" title="空标识符"></a>空标识符</h3><p>空标识符（blank identifier），即_（也就是下划线）</p>
-<p>空标识符可用于在任何语法需要变量名但程序逻辑不需要的时候（如：在循环里丢弃不需要的循环索引，并保留元素值。</p>
+<p>空标识符可用于在任何<strong>语法需要变量名但程序逻辑不需要的时候</strong>（如：在循环里丢弃不需要的循环索引，并保留元素值。</p>
 <h1 id="程序结构"><a href="#程序结构" class="headerlink" title="程序结构"></a>程序结构</h1><h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><blockquote>
 <p>命名规则：以字母或下划线开头，后面可以跟任意数量的字母、数字或下划线，大小写敏感。</p>
 </blockquote>
@@ -1192,13 +1192,13 @@ continue   for           import   return      var
 <pre><code>内建常量: true false iota nil
 
 内建类型: int int8 int16 int32 int64
-          uint uint8 uint16 uint32 uint64 uintptr
-          float32 float64 complex128 complex64
-          bool byte rune string error
+         uint uint8 uint16 uint32 uint64 uintptr
+         float32 float64 complex128 complex64
+         bool byte rune string error
 
 内建函数: make len cap new append copy close delete
-          complex real imag
-          panic recover
+         complex real imag
+         panic recover
 </code></pre>
 <ul>
 <li><p>如果一个名字是在函数内部定义，那么它就只在函数内部有效。如果是在函数外部定义，那么将在当前包的所有文件中都可以访问。</p>
@@ -1228,7 +1228,7 @@ continue   for           import   return      var
 </blockquote>
 <pre><code>var 变量名字 类型 = 表达式
 </code></pre>
-<p>类型和表达式可以省略其中的一个：</p>
+<p><strong>类型和表达式可以省略其中的一个：</strong></p>
 <ul>
 <li>省略类型信息，将根据初始化表达式来推导变量的类型信息。</li>
 <li>省略初始化表达式，将用零值初始化该变量。</li>
@@ -1259,16 +1259,16 @@ var b, f, s = true, 2.3, &quot;four&quot; // bool, float64, string
 <pre><code>f, err := os.Open(name)
 </code></pre>
 <p>如果有一些已经在相同的词法域声明过了，那么简短变量声明语句对这些已经声明过的变量就只有赋值行为。</p>
-<p>但简短变量声明语句中必须至少要声明一个新的变量，否则不能编译通过：</p>
+<p>但<strong>简短变量声明语句中必须至少要声明一个新的变量，否则不能编译通过</strong>：</p>
 <pre><code>f, err := os.Open(infile)
 // ...
 f, err := os.Create(outfile) // compile error: no new variables
 </code></pre>
 <p>注：如果变量是在外部词法域声明的，那么简短变量声明语句将会在当前词法域重新声明一个新的变量。</p>
 <h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p><strong>一个变量对应一个保存了变量对应类型值的内存空间</strong>，变量有时候被称为可寻址的值。</p>
-<p>一个指针的值是另一个变量的地址。一个指针对应变量在内存中的存储位置。</p>
-<p>并不是每一个值都会有一个内存地址，但是对于每一个变量必然有对应的内存地址。</p>
-<p>“var x int”声明语句声明一个x变量，那么&amp;x表达式（取x变量的内存地址）将产生一个指向该整数变量的指针，指针对应的数据类型是<code>*int</code>，指针被称之为“指向int类型的指针”。如果指针名字为p，那么可以说“p指针指向变量x”，或者说“p指针保存了x变量的内存地址”。</p>
+<p><strong>一个指针的值是另一个变量的地址。</strong>一个指针对应变量在内存中的存储位置。</p>
+<p>并不是每一个值都会有一个内存地址，但是对于<strong>每一个变量必然有对应的内存地址</strong>。</p>
+<p>“var x int”声明语句声明一个x变量，那么&amp;x表达式（取x变量的内存地址）将产生一个指向该整数变量的指针，**指针对应的数据类型是<code>*int</code>**，指针被称之为“指向int类型的指针”。如果指针名字为p，那么可以说“p指针指向变量x”，或者说“p指针保存了x变量的内存地址”。</p>
 <p>通过指针，我们可以直接读或更新对应变量的值，而不需要知道该变量的名字（如果变量有名字的话）。</p>
 <pre><code>x := 1
 p := &amp;x         // &amp;x指针对应的数据类型是*int，指针被称之为“指向int类型的指针”
@@ -1319,7 +1319,7 @@ fmt.Println(*p) // &quot;2&quot;
 </li>
 <li><p>局部变量的生命周期则是动态的：每次从创建一个新变量的声明语句开始，直到该变量不再被引用为止，然后变量的存储空间可能被回收。</p>
 </li>
-<li><p>函数的参数变量和返回值变量都是局部变量。它们在函数每次被调用的时候创建。</p>
+<li><p><strong>函数的参数变量和返回值变量都是局部变量</strong>。它们在函数每次被调用的时候创建。</p>
 </li>
 </ul>
 <p>一个变量的有效周期只取决于是否可达，因此一个循环迭代内部的局部变量的生命周期可能超出其局部作用域。同时，<strong>局部变量可能在函数返回之后依然存在</strong>。</p>
@@ -1495,7 +1495,7 @@ if err != nil &#123;
 f.ReadByte()
 f.Close()
 </code></pre>
-<p>要特别注意短变量声明语句的作用域范围。<code>:=</code>语句会将变量重新声明为新的局部变量。内部声明的变量将屏蔽外部的声明，导致无法正确更新包级声明的变量。</p>
+<p>要特别注意<strong>短变量声明语句的作用域范围。<code>:=</code>语句会将变量重新声明为新的局部变量</strong>。内部声明的变量将屏蔽外部的声明，导致无法正确更新包级声明的变量。</p>
 <pre><code>var cwd string
 
 func init() &#123;
