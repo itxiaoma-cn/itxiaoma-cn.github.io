@@ -1091,7 +1091,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-05-10 11:59:00'>2021-07-04 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-07-06 19:43:03'>2021-07-04 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1135,7 +1135,7 @@
 fmt.Println(hypot(3,4)) // &quot;5&quot;
 </code></pre>
 <p>x和y是形参名，3和4是调用时的传入的实参，函数返回了一个float64类型的值。 </p>
-<h4 id="函数签名"><a href="#函数签名" class="headerlink" title="函数签名"></a>函数签名</h4><p>函数的类型被称为函数的签名。</p>
+<h4 id="函数签名"><a href="#函数签名" class="headerlink" title="函数签名"></a>函数签名</h4><p><strong>函数的类型被称为函数的签名。</strong></p>
 <p>如果两个函数形式参数列表和返回值列表中的变量类型一一对应，那么这两个函数被认为有相同的类型或签名。</p>
 <p>形参和返回值的变量名不影响函数签名，也不影响它们是否可以以省略参数类型的形式表示。</p>
 <p>每一次函数调用都必须按照声明顺序为所有参数提供实参（参数值）。</p>
@@ -1192,7 +1192,7 @@ func outline(stack []string, n *html.Node) &#123;
 <p>因此当函数返回时，调用方的stack与其调用自身之前完全一致。</p>
 <h4 id="可变栈"><a href="#可变栈" class="headerlink" title="可变栈"></a>可变栈</h4><ul>
 <li>大部分编程语言使用固定大小的函数调用栈，常见的大小从64KB到2MB不等。固定大小栈会限制递归的深度，当你用递归处理大量数据时，需要避免栈溢出；除此之外，还会导致安全性问题。</li>
-<li>Go语言使用可变栈，栈的大小按需增加（初始时很小）。这使得我们使用递归时不必考虑溢出和安全问题。</li>
+<li><strong>Go语言使用可变栈，栈的大小按需增加（初始时很小）。这使得我们使用递归时不必考虑溢出和安全问题。</strong></li>
 </ul>
 <h3 id="多返回值"><a href="#多返回值" class="headerlink" title="多返回值"></a>多返回值</h3><p>调用多返回值函数时，返回给调用者的是一组值，调用者必须显式的将这些值分配给变量:</p>
 <pre><code>links, err := findLinks(url)
@@ -1225,8 +1225,8 @@ func outline(stack []string, n *html.Node) &#123;
 // return 等价于 return words, images, err
 </code></pre>
 <h3 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h3><p>对于将运行失败看作是预期结果的函数，它们会返回一个额外的返回值，通常是最后一个，来传递错误信息。</p>
-<p>如果导致失败的原因只有一个，额外的返回值可以是一个布尔值，通常被命名为ok。</p>
-<p>失败的唯一原因是key不存在：</p>
+<p><strong>如果导致失败的原因只有一个，额外的返回值可以是一个布尔值，通常被命名为ok。</strong></p>
+<p><strong>失败的唯一原因是key不存在：</strong></p>
 <pre><code class="Go">value, ok := cache.Lookup(key)
 if !ok &#123;
     // ...cache[key] does not exist…
@@ -1244,9 +1244,9 @@ if err != nil&#123;
 &#125;
 </code></pre>
 <p>当错误最终由main函数处理时，错误信息应提供清晰的从原因到后果的因果链</p>
-<p>由于错误信息经常是以链式组合在一起的，所以错误信息中应避免大写和换行符。</p>
+<p>由于错误信息经常是以链式组合在一起的，所以<strong>错误信息中应避免大写和换行符。</strong></p>
 <p>编写错误信息时，我们要确保错误信息对问题细节的描述是详尽的。尤其是要注意错误信息表达的一致性，即相同的函数或同包内的同一组函数返回的错误在构成和处理方式上是相似的。</p>
-<p>每个错误的描述不仅仅包含错误的原因（如无权限，文件目录不存在）也包含文件名，这样调用者在构造新的错误信息时无需再添加这些信息。</p>
+<p><strong>每个错误的描述不仅仅包含错误的原因（如无权限，文件目录不存在）也包含文件名，这样调用者在构造新的错误信息时无需再添加这些信息。</strong></p>
 <p>一般而言，被调用函数f(x)会将调用信息和参数信息作为发生错误时的上下文放在错误信息中并返回给调用者，调用者需要添加一些错误信息中不包含的信息，比如添加url到html.Parse返回的错误中。</p>
 <h5 id="2-重试"><a href="#2-重试" class="headerlink" title="2.重试"></a>2.重试</h5><p>如果错误的发生是偶然性的，或由不可预知的问题导致的。一个明智的选择是重新尝试失败的操作。</p>
 <p>在重试时，我们需要限制重试的时间间隔或重试的次数，防止无限制的重试。</p>
@@ -1291,8 +1291,8 @@ if err != nil &#123;
 // ...use temp dir…
 os.RemoveAll(dir) // ignore errors; $TMPDIR is cleaned periodically
 </code></pre>
-<h4 id="编码风格"><a href="#编码风格" class="headerlink" title="编码风格"></a>编码风格</h4><p>检查某个子函数是否失败后，我们通常将处理失败的逻辑代码放在处理成功的代码之前。</p>
-<p>如果某个错误会导致函数返回，那么成功时的逻辑代码不应放在else语句块中，而应直接放在函数体中。</p>
+<h4 id="编码风格"><a href="#编码风格" class="headerlink" title="编码风格"></a>编码风格</h4><p>检查某个子函数是否失败后，我们<strong>通常将处理失败的逻辑代码放在处理成功的代码之前。</strong></p>
+<p><strong>如果某个错误会导致函数返回，那么成功时的逻辑代码不应放在else语句块中，而应直接放在函数体中。</strong></p>
 <h4 id="文件结尾错误（EOF）"><a href="#文件结尾错误（EOF）" class="headerlink" title="文件结尾错误（EOF）"></a>文件结尾错误（EOF）</h4><p>io包保证任何由文件结束引起的读取失败都返回同一个错误——io.EOF，该错误在io包中定义：</p>
 <pre><code class="Go">package io
 
@@ -1326,7 +1326,7 @@ fmt.Println(f(3))     // &quot;-3&quot;
 fmt.Printf(&quot;%T\n&quot;, f) // &quot;func(int) i
 f = product // compile error: can&#39;t assign func(int, int) int to func(int) int
 </code></pre>
-<p>函数类型的零值是nil。调用值为nil的函数值会引起panic错误：</p>
+<p><strong>函数类型的零值是nil。调用值为nil的函数值会引起panic错误：</strong></p>
 <pre><code class="Go">var f func(int) int
 f(3) // 此处f的值为nil, 会引起panic错误
 </code></pre>
@@ -1353,9 +1353,9 @@ func main() &#123;
     ...
 &#125;
 </code></pre>
-<h3 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h3><p>拥有函数名的函数只能在包级语法块中被声明</p>
+<h3 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h3><p>拥有函数名的函数只能在包级语法块中被声明。</p>
 <p>通过函数字面量（function literal），我们可绕过这一限制，在任何表达式中表示一个函数值。</p>
-<p>func关键字后没有函数名，函数值字面量是一种表达式，它的值被称为匿名函数（anonymous function）。</p>
+<p><strong>func关键字后没有函数名，函数值字面量是一种表达式，它的值被称为匿名函数（anonymous function）。</strong></p>
 <pre><code>strings.Map(func(r rune) rune &#123; return r + 1 &#125;, &quot;HAL-9000&quot;)
 </code></pre>
 <p>在函数中定义的内部函数可以引用该函数的变量</p>
@@ -1458,9 +1458,10 @@ func g([]int) &#123;&#125;
 fmt.Printf(&quot;%T\n&quot;, f) // &quot;func(...int)&quot;
 fmt.Printf(&quot;%T\n&quot;, g) // &quot;func([]int)&quot;
 </code></pre>
-<p>可变参数函数经常被用于格式化字符串。</p>
+<p><strong>可变参数函数经常被用于格式化字符串。</strong></p>
 <p>interface{}表示函数的最后一个参数可以接收任意类型。</p>
-<h3 id="Defer函数"><a href="#Defer函数" class="headerlink" title="Defer函数"></a>Defer函数</h3><p>在调用普通函数或方法前加上关键字defer，当执行到该条语句时，函数和参数表达式得到计算，但直到包含该defer语句的函数执行完毕时，defer后的函数才会被执行，不论包含defer语句的函数是通过return正常结束，还是由于panic导致的异常结束。你可以在一个函数中执行多条defer语句，它们的执行顺序与声明顺序相反。</p>
+<h3 id="Defer函数"><a href="#Defer函数" class="headerlink" title="Defer函数"></a>Defer函数</h3><p>在调用普通函数或方法前加上关键字defer，当执行到该条语句时，函数和参数表达式得到计算，但直到包含该defer语句的函数执行完毕时，defer后的函数才会被执行，不论包含defer语句的函数是通过return正常结束，还是由于panic导致的异常结束。</p>
+<p><strong>一个函数中执行多条defer语句，它们的执行顺序与声明顺序相反。</strong></p>
 <p>defer语句经常被用于处理成对的操作，如打开、关闭、连接、断开连接、加锁、释放锁。</p>
 <p>通过defer机制，不论函数逻辑多复杂，都能保证在任何执行路径下，资源被释放。</p>
 <p><strong>释放资源的defer应该直接跟在请求资源的语句后。</strong></p>
@@ -1497,7 +1498,7 @@ func lookup(key string) int &#123;
 <p>调试复杂程序时，defer机制也常被用于记录何时进入和退出函数。</p>
 <p>通过这种方式， 我们可以只通过一条语句控制函数的入口和所有的出口，甚至可以记录函数的运行时间。</p>
 <p>需要注意一点：不要忘记defer语句后的圆括号，否则本该在进入时执行的操作会在退出时执行，而本该在退出时执行的，永远不会被执行。</p>
-<p><strong>defer语句中的函数会在return语句更新返回值变量后再执行</strong>，又因为在函数中定义的匿名函数可以访问该函数包括返回值变量在内的所有变量，所以，对匿名函数采用defer机制，可以使其观察函数的返回值。</p>
+<p><strong>defer语句中的函数会在return语句更新返回值变量后再执行</strong>，又因为在函数中定义的匿名函数可以访问该函数包括返回值变量在内的所有变量，所以，<strong>对匿名函数采用defer机制，可以使其观察函数的返回值。</strong></p>
 <pre><code class="Go">func double(x int) (result int) &#123;
     defer func() &#123; fmt.Printf(&quot;double(%d) = %d\n&quot;, x,result) &#125;()
     return x + x
@@ -1540,7 +1541,7 @@ func doFile(filename string) error &#123;
 &#125;
 </code></pre>
 <h3 id="Panic异常"><a href="#Panic异常" class="headerlink" title="Panic异常"></a>Panic异常</h3><p>Go的类型系统会在编译时捕获很多错误，但有些错误只能在运行时检查，如数组访问越界、空指针引用等。这些运行时错误会引起painc异常。</p>
-<p>一般而言，当panic异常发生时，程序会中断运行，并立即执行在该goroutine（可以先理解成线程，在第8章会详细介绍）中被延迟的函数（defer 机制）。</p>
+<p>一般而言，<strong>当panic异常发生时，程序会中断运行，并立即执行在该goroutine（可以先理解成线程，在第8章会详细介绍）中被延迟的函数（defer 机制）。</strong></p>
 <p>随后，程序崩溃并输出日志信息。日志信息包括panic value和函数调用的堆栈跟踪信息。</p>
 <p>panic value通常是某种错误信息。</p>
 <p>对于每个goroutine，日志信息中会有与之相对的，发生panic时的函数调用堆栈跟踪信息。</p>
@@ -1549,8 +1550,8 @@ func doFile(filename string) error &#123;
 <p>断言函数必须满足的前置条件是明智的做法，但这很容易被滥用。除非你能提供更多的错误信息，或者能更快速的发现错误，否则不需要使用断言，编译器在运行时会帮你检查代码。</p>
 <p><strong>由于panic会引起程序的崩溃，因此panic一般用于严重错误，如程序内部的逻辑不一致。</strong></p>
 <h3 id="Recover捕获异常"><a href="#Recover捕获异常" class="headerlink" title="Recover捕获异常"></a>Recover捕获异常</h3><p>通常来说，不应该对panic异常做任何处理，但有时，也许我们可以从异常中恢复，至少我们可以在程序崩溃前，做一些操作。举个例子，当web服务器遇到不可预料的严重问题时，在崩溃前应该将所有的连接关闭；如果不做任何处理，会使得客户端一直处于等待状态。如果web服务器还在开发阶段，服务器甚至可以将异常信息反馈到客户端，帮助调试。</p>
-<p>如果在deferred函数中调用了内置函数recover，并且定义该defer语句的函数发生了panic异常，recover会使程序从panic中恢复，并返回panic value。</p>
-<p>导致panic异常的函数不会继续运行，但能正常返回。在未发生panic时调用recover，recover会返回nil。</p>
+<p>如果在defer函数中调用了内置函数recover，并且定义该defer语句的函数发生了panic异常，recover会使程序从panic中恢复，并返回panic value。</p>
+<p><strong>导致panic异常的函数不会继续运行，但能正常返回。</strong>在未发生panic时调用recover，recover会返回nil。</p>
 <pre><code class="Go">func Parse(input string) (s *Syntax, err error) &#123;
     defer func() &#123;
         if p := recover(); p != nil &#123;
@@ -1562,7 +1563,7 @@ func doFile(filename string) error &#123;
 </code></pre>
 <p>不加区分的恢复所有的panic异常，不是可取的做法；因为在panic之后，无法保证包级变量的状态仍然和我们预期一致。比如，对数据结构的一次重要更新没有被完整完成、文件或者网络连接没有被关闭、获得的锁没有被释放。此外，如果写日志时产生的panic被不加区分的恢复，可能会导致漏洞被忽略。</p>
 <p><strong>不应该试图去恢复其他包引起的panic。</strong></p>
-<p>公有的API应该将函数的运行失败作为error返回，而不是panic。同样的，你也不应该恢复一个由他人开发的函数引起的panic，比如说调用者传入的回调函数，因为你无法确保这样做是安全的。</p>
+<p><strong>公有的API应该将函数的运行失败作为error返回，而不是panic。</strong>同样的，你也不应该恢复一个由他人开发的函数引起的panic，比如说调用者传入的回调函数，因为你无法确保这样做是安全的。</p>
 <p>为了标识某个panic是否应该被恢复，我们可以将panic value设置成特殊类型。在recover时对panic value进行检查，如果发现panic value是特殊类型，就将这个panic作为error处理，如果不是，则按照正常的panic进行处理。</p>
 <p>下面的例子是title函数的变形，如果HTML页面包含多个<code>&lt;title&gt;</code>，该函数会给调用者返回一个错误（error）。在soleTitle内部处理时，如果检测到有多个<code>&lt;title&gt;</code>，会调用panic，阻止函数继续递归，并将特殊类型bailout作为panic的参数。</p>
 <pre><code class="Go">// soleTitle returns the text of the first non-empty title element
