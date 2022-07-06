@@ -1091,7 +1091,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-27 12:31:35'>2021-07-03 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-07-06 16:13:36'>2021-07-03 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1166,7 +1166,7 @@ fmt.Println(RMB, symbol[RMB]) // &quot;3 ￥&quot;
 </li>
 <li><p>可以直接通过==比较运算符来比较两个数组</p>
 </li>
-<li><p>只有当两个数组的所有元素都是相等的时候数组才是相等的。</p>
+<li><p><strong>只有当两个数组的所有元素都是相等的时候数组才是相等的</strong>。</p>
 </li>
 </ul>
 <pre><code>a := [2]int&#123;1, 2&#125;
@@ -1176,7 +1176,7 @@ fmt.Println(a == b, a == c, b == c) // &quot;true false false&quot;
 d := [3]int&#123;1, 2&#125;
 fmt.Println(a == d) // compile error: cannot compare [2]int == [3]int
 </code></pre>
-<h3 id="函数引用"><a href="#函数引用" class="headerlink" title="函数引用"></a>函数引用</h3><p>当调用一个函数的时候，函数的每个调用参数将会被赋值给函数内部的参数变量，所以函数参数变量接收的是一个复制的副本，并不是原始调用的变量。</p>
+<h3 id="函数引用"><a href="#函数引用" class="headerlink" title="函数引用"></a>函数引用</h3><p>当调用一个函数的时候，函数的每个调用参数将会被赋值给函数内部的参数变量，所以<strong>函数参数变量接收的是一个复制的副本</strong>，并不是原始调用的变量。</p>
 <p>函数参数传递的机制导致传递大的数组类型将是低效的，并且对数组参数的任何的修改都是发生在复制的数组上，并<strong>不能直接修改调用时原始的数组变量</strong>。</p>
 <p>当然，我们可以显式地传入一个<strong>数组指针</strong>，那样的话函数通过指针对数组的任何修改都可以直接反馈到调用者。</p>
 <pre><code>func zero(ptr *[32]byte) &#123; // [32]byte&#123;&#125;就可以生成一个32字节的数组
@@ -1197,7 +1197,7 @@ func zero(ptr *[32]byte) &#123;
 </li>
 <li><p>一个slice类型一般写作[]T，其中T代表slice中元素的类型；slice的语法和数组很像，只是没有固定长度而已。</p>
 </li>
-<li><p>一个slice由三个部分构成：指针、长度和容量，内置的len和cap函数分别返回slice的长度和容量。</p>
+<li><p><strong>一个slice由三个部分构成：指针、长度和容量</strong>，内置的len和cap函数分别返回slice的长度和容量。</p>
 </li>
 <li><p>长度对应slice中元素的数目，长度不能超过容量，容量一般是从slice的开始位置到底层数据的结尾位置。</p>
 </li>
@@ -1224,7 +1224,7 @@ fmt.Println(summer) // [&quot;June&quot; &quot;July&quot; &quot;August&quot;]
 </code></pre>
 <h3 id="传值"><a href="#传值" class="headerlink" title="传值"></a>传值</h3><p>如果i位置的索引被省略的话将使用0代替，如果j位置的索引被省略的话将使用len(s)代替。</p>
 <p>slice值包含指向第一个slice元素的指针，因此向函数传递slice将允许在函数内部修改底层数组的元素。</p>
-<p>换句话说，复制一个slice只是对底层的数组创建了一个新的slice别名</p>
+<p>换句话说，<strong>复制一个slice只是对底层的数组创建了一个新的slice别名</strong>。</p>
 <pre><code>func reverse(s []int) &#123;
     for i, j := 0, len(s)-1; i &lt; j; i, j = i+1, j-1 &#123;
         s[i], s[j] = s[j], s[i]
@@ -1236,7 +1236,7 @@ reverse(a[:])
 fmt.Println(a) // &quot;[5 4 3 2 1 0]&quot;
 </code></pre>
 <p>对于slice并没有指明序列的长度。这会隐式地创建一个合适大小的数组，然后slice的指针指向底层的数组。</p>
-<h3 id="比较-1"><a href="#比较-1" class="headerlink" title="比较"></a>比较</h3><p><strong>和数组不同的是，slice之间不能比较</strong></p>
+<h3 id="比较-1"><a href="#比较-1" class="headerlink" title="比较"></a>比较</h3><p>和数组不同的是，<strong>slice之间不能比较</strong></p>
 <p>不过标准库提供了高度优化的bytes.Equal函数来判断两个字节型slice是否相等（[]byte），但是对于其他类型的slice，我们必须自己展开每个元素进行比较：</p>
 <pre><code class="go">func equal(x, y []string) bool &#123;
     if len(x) != len(y) &#123;
@@ -1254,7 +1254,7 @@ fmt.Println(a) // &quot;[5 4 3 2 1 0]&quot;
 <li>当slice声明为[]interface{}时，slice的元素可以是自身</li>
 <li>slice的元素是间接引用的，一个固定的slice值在不同的时刻可能包含不同的元素，因为底层数组的元素可能会被修改。</li>
 </ul>
-<p>slice唯一合法的比较操作是和nil比较，一个零值的slice等于nil。</p>
+<p>slice唯一合法的比较操作是和nil比较，<strong>一个零值的slice等于nil</strong>。</p>
 <pre><code>if summer == nil &#123; /* ... */ &#125;
 </code></pre>
 <p>一个nil值的slice并没有底层数组。一个nil值的slice的长度和容量都是0。</p>
@@ -1270,7 +1270,7 @@ s = []int&#123;&#125;    // len(s) == 0, s != nil
 <pre><code>make([]T, len)
 make([]T, len, cap) // same as make([]T, cap)[:len]
 </code></pre>
-<p>在底层，make创建了一个匿名的数组变量，然后返回一个slice；只有通过返回的slice才能引用底层匿名的数组变量。在第一种语句中，slice是整个数组的view。在第二个语句中，slice只引用了底层数组的前len个元素，但是容量将包含整个的数组。额外的元素是留给未来的增长用的。</p>
+<p>在底层，make创建了一个匿名的数组变量，然后返回一个slice；只有通过返回的slice才能引用底层匿名的数组变量。在第一种语句中，slice是整个数组的view。在第二个语句中，<strong>slice只引用了底层数组的前len个元素，但是容量将包含整个的数组。</strong>额外的元素是留给未来的增长用的。</p>
 <h3 id="append函数"><a href="#append函数" class="headerlink" title="append函数"></a>append函数</h3><p>内置的append函数用于向slice追加元素：</p>
 <pre><code>var runes []rune
 for _, r := range &quot;Hello, 世界&quot; &#123;
@@ -1569,7 +1569,7 @@ EmployeeByID(id).Salary = 0 // fired for... no real reason
 &#125;
 </code></pre>
 <p>结构体成员的输入顺序也有重要的意义。</p>
-<p>如果结构体成员名字是以大写字母开头的，那么该成员就是导出的。</p>
+<p><strong>如果结构体成员名字是以大写字母开头的，那么该成员就是导出的。</strong></p>
 <p>一个结构体可能同时包含导出和未导出的成员。</p>
 <p>一个命名为S的结构体类型将不能再包含S类型的成员：因为一个聚合的值不能包含它自身。</p>
 <p>S类型的结构体可以包含<code>*S</code>指针类型的成员，这可以让我们创建递归的数据结构，比如链表和树结构等。</p>
@@ -1615,7 +1615,7 @@ pp := new(Point)
 *pp = Point&#123;1, 2&#125;
 </code></pre>
 <p>不过&amp;Point{1, 2}写法可以直接在表达式中使用，比如一个函数调用。</p>
-<h4 id="结构体比较"><a href="#结构体比较" class="headerlink" title="结构体比较"></a>结构体比较</h4><p>如果结构体的全部成员都是可以比较的，那么结构体也是可以比较的，那样的话两个结构体将可以使用==或!=运算符进行比较。</p>
+<h4 id="结构体比较"><a href="#结构体比较" class="headerlink" title="结构体比较"></a>结构体比较</h4><p><strong>如果结构体的全部成员都是可以比较的，那么结构体也是可以比较的</strong>，那样的话两个结构体将可以使用==或!=运算符进行比较。</p>
 <p>相等比较运算符==将比较两个结构体的每个成员，因此下面两个比较的表达式是等价的：</p>
 <pre><code class="Go">type Point struct&#123; X, Y int &#125;
 
@@ -1688,7 +1688,7 @@ object          &#123;&quot;year&quot;: 1980,
                  &quot;medals&quot;: [&quot;gold&quot;, &quot;silver&quot;, &quot;bronze&quot;]&#125;
 </code></pre>
 <h4 id="编组"><a href="#编组" class="headerlink" title="编组"></a>编组</h4><p>将一个Go语言中类似movies的结构体slice转为JSON的过程叫编组（marshaling）。</p>
-<p>编组通过调用json.Marshal函数完成：</p>
+<p><strong>编组通过调用json.Marshal函数完成：</strong></p>
 <pre><code>type Movie struct &#123;
     Title  string
     Year   int  `json:&quot;released&quot;`
@@ -1758,8 +1758,11 @@ fmt.Printf(&quot;%s\n&quot;, data)
 <pre><code>Year  int  `json:&quot;released&quot;`
 Color bool `json:&quot;color,omitempty&quot;`
 </code></pre>
-<p>成员Tag中json对应值的第一部分用于指定JSON对象的名字</p>
-<p>omitempty选项，表示当Go语言结构体成员为空或零值时不生成该JSON对象（这里false为零值）。</p>
+<p>Tag相关：</p>
+<ul>
+<li><strong>json对应值的第一部分用于指定JSON对象的名字</strong></li>
+<li><strong>omitempty选项，表示当Go语言结构体成员为空或零值时不生成该JSON对象（这里false为零值）。</strong></li>
+</ul>
 <h4 id="解码"><a href="#解码" class="headerlink" title="解码"></a>解码</h4><p>将JSON数据解码为Go语言的数据结构，Go语言中一般叫unmarshaling，通过json.Unmarshal函数完成。</p>
 <p>下面的代码将JSON格式的电影数据解码为一个结构体slice，结构体中只有Title成员。</p>
 <pre><code>var titles []struct&#123; Title string &#125; //slice只含有Title信息的值填充，其它JSON成员将被忽略。
@@ -1783,7 +1786,7 @@ Age:    &#123;&#123;.CreatedAt | daysAgo&#125;&#125; days
 </code></pre>
 <p><code>&#123;&#123;.TotalCount&#125;&#125;</code>对应action将展开为结构体中TotalCount成员以默认的方式打印的值。</p>
 <p><code>&#123;&#123;range .Items&#125;&#125;</code>和<code>&#123;&#123;end&#125;&#125;</code>对应一个循环action，因此它们之间的内容可能会被展开多次，循环每次迭代的当前值对应当前的Items元素的值。</p>
-<p>在一个action中，<code>|</code>操作符表示将前一个表达式的结果作为后一个函数的输入，类似于UNIX中管道的概念。</p>
+<p><strong>在一个action中，<code>|</code>操作符表示将前一个表达式的结果作为后一个函数的输入，类似于UNIX中管道的概念。</strong></p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="http://books.studygolang.com/gopl-zh">Go语言圣经（中文版）</a></p>
 
       

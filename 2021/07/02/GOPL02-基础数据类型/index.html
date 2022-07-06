@@ -1091,7 +1091,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-25 20:13:55'>2021-07-02 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-07-06 12:40:39'>2021-07-02 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1142,7 +1142,7 @@
 <p>对应特定CPU平台机器字大小的有符号和无符号整数int和uint：根据硬件平台，大小32或64bit</p>
 <p>int和int32是不同的类型，即使int的大小也是32bit，在需要将int当作int32类型的地方需要一个显式的类型转换操作，反之亦然。</p>
 <h3 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h3><p>Unicode字符rune类型是和int32等价的类型，通常用于表示一个Unicode码点。这两个名称可以互换使用。</p>
-<h3 id="byte"><a href="#byte" class="headerlink" title="byte"></a>byte</h3><p>byte也是uint8类型的等价类型，byte类型一般用于强调数值是一个原始的数据而不是一个小的整数。</p>
+<h3 id="byte"><a href="#byte" class="headerlink" title="byte"></a>byte</h3><p>byte是uint8类型的等价类型，一般用于强调数值是一个原始的数据而不是一个小的整数。</p>
 <h3 id="uintptr"><a href="#uintptr" class="headerlink" title="uintptr"></a>uintptr</h3><p>无符号的整数类型，没有指定具体的bit大小但是足以容纳指针。</p>
 <p>uintptr类型只有在底层编程时才需要，特别是Go语言和C语言函数库或操作系统接口相交互的地方。</p>
 <h3 id="二元运算符"><a href="#二元运算符" class="headerlink" title="二元运算符"></a>二元运算符</h3><p>优先级递减：</p>
@@ -1155,7 +1155,7 @@
 <p>二元运算符有五种优先级。在同一个优先级，使用左优先结合规则，但是使用括号可以明确优先顺序，使用括号也可以用于提升优先级，例如<code>mask &amp; (1 &lt;&lt; 28)</code>。</p>
 <p><code>&amp;&amp;</code>的优先级比<code>||</code>高（助记：<code>&amp;&amp;</code>对应逻辑乘法，<code>||</code>对应逻辑加法，乘法比加法优先级要高）。</p>
 <h4 id="取模运算符"><a href="#取模运算符" class="headerlink" title="取模运算符"></a>取模运算符</h4><p>取模运算符%仅用于整数间的运算。</p>
-<p>取模运算符的符号和被取模数的符号总是一致的，因此<code>-5%3</code>和<code>-5%-3</code>结果都是-2。</p>
+<p><strong>取模运算符的符号和被取模数的符号总是一致的</strong>，因此<code>-5%3</code>和<code>-5%-3</code>结果都是-2。</p>
 <h4 id="溢出"><a href="#溢出" class="headerlink" title="溢出"></a>溢出</h4><p>一个算术运算的结果，不管是有符号或者是无符号的，如果需要更多的bit位才能正确表示的话，就说明计算结果是溢出了。</p>
 <pre><code>var u uint8 = 255
 fmt.Println(u, u+1, u*u) // &quot;255 0 1&quot;
@@ -1276,10 +1276,10 @@ fmt.Println(imag(x*y))           // &quot;10&quot;
 <p>复数也可以用==和!=进行相等比较。只有两个复数的实部和虚部都相等的时候它们才是相等的。</p>
 <h2 id="布尔型"><a href="#布尔型" class="headerlink" title="布尔型"></a>布尔型</h2><p>一个布尔类型的值只有两种：true和false。</p>
 <p>布尔值可以和&amp;&amp;（AND）和||（OR）操作符结合。</p>
-<p>短路行为：如果运算符左边值已经可以确定整个布尔表达式的值，那么运算符右边的值将不再被求值，因此下面的表达式总是安全的</p>
+<p><strong>短路行为</strong>：如果运算符左边值已经可以确定整个布尔表达式的值，那么运算符右边的值将不再被求值，因此下面的表达式总是安全的</p>
 <pre><code>s != &quot;&quot; &amp;&amp; s[0] == &#39;x&#39; //s[0]操作如果应用于空字符串将会导致panic异常
 </code></pre>
-<h4 id="类型转换-1"><a href="#类型转换-1" class="headerlink" title="类型转换"></a>类型转换</h4><p>布尔值并不会隐式转换为数字值0或1，反之亦然。必须使用一个显式的if语句辅助转换。</p>
+<h4 id="类型转换-1"><a href="#类型转换-1" class="headerlink" title="类型转换"></a>类型转换</h4><p><strong>布尔值并不会隐式转换为数字值0或1，反之亦然。</strong>必须使用一个显式的if语句辅助转换。</p>
 <pre><code>// 布尔 =&gt; 数字
 func btoi(b bool) int &#123;
     if b &#123;
@@ -1293,8 +1293,11 @@ func itob(i int) bool &#123; return i != 0 &#125;
 <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p><strong>一个字符串是一个不可改变的字节序列。</strong></p>
 <p>字符串可以包含任意的数据，包括byte值0，但是通常是用来包含人类可读的文本。</p>
 <p>文本字符串通常被解释为采用UTF8编码的Unicode码点（rune）序列。</p>
-<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><h4 id="len函数"><a href="#len函数" class="headerlink" title="len函数"></a>len函数</h4><p>内置的len函数可以返回一个字符串中的字节数目（不是rune字符数目），索引操作s[i]返回第i个字节的字节值，i必须满足0 ≤ i&lt; len(s)条件约束。</p>
-<pre><code>s := &quot;hello, world&quot;
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><h4 id="len函数"><a href="#len函数" class="headerlink" title="len函数"></a>len函数</h4><p>内置的len函数可以返回一个字符串中的字节数（不是rune字符数目），索引操作s[i]返回第i个字节的字节值，i必须满足0 ≤ i&lt; len(s)条件约束。</p>
+<pre><code>a := &quot;我们&quot;
+fmt.Println(len(a)) // 6
+
+s := &quot;hello, world&quot;
 fmt.Println(len(s))     // &quot;12&quot;
 fmt.Println(s[0], s[7]) // &quot;104 119&quot; (&#39;h&#39; and &#39;w&#39;)
 c := s[len(s)] // panic: index out of range
@@ -1365,6 +1368,16 @@ func main() &#123;
 <pre><code>for i, r := range &quot;Hello, 世界&quot; &#123;
     fmt.Printf(&quot;%d\t%q\t%d\n&quot;, i, r, r)
 &#125;
+
+0    &#39;H&#39;    72
+1    &#39;e&#39;    101
+2    &#39;l&#39;    108
+3    &#39;l&#39;    108
+4    &#39;o&#39;    111
+5    &#39;,&#39;    44
+6    &#39; &#39;    32
+7    &#39;世&#39;    19990
+10    &#39;界&#39;    30028
 </code></pre>
 <h4 id="错误编码"><a href="#错误编码" class="headerlink" title="错误编码"></a>错误编码</h4><p>如果遇到一个错误的UTF8编码输入，将生成一个特别的Unicode字符<code>\uFFFD</code>，在印刷中这个符号通常是一个黑色六角或钻石形状，里面包含一个白色的问号”?”。</p>
 <p>这样的一个字符，通常是一个危险信号，说明输入并不是一个完美没有错误的UTF8字符串。</p>
@@ -1398,10 +1411,11 @@ func basename(s string) string &#123;
 &#125;
 </code></pre>
 <h4 id="bytes包"><a href="#bytes包" class="headerlink" title="bytes包"></a>bytes包</h4><p>bytes包也提供了很多类似功能的函数，但是针对和字符串有着相同结构的[]byte类型。</p>
-<p>因为字符串是只读的，因此逐步构建字符串会导致很多分配和复制。在这种情况下，使用bytes.Buffer类型将会更有效。</p>
+<p>因为字符串是只读的，因此逐步构建字符串会导致很多分配和复制。</p>
+<p>在这种情况下，使用bytes.Buffer类型将会更有效。</p>
 <h5 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h5><p>一个字符串是包含只读字节的数组，一旦创建，是不可变的。</p>
 <p>相比之下，一个字节slice的元素则可以自由地修改。</p>
-<p>一个[]byte(s)转换是分配了一个新的字节数组用于保存字符串数据的拷贝，然后引用这个底层的字节数组。</p>
+<p><strong>[]byte(s)转换是分配了一个新的字节数组用于保存字符串数据的拷贝，然后引用这个底层的字节数组。</strong></p>
 <pre><code>s := &quot;abc&quot;
 b := []byte(s)
 s2 := string(b)
@@ -1477,7 +1491,7 @@ fmt.Println(y) //123
 <p>ParseInt函数的第三个参数是用于指定整型数的大小；例如16表示int16，0则表示int。</p>
 <p><strong>在任何情况下，返回的结果y总是int64类型</strong>，你可以通过强制类型转换将它转为更小的整数类型。</p>
 <h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p><strong>常量表达式的值在编译期计算，而不是在运行期。</strong></p>
-<p>每种常量的潜在类型都是基础类型：boolean、string或数字。</p>
+<p>每种<strong>常量的潜在类型都是基础类型：boolean、string或数字</strong>。</p>
 <p>一个常量的声明语句定义了常量的名字，和变量的声明语法类似，<strong>常量的值不可修改</strong>。</p>
 <pre><code>const pi = 3.14159
 </code></pre>
@@ -1491,7 +1505,7 @@ func parseIPv4(s string) IP &#123;
     // ...
 &#125;
 </code></pre>
-<p>一个常量的声明也可以包含一个类型和一个值，但是如果没有显式指明类型，那么将从右边的表达式推断类型。‘</p>
+<p>一个常量的声明也可以包含一个类型和一个值，但是如果没有显式指明类型，那么将从右边的表达式推断类型。</p>
 <pre><code>const noDelay time.Duration = 0
 const timeout = 5 * time.Minute
 </code></pre>
@@ -1504,7 +1518,7 @@ const timeout = 5 * time.Minute
 )
 fmt.Println(a, b, c, d) // &quot;1 1 2 2&quot;
 </code></pre>
-<h3 id="iota-常量生成器"><a href="#iota-常量生成器" class="headerlink" title="iota 常量生成器"></a>iota 常量生成器</h3><p>在一个const声明语句中，在第一个声明的常量所在的行，iota将会被置为0，然后在每一个有常量声明的行加一。</p>
+<h3 id="iota-常量生成器"><a href="#iota-常量生成器" class="headerlink" title="iota 常量生成器"></a>iota 常量生成器</h3><p><strong>在一个const声明语句中，在第一个声明的常量所在的行，iota将会被置为0，然后在每一个有常量声明的行加一。</strong></p>
 <pre><code>type Weekday int
 
 const (
