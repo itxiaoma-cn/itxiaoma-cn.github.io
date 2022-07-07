@@ -13140,12 +13140,14 @@ func  main()&#123;
     <title>GOPL05-方法</title>
     <url>/2021/07/05/GOPL05-%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<p>[TOC]</p>
-<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>一个对象其实也就是一个简单的值或者一个变量，在这个对象中会包含一些方法，而一个方法则是一个一个和特殊类型关联的函数。</p>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p><strong>方法是和特殊类型关联的函数。</strong></p>
+<p>一个对象其实也就是一个简单的值或者一个变量，在这个对象中会包含一些方法，而一个方法则是一个一个和特殊类型关联的函数。</p>
 <p>一个面向对象的程序会用方法来表达其属性和对应的操作，这样使用这个对象的用户就不需要直接去操作对象，而是借助方法来做这些事情。</p>
 <pre><code class="Go">const day = 24 * time.Hour
 fmt.Println(day.Seconds()) // &quot;86400&quot;
 </code></pre>
-<h3 id="方法声明"><a href="#方法声明" class="headerlink" title="方法声明"></a>方法声明</h3><p>在函数声明时，在其名字之前放上一个变量，即是一个方法。这个附加的参数会将该函数附加到这种类型上，即相当于为这种类型定义了一个独占的方法。</p>
+<h3 id="方法声明"><a href="#方法声明" class="headerlink" title="方法声明"></a>方法声明</h3><p><strong>在函数声明时，在其名字之前放上一个变量，即是一个方法。</strong></p>
+<p>这个附加的参数会将该函数附加到这种类型上，即相当于为这种类型定义了一个独占的方法。</p>
 <pre><code class="go">package geometry
 
 import &quot;math&quot;
@@ -13189,7 +13191,7 @@ func (path Path) Distance() float64 &#123;
 </code></pre>
 <p>Path是一个命名的slice类型，而不是Point那样的struct类型，然而我们依然可以为它定义方法。</p>
 <p><strong>我们可以给同一个包内的任意命名类型定义方法，只要这个命名类型的底层类型不是指针或者interface。</strong>（译注：这个例子里，底层类型是指[]Point这个slice，Path就是命名类型）</p>
-<p>对于一个给定的类型，其内部的方法都必须有唯一的方法名，但是不同的类型却可以有同样的方法名。</p>
+<p><strong>对于一个给定的类型，其内部的方法都必须有唯一的方法名，但是不同的类型却可以有同样的方法名。</strong></p>
 <h3 id="基于指针对象的方法"><a href="#基于指针对象的方法" class="headerlink" title="基于指针对象的方法"></a>基于指针对象的方法</h3><p>当调用一个函数时，会对其每一个参数值进行拷贝。</p>
 <p>如果一个函数需要更新一个变量，或者函数的其中一个参数实在太大我们希望能够避免进行这种默认的拷贝，这种情况下我们就需要用到指针了。</p>
 <p>对应到我们这里用来更新接收器的对象的方法，当这个接受者变量本身比较大时，我们就可以用其指针而不是对象来声明方法，如下：</p>
@@ -13451,7 +13453,7 @@ time.AfterFunc(10 * time.Second, func() &#123; r.Launch() &#125;)
 <pre><code class="go">time.AfterFunc(10 * time.Second, r.Launch)
 </code></pre>
 <p>译注：省掉了上面那个例子里的匿名函数。</p>
-<h4 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h4><p>当调用一个方法时，与调用一个普通的函数相比，我们必须要用选择器（p.Distance）语法来指定方法的接收器。</p>
+<h4 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h4><p><strong>当调用一个方法时，与调用一个普通的函数相比，我们必须要用选择器（p.Distance）语法来指定方法的接收器。</strong></p>
 <p>当T是一个类型时，方法表达式可能会写作<code>T.f</code>或者<code>(*T).f</code>，会返回一个函数“值”，这种函数会将其第一个参数用作接收器，所以可以用通常（译注：不写选择器）的方式来对其进行调用：</p>
 <pre><code class="go">p := Point&#123;1, 2&#125;
 q := Point&#123;4, 6&#125;
@@ -13577,7 +13579,7 @@ fmt.Println(x)          // &quot;&#123;[4398046511618 0 65536]&#125;&quot;
 <p>在第一个Println中，我们打印一个<code>*IntSet</code>的指针，这个类型的指针确实有自定义的String方法。</p>
 <p>第二Println，我们直接调用了x变量的String()方法；这种情况下编译器会隐式地在x前插入&amp;操作符，这样相当于我们还是调用的IntSet指针的String方法。</p>
 <p>在第三个Println中，因为IntSet类型没有String方法，所以Println方法会直接以原始的方式理解并打印。所以在这种情况下&amp;符号是不能忘的。在我们这种场景下，你把String方法绑定到IntSet对象上，而不是IntSet指针上可能会更合适一些，不过这也需要具体问题具体分析。</p>
-<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>一个对象的变量或者方法如果对调用方是不可见的话，一般就被定义为“封装”。</p>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p><strong>一个对象的变量或者方法如果对调用方是不可见的话，一般就被定义为“封装”。</strong></p>
 <p>封装有时候也被叫做信息隐藏，同时也是面向对象编程最关键的一个方面。</p>
 <p>Go语言只有一种控制可见性的手段：大写首字母的标识符会从定义它们的包中被导出，小写字母的则不会。这种限制包内成员的方式同样适用于struct或者一个类型的方法。</p>
 <p>因而<strong>如果我们想要封装一个对象，我们必须将其定义为一个struct。</strong></p>
@@ -13589,7 +13591,7 @@ fmt.Println(x)          // &quot;&#123;[4398046511618 0 65536]&#125;&quot;
 <p>当然，我们也可以把IntSet定义为一个slice类型，但这样我们就需要把代码中所有方法里用到的s.words用<code>*s</code>替换掉了：</p>
 <pre><code class="go">type IntSet []uint64
 </code></pre>
-<p>这种基于名字的手段使得在语言中最小的封装单元是package，而不是像其它语言一样的类型。</p>
+<p>这种基于名字的手段使得<strong>在GO语言中最小的封装单元是package</strong>，而不是像其它语言一样的类型。</p>
 <p>一个struct类型的字段对同一个包的所有代码都有可见性，无论你的代码是写在一个函数还是一个方法里。</p>
 <h4 id="三个优点"><a href="#三个优点" class="headerlink" title="三个优点"></a>三个优点</h4><p>首先，因为调用方不能直接修改对象的变量值，其只需要关注少量的语句并且只要弄懂少量变量的可能的值即可。</p>
 <p>第二，隐藏实现的细节，可以防止调用方依赖那些可能变化的具体实现，这样使设计包的程序员在不破坏对外的api情况下能得到更大的自由。</p>
@@ -14889,7 +14891,7 @@ type ReadWriteCloser interface &#123;
     Closer
 &#125;
 </code></pre>
-<p>以一个简写命名一个接口，而不用声明它所有的方法，这种方式称为接口内嵌。</p>
+<p><strong>以一个简写命名一个接口，而不用声明它所有的方法，这种方式称为接口内嵌。</strong></p>
 <p>不使用内嵌来声明io.ReadWriter接口：</p>
 <pre><code class="go">type ReadWriter interface &#123;
     Read(p []byte) (n int, err error)
@@ -15205,7 +15207,7 @@ func f(out io.Writer) &#123;
     out.Write([]byte(&quot;done!\n&quot;)) // panic: nil pointer dereference
 &#125;
 </code></pre>
-<p>当main函数调用函数f时，它给f函数的out参数赋了一个<em>bytes.Buffer的空指针，所以out的动态值是nil。然而，它的动态类型是</em>bytes.Buffer，意思就是out变量是一个包含空指针值的非空接口（如图7.5），所以防御性检查out!=nil的结果依然是true。</p>
+<p>当main函数调用函数f时，它给f函数的out参数赋了一个<em>bytes.Buffer的空指针，所以out的动态值是nil。然而，它的动态类型是</em>bytes.Buffer，意思就是out变量是<strong>一个包含空指针值的非空接口，防御性检查out!=nil的结果依然是true</strong>。</p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h1pbzk5dmej205r02rmwz.jpg"></p>
 <p>*bytes.Buffer类型调用Write方法，尝试去获取缓冲区时会发生panic。</p>
 <p>(*bytes.Buffer).Write方法的接收者非空，所以将nil指针赋给这个接口是错误的。</p>
@@ -15908,8 +15910,8 @@ func formatOneValue(x interface&#123;&#125;) string &#123;
 <p>如果x满足这两个接口类型中的一个，具体满足的接口决定对值的格式化方式。</p>
 <p>任何有String方法的类型都满足fmt.Stringer中约定的行为，这个行为会返回一个适合打印的字符串。</p>
 <h3 id="类型分支"><a href="#类型分支" class="headerlink" title="类型分支"></a>类型分支</h3><p>接口被以两种不同的方式使用。</p>
-<p>在第一个方式中，以io.Reader，io.Writer，fmt.Stringer，sort.Interface，http.Handler和error为典型，一个接口的方法表达了实现这个接口的具体类型间的相似性，但是隐藏了代码的细节和这些具体类型本身的操作。重点在于方法上，而不是具体的类型上。</p>
-<p>第二个方式是利用一个接口值可以持有各种具体类型值的能力，将这个接口认为是这些类型的联合。类型断言用来动态地区别这些类型，使得对每一种情况都不一样。在这个方式中，重点在于具体的类型满足这个接口，而不在于接口的方法（如果它确实有一些的话），并且没有任何的信息隐藏。我们将以这种方式使用的接口描述为discriminated unions（可辨识联合）。</p>
+<p>在第一个方式中，以io.Reader，io.Writer，fmt.Stringer，sort.Interface，http.Handler和error为典型，<strong>一个接口的方法表达了实现这个接口的具体类型间的相似性，但是隐藏了代码的细节和这些具体类型本身的操作。</strong>重点在于方法上，而不是具体的类型上。</p>
+<p>第二个方式是利用一个接口值可以持有各种具体类型值的能力，将这个接口认为是这些类型的联合。<strong>类型断言用来动态地区别这些类型，使得对每一种情况都不一样</strong>。在这个方式中，重点在于具体的类型满足这个接口，而不在于接口的方法（如果它确实有一些的话），并且没有任何的信息隐藏。我们将以这种方式使用的接口描述为discriminated unions（可辨识联合）。</p>
 <p>将每一个参数值转换成它的SQL字面量符号：</p>
 <pre><code class="go">import &quot;database/sql&quot;
 
@@ -16070,9 +16072,9 @@ html body div div h2: B Definitions for Character Normalization
 </code></pre>
 <h3 id="一些建议"><a href="#一些建议" class="headerlink" title="一些建议"></a>一些建议</h3><p>当设计一个新的包时，新手Go程序员总是先创建一套接口，然后再定义一些满足它们的具体类型。这种方式的结果就是有很多的接口，它们中的每一个仅只有一个实现。</p>
 <p>不要再这么做了。这种接口是不必要的抽象；它们也有一个运行时损耗。</p>
-<p>你可以使用导出机制（§6.6）来限制一个类型的方法或一个结构体的字段是否在包外可见。</p>
+<p>你可以使用导出机制来限制一个类型的方法或一个结构体的字段是否在包外可见。</p>
 <p><strong>接口只有当有两个或两个以上的具体类型必须以相同的方式进行处理时才需要。</strong></p>
-<p>当一个接口只被一个单一的具体类型实现时有一个例外，就是由于它的依赖，这个具体类型不能和这个接口存在在一个相同的包中。这种情况下，一个接口是解耦这两个包的一个好方式。</p>
+<p><strong>当一个接口只被一个单一的具体类型实现时有一个例外，就是由于它的依赖，这个具体类型不能和这个接口存在在一个相同的包中。这种情况下，一个接口是解耦这两个包的一个好方式。</strong></p>
 <p>因为在Go语言中只有当两个或更多的类型实现一个接口时才使用接口，它们必定会从任意特定的实现细节中抽象出来。结果就是有更少和更简单方法的更小的接口（经常和io.Writer或 fmt.Stringer一样只有一个）。当新的类型出现时，小的接口更容易满足。对于接口设计的一个好的标准就是 ask only for what you need（只考虑你需要的东西）</p>
 <p>我们完成了对方法和接口的学习过程。Go语言对面向对象风格的编程支持良好，但这并不意味着你只能使用这一风格。不是任何事物都需要被当做一个对象；独立的函数有它们自己的用处，未封装的数据类型也是这样。观察一下，在本书前五章的例子中像input.Scan这样的方法被调用不超过二十次，与之相反的是普遍调用的函数如fmt.Printf。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://books.studygolang.com/gopl-zh">Go语言圣经（中文版）</a></p>
