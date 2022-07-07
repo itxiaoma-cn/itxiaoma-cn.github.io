@@ -21758,12 +21758,12 @@ func main()  &#123;
 <li>每个P和一个M绑定，M从绑定的P的局部队列获取 G 来执行 </li>
 <li>当M绑定的P的局部队列为空时，M会从全局队列获取到本地队列来执行G (流程 3.1)，当从全局队列中没有获取到可执行的 G 时候，M 会从其他 P 的局部队列中偷取 G 来执行(流程 3.2)，这种从其他 P 偷的方式称为 work stealing </li>
 <li>当G因系统调用(syscall)阻塞时会阻塞M，此时P会和M解绑即hand off，并寻找新的闲置的 M，若没有闲置的 M就会新建一个 M(流程 5.1) </li>
-<li>当 G 因 channel 或者 network I/O 阻塞时，不会阻塞 M，M 会寻找其他 runnable 的 G;当阻塞的 G 恢复后会重新进入 runnable 进入 P 队列等待执 行(流程 5.3) </li>
+<li>当 G 因 channel 或者 network I/O 阻塞时，不会阻塞 M，M 会寻找其他 runnable 的 G;当阻塞的 G 恢复后会重新进入P队列等待执行</li>
 </ol>
-<h3 id="5-work-stealing-机制"><a href="#5-work-stealing-机制" class="headerlink" title="5. work stealing 机制"></a>5. <strong>work stealing</strong> <strong>机制</strong></h3><p>Goroutine 仅在本地队列满载之后才会加入到全局队列；它也会在 Go 往调度器中批量注入时被加到全局队列，例如，网络轮询器（network poller） 或者在垃圾回收期间等待的 Goroutine。</p>
+<h3 id="5-work-stealing-机制"><a href="#5-work-stealing-机制" class="headerlink" title="5. work stealing 机制"></a>5. <strong>work stealing</strong> <strong>机制</strong></h3><p>Goroutine 仅在本地队列满载之后才会加入到全局队列；它也会在Go往调度器中批量注入时被加到全局队列，例如，网络轮询器（network poller） 或者在垃圾回收期间等待的 Goroutine。</p>
 <p>获取 P 本地队列，当从绑定 P 本地队列上找不到可执行的 G，尝试从全局链表中拿，再拿不到从网络轮询器netpoll 和事件池里拿，最后会会随机的选择其他的 P，并尝试从其队列中偷取一半可运行的G</p>
 <h3 id="6-hand-off-机制"><a href="#6-hand-off-机制" class="headerlink" title="6. hand off 机制"></a>6. hand off 机制</h3><p>当本线程 M 因为 G 进行的系统调用阻塞时，线程释放绑定的 P，把 P 转移给其他空闲的 M 执行。</p>
-<p>细节:当发生上线文切换时，需要对执行现场进行保护，以便下次被调度执行时进行现场恢复。</p>
+<p>细节: 当发生上线文切换时，需要对执行现场进行保护，以便下次被调度执行时进行现场恢复。</p>
 <p>Go 调度器 M 的栈保存在 G 对象上，只需要将 M 所需要的寄存器(SP、PC 等)保存到 G 对象上就可以实现现场保护。当这些寄存器数据被保护起来，就随时可以做上下文切换了，在中断之前把现场保存起来。</p>
 <p>如果此时G 任务还没有执行完，M 可以将任务重新丢到 P 的任务队列，等待下一次被调度执行。当再次被调度执行时，M 通过访问 G 的 vdsoSP、vdsoPC 寄存器进行现场恢复(从上次中断位置继续执行)。</p>
 <h3 id="7-协作式的抢占式调度"><a href="#7-协作式的抢占式调度" class="headerlink" title="7. 协作式的抢占式调度"></a>7. <strong>协作式的抢占式调度</strong></h3><p>在 1.14 版本之前，程序只能依靠 Goroutine 主动让出 CPU 资源才能触发调度。这种方式存在问题有:</p>
@@ -21771,14 +21771,23 @@ func main()  &#123;
 <li>某些 Goroutine 可以长时间占用线程，造成其它 Goroutine 的饥饿</li>
 <li>垃圾回收需要暂停整个程序(Stop-the-world，STW)，最长可能需要几分钟的时间，导致整个程序无法工作</li>
 </ul>
-<h3 id="8-基于信号的抢占式调度"><a href="#8-基于信号的抢占式调度" class="headerlink" title="8. 基于信号的抢占式调度"></a>8. <strong>基于信号的抢占式调度</strong></h3><p>在任何情况下，Go 运行时并行执行(注意，不是并发)的 goroutines 数量是小于等于 P 的数量的。为了提高系统的性能，P 的数量肯定不是越小越好，所以官方默认值就是 CPU 的核心数，设置的过小的话，如果一个持有 P 的 M，由于 P 当前执行的 G 调用了 syscall 而导致 M 被阻塞，那么此时关键点:</p>
-<p>GO 的调度器是迟钝的，它很可能什么都没做，直到 M 阻塞了相当长时间以后，才会发现有一个 P/M 被 syscall 阻塞了。然后，才会用空闲的 M 来强这个 P。通过 sysmon 监控实现的抢占式调度，最快在 20us，最慢在 10-20ms 才会发现有一个 M 持有 P 并阻塞了。操作系统在 1ms 内可以完成很多次线程调度(一般情况 1ms 可以完成几十次线程调度)，Go 发起 IO/syscall 的时候执行该 G 的 M 会阻塞然后被 OS 调度走，P 什么也不干，sysmon 最慢要 10-20ms才能发现这个阻塞，说不定那时候阻塞已经结束了，这样宝贵的 P 资源就这么被阻塞的 M 浪费了。</p>
+<h3 id="8-基于信号的抢占式调度"><a href="#8-基于信号的抢占式调度" class="headerlink" title="8. 基于信号的抢占式调度"></a>8. <strong>基于信号的抢占式调度</strong></h3><h4 id="sysmon函数"><a href="#sysmon函数" class="headerlink" title="sysmon函数"></a>sysmon函数</h4><p>决定Go抢占时机的核心函数叫做<code>sysmon</code>，它不依赖P，可以直接绑定在M上执行。这个函数是一个无限循环，它将始终运行在后台，执行监控任务。我们不妨将sysmon绑定的M记为Ms。</p>
+<h4 id="抢占进行系统调用的P"><a href="#抢占进行系统调用的P" class="headerlink" title="抢占进行系统调用的P"></a>抢占进行系统调用的P</h4><p>P不想被抢占，必须同时满足以下条件：</p>
+<ol>
+<li>P的本地运行队列里面没有等待运行的goroutine；</li>
+<li>有处于自旋状态的M或者有空闲的P；</li>
+<li>从上一次<code>sysmon</code>观察到P对应的M处于系统调用之中至今已超过10ms。</li>
+</ol>
+<p>只要有一个条件满足了，<code>sysmon</code>就可以抢占当前的P。</p>
+<h4 id="抢占运行时间过长的P"><a href="#抢占运行时间过长的P" class="headerlink" title="抢占运行时间过长的P"></a>抢占运行时间过长的P</h4><p>对于运行时间过长的P，先把它的抢占标志改掉，这样下一次发生函数调用时就能抢占该P</p>
+<p>如果当前系统支持异步抢占，将直接发送<code>_SIGURG</code>信号给当前P对应的M，由<code>sighandler</code>决定如何处理。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/533402588">Go语言抢占机制详解</a></p>
 <h3 id="9-GMP-调度过程中存在哪些阻塞"><a href="#9-GMP-调度过程中存在哪些阻塞" class="headerlink" title="9. GMP 调度过程中存在哪些阻塞"></a>9. <strong>GMP</strong> <strong>调度过程中存在哪些阻塞</strong></h3><ul>
 <li>I/O，select</li>
 <li>block on syscall</li>
 <li>channel</li>
 <li>等待锁</li>
-<li>runtime.Gosched()</li>
+<li>runtime.Gosched() 让当前goroutine让出CPU,好让其它的goroutine获得执行的机会</li>
 </ul>
 <h3 id="10-Sysmon-有什么作用"><a href="#10-Sysmon-有什么作用" class="headerlink" title="10.Sysmon 有什么作用"></a>10.<strong>Sysmon</strong> <strong>有什么作用</strong></h3><p>Sysmon 也叫监控线程，变动的周期性检查，好处</p>
 <ul>
@@ -21786,7 +21795,7 @@ func main()  &#123;
 <li>如果超过2分钟没有垃圾回收，强制执行;</li>
 <li>将长时间未处理的网络轮询器 netpoll 添加到全局队列;</li>
 <li>向长时间运行的 G 任务发出抢占调度(超过 10ms 的 g，会进行 retake); </li>
-<li>收回因 syscall 长时间阻塞的 P; </li>
+<li>收回因 syscall 长时间阻塞的 P</li>
 </ul>
 <h3 id="11-三色标记"><a href="#11-三色标记" class="headerlink" title="11. 三色标记"></a>11. 三色标记</h3><ul>
 <li><p>先把所有的对象都放到白色的集合中</p>
