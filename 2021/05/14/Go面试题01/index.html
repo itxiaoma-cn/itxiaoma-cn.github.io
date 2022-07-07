@@ -1091,7 +1091,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-07-07 08:42:57'>2021-05-14 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-07-07 08:47:26'>2021-05-14 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1276,13 +1276,13 @@ default:
 <li>返回值是指向这个新分配的地址的指针</li>
 </ul>
 </li>
-<li><p>make 的作用是为引用类型（ slice, map or chan ）初始化 然后返回引用 </p>
+<li><p>make 的作用是为引用类型（ slice, map or chan ）初始化，然后返回该类型的引用</p>
 <pre><code>func make(Type, size IntegerType) Type
 </code></pre>
 </li>
 </ol>
 <h3 id="14-make和new的区别？"><a href="#14-make和new的区别？" class="headerlink" title="14. make和new的区别？"></a>14. make和new的区别？</h3><p>make和new都是用来分配内存的內建函数，在堆上分配内存</p>
-<p>make用于引用类型slice、map以及channel的初始化（非零值），返回的是类型本身</p>
+<p>make用于引用类型slice、map以及channel的初始化（非零值），返回的是类型的引用而不是指针</p>
 <p>new可以分配任意类型数据，并返回指向内存地址的指针，指针指向的内容的值为零(zero value)</p>
 <h3 id="15-Printf-，Sprintf-，FprintF-都是格式化输出，有什么不同？"><a href="#15-Printf-，Sprintf-，FprintF-都是格式化输出，有什么不同？" class="headerlink" title="15. Printf()，Sprintf()，FprintF() 都是格式化输出，有什么不同？"></a>15. Printf()，Sprintf()，FprintF() 都是格式化输出，有什么不同？</h3><p>Printf 是标准输出，一般是屏幕，也可以重定向。 </p>
 <p>Sprintf()是把格式化字符串输出到指定的字符串中。 </p>
