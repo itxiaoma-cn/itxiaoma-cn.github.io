@@ -6,18 +6,28 @@
   <meta name="keywords" content=" GO , GOPL ">
   <meta name="description" content="GOPL10-测试 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="连接Mysql Go语言中的database&#x2F;sql包提供了保证SQL或类SQL数据库的泛用接口，并不提供具体的数据库驱动。  下载依赖go get -u github.com&#x2F;go-sql-driver&#x2F;mysql  连接package main  import (     &quot;database&#x2F;sql&quot;     &quot;fmt&quot;   _ &quot;github">
+<meta name="description" content="01 路由详解Gin框架路由使用的是定制版的httprouter，原理是大量使用公共前缀的树结构。 特点是具有公共前缀的节点也共享一个公共父节点。 基数树 Radix Tree  基数树，或称压缩前缀树，是一种更节省空间的Trie Tree（前缀树）。对于基数树的每个节点，如果该节点是惟一的子树，就会和父节点合并。   注册路由的过程就是构造前缀树的过程，具有公共前缀的节点共享同一个公共父节点。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GoWeb高级03-Mysql和Redis">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/06/03/GoWeb03-Mysql%E5%92%8CRedis/index.html">
+<meta property="og:title" content="GoWeb02-Gin源码解析">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/06/02/GoWeb02-Gin%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="连接Mysql Go语言中的database&#x2F;sql包提供了保证SQL或类SQL数据库的泛用接口，并不提供具体的数据库驱动。  下载依赖go get -u github.com&#x2F;go-sql-driver&#x2F;mysql  连接package main  import (     &quot;database&#x2F;sql&quot;     &quot;fmt&quot;   _ &quot;github">
+<meta property="og:description" content="01 路由详解Gin框架路由使用的是定制版的httprouter，原理是大量使用公共前缀的树结构。 特点是具有公共前缀的节点也共享一个公共父节点。 基数树 Radix Tree  基数树，或称压缩前缀树，是一种更节省空间的Trie Tree（前缀树）。对于基数树的每个节点，如果该节点是惟一的子树，就会和父节点合并。   注册路由的过程就是构造前缀树的过程，具有公共前缀的节点共享同一个公共父节点。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-29T06:49:39.000Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h46unfjsj20bi07ymxk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h4gi6fbgj20cr096t99.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h4hoab15j20e408r0t0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2loyf6hvdj20jg0eswfs.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q3et3vu5j20rg0h80tc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q67xr3d8j21hw0kq0uh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q6a0m2scj20r605mmxd.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q6awiovcj20qo0hiwfj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q67xr3d8j21hw0kq0uh.jpg">
+<meta property="article:published_time" content="2022-06-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-04T01:03:15.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h46unfjsj20bi07ymxk.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -1091,7 +1101,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-05-04 11:38:28'>2021-07-10 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-07-08 20:35:58'>2021-07-10 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1120,12 +1130,12 @@
       
         <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#go-test"><span class="toc-text">go test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E5%87%BD%E6%95%B0"><span class="toc-text">测试函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Errorf"><span class="toc-text">Errorf</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E6%A0%BC%E9%A9%B1%E5%8A%A8%E6%B5%8B%E8%AF%95"><span class="toc-text">表格驱动测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%B5%8B%E8%AF%95"><span class="toc-text">随机测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%AA%E5%91%BD%E4%BB%A4"><span class="toc-text">测试一个命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E8%A6%86%E7%9B%96%E7%8E%87"><span class="toc-text">测试覆盖率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95"><span class="toc-text">基准测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%96%E6%9E%90"><span class="toc-text">剖析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F"><span class="toc-text">非测试程序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E5%87%BD%E6%95%B0"><span class="toc-text">示例函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%A1%A3"><span class="toc-text">文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%A4%BA%E4%BE%8B%E5%87%BD%E6%95%B0%E6%B5%8B%E8%AF%95"><span class="toc-text">运行示例函数测试</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></div></p>
 <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h3 id="go-test"><a href="#go-test" class="headerlink" title="go test"></a>go test</h3><p>go test命令是一个按照一定的约定和组织来测试代码的程序。</p>
-<p>在包目录内，所有以<code>_test.go</code>为后缀名的源文件在执行go build时不会被构建成包的一部分，它们是go test测试的一部分。</p>
+<p><strong>在包目录内，所有以<code>_test.go</code>为后缀名的源文件在执行go build时不会被构建成包的一部分，它们是go test测试的一部分。</strong></p>
 <p>在<code>*_test.go</code>文件中，有三种类型的函数：测试函数、基准测试（benchmark）函数、示例函数。</p>
 <ul>
-<li>一个测试函数是以Test为函数名前缀的函数，用于测试程序的一些逻辑行为是否正确；go test命令会调用这些测试函数并报告测试结果是PASS或FAIL。</li>
-<li>基准测试函数是以Benchmark为函数名前缀的函数，它们用于衡量一些函数的性能；go test命令会多次运行基准测试函数以计算一个平均的执行时间。</li>
-<li>示例函数是以Example为函数名前缀的函数，提供一个由编译器保证正确性的示例文档。我们将在11.2节讨论测试函数的所有细节，并在11.4节讨论基准测试函数的细节，然后在11.6节讨论示例函数的细节。</li>
+<li><strong>测试函数是以Test为函数名前缀的函数，用于测试程序的一些逻辑行为是否正确；</strong>go test命令会调用这些测试函数并报告测试结果是PASS或FAIL。</li>
+<li><strong>基准测试函数是以Benchmark为函数名前缀的函数，它们用于衡量一些函数的性能；</strong>go test命令会多次运行基准测试函数以计算一个平均的执行时间。</li>
+<li><strong>示例函数是以Example为函数名前缀的函数，提供一个由编译器保证正确性的示例文档。</strong>我们将在11.2节讨论测试函数的所有细节，并在11.4节讨论基准测试函数的细节，然后在11.6节讨论示例函数的细节。</li>
 </ul>
 <p>go test命令会遍历所有的<code>*_test.go</code>文件中符合上述命名规则的函数，生成一个临时的main包用于调用相应的测试函数，接着构建并运行、报告测试结果，最后清理测试中生成的临时文件。</p>
 <h3 id="测试函数"><a href="#测试函数" class="headerlink" title="测试函数"></a>测试函数</h3><p>名：</p>
@@ -1133,12 +1143,12 @@
     // ...
 &#125;
 </code></pre>
-<p>测试函数的名字必须以Test开头，可选的后缀名必须以大写字母开头：</p>
+<p><strong>测试函数的名字必须以Test开头，可选的后缀名必须以大写字母开头：</strong></p>
 <pre><code class="Go">func TestSin(t *testing.T) &#123; /* ... */ &#125;
 func TestCos(t *testing.T) &#123; /* ... */ &#125;
 func TestLog(t *testing.T) &#123; /* ... */ &#125;
 </code></pre>
-<p>其中t参数用于报告测试失败和附加的日志信息。</p>
+<p>其中<strong>t参数用于报告测试失败和附加的日志信息。</strong></p>
 <p>让我们定义一个实例包gopl.io/ch11/word1，其中只有一个函数IsPalindrome用于检查一个字符串是否从前向后和从后向前读都是一样的。（下面这个实现对于一个字符串是否是回文字符串前后重复测试了两次；我们稍后会再讨论这个问题。）</p>
 <pre><code class="Go">// Package word provides utilities for word games.
 package word
@@ -1179,7 +1189,7 @@ func TestNonPalindrome(t *testing.T) &#123;
 $ go test
 ok   gopl.io/ch11/word1  0.008s
 </code></pre>
-<h4 id="Errorf"><a href="#Errorf" class="headerlink" title="Errorf"></a>Errorf</h4><p>为了避免两次输入较长的字符串，我们使用了提供了有类似Printf格式化功能的 Errorf函数来汇报错误结果。</p>
+<h4 id="Errorf"><a href="#Errorf" class="headerlink" title="Errorf"></a>Errorf</h4><p>为了避免两次输入较长的字符串，我们使用了提供了有类似Printf格式化功能的Errorf函数来汇报错误结果。</p>
 <p>当添加了这两个测试用例之后，<code>go test</code>返回了测试失败的信息。</p>
 <pre><code class="Go">func TestFrenchPalindrome(t *testing.T) &#123;
     if !IsPalindrome(&quot;été&quot;) &#123;
@@ -1202,9 +1212,9 @@ func TestCanalPalindrome(t *testing.T) &#123;
 FAIL
 FAIL    gopl.io/ch11/word1  0.014s
 </code></pre>
-<p>先编写测试用例并观察到测试用例触发了和用户报告的错误相同的描述是一个好的测试习惯。只有这样，我们才能定位我们要真正解决的问题。</p>
+<p>先编写测试用例，并观察到测试用例触发了和用户报告的错误相同的描述是一个好的测试习惯。只有这样，我们才能定位我们要真正解决的问题。</p>
 <h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>先写测试用例的另外的好处是，运行测试通常会比手工描述报告的处理更快，这让我们可以进行快速地迭代。如果测试集有很多运行缓慢的测试，我们可以通过只选择运行某些特定的测试来加快测试速度。</p>
-<p>参数<code>-v</code>可用于打印每个测试函数的名字和运行时间：</p>
+<p><strong>参数<code>-v</code>可用于打印每个测试函数的名字和运行时间：</strong></p>
 <pre><code>$ go test -v
 === RUN TestPalindrome
 --- PASS: TestPalindrome (0.00s)
@@ -1220,7 +1230,7 @@ FAIL
 exit status 1
 FAIL    gopl.io/ch11/word1  0.017s
 </code></pre>
-<p>参数<code>-run</code>对应一个正则表达式，只有测试函数名被它正确匹配的测试函数才会被<code>go test</code>测试命令运行：</p>
+<p><strong>参数<code>-run</code>对应一个正则表达式，只有测试函数名被它正确匹配的测试函数才会被<code>go test</code>测试命令运行：</strong></p>
 <pre><code>$ go test -v -run=&quot;French|Canal&quot;
 === RUN TestFrenchPalindrome
 --- FAIL: TestFrenchPalindrome (0.00s)
@@ -1289,7 +1299,8 @@ func IsPalindrome(s string) bool &#123;
 ok      gopl.io/ch11/word2      0.015s
 </code></pre>
 <p>这种表格驱动的测试在Go语言中很常见。我们可以很容易地向表格添加新的测试数据，并且后面的测试逻辑也没有冗余，这样我们可以有更多的精力去完善错误信息。</p>
-<p>失败测试的输出并不包括调用t.Errorf时刻的堆栈调用信息。和其他编程语言或测试框架的assert断言不同，t.Errorf调用也没有引起panic异常或停止测试的执行。即使表格中前面的数据导致了测试的失败，表格后面的测试数据依然会运行测试，因此在一个测试中我们可能了解多个失败的信息。</p>
+<p>失败测试的输出并不包括调用t.Errorf时刻的堆栈调用信息。和其他编程语言或测试框架的assert断言不同，t.Errorf调用也没有引起panic异常或停止测试的执行。</p>
+<p><strong>即使表格中前面的数据导致了测试的失败，表格后面的测试数据依然会运行测试，因此在一个测试中我们可能了解多个失败的信息。</strong></p>
 <p><strong>如果我们真的需要停止测试，或许是因为初始化失败或可能是早先的错误导致了后续错误等原因，我们可以使用t.Fatal或t.Fatalf停止当前测试函数。</strong>它们必须在和测试函数同一个goroutine内调用。</p>
 <p>测试失败的信息一般的形式是“f(x) = y, want z”，其中f(x)解释了失败的操作和对应的输入，y是实际的运行结果，z是期望的正确的结果。</p>
 <p>就像前面检查回文字符串的例子，实际的函数用于f(x)部分。显示x是表格驱动型测试中比较重要的部分，因为同一个断言可能对应不同的表格项执行多次。</p>
@@ -1478,7 +1489,7 @@ Open a web browser displaying annotated source code:
     go tool cover -html=c.out
 ...
 </code></pre>
-<p><code>go tool</code>命令运行Go工具链的底层可执行程序。这些底层可执行程序放在$GOROOT/pkg/tool/${GOOS}_${GOARCH}目录。因为有<code>go build</code>命令的原因，我们很少直接调用这些底层工具。</p>
+<p><code>go tool</code>命令运行Go工具链的底层可执行程序。这些底层可执行程序放在<code>$GOROOT/pkg/tool/$&#123;GOOS&#125;_$&#123;GOARCH&#125;</code>目录。因为有<code>go build</code>命令的原因，我们很少直接调用这些底层工具。</p>
 <p>现在我们可以用<code>-coverprofile</code>标志参数重新运行测试：</p>
 <pre><code>$ go test -run=Coverage -coverprofile=c.out gopl.io/ch7/eval
 ok      gopl.io/ch7/eval         0.032s      coverage: 68.5% of statements
@@ -1554,7 +1565,7 @@ func Benchmark1000(b *testing.B)       &#123; benchmark(b, 1000) &#125;
 </code></pre>
 <p>通过函数参数来指定输入的大小，但是参数变量对于每个具体的基准测试都是固定的。要避免直接修改b.N来控制输入的大小。除非你将它作为一个固定大小的迭代计算输入，否则基准测试的结果将毫无意义。</p>
 <p>比较型的基准测试反映出的模式在程序设计阶段是很有帮助的，但是即使程序完工了也应当保留基准测试代码。因为随着项目的发展，或者是输入的增加，或者是部署到新的操作系统或不同的处理器，我们可以再次用基准测试来帮助我们改进设计。</p>
-<h3 id="剖析"><a href="#剖析" class="headerlink" title="剖析"></a>剖析</h3><p>剖析技术是基于程序执行期间一些自动抽样，然后在收尾时进行推断；最后产生的统计结果就称为剖析数据。</p>
+<h3 id="剖析"><a href="#剖析" class="headerlink" title="剖析"></a>剖析</h3><p><strong>剖析技术是基于程序执行期间一些自动抽样，然后在收尾时进行推断；最后产生的统计结果就称为剖析数据。</strong></p>
 <p>Go语言支持多种类型的剖析性能分析，每一种关注不同的方面，但它们都涉及到每个采样记录的感兴趣的一系列事件消息，每个事件都包含函数调用时函数调用堆栈的信息。内建的<code>go test</code>工具对几种分析方式都提供了支持。</p>
 <ul>
 <li><p>CPU剖析数据标识了最耗CPU时间的函数。在每个CPU上运行的线程在每隔几毫秒都会遇到操作系统的中断事件，每次中断时都会记录一个剖析数据然后恢复正常的运行。</p>

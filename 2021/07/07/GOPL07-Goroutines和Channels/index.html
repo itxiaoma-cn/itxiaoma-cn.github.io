@@ -6,18 +6,28 @@
   <meta name="keywords" content=" GO , GOPL ">
   <meta name="description" content="GOPL07-Goroutines和Channels | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="连接Mysql Go语言中的database&#x2F;sql包提供了保证SQL或类SQL数据库的泛用接口，并不提供具体的数据库驱动。  下载依赖go get -u github.com&#x2F;go-sql-driver&#x2F;mysql  连接package main  import (     &quot;database&#x2F;sql&quot;     &quot;fmt&quot;   _ &quot;github">
+<meta name="description" content="01 路由详解Gin框架路由使用的是定制版的httprouter，原理是大量使用公共前缀的树结构。 特点是具有公共前缀的节点也共享一个公共父节点。 基数树 Radix Tree  基数树，或称压缩前缀树，是一种更节省空间的Trie Tree（前缀树）。对于基数树的每个节点，如果该节点是惟一的子树，就会和父节点合并。   注册路由的过程就是构造前缀树的过程，具有公共前缀的节点共享同一个公共父节点。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GoWeb高级03-Mysql和Redis">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/06/03/GoWeb03-Mysql%E5%92%8CRedis/index.html">
+<meta property="og:title" content="GoWeb02-Gin源码解析">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/06/02/GoWeb02-Gin%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="连接Mysql Go语言中的database&#x2F;sql包提供了保证SQL或类SQL数据库的泛用接口，并不提供具体的数据库驱动。  下载依赖go get -u github.com&#x2F;go-sql-driver&#x2F;mysql  连接package main  import (     &quot;database&#x2F;sql&quot;     &quot;fmt&quot;   _ &quot;github">
+<meta property="og:description" content="01 路由详解Gin框架路由使用的是定制版的httprouter，原理是大量使用公共前缀的树结构。 特点是具有公共前缀的节点也共享一个公共父节点。 基数树 Radix Tree  基数树，或称压缩前缀树，是一种更节省空间的Trie Tree（前缀树）。对于基数树的每个节点，如果该节点是惟一的子树，就会和父节点合并。   注册路由的过程就是构造前缀树的过程，具有公共前缀的节点共享同一个公共父节点。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-29T06:49:39.000Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h46unfjsj20bi07ymxk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h4gi6fbgj20cr096t99.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h4hoab15j20e408r0t0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2loyf6hvdj20jg0eswfs.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q3et3vu5j20rg0h80tc.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q67xr3d8j21hw0kq0uh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q6a0m2scj20r605mmxd.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q6awiovcj20qo0hiwfj.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q67xr3d8j21hw0kq0uh.jpg">
+<meta property="article:published_time" content="2022-06-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-04T01:03:15.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h46unfjsj20bi07ymxk.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -1091,7 +1101,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-29 22:16:19'>2021-07-07 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-07-08 15:34:32'>2021-07-07 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1121,7 +1131,7 @@
         <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Goroutines"><span class="toc-text">Goroutines</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CSP"><span class="toc-text">CSP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Goroutines-1"><span class="toc-text">Goroutines</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-%E5%B9%B6%E5%8F%91%E7%9A%84Clock%E6%9C%8D%E5%8A%A1"><span class="toc-text">示例: 并发的Clock服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-%E5%B9%B6%E5%8F%91%E7%9A%84Echo%E6%9C%8D%E5%8A%A1"><span class="toc-text">示例: 并发的Echo服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Channels"><span class="toc-text">Channels</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E5%8F%97"><span class="toc-text">发送和接受</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Close"><span class="toc-text">Close</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8D%E5%B8%A6%E7%BC%93%E5%AD%98%E7%9A%84Channels"><span class="toc-text">不带缓存的Channels</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E8%81%94%E7%9A%84Channels"><span class="toc-text">串联的Channels</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E6%96%B9%E5%90%91%E7%9A%84Channel"><span class="toc-text">单方向的Channel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%A6%E7%BC%93%E5%AD%98%E7%9A%84Channels"><span class="toc-text">带缓存的Channels</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#goroutines%E6%B3%84%E6%BC%8F"><span class="toc-text">goroutines泄漏</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E7%9A%84%E5%BE%AA%E7%8E%AF"><span class="toc-text">并发的循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-%E5%B9%B6%E5%8F%91%E7%9A%84Web%E7%88%AC%E8%99%AB"><span class="toc-text">示例: 并发的Web爬虫</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%981"><span class="toc-text">问题1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%982"><span class="toc-text">问题2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8Eselect%E7%9A%84%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="toc-text">基于select的多路复用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#goroutine%E6%B3%84%E9%9C%B2"><span class="toc-text">goroutine泄露</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-%E5%B9%B6%E5%8F%91%E7%9A%84%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86"><span class="toc-text">示例: 并发的目录遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%B8%BB%E5%87%BD%E6%95%B0"><span class="toc-text">1.主函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%B9%B6%E5%8F%91"><span class="toc-text">3.并发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%8E%A7%E5%88%B6%E5%B9%B6%E5%8F%91%E6%95%B0"><span class="toc-text">4.控制并发数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91%E7%9A%84%E9%80%80%E5%87%BA"><span class="toc-text">并发的退出</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B9%BF%E6%92%AD%E6%9C%BA%E5%88%B6"><span class="toc-text">广播机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-%E8%81%8A%E5%A4%A9%E6%9C%8D%E5%8A%A1"><span class="toc-text">示例: 聊天服务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#listen%E5%92%8Caccept"><span class="toc-text">listen和accept</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-text">客户端</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></li></ol></div></p>
 <h1 id="Goroutines"><a href="#Goroutines" class="headerlink" title="Goroutines"></a>Goroutines</h1><h3 id="CSP"><a href="#CSP" class="headerlink" title="CSP"></a>CSP</h3><p>顺序通信进程（communicating sequential processes）被简称为CSP。</p>
 <p>CSP是一种现代的并发编程模型，在这种编程模型中值会在不同的运行实例（goroutine）中传递，尽管大多数情况下仍然是被限制在单一实例中。</p>
-<h3 id="Goroutines-1"><a href="#Goroutines-1" class="headerlink" title="Goroutines"></a>Goroutines</h3><p>在Go语言中，每一个并发的执行单元叫作一个goroutine。</p>
+<h3 id="Goroutines-1"><a href="#Goroutines-1" class="headerlink" title="Goroutines"></a>Goroutines</h3><p><strong>在Go语言中，每一个并发的执行单元叫作一个goroutine。</strong></p>
 <p>当一个程序启动时，其主函数即在一个单独的goroutine中运行，我们叫它main goroutine。</p>
 <p>新的goroutine会用go语句来创建。在语法上，go语句是一个普通的函数或方法调用前加上关键字go。go语句会使其语句中的函数在一个新创建的goroutine中运行。</p>
 <pre><code class="go">f()    // call f(); wait for it to return
@@ -1379,7 +1389,8 @@ $ killall reverb2
 <p>和map类似，channel也对应一个make创建的底层数据结构的引用。</p>
 <p>当我们复制一个channel或用于函数参数传递时，我们只是拷贝了一个channel引用，因此调用者和被调用者将引用同一个channel对象。</p>
 <p>和其它的引用类型一样，channel的零值也是nil。</p>
-<p><strong>两个相同类型的channel可以使用==运算符比较。</strong>如果两个channel引用的是相同的对象，那么比较的结果为真。一个channel也可以和nil进行比较。</p>
+<p><strong>两个相同类型的channel可以使用==运算符比较。如果两个channel引用的是相同的对象，那么比较的结果为真。</strong></p>
+<p>一个channel也可以和nil进行比较。</p>
 <h4 id="发送和接受"><a href="#发送和接受" class="headerlink" title="发送和接受"></a>发送和接受</h4><p>一个channel有发送和接受两个主要操作，都是通信行为。</p>
 <p>一个发送语句将一个值从一个goroutine通过channel发送到另一个执行接收操作的goroutine。</p>
 <p>发送和接收两个操作都使用<code>&lt;-</code>运算符。</p>
@@ -1401,12 +1412,12 @@ ch = make(chan int, 3) // buffered channel with capacity 3
 </code></pre>
 <h4 id="不带缓存的Channels"><a href="#不带缓存的Channels" class="headerlink" title="不带缓存的Channels"></a>不带缓存的Channels</h4><p><strong>一个基于无缓存Channels的发送操作将导致发送者goroutine阻塞</strong>，直到另一个goroutine在相同的Channels上执行接收操作，当发送的值通过Channels成功传输之后，两个goroutine可以继续执行后面的语句。</p>
 <p>如果接收操作先发生，那么接收者goroutine也将阻塞，直到有另一个goroutine在相同的Channels上执行发送操作。</p>
-<p>基于无缓存Channels的发送和接收操作将导致两个goroutine做一次同步操作。因为这个原因，无缓存Channels有时候也被称为同步Channels。</p>
-<p>。当通过一个无缓存Channels发送数据时，接收者收到数据发生在再次唤醒唤醒发送者goroutine之前（译注：<strong><em>happens before</em>，这是Go语言并发内存模型的一个关键术语！</strong>）。</p>
+<p>基于无缓存Channels的发送和接收操作将导致两个goroutine做一次同步操作。因为这个原因，<strong>无缓存Channels有时候也被称为同步Channels。</strong></p>
+<p>当通过一个无缓存Channels发送数据时，接收者收到数据发生在再次唤醒唤醒发送者goroutine之前（译注：<strong><em>happens before</em>，这是Go语言并发内存模型的一个关键术语！</strong>）。</p>
 <p>在讨论并发编程时，当我们说x事件在y事件之前发生（<em>happens before</em>），我们并不是说x事件在时间上比y时间更早；我们要表达的意思是要保证在此之前的事件都已经完成了，例如在此之前的更新某些变量的操作已经完成，你可以放心依赖这些已完成的事件了。</p>
 <p>当我们说x事件既不是在y事件之前发生也不是在y事件之后发生，我们就说x事件和y事件是并发的。这并不是意味着x事件和y事件就一定是同时发生的，我们只是不能确定这两个事件发生的先后顺序。</p>
 <p>当两个goroutine并发访问了相同的变量时，我们有必要保证某些事件的执行顺序，以避免出现某些并发问题。</p>
-<p>需要让主goroutine等待后台goroutine完成工作后再退出，可以使用一个channel来同步两个goroutine：</p>
+<p><strong>需要让主goroutine等待后台goroutine完成工作后再退出，可以使用一个channel来同步两个goroutine：</strong></p>
 <pre><code class="Go">func main() &#123;
     conn, err := net.Dial(&quot;tcp&quot;, &quot;localhost:8000&quot;)
     if err != nil &#123;
@@ -1504,13 +1515,13 @@ go func() &#123;
     &#125;
 &#125;
 </code></pre>
-<p>只有当需要告诉接收者goroutine，所有的数据已经全部发送时才需要关闭channel。</p>
-<p>不管一个channel是否被关闭，当它没有被引用时将会被Go语言的垃圾自动回收器回收。（不要将关闭一个打开文件的操作和关闭一个channel操作混淆。<strong>对于每个打开的文件，都需要在不使用的时候调用对应的Close方法来关闭文件。</strong>）</p>
+<p><strong>只有当需要告诉接收者goroutine，所有的数据已经全部发送时才需要关闭channel。</strong></p>
+<p><strong>不管一个channel是否被关闭，当它没有被引用时将会被Go语言的垃圾自动回收器回收。</strong>（不要将关闭一个打开文件的操作和关闭一个channel操作混淆。对于每个打开的文件，都需要在不使用的时候调用对应的Close方法来关闭文件。）</p>
 <p><strong>试图重复关闭一个channel将导致panic异常，试图关闭一个nil值的channel也将导致panic异常。</strong></p>
 <h4 id="单方向的Channel"><a href="#单方向的Channel" class="headerlink" title="单方向的Channel"></a>单方向的Channel</h4><p>当一个channel作为一个函数参数时，它一般总是被专门用于只发送或者只接收。</p>
 <p>类型<code>chan&lt;- int</code>表示一个只发送int的channel，只能发送不能接收。</p>
 <p>相反，类型<code>&lt;-chan int</code>表示一个只接收int的channel，只能接收不能发送。</p>
-<p><strong>只有在发送者所在的goroutine才会调用close函数，因此对一个只接收的channel调用close将是一个编译错误。</strong></p>
+<p><strong>只有在发送者所在的goroutine才会调用close函数，对一个只接收的channel调用close将是一个编译错误。</strong></p>
 <pre><code class="Go">func counter(out chan&lt;- int) &#123;
     for x := 0; x &lt; 100; x++ &#123;
         out &lt;- x
@@ -1570,7 +1581,8 @@ ch &lt;- &quot;C&quot;
 fmt.Println(&lt;-ch) // &quot;C&quot;
 </code></pre>
 <p>在这个例子中，发送和接收操作都发生在同一个goroutine中，但是在真实的程序中它们一般由不同的goroutine执行。</p>
-<p><strong>Go语言新手有时候会将一个带缓存的channel当作同一个goroutine中的队列使用，虽然语法看似简单，但实际上这是一个错误。</strong>Channel和goroutine的调度器机制是紧密相连的，如果没有其他goroutine从channel接收，发送者——或许是整个程序——将会面临永远阻塞的风险。如果你只是需要一个简单的队列，使用slice就可以了。</p>
+<p><strong>Go语言新手有时候会将一个带缓存的channel当作同一个goroutine中的队列使用，虽然语法看似简单，但实际上这是一个错误。</strong>Channel和goroutine的调度器机制是紧密相连的，如果没有其他goroutine从channel接收，发送者——或许是整个程序——将会面临永远阻塞的风险。</p>
+<p><strong>如果你只是需要一个简单的队列，使用slice就可以了。</strong></p>
 <p>下面的例子展示了一个使用了带缓存channel的应用。它并发地向三个镜像站点发出请求，三个镜像站点分散在不同的地理位置。它们分别将收到的响应发送到带缓存channel，最后接收者只接收第一个收到的响应，也就是最快的那个响应。</p>
 <pre><code class="Go">func mirroredQuery() string &#123;
     responses := make(chan string, 3)
@@ -1582,8 +1594,8 @@ fmt.Println(&lt;-ch) // &quot;C&quot;
 
 func request(hostname string) (response string) &#123; /* ... */ &#125;
 </code></pre>
-<h5 id="goroutines泄漏"><a href="#goroutines泄漏" class="headerlink" title="goroutines泄漏"></a>goroutines泄漏</h5><p>如果我们使用了无缓存的channel，那么两个慢的goroutines将会因为没有人接收而被永远卡住。这种情况，称为goroutines泄漏，这将是一个BUG。</p>
-<p>和垃圾变量不同，泄漏的goroutines并不会被自动回收，因此确保每个不再需要的goroutine能正常退出是重要的。</p>
+<h5 id="goroutines泄漏"><a href="#goroutines泄漏" class="headerlink" title="goroutines泄漏"></a>goroutines泄漏</h5><p>如果我们使用了无缓存的channel，那么两个<strong>慢的goroutines将会因为没有人接收而被永远卡住。这种情况，称为goroutines泄漏，这将是一个BUG。</strong></p>
+<p><strong>和垃圾变量不同，泄漏的goroutines并不会被自动回收，因此确保每个不再需要的goroutine能正常退出是重要的。</strong></p>
 <p>无缓存channel更强地保证了每个发送操作与相应的同步接收操作；带缓存channel，这些操作是解耦的。</p>
 <h3 id="并发的循环"><a href="#并发的循环" class="headerlink" title="并发的循环"></a>并发的循环</h3><p>下面的程序会循环迭代一些图片文件名，并为每一张图片生成一个缩略图：</p>
 <pre><code class="go">// makeThumbnails makes thumbnails of the specified files.
@@ -1595,7 +1607,7 @@ func makeThumbnails(filenames []string) &#123;
     &#125;
 &#125;
 </code></pre>
-<p>这种子问题都是完全彼此独立的问题被叫做易并行问题。</p>
+<p>这种<strong>子问题都是完全彼此独立的问题被叫做易并行问题。</strong></p>
 <p>1.并行地执行这些操作，从而将文件IO的延迟隐藏掉：</p>
 <pre><code class="go">// NOTE: incorrect!
 func makeThumbnails2(filenames []string) &#123;
@@ -1621,7 +1633,7 @@ func makeThumbnails3(filenames []string) &#123;
 &#125;
 </code></pre>
 <p>变量f是被所有的匿名函数值所共享，且会被连续的循环迭代所更新的。</p>
-<p>显式地添加这个参数，我们能够确保使用的f是当go语句执行时的“当前”那个f。</p>
+<p><strong>显式地添加这个参数，我们能够确保使用的f是当go语句执行时的“当前”那个f。</strong></p>
 <p>3.从每一个worker goroutine往主goroutine中返回值：</p>
 <pre><code class="go">// makeThumbnails4 makes thumbnails for the specified files in parallel.
 // It returns an error if any step failed.
@@ -1644,7 +1656,7 @@ func makeThumbnails4(filenames []string) error &#123;
     return nil
 &#125;
 </code></pre>
-<p>这个程序有一个微妙的bug。当它遇到第一个非nil的error时会直接将error返回到调用方，使得没有一个goroutine去排空errors channel。这样剩下的worker goroutine在向这个channel中发送值时，都会永远地阻塞下去，并且永远都不会退出。这种情况叫做goroutine泄露（§8.4.4），可能会导致整个程序卡住或者跑出out of memory的错误。</p>
+<p>这个程序有一个微妙的bug。当它遇到第一个非nil的error时会直接将error返回到调用方，使得没有一个goroutine去排空errors channel。这样剩下的worker goroutine在向这个channel中发送值时，都会永远地阻塞下去，并且永远都不会退出。这种情况叫做goroutine泄露，可能会导致整个程序卡住或者跑出out of memory的错误。</p>
 <p>4.解决goroutine泄露：</p>
 <p>用一个具有合适大小的buffered channel，这样这些worker goroutine向channel中发送错误时就不会被阻塞。</p>
 <pre><code class="go">// makeThumbnails5 makes thumbnails for the specified files in parallel.
@@ -1712,7 +1724,7 @@ func makeThumbnails6(filenames &lt;-chan string) int64 &#123;
 &#125;
 </code></pre>
 <p>注意Add和Done方法的不对称。</p>
-<p>Add是为计数器加一，必须在worker goroutine开始之前调用，而不是在goroutine中；否则的话我们没办法确定Add是在”closer” goroutine调用Wait之前被调用。</p>
+<p><strong>Add是为计数器加一，必须在worker goroutine开始之前调用，而不是在goroutine中</strong>；否则的话我们没办法确定Add是在”closer” goroutine调用Wait之前被调用。</p>
 <p>并且Add还有一个参数，但Done却没有任何参数；其实它和Add(-1)是等价的。</p>
 <p>我们使用defer来确保计数器即使是在出错的情况下依然能够正确地被减掉。</p>
 <p>上面的程序代码结构是当我们使用并发循环，但又不知道迭代次数时很通常而且很地道的写法。</p>
@@ -1807,7 +1819,7 @@ func crawl(url string) []string &#123;
 &#125;
 </code></pre>
 <p>主循环会在n减为0时终止，这时候说明没活可干了。</p>
-<h3 id="基于select的多路复用"><a href="#基于select的多路复用" class="headerlink" title="基于select的多路复用"></a>基于select的多路复用</h3><p><code>time.Tick()</code> 函数返回的是一个 <code>channel</code> ，每隔指定的时间就会有数据从 <code>channel</code> 中出来。</p>
+<h3 id="基于select的多路复用"><a href="#基于select的多路复用" class="headerlink" title="基于select的多路复用"></a>基于select的多路复用</h3><p><strong><code>time.Tick()</code> 函数返回的是一个 <code>channel</code> ，每隔指定的时间就会有数据从 <code>channel</code> 中出来。</strong></p>
 <pre><code class="go">func main() &#123;
     fmt.Println(&quot;Commencing countdown.&quot;)
     tick := time.Tick(1 * time.Second)
@@ -1827,7 +1839,7 @@ go func() &#123;
 &#125;()
 </code></pre>
 <p>现在每一次计数循环的迭代都需要等待两个channel中的其中一个返回事件了：当一切正常时的ticker channel或者异常时返回的abort事件。</p>
-<p>我们无法做到从每一个channel中接收信息，如果我们这么做的话，如果第一个channel中没有事件发过来那么程序就会立刻被阻塞，这样我们就无法收到第二个channel中发过来的事件。</p>
+<p><strong>我们无法做到从每一个channel中接收信息，如果我们这么做的话，如果第一个channel中没有事件发过来那么程序就会立刻被阻塞，这样我们就无法收到第二个channel中发过来的事件。</strong></p>
 <p>这时候我们需要多路复用（multiplex）这些操作了，为了能够多路复用，我们使用了select语句。</p>
 <pre><code class="go">select &#123;
 case &lt;-ch1:
@@ -1879,7 +1891,6 @@ func main() &#123;
 x
 Launch aborted!
 </code></pre>
-<p>例2：</p>
 <p>当countdown函数返回时，它会停止从tick中接收事件，但是ticker这个goroutine还依然存活，继续徒劳地尝试向channel中发送值，然而这时候已经没有其它的goroutine会从该channel中接收值了——这被称为goroutine泄露。</p>
 <p>例2：</p>
 <pre><code class="go">ch := make(chan int, 1)
@@ -2057,7 +2068,7 @@ $ ./du2 -v $HOME /usr /bin /etc
 175931 files  62.2 GB
 213201 files  62.7 GB
 </code></pre>
-<h4 id="3-并发"><a href="#3-并发" class="headerlink" title="3.并发"></a>3.并发</h4><p>对每一个walkDir的调用创建一个新的goroutine。它使用sync.WaitGroup（§8.5）来对仍旧活跃的walkDir调用进行计数，另一个goroutine会在计数器减为零的时候将fileSizes这个channel关闭。</p>
+<h4 id="3-并发"><a href="#3-并发" class="headerlink" title="3.并发"></a>3.并发</h4><p>对每一个walkDir的调用创建一个新的goroutine。它使用sync.WaitGroup来对仍旧活跃的walkDir调用进行计数，另一个goroutine会在计数器减为零的时候将fileSizes这个channel关闭。</p>
 <pre><code class="go">func main() &#123;
     // ...determine roots...
     // Traverse each root of the file tree in parallel.
@@ -2096,7 +2107,7 @@ func dirents(dir string) []os.FileInfo &#123;
     defer func() &#123; &lt;-sema &#125;() // release token
     // ...
 </code></pre>
-<h3 id="并发的退出"><a href="#并发的退出" class="headerlink" title="并发的退出"></a>并发的退出</h3><p>Go语言并没有提供在一个goroutine中终止另一个goroutine的方法，因为这样会导致goroutine之间的共享变量落在未定义的状态上。</p>
+<h3 id="并发的退出"><a href="#并发的退出" class="headerlink" title="并发的退出"></a>并发的退出</h3><p><strong>Go语言并没有提供在一个goroutine中终止另一个goroutine的方法，因为这样会导致goroutine之间的共享变量落在未定义的状态上。</strong></p>
 <h4 id="广播机制"><a href="#广播机制" class="headerlink" title="广播机制"></a>广播机制</h4><p>不要向channel发送值，而是用关闭一个channel来进行广播。</p>
 <p>1.工具函数，cancelled，这个函数在被调用的时候会轮询退出状态。</p>
 <pre><code class="go">var done = make(chan struct&#123;&#125;)

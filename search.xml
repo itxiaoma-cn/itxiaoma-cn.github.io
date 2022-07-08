@@ -16094,7 +16094,7 @@ html body div div h2: B Definitions for Character Normalization
     <content><![CDATA[<p>[TOC]</p>
 <h1 id="Goroutines"><a href="#Goroutines" class="headerlink" title="Goroutines"></a>Goroutines</h1><h3 id="CSP"><a href="#CSP" class="headerlink" title="CSP"></a>CSP</h3><p>顺序通信进程（communicating sequential processes）被简称为CSP。</p>
 <p>CSP是一种现代的并发编程模型，在这种编程模型中值会在不同的运行实例（goroutine）中传递，尽管大多数情况下仍然是被限制在单一实例中。</p>
-<h3 id="Goroutines-1"><a href="#Goroutines-1" class="headerlink" title="Goroutines"></a>Goroutines</h3><p>在Go语言中，每一个并发的执行单元叫作一个goroutine。</p>
+<h3 id="Goroutines-1"><a href="#Goroutines-1" class="headerlink" title="Goroutines"></a>Goroutines</h3><p><strong>在Go语言中，每一个并发的执行单元叫作一个goroutine。</strong></p>
 <p>当一个程序启动时，其主函数即在一个单独的goroutine中运行，我们叫它main goroutine。</p>
 <p>新的goroutine会用go语句来创建。在语法上，go语句是一个普通的函数或方法调用前加上关键字go。go语句会使其语句中的函数在一个新创建的goroutine中运行。</p>
 <pre><code class="go">f()    // call f(); wait for it to return
@@ -16352,7 +16352,8 @@ $ killall reverb2
 <p>和map类似，channel也对应一个make创建的底层数据结构的引用。</p>
 <p>当我们复制一个channel或用于函数参数传递时，我们只是拷贝了一个channel引用，因此调用者和被调用者将引用同一个channel对象。</p>
 <p>和其它的引用类型一样，channel的零值也是nil。</p>
-<p><strong>两个相同类型的channel可以使用==运算符比较。</strong>如果两个channel引用的是相同的对象，那么比较的结果为真。一个channel也可以和nil进行比较。</p>
+<p><strong>两个相同类型的channel可以使用==运算符比较。如果两个channel引用的是相同的对象，那么比较的结果为真。</strong></p>
+<p>一个channel也可以和nil进行比较。</p>
 <h4 id="发送和接受"><a href="#发送和接受" class="headerlink" title="发送和接受"></a>发送和接受</h4><p>一个channel有发送和接受两个主要操作，都是通信行为。</p>
 <p>一个发送语句将一个值从一个goroutine通过channel发送到另一个执行接收操作的goroutine。</p>
 <p>发送和接收两个操作都使用<code>&lt;-</code>运算符。</p>
@@ -16374,12 +16375,12 @@ ch = make(chan int, 3) // buffered channel with capacity 3
 </code></pre>
 <h4 id="不带缓存的Channels"><a href="#不带缓存的Channels" class="headerlink" title="不带缓存的Channels"></a>不带缓存的Channels</h4><p><strong>一个基于无缓存Channels的发送操作将导致发送者goroutine阻塞</strong>，直到另一个goroutine在相同的Channels上执行接收操作，当发送的值通过Channels成功传输之后，两个goroutine可以继续执行后面的语句。</p>
 <p>如果接收操作先发生，那么接收者goroutine也将阻塞，直到有另一个goroutine在相同的Channels上执行发送操作。</p>
-<p>基于无缓存Channels的发送和接收操作将导致两个goroutine做一次同步操作。因为这个原因，无缓存Channels有时候也被称为同步Channels。</p>
-<p>。当通过一个无缓存Channels发送数据时，接收者收到数据发生在再次唤醒唤醒发送者goroutine之前（译注：<strong><em>happens before</em>，这是Go语言并发内存模型的一个关键术语！</strong>）。</p>
+<p>基于无缓存Channels的发送和接收操作将导致两个goroutine做一次同步操作。因为这个原因，<strong>无缓存Channels有时候也被称为同步Channels。</strong></p>
+<p>当通过一个无缓存Channels发送数据时，接收者收到数据发生在再次唤醒唤醒发送者goroutine之前（译注：<strong><em>happens before</em>，这是Go语言并发内存模型的一个关键术语！</strong>）。</p>
 <p>在讨论并发编程时，当我们说x事件在y事件之前发生（<em>happens before</em>），我们并不是说x事件在时间上比y时间更早；我们要表达的意思是要保证在此之前的事件都已经完成了，例如在此之前的更新某些变量的操作已经完成，你可以放心依赖这些已完成的事件了。</p>
 <p>当我们说x事件既不是在y事件之前发生也不是在y事件之后发生，我们就说x事件和y事件是并发的。这并不是意味着x事件和y事件就一定是同时发生的，我们只是不能确定这两个事件发生的先后顺序。</p>
 <p>当两个goroutine并发访问了相同的变量时，我们有必要保证某些事件的执行顺序，以避免出现某些并发问题。</p>
-<p>需要让主goroutine等待后台goroutine完成工作后再退出，可以使用一个channel来同步两个goroutine：</p>
+<p><strong>需要让主goroutine等待后台goroutine完成工作后再退出，可以使用一个channel来同步两个goroutine：</strong></p>
 <pre><code class="Go">func main() &#123;
     conn, err := net.Dial(&quot;tcp&quot;, &quot;localhost:8000&quot;)
     if err != nil &#123;
@@ -16477,13 +16478,13 @@ go func() &#123;
     &#125;
 &#125;
 </code></pre>
-<p>只有当需要告诉接收者goroutine，所有的数据已经全部发送时才需要关闭channel。</p>
-<p>不管一个channel是否被关闭，当它没有被引用时将会被Go语言的垃圾自动回收器回收。（不要将关闭一个打开文件的操作和关闭一个channel操作混淆。<strong>对于每个打开的文件，都需要在不使用的时候调用对应的Close方法来关闭文件。</strong>）</p>
+<p><strong>只有当需要告诉接收者goroutine，所有的数据已经全部发送时才需要关闭channel。</strong></p>
+<p><strong>不管一个channel是否被关闭，当它没有被引用时将会被Go语言的垃圾自动回收器回收。</strong>（不要将关闭一个打开文件的操作和关闭一个channel操作混淆。对于每个打开的文件，都需要在不使用的时候调用对应的Close方法来关闭文件。）</p>
 <p><strong>试图重复关闭一个channel将导致panic异常，试图关闭一个nil值的channel也将导致panic异常。</strong></p>
 <h4 id="单方向的Channel"><a href="#单方向的Channel" class="headerlink" title="单方向的Channel"></a>单方向的Channel</h4><p>当一个channel作为一个函数参数时，它一般总是被专门用于只发送或者只接收。</p>
 <p>类型<code>chan&lt;- int</code>表示一个只发送int的channel，只能发送不能接收。</p>
 <p>相反，类型<code>&lt;-chan int</code>表示一个只接收int的channel，只能接收不能发送。</p>
-<p><strong>只有在发送者所在的goroutine才会调用close函数，因此对一个只接收的channel调用close将是一个编译错误。</strong></p>
+<p><strong>只有在发送者所在的goroutine才会调用close函数，对一个只接收的channel调用close将是一个编译错误。</strong></p>
 <pre><code class="Go">func counter(out chan&lt;- int) &#123;
     for x := 0; x &lt; 100; x++ &#123;
         out &lt;- x
@@ -16543,7 +16544,8 @@ ch &lt;- &quot;C&quot;
 fmt.Println(&lt;-ch) // &quot;C&quot;
 </code></pre>
 <p>在这个例子中，发送和接收操作都发生在同一个goroutine中，但是在真实的程序中它们一般由不同的goroutine执行。</p>
-<p><strong>Go语言新手有时候会将一个带缓存的channel当作同一个goroutine中的队列使用，虽然语法看似简单，但实际上这是一个错误。</strong>Channel和goroutine的调度器机制是紧密相连的，如果没有其他goroutine从channel接收，发送者——或许是整个程序——将会面临永远阻塞的风险。如果你只是需要一个简单的队列，使用slice就可以了。</p>
+<p><strong>Go语言新手有时候会将一个带缓存的channel当作同一个goroutine中的队列使用，虽然语法看似简单，但实际上这是一个错误。</strong>Channel和goroutine的调度器机制是紧密相连的，如果没有其他goroutine从channel接收，发送者——或许是整个程序——将会面临永远阻塞的风险。</p>
+<p><strong>如果你只是需要一个简单的队列，使用slice就可以了。</strong></p>
 <p>下面的例子展示了一个使用了带缓存channel的应用。它并发地向三个镜像站点发出请求，三个镜像站点分散在不同的地理位置。它们分别将收到的响应发送到带缓存channel，最后接收者只接收第一个收到的响应，也就是最快的那个响应。</p>
 <pre><code class="Go">func mirroredQuery() string &#123;
     responses := make(chan string, 3)
@@ -16555,8 +16557,8 @@ fmt.Println(&lt;-ch) // &quot;C&quot;
 
 func request(hostname string) (response string) &#123; /* ... */ &#125;
 </code></pre>
-<h5 id="goroutines泄漏"><a href="#goroutines泄漏" class="headerlink" title="goroutines泄漏"></a>goroutines泄漏</h5><p>如果我们使用了无缓存的channel，那么两个慢的goroutines将会因为没有人接收而被永远卡住。这种情况，称为goroutines泄漏，这将是一个BUG。</p>
-<p>和垃圾变量不同，泄漏的goroutines并不会被自动回收，因此确保每个不再需要的goroutine能正常退出是重要的。</p>
+<h5 id="goroutines泄漏"><a href="#goroutines泄漏" class="headerlink" title="goroutines泄漏"></a>goroutines泄漏</h5><p>如果我们使用了无缓存的channel，那么两个<strong>慢的goroutines将会因为没有人接收而被永远卡住。这种情况，称为goroutines泄漏，这将是一个BUG。</strong></p>
+<p><strong>和垃圾变量不同，泄漏的goroutines并不会被自动回收，因此确保每个不再需要的goroutine能正常退出是重要的。</strong></p>
 <p>无缓存channel更强地保证了每个发送操作与相应的同步接收操作；带缓存channel，这些操作是解耦的。</p>
 <h3 id="并发的循环"><a href="#并发的循环" class="headerlink" title="并发的循环"></a>并发的循环</h3><p>下面的程序会循环迭代一些图片文件名，并为每一张图片生成一个缩略图：</p>
 <pre><code class="go">// makeThumbnails makes thumbnails of the specified files.
@@ -16568,7 +16570,7 @@ func makeThumbnails(filenames []string) &#123;
     &#125;
 &#125;
 </code></pre>
-<p>这种子问题都是完全彼此独立的问题被叫做易并行问题。</p>
+<p>这种<strong>子问题都是完全彼此独立的问题被叫做易并行问题。</strong></p>
 <p>1.并行地执行这些操作，从而将文件IO的延迟隐藏掉：</p>
 <pre><code class="go">// NOTE: incorrect!
 func makeThumbnails2(filenames []string) &#123;
@@ -16594,7 +16596,7 @@ func makeThumbnails3(filenames []string) &#123;
 &#125;
 </code></pre>
 <p>变量f是被所有的匿名函数值所共享，且会被连续的循环迭代所更新的。</p>
-<p>显式地添加这个参数，我们能够确保使用的f是当go语句执行时的“当前”那个f。</p>
+<p><strong>显式地添加这个参数，我们能够确保使用的f是当go语句执行时的“当前”那个f。</strong></p>
 <p>3.从每一个worker goroutine往主goroutine中返回值：</p>
 <pre><code class="go">// makeThumbnails4 makes thumbnails for the specified files in parallel.
 // It returns an error if any step failed.
@@ -16617,7 +16619,7 @@ func makeThumbnails4(filenames []string) error &#123;
     return nil
 &#125;
 </code></pre>
-<p>这个程序有一个微妙的bug。当它遇到第一个非nil的error时会直接将error返回到调用方，使得没有一个goroutine去排空errors channel。这样剩下的worker goroutine在向这个channel中发送值时，都会永远地阻塞下去，并且永远都不会退出。这种情况叫做goroutine泄露（§8.4.4），可能会导致整个程序卡住或者跑出out of memory的错误。</p>
+<p>这个程序有一个微妙的bug。当它遇到第一个非nil的error时会直接将error返回到调用方，使得没有一个goroutine去排空errors channel。这样剩下的worker goroutine在向这个channel中发送值时，都会永远地阻塞下去，并且永远都不会退出。这种情况叫做goroutine泄露，可能会导致整个程序卡住或者跑出out of memory的错误。</p>
 <p>4.解决goroutine泄露：</p>
 <p>用一个具有合适大小的buffered channel，这样这些worker goroutine向channel中发送错误时就不会被阻塞。</p>
 <pre><code class="go">// makeThumbnails5 makes thumbnails for the specified files in parallel.
@@ -16685,7 +16687,7 @@ func makeThumbnails6(filenames &lt;-chan string) int64 &#123;
 &#125;
 </code></pre>
 <p>注意Add和Done方法的不对称。</p>
-<p>Add是为计数器加一，必须在worker goroutine开始之前调用，而不是在goroutine中；否则的话我们没办法确定Add是在”closer” goroutine调用Wait之前被调用。</p>
+<p><strong>Add是为计数器加一，必须在worker goroutine开始之前调用，而不是在goroutine中</strong>；否则的话我们没办法确定Add是在”closer” goroutine调用Wait之前被调用。</p>
 <p>并且Add还有一个参数，但Done却没有任何参数；其实它和Add(-1)是等价的。</p>
 <p>我们使用defer来确保计数器即使是在出错的情况下依然能够正确地被减掉。</p>
 <p>上面的程序代码结构是当我们使用并发循环，但又不知道迭代次数时很通常而且很地道的写法。</p>
@@ -16780,7 +16782,7 @@ func crawl(url string) []string &#123;
 &#125;
 </code></pre>
 <p>主循环会在n减为0时终止，这时候说明没活可干了。</p>
-<h3 id="基于select的多路复用"><a href="#基于select的多路复用" class="headerlink" title="基于select的多路复用"></a>基于select的多路复用</h3><p><code>time.Tick()</code> 函数返回的是一个 <code>channel</code> ，每隔指定的时间就会有数据从 <code>channel</code> 中出来。</p>
+<h3 id="基于select的多路复用"><a href="#基于select的多路复用" class="headerlink" title="基于select的多路复用"></a>基于select的多路复用</h3><p><strong><code>time.Tick()</code> 函数返回的是一个 <code>channel</code> ，每隔指定的时间就会有数据从 <code>channel</code> 中出来。</strong></p>
 <pre><code class="go">func main() &#123;
     fmt.Println(&quot;Commencing countdown.&quot;)
     tick := time.Tick(1 * time.Second)
@@ -16800,7 +16802,7 @@ go func() &#123;
 &#125;()
 </code></pre>
 <p>现在每一次计数循环的迭代都需要等待两个channel中的其中一个返回事件了：当一切正常时的ticker channel或者异常时返回的abort事件。</p>
-<p>我们无法做到从每一个channel中接收信息，如果我们这么做的话，如果第一个channel中没有事件发过来那么程序就会立刻被阻塞，这样我们就无法收到第二个channel中发过来的事件。</p>
+<p><strong>我们无法做到从每一个channel中接收信息，如果我们这么做的话，如果第一个channel中没有事件发过来那么程序就会立刻被阻塞，这样我们就无法收到第二个channel中发过来的事件。</strong></p>
 <p>这时候我们需要多路复用（multiplex）这些操作了，为了能够多路复用，我们使用了select语句。</p>
 <pre><code class="go">select &#123;
 case &lt;-ch1:
@@ -16852,7 +16854,6 @@ func main() &#123;
 x
 Launch aborted!
 </code></pre>
-<p>例2：</p>
 <p>当countdown函数返回时，它会停止从tick中接收事件，但是ticker这个goroutine还依然存活，继续徒劳地尝试向channel中发送值，然而这时候已经没有其它的goroutine会从该channel中接收值了——这被称为goroutine泄露。</p>
 <p>例2：</p>
 <pre><code class="go">ch := make(chan int, 1)
@@ -17030,7 +17031,7 @@ $ ./du2 -v $HOME /usr /bin /etc
 175931 files  62.2 GB
 213201 files  62.7 GB
 </code></pre>
-<h4 id="3-并发"><a href="#3-并发" class="headerlink" title="3.并发"></a>3.并发</h4><p>对每一个walkDir的调用创建一个新的goroutine。它使用sync.WaitGroup（§8.5）来对仍旧活跃的walkDir调用进行计数，另一个goroutine会在计数器减为零的时候将fileSizes这个channel关闭。</p>
+<h4 id="3-并发"><a href="#3-并发" class="headerlink" title="3.并发"></a>3.并发</h4><p>对每一个walkDir的调用创建一个新的goroutine。它使用sync.WaitGroup来对仍旧活跃的walkDir调用进行计数，另一个goroutine会在计数器减为零的时候将fileSizes这个channel关闭。</p>
 <pre><code class="go">func main() &#123;
     // ...determine roots...
     // Traverse each root of the file tree in parallel.
@@ -17069,7 +17070,7 @@ func dirents(dir string) []os.FileInfo &#123;
     defer func() &#123; &lt;-sema &#125;() // release token
     // ...
 </code></pre>
-<h3 id="并发的退出"><a href="#并发的退出" class="headerlink" title="并发的退出"></a>并发的退出</h3><p>Go语言并没有提供在一个goroutine中终止另一个goroutine的方法，因为这样会导致goroutine之间的共享变量落在未定义的状态上。</p>
+<h3 id="并发的退出"><a href="#并发的退出" class="headerlink" title="并发的退出"></a>并发的退出</h3><p><strong>Go语言并没有提供在一个goroutine中终止另一个goroutine的方法，因为这样会导致goroutine之间的共享变量落在未定义的状态上。</strong></p>
 <h4 id="广播机制"><a href="#广播机制" class="headerlink" title="广播机制"></a>广播机制</h4><p>不要向channel发送值，而是用关闭一个channel来进行广播。</p>
 <p>1.工具函数，cancelled，这个函数在被调用的时候会轮询退出状态。</p>
 <pre><code class="go">var done = make(chan struct&#123;&#125;)
@@ -17276,7 +17277,7 @@ var balance int
 func Deposit(amount int) &#123; balance = balance + amount &#125;
 func Balance() int &#123; return balance &#125;
 </code></pre>
-<p>对于某个类型来说，如果其所有可访问的方法和操作都是并发安全的话，那么该类型便是并发安全的。</p>
+<p><strong>对于某个类型来说，如果其所有可访问的方法和操作都是并发安全的话，那么该类型便是并发安全的。</strong></p>
 <p>并发情况：</p>
 <pre><code class="go">// Alice:
 go func() &#123;
@@ -17329,7 +17330,7 @@ func Icon(name string) image.Image &#123; return icons[name] &#125;
 </code></pre>
 <p>任意数量的goroutine并发访问Icon都是安全的，因为每一个goroutine都只是去读取而已。</p>
 <p>数据结构如果从不被修改则是并发安全的，无需进行同步。</p>
-<h5 id="2-monitor-goroutine"><a href="#2-monitor-goroutine" class="headerlink" title="2.monitor goroutine"></a>2.monitor goroutine</h5><p>把变量限定在单独的goroutine中。</p>
+<h5 id="2-监控协程-monitor-goroutine"><a href="#2-监控协程-monitor-goroutine" class="headerlink" title="2.监控协程 monitor goroutine"></a>2.监控协程 monitor goroutine</h5><p>把变量限定在单独的goroutine中。</p>
 <p>由于其它的goroutine不能够直接访问变量，它们只能使用一个channel来发送请求给指定的goroutine来查询更新变量。</p>
 <p>这也就是Go的口头禅“<strong>不要使用共享数据来通信；使用通信来共享数据</strong>”。</p>
 <p><strong>一个提供对一个指定的变量通过channel来请求的goroutine叫做这个变量的monitor（监控）goroutine。</strong></p>
@@ -17483,13 +17484,13 @@ func Balance() int &#123;
 <p>每次一个goroutine访问bank变量时（这里只有balance余额变量），它都会调用mutex的Lock方法来获取一个互斥锁。</p>
 <p>如果其它的goroutine已经获得了这个锁的话，这个操作会被阻塞直到其它goroutine调用了Unlock使该锁变回可用状态。</p>
 <p><strong>mutex会保护共享变量。</strong>惯例来说，被mutex所保护的变量是在mutex变量声明之后立刻声明的。如果你的做法和惯例不符，确保在文档里对你的做法进行说明。</p>
-<h4 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a>临界区</h4><p>在Lock和Unlock之间的代码段中的内容goroutine可以随便读取或者修改，这个代码段叫做临界区。</p>
+<h4 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a>临界区</h4><p><strong>在Lock和Unlock之间的代码段中的内容goroutine可以随便读取或者修改，这个代码段叫做临界区。</strong></p>
 <p>锁的持有者在其他goroutine获取该锁之前需要调用Unlock。</p>
 <p>goroutine在结束后释放锁是必要的，无论以哪条路径通过函数都需要释放，即使是在错误路径中，也要记得释放。</p>
 <h4 id="监控monitor"><a href="#监控monitor" class="headerlink" title="监控monitor"></a>监控monitor</h4><p>上面的bank程序例证了一种通用的并发模式。</p>
 <p>一系列的导出函数封装了一个或多个变量，那么访问这些变量唯一的方式就是通过这些函数来做（或者方法，对于一个对象的变量来说）。</p>
 <p>每一个函数在一开始就获取互斥锁并在最后释放锁，从而保证共享变量不会被并发访问。</p>
-<p>这种函数、互斥锁和变量的编排叫作监控monitor（一个代理人保证变量被顺序访问）。</p>
+<p><strong>这种函数、互斥锁和变量的编排叫作监控monitor（一个代理人保证变量被顺序访问）。</strong></p>
 <p>用defer来调用Unlock，临界区会隐式地延伸到函数作用域的最后，这样我们就从“总要记得在函数返回之后或者发生错误返回时要记得调用一次Unlock”这种状态中获得了解放。Go会自动帮我们完成这些事情。</p>
 <pre><code class="go">func Balance() int &#123;
     mu.Lock()
@@ -18016,14 +18017,14 @@ $ GOMAXPROCS=2 go run hacker-cliché.go
 <li><p>每个包还通过控制包内名字的可见性和是否导出来实现封装特性。</p>
 </li>
 </ul>
-<p>通过限制包内变量的可见性，还可以强制用户通过某些特定函数来访问和更新内部变量，这样可以保证内部变量的一致性和并发时的互斥约束。</p>
-<p>当我们修改了一个源文件，我们必须重新编译该源文件对应的包和所有依赖该包的其他包。</p>
+<p><strong>通过限制包内变量的可见性，还可以强制用户通过某些特定函数来访问和更新内部变量，这样可以保证内部变量的一致性和并发时的互斥约束。</strong></p>
+<p><strong>当我们修改了一个源文件，我们必须重新编译该源文件对应的包和所有依赖该包的其他包。</strong></p>
 <h4 id="Go编译快的原因"><a href="#Go编译快的原因" class="headerlink" title="Go编译快的原因"></a>Go编译快的原因</h4><ul>
 <li>第一点，<strong>所有导入的包必须在每个文件的开头显式声明</strong>，这样的话编译器就没有必要读取和分析整个源文件来判断包的依赖关系。</li>
 <li>第二点，<strong>禁止包的环状依赖</strong>，因为没有循环依赖，包的依赖关系形成一个有向无环图，每个包可以被独立编译，而且很可能是被并发编译。</li>
 <li>第三点，<strong>编译后包的目标文件不仅仅记录包本身的导出信息，目标文件同时还记录了包的依赖关系</strong>。因此，在编译一个包的时候，编译器只需要读取每个直接导入包的目标文件，而不需要遍历所有依赖的的文件（译注：很多都是重复的间接依赖）。</li>
 </ul>
-<h3 id="导入路径"><a href="#导入路径" class="headerlink" title="导入路径"></a>导入路径</h3><p>每个包是由一个全局唯一的字符串所标识的导入路径定位。</p>
+<h3 id="导入路径"><a href="#导入路径" class="headerlink" title="导入路径"></a>导入路径</h3><p><strong>每个包是由一个全局唯一的字符串所标识的导入路径定位。</strong></p>
 <p>出现在import语句中的导入路径也是字符串。</p>
 <pre><code class="Go">import (
     &quot;fmt&quot;
@@ -18039,7 +18040,8 @@ $ GOMAXPROCS=2 go run hacker-cliché.go
 <p>如果你计划分享或发布包，那么导入路径最好是全球唯一的。</p>
 <p>为了避免冲突，所有非标准库包的导入路径建议以所在组织的互联网域名为前缀；而且这样也有利于包的检索。</p>
 <p>例如，上面的import语句导入了Go团队维护的HTML解析器和一个流行的第三方维护的MySQL驱动。</p>
-<h3 id="包声明"><a href="#包声明" class="headerlink" title="包声明"></a>包声明</h3><p>在每个Go语言源文件的开头都必须有包声明语句。包声明语句的主要目的是确定当前包被其它包导入时默认的标识符（也称为包名）。</p>
+<h3 id="包声明"><a href="#包声明" class="headerlink" title="包声明"></a>包声明</h3><p><strong>在每个Go语言源文件的开头都必须有包声明语句。</strong></p>
+<p>包声明语句的主要目的是确定当前包被其它包导入时默认的标识符（也称为包名）。</p>
 <p>例如，math/rand包的每个源文件的开头都包含<code>package rand</code>包声明语句，所以当你导入这个包，你就可以用rand.Int、rand.Float64类似的方式访问包的成员。</p>
 <pre><code class="Go">package main
 
@@ -18163,12 +18165,12 @@ db, err = sql.Open(&quot;sqlite3&quot;, dbname)  // returns error: unknown drive
 </li>
 <li><p>尽可能让命名有描述性且无歧义。</p>
 </li>
-<li><p>包名一般采用单数的形式。标准库的bytes、errors和strings使用了复数形式，这是为了避免和预定义的类型冲突，同样还有go/types是为了避免和type关键字冲突。</p>
+<li><p><strong>包名一般采用单数的形式。</strong>标准库的bytes、errors和strings使用了复数形式，这是为了避免和预定义的类型冲突，同样还有go/types是为了避免和type关键字冲突。</p>
 </li>
 <li><p>要避免包名有其它的含义。</p>
 </li>
 </ul>
-<h4 id="包成员命名"><a href="#包成员命名" class="headerlink" title="包成员命名"></a>包成员命名</h4><p>当设计一个包的时候，需要考虑包名和成员名两个部分如何很好地配合。下面有一些例子：</p>
+<h4 id="包成员命名"><a href="#包成员命名" class="headerlink" title="包成员命名"></a>包成员命名</h4><p><strong>当设计一个包的时候，需要考虑包名和成员名两个部分如何很好地配合。</strong>下面有一些例子：</p>
 <pre><code>bytes.Equal    flag.Int    http.Get    json.Marshal
 </code></pre>
 <p>我们可以看到一些常用的命名模式。strings包提供了和字符串相关的诸多操作：</p>
@@ -18246,14 +18248,21 @@ $ go get gopl.io/...
 </code></pre>
 <p>GOPATH对应的工作区目录有三个子目录。</p>
 <ul>
-<li>其中src子目录用于存储源代码。每个包被保存在与$GOPATH/src的相对路径为包导入路径的子目录中，例如gopl.io/ch1/helloworld相对应的路径目录。我们看到，一个GOPATH工作区的src目录中可能有多个独立的版本控制系统，例如gopl.io和golang.org分别对应不同的Git仓库。</li>
-<li>其中pkg子目录用于保存编译后的包的目标文件</li>
-<li>bin子目录用于保存编译后的可执行程序，例如helloworld可执行程序。</li>
+<li><strong>src子目录用于存储源代码。</strong>每个包被保存在与$GOPATH/src的相对路径为包导入路径的子目录中，例如gopl.io/ch1/helloworld相对应的路径目录。我们看到，一个GOPATH工作区的src目录中可能有多个独立的版本控制系统，例如gopl.io和golang.org分别对应不同的Git仓库。</li>
+<li><strong>pkg子目录用于保存编译后的包的目标文件。</strong></li>
+<li><strong>bin子目录用于保存编译后的可执行程序，例如helloworld可执行程序。</strong></li>
 </ul>
-<h4 id="GOROOT"><a href="#GOROOT" class="headerlink" title="GOROOT"></a>GOROOT</h4><p>GOROOT用来指定Go的安装目录，还有它自带的标准库包的位置。</p>
+<h4 id="GOROOT"><a href="#GOROOT" class="headerlink" title="GOROOT"></a>GOROOT</h4><p><strong>GOROOT用来指定Go的安装目录，还有它自带的标准库包的位置。</strong></p>
 <p>GOROOT的目录结构和GOPATH类似，因此存放fmt包的源代码对应目录应该为$GOROOT/src/fmt。</p>
 <p>用户一般不需要设置GOROOT，默认情况下Go语言安装工具会将其设置为安装的目录路径。</p>
-<p>其中<code>go env</code>命令用于查看Go语言工具涉及的所有环境变量的值，包括未设置环境变量的默认值。GOOS环境变量用于指定目标操作系统（例如android、linux、darwin或windows），GOARCH环境变量用于指定处理器的类型，例如amd64、386或arm等。虽然GOPATH环境变量是唯一必须要设置的，但是其它环境变量也会偶尔用到。</p>
+<p>其中<code>go env</code>命令用于查看Go语言工具涉及的所有环境变量的值，包括未设置环境变量的默认值。</p>
+<ul>
+<li><p>GOOS环境变量用于指定目标操作系统（例如android、linux、darwin或windows）</p>
+</li>
+<li><p>GOARCH环境变量用于指定处理器的类型，例如amd64、386或arm等。</p>
+<p>虽然GOPATH环境变量是唯一必须要设置的，但是其它环境变量也会偶尔用到。</p>
+</li>
+</ul>
 <h3 id="下载包"><a href="#下载包" class="headerlink" title="下载包"></a>下载包</h3><p>使用命令<code>go get</code>可以下载一个单一的包或者用<code>...</code>下载整个子目录里面的每个包。</p>
 <p>Go语言工具箱的go命令同时计算并下载所依赖的每个包，这也是前一个例子中golang.org/x/net/html自动出现在本地工作区目录的原因。</p>
 <p>一旦<code>go get</code>命令下载了包，然后就是安装包或包对应的可执行的程序。</p>
@@ -18329,8 +18338,8 @@ $ ./quoteargs one &quot;two three&quot; four\ five
 </code></pre>
 <p>(译注：其实也可以偷懒，直接go run <code>*.go</code>)</p>
 <p>第一行的参数列表中，<strong>第一个不是以<code>.go</code>结尾的将作为可执行程序的参数运行</strong>。</p>
-<p>默认情况下，<code>go build</code>命令构建指定的包和它依赖的包，然后丢弃除了最后的可执行文件之外所有的中间编译结果。依赖分析和编译过程虽然都是很快的，但是随着项目增加到几十个包和成千上万行代码，依赖关系分析和编译时间的消耗将变的可观，有时候可能需要几秒种，即使这些依赖项没有改变。</p>
-<h4 id="go-install"><a href="#go-install" class="headerlink" title="go install"></a>go install</h4><p><code>go install</code>命令和<code>go build</code>命令很相似，但是它会保存每个包的编译成果，而不是将它们都丢弃。</p>
+<p><strong>默认情况下，<code>go build</code>命令构建指定的包和它依赖的包，然后丢弃除了最后的可执行文件之外所有的中间编译结果。</strong>依赖分析和编译过程虽然都是很快的，但是随着项目增加到几十个包和成千上万行代码，依赖关系分析和编译时间的消耗将变的可观，有时候可能需要几秒种，即使这些依赖项没有改变。</p>
+<h4 id="go-install"><a href="#go-install" class="headerlink" title="go install"></a>go install</h4><p><strong><code>go install</code>命令和<code>go build</code>命令很相似，但是它会保存每个包的编译成果，而不是将它们都丢弃。</strong></p>
 <p>被编译的包会被保存到<code>$GOPATH/pkg</code>目录下，目录路径和 src目录路径对应，可执行程序被保存到<code>$GOPATH/bin</code>目录。（很多用户会将$GOPATH/bin添加到可执行程序的搜索列表中。）还有，<code>go install</code>命令和<code>go build</code>命令都不会重新编译没有发生变化的包，这可以使后续构建更快捷。</p>
 <p>为了方便编译依赖的包，<code>go build -i</code>命令将安装每个目标所依赖的包。</p>
 <p>因为编译对应不同的操作系统平台和CPU架构，<code>go install</code>命令会将编译结果安装到GOOS和GOARCH对应的目录。例如，在Mac系统，golang.org/x/net/html包将被安装到$GOPATH/pkg/darwin_amd64目录下的golang.org/x/net/html.a文件。</p>
@@ -18352,7 +18361,7 @@ darwin 386
 <p>还有一个特别的构建注释参数可以提供更多的构建过程控制。例如，文件中可能包含下面的注释：</p>
 <pre><code class="Go">// +build linux darwin
 </code></pre>
-<p>在包声明和包注释的前面，该构建注释参数告诉<code>go build</code>只在编译程序对应的目标操作系统是Linux或Mac OS X时才编译这个文件。下面的构建注释则表示不编译这个文件：</p>
+<p><strong>在包声明和包注释的前面，该构建注释参数告诉<code>go build</code>只在编译程序对应的目标操作系统是Linux或Mac OS X时才编译这个文件。</strong>下面的构建注释则表示不编译这个文件：</p>
 <pre><code class="Go">// +build ignore
 </code></pre>
 <p>更多细节，可以参考go/build包的构建约束部分的文档。</p>
@@ -18587,7 +18596,8 @@ e.args[0].value.x.value = &quot;A&quot;
 e.args[0].value.y.type = eval.Var
 e.args[0].value.y.value = &quot;pi&quot;
 </code></pre>
-<p>你应该尽量避免在一个包的API中暴露涉及反射的接口。我们将定义一个未导出的display函数用于递归处理工作，导出的是Display函数，它只是display函数简单的包装以接受interface{}类型的参数：</p>
+<p><strong>应该尽量避免在一个包的API中暴露涉及反射的接口。</strong></p>
+<p>我们将定义一个未导出的display函数用于递归处理工作，导出的是Display函数，它只是display函数简单的包装以接受interface{}类型的参数：</p>
 <p><em>gopl.io/ch12/display</em></p>
 <pre><code class="Go">func Display(name string, x interface&#123;&#125;) &#123;
     fmt.Printf(&quot;Display %s (%T):\n&quot;, name, x)
@@ -18698,7 +18708,7 @@ strangelove.Sequel = nil
 // (*(*os.Stderr).file).name = &quot;/dev/stderr&quot;
 // (*(*os.Stderr).file).nepipe = 0
 </code></pre>
-<p>可以看出，反射能够访问到结构体中未导出的成员。需要当心的是这个例子的输出在不同操作系统上可能是不同的，并且随着标准库的发展也可能导致结果不同。（这也是将这些成员定义为私有成员的原因之一！）我们甚至可以用Display函数来显示reflect.Value 的内部构造（在这里设置为<code>*os.File</code>的类型描述体）。<code>Display(&quot;rV&quot;, reflect.ValueOf(os.Stderr))</code>调用的输出如下，当然不同环境得到的结果可能有差异：</p>
+<p>可以看出，<strong>反射能够访问到结构体中未导出的成员。</strong>需要当心的是这个例子的输出在不同操作系统上可能是不同的，并且随着标准库的发展也可能导致结果不同。（这也是将这些成员定义为私有成员的原因之一！）我们甚至可以用Display函数来显示reflect.Value 的内部构造（在这里设置为<code>*os.File</code>的类型描述体）。<code>Display(&quot;rV&quot;, reflect.ValueOf(os.Stderr))</code>调用的输出如下，当然不同环境得到的结果可能有差异：</p>
 <pre><code class="Go">Display rV (reflect.Value):
 (*rV.typ).size = 8
 (*rV.typ).hash = 871609668
@@ -19086,11 +19096,11 @@ methods.Print(new(strings.Replacer))
 <p>避免这种因反射而导致的脆弱性的问题的最好方法，是将所有的反射相关的使用控制在包的内部，如果可能的话避免在包的API中直接暴露reflect.Value类型，这样可以限制一些非法输入。如果无法做到这一点，在每个有风险的操作前指向额外的类型检查。以标准库中的代码为例，当fmt.Printf收到一个非法的操作数时，它并不会抛出panic异常，而是打印相关的错误信息。程序虽然还有BUG，但是会更加容易诊断。</p>
 <pre><code class="Go">fmt.Printf(&quot;%d %s\n&quot;, &quot;hello&quot;, 42) // &quot;%!d(string=hello) %!s(int=42)&quot;
 </code></pre>
-<p>反射同样降低了程序的安全性，还影响了自动化重构和分析工具的准确性，因为它们无法识别运行时才能确认的类型信息。</p>
-<p>避免使用反射的第二个原因是，即使对应类型提供了相同文档，但是反射的操作不能做静态类型检查，而且大量反射的代码通常难以理解。总是需要小心翼翼地为每个导出的类型和其它接受interface{}或reflect.Value类型参数的函数维护说明文档。</p>
-<p>第三个原因，基于反射的代码通常比正常的代码运行速度慢一到两个数量级。对于一个典型的项目，大部分函数的性能和程序的整体性能关系不大，所以当反射能使程序更加清晰的时候可以考虑使用。</p>
+<p><strong>反射同样降低了程序的安全性，还影响了自动化重构和分析工具的准确性，因为它们无法识别运行时才能确认的类型信息。</strong></p>
+<p><strong>避免使用反射的第二个原因是，即使对应类型提供了相同文档，但是反射的操作不能做静态类型检查，而且大量反射的代码通常难以理解。</strong>总是需要小心翼翼地为每个导出的类型和其它接受interface{}或reflect.Value类型参数的函数维护说明文档。</p>
+<p><strong>第三个原因，基于反射的代码通常比正常的代码运行速度慢一到两个数量级。</strong>对于一个典型的项目，大部分函数的性能和程序的整体性能关系不大，所以当反射能使程序更加清晰的时候可以考虑使用。</p>
 <p>测试是一个特别适合使用反射的场景，因为每个测试的数据集都很小。</p>
-<p>但是对于性能关键路径的函数，最好避免使用反射。</p>
+<p><strong>但是对于性能关键路径的函数，最好避免使用反射。</strong></p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://books.studygolang.com/gopl-zh">Go语言圣经（中文版）</a></p>
 ]]></content>
       <categories>
@@ -19106,12 +19116,12 @@ methods.Print(new(strings.Replacer))
     <url>/2021/07/10/GOPL10-%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<p>[TOC]</p>
 <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><h3 id="go-test"><a href="#go-test" class="headerlink" title="go test"></a>go test</h3><p>go test命令是一个按照一定的约定和组织来测试代码的程序。</p>
-<p>在包目录内，所有以<code>_test.go</code>为后缀名的源文件在执行go build时不会被构建成包的一部分，它们是go test测试的一部分。</p>
+<p><strong>在包目录内，所有以<code>_test.go</code>为后缀名的源文件在执行go build时不会被构建成包的一部分，它们是go test测试的一部分。</strong></p>
 <p>在<code>*_test.go</code>文件中，有三种类型的函数：测试函数、基准测试（benchmark）函数、示例函数。</p>
 <ul>
-<li>一个测试函数是以Test为函数名前缀的函数，用于测试程序的一些逻辑行为是否正确；go test命令会调用这些测试函数并报告测试结果是PASS或FAIL。</li>
-<li>基准测试函数是以Benchmark为函数名前缀的函数，它们用于衡量一些函数的性能；go test命令会多次运行基准测试函数以计算一个平均的执行时间。</li>
-<li>示例函数是以Example为函数名前缀的函数，提供一个由编译器保证正确性的示例文档。我们将在11.2节讨论测试函数的所有细节，并在11.4节讨论基准测试函数的细节，然后在11.6节讨论示例函数的细节。</li>
+<li><strong>测试函数是以Test为函数名前缀的函数，用于测试程序的一些逻辑行为是否正确；</strong>go test命令会调用这些测试函数并报告测试结果是PASS或FAIL。</li>
+<li><strong>基准测试函数是以Benchmark为函数名前缀的函数，它们用于衡量一些函数的性能；</strong>go test命令会多次运行基准测试函数以计算一个平均的执行时间。</li>
+<li><strong>示例函数是以Example为函数名前缀的函数，提供一个由编译器保证正确性的示例文档。</strong>我们将在11.2节讨论测试函数的所有细节，并在11.4节讨论基准测试函数的细节，然后在11.6节讨论示例函数的细节。</li>
 </ul>
 <p>go test命令会遍历所有的<code>*_test.go</code>文件中符合上述命名规则的函数，生成一个临时的main包用于调用相应的测试函数，接着构建并运行、报告测试结果，最后清理测试中生成的临时文件。</p>
 <h3 id="测试函数"><a href="#测试函数" class="headerlink" title="测试函数"></a>测试函数</h3><p>名：</p>
@@ -19119,12 +19129,12 @@ methods.Print(new(strings.Replacer))
     // ...
 &#125;
 </code></pre>
-<p>测试函数的名字必须以Test开头，可选的后缀名必须以大写字母开头：</p>
+<p><strong>测试函数的名字必须以Test开头，可选的后缀名必须以大写字母开头：</strong></p>
 <pre><code class="Go">func TestSin(t *testing.T) &#123; /* ... */ &#125;
 func TestCos(t *testing.T) &#123; /* ... */ &#125;
 func TestLog(t *testing.T) &#123; /* ... */ &#125;
 </code></pre>
-<p>其中t参数用于报告测试失败和附加的日志信息。</p>
+<p>其中<strong>t参数用于报告测试失败和附加的日志信息。</strong></p>
 <p>让我们定义一个实例包gopl.io/ch11/word1，其中只有一个函数IsPalindrome用于检查一个字符串是否从前向后和从后向前读都是一样的。（下面这个实现对于一个字符串是否是回文字符串前后重复测试了两次；我们稍后会再讨论这个问题。）</p>
 <pre><code class="Go">// Package word provides utilities for word games.
 package word
@@ -19165,7 +19175,7 @@ func TestNonPalindrome(t *testing.T) &#123;
 $ go test
 ok   gopl.io/ch11/word1  0.008s
 </code></pre>
-<h4 id="Errorf"><a href="#Errorf" class="headerlink" title="Errorf"></a>Errorf</h4><p>为了避免两次输入较长的字符串，我们使用了提供了有类似Printf格式化功能的 Errorf函数来汇报错误结果。</p>
+<h4 id="Errorf"><a href="#Errorf" class="headerlink" title="Errorf"></a>Errorf</h4><p>为了避免两次输入较长的字符串，我们使用了提供了有类似Printf格式化功能的Errorf函数来汇报错误结果。</p>
 <p>当添加了这两个测试用例之后，<code>go test</code>返回了测试失败的信息。</p>
 <pre><code class="Go">func TestFrenchPalindrome(t *testing.T) &#123;
     if !IsPalindrome(&quot;été&quot;) &#123;
@@ -19188,9 +19198,9 @@ func TestCanalPalindrome(t *testing.T) &#123;
 FAIL
 FAIL    gopl.io/ch11/word1  0.014s
 </code></pre>
-<p>先编写测试用例并观察到测试用例触发了和用户报告的错误相同的描述是一个好的测试习惯。只有这样，我们才能定位我们要真正解决的问题。</p>
+<p>先编写测试用例，并观察到测试用例触发了和用户报告的错误相同的描述是一个好的测试习惯。只有这样，我们才能定位我们要真正解决的问题。</p>
 <h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>先写测试用例的另外的好处是，运行测试通常会比手工描述报告的处理更快，这让我们可以进行快速地迭代。如果测试集有很多运行缓慢的测试，我们可以通过只选择运行某些特定的测试来加快测试速度。</p>
-<p>参数<code>-v</code>可用于打印每个测试函数的名字和运行时间：</p>
+<p><strong>参数<code>-v</code>可用于打印每个测试函数的名字和运行时间：</strong></p>
 <pre><code>$ go test -v
 === RUN TestPalindrome
 --- PASS: TestPalindrome (0.00s)
@@ -19206,7 +19216,7 @@ FAIL
 exit status 1
 FAIL    gopl.io/ch11/word1  0.017s
 </code></pre>
-<p>参数<code>-run</code>对应一个正则表达式，只有测试函数名被它正确匹配的测试函数才会被<code>go test</code>测试命令运行：</p>
+<p><strong>参数<code>-run</code>对应一个正则表达式，只有测试函数名被它正确匹配的测试函数才会被<code>go test</code>测试命令运行：</strong></p>
 <pre><code>$ go test -v -run=&quot;French|Canal&quot;
 === RUN TestFrenchPalindrome
 --- FAIL: TestFrenchPalindrome (0.00s)
@@ -19275,7 +19285,8 @@ func IsPalindrome(s string) bool &#123;
 ok      gopl.io/ch11/word2      0.015s
 </code></pre>
 <p>这种表格驱动的测试在Go语言中很常见。我们可以很容易地向表格添加新的测试数据，并且后面的测试逻辑也没有冗余，这样我们可以有更多的精力去完善错误信息。</p>
-<p>失败测试的输出并不包括调用t.Errorf时刻的堆栈调用信息。和其他编程语言或测试框架的assert断言不同，t.Errorf调用也没有引起panic异常或停止测试的执行。即使表格中前面的数据导致了测试的失败，表格后面的测试数据依然会运行测试，因此在一个测试中我们可能了解多个失败的信息。</p>
+<p>失败测试的输出并不包括调用t.Errorf时刻的堆栈调用信息。和其他编程语言或测试框架的assert断言不同，t.Errorf调用也没有引起panic异常或停止测试的执行。</p>
+<p><strong>即使表格中前面的数据导致了测试的失败，表格后面的测试数据依然会运行测试，因此在一个测试中我们可能了解多个失败的信息。</strong></p>
 <p><strong>如果我们真的需要停止测试，或许是因为初始化失败或可能是早先的错误导致了后续错误等原因，我们可以使用t.Fatal或t.Fatalf停止当前测试函数。</strong>它们必须在和测试函数同一个goroutine内调用。</p>
 <p>测试失败的信息一般的形式是“f(x) = y, want z”，其中f(x)解释了失败的操作和对应的输入，y是实际的运行结果，z是期望的正确的结果。</p>
 <p>就像前面检查回文字符串的例子，实际的函数用于f(x)部分。显示x是表格驱动型测试中比较重要的部分，因为同一个断言可能对应不同的表格项执行多次。</p>
@@ -19464,7 +19475,7 @@ Open a web browser displaying annotated source code:
     go tool cover -html=c.out
 ...
 </code></pre>
-<p><code>go tool</code>命令运行Go工具链的底层可执行程序。这些底层可执行程序放在$GOROOT/pkg/tool/${GOOS}_${GOARCH}目录。因为有<code>go build</code>命令的原因，我们很少直接调用这些底层工具。</p>
+<p><code>go tool</code>命令运行Go工具链的底层可执行程序。这些底层可执行程序放在<code>$GOROOT/pkg/tool/$&#123;GOOS&#125;_$&#123;GOARCH&#125;</code>目录。因为有<code>go build</code>命令的原因，我们很少直接调用这些底层工具。</p>
 <p>现在我们可以用<code>-coverprofile</code>标志参数重新运行测试：</p>
 <pre><code>$ go test -run=Coverage -coverprofile=c.out gopl.io/ch7/eval
 ok      gopl.io/ch7/eval         0.032s      coverage: 68.5% of statements
@@ -19540,7 +19551,7 @@ func Benchmark1000(b *testing.B)       &#123; benchmark(b, 1000) &#125;
 </code></pre>
 <p>通过函数参数来指定输入的大小，但是参数变量对于每个具体的基准测试都是固定的。要避免直接修改b.N来控制输入的大小。除非你将它作为一个固定大小的迭代计算输入，否则基准测试的结果将毫无意义。</p>
 <p>比较型的基准测试反映出的模式在程序设计阶段是很有帮助的，但是即使程序完工了也应当保留基准测试代码。因为随着项目的发展，或者是输入的增加，或者是部署到新的操作系统或不同的处理器，我们可以再次用基准测试来帮助我们改进设计。</p>
-<h3 id="剖析"><a href="#剖析" class="headerlink" title="剖析"></a>剖析</h3><p>剖析技术是基于程序执行期间一些自动抽样，然后在收尾时进行推断；最后产生的统计结果就称为剖析数据。</p>
+<h3 id="剖析"><a href="#剖析" class="headerlink" title="剖析"></a>剖析</h3><p><strong>剖析技术是基于程序执行期间一些自动抽样，然后在收尾时进行推断；最后产生的统计结果就称为剖析数据。</strong></p>
 <p>Go语言支持多种类型的剖析性能分析，每一种关注不同的方面，但它们都涉及到每个采样记录的感兴趣的一系列事件消息，每个事件都包含函数调用时函数调用堆栈的信息。内建的<code>go test</code>工具对几种分析方式都提供了支持。</p>
 <ul>
 <li><p>CPU剖析数据标识了最耗CPU时间的函数。在每个CPU上运行的线程在每隔几毫秒都会遇到操作系统的中断事件，每次中断时都会记录一个剖析数据然后恢复正常的运行。</p>
