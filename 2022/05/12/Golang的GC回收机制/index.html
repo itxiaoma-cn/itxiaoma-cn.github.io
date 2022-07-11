@@ -6,28 +6,19 @@
   <meta name="keywords" content=" GO ">
   <meta name="description" content="Golang的GC回收机制 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="01 路由详解Gin框架路由使用的是定制版的httprouter，原理是大量使用公共前缀的树结构。 特点是具有公共前缀的节点也共享一个公共父节点。 基数树 Radix Tree  基数树，或称压缩前缀树，是一种更节省空间的Trie Tree（前缀树）。对于基数树的每个节点，如果该节点是惟一的子树，就会和父节点合并。   注册路由的过程就是构造前缀树的过程，具有公共前缀的节点共享同一个公共父节点。">
+<meta name="description" content="[TOC] 1.vue-admin-templete动态路由参考：vue-admin-template 动态路由 2.动态路由刷新空白let oneRun &#x3D; true  &#x2F;&#x2F; get menu routes   if (oneRun) &amp;#123;     oneRun &#x3D; false     const accessRoutes &#x3D; await store.dispatch(&#39;menu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GoWeb02-Gin源码解析">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/06/02/GoWeb02-Gin%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:title" content="GO微服务03-前端问题汇总">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/07/03/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="01 路由详解Gin框架路由使用的是定制版的httprouter，原理是大量使用公共前缀的树结构。 特点是具有公共前缀的节点也共享一个公共父节点。 基数树 Radix Tree  基数树，或称压缩前缀树，是一种更节省空间的Trie Tree（前缀树）。对于基数树的每个节点，如果该节点是惟一的子树，就会和父节点合并。   注册路由的过程就是构造前缀树的过程，具有公共前缀的节点共享同一个公共父节点。">
+<meta property="og:description" content="[TOC] 1.vue-admin-templete动态路由参考：vue-admin-template 动态路由 2.动态路由刷新空白let oneRun &#x3D; true  &#x2F;&#x2F; get menu routes   if (oneRun) &amp;#123;     oneRun &#x3D; false     const accessRoutes &#x3D; await store.dispatch(&#39;menu">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h46unfjsj20bi07ymxk.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h4gi6fbgj20cr096t99.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h4hoab15j20e408r0t0.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2loyf6hvdj20jg0eswfs.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q3et3vu5j20rg0h80tc.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q67xr3d8j21hw0kq0uh.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q6a0m2scj20r605mmxd.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q6awiovcj20qo0hiwfj.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q67xr3d8j21hw0kq0uh.jpg">
-<meta property="article:published_time" content="2022-06-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-04T01:03:15.000Z">
+<meta property="article:published_time" content="2022-07-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-07-11T07:42:32.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
+<meta property="article:tag" content="微服务">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h46unfjsj20bi07ymxk.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -89,7 +80,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(84)</small>
+                <small>(85)</small>
             
         </div>
     </li>
@@ -100,7 +91,7 @@
                     <div data-rel="GO">
                         
                         GO
-                        <small>(19)</small>
+                        <small>(20)</small>
                         
                     </div>
                     
@@ -261,7 +252,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="84">
+<input type="hidden" id="yelog_site_posts_number" value="85">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -382,6 +373,38 @@
     
     <nav id="title-list-nav">
         
+        <a  class="全部文章 微服务 "
+           href="/2022/07/03/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务03-前端问题汇总">GO微服务03-前端问题汇总</span>
+            <span class="post-date" title="2022-07-03 00:00:00">2022/07/03</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/07/02/GO%E5%BE%AE%E6%9C%8D%E5%8A%A102-%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务02-后端问题汇总">GO微服务02-后端问题汇总</span>
+            <span class="post-date" title="2022-07-02 00:00:00">2022/07/02</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/07/01/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务01-环境搭建">GO微服务01-环境搭建</span>
+            <span class="post-date" title="2022-07-01 00:00:00">2022/07/01</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/04/GoWeb04-Zap%E6%97%A5%E5%BF%97/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb高级04-Zap日志">GoWeb高级04-Zap日志</span>
+            <span class="post-date" title="2022-06-04 00:00:00">2022/06/04</span>
+        </a>
+        
         <a  class="全部文章 GO "
            href="/2022/06/03/GoWeb03-Mysql%E5%92%8CRedis/"
            data-tag="GO"
@@ -436,30 +459,6 @@
            data-author="" >
             <span class="post-title" title="Golang内存管理">Golang内存管理</span>
             <span class="post-date" title="2022-05-02 00:00:00">2022/05/02</span>
-        </a>
-        
-        <a  class="全部文章 微服务 "
-           href="/2022/04/16/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
-           data-tag="GO,微服务"
-           data-author="" >
-            <span class="post-title" title="GO微服务01-环境搭建">GO微服务01-环境搭建</span>
-            <span class="post-date" title="2022-04-16 00:00:00">2022/04/16</span>
-        </a>
-        
-        <a  class="全部文章 微服务 "
-           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A102-%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/"
-           data-tag="GO,微服务"
-           data-author="" >
-            <span class="post-title" title="GO微服务02-问题处理">GO微服务02-问题处理</span>
-            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
-        </a>
-        
-        <a  class="全部文章 微服务 "
-           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/"
-           data-tag="GO,微服务"
-           data-author="" >
-            <span class="post-title" title="GO微服务03-前端问题处理">GO微服务03-前端问题处理</span>
-            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
         </a>
         
         <a  class="全部文章 微服务 "
@@ -1099,7 +1098,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-05-13 10:29:17'>2022-05-12 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-07-09 11:09:23'>2022-05-12 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1110,7 +1109,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#V1-3%E5%89%8D-%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4%E6%B3%95"><span class="toc-text">V1.3前-标记清除法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#V1-3-STW%E6%AD%A5%E9%AA%A4%E6%8F%90%E5%89%8D"><span class="toc-text">V1.3 STW步骤提前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#V1-5-%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E6%B3%95"><span class="toc-text">V1.5 三色标记法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B2%A1%E6%9C%89STW%E7%9A%84%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E6%B3%95"><span class="toc-text">没有STW的三色标记法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E4%B8%A2%E5%A4%B1"><span class="toc-text">对象丢失</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E5%BC%B1%E4%B8%89%E8%89%B2%E4%B8%8D%E5%8F%98%E5%BC%8F"><span class="toc-text">强弱三色不变式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E5%B1%8F%E9%9A%9C"><span class="toc-text">插入屏障</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%B1%8F%E9%9A%9C"><span class="toc-text">删除屏障</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#V1-8-%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E6%B3%95-%E6%B7%B7%E5%90%88%E5%86%99%E5%B1%8F%E9%9A%9C"><span class="toc-text">V1.8 三色标记法+混合写屏障</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E5%90%88%E5%86%99%E5%B1%8F%E9%9A%9C"><span class="toc-text">混合写屏障</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B8%E5%9E%8B%E5%9C%BA%E6%99%AF"><span class="toc-text">典型场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E4%B8%80%EF%BC%9A-%E5%AF%B9%E8%B1%A1%E8%A2%AB%E4%B8%80%E4%B8%AA%E5%A0%86%E5%AF%B9%E8%B1%A1%E5%88%A0%E9%99%A4%E5%BC%95%E7%94%A8%EF%BC%8C%E6%88%90%E4%B8%BA%E6%A0%88%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%8B%E6%B8%B8"><span class="toc-text">场景一： 对象被一个堆对象删除引用，成为栈对象的下游</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E4%BA%8C%EF%BC%9A-%E5%AF%B9%E8%B1%A1%E8%A2%AB%E4%B8%80%E4%B8%AA%E6%A0%88%E5%AF%B9%E8%B1%A1%E5%88%A0%E9%99%A4%E5%BC%95%E7%94%A8%EF%BC%8C%E6%88%90%E4%B8%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%88%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%8B%E6%B8%B8"><span class="toc-text">场景二： 对象被一个栈对象删除引用，成为另一个栈对象的下游</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E4%B8%89%EF%BC%9A%E5%AF%B9%E8%B1%A1%E8%A2%AB%E4%B8%80%E4%B8%AA%E5%A0%86%E5%AF%B9%E8%B1%A1%E5%88%A0%E9%99%A4%E5%BC%95%E7%94%A8%EF%BC%8C%E6%88%90%E4%B8%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%A0%86%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%8B%E6%B8%B8"><span class="toc-text">场景三：对象被一个堆对象删除引用，成为另一个堆对象的下游</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E5%9B%9B%EF%BC%9A%E5%AF%B9%E8%B1%A1%E4%BB%8E%E4%B8%80%E4%B8%AA%E6%A0%88%E5%AF%B9%E8%B1%A1%E5%88%A0%E9%99%A4%E5%BC%95%E7%94%A8%EF%BC%8C%E6%88%90%E4%B8%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%A0%86%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%8B%E6%B8%B8"><span class="toc-text">场景四：对象从一个栈对象删除引用，成为另一个堆对象的下游</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#V1-3%E5%89%8D-%E6%A0%87%E8%AE%B0%E6%B8%85%E9%99%A4%E6%B3%95"><span class="toc-text">V1.3前-标记清除法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#V1-3-STW%E6%AD%A5%E9%AA%A4%E6%8F%90%E5%89%8D"><span class="toc-text">V1.3 STW步骤提前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#V1-5-%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E6%B3%95-%E6%8F%92%E5%85%A5%E5%88%A0%E9%99%A4%E5%86%99%E5%B1%8F%E9%9A%9C"><span class="toc-text">V1.5 三色标记法+插入删除写屏障</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B2%A1%E6%9C%89STW%E7%9A%84%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E6%B3%95"><span class="toc-text">没有STW的三色标记法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E4%B8%A2%E5%A4%B1"><span class="toc-text">对象丢失</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E5%BC%B1%E4%B8%89%E8%89%B2%E4%B8%8D%E5%8F%98%E5%BC%8F"><span class="toc-text">强弱三色不变式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E5%B1%8F%E9%9A%9C"><span class="toc-text">插入屏障</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%B1%8F%E9%9A%9C"><span class="toc-text">删除屏障</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#V1-8-%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E6%B3%95-%E6%B7%B7%E5%90%88%E5%86%99%E5%B1%8F%E9%9A%9C"><span class="toc-text">V1.8 三色标记法+混合写屏障</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%B7%E5%90%88%E5%86%99%E5%B1%8F%E9%9A%9C"><span class="toc-text">混合写屏障</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B8%E5%9E%8B%E5%9C%BA%E6%99%AF"><span class="toc-text">典型场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E4%B8%80%EF%BC%9A-%E5%AF%B9%E8%B1%A1%E8%A2%AB%E4%B8%80%E4%B8%AA%E5%A0%86%E5%AF%B9%E8%B1%A1%E5%88%A0%E9%99%A4%E5%BC%95%E7%94%A8%EF%BC%8C%E6%88%90%E4%B8%BA%E6%A0%88%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%8B%E6%B8%B8"><span class="toc-text">场景一： 对象被一个堆对象删除引用，成为栈对象的下游</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E4%BA%8C%EF%BC%9A-%E5%AF%B9%E8%B1%A1%E8%A2%AB%E4%B8%80%E4%B8%AA%E6%A0%88%E5%AF%B9%E8%B1%A1%E5%88%A0%E9%99%A4%E5%BC%95%E7%94%A8%EF%BC%8C%E6%88%90%E4%B8%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E6%A0%88%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%8B%E6%B8%B8"><span class="toc-text">场景二： 对象被一个栈对象删除引用，成为另一个栈对象的下游</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E4%B8%89%EF%BC%9A%E5%AF%B9%E8%B1%A1%E8%A2%AB%E4%B8%80%E4%B8%AA%E5%A0%86%E5%AF%B9%E8%B1%A1%E5%88%A0%E9%99%A4%E5%BC%95%E7%94%A8%EF%BC%8C%E6%88%90%E4%B8%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%A0%86%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%8B%E6%B8%B8"><span class="toc-text">场景三：对象被一个堆对象删除引用，成为另一个堆对象的下游</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E5%9B%9B%EF%BC%9A%E5%AF%B9%E8%B1%A1%E4%BB%8E%E4%B8%80%E4%B8%AA%E6%A0%88%E5%AF%B9%E8%B1%A1%E5%88%A0%E9%99%A4%E5%BC%95%E7%94%A8%EF%BC%8C%E6%88%90%E4%B8%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%A0%86%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%8B%E6%B8%B8"><span class="toc-text">场景四：对象从一个栈对象删除引用，成为另一个堆对象的下游</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1146,7 +1145,7 @@
 <h2 id="V1-3-STW步骤提前"><a href="#V1-3-STW步骤提前" class="headerlink" title="V1.3 STW步骤提前"></a>V1.3 STW步骤提前</h2><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h25yb3yu7vj20p305g74e.jpg"></p>
 <p>STW的步骤提前了一步，因为在Sweep清除的时候，可以不需要STW停止，因为这些对象已经是不可达对象了，不会出现回收写冲突等问题。</p>
 <p>但是无论怎么优化，Go V1.3都面临这个一个重要问题，就是<strong>mark-and-sweep 算法会暂停整个程序</strong> 。</p>
-<h2 id="V1-5-三色标记法"><a href="#V1-5-三色标记法" class="headerlink" title="V1.5 三色标记法"></a>V1.5 三色标记法</h2><ol>
+<h2 id="V1-5-三色标记法-插入删除写屏障"><a href="#V1-5-三色标记法-插入删除写屏障" class="headerlink" title="V1.5 三色标记法+插入删除写屏障"></a>V1.5 三色标记法+插入删除写屏障</h2><ol>
 <li>每次新创建的对象，默认的颜色都是标记为“白色”</li>
 <li>每次GC回收开始, 会从根节点开始遍历所有对象，把遍历到的对象从白色集合放入“灰色”集合</li>
 <li>遍历灰色集合，将灰色对象引用的对象从白色集合放入灰色集合，之后将此灰色对象放入黑色集合</li>
@@ -1160,7 +1159,7 @@
 <li>条件1: 一个白色对象被黑色对象引用**(白色被挂在黑色下)**</li>
 <li>条件2: 灰色对象与它之间的可达关系的白色对象遭到破坏**(灰色同时丢了该白色)**</li>
 </ul>
-<p>当以上两个条件同时满足时，就会出现对象丢失现象!</p>
+<p>当以上两个条件同时满足时，就会出现对象丢失现象。</p>
 <h3 id="强弱三色不变式"><a href="#强弱三色不变式" class="headerlink" title="强弱三色不变式"></a>强弱三色不变式</h3><p>GC回收器满足下面两种情况之一时，即可保对象不丢失。 这两种方式就是“强三色不变式”和“ 弱三色不变式”。</p>
 <ul>
 <li>强三色不变式：不存在黑色对象引用到白色对象的指针。</li>
@@ -1228,14 +1227,12 @@
 堆对象4-&gt;对象7 = null；         //对象4 删除引用 对象7
 </code></pre>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26k9x5lirj20nc0dpabl.jpg"></p>
-<p>Golang中的混合写屏障满足<code>弱三色不变式</code>，结合了删除写屏障和插入写屏障的优点，只需要在开始时并发扫描各个goroutine的栈，使其变黑并一直保持，这个过程不需要STW，而标记结束后，因为栈在扫描后始终是黑色的，也无需再进行re-scan操作了，减少了STW的时间。</p>
+<p>Golang中的**混合写屏障满足<code>弱三色不变式</code>**，结合了删除写屏障和插入写屏障的优点，只需要在开始时并发扫描各个goroutine的栈，使其变黑并一直保持，这个过程不需要STW，而标记结束后，因为栈在扫描后始终是黑色的，也无需再进行re-scan操作了，减少了STW的时间。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li><p>GoV1.3- 普通标记清除法，整体过程需要启动STW，效率极低。</p>
-</li>
-<li><p>GoV1.5- 三色标记法， 堆空间启动写屏障，栈空间不启动，全部扫描之后，需要重新扫描一次栈(需要STW)，效率普通</p>
-</li>
-<li><p>GoV1.8-三色标记法，混合写屏障机制， 栈空间不启动，堆空间启动。整个过程几乎不需要STW，效率较高。</p>
-</li>
+<li>GoV1.3前-标记清除法，整体过程需要启动STW，效率极低。</li>
+<li>GoV1.3- 普通标记清除法，STW提前，整体过程需要启动STW，效率低。</li>
+<li>GoV1.5- 三色标记法， 堆空间启动写屏障，栈空间不启动，全部扫描之后，需要重新扫描一次栈(需要STW)，效率普通</li>
+<li>GoV1.8-三色标记法，混合写屏障机制， 栈空间不启动，堆空间启动。整个过程几乎不需要STW，效率较高。</li>
 </ul>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.kancloud.cn/aceld/golang/1958308">Golang修养之路</a></p>
 

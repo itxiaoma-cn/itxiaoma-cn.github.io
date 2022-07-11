@@ -2,32 +2,23 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>GO微服务01-环境搭建 | IT小马</title>
+  <title>GO微服务03-前端问题汇总 | IT小马</title>
   <meta name="keywords" content=" GO , 微服务 ">
-  <meta name="description" content="GO微服务01-环境搭建 | IT小马">
+  <meta name="description" content="GO微服务03-前端问题汇总 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="01 路由详解Gin框架路由使用的是定制版的httprouter，原理是大量使用公共前缀的树结构。 特点是具有公共前缀的节点也共享一个公共父节点。 基数树 Radix Tree  基数树，或称压缩前缀树，是一种更节省空间的Trie Tree（前缀树）。对于基数树的每个节点，如果该节点是惟一的子树，就会和父节点合并。   注册路由的过程就是构造前缀树的过程，具有公共前缀的节点共享同一个公共父节点。">
+<meta name="description" content="[TOC] 1.vue-admin-templete动态路由参考：vue-admin-template 动态路由 2.动态路由刷新空白let oneRun &#x3D; true  &#x2F;&#x2F; get menu routes   if (oneRun) &amp;#123;     oneRun &#x3D; false     const accessRoutes &#x3D; await store.dispatch(&#39;menu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GoWeb02-Gin源码解析">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/06/02/GoWeb02-Gin%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:title" content="GO微服务03-前端问题汇总">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/07/03/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="01 路由详解Gin框架路由使用的是定制版的httprouter，原理是大量使用公共前缀的树结构。 特点是具有公共前缀的节点也共享一个公共父节点。 基数树 Radix Tree  基数树，或称压缩前缀树，是一种更节省空间的Trie Tree（前缀树）。对于基数树的每个节点，如果该节点是惟一的子树，就会和父节点合并。   注册路由的过程就是构造前缀树的过程，具有公共前缀的节点共享同一个公共父节点。">
+<meta property="og:description" content="[TOC] 1.vue-admin-templete动态路由参考：vue-admin-template 动态路由 2.动态路由刷新空白let oneRun &#x3D; true  &#x2F;&#x2F; get menu routes   if (oneRun) &amp;#123;     oneRun &#x3D; false     const accessRoutes &#x3D; await store.dispatch(&#39;menu">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h46unfjsj20bi07ymxk.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h4gi6fbgj20cr096t99.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h4hoab15j20e408r0t0.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2loyf6hvdj20jg0eswfs.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q3et3vu5j20rg0h80tc.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q67xr3d8j21hw0kq0uh.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q6a0m2scj20r605mmxd.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q6awiovcj20qo0hiwfj.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q67xr3d8j21hw0kq0uh.jpg">
-<meta property="article:published_time" content="2022-06-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-04T01:03:15.000Z">
+<meta property="article:published_time" content="2022-07-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-07-11T07:42:32.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
+<meta property="article:tag" content="微服务">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h46unfjsj20bi07ymxk.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -89,7 +80,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(84)</small>
+                <small>(85)</small>
             
         </div>
     </li>
@@ -100,7 +91,7 @@
                     <div data-rel="GO">
                         
                         GO
-                        <small>(19)</small>
+                        <small>(20)</small>
                         
                     </div>
                     
@@ -261,7 +252,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="84">
+<input type="hidden" id="yelog_site_posts_number" value="85">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -382,6 +373,38 @@
     
     <nav id="title-list-nav">
         
+        <a  class="全部文章 微服务 "
+           href="/2022/07/03/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务03-前端问题汇总">GO微服务03-前端问题汇总</span>
+            <span class="post-date" title="2022-07-03 00:00:00">2022/07/03</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/07/02/GO%E5%BE%AE%E6%9C%8D%E5%8A%A102-%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务02-后端问题汇总">GO微服务02-后端问题汇总</span>
+            <span class="post-date" title="2022-07-02 00:00:00">2022/07/02</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/07/01/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务01-环境搭建">GO微服务01-环境搭建</span>
+            <span class="post-date" title="2022-07-01 00:00:00">2022/07/01</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/04/GoWeb04-Zap%E6%97%A5%E5%BF%97/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb高级04-Zap日志">GoWeb高级04-Zap日志</span>
+            <span class="post-date" title="2022-06-04 00:00:00">2022/06/04</span>
+        </a>
+        
         <a  class="全部文章 GO "
            href="/2022/06/03/GoWeb03-Mysql%E5%92%8CRedis/"
            data-tag="GO"
@@ -436,30 +459,6 @@
            data-author="" >
             <span class="post-title" title="Golang内存管理">Golang内存管理</span>
             <span class="post-date" title="2022-05-02 00:00:00">2022/05/02</span>
-        </a>
-        
-        <a  class="全部文章 微服务 "
-           href="/2022/04/16/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
-           data-tag="GO,微服务"
-           data-author="" >
-            <span class="post-title" title="GO微服务01-环境搭建">GO微服务01-环境搭建</span>
-            <span class="post-date" title="2022-04-16 00:00:00">2022/04/16</span>
-        </a>
-        
-        <a  class="全部文章 微服务 "
-           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A102-%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/"
-           data-tag="GO,微服务"
-           data-author="" >
-            <span class="post-title" title="GO微服务02-问题处理">GO微服务02-问题处理</span>
-            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
-        </a>
-        
-        <a  class="全部文章 微服务 "
-           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/"
-           data-tag="GO,微服务"
-           data-author="" >
-            <span class="post-title" title="GO微服务03-前端问题处理">GO微服务03-前端问题处理</span>
-            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
         </a>
         
         <a  class="全部文章 微服务 "
@@ -1072,9 +1071,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-GO微服务01-环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-GO微服务03-前端问题汇总" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">GO微服务01-环境搭建</h1>
+        <h1 class="article-title">GO微服务03-前端问题汇总</h1>
     
     <div class="article-meta">
         
@@ -1101,7 +1100,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-04-16 21:57:21'>2022-04-16 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-07-11 15:42:32'>2022-07-03 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1112,7 +1111,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#K8S%E9%83%A8%E7%BD%B2Mysql"><span class="toc-text">K8S部署Mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BAConfigMap%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">1.创建ConfigMap存储配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8-PV-PVC"><span class="toc-text">2. 数据存储(PV+PVC)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%83%A8%E7%BD%B2Mysql-Pod"><span class="toc-text">3. 部署Mysql Pod</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AEservice"><span class="toc-text">4.配置service</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E8%BF%9E%E6%8E%A5%E6%B5%8B%E8%AF%95"><span class="toc-text">5. 连接测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Helm%E9%83%A8%E7%BD%B2Nacos"><span class="toc-text">Helm部署Nacos</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96Mysql%E6%95%B0%E6%8D%AE"><span class="toc-text">1.初始化Mysql数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%B8%8B%E8%BD%BD"><span class="toc-text">2.下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85"><span class="toc-text">3.安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AEIngress"><span class="toc-text">4. 配置Ingress</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%B5%8B%E8%AF%95"><span class="toc-text">5.测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Helm%E9%83%A8%E7%BD%B2Consul"><span class="toc-text">Helm部署Consul</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%96%B0%E5%BB%BA%E5%B9%B6%E6%8C%82%E8%BD%BD%E7%9B%AE%E5%BD%95"><span class="toc-text">1. 新建并挂载目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%94%B3%E8%AF%B7PV"><span class="toc-text">2.申请PV</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">3.配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%AE%89%E8%A3%85"><span class="toc-text">4.安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E9%85%8D%E7%BD%AEIngress"><span class="toc-text">5.配置Ingress</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E6%B5%8B%E8%AF%95"><span class="toc-text">6.测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Helm%E9%83%A8%E7%BD%B2redis"><span class="toc-text">Helm部署redis</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%96%B0%E5%BB%BA%E5%B9%B6%E6%8C%82%E8%BD%BD%E7%9B%AE%E5%BD%95-1"><span class="toc-text">1. 新建并挂载目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%BB%91%E5%AE%9APV-PVC"><span class="toc-text">2.绑定PV-PVC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85redis"><span class="toc-text">安装redis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-vue-admin-templete%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-text">1.vue-admin-templete动态路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E5%88%B7%E6%96%B0%E7%A9%BA%E7%99%BD"><span class="toc-text">2.动态路由刷新空白</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E8%AE%BF%E9%97%AE%E6%8A%A5%E9%94%99"><span class="toc-text">3.动态路由访问报错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E8%B7%AF%E7%94%B1%E5%8F%82%E6%95%B0"><span class="toc-text">4.获取当前路由参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Table%E9%BB%98%E8%AE%A4%E9%80%89%E4%B8%AD"><span class="toc-text">5.Table默认选中</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1128,656 +1127,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#K8S%E9%83%A8%E7%BD%B2Mysql"><span class="toc-text">K8S部署Mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BAConfigMap%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">1.创建ConfigMap存储配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8-PV-PVC"><span class="toc-text">2. 数据存储(PV+PVC)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%83%A8%E7%BD%B2Mysql-Pod"><span class="toc-text">3. 部署Mysql Pod</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AEservice"><span class="toc-text">4.配置service</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E8%BF%9E%E6%8E%A5%E6%B5%8B%E8%AF%95"><span class="toc-text">5. 连接测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Helm%E9%83%A8%E7%BD%B2Nacos"><span class="toc-text">Helm部署Nacos</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96Mysql%E6%95%B0%E6%8D%AE"><span class="toc-text">1.初始化Mysql数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%B8%8B%E8%BD%BD"><span class="toc-text">2.下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85"><span class="toc-text">3.安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AEIngress"><span class="toc-text">4. 配置Ingress</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E6%B5%8B%E8%AF%95"><span class="toc-text">5.测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Helm%E9%83%A8%E7%BD%B2Consul"><span class="toc-text">Helm部署Consul</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%96%B0%E5%BB%BA%E5%B9%B6%E6%8C%82%E8%BD%BD%E7%9B%AE%E5%BD%95"><span class="toc-text">1. 新建并挂载目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%94%B3%E8%AF%B7PV"><span class="toc-text">2.申请PV</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">3.配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%AE%89%E8%A3%85"><span class="toc-text">4.安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E9%85%8D%E7%BD%AEIngress"><span class="toc-text">5.配置Ingress</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E6%B5%8B%E8%AF%95"><span class="toc-text">6.测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Helm%E9%83%A8%E7%BD%B2redis"><span class="toc-text">Helm部署redis</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%96%B0%E5%BB%BA%E5%B9%B6%E6%8C%82%E8%BD%BD%E7%9B%AE%E5%BD%95-1"><span class="toc-text">1. 新建并挂载目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%BB%91%E5%AE%9APV-PVC"><span class="toc-text">2.绑定PV-PVC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85redis"><span class="toc-text">安装redis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-text">测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></div></p>
-<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h3 id="K8S部署Mysql"><a href="#K8S部署Mysql" class="headerlink" title="K8S部署Mysql"></a>K8S部署Mysql</h3><h4 id="1-创建ConfigMap存储配置文件"><a href="#1-创建ConfigMap存储配置文件" class="headerlink" title="1.创建ConfigMap存储配置文件"></a>1.创建ConfigMap存储配置文件</h4><p>mysql-config.yaml</p>
-<pre><code>apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mysql-config
-  labels:
-    app: mysql
-data:
-  my.cnf: |-
-    [client]
-    default-character-set=utf8mb4
-    [mysql]
-    default-character-set=utf8mb4
-    [mysqld] 
-    max_connections = 2000
-    secure_file_priv=/var/lib/mysql
-    sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION    
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-vue-admin-templete%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-text">1.vue-admin-templete动态路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E5%88%B7%E6%96%B0%E7%A9%BA%E7%99%BD"><span class="toc-text">2.动态路由刷新空白</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E8%AE%BF%E9%97%AE%E6%8A%A5%E9%94%99"><span class="toc-text">3.动态路由访问报错</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E8%B7%AF%E7%94%B1%E5%8F%82%E6%95%B0"><span class="toc-text">4.获取当前路由参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Table%E9%BB%98%E8%AE%A4%E9%80%89%E4%B8%AD"><span class="toc-text">5.Table默认选中</span></a></li></ol></div></p>
+<h2 id="1-vue-admin-templete动态路由"><a href="#1-vue-admin-templete动态路由" class="headerlink" title="1.vue-admin-templete动态路由"></a>1.vue-admin-templete动态路由</h2><p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Bug_yellow/article/details/119883488">vue-admin-template 动态路由</a></p>
+<h2 id="2-动态路由刷新空白"><a href="#2-动态路由刷新空白" class="headerlink" title="2.动态路由刷新空白"></a>2.动态路由刷新空白</h2><pre><code>let oneRun = true
+
+// get menu routes
+  if (oneRun) &#123;
+    oneRun = false
+    const accessRoutes = await store.dispatch(&#39;menus/getRoutes&#39;)
+    resetRouter()
+    router.addRoutes(accessRoutes)
+    next(&#123; ...to, replace: true &#125;)
+  &#125;
 </code></pre>
-<p>执行结果</p>
-<pre><code>kubectl apply -f mysql-config.yaml 
-configmap/mysql-config created
-
-kubectl get cm
-NAME           DATA   AGE
-mysql-config   1      7s
+<h2 id="3-动态路由访问报错"><a href="#3-动态路由访问报错" class="headerlink" title="3.动态路由访问报错"></a>3.动态路由访问报错</h2><pre><code>component: () =&gt; import(&#39;@/views/&#39; + item.Ename + &#39;/&#39; + sub.Ename),
 </code></pre>
-<h4 id="2-数据存储-PV-PVC"><a href="#2-数据存储-PV-PVC" class="headerlink" title="2. 数据存储(PV+PVC)"></a>2. 数据存储(PV+PVC)</h4><p>新建并挂载目录</p>
-<pre><code>mkdir -p /data/mysql
-
-vim /etc/exports
-
-/data/mysql *(rw,no_root_squash)
-
- exportfs -r
+<p>改为</p>
+<pre><code>component: (resolve) =&gt; require([&#39;@/views/&#39; + item.Ename + &#39;/&#39; + sub.Ename], resolve),
 </code></pre>
-<p>mysql-pv.yaml</p>
-<pre><code>apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: mysql-pv
-spec:
-  capacity:
-    storage: 5Gi
-  accessModes:
-  - ReadWriteOnce
-  nfs:
-    path: /data/mysql
-    server: 10.0.4.5
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44153063/article/details/114826870">Error: Cannot find module ‘@/views/**/**‘</a></p>
+<h2 id="4-获取当前路由参数"><a href="#4-获取当前路由参数" class="headerlink" title="4.获取当前路由参数"></a>4.获取当前路由参数</h2><p>/test/key</p>
+<pre><code>this.$route.path      // /test/key
 </code></pre>
-<p>执行结果</p>
-<pre><code>kubectl apply -f mysql-pv.yaml
-
-kubectl get pv,pvc
-NAME                        CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM               STORAGECLASS   REASON   AGE
-persistentvolume/mysql-pv   5Gi        RWO            Retain           Bound    default/mysql-pvc                           3s
-
-NAME                              STATUS   VOLUME     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
-persistentvolumeclaim/mysql-pvc   Bound    mysql-pv   5Gi        RWO                           3s
+<p>/blog/1</p>
+<pre><code>this.$route.params.id // 1
 </code></pre>
-<h4 id="3-部署Mysql-Pod"><a href="#3-部署Mysql-Pod" class="headerlink" title="3. 部署Mysql Pod"></a>3. 部署Mysql Pod</h4><p>mysql-deploy.yaml</p>
-<pre><code>apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: mysql
-  labels:
-    app: mysql
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: mysql
-  template:
-    metadata:
-      labels:
-        app: mysql
-    spec:
-      containers:
-      - name: mysql
-        image: mysql:8.0.19
-        ports:
-        - containerPort: 3306
-        env:
-        - name: MYSQL_ROOT_PASSWORD    ## 配置Root用户默认密码
-          value: &quot;123456&quot;
-        resources:
-          limits:
-            cpu: 500m
-            memory: 512Mi
-          requests:
-            cpu: 500m
-            memory: 512Mi
-        livenessProbe:
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 5
-          successThreshold: 1
-          failureThreshold: 3
-          exec:
-            command: [&quot;mysqladmin&quot;, &quot;-uroot&quot;, &quot;-p$&#123;MYSQL_ROOT_PASSWORD&#125;&quot;, &quot;ping&quot;]
-        readinessProbe:
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 5
-          successThreshold: 1
-          failureThreshold: 3
-          exec:
-            command: [&quot;mysqladmin&quot;, &quot;-uroot&quot;, &quot;-p$&#123;MYSQL_ROOT_PASSWORD&#125;&quot;, &quot;ping&quot;]
-        volumeMounts:
-        - name: data
-          mountPath: /var/lib/mysql
-        - name: config
-          mountPath: /etc/mysql/conf.d/my.cnf
-          subPath: my.cnf
-        - name: localtime
-          readOnly: true
-          mountPath: /etc/localtime
-      volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: mysql-pvc
-      - name: config
-        configMap:
-          name: mysql-config
-      - name: localtime
-        hostPath:
-          type: File
-          path: /etc/localtime
+<h2 id="5-Table默认选中"><a href="#5-Table默认选中" class="headerlink" title="5.Table默认选中"></a>5.Table默认选中</h2><pre><code class="vue">this.$nextTick(() =&gt; &#123;
+  const selected = row.checked === true
+  this.$refs.multipleTable.toggleRowSelection(row, selected)
+&#125;)
 </code></pre>
-<p>注意：persistentVolumeClaim和configMap需要和之前创建的名称匹配</p>
-<p><strong>参数简介：</strong></p>
-<ul>
-<li><strong>ports：</strong> 配置镜像映射端口。</li>
-<li><strong>env：</strong> 镜像环境变量配置，其中 MYSQL_ROOT_PASSWORD 是 Mysql 镜像用于配置 root 用户默认密码变量。</li>
-<li><strong>resources：</strong> 配置 CPU、Memory 资源限制，可以通过配置该值来配置 Pod 的 QoS 级别。</li>
-<li><strong>livenessProbe：</strong> 配置存活探针,定时检测 Mysql 应用运行状态,如果检测到 Mysql 挂掉将进行重启操作。</li>
-<li><strong>readinessProbe：</strong> 配置就绪探针,定时检测 Mysql 应用启动状态,如果启动成功将允许流量涌入,启动失败将进行重启操作。</li>
-<li><strong>command：</strong> 探针执行探测时执行的探测命令。</li>
-<li><strong>volumeMounts：</strong> 存储卷挂载配置，用于镜像内存储的挂载配置，与 volumes 中对于的 name 进行绑定。</li>
-<li><strong>volumes：</strong> 存储卷配置，可配置使用 pvc、hostPath、emptyDir、nfs 等存储，需要配置 name 值与 VolumeMounts 进行绑定。</li>
-</ul>
-<p>执行结果</p>
-<pre><code>kubectl apply -f mysql-deploy.yaml
-kubectl get pods
-
-NAME                    READY   STATUS    RESTARTS   AGE
-mysql-589f94cf4-gzng6   1/1     Running   0          46s
-</code></pre>
-<h4 id="4-配置service"><a href="#4-配置service" class="headerlink" title="4.配置service"></a>4.配置service</h4><p>mysql-svc.yaml</p>
-<pre><code>apiVersion: v1
-kind: Service
-metadata:
-  name: mysql
-  labels:
-    app: mysql
-spec:
-  type: NodePort
-  ports:
-  - name: mysql
-    port: 3306
-    targetPort: 3306
-    nodePort: 30336
-  selector:
-    app: mysql
-</code></pre>
-<p>执行结果</p>
-<pre><code>kubectl apply -f mysql-svc.yaml 
-kubectl get svc mysql
-
-NAME    TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-mysql   NodePort   10.102.59.153   &lt;none&gt;        3306:30336/TCP   2m16s
-</code></pre>
-<h4 id="5-连接测试"><a href="#5-连接测试" class="headerlink" title="5. 连接测试"></a>5. 连接测试</h4><pre><code>mysql -h 192.168.0.111 -P 30336 --user=root --password=123456
-</code></pre>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h18jfkgidwj20cq0aljrv.jpg"></p>
-<h3 id="Helm部署Nacos"><a href="#Helm部署Nacos" class="headerlink" title="Helm部署Nacos"></a>Helm部署Nacos</h3><h4 id="1-初始化Mysql数据"><a href="#1-初始化Mysql数据" class="headerlink" title="1.初始化Mysql数据"></a>1.初始化Mysql数据</h4><pre><code>/*
- * Copyright 1999-2018 Alibaba Group Holding Ltd.
- *
- * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/******************************************/
-/*   数据库全名 = nacos_config   */
-/*   表名称 = config_info   */
-/******************************************/
-CREATE TABLE `config_info` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT &#39;id&#39;,
-  `data_id` varchar(255) NOT NULL COMMENT &#39;data_id&#39;,
-  `group_id` varchar(255) DEFAULT NULL,
-  `content` longtext NOT NULL COMMENT &#39;content&#39;,
-  `md5` varchar(32) DEFAULT NULL COMMENT &#39;md5&#39;,
-  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#39;创建时间&#39;,
-  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#39;修改时间&#39;,
-  `src_user` text COMMENT &#39;source user&#39;,
-  `src_ip` varchar(50) DEFAULT NULL COMMENT &#39;source ip&#39;,
-  `app_name` varchar(128) DEFAULT NULL,
-  `tenant_id` varchar(128) DEFAULT &#39;&#39; COMMENT &#39;租户字段&#39;,
-  `c_desc` varchar(256) DEFAULT NULL,
-  `c_use` varchar(64) DEFAULT NULL,
-  `effect` varchar(64) DEFAULT NULL,
-  `type` varchar(64) DEFAULT NULL,
-  `c_schema` text,
-  `encrypted_data_key` text NOT NULL COMMENT &#39;秘钥&#39;,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_configinfo_datagrouptenant` (`data_id`,`group_id`,`tenant_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT=&#39;config_info&#39;;
-
-/******************************************/
-/*   数据库全名 = nacos_config   */
-/*   表名称 = config_info_aggr   */
-/******************************************/
-CREATE TABLE `config_info_aggr` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT &#39;id&#39;,
-  `data_id` varchar(255) NOT NULL COMMENT &#39;data_id&#39;,
-  `group_id` varchar(255) NOT NULL COMMENT &#39;group_id&#39;,
-  `datum_id` varchar(255) NOT NULL COMMENT &#39;datum_id&#39;,
-  `content` longtext NOT NULL COMMENT &#39;内容&#39;,
-  `gmt_modified` datetime NOT NULL COMMENT &#39;修改时间&#39;,
-  `app_name` varchar(128) DEFAULT NULL,
-  `tenant_id` varchar(128) DEFAULT &#39;&#39; COMMENT &#39;租户字段&#39;,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_configinfoaggr_datagrouptenantdatum` (`data_id`,`group_id`,`tenant_id`,`datum_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT=&#39;增加租户字段&#39;;
-
-
-/******************************************/
-/*   数据库全名 = nacos_config   */
-/*   表名称 = config_info_beta   */
-/******************************************/
-CREATE TABLE `config_info_beta` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT &#39;id&#39;,
-  `data_id` varchar(255) NOT NULL COMMENT &#39;data_id&#39;,
-  `group_id` varchar(128) NOT NULL COMMENT &#39;group_id&#39;,
-  `app_name` varchar(128) DEFAULT NULL COMMENT &#39;app_name&#39;,
-  `content` longtext NOT NULL COMMENT &#39;content&#39;,
-  `beta_ips` varchar(1024) DEFAULT NULL COMMENT &#39;betaIps&#39;,
-  `md5` varchar(32) DEFAULT NULL COMMENT &#39;md5&#39;,
-  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#39;创建时间&#39;,
-  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#39;修改时间&#39;,
-  `src_user` text COMMENT &#39;source user&#39;,
-  `src_ip` varchar(50) DEFAULT NULL COMMENT &#39;source ip&#39;,
-  `tenant_id` varchar(128) DEFAULT &#39;&#39; COMMENT &#39;租户字段&#39;,
-  `encrypted_data_key` text NOT NULL COMMENT &#39;秘钥&#39;,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_configinfobeta_datagrouptenant` (`data_id`,`group_id`,`tenant_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT=&#39;config_info_beta&#39;;
-
-/******************************************/
-/*   数据库全名 = nacos_config   */
-/*   表名称 = config_info_tag   */
-/******************************************/
-CREATE TABLE `config_info_tag` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT &#39;id&#39;,
-  `data_id` varchar(255) NOT NULL COMMENT &#39;data_id&#39;,
-  `group_id` varchar(128) NOT NULL COMMENT &#39;group_id&#39;,
-  `tenant_id` varchar(128) DEFAULT &#39;&#39; COMMENT &#39;tenant_id&#39;,
-  `tag_id` varchar(128) NOT NULL COMMENT &#39;tag_id&#39;,
-  `app_name` varchar(128) DEFAULT NULL COMMENT &#39;app_name&#39;,
-  `content` longtext NOT NULL COMMENT &#39;content&#39;,
-  `md5` varchar(32) DEFAULT NULL COMMENT &#39;md5&#39;,
-  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#39;创建时间&#39;,
-  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#39;修改时间&#39;,
-  `src_user` text COMMENT &#39;source user&#39;,
-  `src_ip` varchar(50) DEFAULT NULL COMMENT &#39;source ip&#39;,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_configinfotag_datagrouptenanttag` (`data_id`,`group_id`,`tenant_id`,`tag_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT=&#39;config_info_tag&#39;;
-
-/******************************************/
-/*   数据库全名 = nacos_config   */
-/*   表名称 = config_tags_relation   */
-/******************************************/
-CREATE TABLE `config_tags_relation` (
-  `id` bigint(20) NOT NULL COMMENT &#39;id&#39;,
-  `tag_name` varchar(128) NOT NULL COMMENT &#39;tag_name&#39;,
-  `tag_type` varchar(64) DEFAULT NULL COMMENT &#39;tag_type&#39;,
-  `data_id` varchar(255) NOT NULL COMMENT &#39;data_id&#39;,
-  `group_id` varchar(128) NOT NULL COMMENT &#39;group_id&#39;,
-  `tenant_id` varchar(128) DEFAULT &#39;&#39; COMMENT &#39;tenant_id&#39;,
-  `nid` bigint(20) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`nid`),
-  UNIQUE KEY `uk_configtagrelation_configidtag` (`id`,`tag_name`,`tag_type`),
-  KEY `idx_tenant_id` (`tenant_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT=&#39;config_tag_relation&#39;;
-
-/******************************************/
-/*   数据库全名 = nacos_config   */
-/*   表名称 = group_capacity   */
-/******************************************/
-CREATE TABLE `group_capacity` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT &#39;主键ID&#39;,
-  `group_id` varchar(128) NOT NULL DEFAULT &#39;&#39; COMMENT &#39;Group ID，空字符表示整个集群&#39;,
-  `quota` int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;配额，0表示使用默认值&#39;,
-  `usage` int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;使用量&#39;,
-  `max_size` int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;单个配置大小上限，单位为字节，0表示使用默认值&#39;,
-  `max_aggr_count` int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;聚合子配置最大个数，，0表示使用默认值&#39;,
-  `max_aggr_size` int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;单个聚合数据的子配置大小上限，单位为字节，0表示使用默认值&#39;,
-  `max_history_count` int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;最大变更历史数量&#39;,
-  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#39;创建时间&#39;,
-  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#39;修改时间&#39;,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_group_id` (`group_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT=&#39;集群、各Group容量信息表&#39;;
-
-/******************************************/
-/*   数据库全名 = nacos_config   */
-/*   表名称 = his_config_info   */
-/******************************************/
-CREATE TABLE `his_config_info` (
-  `id` bigint(64) unsigned NOT NULL,
-  `nid` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `data_id` varchar(255) NOT NULL,
-  `group_id` varchar(128) NOT NULL,
-  `app_name` varchar(128) DEFAULT NULL COMMENT &#39;app_name&#39;,
-  `content` longtext NOT NULL,
-  `md5` varchar(32) DEFAULT NULL,
-  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `src_user` text,
-  `src_ip` varchar(50) DEFAULT NULL,
-  `op_type` char(10) DEFAULT NULL,
-  `tenant_id` varchar(128) DEFAULT &#39;&#39; COMMENT &#39;租户字段&#39;,
-  `encrypted_data_key` text NOT NULL COMMENT &#39;秘钥&#39;,
-  PRIMARY KEY (`nid`),
-  KEY `idx_gmt_create` (`gmt_create`),
-  KEY `idx_gmt_modified` (`gmt_modified`),
-  KEY `idx_did` (`data_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT=&#39;多租户改造&#39;;
-
-
-/******************************************/
-/*   数据库全名 = nacos_config   */
-/*   表名称 = tenant_capacity   */
-/******************************************/
-CREATE TABLE `tenant_capacity` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT &#39;主键ID&#39;,
-  `tenant_id` varchar(128) NOT NULL DEFAULT &#39;&#39; COMMENT &#39;Tenant ID&#39;,
-  `quota` int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;配额，0表示使用默认值&#39;,
-  `usage` int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;使用量&#39;,
-  `max_size` int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;单个配置大小上限，单位为字节，0表示使用默认值&#39;,
-  `max_aggr_count` int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;聚合子配置最大个数&#39;,
-  `max_aggr_size` int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;单个聚合数据的子配置大小上限，单位为字节，0表示使用默认值&#39;,
-  `max_history_count` int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;最大变更历史数量&#39;,
-  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#39;创建时间&#39;,
-  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT &#39;修改时间&#39;,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_tenant_id` (`tenant_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT=&#39;租户容量信息表&#39;;
-
-
-CREATE TABLE `tenant_info` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT &#39;id&#39;,
-  `kp` varchar(128) NOT NULL COMMENT &#39;kp&#39;,
-  `tenant_id` varchar(128) default &#39;&#39; COMMENT &#39;tenant_id&#39;,
-  `tenant_name` varchar(128) default &#39;&#39; COMMENT &#39;tenant_name&#39;,
-  `tenant_desc` varchar(256) DEFAULT NULL COMMENT &#39;tenant_desc&#39;,
-  `create_source` varchar(32) DEFAULT NULL COMMENT &#39;create_source&#39;,
-  `gmt_create` bigint(20) NOT NULL COMMENT &#39;创建时间&#39;,
-  `gmt_modified` bigint(20) NOT NULL COMMENT &#39;修改时间&#39;,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_tenant_info_kptenantid` (`kp`,`tenant_id`),
-  KEY `idx_tenant_id` (`tenant_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT=&#39;tenant_info&#39;;
-
-CREATE TABLE `users` (
-    `username` varchar(50) NOT NULL PRIMARY KEY,
-    `password` varchar(500) NOT NULL,
-    `enabled` boolean NOT NULL
-);
-
-CREATE TABLE `roles` (
-    `username` varchar(50) NOT NULL,
-    `role` varchar(50) NOT NULL,
-    UNIQUE INDEX `idx_user_role` (`username` ASC, `role` ASC) USING BTREE
-);
-
-CREATE TABLE `permissions` (
-    `role` varchar(50) NOT NULL,
-    `resource` varchar(255) NOT NULL,
-    `action` varchar(8) NOT NULL,
-    UNIQUE INDEX `uk_role_permission` (`role`,`resource`,`action`) USING BTREE
-);
-
-INSERT INTO users (username, password, enabled) VALUES (&#39;nacos&#39;, &#39;$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu&#39;, TRUE);
-
-INSERT INTO roles (username, role) VALUES (&#39;nacos&#39;, &#39;ROLE_ADMIN&#39;);
-</code></pre>
-<h4 id="2-下载"><a href="#2-下载" class="headerlink" title="2.下载"></a>2.下载</h4><pre><code>git clone https://github.com/nacos-group/nacos-k8s.git
-cd nacos-k8s
-</code></pre>
-<h4 id="3-安装"><a href="#3-安装" class="headerlink" title="3.安装"></a>3.安装</h4><pre><code>helm install --namespace ingress-nginx nacos ./ --set global.mode=standalone --set nacos.storage.db.host=192.168.1.100 --set nacos.storage.db.name=nacos --set nacos.storage.db.port=3306 --set nacos.storage.db.username=root  --set nacos.storage.db.password=xxxxxx 
-</code></pre>
-<p>注：–namespace ingress-nginx是为了使用ingress，直接使用NodePort可不配置，下同。</p>
-<h4 id="4-配置Ingress"><a href="#4-配置Ingress" class="headerlink" title="4. 配置Ingress"></a>4. 配置Ingress</h4><p>ingress-nacos.yaml</p>
-<pre><code>apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: ingress-nacos
-  namespace: ingress-nginx
-spec:
-  rules:
-  - host: nacos.itxiaoma.cn
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: nacos-cs
-          servicePort: 8848
-</code></pre>
-<p>执行</p>
-<pre><code>kubectl apply -f ingress-nacos.yaml 
-</code></pre>
-<h4 id="5-测试"><a href="#5-测试" class="headerlink" title="5.测试"></a>5.测试</h4><p>访问：<a target="_blank" rel="noopener" href="http://nacos.itxiaoma.cn/nacos/index.html">http://nacos.itxiaoma.cn/nacos/index.html</a></p>
-<p>默认账户：nacos 密码：nacos</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h199we7b1wj212q09yjsc.jpg"></p>
-<h3 id="Helm部署Consul"><a href="#Helm部署Consul" class="headerlink" title="Helm部署Consul"></a>Helm部署Consul</h3><h4 id="1-新建并挂载目录"><a href="#1-新建并挂载目录" class="headerlink" title="1. 新建并挂载目录"></a>1. 新建并挂载目录</h4><pre><code>mkdir -p /data/consul
-
-vim /etc/exports
-
-/data/consul *(rw,no_root_squash)
-
-exportfs -r
-</code></pre>
-<h4 id="2-申请PV"><a href="#2-申请PV" class="headerlink" title="2.申请PV"></a>2.申请PV</h4><p>consul-pv.yaml</p>
-<pre><code>kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: pv-volume-consul-0
-  namespace: ingress-nginx
-  labels:
-    type: local
-spec:
-  storageClassName: &quot;&quot;
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: &quot;/data/consul&quot;
-</code></pre>
-<pre><code>kubectl apply -f consul-pv.yaml 
-</code></pre>
-<h4 id="3-配置文件"><a href="#3-配置文件" class="headerlink" title="3.配置文件"></a>3.配置文件</h4><p>consul-config.yaml</p>
-<pre><code>global:
-  name: consul # 设置用于 Helm chart 中所有资源的前缀
-ui:
-  service: # 为 Consul UI 配置服务
-    type: &#39;NodePort&#39; # 服务类型为 NodePort
-server:
-  replicas: 1 # 要运行的服务器的数量，即集群数
-  affinity: &quot;&quot; # 允许每个节点上运行更多的Pod
-  storage: &#39;1Gi&#39; # 定义用于配置服务器的 StatefulSet 存储的磁盘大小
-  storageClass: &quot;&quot; # 使用Kubernetes集群的默认 StorageClass
-  securityContext: # 服务器 Pod 的安全上下文，以 root 用户运行
-    fsGroup: 2000
-    runAsGroup: 2000
-    runAsNonRoot: false
-    runAsUser: 0
-</code></pre>
-<h4 id="4-安装"><a href="#4-安装" class="headerlink" title="4.安装"></a>4.安装</h4><pre><code>helm install consul hashicorp/consul --version 0.41.1 -n ingress-nginx -f consul-config.yaml 
-</code></pre>
-<p>注：加–version 0.41.1是因为kubenetes1.18版本限制，&gt;=1.19版本可忽略</p>
-<h4 id="5-配置Ingress"><a href="#5-配置Ingress" class="headerlink" title="5.配置Ingress"></a>5.配置Ingress</h4><p>配置密码</p>
-<pre><code>#安装httpd
-yum install -y httpd
-
-#生成auth文件
-htpasswd -c auth consul
-New password: 
-Re-type new password: 
-Adding password for user consul
-
-#创建secret
-kubectl create secret generic basic-auth --from-file=auth -n ingress-nginx
-
-#查看secret
-kubectl get secret basic-auth -o yaml -n ingress-nginx
-</code></pre>
-<p>创建Ingress</p>
-<pre><code>apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: ingress-consul
-  namespace: ingress-nginx
-  annotations:
-    nginx.ingress.kubernetes.io/auth-type: basic
-    nginx.ingress.kubernetes.io/auth-secret: basic-auth
-    nginx.ingress.kubernetes.io/auth-realm: &#39;Authentication Required&#39;
-spec:
-  rules:
-  - host: consul.itxiaoma.cn
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: consul-ui
-          servicePort: 80
-</code></pre>
-<h4 id="6-测试"><a href="#6-测试" class="headerlink" title="6.测试"></a>6.测试</h4><p>访问：<a target="_blank" rel="noopener" href="http://consul.itxiaoma.cn/">http://consul.itxiaoma.cn/</a></p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h19ac8zychj209u07fq32.jpg"></p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h199vtllttj20km07njrl.jpg"></p>
-<h3 id="Helm部署redis"><a href="#Helm部署redis" class="headerlink" title="Helm部署redis"></a>Helm部署redis</h3><h4 id="1-新建并挂载目录-1"><a href="#1-新建并挂载目录-1" class="headerlink" title="1. 新建并挂载目录"></a>1. 新建并挂载目录</h4><pre><code>mkdir -p /data/redis
-
-vim /etc/exports
-
-/data/consul *(rw,no_root_squash)
-
-exportfs -r
-</code></pre>
-<h4 id="2-绑定PV-PVC"><a href="#2-绑定PV-PVC" class="headerlink" title="2.绑定PV-PVC"></a>2.绑定PV-PVC</h4><p>redis-pv.yaml</p>
-<pre><code>kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: pv-redis
-  namespace: ingress-nginx
-  labels:
-    type: local
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: /data/redis
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: pvc-redis
-  namespace: ingress-nginx
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-</code></pre>
-<pre><code>kubectl apply -f redis-pv.yaml 
-</code></pre>
-<p>redis-slave-pv.yaml</p>
-<pre><code>kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: pv-redis-slave
-  namespace: ingress-nginx
-  labels:
-    type: local
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: /data/redis
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: redis-data-redis-replicas-0
-  namespace: ingress-nginx
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-</code></pre>
-<pre><code>kubectl apply -f redis-slave-pv.yaml 
-</code></pre>
-<h4 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h4><p>my-values.yaml</p>
-<pre><code>commonConfiguration: |-
-  appendonly no
-auth:
-  password: xxxxx
-master:
-  service:
-    type: NodePort
-  persistence:
-    existingClaim: &quot;pvc-redis&quot;
-replica:
-  service:
-    type: NodePort
-</code></pre>
-<p>安装</p>
-<pre><code>helm install -f my-values.yaml redis bitnami/redis -n ingress-nginx --version 16.0.0
-</code></pre>
-<pre><code>To get your password run:
-
-    export REDIS_PASSWORD=$(kubectl get secret --namespace ingress-nginx redis -o jsonpath=&quot;&#123;.data.redis-password&#125;&quot; | base64 --decode)
-
-To connect to your Redis&amp;trade; server:
-
-1. Run a Redis&amp;trade; pod that you can use as a client:
-
-   kubectl run --namespace ingress-nginx redis-client --restart=&#39;Never&#39;  --env REDIS_PASSWORD=$REDIS_PASSWORD  --image docker.io/bitnami/redis:6.2.6-debian-10-r103 --command -- sleep infinity
-
-   Use the following command to attach to the pod:
-
-   kubectl exec --tty -i redis-client \
-   --namespace ingress-nginx -- bash
-
-2. Connect using the Redis&amp;trade; CLI:
-   REDISCLI_AUTH=&quot;$REDIS_PASSWORD&quot; redis-cli -h redis-master
-   REDISCLI_AUTH=&quot;$REDIS_PASSWORD&quot; redis-cli -h redis-replicas
-
-To connect to your database from outside the cluster execute the following commands:
-
-    export NODE_IP=$(kubectl get nodes --namespace ingress-nginx -o jsonpath=&quot;&#123;.items[0].status.addresses[0].address&#125;&quot;)
-    export NODE_PORT=$(kubectl get --namespace ingress-nginx -o jsonpath=&quot;&#123;.spec.ports[0].nodePort&#125;&quot; services redis-master)
-    REDISCLI_AUTH=&quot;$REDIS_PASSWORD&quot; redis-cli -h $NODE_IP -p $NODE_PORT
-</code></pre>
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><pre><code>kubectl get svc -n ingress-nginx
-</code></pre>
-<pre><code>
-</code></pre>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="http://www.mydlq.club/article/75/">Kubernetes 部署 Mysql 8.0 数据库</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/maoxinwen1/article/details/88629313?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1.pc_relevant_default&utm_relevant_index=2">MySQL8.0登录提示caching_sha2_password问题解决方法</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/nacos-group/nacos-k8s/tree/master/helm">https://github.com/nacos-group/nacos-k8s/tree/master/helm</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.consul.io/docs/k8s/helm">https://www.consul.io/docs/k8s/helm</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.modb.pro/db/74448">使用 Helm 部署 Consul 集群</a></p>
-<p><a target="_blank" rel="noopener" href="https://artifacthub.io/packages/helm/hashicorp/consul/0.41.1">Consul on Kubernetes Helm Chart</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.likecs.com/show-306177642.html">Nginx Ingress设置账号密码</a></p>
-<p><a target="_blank" rel="noopener" href="https://kubernetes.github.io/ingress-nginx/examples/auth/basic/">NGINX Ingress Controller-Basic Authentication</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/398659314dce">helm部署redis主从</a></p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000040364886">Helm3安装Redis集群</a></p>
-<p><a target="_blank" rel="noopener" href="https://artifacthub.io/packages/helm/bitnami/redis/16.0.0">https://artifacthub.io/packages/helm/bitnami/redis/16.0.0</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>

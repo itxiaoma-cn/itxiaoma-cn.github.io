@@ -6,28 +6,19 @@
   <meta name="keywords" content=" GO ">
   <meta name="description" content="Golang的GMP详解 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="01 路由详解Gin框架路由使用的是定制版的httprouter，原理是大量使用公共前缀的树结构。 特点是具有公共前缀的节点也共享一个公共父节点。 基数树 Radix Tree  基数树，或称压缩前缀树，是一种更节省空间的Trie Tree（前缀树）。对于基数树的每个节点，如果该节点是惟一的子树，就会和父节点合并。   注册路由的过程就是构造前缀树的过程，具有公共前缀的节点共享同一个公共父节点。">
+<meta name="description" content="[TOC] 1.vue-admin-templete动态路由参考：vue-admin-template 动态路由 2.动态路由刷新空白let oneRun &#x3D; true  &#x2F;&#x2F; get menu routes   if (oneRun) &amp;#123;     oneRun &#x3D; false     const accessRoutes &#x3D; await store.dispatch(&#39;menu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GoWeb02-Gin源码解析">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/06/02/GoWeb02-Gin%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:title" content="GO微服务03-前端问题汇总">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/07/03/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="01 路由详解Gin框架路由使用的是定制版的httprouter，原理是大量使用公共前缀的树结构。 特点是具有公共前缀的节点也共享一个公共父节点。 基数树 Radix Tree  基数树，或称压缩前缀树，是一种更节省空间的Trie Tree（前缀树）。对于基数树的每个节点，如果该节点是惟一的子树，就会和父节点合并。   注册路由的过程就是构造前缀树的过程，具有公共前缀的节点共享同一个公共父节点。">
+<meta property="og:description" content="[TOC] 1.vue-admin-templete动态路由参考：vue-admin-template 动态路由 2.动态路由刷新空白let oneRun &#x3D; true  &#x2F;&#x2F; get menu routes   if (oneRun) &amp;#123;     oneRun &#x3D; false     const accessRoutes &#x3D; await store.dispatch(&#39;menu">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h46unfjsj20bi07ymxk.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h4gi6fbgj20cr096t99.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h4hoab15j20e408r0t0.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2loyf6hvdj20jg0eswfs.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q3et3vu5j20rg0h80tc.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q67xr3d8j21hw0kq0uh.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q6a0m2scj20r605mmxd.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q6awiovcj20qo0hiwfj.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2q67xr3d8j21hw0kq0uh.jpg">
-<meta property="article:published_time" content="2022-06-01T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-04T01:03:15.000Z">
+<meta property="article:published_time" content="2022-07-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-07-11T07:42:32.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
+<meta property="article:tag" content="微服务">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/e6c9d24ely1h2h46unfjsj20bi07ymxk.jpg">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -89,7 +80,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(84)</small>
+                <small>(85)</small>
             
         </div>
     </li>
@@ -100,7 +91,7 @@
                     <div data-rel="GO">
                         
                         GO
-                        <small>(19)</small>
+                        <small>(20)</small>
                         
                     </div>
                     
@@ -261,7 +252,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="84">
+<input type="hidden" id="yelog_site_posts_number" value="85">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -382,6 +373,38 @@
     
     <nav id="title-list-nav">
         
+        <a  class="全部文章 微服务 "
+           href="/2022/07/03/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务03-前端问题汇总">GO微服务03-前端问题汇总</span>
+            <span class="post-date" title="2022-07-03 00:00:00">2022/07/03</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/07/02/GO%E5%BE%AE%E6%9C%8D%E5%8A%A102-%E5%90%8E%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务02-后端问题汇总">GO微服务02-后端问题汇总</span>
+            <span class="post-date" title="2022-07-02 00:00:00">2022/07/02</span>
+        </a>
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/07/01/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务01-环境搭建">GO微服务01-环境搭建</span>
+            <span class="post-date" title="2022-07-01 00:00:00">2022/07/01</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/04/GoWeb04-Zap%E6%97%A5%E5%BF%97/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb高级04-Zap日志">GoWeb高级04-Zap日志</span>
+            <span class="post-date" title="2022-06-04 00:00:00">2022/06/04</span>
+        </a>
+        
         <a  class="全部文章 GO "
            href="/2022/06/03/GoWeb03-Mysql%E5%92%8CRedis/"
            data-tag="GO"
@@ -436,30 +459,6 @@
            data-author="" >
             <span class="post-title" title="Golang内存管理">Golang内存管理</span>
             <span class="post-date" title="2022-05-02 00:00:00">2022/05/02</span>
-        </a>
-        
-        <a  class="全部文章 微服务 "
-           href="/2022/04/16/GO%E5%BE%AE%E6%9C%8D%E5%8A%A101-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
-           data-tag="GO,微服务"
-           data-author="" >
-            <span class="post-title" title="GO微服务01-环境搭建">GO微服务01-环境搭建</span>
-            <span class="post-date" title="2022-04-16 00:00:00">2022/04/16</span>
-        </a>
-        
-        <a  class="全部文章 微服务 "
-           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A102-%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/"
-           data-tag="GO,微服务"
-           data-author="" >
-            <span class="post-title" title="GO微服务02-问题处理">GO微服务02-问题处理</span>
-            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
-        </a>
-        
-        <a  class="全部文章 微服务 "
-           href="/2022/04/15/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/"
-           data-tag="GO,微服务"
-           data-author="" >
-            <span class="post-title" title="GO微服务03-前端问题处理">GO微服务03-前端问题处理</span>
-            <span class="post-date" title="2022-04-15 00:00:00">2022/04/15</span>
         </a>
         
         <a  class="全部文章 微服务 "
@@ -1099,7 +1098,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-05-18 11:15:23'>2022-05-11 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-07-09 10:13:18'>2022-05-11 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1110,7 +1109,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Golang%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E7%94%B1%E6%9D%A5"><span class="toc-text">Golang调度器的由来</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E8%BF%9B%E7%A8%8B%E9%97%AE%E9%A2%98"><span class="toc-text">单进程问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%97%AE%E9%A2%98"><span class="toc-text">多进程多线程问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B-co-routine"><span class="toc-text">协程(co-routine)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%85%B3%E7%B3%BB%E7%B1%BB%E5%9E%8B"><span class="toc-text">协程和线程的关系类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#N-1%E5%85%B3%E7%B3%BB%EF%BC%9AN%E4%B8%AA%E5%8D%8F%E7%A8%8B%E7%BB%91%E5%AE%9A1%E4%B8%AA%E7%BA%BF%E7%A8%8B"><span class="toc-text">N:1关系：N个协程绑定1个线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1%E5%85%B3%E7%B3%BB%EF%BC%9A1%E4%B8%AA%E5%8D%8F%E7%A8%8B%E7%BB%91%E5%AE%9A1%E4%B8%AA%E7%BA%BF%E7%A8%8B"><span class="toc-text">1:1关系：1个协程绑定1个线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#M-N%E5%85%B3%E7%B3%BB%EF%BC%9AM%E4%B8%AA%E5%8D%8F%E7%A8%8B%E7%BB%91%E5%AE%9A1%E4%B8%AA%E7%BA%BF%E7%A8%8B"><span class="toc-text">M:N关系：M个协程绑定1个线程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Goroutine"><span class="toc-text">Goroutine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A9%E6%9C%9F%E8%B0%83%E5%BA%A6%E5%99%A8GM"><span class="toc-text">早期调度器GM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3"><span class="toc-text">GMP模型设计思想</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B"><span class="toc-text">GMP模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-text">P的数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#M%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-text">M的数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAP"><span class="toc-text">创建P</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAM"><span class="toc-text">创建M</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5"><span class="toc-text">调度器设计策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E7%94%A8%E7%BA%BF%E7%A8%8B"><span class="toc-text">复用线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%B9%B6%E8%A1%8C"><span class="toc-text">利用并行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A2%E5%8D%A0"><span class="toc-text">抢占</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80G%E9%98%9F%E5%88%97"><span class="toc-text">全局G队列</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#go-func-%E8%B0%83%E5%BA%A6%E6%B5%81%E7%A8%8B"><span class="toc-text">go func()调度流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">调度器的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E7%BC%96%E7%A8%8B"><span class="toc-text">可视化编程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-go-tool-trace"><span class="toc-text">1.go tool trace</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Debug-trace"><span class="toc-text">2.Debug trace</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GMP%E5%9C%BA%E6%99%AF%E8%A7%A3%E6%9E%90"><span class="toc-text">GMP场景解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF1%EF%BC%9A%E5%B1%80%E9%83%A8%E4%BC%98%E5%85%88%E6%80%A7"><span class="toc-text">场景1：局部优先性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF2%EF%BC%9A%E7%BA%BF%E7%A8%8B%E5%A4%8D%E7%94%A8"><span class="toc-text">场景2：线程复用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF3%EF%BC%9A%E6%9C%AC%E5%9C%B0%E9%98%9F%E5%88%97%E6%BB%A1%E4%BA%86"><span class="toc-text">场景3：本地队列满了</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF4%EF%BC%9A%E6%9C%AC%E5%9C%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-text">场景4：本地负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF5%EF%BC%9A%E5%8A%A0%E5%85%A5%E6%9C%AC%E5%9C%B0%E9%98%9F%E5%88%97"><span class="toc-text">场景5：加入本地队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF6%EF%BC%9A%E8%87%AA%E6%97%8B%E7%BA%BF%E7%A8%8B"><span class="toc-text">场景6：自旋线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF7%EF%BC%9A%E5%85%A8%E5%B1%80%E9%98%9F%E5%88%97%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-text">场景7：全局队列负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF8%EF%BC%9Awork-stealing"><span class="toc-text">场景8：work stealing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF9%EF%BC%9A%E8%87%AA%E6%97%8B%E7%BA%BF%E7%A8%8B%E6%9C%80%E5%A4%A7%E9%99%90%E5%88%B6"><span class="toc-text">场景9：自旋线程最大限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF10%EF%BC%9A%E9%98%BB%E5%A1%9E%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-text">场景10：阻塞的系统调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF11%EF%BC%9A%E9%9D%9E%E9%98%BB%E5%A1%9E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-text">场景11：非阻塞系统调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Golang%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E7%94%B1%E6%9D%A5"><span class="toc-text">Golang调度器的由来</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E8%BF%9B%E7%A8%8B%E9%97%AE%E9%A2%98"><span class="toc-text">单进程问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%97%AE%E9%A2%98"><span class="toc-text">多进程多线程问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B-co-routine"><span class="toc-text">协程(co-routine)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%85%B3%E7%B3%BB%E7%B1%BB%E5%9E%8B"><span class="toc-text">协程和线程的关系类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#N-1%E5%85%B3%E7%B3%BB%EF%BC%9AN%E4%B8%AA%E5%8D%8F%E7%A8%8B%E7%BB%91%E5%AE%9A1%E4%B8%AA%E7%BA%BF%E7%A8%8B"><span class="toc-text">N:1关系：N个协程绑定1个线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1%E5%85%B3%E7%B3%BB%EF%BC%9A1%E4%B8%AA%E5%8D%8F%E7%A8%8B%E7%BB%91%E5%AE%9A1%E4%B8%AA%E7%BA%BF%E7%A8%8B"><span class="toc-text">1:1关系：1个协程绑定1个线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#M-N%E5%85%B3%E7%B3%BB%EF%BC%9AM%E4%B8%AA%E5%8D%8F%E7%A8%8B%E7%BB%91%E5%AE%9AN%E4%B8%AA%E7%BA%BF%E7%A8%8B"><span class="toc-text">M:N关系：M个协程绑定N个线程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Goroutine"><span class="toc-text">Goroutine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A9%E6%9C%9F%E8%B0%83%E5%BA%A6%E5%99%A8GM"><span class="toc-text">早期调度器GM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3"><span class="toc-text">GMP模型设计思想</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B"><span class="toc-text">GMP模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-text">P的数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#M%E7%9A%84%E6%95%B0%E9%87%8F"><span class="toc-text">M的数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAP"><span class="toc-text">创建P</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAM"><span class="toc-text">创建M</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5"><span class="toc-text">调度器设计策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E7%94%A8%E7%BA%BF%E7%A8%8B"><span class="toc-text">复用线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%B9%B6%E8%A1%8C"><span class="toc-text">利用并行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A2%E5%8D%A0"><span class="toc-text">抢占</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80G%E9%98%9F%E5%88%97"><span class="toc-text">全局G队列</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#go-func-%E8%B0%83%E5%BA%A6%E6%B5%81%E7%A8%8B"><span class="toc-text">go func()调度流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">调度器的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E7%BC%96%E7%A8%8B"><span class="toc-text">可视化编程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-go-tool-trace"><span class="toc-text">1.go tool trace</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Debug-trace"><span class="toc-text">2.Debug trace</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GMP%E5%9C%BA%E6%99%AF%E8%A7%A3%E6%9E%90"><span class="toc-text">GMP场景解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF1%EF%BC%9A%E5%B1%80%E9%83%A8%E4%BC%98%E5%85%88%E6%80%A7"><span class="toc-text">场景1：局部优先性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF2%EF%BC%9A%E7%BA%BF%E7%A8%8B%E5%A4%8D%E7%94%A8"><span class="toc-text">场景2：线程复用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF3%EF%BC%9A%E6%9C%AC%E5%9C%B0%E9%98%9F%E5%88%97%E6%BB%A1%E4%BA%86"><span class="toc-text">场景3：本地队列满了</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF4%EF%BC%9A%E6%9C%AC%E5%9C%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-text">场景4：本地负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF5%EF%BC%9A%E5%8A%A0%E5%85%A5%E6%9C%AC%E5%9C%B0%E9%98%9F%E5%88%97"><span class="toc-text">场景5：加入本地队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF6%EF%BC%9A%E8%87%AA%E6%97%8B%E7%BA%BF%E7%A8%8B"><span class="toc-text">场景6：自旋线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF7%EF%BC%9A%E5%85%A8%E5%B1%80%E9%98%9F%E5%88%97%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-text">场景7：全局队列负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF8%EF%BC%9Awork-stealing"><span class="toc-text">场景8：work stealing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF9%EF%BC%9A%E8%87%AA%E6%97%8B%E7%BA%BF%E7%A8%8B%E6%9C%80%E5%A4%A7%E9%99%90%E5%88%B6"><span class="toc-text">场景9：自旋线程最大限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF10%EF%BC%9A%E9%98%BB%E5%A1%9E%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-text">场景10：阻塞的系统调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF11%EF%BC%9A%E9%9D%9E%E9%98%BB%E5%A1%9E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-text">场景11：非阻塞系统调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1133,10 +1132,11 @@
 <h3 id="多进程多线程问题"><a href="#多进程多线程问题" class="headerlink" title="多进程多线程问题"></a>多进程多线程问题</h3><ol>
 <li>进程/线程数越多，切换成本越大</li>
 <li>多线程伴随着同步竞争（锁，资源冲突）</li>
-<li>高内存占用：进程虚拟内存占用4GB(32bit OS)，线索占用4MB</li>
+<li>高内存占用：进程虚拟内存占用4GB(32bit OS)，线程占用4MB</li>
 <li>高CPU调度消耗</li>
 </ol>
-<h3 id="协程-co-routine"><a href="#协程-co-routine" class="headerlink" title="协程(co-routine)"></a>协程(co-routine)</h3><ul>
+<h3 id="协程-co-routine"><a href="#协程-co-routine" class="headerlink" title="协程(co-routine)"></a>协程(co-routine)</h3><p>线程和协程的区别：</p>
+<ul>
 <li><p>线程由CPU调度，是抢占式的，基本调度也需要陷入内核态；</p>
 </li>
 <li><p>协程由用户态调度，是协作式的，一个协程让出CPU后，才执行下一个协程。</p>
@@ -1146,7 +1146,7 @@
 <p>缺点：无法利用多核加速能力；协程阻塞会造成其他协程都无法执行，没有并发能力。</p>
 <h4 id="1-1关系：1个协程绑定1个线程"><a href="#1-1关系：1个协程绑定1个线程" class="headerlink" title="1:1关系：1个协程绑定1个线程"></a>1:1关系：1个协程绑定1个线程</h4><p>优点：协程的调度都由CPU完成，不存在N:1缺点，</p>
 <p>缺点：协程的创建、删除和切换的代价都由CPU完成，切换协程代价过大</p>
-<h4 id="M-N关系：M个协程绑定1个线程"><a href="#M-N关系：M个协程绑定1个线程" class="headerlink" title="M:N关系：M个协程绑定1个线程"></a>M:N关系：M个协程绑定1个线程</h4><p>优点：能够利用多核</p>
+<h4 id="M-N关系：M个协程绑定N个线程"><a href="#M-N关系：M个协程绑定N个线程" class="headerlink" title="M:N关系：M个协程绑定N个线程"></a>M:N关系：M个协程绑定N个线程</h4><p>优点：能够利用多核</p>
 <p>缺点：过于依赖协程调度器的优化和算法</p>
 <h3 id="Goroutine"><a href="#Goroutine" class="headerlink" title="Goroutine"></a>Goroutine</h3><p>Go中协程被称为goroutine，它非常轻量，一个goroutine只占几KB，</p>
 <p>goroutine让一组可复用的函数运行在一组线程之上，即使有协程阻塞，该线程的其他协程也可以被<code>runtime</code>调度，转移到其他可运行的线程上。特点：</p>
@@ -1188,7 +1188,7 @@
 <p>1）work stealing机制</p>
 <p> 当本线程无可运行的G时，尝试从其他线程绑定的P偷取G，而不是销毁线程。</p>
 <p>2）hand off机制</p>
-<p> 当本线程因为G进行系统调用阻塞时，线程释放绑定的P，把P转移给其他空闲的线程执行。</p>
+<p> 当本线程因为G进行系统调用阻塞时，线程释放绑定的P，把P转移给其他空闲的M执行。</p>
 <h4 id="利用并行"><a href="#利用并行" class="headerlink" title="利用并行"></a><strong>利用并行</strong></h4><p><code>GOMAXPROCS</code>设置P的数量，最多有<code>GOMAXPROCS</code>个线程分布在多个CPU上同时运行。<code>GOMAXPROCS</code>也限制了并发的程度，比如<code>GOMAXPROCS = 核数/2</code>，则最多利用了一半的CPU核进行并行。</p>
 <h4 id="抢占"><a href="#抢占" class="headerlink" title="抢占"></a>抢占</h4><ul>
 <li><p>在co-routine中要等待一个协程主动让出CPU才执行下一个协程</p>
@@ -1199,10 +1199,10 @@
 <h4 id="全局G队列"><a href="#全局G队列" class="headerlink" title="全局G队列"></a>全局G队列</h4><p>P本地队列为空时，会尝试从全局队列拿一批G放到P的本地队列。</p>
 <h3 id="go-func-调度流程"><a href="#go-func-调度流程" class="headerlink" title="go func()调度流程"></a>go func()调度流程</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26mkh2zu1j20pi0eg3zr.jpg"></p>
 <p>1、通过 go func()来创建一个goroutine；</p>
-<p> 2、有两个存储G的队列，一个是局部调度器P的本地队列、一个是全局G队列。新创建的G会先保存在P的本地队列中，如果P的本地队列已经满了就会保存在全局的队列中；</p>
-<p> 3、G只能运行在M中，一个M必须持有一个P，M与P是1：1的关系。M会从P的本地队列弹出一个可执行状态的G来执行，如果P的本地队列为空，就会想其他的MP组合偷取一个可执行的G来执行；</p>
+<p>2、新创建的G会先保存在P的本地队列中，如果P的本地队列已经满了就会保存在全局的队列中；</p>
+<p>3、G只能运行在M中，一个M必须持有一个P，M与P是1：1的关系。M会从P的本地队列弹出一个可执行状态的G来执行，如果P的本地队列为空，就会想其他的MP组合偷取一个可执行的G来执行；</p>
 <p> 4、一个M调度G执行的过程是一个循环机制；</p>
-<p> 5、当M执行某一个G时候如果发生了syscall或则其余阻塞操作，M会阻塞，如果当前有一些G在执行，runtime会把这个线程M从P中摘除(detach)，然后再创建一个新的操作系统的线程(如果有空闲的线程可用就复用空闲线程)来服务于这个P；</p>
+<p> 5、当M执行某一个G时候如果发生了syscall或则其余阻塞操作，M会阻塞，如果当前有一些G在执行，runtime会把这个线程M从P中摘除(detach)，然后再创建一个新的M(如果有空闲的M可用就复用空闲M)来服务于这个P；</p>
 <p> 6、当M系统调用结束时候，这个G会尝试获取一个空闲的P执行，并放入到这个P的本地队列。如果获取不到P，那么这个线程M变成休眠状态， 加入到空闲线程中，然后这个G会被放入全局队列中。</p>
 <h3 id="调度器的生命周期"><a href="#调度器的生命周期" class="headerlink" title="调度器的生命周期"></a>调度器的生命周期</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26v7wfquyj20cl0nzq3o.jpg"></p>
 <ul>
@@ -1325,13 +1325,13 @@ Hello World
 <h3 id="场景3：本地队列满了"><a href="#场景3：本地队列满了" class="headerlink" title="场景3：本地队列满了"></a>场景3：本地队列满了</h3><p>假设每个P的本地队列只能存3个G。G2要创建了6个G，前3个G（G3, G4, G5）已经加入p1的本地队列，P1本地队列满了。</p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vqx1tmgj20nr0h1gmk.jpg"></p>
 <h3 id="场景4：本地负载均衡"><a href="#场景4：本地负载均衡" class="headerlink" title="场景4：本地负载均衡"></a>场景4：本地负载均衡</h3><p>G2在创建G7的时候，发现P1的本地队列已满，需要执行<strong>负载均衡</strong>(把P1中本地队列中前一半的G，还有新创建G<strong>转移</strong>到全局队列)。</p>
-<p>这些G被转移到全局队列时，会被打乱顺序。所以G3,G4,G7被转移到全局队列。</p>
+<p><strong>G被转移到全局队列时，会被打乱顺序。</strong>所以G3,G4,G7被转移到全局队列。</p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vs0uq6oj20nk0koq4a.jpg"></p>
 <h3 id="场景5：加入本地队列"><a href="#场景5：加入本地队列" class="headerlink" title="场景5：加入本地队列"></a>场景5：加入本地队列</h3><p>G2创建G8时，P1的本地队列未满，所以G8会被加入到P1的本地队列。</p>
 <p>G8加入到P1点本地队列的原因还是因为P1此时在与M1绑定，而G2此时是M1在执行。所以G2创建的新的G会优先放置到自己的M绑定的P上。</p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vsnr6kzj20nz0lpmyb.jpg"></p>
 <h3 id="场景6：自旋线程"><a href="#场景6：自旋线程" class="headerlink" title="场景6：自旋线程"></a>场景6：自旋线程</h3><p>在创建G时，运行的G会尝试唤醒其他空闲的P和M组合去执行。</p>
-<p>假定G2唤醒了M2，M2绑定了P2，并运行G0，但P2本地队列没有G，M2此时为自旋线程<strong>（没有G但为运行状态的线程，不断寻找G）</strong>。</p>
+<p>假定G2唤醒了M2，M2绑定了P2，并运行G0，但P2本地队列没有G，M2此时为自旋线程<strong>（没有G但为运行状态的线程M，不断寻找G）</strong>。</p>
 <p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h26vuhb6lej20pb0bwab1.jpg"></p>
 <h3 id="场景7：全局队列负载均衡"><a href="#场景7：全局队列负载均衡" class="headerlink" title="场景7：全局队列负载均衡"></a>场景7：全局队列负载均衡</h3><p>M2尝试从全局队列(简称“GQ”)取一批G放到P2的本地队列（函数：<code>findrunnable()</code>）。M2从全局队列取的G数量符合下面的公式：</p>
 <pre><code class="go">n =  min(len(GQ) / GOMAXPROCS +  1,  cap(LQ) / 2 )
