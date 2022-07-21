@@ -2,19 +2,19 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Mysql45讲07-行锁 | IT小马</title>
+  <title>Mysql45讲04-普通索引，唯一索引 | IT小马</title>
   <meta name="keywords" content=" 后端 , MYSQL ">
-  <meta name="description" content="Mysql45讲07-行锁 | IT小马">
+  <meta name="description" content="Mysql45讲04-普通索引，唯一索引 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="[TOC] 1.vue-admin-templete动态路由参考：vue-admin-template 动态路由 2.动态路由刷新空白let oneRun &#x3D; true  &#x2F;&#x2F; get menu routes   if (oneRun) &amp;#123;     oneRun &#x3D; false     const accessRoutes &#x3D; await store.dispatch(&#39;menu">
+<meta name="description" content="[TOC] 1.k8s查看POD日志kubectl get pods -n ingress-nginx  kubectl logs -f cartorder-web-58dcf66cc-kt84x -n ingress-nginx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GO微服务03-前端问题汇总">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/07/03/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/index.html">
+<meta property="og:title" content="GO微服务04-环境问题汇总">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/07/04/GO%E5%BE%AE%E6%9C%8D%E5%8A%A104-%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="[TOC] 1.vue-admin-templete动态路由参考：vue-admin-template 动态路由 2.动态路由刷新空白let oneRun &#x3D; true  &#x2F;&#x2F; get menu routes   if (oneRun) &amp;#123;     oneRun &#x3D; false     const accessRoutes &#x3D; await store.dispatch(&#39;menu">
+<meta property="og:description" content="[TOC] 1.k8s查看POD日志kubectl get pods -n ingress-nginx  kubectl logs -f cartorder-web-58dcf66cc-kt84x -n ingress-nginx">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-07-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-07-11T07:42:32.000Z">
+<meta property="article:published_time" content="2022-07-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-07-18T14:23:32.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
 <meta property="article:tag" content="微服务">
@@ -80,7 +80,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(85)</small>
+                <small>(90)</small>
             
         </div>
     </li>
@@ -133,7 +133,7 @@
                     <div data-rel="MYSQL">
                         
                         MYSQL
-                        <small>(7)</small>
+                        <small>(11)</small>
                         
                     </div>
                     
@@ -203,7 +203,7 @@
                     <div data-rel="微服务">
                         
                         微服务
-                        <small>(4)</small>
+                        <small>(5)</small>
                         
                     </div>
                     
@@ -252,7 +252,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="85">
+<input type="hidden" id="yelog_site_posts_number" value="90">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -372,6 +372,14 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/07/04/GO%E5%BE%AE%E6%9C%8D%E5%8A%A104-%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务04-环境问题汇总">GO微服务04-环境问题汇总</span>
+            <span class="post-date" title="2022-07-04 00:00:00">2022/07/04</span>
+        </a>
         
         <a  class="全部文章 微服务 "
            href="/2022/07/03/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"
@@ -918,26 +926,66 @@
         </a>
         
         <a  class="全部文章 MYSQL "
-           href="/2021/06/06/Mysql45%E8%AE%B206-%E9%94%81/"
+           href="/2021/06/21/Mysql45%E8%AE%B221-%E5%8A%A0%E9%94%81%E8%A7%84%E5%88%99/"
            data-tag="后端,MYSQL"
            data-author="" >
-            <span class="post-title" title="Mysql45讲06-锁">Mysql45讲06-锁</span>
+            <span class="post-title" title="Mysql45讲21-加锁规则">Mysql45讲21-加锁规则</span>
+            <span class="post-date" title="2021-06-21 00:00:00">2021/06/21</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/20/Mysql45%E8%AE%B220-%E5%B9%BB%E8%AF%BB-%E9%97%B4%E9%9A%99%E9%94%81/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲20-幻读-间隙锁">Mysql45讲20-幻读-间隙锁</span>
+            <span class="post-date" title="2021-06-20 00:00:00">2021/06/20</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/19/Mysql45%E8%AE%B219-%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲19-问题排查">Mysql45讲19-问题排查</span>
+            <span class="post-date" title="2021-06-19 00:00:00">2021/06/19</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/17/Mysql45%E8%AE%B217-18-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲17-18-随机查询">Mysql45讲17-18-随机查询</span>
+            <span class="post-date" title="2021-06-17 00:00:00">2021/06/17</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/06/Mysql45%E8%AE%B206-%E8%AE%A1%E6%95%B0%EF%BC%8C%E6%8E%92%E5%BA%8F/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲06-计数，排序">Mysql45讲06-计数，排序</span>
             <span class="post-date" title="2021-06-06 00:00:00">2021/06/06</span>
         </a>
         
         <a  class="全部文章 MYSQL "
-           href="/2021/06/04/Mysql45%E8%AE%B204-05-%E7%B4%A2%E5%BC%95/"
+           href="/2021/06/05/Mysql45%E8%AE%B205-%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%88%B7%E7%9B%98/"
            data-tag="后端,MYSQL"
            data-author="" >
-            <span class="post-title" title="Mysql45讲0405-索引">Mysql45讲0405-索引</span>
+            <span class="post-title" title="Mysql45讲05-前缀索引，刷盘">Mysql45讲05-前缀索引，刷盘</span>
+            <span class="post-date" title="2021-06-05 00:00:00">2021/06/05</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/04/Mysql45%E8%AE%B204-%E6%99%AE%E9%80%9A%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲04-普通索引，唯一索引">Mysql45讲04-普通索引，唯一索引</span>
             <span class="post-date" title="2021-06-04 00:00:00">2021/06/04</span>
         </a>
         
         <a  class="全部文章 MYSQL "
-           href="/2021/06/03/Mysql45%E8%AE%B203-%E4%BA%8B%E5%8A%A1/"
+           href="/2021/06/03/Mysql45%E8%AE%B203-%E9%94%81/"
            data-tag="后端,MYSQL"
            data-author="" >
-            <span class="post-title" title="Mysql45讲03-事务">Mysql45讲03-事务</span>
+            <span class="post-title" title="Mysql45讲03-锁">Mysql45讲03-锁</span>
             <span class="post-date" title="2021-06-03 00:00:00">2021/06/03</span>
         </a>
         
@@ -950,26 +998,18 @@
         </a>
         
         <a  class="全部文章 MYSQL "
+           href="/2021/06/02/Mysql45%E8%AE%B202-%E4%BA%8B%E5%8A%A1%E5%92%8C%E7%B4%A2%E5%BC%95/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲02-事务和索引">Mysql45讲02-事务和索引</span>
+            <span class="post-date" title="2021-06-02 00:00:00">2021/06/02</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
            href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
            data-tag="后端,MYSQL"
            data-author="" >
             <span class="post-title" title="Mysql45讲01-基础架构">Mysql45讲01-基础架构</span>
-            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
-        </a>
-        
-        <a  class="全部文章 MYSQL "
-           href="/2021/06/01/Mysql45%E8%AE%B207-%E8%A1%8C%E9%94%81/"
-           data-tag="后端,MYSQL"
-           data-author="" >
-            <span class="post-title" title="Mysql45讲07-行锁">Mysql45讲07-行锁</span>
-            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
-        </a>
-        
-        <a  class="全部文章 MYSQL "
-           href="/2021/06/01/Mysql45%E8%AE%B208-%E9%9A%94%E7%A6%BB/"
-           data-tag="后端,MYSQL"
-           data-author="" >
-            <span class="post-title" title="Mysql45讲08-隔离">Mysql45讲08-隔离</span>
             <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
         </a>
         
@@ -1071,9 +1111,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Mysql45讲07-行锁" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Mysql45讲04-普通索引，唯一索引" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Mysql45讲07-行锁</h1>
+        <h1 class="article-title">Mysql45讲04-普通索引，唯一索引</h1>
     
     <div class="article-meta">
         
@@ -1100,7 +1140,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-05-19 20:37:48'>2021-06-01 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-07-21 10:59:31'>2021-06-04 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1111,7 +1151,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E7%B4%A2%E5%BC%95"><span class="toc-text">普通索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95"><span class="toc-text">唯一索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E7%B4%A2%E5%BC%95%E5%92%8C%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">普通索引和唯一索引的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E5%B7%AE%E5%BC%82"><span class="toc-text">查询语句差异</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E8%AF%AD%E5%8F%A5%E5%B7%AE%E5%BC%82"><span class="toc-text">更新语句差异</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#change-buffer"><span class="toc-text">change buffer</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#merge"><span class="toc-text">merge</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6"><span class="toc-text">使用条件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE"><span class="toc-text">使用建议</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#change-buffer%E5%92%8Credo-log"><span class="toc-text">change buffer和redo log</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#change-buffer%E5%92%8Credo-log%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">change buffer和redo log的区别</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%A1%A8%E7%A9%BA%E9%97%B4%E8%B7%9F%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A9%BA%E9%97%B4"><span class="toc-text">系统表空间跟数据表空间</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%85%A2%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97"><span class="toc-text">慢查询日志</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-text">索引优化器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8%E7%9A%84%E9%80%BB%E8%BE%91"><span class="toc-text">优化器的逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#MySQL-%E6%98%AF%E6%80%8E%E6%A0%B7%E5%BE%97%E5%88%B0%E7%B4%A2%E5%BC%95%E7%9A%84%E5%9F%BA%E6%95%B0%E7%9A%84%E5%91%A2%EF%BC%9F"><span class="toc-text">MySQL 是怎样得到索引的基数的呢？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%BB%9F%E8%AE%A1%E5%80%BC%EF%BC%88cardinality-%E5%88%97%EF%BC%89"><span class="toc-text">索引统计值（cardinality 列）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E9%80%89%E6%8B%A9%E5%BC%82%E5%B8%B8%E5%92%8C%E5%A4%84%E7%90%86"><span class="toc-text">索引选择异常和处理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%BC%BA%E8%A1%8C%E9%80%89%E6%8B%A9%E7%B4%A2%E5%BC%95-force-index"><span class="toc-text">1.强行选择索引 force index()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E4%BF%AE%E6%94%B9%E8%AF%AD%E5%8F%A5%E5%BC%95%E5%AF%BCMysql%E4%BD%BF%E7%94%A8%E6%9C%9F%E6%9C%9B%E7%B4%A2%E5%BC%95"><span class="toc-text">2.修改语句引导Mysql使用期望索引</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E6%96%B0%E5%BB%BA%E6%9B%B4%E5%90%88%E9%80%82%E7%9A%84%E7%B4%A2%E5%BC%95%EF%BC%8C%E6%88%96%E5%88%A0%E6%8E%89%E8%AF%AF%E7%94%A8%E7%9A%84%E7%B4%A2%E5%BC%95%E3%80%82"><span class="toc-text">3.新建更合适的索引，或删掉误用的索引。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%EF%BC%9A%E5%9C%A8%E6%9E%84%E9%80%A0%E7%AC%AC%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9A%84%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%E9%80%9A%E8%BF%87-session-A-%E7%9A%84%E9%85%8D%E5%90%88%EF%BC%8C%E8%AE%A9-session-B-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%90%8E%E5%8F%88%E9%87%8D%E6%96%B0%E6%8F%92%E5%85%A5%E4%BA%86%E4%B8%80%E9%81%8D%E6%95%B0%E6%8D%AE%EF%BC%8C%E7%84%B6%E5%90%8E%E5%B0%B1%E5%8F%91%E7%8E%B0-explain-%E7%BB%93%E6%9E%9C%E4%B8%AD%EF%BC%8Crows-%E5%AD%97%E6%AE%B5%E4%BB%8E-10001-%E5%8F%98%E6%88%90-37000-%E5%A4%9A%EF%BC%8C%E8%BF%99%E6%98%AF%E4%BB%80%E4%B9%88%E5%8E%9F%E5%9B%A0%EF%BC%9F"><span class="toc-text">问题：在构造第一个例子的过程中，通过 session A 的配合，让 session B 删除数据后又重新插入了一遍数据，然后就发现 explain 结果中，rows 字段从 10001 变成 37000 多，这是什么原因？</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1127,7 +1167,275 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h4 id="普通索引"><a href="#普通索引" class="headerlink" title="普通索引"></a>普通索引</h4><blockquote>
+<p>创建索引时不附加任何限制条件(唯一、非空等限制)，可以创建在任何数据类型的字段上。</p>
+</blockquote>
+<pre><code>ALTER TABLE `test` ADD INDEX `k_title` (`title`) USING BTREE ; 
+</code></pre>
+<h4 id="唯一索引"><a href="#唯一索引" class="headerlink" title="唯一索引"></a>唯一索引</h4><blockquote>
+<p>创建索引时限制索引的值必须是唯一的。</p>
+</blockquote>
+<pre><code>ALTER TABLE `test` ADD UNIQUE INDEX `un_index_title` (`title`) USING BTREE ; 
+</code></pre>
+<p>通过该类型的索引可以更快速地查询某条记录。 </p>
+<h4 id="普通索引和唯一索引的区别"><a href="#普通索引和唯一索引的区别" class="headerlink" title="普通索引和唯一索引的区别"></a>普通索引和唯一索引的区别</h4><h5 id="查询语句差异"><a href="#查询语句差异" class="headerlink" title="查询语句差异"></a>查询语句差异</h5><ul>
+<li>普通索引查找到第一个满足条件的记录后，继续向后遍历，直到第一个不满足条件的记录 ，停止继续检索。</li>
+<li>唯一索引由于索引定义了唯一性，查找到第一个满足条件的记录后，直接停止继续检索。</li>
+</ul>
+<h5 id="更新语句差异"><a href="#更新语句差异" class="headerlink" title="更新语句差异"></a>更新语句差异</h5><ul>
+<li>普通索引 将数据页从磁盘读入内存，更新数据页。 </li>
+<li>唯一索引 将数据页从磁盘读入内存，判断是否唯一，再更新数据页。  </li>
+</ul>
+<p>InnoDB 的数据是按数据页为单位来读写的。也就是说，当需要读一条记录的时候，并不是将这个记录本身从磁盘读出来，而是以页为单位，将其整体读入内存。在 InnoDB 中，每个数据页的大小默认是 16KB。所以<strong>普通索引和唯一索引的搜索性能几乎一模一样。</strong></p>
+<h4 id="change-buffer"><a href="#change-buffer" class="headerlink" title="change buffer"></a>change buffer</h4><blockquote>
+<p>普通二级索引的目标数据页不在内存当中时，会记录change buffer</p>
+</blockquote>
+<p><strong>change buffer 可以减少随机磁盘访问，提升更新性能</strong></p>
+<ul>
+<li>当需要更新一个数据页时，如果数据页在内存中就直接更新</li>
+<li>而如果这个数据页还没有在内存中的话，在不影响数据一致性的前提下，InnoDB 会将这些更新操作缓存在 change buffer 中，这样就不需要从磁盘中读入这个数据页了。</li>
+<li>下次查询需要访问这个数据页的时候，将数据页读入内存，然后执行 change buffer 中与这个页有关的操作。</li>
+<li>change buffer会持久化到系统共享表，redo log会记录change buffer对应的数据页改动，注意，redo log记录的只可能是数据页物理改动，不是仅仅记录操作。</li>
+</ul>
+<p>理解change buffer，首先要明确概念： </p>
+<ol>
+<li>mysql数据存储在主键索引树的叶子节点。 </li>
+<li>普通索引和唯一索引也都有自己的索引树，树的叶子节点存储的是主键ID。 </li>
+<li>做更新操作（插入，更新，删除）会同时更新所有的索引树结构。</li>
+<li>insert：主键索引树和唯一建索引树的肯定都要更新，肯定是无法用到change buffer的；但是普通索引树的更新，是可以使用change buffer的。 </li>
+<li>update：只要涉及到相关字段更新，就要同时更新相应的索引树。道理同上。 </li>
+<li>【显然，insert操作的影响更大，如果有多个唯一索引，insert对内存命中率会有极大影响】<ol>
+<li>减少读磁盘：仅仅是减少的是对二级普通索引页的读磁盘操作，而对于其他类型的页(唯一索引，主键索引)还是要读磁盘的。 </li>
+<li>减少内存占用：change buffer虽然还是需要内存占用(记录数据更新动作)，但相比于数据页来说(默认16K)，所占的内存还是小了很多的。</li>
+</ol>
+</li>
+</ol>
+<h5 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h5><blockquote>
+<p>把change buffer应用到旧的数据页，得到新的数据页的过程称为 merge </p>
+</blockquote>
+<ul>
+<li>访问这个数据页会触发 merge </li>
+<li>系统有后台线程会定期 merge</li>
+<li>在数据库正常关闭（shutdown）的过程中，也会执行 merge 操作。  </li>
+</ul>
+<p>merge 的执行流程：</p>
+<ol>
+<li>从磁盘读入数据页到内存（老版本的数据页）；</li>
+<li>从 change buffer 里找出这个数据页的 change buffer 记录 (可能有多个），依次应用，得到新版数据页；</li>
+<li>写 redo log。这个 redo log 包含了数据的变更和 change buffer 的变更。</li>
+</ol>
+<h5 id="使用条件"><a href="#使用条件" class="headerlink" title="使用条件"></a>使用条件</h5><blockquote>
+<p>只有普通索引可以使用 change buffer，唯一索引的更新就不能使用</p>
+</blockquote>
+<p>唯一索引来说，所有的更新操作都要先判断这个操作是否违反唯一性约束。必须要将数据页读入内存才能判断。如果都已经读入到内存了，那直接更新内存会更快，就没必要使用 change buffer 了。</p>
+<p>举例：更新记录目标页不在内存中时，普通索引和唯一索引的操作？</p>
+<p>唯一索引：需要将数据页读入内存，判断到没有冲突，插入这个值，语句执行结束；</p>
+<p>普通索引：将更新记录在 change buffer，语句执行就结束了。</p>
+<h5 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h5><ul>
+<li>merge 的时候是真正进行数据更新的时刻，而 change buffer 的主要目的就是将记录的变更动作缓存下来</li>
+<li>在一个数据页做 merge 之前，change buffer 记录的变更越多（也就是这个页面上要更新的次数越多），收益就越大。</li>
+<li>页面在写完以后马上被访问到的概率比较小，此时 change buffer 的使用效果最好。常见的就是账单类、日志类的系统。</li>
+<li>写入之后马上查询，会立即触发 merge 过程。这样随机访问 IO 的次数不会减少，反而增加了 change buffer 的维护代价。</li>
+</ul>
+<h5 id="使用建议"><a href="#使用建议" class="headerlink" title="使用建议"></a>使用建议</h5><blockquote>
+<p>两类索引在查询能力上是没差别的，主要是对更新性能的影响，所以尽量选择普通索引。</p>
+</blockquote>
+<h4 id="change-buffer和redo-log"><a href="#change-buffer和redo-log" class="headerlink" title="change buffer和redo log"></a>change buffer和redo log</h4><pre><code>mysql&gt; insert into t(id,k) values(id1,k1),(id2,k2);
+</code></pre>
+<p>假设当前 k 索引树的状态，查找到位置后，k1 所在的数据页在内存 (InnoDB buffer pool) 中，k2 所在的数据页不在内存中。</p>
+<p>操作顺序：</p>
+<ol>
+<li>Page 1 在内存中，直接更新内存；</li>
+<li>Page 2 没有在内存中，就在内存的 change buffer 区域，记录下“我要往 Page 2 插入一行”这个信息</li>
+<li>将上述两个动作记入 redo log 中。</li>
+</ol>
+<p>内存中的数据还在时，读取的操作顺序：</p>
+<ol>
+<li>读 Page 1 的时候，直接从内存返回。</li>
+<li>要读 Page 2 的时候，需要把 Page 2 从磁盘读入内存中，然后应用 change buffer 里面的操作日志，生成一个正确的版本并返回结果。</li>
+</ol>
+<h5 id="change-buffer和redo-log的区别"><a href="#change-buffer和redo-log的区别" class="headerlink" title="change buffer和redo log的区别"></a>change buffer和redo log的区别</h5><ul>
+<li>redo log 主要节省的是随机写磁盘的 IO 消耗（转成顺序写）</li>
+<li>change buffer 主要节省的则是随机读磁盘的 IO 消耗。</li>
+</ul>
+<p>问题：机器掉电重启，会不会导致 change buffer 丢失，对数据库造成影响呢？</p>
+<p>答案：会导致change buffer丢失，会导致本次未完成的操作数据丢失，但不会导致已完成操作的数据丢失。</p>
+<ol>
+<li>change buffer中分两部分，一部分是本次写入未写完的，一部分是已经写入完成的。</li>
+<li>未写完的操作，还未写入redo log，因此事务还未提交，所以没影响。</li>
+<li>已经写完成的，可以通过redo log来进行恢复。</li>
+</ol>
+<h4 id="系统表空间跟数据表空间"><a href="#系统表空间跟数据表空间" class="headerlink" title="系统表空间跟数据表空间"></a>系统表空间跟数据表空间</h4><p>系统表空间：用来放系统信息的，比如数据字典什么的，对应的磁盘文件是ibdata1</p>
+<p>数据表空间：一个个的表数据文件，对应的磁盘文件就是 表名.ibd</p>
+<h3 id="慢查询日志"><a href="#慢查询日志" class="headerlink" title="慢查询日志"></a>慢查询日志</h3><p><strong>查询Mysql配置文件路径</strong></p>
+<pre><code>sudo find / -name my.cnf
+</code></pre>
+<p><strong>查看慢查询是否开启(路径)</strong></p>
+<pre><code>show variables like &#39;%slow_query_log%&#39;;
+
+slow_query_log            OFF
+slow_query_log_file    /var/lib/mysql/local-slow.log
+</code></pre>
+<p><strong>查看慢查询输出类型(文件/表)</strong></p>
+<pre><code>show variables like &#39;%log_output%&#39;;
+</code></pre>
+<p><strong>查看慢查询设置时间，默认是10秒，可以设置</strong></p>
+<p><strong>查看慢查询设置时间，默认是10秒，可以设置</strong></p>
+<pre><code>show variables like &#39;%long_query_time%&#39;;
+
+long_query_time    10.000000
+</code></pre>
+<p><strong>开启慢查询功能</strong></p>
+<p>动态开启(重启后会失效)</p>
+<pre><code>#开启慢查询功能，1是开启，0是关闭
+mysql&gt; set global slow_query_log=1;
+#定义查过多少秒的查询算是慢查询，这里定义的是1秒，5.6版本之后允许设置少于1秒，例如0.1秒
+mysql&gt; set global long_query_time=1;
+#定义慢查询日志的路径
+mysql&gt; set global slow_query_log_file=&#39;日志文件路径&#39;;
+#关闭功能：
+set global slow_query_log=0;
+#设置慢查询记录到表中
+set global log_output=&#39;TABLE&#39;;
+</code></pre>
+<p>配置文件：在[mysqld]里追加一下内容，重启mysql服务后会生效</p>
+<pre><code>vim my.cnf
+[mysqld]
+slow_query_log = ON
+#定义慢查询日志的路径
+slow_query_log_file = 以实际日志路径为准
+#定义查过多少秒的查询算是慢查询，这里定义的是1秒，5.6版本之后允许设置少于1秒，例如0.1秒
+long_query_time = 1
+#用来设置是否记录没有使用索引的查询到慢查询记录,默认关闭,看需求开启,会产生很多日志,可动态修改
+#log-queries-not-using-indexes
+管理指令也会被记录到慢查询。比如OPTIMEZE TABLE, ALTER TABLE,默认关闭,看需求开启,会产生很多日志,可动态修改
+#log-slow-admin-statements
+</code></pre>
+<p><strong>慢查询日志记录分析方法</strong></p>
+<ol>
+<li><p>使用mysql程序自带的mysqldumpslow命令分析</p>
+<pre><code>#输出记录次数最多的10条SQL语句:
+mysqldumpslow -s c -t 10 日志文件路径
+
+参数解析：
+-s：是表示按照何种方式排序，子参数如下：
+    c、t、l、r：分别是按照记录次数、时间、查询时间、返回的记录数来排序，
+    ac、at、al、ar：表示相应的倒叙；
+-t：返回前面多少条的数据，这里意思就是返回10条数据了（也可以说是前十）
+-g：后边可以写一个正则匹配模式，大小写不敏感的，比如：
+    /path/mysqldumpslow -s r -t 10 日志文件路径，得到返回记录集最多的10个查询。
+    /path/mysqldumpslow -s t -t 10 -g &quot;left join&quot; 日志文件路径，得到按照时间排序的前10条里面含有左连接的查询语句。
+</code></pre>
+</li>
+<li><p>使用pt(Percona Toolkit)工具的pt-query-digest进行统计分析</p>
+<pre><code>pt-query-digest 日志文件路径 &gt;t.txt
+</code></pre>
+</li>
+</ol>
+<p><strong>查询日志</strong></p>
+<blockquote>
+<p>如果慢查询日志还是解决不了问题的话，就建议开查询日志general-log来跟踪sql了。</p>
+</blockquote>
+<p>查看当前状态:</p>
+<pre><code>show variables like &#39;general%&#39;;
+</code></pre>
+<p>配置：my.cnf</p>
+<pre><code>general-log = 1开启（0关闭）
+log = /log/mysql_query.log路径
+</code></pre>
+<p>或直接通过语句设置</p>
+<pre><code>set global general_log=1开启（0关闭）
+</code></pre>
+<h3 id="索引优化器"><a href="#索引优化器" class="headerlink" title="索引优化器"></a>索引优化器</h3><p>建表</p>
+<pre><code>CREATE TABLE `t` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `a` int(11) DEFAULT NULL,
+  `b` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `a` (`a`),
+  KEY `b` (`b`)
+) ENGINE=InnoDB;
+</code></pre>
+<p>插入数据</p>
+<pre><code>delimiter ;;
+create procedure idata()
+begin
+  declare i int;
+  set i=1;
+  start TRANSACTION;
+    while(i&lt;=100000)do
+      insert into t values(i, i, i);
+      set i=i+1;
+    end while;
+  commit;
+end;;
+delimiter ;
+call idata();
+</code></pre>
+<p>分析SQL</p>
+<pre><code>explain select * from t where a between 10000 and 20000;
+
+possible_keys a
+</code></pre>
+<p><img src="https://static001.geekbang.org/resource/image/1e/1e/1e5ba1c2934d3b2c0d96b210a27e1a1e.png?wh=936*344"></p>
+<p>执行查询</p>
+<pre><code>set long_query_time=0;
+select * from t where a between 10000 and 20000; /*Q1*/
+select * from t force index(a) where a between 10000 and 20000;/*Q2*/
+</code></pre>
+<p>Q1 扫描了 10 万行，显然是走了全表扫描，执行时间是 40 毫秒。Q1用错了索引。</p>
+<p>Q2 扫描了 10001 行，执行了 21 毫秒。</p>
+<ul>
+<li>session A 开启的事务是 RR 级别，会创建一个一致性读视图； </li>
+<li>session B 的删除会产生记录的新版本（空记录），同时会产生新的 Undo Log； </li>
+<li>一致性读视图需要的 Undo Log 是不会删除的，意味着 session B 产生的删除记录的 Undo Log 是不能删除的，意味着记录的当前版本（空记录）不能真的从磁盘上被删掉，因为如果记录都从磁盘上删掉了，那么空有 Undo Log 也无法回到 session A 应该看到的那个版本；</li>
+<li>就好比链表总得有个头结点把，如果失去了对头结点的引用，就失去了访问整个链表的起点； 不删除的情况下，记录还在数据页上占着空间呢，session B 又把数据加回来，导致索引的数据页出现大量的分裂； 大量的页分裂，导致了 cardinality 的不准；</li>
+</ul>
+<h4 id="优化器的逻辑"><a href="#优化器的逻辑" class="headerlink" title="优化器的逻辑"></a>优化器的逻辑</h4><blockquote>
+<p>优化器优化时会考虑的因素： 1.扫描行数 2.是否使用临时表 3. 是否需要排序</p>
+</blockquote>
+<h5 id="MySQL-是怎样得到索引的基数的呢？"><a href="#MySQL-是怎样得到索引的基数的呢？" class="headerlink" title="MySQL 是怎样得到索引的基数的呢？"></a>MySQL 是怎样得到索引的基数的呢？</h5><p>答：采样统计。</p>
+<ul>
+<li>InnoDB 默认会选择 N 个数据页，统计这些页面上的不同值，得到一个平均值，然后乘以这个索引的页面数，就得到了这个索引的基数。 </li>
+<li>而数据表是会持续更新的，索引统计信息也不会固定不变。当变更的数据行数超过 1/M 的时候，会自动触发重新做一次索引统计。</li>
+<li>在 MySQL 中，有两种存储索引统计的方式，可以通过设置参数 innodb_stats_persistent 的值来选择： <ul>
+<li>设置为 on 的时候，表示统计信息会持久化存储。这时，默认的 N 是 20，M 是 10。</li>
+<li>设置为 off 的时候，表示统计信息只存储在内存中。这时，默认的 N 是 8，M 是 16。</li>
+</ul>
+</li>
+</ul>
+<p>innodb_stats_persistent 参数含义：是否启用持久化统计信息功能 默认值：ON 持久化统计信息功能通过将统计信息存储到磁盘并使其在服务器重新启动期间保持不变来提高执行计划的稳定性，以便优化器更有可能每次为给定查询做出一致的选择。 </p>
+<p>当innodb_stats_persistent = ON或使用STATS_PERSISTENT = 1创建或更改单个表时，统计信息将持久保存到磁盘。innodb_stats_persistent默认启用。 要恢复使用非持久化统计信息，可以使用ALTER TABLE tbl_name STATS_PERSISTENT = 0语句修改表。</p>
+<h5 id="索引统计值（cardinality-列）"><a href="#索引统计值（cardinality-列）" class="headerlink" title="索引统计值（cardinality 列）"></a>索引统计值（cardinality 列）</h5><p>查询语句</p>
+<pre><code>show index from t;
+
+//Cardinality 100467
+</code></pre>
+<p>优化器预估扫描行数</p>
+<pre><code>explain select * from t where a between 10000 and 20000;
+
+//row 表示预计扫描行数
+</code></pre>
+<p>重新统计</p>
+<pre><code>analyze table t
+</code></pre>
+<h4 id="索引选择异常和处理"><a href="#索引选择异常和处理" class="headerlink" title="索引选择异常和处理"></a>索引选择异常和处理</h4><p>针对优化器选择错误索引的处理：</p>
+<pre><code>mysql&gt; explain select * from t where (a between 1 and 1000) and (b between 50000 and 100000) order by b limit 1;
+</code></pre>
+<p>此时默认会选择索引b（可以避免排序），但索引a扫描行数更少；</p>
+<h5 id="1-强行选择索引-force-index"><a href="#1-强行选择索引-force-index" class="headerlink" title="1.强行选择索引 force index()"></a>1.强行选择索引 force index()</h5><pre><code>explain select * from t force index(a) where (a between 1 and 1000) and (b between 50000 and 100000) order by b limit 1;
+</code></pre>
+<h5 id="2-修改语句引导Mysql使用期望索引"><a href="#2-修改语句引导Mysql使用期望索引" class="headerlink" title="2.修改语句引导Mysql使用期望索引"></a>2.修改语句引导Mysql使用期望索引</h5><pre><code>explain select * from t where (a between 1 and 1000) and (b between 50000 and 100000) order by b,a limit 1
+</code></pre>
+<p>解析：</p>
+<ol>
+<li>之前优化器选择使用索引 b，是因为它认为使用索引 b 可以避免排序（b 本身是索引，已经是有序的了，如果选择索引 b 的话，不需要再做排序，只需要遍历）。</li>
+<li>order by b,a 这种写法，要求按照 b,a 排序，就意味着使用这两个索引都需要排序。因此，扫描行数成了影响决策的主要条件，于是此时优化器选了只需要扫描 1000 行的索引 a。</li>
+</ol>
+<h5 id="3-新建更合适的索引，或删掉误用的索引。"><a href="#3-新建更合适的索引，或删掉误用的索引。" class="headerlink" title="3.新建更合适的索引，或删掉误用的索引。"></a>3.新建更合适的索引，或删掉误用的索引。</h5><p>问题：为什么limit 1时优化器优先使用b，limit 100后优先使用a索引？</p>
+<p>答案：因为b不用排序，又有limit 1，从5w里只要找到一条就可以返回了，如果选择a，因为要排序，就要扫完1000条，然后才能排序，这成本明显太大，所以选择了b。但如果是limit 100，选择b，虽然不用排序，但找到第一条记录后，还要向后查询，看后面有没有满足条件的100个记录，从5w中找100个的成本就大于从1000找100个的成本了，所以选择a。</p>
+<h5 id="问题：在构造第一个例子的过程中，通过-session-A-的配合，让-session-B-删除数据后又重新插入了一遍数据，然后就发现-explain-结果中，rows-字段从-10001-变成-37000-多，这是什么原因？"><a href="#问题：在构造第一个例子的过程中，通过-session-A-的配合，让-session-B-删除数据后又重新插入了一遍数据，然后就发现-explain-结果中，rows-字段从-10001-变成-37000-多，这是什么原因？" class="headerlink" title="问题：在构造第一个例子的过程中，通过 session A 的配合，让 session B 删除数据后又重新插入了一遍数据，然后就发现 explain 结果中，rows 字段从 10001 变成 37000 多，这是什么原因？"></a>问题：在构造第一个例子的过程中，通过 session A 的配合，让 session B 删除数据后又重新插入了一遍数据，然后就发现 explain 结果中，rows 字段从 10001 变成 37000 多，这是什么原因？</h5><p>答案：session A 开启了事务并没有提交，所以之前插入的 10 万行数据是不能删除的。这样，之前的数据每一行数据都有两个版本，旧版本是 delete 之前的数据，新版本是标记为 deleted 的数据。这样，索引 a 上的数据其实就有两份。session B新增的会开启新的空间，引起统计信息出现错误，导致优化器选择错误。</p>
+
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
     </div>

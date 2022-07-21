@@ -2,19 +2,19 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Mysql45讲06-锁 | IT小马</title>
+  <title>Mysql45讲19-问题排查 | IT小马</title>
   <meta name="keywords" content=" 后端 , MYSQL ">
-  <meta name="description" content="Mysql45讲06-锁 | IT小马">
+  <meta name="description" content="Mysql45讲19-问题排查 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="[TOC] 1.vue-admin-templete动态路由参考：vue-admin-template 动态路由 2.动态路由刷新空白let oneRun &#x3D; true  &#x2F;&#x2F; get menu routes   if (oneRun) &amp;#123;     oneRun &#x3D; false     const accessRoutes &#x3D; await store.dispatch(&#39;menu">
+<meta name="description" content="[TOC] 1.k8s查看POD日志kubectl get pods -n ingress-nginx  kubectl logs -f cartorder-web-58dcf66cc-kt84x -n ingress-nginx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GO微服务03-前端问题汇总">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/07/03/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/index.html">
+<meta property="og:title" content="GO微服务04-环境问题汇总">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/07/04/GO%E5%BE%AE%E6%9C%8D%E5%8A%A104-%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="[TOC] 1.vue-admin-templete动态路由参考：vue-admin-template 动态路由 2.动态路由刷新空白let oneRun &#x3D; true  &#x2F;&#x2F; get menu routes   if (oneRun) &amp;#123;     oneRun &#x3D; false     const accessRoutes &#x3D; await store.dispatch(&#39;menu">
+<meta property="og:description" content="[TOC] 1.k8s查看POD日志kubectl get pods -n ingress-nginx  kubectl logs -f cartorder-web-58dcf66cc-kt84x -n ingress-nginx">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-07-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-07-11T07:42:32.000Z">
+<meta property="article:published_time" content="2022-07-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-07-18T14:23:32.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
 <meta property="article:tag" content="微服务">
@@ -80,7 +80,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(85)</small>
+                <small>(90)</small>
             
         </div>
     </li>
@@ -133,7 +133,7 @@
                     <div data-rel="MYSQL">
                         
                         MYSQL
-                        <small>(7)</small>
+                        <small>(11)</small>
                         
                     </div>
                     
@@ -203,7 +203,7 @@
                     <div data-rel="微服务">
                         
                         微服务
-                        <small>(4)</small>
+                        <small>(5)</small>
                         
                     </div>
                     
@@ -252,7 +252,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="85">
+<input type="hidden" id="yelog_site_posts_number" value="90">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -372,6 +372,14 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/07/04/GO%E5%BE%AE%E6%9C%8D%E5%8A%A104-%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务04-环境问题汇总">GO微服务04-环境问题汇总</span>
+            <span class="post-date" title="2022-07-04 00:00:00">2022/07/04</span>
+        </a>
         
         <a  class="全部文章 微服务 "
            href="/2022/07/03/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"
@@ -918,26 +926,66 @@
         </a>
         
         <a  class="全部文章 MYSQL "
-           href="/2021/06/06/Mysql45%E8%AE%B206-%E9%94%81/"
+           href="/2021/06/21/Mysql45%E8%AE%B221-%E5%8A%A0%E9%94%81%E8%A7%84%E5%88%99/"
            data-tag="后端,MYSQL"
            data-author="" >
-            <span class="post-title" title="Mysql45讲06-锁">Mysql45讲06-锁</span>
+            <span class="post-title" title="Mysql45讲21-加锁规则">Mysql45讲21-加锁规则</span>
+            <span class="post-date" title="2021-06-21 00:00:00">2021/06/21</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/20/Mysql45%E8%AE%B220-%E5%B9%BB%E8%AF%BB-%E9%97%B4%E9%9A%99%E9%94%81/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲20-幻读-间隙锁">Mysql45讲20-幻读-间隙锁</span>
+            <span class="post-date" title="2021-06-20 00:00:00">2021/06/20</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/19/Mysql45%E8%AE%B219-%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲19-问题排查">Mysql45讲19-问题排查</span>
+            <span class="post-date" title="2021-06-19 00:00:00">2021/06/19</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/17/Mysql45%E8%AE%B217-18-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲17-18-随机查询">Mysql45讲17-18-随机查询</span>
+            <span class="post-date" title="2021-06-17 00:00:00">2021/06/17</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/06/Mysql45%E8%AE%B206-%E8%AE%A1%E6%95%B0%EF%BC%8C%E6%8E%92%E5%BA%8F/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲06-计数，排序">Mysql45讲06-计数，排序</span>
             <span class="post-date" title="2021-06-06 00:00:00">2021/06/06</span>
         </a>
         
         <a  class="全部文章 MYSQL "
-           href="/2021/06/04/Mysql45%E8%AE%B204-05-%E7%B4%A2%E5%BC%95/"
+           href="/2021/06/05/Mysql45%E8%AE%B205-%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%88%B7%E7%9B%98/"
            data-tag="后端,MYSQL"
            data-author="" >
-            <span class="post-title" title="Mysql45讲0405-索引">Mysql45讲0405-索引</span>
+            <span class="post-title" title="Mysql45讲05-前缀索引，刷盘">Mysql45讲05-前缀索引，刷盘</span>
+            <span class="post-date" title="2021-06-05 00:00:00">2021/06/05</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/04/Mysql45%E8%AE%B204-%E6%99%AE%E9%80%9A%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲04-普通索引，唯一索引">Mysql45讲04-普通索引，唯一索引</span>
             <span class="post-date" title="2021-06-04 00:00:00">2021/06/04</span>
         </a>
         
         <a  class="全部文章 MYSQL "
-           href="/2021/06/03/Mysql45%E8%AE%B203-%E4%BA%8B%E5%8A%A1/"
+           href="/2021/06/03/Mysql45%E8%AE%B203-%E9%94%81/"
            data-tag="后端,MYSQL"
            data-author="" >
-            <span class="post-title" title="Mysql45讲03-事务">Mysql45讲03-事务</span>
+            <span class="post-title" title="Mysql45讲03-锁">Mysql45讲03-锁</span>
             <span class="post-date" title="2021-06-03 00:00:00">2021/06/03</span>
         </a>
         
@@ -950,26 +998,18 @@
         </a>
         
         <a  class="全部文章 MYSQL "
+           href="/2021/06/02/Mysql45%E8%AE%B202-%E4%BA%8B%E5%8A%A1%E5%92%8C%E7%B4%A2%E5%BC%95/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲02-事务和索引">Mysql45讲02-事务和索引</span>
+            <span class="post-date" title="2021-06-02 00:00:00">2021/06/02</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
            href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
            data-tag="后端,MYSQL"
            data-author="" >
             <span class="post-title" title="Mysql45讲01-基础架构">Mysql45讲01-基础架构</span>
-            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
-        </a>
-        
-        <a  class="全部文章 MYSQL "
-           href="/2021/06/01/Mysql45%E8%AE%B207-%E8%A1%8C%E9%94%81/"
-           data-tag="后端,MYSQL"
-           data-author="" >
-            <span class="post-title" title="Mysql45讲07-行锁">Mysql45讲07-行锁</span>
-            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
-        </a>
-        
-        <a  class="全部文章 MYSQL "
-           href="/2021/06/01/Mysql45%E8%AE%B208-%E9%9A%94%E7%A6%BB/"
-           data-tag="后端,MYSQL"
-           data-author="" >
-            <span class="post-title" title="Mysql45讲08-隔离">Mysql45讲08-隔离</span>
             <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
         </a>
         
@@ -1071,9 +1111,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Mysql45讲06-锁" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Mysql45讲19-问题排查" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Mysql45讲06-锁</h1>
+        <h1 class="article-title">Mysql45讲19-问题排查</h1>
     
     <div class="article-meta">
         
@@ -1100,7 +1140,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-05-19 20:36:55'>2021-06-06 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-07-21 10:58:56'>2021-06-19 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1111,7 +1151,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9F%A5%E8%AF%A2%E9%95%BF%E6%97%B6%E9%97%B4%E4%B8%8D%E8%BF%94%E5%9B%9E"><span class="toc-text">1.查询长时间不返回</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%89MDL%E9%94%81%EF%BC%9AWaiting-for-table-metadata-lock"><span class="toc-text">等MDL锁：Waiting for table metadata lock</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E9%80%A0%E6%88%90%E9%98%BB%E5%A1%9E%E7%9A%84%E7%BA%BF%E7%A8%8B"><span class="toc-text">查询造成阻塞的线程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%89flush%EF%BC%9AWaiting-for-table-flush"><span class="toc-text">等flush：Waiting for table flush</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%89%E8%A1%8C%E9%94%81"><span class="toc-text">等行锁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%9F%A5%E8%AF%A2%E6%85%A2"><span class="toc-text">2.查询慢</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%85%A2%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97"><span class="toc-text">慢查询日志</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1127,7 +1167,71 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="1-查询长时间不返回"><a href="#1-查询长时间不返回" class="headerlink" title="1.查询长时间不返回"></a>1.查询长时间不返回</h3><p>参考：<a target="_blank" rel="noopener" href="http://mysql.taobao.org/monthly/2015/04/01/">http://mysql.taobao.org/monthly/2015/04/01/</a></p>
+<p>初始化数据</p>
+<pre><code>mysql&gt; CREATE TABLE `t` (
+  `id` int(11) NOT NULL,
+  `c` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+delimiter ;;
+create procedure idata()
+begin
+  declare i int;
+  set i=1;
+  while(i&lt;=100000) do
+    insert into t values(i,i);
+    set i=i+1;
+  end while;
+end;;
+delimiter ;
+
+call idata();
+</code></pre>
+<h4 id="等MDL锁：Waiting-for-table-metadata-lock"><a href="#等MDL锁：Waiting-for-table-metadata-lock" class="headerlink" title="等MDL锁：Waiting for table metadata lock"></a>等MDL锁：Waiting for table metadata lock</h4><pre><code>show processlist
+</code></pre>
+<p>*显示的id为mysql连接线程id。 关闭线程： 连接mysql后，kill id(线程id)</p>
+<h5 id="查询造成阻塞的线程"><a href="#查询造成阻塞的线程" class="headerlink" title="查询造成阻塞的线程"></a>查询造成阻塞的线程</h5><pre><code>select blocking_pid from sys.schema_table_lock_waits;
+</code></pre>
+<p>注：MySQL 启动时需要设置 performance_schema=on，相比于设置为 off 会有 10% 左右的性能损失</p>
+<h4 id="等flush：Waiting-for-table-flush"><a href="#等flush：Waiting-for-table-flush" class="headerlink" title="等flush：Waiting for table flush"></a>等flush：Waiting for table flush</h4><p>flush操作：</p>
+<ul>
+<li>关闭所有已打开的表对象，同时将查询缓存中的结果清空。</li>
+<li>正在使用的表对象是不能关闭的（如SQL请求仍在运行），因此，Flush Tables操作会被正在运行的SQL请求阻塞。</li>
+</ul>
+<pre><code>flush tables t with read lock;//只关闭表 t
+
+flush tables with read lock;//关闭 MySQL 里所有打开的表
+</code></pre>
+<p><img src="https://static001.geekbang.org/resource/image/2b/9c/2bbc77cfdb118b0d9ef3fdd679d0a69c.png"></p>
+<h4 id="等行锁"><a href="#等行锁" class="headerlink" title="等行锁"></a>等行锁</h4><p>共享锁 (lock in share mode)、排他锁 (for update)</p>
+<pre><code>select * from t where id=1 lock in share mode; //加in share mode是为了使用当前读
+</code></pre>
+<p><img src="https://static001.geekbang.org/resource/image/3e/75/3e68326b967701c59770612183277475.png" alt="img"></p>
+<p>session A 启动了事务，占有写锁，还不提交，导致 session B 被堵住。</p>
+<p>解决方案：Mysql5.7以后，查询sys.innodb_lock_waits 表</p>
+<pre><code>mysql&gt; select * from t sys.innodb_lock_waits where locked_table=&#39;`test`.`t`&#39;\G
+</code></pre>
+<p>查看blocking_pid ，并kill PID</p>
+<p>注：连接被断开的时候，会自动回滚这个连接里面正在执行的线程，也就释放了 id=1 上的行锁。</p>
+<h4 id="2-查询慢"><a href="#2-查询慢" class="headerlink" title="2.查询慢"></a>2.查询慢</h4><h5 id="慢查询日志"><a href="#慢查询日志" class="headerlink" title="慢查询日志"></a>慢查询日志</h5><pre><code>set long_query_time=0 #将慢查询日志的时间阈值设置为 0
+</code></pre>
+<p>1.没有索引，语句只能走 id 主键顺序扫描，扫描行数多</p>
+<pre><code>select * from t where c=50000 limit 1;
+</code></pre>
+<p>2.查询单行</p>
+<p><img src="https://static001.geekbang.org/resource/image/84/ff/84667a3449dc846e393142600ee7a2ff.png" alt="img"></p>
+<pre><code>mysql&gt; select * from t where id=1；//0.8s
+mysql&gt; select * from t where id=1 lock in share mode； //0.02s
+</code></pre>
+<p>解析：</p>
+<ol>
+<li>session B 更新完 100 万次，生成了 100 万个回滚日志 (undo log)。</li>
+<li>select * from t where id=1 这个语句，是一致性读，因此需要从 1000001 开始，依次执行 undo log，执行了 100 万次以后，才将 1 这个结果返回。</li>
+<li>带 lock in share mode 的 SQL 语句，是当前读，因此会直接读到 1000001 这个结果，所以速度很快</li>
+</ol>
+
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
     </div>

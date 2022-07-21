@@ -2,19 +2,19 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Mysql45讲03-事务 | IT小马</title>
+  <title>Mysql45讲17-18-随机查询 | IT小马</title>
   <meta name="keywords" content=" 后端 , MYSQL ">
-  <meta name="description" content="Mysql45讲03-事务 | IT小马">
+  <meta name="description" content="Mysql45讲17-18-随机查询 | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="[TOC] 1.vue-admin-templete动态路由参考：vue-admin-template 动态路由 2.动态路由刷新空白let oneRun &#x3D; true  &#x2F;&#x2F; get menu routes   if (oneRun) &amp;#123;     oneRun &#x3D; false     const accessRoutes &#x3D; await store.dispatch(&#39;menu">
+<meta name="description" content="[TOC] 1.k8s查看POD日志kubectl get pods -n ingress-nginx  kubectl logs -f cartorder-web-58dcf66cc-kt84x -n ingress-nginx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GO微服务03-前端问题汇总">
-<meta property="og:url" content="https://blog.itxiaoma.cn/2022/07/03/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/index.html">
+<meta property="og:title" content="GO微服务04-环境问题汇总">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2022/07/04/GO%E5%BE%AE%E6%9C%8D%E5%8A%A104-%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/index.html">
 <meta property="og:site_name" content="IT小马">
-<meta property="og:description" content="[TOC] 1.vue-admin-templete动态路由参考：vue-admin-template 动态路由 2.动态路由刷新空白let oneRun &#x3D; true  &#x2F;&#x2F; get menu routes   if (oneRun) &amp;#123;     oneRun &#x3D; false     const accessRoutes &#x3D; await store.dispatch(&#39;menu">
+<meta property="og:description" content="[TOC] 1.k8s查看POD日志kubectl get pods -n ingress-nginx  kubectl logs -f cartorder-web-58dcf66cc-kt84x -n ingress-nginx">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-07-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-07-11T07:42:32.000Z">
+<meta property="article:published_time" content="2022-07-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-07-18T14:23:32.000Z">
 <meta property="article:author" content="IT小马">
 <meta property="article:tag" content="GO">
 <meta property="article:tag" content="微服务">
@@ -80,7 +80,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(85)</small>
+                <small>(90)</small>
             
         </div>
     </li>
@@ -133,7 +133,7 @@
                     <div data-rel="MYSQL">
                         
                         MYSQL
-                        <small>(7)</small>
+                        <small>(11)</small>
                         
                     </div>
                     
@@ -203,7 +203,7 @@
                     <div data-rel="微服务">
                         
                         微服务
-                        <small>(4)</small>
+                        <small>(5)</small>
                         
                     </div>
                     
@@ -252,7 +252,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="85">
+<input type="hidden" id="yelog_site_posts_number" value="90">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -372,6 +372,14 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        <a  class="全部文章 微服务 "
+           href="/2022/07/04/GO%E5%BE%AE%E6%9C%8D%E5%8A%A104-%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"
+           data-tag="GO,微服务"
+           data-author="" >
+            <span class="post-title" title="GO微服务04-环境问题汇总">GO微服务04-环境问题汇总</span>
+            <span class="post-date" title="2022-07-04 00:00:00">2022/07/04</span>
+        </a>
         
         <a  class="全部文章 微服务 "
            href="/2022/07/03/GO%E5%BE%AE%E6%9C%8D%E5%8A%A103-%E5%89%8D%E7%AB%AF%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"
@@ -918,26 +926,66 @@
         </a>
         
         <a  class="全部文章 MYSQL "
-           href="/2021/06/06/Mysql45%E8%AE%B206-%E9%94%81/"
+           href="/2021/06/21/Mysql45%E8%AE%B221-%E5%8A%A0%E9%94%81%E8%A7%84%E5%88%99/"
            data-tag="后端,MYSQL"
            data-author="" >
-            <span class="post-title" title="Mysql45讲06-锁">Mysql45讲06-锁</span>
+            <span class="post-title" title="Mysql45讲21-加锁规则">Mysql45讲21-加锁规则</span>
+            <span class="post-date" title="2021-06-21 00:00:00">2021/06/21</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/20/Mysql45%E8%AE%B220-%E5%B9%BB%E8%AF%BB-%E9%97%B4%E9%9A%99%E9%94%81/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲20-幻读-间隙锁">Mysql45讲20-幻读-间隙锁</span>
+            <span class="post-date" title="2021-06-20 00:00:00">2021/06/20</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/19/Mysql45%E8%AE%B219-%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲19-问题排查">Mysql45讲19-问题排查</span>
+            <span class="post-date" title="2021-06-19 00:00:00">2021/06/19</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/17/Mysql45%E8%AE%B217-18-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲17-18-随机查询">Mysql45讲17-18-随机查询</span>
+            <span class="post-date" title="2021-06-17 00:00:00">2021/06/17</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/06/Mysql45%E8%AE%B206-%E8%AE%A1%E6%95%B0%EF%BC%8C%E6%8E%92%E5%BA%8F/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲06-计数，排序">Mysql45讲06-计数，排序</span>
             <span class="post-date" title="2021-06-06 00:00:00">2021/06/06</span>
         </a>
         
         <a  class="全部文章 MYSQL "
-           href="/2021/06/04/Mysql45%E8%AE%B204-05-%E7%B4%A2%E5%BC%95/"
+           href="/2021/06/05/Mysql45%E8%AE%B205-%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%88%B7%E7%9B%98/"
            data-tag="后端,MYSQL"
            data-author="" >
-            <span class="post-title" title="Mysql45讲0405-索引">Mysql45讲0405-索引</span>
+            <span class="post-title" title="Mysql45讲05-前缀索引，刷盘">Mysql45讲05-前缀索引，刷盘</span>
+            <span class="post-date" title="2021-06-05 00:00:00">2021/06/05</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/04/Mysql45%E8%AE%B204-%E6%99%AE%E9%80%9A%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲04-普通索引，唯一索引">Mysql45讲04-普通索引，唯一索引</span>
             <span class="post-date" title="2021-06-04 00:00:00">2021/06/04</span>
         </a>
         
         <a  class="全部文章 MYSQL "
-           href="/2021/06/03/Mysql45%E8%AE%B203-%E4%BA%8B%E5%8A%A1/"
+           href="/2021/06/03/Mysql45%E8%AE%B203-%E9%94%81/"
            data-tag="后端,MYSQL"
            data-author="" >
-            <span class="post-title" title="Mysql45讲03-事务">Mysql45讲03-事务</span>
+            <span class="post-title" title="Mysql45讲03-锁">Mysql45讲03-锁</span>
             <span class="post-date" title="2021-06-03 00:00:00">2021/06/03</span>
         </a>
         
@@ -950,26 +998,18 @@
         </a>
         
         <a  class="全部文章 MYSQL "
+           href="/2021/06/02/Mysql45%E8%AE%B202-%E4%BA%8B%E5%8A%A1%E5%92%8C%E7%B4%A2%E5%BC%95/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲02-事务和索引">Mysql45讲02-事务和索引</span>
+            <span class="post-date" title="2021-06-02 00:00:00">2021/06/02</span>
+        </a>
+        
+        <a  class="全部文章 MYSQL "
            href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
            data-tag="后端,MYSQL"
            data-author="" >
             <span class="post-title" title="Mysql45讲01-基础架构">Mysql45讲01-基础架构</span>
-            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
-        </a>
-        
-        <a  class="全部文章 MYSQL "
-           href="/2021/06/01/Mysql45%E8%AE%B207-%E8%A1%8C%E9%94%81/"
-           data-tag="后端,MYSQL"
-           data-author="" >
-            <span class="post-title" title="Mysql45讲07-行锁">Mysql45讲07-行锁</span>
-            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
-        </a>
-        
-        <a  class="全部文章 MYSQL "
-           href="/2021/06/01/Mysql45%E8%AE%B208-%E9%9A%94%E7%A6%BB/"
-           data-tag="后端,MYSQL"
-           data-author="" >
-            <span class="post-title" title="Mysql45讲08-隔离">Mysql45讲08-隔离</span>
             <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
         </a>
         
@@ -1071,9 +1111,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Mysql45讲03-事务" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Mysql45讲17-18-随机查询" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Mysql45讲03-事务</h1>
+        <h1 class="article-title">Mysql45讲17-18-随机查询</h1>
     
     <div class="article-meta">
         
@@ -1100,7 +1140,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-05-19 20:36:47'>2021-06-03 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-07-21 10:59:03'>2021-06-17 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1111,7 +1151,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-text">事务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%94%E7%A6%BB%E6%80%A7"><span class="toc-text">隔离性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-text">事务并发问题：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB"><span class="toc-text">事务隔离级别</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%B6%88%E6%81%AF"><span class="toc-text">随机消息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E4%B8%B4%E6%97%B6%E8%A1%A8"><span class="toc-text">内存临时表</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#order-by-rand-%E4%BD%BF%E7%94%A8%E4%BA%86%E5%86%85%E5%AD%98%E4%B8%B4%E6%97%B6%E8%A1%A8%EF%BC%8C%E5%86%85%E5%AD%98%E4%B8%B4%E6%97%B6%E8%A1%A8%E6%8E%92%E5%BA%8F%E7%9A%84%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8%E4%BA%86-rowid-%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95%E3%80%82"><span class="toc-text">order by rand() 使用了内存临时表，内存临时表排序的时候使用了 rowid 排序方法。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E9%80%89%E6%8B%A9"><span class="toc-text">算法选择</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-text">语句执行流程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%85%A2%E6%9F%A5%E8%AF%A2%E6%A0%A1%E9%AA%8C"><span class="toc-text">慢查询校验</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#rowid"><span class="toc-text">rowid</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E4%B8%B4%E6%97%B6%E8%A1%A8"><span class="toc-text">磁盘临时表</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E4%B8%B4%E6%97%B6%E8%A1%A8%E6%8E%92%E5%BA%8F"><span class="toc-text">磁盘临时表排序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%E7%AE%97%E6%B3%95%E6%8E%92%E5%BA%8F"><span class="toc-text">优先队列算法排序</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E6%8E%92%E5%BA%8F%E6%96%B9%E6%B3%95"><span class="toc-text">随机排序方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%A7%E7%BB%AD%E4%BC%98%E5%8C%96"><span class="toc-text">继续优化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%B7%AE%E5%BC%82"><span class="toc-text">性能差异</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%AD%97%E6%AE%B5%E5%87%BD%E6%95%B0%E6%93%8D%E4%BD%9C"><span class="toc-text">条件字段函数操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95%E7%9A%84%E5%BF%AB%E9%80%9F%E5%AE%9A%E4%BD%8D%E8%83%BD%E5%8A%9B"><span class="toc-text">使用索引的快速定位能力</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8D%E8%A6%81%E5%9C%A8%E7%B4%A2%E5%BC%95%E5%AD%97%E6%AE%B5%E4%B8%8A%E5%8A%A0%E5%87%BD%E6%95%B0%EF%BC%8C%E6%8A%8A%E5%87%BD%E6%95%B0%E6%94%BE%E5%9C%A8%E5%80%BC%E7%9A%84%E5%A4%84%E7%90%86%E4%B8%8A"><span class="toc-text">不要在索引字段上加函数，把函数放在值的处理上</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-text">隐式类型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%90%E5%BC%8F%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2"><span class="toc-text">隐式字符编码转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5"><span class="toc-text">特殊情况</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1127,19 +1167,183 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><ul>
-<li>事务就是要保证一组数据库操作，要么全部成功，要么全部失败。</li>
-<li>在 MySQL 中，事务支持是在引擎层实现的。</li>
-<li>ACID（Atomicity、Consistency、Isolation、Durability，即原子性、一致性、隔离性、持久性）</li>
+        <h2 id="随机消息"><a href="#随机消息" class="headerlink" title="随机消息"></a>随机消息</h2><h4 id="内存临时表"><a href="#内存临时表" class="headerlink" title="内存临时表"></a>内存临时表</h4><h5 id="order-by-rand-使用了内存临时表，内存临时表排序的时候使用了-rowid-排序方法。"><a href="#order-by-rand-使用了内存临时表，内存临时表排序的时候使用了-rowid-排序方法。" class="headerlink" title="order by rand() 使用了内存临时表，内存临时表排序的时候使用了 rowid 排序方法。"></a>order by rand() 使用了内存临时表，内存临时表排序的时候使用了 rowid 排序方法。</h5><p>随机排序取3个值：</p>
+<pre><code>select word from words order by rand() limit 3;
+</code></pre>
+<p>查看执行情况：</p>
+<pre><code>explain select word from words order by rand() limit 3;
+</code></pre>
+<p>Extra 字段显示 Using temporary，表示的是需要使用临时表；Using filesort，表示的是需要执行排序操作。这个 Extra 的意思就是，需要临时表，并且需要在临时表上排序。</p>
+<p>直接使用 order by rand()，这个语句需要 Using temporary 和 Using filesort，查询的执行代价往往是比较大的。所以，在设计的时候你要尽量避开这种写法。</p>
+<h5 id="算法选择"><a href="#算法选择" class="headerlink" title="算法选择"></a>算法选择</h5><ul>
+<li>对于InnoDB表，全字段排序认为可以减少回表，少访问磁盘，在innodb引擎被优先使用。</li>
+<li>对于内存表，回表过程只是简单地根据数据行的位置，直接访问内存得到数据，根本不会导致多访问磁盘。（临时表在内存中，因此回表过程不会访问磁盘）</li>
 </ul>
-<h3 id="隔离性"><a href="#隔离性" class="headerlink" title="隔离性"></a>隔离性</h3><h4 id="事务并发问题："><a href="#事务并发问题：" class="headerlink" title="事务并发问题："></a>事务并发问题：</h4><p>脏读（dirty read）：一个事务读取了其它事务update后未提交的数据。</p>
-<p>不可重复读（non-repeatable read）：一个事务读取了其它事务update或delete后已提交的数据。 </p>
-<p>幻读（phantom read）：一个事务读取了其它事务新insert已经提交的数据（前后读取数量不一致）。</p>
-<h4 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h4><p>读未提交RU（read uncommitted）：一个事务还没提交时，它做的变更就能被别的事务看到。</p>
-<p>读提交RC（read committed）：一个事务提交之后，它做的变更才会被其他事务看到。</p>
-<p>可重复读RR（repeatable read）：一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。</p>
-<p>串行化Serial（serializable ）：对于同一行记录，“写”会加“写锁”，“读”会加“读锁”。当出现读写锁冲突的时候，后访问的事务必须等前一个事务执行完成，才能继续执行。</p>
-<p><em>*<em>InnoDB</em>的*默认隔离级别</em>是可重复读(repeatable read) **</p>
+<p>优化器没有了这一层顾虑，那么它会优先考虑的，就是用于排序的行越小越好了，所以，MySQL 这时就会选择 rowid 排序。</p>
+<h5 id="语句执行流程"><a href="#语句执行流程" class="headerlink" title="语句执行流程"></a>语句执行流程</h5><ol>
+<li>创建一个临时表。这个临时表使用的是 memory 引擎，表里有两个字段，第一个字段是 double 类型，为了后面描述方便，记为字段 R，第二个字段是 varchar(64) 类型，记为字段 W。并且，这个表没有建索引。</li>
+<li>从 words 表中，按主键顺序取出所有的 word 值。对于每一个 word 值，调用 rand() 函数生成一个大于 0 小于 1 的随机小数，并把这个随机小数和 word 分别存入临时表的 R 和 W 字段中，到此，扫描行数是 10000。</li>
+<li>初始化 sort_buffer。sort_buffer 中有两个字段，一个是 double 类型，另一个是整型。</li>
+<li>从内存临时表中一行一行地取出 R 值和位置信息（我后面会和你解释这里为什么是“位置信息”），分别存入 sort_buffer 中的两个字段里。这个过程要对内存临时表做全表扫描，此时扫描行数增加 10000，变成了 20000。</li>
+<li>在 sort_buffer 中根据 R 的值进行排序。注意，这个过程没有涉及到表操作，所以不会增加扫描行数。</li>
+<li>排序完成后，取出前三个结果的位置信息，依次到内存临时表中取出 word 值，返回给客户端。这个过程中，访问了表的三行数据，总扫描行数变成了 20003。</li>
+</ol>
+<p>注：MySQL5.7.19测试结果是20003，MySQL8.0.21是10003</p>
+<h5 id="慢查询校验"><a href="#慢查询校验" class="headerlink" title="慢查询校验"></a>慢查询校验</h5><p>Rows_examined：20003 就表示这个语句执行过程中扫描了 20003 行，也就验证了我们分析得出的结论。</p>
+<h5 id="rowid"><a href="#rowid" class="headerlink" title="rowid"></a>rowid</h5><blockquote>
+<p>表示的是：每个引擎用来唯一标识数据行的信息。</p>
+</blockquote>
+<ul>
+<li>对于有主键的 InnoDB 表来说，这个 rowid 就是主键 ID；</li>
+<li>对于没有主键的 InnoDB 表来说，这个 rowid 就是由系统生成的；</li>
+<li>MEMORY 引擎不是索引组织表。在这个例子里面，你可以认为它就是一个数组。因此，这个 rowid 其实就是数组的下标。</li>
+</ul>
+<h4 id="磁盘临时表"><a href="#磁盘临时表" class="headerlink" title="磁盘临时表"></a>磁盘临时表</h4><p>tmp_table_size 这个配置限制了内存临时表的大小，默认值是 16M。</p>
+<p>如果临时表大小超过了 tmp_table_size，那么内存临时表就会转成磁盘临时表。</p>
+<ul>
+<li>内存临时表使用的是memory引擎</li>
+<li>磁盘临时表使用的引擎默认是InnoDB，是由参数 internal_tmp_disk_storage_engine 控制的</li>
+</ul>
+<h5 id="磁盘临时表排序"><a href="#磁盘临时表排序" class="headerlink" title="磁盘临时表排序"></a>磁盘临时表排序</h5><p>当使用磁盘临时表的时候，对应的就是一个没有显式索引的 InnoDB 表的排序过程。</p>
+<h5 id="优先队列算法排序"><a href="#优先队列算法排序" class="headerlink" title="优先队列算法排序"></a>优先队列算法排序</h5><p>MySQL 5.6 版本引入的一个新的排序算法，即：优先队列排序算法。</p>
+<ul>
+<li>归并排序算法，需要将10000 行数据都排好序</li>
+<li>优先队列算法，可以精确地只得到三个最小值，不需要使用临时文件。</li>
+</ul>
+<p>注：超过了我设置的 sort_buffer_size 大小的话，只能使用归并排序算法。</p>
+<p>执行流程：</p>
+<ol>
+<li>对于这 10000 个准备排序的 (R,rowid)，先取前三行，构造成一个堆；（对数据结构印象模糊的同学，可以先设想成这是一个由三个元素组成的数组）</li>
+<li>取下一个行 (R’,rowid’)，跟当前堆里面最大的 R 比较，如果 R’小于 R，把这个 (R,rowid) 从堆中去掉，换成 (R’,rowid’)；</li>
+<li>重复第 2 步，直到第 10000 个 (R’,rowid’) 完成比较。</li>
+</ol>
+<pre><code>set tmp_table_size=1024;
+set sort_buffer_size=32768;
+set max_length_for_sort_data=16;
+/* 打开 optimizer_trace，只对本线程有效 */
+SET optimizer_trace=&#39;enabled=on&#39;; 
+
+/* 执行语句 */
+select word from words order by rand() limit 3;
+
+/* 查看 OPTIMIZER_TRACE 输出 */
+SELECT * FROM `information_schema`.`OPTIMIZER_TRACE`\G
+</code></pre>
+<p>OPTIMIZER_TRACE 结果中，filesort_priority_queue_optimization 这个部分的 chosen=true，就表示使用了优先队列排序算法，这个过程不需要临时文件，因此对应的 number_of_tmp_files 是 0。</p>
+<p>注：OPTIMIZER_TRACE是mysql5.6开始提供的</p>
+<h4 id="随机排序方法"><a href="#随机排序方法" class="headerlink" title="随机排序方法"></a>随机排序方法</h4><ol>
+<li>取得整个表的行数，并记为 C。</li>
+<li>取得 Y = floor(C * rand())。 floor 函数在这里的作用，就是取整数部分。</li>
+<li>再用 limit Y,1 取得一行</li>
+<li>再执行三个 limit Y, 1 语句得到三行数据。</li>
+</ol>
+<pre><code>select count(*) into @C from t;
+set @Y1 = floor(@C * rand());
+set @Y2 = floor(@C * rand());
+set @Y3 = floor(@C * rand());
+select * from t limit @Y1，1； //在应用代码里面取Y1、Y2、Y3值，拼出SQL后执行
+select * from t limit @Y2，1；
+select * from t limit @Y3，1；
+</code></pre>
+<p>总扫描行数是 C+(Y1+1)+(Y2+1)+(Y3+1)。</p>
+<h4 id="继续优化"><a href="#继续优化" class="headerlink" title="继续优化"></a>继续优化</h4><ol>
+<li><p>取 Y1、Y2 和 Y3 里面最大的一个数，记为 M，最小的一个数记为 N，然后执行下面这条 SQL 语句：</p>
+<pre><code>select * from t limit N, M-N+1;
+//加上取整个表总行数的 C 行，这个方案的扫描行数总共只需要 C+M+1 行。
+</code></pre>
+</li>
+<li><p>可以先取回 id 值，在应用中确定了三个 id 值以后，再执行三次 where id=X 的语句。</p>
+</li>
+</ol>
+<h2 id="性能差异"><a href="#性能差异" class="headerlink" title="性能差异"></a>性能差异</h2><p>走不了索引的情况：</p>
+<ol>
+<li>函数操作了列</li>
+<li>隐式转换字段类型</li>
+<li>字符集不同</li>
+</ol>
+<h4 id="条件字段函数操作"><a href="#条件字段函数操作" class="headerlink" title="条件字段函数操作"></a>条件字段函数操作</h4><p>统计发生在所有年份中 7 月份的交易记录总数：</p>
+<pre><code>CREATE TABLE `tradelog` (
+  `id` int(11) NOT NULL,
+  `tradeid` varchar(32) DEFAULT NULL,
+  `operator` int(11) DEFAULT NULL,
+  `t_modified` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tradeid` (`tradeid`),
+  KEY `t_modified` (`t_modified`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+select count(*) from tradelog where month(t_modified)=7;
+</code></pre>
+<ul>
+<li>对索引字段做函数操作，可能会破坏索引值的有序性，因此优化器就决定放弃走树搜索功能。</li>
+<li>虽然优化器权衡后依然选择了走索引，但是这个索引没有办法通过树搜索功能快速定位，只能全索引扫描(遍历索引树)。</li>
+</ul>
+<pre><code>explain select count(*) from tradelog where month(t_modified)=7;
+</code></pre>
+<p>key=”t_modified”表示的是，使用了 t_modified 这个索引；我在测试表数据中插入了 10 万行数据，rows=100335，说明这条语句扫描了整个索引的所有值；Extra 字段的 Using index，表示的是使用了覆盖索引。</p>
+<p>结论：由于在 t_modified 字段加了 month() 函数操作，导致了全索引扫描。</p>
+<h5 id="使用索引的快速定位能力"><a href="#使用索引的快速定位能力" class="headerlink" title="使用索引的快速定位能力"></a>使用索引的快速定位能力</h5><pre><code>select count(*) from tradelog where 
+(t_modified &gt;= &#39;2016-7-1&#39; and t_modified&lt;&#39;2016-8-1&#39;) or 
+(t_modified &gt;= &#39;2017-7-1&#39; and t_modified&lt;&#39;2017-8-1&#39;) or 
+(t_modified &gt;= &#39;2018-7-1&#39; and t_modified&lt;&#39;2018-8-1&#39;);
+</code></pre>
+<h5 id="不要在索引字段上加函数，把函数放在值的处理上"><a href="#不要在索引字段上加函数，把函数放在值的处理上" class="headerlink" title="不要在索引字段上加函数，把函数放在值的处理上"></a>不要在索引字段上加函数，把函数放在值的处理上</h5><p>对于 select * from tradelog where id + 1 = 10000 不能使用使用索引</p>
+<pre><code>select * from tradelog where id = 10000 - 1
+</code></pre>
+<p>可以使用索引</p>
+<h4 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h4><p><strong>MySQL 中，字符串和数字做比较的话，是将字符串转换成数字。</strong></p>
+<p>字段类型是 varchar(32)，而输入的参数却是整型，所以需要做类型转换时，无法使用索引。</p>
+<pre><code>select * from tradelog where tradeid=110717;
+</code></pre>
+<p>tradeid字段类型是 varchar(32)，而输入的参数却是整型，所以需要做类型转换时，无法使用索引。</p>
+<pre><code>select * from tradelog where id=&quot;83126&quot;;
+</code></pre>
+<p>id 的类型是 int，字符串和数字在进行比较的时候，是将字符串转换为数字，可以使用索引。</p>
+<h4 id="隐式字符编码转换"><a href="#隐式字符编码转换" class="headerlink" title="隐式字符编码转换"></a>隐式字符编码转换</h4><p>字符集不同，连接过程中要求在被驱动表的索引字段上加函数操作，是直接导致对被驱动表做全表扫描的原因。</p>
+<pre><code>CREATE TABLE `trade_detail` (
+  `id` int(11) NOT NULL,
+  `tradeid` varchar(32) DEFAULT NULL,
+  `trade_step` int(11) DEFAULT NULL, /*操作步骤*/
+  `step_info` varchar(32) DEFAULT NULL, /*步骤信息*/
+  PRIMARY KEY (`id`),
+  KEY `tradeid` (`tradeid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+</code></pre>
+<p>已知utf8mb4是utf8的超集，当这两个类型的字符串在做比较的时候，MySQL 内部的操作是，先把 utf8 字符串转成 utf8mb4 字符集，再做比较。</p>
+<pre><code>select d.* from tradelog l, trade_detail d where d.tradeid=l.tradeid and l.id=2;
+</code></pre>
+<p>相当于</p>
+<pre><code>select * from trade_detail  where CONVERT(traideid USING utf8mb4)=$L2.tradeid.value; 
+</code></pre>
+<p>优化方案：</p>
+<ol>
+<li><p>把 trade_detail 表上的 tradeid 字段的字符集也改成 utf8mb4</p>
+<pre><code>alter table trade_detail modify tradeid varchar(32) CHARACTER SET utf8mb4 default null;
+</code></pre>
+</li>
+<li><p>把函数加在结果中</p>
+<pre><code>select d.* from tradelog l , trade_detail d where d.tradeid=CONVERT(l.tradeid USING utf8) and l.id=2; 
+</code></pre>
+</li>
+</ol>
+<h4 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h4><pre><code>mysql&gt; CREATE TABLE `table_a` (
+  `id` int(11) NOT NULL,
+  `b` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `b` (`b`)
+) ENGINE=InnoDB;
+</code></pre>
+<p>假设现在表里面，有 100 万行数据，其中有 10 万行数据的 b 的值是’1234567890’， 假设现在执行语句是这么写的:</p>
+<pre><code>mysql&gt; select * from table_a where b=&#39;1234567890abcd&#39;;
+</code></pre>
+<p>Mysql执行流程：</p>
+<ol>
+<li>在传给引擎执行的时候，做了字符截断。因为引擎里面这个行只定义了长度是 10，所以只截了前 10 个字节，就是’1234567890’进去做匹配；</li>
+<li>满足条件的数据有 10 万行；</li>
+<li>因为是 select *， 所以要做 10 万次回表；</li>
+<li>每次回表以后查出整行，到 server 层一判断，b 的值都不是’1234567890abcd’</li>
+<li>返回结果是空。</li>
+</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
