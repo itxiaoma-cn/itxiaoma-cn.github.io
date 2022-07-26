@@ -20707,151 +20707,6 @@ status: &#123;&#125;
       </tags>
   </entry>
   <entry>
-    <title>幼麟实验室Golang</title>
-    <url>/2022/05/10/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang/</url>
-    <content><![CDATA[<h2 id="1-String"><a href="#1-String" class="headerlink" title="1.String"></a>1.String</h2><p>string的底层结构是StringHeader，它包含2个字段，Data和Len；前8字节Data是指针(指向字符串值的地址)，后8个字节Len是int类型(标识字符串的长度)，所以一共占16个字节</p>
-<h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><p>字符集：ASCII</p>
-<p>中文字符集：GB2312</p>
-<p>通用字符集：  g够，高位补零</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h214s034nxj20de0c33zi.jpg">VBl<img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h214tbhkzej20br08bmxh.jpg"></p>
-<h3 id="数据结构：data-len"><a href="#数据结构：data-len" class="headerlink" title="数据结构：data + len"></a>数据结构：data + len</h3><p>data：数据</p>
-<p>len：字节个数</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h214vs3mvdj20vg0fpaat.jpg" alt="image-20220508173947505"></p>
-<p>注意：字符串变量会分配到只读内存段，不允许修改</p>
-<pre><code>fmt.Printf(&quot;%c\n&quot;, s1[2]) //正确
-s1[2] = &#39;o&#39; //错误
-
-s1 = &quot;Hello&quot; //正确，存储的地址会指向新的内容，并没有修改原来 的内容
-
-bs := ([]byte)(s1)
-bs[2] = &#39;o&#39;
-fmt.Printf(&quot;%c\n&quot;, bs[2]) //正确
-</code></pre>
-<h2 id="2-Slice"><a href="#2-Slice" class="headerlink" title="2.Slice"></a>2.Slice</h2><p>data: 元素（底层数组的起始地址）</p>
-<p>len: 长度</p>
-<p>cap: 容量</p>
-<h3 id="var"><a href="#var" class="headerlink" title="var"></a>var</h3><pre><code>var ints []int
-
-data=nil 
-len=0
-cap=0
-</code></pre>
-<h3 id="make"><a href="#make" class="headerlink" title="make"></a>make</h3><pre><code>var ints []int = make([]int, 2, 5)
-</code></pre>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24kj17wmrj20ok07nmxc.jpg"></p>
-<p>添加/修改元素</p>
-<pre><code>var ints []int = make([]int, 2, 5)
-ints = append(ints, 1) //长度变为3
-ints[0] = 1
-</code></pre>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24kl2qoshj20on07hjrp.jpg"></p>
-<p>越界访问：已存储的元素可以安全读写，超出范围则发生panic（如读写ints[4]~ints[5]）</p>
-<h3 id="new"><a href="#new" class="headerlink" title="new"></a>new</h3><p>new不负责底层数组的分配，返回slice结构的起始地址</p>
-<pre><code>ps := new([]string) // data = nil len = 0 cap = 0
-(*ps)[0] = &quot;test&quot;   //报错，因为没有底层数组
-*ps = append(*ps, &quot;test&quot;)
-</code></pre>
-<p>字符串类型：字符串内容 + 字节长度</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24ku6ipmzj20gz0de74k.jpg"></p>
-<p> 共享底层数组：数组容量，内容不可改变</p>
-<pre><code>arr := [10]int&#123;0,1,2,3,4,5,6,7,8,9&#125;
-var s1 []int = arr[1:4]
-var s2 []int = arr[7:]
-</code></pre>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24kyjuihgj20sp075wez.jpg"></p>
-<p>添加元素：</p>
-<pre><code>s2 = append(s2, 10)
-</code></pre>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24l500mk3j20lr09b3yy.jpg"></p>
-<h3 id="扩容规则"><a href="#扩容规则" class="headerlink" title="扩容规则"></a>扩容规则</h3><ol>
-<li><p>预估扩容后容量</p>
-<pre><code>1.切片容量翻倍如果小于预估容量，则扩容到预估容量；
-2.切片容量翻倍如果大于预估容量：
-  - 切片的容量如果小于1024，那么直接翻倍
-  - 如果大于等于1024，每次扩1/4，直到新容量超过所需容量。
-</code></pre>
-</li>
-<li><p>计算所需内存</p>
-<pre><code>所需内存 = 预估容量 x 元素类型大小
-</code></pre>
-</li>
-<li><p>分配内存，匹配合适的内存规格</p>
-</li>
-</ol>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24lah54v2j20lv0j6wfn.jpg"></p>
-<h2 id="3-内存对齐"><a href="#3-内存对齐" class="headerlink" title="3.内存对齐"></a>3.内存对齐</h2><p>现代计算机中内存空间都是按照字节(byte)进行划分的，编译器会把各种类型数据安排合适的地址，并占用合适的长度，这种就称为内存对齐，内存对齐是指首地址对齐。</p>
-<p>为什么要内存对齐？</p>
-<ul>
-<li>有些<code>CPU</code>只能在特定地址访问数据，不同硬件平台具有差异性，在编译时将分配的内存进行对齐，这就具有平台可以移植性了</li>
-<li><code>CPU</code> 访问内存时，并不是逐个字节访问，而是以字长（word size）为单位访问，所以数据结构应该尽可能地在自然边界上对齐，如果访问未对齐的内存，处理器需要做两次内存访问，而对齐的内存访问仅需要一次访问，内存对齐后可以提升性能</li>
-</ul>
-<p>现代计算机中内存空间都是按照字节(byte)进行划分的，编译器会把各种类型数据安排合适的地址，并占用合适的长度，这种就称为内存对齐，内存对齐是指首地址对齐。</p>
-<h3 id="对齐边界"><a href="#对齐边界" class="headerlink" title="对齐边界"></a>对齐边界</h3><p>每种类型的对齐值就是它的对齐边界。</p>
-<p>内存对齐要求数据存储地址及占用的字节数都要是它对齐边界的倍数。</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24tjdcqm9j20y10figmd.jpg"></p>
-<h4 id="每种类型的对齐边界"><a href="#每种类型的对齐边界" class="headerlink" title="每种类型的对齐边界"></a>每种类型的对齐边界</h4><p>32位平台指针宽度PtrSize和寄存器宽度RegSize都是4字节，64位平台都是8字节。</p>
-<p>RegSize可以理解为机器字长，也是平台对应的最大对齐边界。</p>
-<ul>
-<li>有些<code>CPU</code>只能在特定地址访问数据，不同硬件平台具有差异性，在编译时将分配的内存进行对齐，这就具有平台可以移植性了</li>
-<li><code>CPU</code> 访问内存时，并不是逐个字节访问，而是以字长（word size）为单位访问，所以数据结构应该尽可能地在自然边界上对齐，如果访问未对齐的内存，处理器需要做两次内存访问，而对齐的内存访问仅需要一次访问，内存对齐后可以提升性能</li>
-</ul>
-<h3 id="内存对齐边界"><a href="#内存对齐边界" class="headerlink" title="内存对齐边界"></a>内存对齐边界</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24tmard8ij20u40i83zg.jpg"></p>
-<h4 id="数据类型对齐边界"><a href="#数据类型对齐边界" class="headerlink" title="数据类型对齐边界"></a>数据类型对齐边界</h4><p>取类型大小与平台最大对齐边界中较小的值。</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24spadmccj20rx0d0dh9.jpg"></p>
-<h3 id="结构体内存对齐"><a href="#结构体内存对齐" class="headerlink" title="结构体内存对齐"></a>结构体内存对齐</h3><ul>
-<li>结构体对齐边界是成员中最大的对齐边界</li>
-<li>结构体占用字节数需要是类型对齐边界的倍数</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24tnj8hg4j20pi07q3yu.jpg"></p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24tpdnnxej20wj0c7jsh.jpg"></p>
-<h2 id="4-map"><a href="#4-map" class="headerlink" title="4.map"></a>4.map</h2><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><p><a href="https://baike.baidu.com/item/%E6%95%A3%E5%88%97%E8%A1%A8/10027933">散列表</a>（Hash table，也叫哈希表），是根据关键码值(Key value)而直接进行访问的<a href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1450">数据结构</a>。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做<a href="https://baike.baidu.com/item/%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0/2366288">散列函数</a>，存放记录的<a href="https://baike.baidu.com/item/%E6%95%B0%E7%BB%84/3794097">数组</a>叫做<a href="https://baike.baidu.com/item/%E6%95%A3%E5%88%97%E8%A1%A8/10027933">散列表</a>。</p>
-<p>通常用一堆buckets(桶)来存储键值对。通过Hash函数处理key，对应[0,m-1]桶编号中的一个。</p>
-<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><ol>
-<li>取模法：hash % m</li>
-<li>与运算法：hash &amp; (m-1) ，注意m需要是2的整数次幂，否则会出现空桶(绝对不会选中)</li>
-</ol>
-<h4 id="Hash冲突"><a href="#Hash冲突" class="headerlink" title="Hash冲突"></a>Hash冲突</h4><ol>
-<li>开放地址法： 当冲突时，查找下一个位置继续判断是否冲突，直到无冲突为止</li>
-<li>拉链法：冲突时在位置上再建立一条链，存储相应映射到该位置的数据，查找时，也是对于链上元素进行<a href="https://so.csdn.net/so/search?q=%E9%81%8D%E5%8E%86&spm=1001.2101.3001.7020">遍历</a>，删除时只需要打上标记，通常不实际进行删除。</li>
-</ol>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h27sblmtywj20vb0i50ts.jpg"></p>
-<p>Hash冲突会影响哈希表的读写效率，解决方法：</p>
-<ul>
-<li>选择散列均匀的哈希函数</li>
-<li>适时进行扩容</li>
-</ul>
-<h4 id="Hash扩容"><a href="#Hash扩容" class="headerlink" title="Hash扩容"></a>Hash扩容</h4><p>负载因子：在HashMap中，负载因子决定了数据量多少了以后可以进行扩容。<strong>Go语言默认负载因子是6.5</strong>。</p>
-<pre><code>负载因子 = 填入哈希表中的元素个数 / 哈希表的长度
-</code></pre>
-<p>渐进式扩容：把键值对迁移时间分摊到多次哈希表操作中的方式。可以避免一次性扩容带来的性能瞬时抖动。</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h27sizj6obj20s50jwjsn.jpg"></p>
-<h3 id="Go语言Map类型"><a href="#Go语言Map类型" class="headerlink" title="Go语言Map类型"></a>Go语言Map类型</h3><p>Go语言中Map类型的底层实现就是哈希表。实现了快速查找、添加、删除的功能。</p>
-<p>map类型变量本质上是一个指针，指向hmap结构体。</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h27ss0zma9j20vd0ex3zn.jpg" alt="hmap"> </p>
-<p> bmap：</p>
-<ul>
-<li>8个toophash：对应hash值的高8位</li>
-<li>8个key</li>
-<li>8个value</li>
-<li>bmap指针，指向溢出桶</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h27t718uipj20bm08y0t2.jpg" alt="bmap"></p>
-<p>mapextra：溢出桶信息</p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h27t81v4m8j20wc0ipdhm.jpg"></p>
-<h3 id="扩容规则-1"><a href="#扩容规则-1" class="headerlink" title="扩容规则"></a>扩容规则</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h27tfmhh7ij20n50g9q3t.jpg"> </p>
-<p>常规桶数量 = 2 的 B 次方</p>
-<p>等量扩容：适用于删除元素较多的情况，可以使桶内元素排列更加紧密。</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.bilibili.com/video/BV1hv411x7we">幼麟实验室</a></p>
-<p><a href="https://www.jianshu.com/p/0a777dc7f7ae">go map深度解析</a></p>
-]]></content>
-      <categories>
-        <category>GO</category>
-      </categories>
-      <tags>
-        <tag>GO</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Redis13-总结</title>
     <url>/2022/02/13/Redis13-%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h3 id="0-Docker连接Redis"><a href="#0-Docker连接Redis" class="headerlink" title="0.Docker连接Redis"></a>0.Docker连接Redis</h3><pre><code>docker exec -it redis /bin/bash -c &quot;redis-cli -c -p 6379 -a 123456&quot;
@@ -25540,6 +25395,14 @@ ab -c 100 -n 5000 http://example.com
 <li>Access-Control-Allow-Origin 允许其他请求域名，用于跨域 </li>
 <li>Last-Modified 最后响应时间 </li>
 </ol>
+<h3 id="86-PHP各版本特性"><a href="#86-PHP各版本特性" class="headerlink" title="86.PHP各版本特性"></a>86.PHP各版本特性</h3><p>PHP5.2 以前：<strong>autoload</strong>, PDO 和 MySQLi, 类型约束</p>
+<p>PHP5.2：<strong>JSON 支持</strong><code>json_encode()</code>，<code>json_decode()</code></p>
+<p>PHP5.3：弃用的功能，<strong>匿名函数</strong>，新增魔术方法，<strong>命名空间</strong>，后期静态绑定，Heredoc 和 Nowdoc, const,</p>
+<p><strong>三元运算符</strong>，Phar</p>
+<p>PHP5.4：Short Open Tag, <strong>数组简写</strong>形式，Traits, 内置 Web 服务器，细节修改</p>
+<p>PHP5.5：yield, <strong>list()</strong> 用于 foreach, 细节修改</p>
+<p>PHP5.6: <strong>常量增强，可变函数参数</strong>，命名空间增强</p>
+<p>PHP7: <strong>标量类型声明,返回值类型声明，null合并运算符，defined定义常量数组，匿名类</strong></p>
 ]]></content>
       <categories>
         <category>面试</category>
@@ -28084,6 +27947,992 @@ mysql&gt; select * from t where id&gt;=10 and id&lt;11 for update;
       <tags>
         <tag>后端</tag>
         <tag>MYSQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PHP5-8各版本特性详解</title>
+    <url>/2022/07/22/PHP5-8%E5%90%84%E7%89%88%E6%9C%AC%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h2 id="汇总"><a href="#汇总" class="headerlink" title="汇总"></a>汇总</h2><p>PHP5.1：</p>
+<ul>
+<li>autoload</li>
+<li>PDO</li>
+<li>MySQLi</li>
+<li>类型约束</li>
+</ul>
+<p>PHP5.2：</p>
+<ul>
+<li>JSON 支持</li>
+</ul>
+<p>PHP5.3：</p>
+<ul>
+<li>命名空间</li>
+<li>匿名函数</li>
+<li>闭包</li>
+<li>新增魔术方法<code>__callStatic()</code>和<code>__invoke()</code> </li>
+<li>新增魔术变量<code>__DIR__</code></li>
+<li>动态调用静态方法 </li>
+<li>延迟静态绑定</li>
+<li>Heredoc和 Nowdoc</li>
+<li>类外使用const定义常量 </li>
+<li>三元运算符</li>
+<li>Phar</li>
+</ul>
+<p>PHP5.4：</p>
+<ul>
+<li>Short Open Tag</li>
+<li>数组简写</li>
+<li>Traits,</li>
+<li>内置 Web 服务器</li>
+<li>动态访问静态方法</li>
+<li>实例化时访问类成员</li>
+</ul>
+<p>PHP5.5：</p>
+<ul>
+<li>yield</li>
+<li>list用于foreach</li>
+<li>细节修改</li>
+<li>empty() 支持表达式作为参数</li>
+<li>try-catch 结构新增 finally 块</li>
+</ul>
+<p>PHP5.6: </p>
+<ul>
+<li>常量增强</li>
+<li>命名空间增强</li>
+<li>可变函数参数</li>
+</ul>
+<p>PHP7.0: </p>
+<ul>
+<li>标量类型声明</li>
+<li>返回值类型声明</li>
+<li>defined定义常量数组</li>
+<li>匿名类</li>
+<li>null合并运算符</li>
+</ul>
+<p>PHP7.1：</p>
+<pre><code>* 可为空类型
+* void类型
+* 多异常捕获
+</code></pre>
+<p>PHP7.2：</p>
+<ul>
+<li>新的对象object</li>
+<li>允许重写抽象方法</li>
+</ul>
+<p>PHP7.3：语法层面没有很大的改变</p>
+<p>PHP7.4：</p>
+<ul>
+<li>类型属性</li>
+<li>箭头函数</li>
+<li>Null合并运算符支持方法</li>
+<li>Opcache 预加载</li>
+</ul>
+<p>PHP8.0: </p>
+<ul>
+<li><p>JIT即时编译</p>
+</li>
+<li><p>命名参数</p>
+</li>
+<li><p>注解</p>
+</li>
+<li><p>联合类型</p>
+</li>
+<li><p>Match表达式</p>
+</li>
+<li><p>Nullsafe 运算符</p>
+</li>
+<li><p>构造器属性提升</p>
+</li>
+</ul>
+<h2 id="PHP5-1"><a href="#PHP5-1" class="headerlink" title="PHP5.1"></a>PHP5.1</h2><h3 id="autoload-魔术方法"><a href="#autoload-魔术方法" class="headerlink" title="__autoload()魔术方法"></a>__autoload()魔术方法</h3><blockquote>
+<p>这是一个自动加载函数，在PHP5中，当我们实例化一个未定义的类时，就会触发此函数。可以通过定义这个函数来启用<a href="https://www.php.net/manual/zh/language.oop5.autoload.php">类的自动加载</a>。</p>
+</blockquote>
+<pre><code class="php">function  __autoload($className) &#123;  
+    $filePath = “project/class/&#123;$className&#125;.php”;  
+    if (is_readable($filePath)) &#123;  
+        require($filePath);  //这里可以只用require，因为一旦包含进来后，php引擎再遇到类A时，将不会调用__autoload，而是直接使用内存中的类A，不会导致多次包含。
+    &#125;  
+&#125;  
+$a = new A();  
+$b = new B();  
+$c = new C(); 
+</code></pre>
+<p><a href="https://www.php.cn/php-weizijiaocheng-426838.html">PHP中__autoload()魔术方法详解</a></p>
+<h3 id="PDO"><a href="#PDO" class="headerlink" title="PDO"></a>PDO</h3><blockquote>
+<p>PHP 数据对象 （PDO） 扩展为PHP访问数据库定义了一个轻量级的一致接口。</p>
+</blockquote>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>可以通过 PHP 的 phpinfo() 函数来查看是否安装了PDO扩展。</p>
+<pre><code class="php">//Linux
+extension=pdo.so
+//Windows  
+extension=php_pdo.dll  
+</code></pre>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><pre><code class="php">&lt;?php
+$dbms=&#39;mysql&#39;;     //数据库类型
+$host=&#39;localhost&#39;; //数据库主机名
+$dbName=&#39;test&#39;;    //使用的数据库
+$user=&#39;root&#39;;      //数据库连接用户名
+$pass=&#39;&#39;;          //对应的密码
+$dsn=&quot;$dbms:host=$host;dbname=$dbName&quot;;
+
+
+try &#123;
+    $dbh = new PDO($dsn, $user, $pass); //初始化一个PDO对象
+    echo &quot;连接成功&lt;br/&gt;&quot;;
+    /*你还可以进行一次搜索操作
+    foreach ($dbh-&gt;query(&#39;SELECT * from FOO&#39;) as $row) &#123;
+        print_r($row); //你可以用 echo($GLOBAL); 来看到这些值
+    &#125;
+    */
+    $dbh = null;
+&#125; catch (PDOException $e) &#123;
+    die (&quot;Error!: &quot; . $e-&gt;getMessage() . &quot;&lt;br/&gt;&quot;);
+&#125;
+//默认这个不是长连接，如果需要数据库长连接，需要最后加一个参数：array(PDO::ATTR_PERSISTENT =&gt; true) 变成这样：
+$db = new PDO($dsn, $user, $pass, array(PDO::ATTR_PERSISTENT =&gt; true));
+</code></pre>
+<p><a href="https://www.runoob.com/php/php-pdo.html">PHP PDO</a></p>
+<h3 id="MySQLi"><a href="#MySQLi" class="headerlink" title="MySQLi"></a>MySQLi</h3><blockquote>
+<p>mysqli.dll是PHP对mysql新特性的一个扩展支持，允许访问MySQL 4.1及以上版本提供的功能。</p>
+</blockquote>
+<h4 id="mysql与mysqli的区别："><a href="#mysql与mysqli的区别：" class="headerlink" title="mysql与mysqli的区别："></a>mysql与mysqli的区别：</h4><ol>
+<li><p>mysqli连接是永久连接，而mysql是非永久连接。</p>
+</li>
+<li><p>mysql连接每当第二次使用的时候，都会重新打开一个新的进程。mysqli连接一直都只使用同一个进程。</p>
+</li>
+</ol>
+<h4 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h4><pre><code class="php">$conn = mysqli_connect(&#39;localhost&#39;, &#39;root&#39;, &#39;123&#39;, &#39;db_test&#39;) or (&#39;error&#39;);
+$sql = &quot;select * from db_table&quot;;
+$query = mysqli_query($conn,$sql);
+while($row = mysqli_fetch_array($query))&#123;
+    echo $row[&#39;title&#39;];
+&#125;
+</code></pre>
+<p><a href="https://m.php.cn/article/487000.html">mysqli和mysql的区别是什么</a></p>
+<h3 id="类型约束"><a href="#类型约束" class="headerlink" title="类型约束"></a>类型约束</h3><p>通过类型约束可以限制参数的类型，不过这一机制并不完善，目前仅适用于类和 callable(可执行类型) 以及 array(数组), 不适用于 string 和 int.</p>
+<pre><code class="php">// 限制第一个参数为 MyClass, 第二个参数为可执行类型，第三个参数为数组
+function MyFunction(MyClass $a, callable $b, array $c)
+&#123;
+    // ...
+&#125;
+</code></pre>
+<h2 id="PHP5-2"><a href="#PHP5-2" class="headerlink" title="PHP5.2"></a>PHP5.2</h2><h3 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h3><ul>
+<li><p><a href="https://www.php.net/manual/zh/function.json-encode.php">json_encode</a> — 对变量进行 JSON 编码</p>
+</li>
+<li><p><a href="https://www.php.net/manual/zh/function.json-decode.php">json_decode</a> — 对 JSON 格式的字符串进行解码</p>
+</li>
+</ul>
+<h2 id="PHP5-3"><a href="#PHP5-3" class="headerlink" title="PHP5.3"></a>PHP5.3</h2><h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><blockquote>
+<p>避免不同包中的类名或变量名产生冲突</p>
+</blockquote>
+<pre><code class="php">&lt;?php
+namespace XXX; // 命名空间的分隔符是反斜杠，该声明语句必须在文件第一行。
+</code></pre>
+<h3 id="匿名函数（闭包）"><a href="#匿名函数（闭包）" class="headerlink" title="匿名函数（闭包）"></a>匿名函数（闭包）</h3><blockquote>
+<p>用来临时性地创建一个无名函数，用于回调函数等用途。</p>
+</blockquote>
+<pre><code class="php">$func = function($arg)
+&#123;
+    print $arg;
+&#125;;
+$func(&quot;Hello World！ hovertree.top&quot;);
+</code></pre>
+<h3 id="新增魔术方法-callStatic-和-invoke"><a href="#新增魔术方法-callStatic-和-invoke" class="headerlink" title="新增魔术方法__callStatic()和__invoke()"></a>新增魔术方法<code>__callStatic()</code>和<code>__invoke()</code></h3><p><code>__callStatic()</code>：用静态方式中调用一个不可访问方法时调用</p>
+<p><code>__invoke()</code> ：以调用函数的方式调用一个对象时的回应方法</p>
+<pre><code class="php">$person = new Person(&#39;小明&#39;); // 初始赋值
+$person(); //触发__invoke()
+</code></pre>
+<h3 id="新增魔术变量-DIR"><a href="#新增魔术变量-DIR" class="headerlink" title="新增魔术变量__DIR__"></a>新增魔术变量<code>__DIR__</code></h3><blockquote>
+<p>获取当前执行的PHP脚本所在的目录</p>
+</blockquote>
+<p>如当前执行的PHP文件为 /htdocs/index.php，则<code>__FILE__</code>等于’/htdocs/index.php’，而<code>__DIR__</code>等于’/htdocs’。</p>
+<h3 id="动态调用静态方法"><a href="#动态调用静态方法" class="headerlink" title="动态调用静态方法"></a>动态调用静态方法</h3><pre><code class="php">public static function test($userName)
+&#123;
+    //...
+&#125;
+
+$className = &#39;cls&#39;;
+$className::test(&#39;Tom&#39;); // PHP &gt;= 5.3.0
+</code></pre>
+<h3 id="延迟静态绑定"><a href="#延迟静态绑定" class="headerlink" title="延迟静态绑定"></a>延迟静态绑定</h3><blockquote>
+<p>PHP 5.3.0中增加了一个static关键字来引用当前类，即实现了延迟静态绑定。</p>
+</blockquote>
+<p>这是因为 self 的语义本来就是“当前类”，所以 PHP5.3 给 static 关键字赋予了一个新功能：后期静态绑定</p>
+<pre><code class="php">class A
+&#123;
+    static public function callFuncXXOO()
+    &#123;
+        print self::funcXXOO();
+    &#125;
+    static public function funcXXOO()
+    &#123;
+        return &quot;A::funcXXOO()&quot;;
+    &#125;
+&#125;
+class B extends A
+&#123;
+    static public function funcXXOO()
+    &#123;
+        return &quot;B::funcXXOO&quot;;
+    &#125;
+&#125;
+$b = new B;
+$b-&gt;callFuncXXOO(); //A::funcXXOO()
+</code></pre>
+<pre><code class="php">class A
+&#123;
+    static public function callFuncXXOO()
+    &#123;
+        print static::funcXXOO();
+    &#125;
+    // ...
+&#125;
+B::callFuncXXOO(); //B::funcXXOO()
+</code></pre>
+<h3 id="类外使用const定义常量"><a href="#类外使用const定义常量" class="headerlink" title="类外使用const定义常量"></a>类外使用const定义常量</h3><p>常量是一个简单的标识符。在脚本执行期间该值不能改变（除了所谓的魔术常量，他们其实不是常量）。常量默认大小写敏感。通常常量标识符总是大写的。</p>
+<p>可以用define()函数来定义常量。在php5.3.0以后，可以使用const关键字在类定义的外部定义常量，先前版本const关键字只能在类(class)中使用。一个常量一旦被定义，就不能再改变或取消定义。</p>
+<h4 id="const和define的区别？"><a href="#const和define的区别？" class="headerlink" title="const和define的区别？"></a>const和define的区别？</h4><ol>
+<li>const是一个语言结构，而define是一个函数。const在编译时要比define快很多。</li>
+</ol>
+<p>const用于类成员变量的定义，一经定义，不可修改。Define不可以用于类成员变量的定义，可用于全局常量。</p>
+<ol start="2">
+<li><p>Const可在类中使用，define不能</p>
+</li>
+<li><p>Const不能在条件语句中定义常量</p>
+</li>
+<li><p>const采用普通的常量名称，define可以采用表达式作为名称</p>
+</li>
+<li><p>const只能接受静态的标量，而define可以采用任何表达式</p>
+</li>
+<li><p>const定义的常量时大小写敏感，而define可以通过第三个参数（为true表示大小写不敏感）来指定大小写是否敏感。</p>
+</li>
+</ol>
+<p><a href="https://www.cnblogs.com/zhouguowei/p/5199076.html">PHP常量详解：define和const的区别</a></p>
+<h3 id="简化三元运算符"><a href="#简化三元运算符" class="headerlink" title="简化三元运算符"></a>简化三元运算符</h3><p>从PHP 5.3开始，通过排除中间表达式，甚至可以进一步简化三元语句。 如果测试表达式在布尔上下文中评估为true，则返回其值。 否则，将返回替代方法。</p>
+<pre><code class="php">&lt;?php
+$favoriteColor = $_GET[&quot;color&quot;] ?: &quot;pink&quot;;
+</code></pre>
+<h3 id="Phar"><a href="#Phar" class="headerlink" title="Phar"></a>Phar</h3><blockquote>
+<p>PHP5.3之后支持了类似Java的jar包，名为phar。用来将多个PHP文件打包为一个文件。 </p>
+</blockquote>
+<p>创建一个phar压缩包</p>
+<pre><code class="php">$phar = new Phar(&#39;swoole.phar&#39;);
+$phar-&gt;buildFromDirectory(__DIR__.&#39;/../&#39;, &#39;/.php$/&#39;);
+$phar-&gt;compressFiles(Phar::GZ);
+$phar-&gt;stopBuffering();
+$phar-&gt;setStub($phar-&gt;createDefaultStub(&#39;lib_config.php&#39;));
+</code></pre>
+<p>使用phar压缩包</p>
+<pre><code class="php">include &#39;swoole.phar&#39;;
+include &#39;swoole.phar/code/page.php&#39;;
+</code></pre>
+<p>使用phar可以很方便的打包你的代码，集成部署到线上机器。</p>
+<p><a href="https://blog.csdn.net/weixin_33520805/article/details/116063848">php phar教程,PHP中phar包的使用教程</a></p>
+<p><a href="https://www.php.cn/php-weizijiaocheng-233172.html">PHP 5.3中的新特性及被弃用的功能函数总结</a></p>
+<p><a href="http://t.zoukankan.com/roucheng-p-php5texing.html">PHP5各个版本的新功能和新特性总结</a></p>
+<h2 id="PHP5-4"><a href="#PHP5-4" class="headerlink" title="PHP5.4"></a>PHP5.4</h2><h3 id="Short-Open-Tag-短开放标签"><a href="#Short-Open-Tag-短开放标签" class="headerlink" title="Short Open Tag 短开放标签"></a>Short Open Tag 短开放标签</h3><blockquote>
+<p>自 PHP5.4 起总是可用。</p>
+</blockquote>
+<pre><code class="php">//可以把
+&lt;?php echo $xxoo;?&gt;
+//简写成：  
+&lt;?= $xxoo;?&gt; 
+</code></pre>
+<h3 id="数组简写"><a href="#数组简写" class="headerlink" title="数组简写"></a><strong>数组简写</strong></h3><pre><code class="php">// 原来的数组写法
+$arr = array(&quot;key&quot; =&gt; &quot;value&quot;, &quot;key2&quot; =&gt; &quot;value2&quot;);
+// 简写形式
+$arr = [&quot;key&quot; =&gt; &quot;value&quot;, &quot;key2&quot; =&gt; &quot;value2&quot;];
+</code></pre>
+<h3 id="Traits"><a href="#Traits" class="headerlink" title="Traits"></a>Traits</h3><blockquote>
+<p>Traits是 PHP 多重继承的一种解决方案。PHP中无法进行多重继承，但一个类可以包含多个Traits</p>
+</blockquote>
+<pre><code class="php">// Traits不能被单独实例化，只能被类所包含
+trait SayWorld
+&#123;
+    public function sayHello()
+    &#123;
+        echo &#39;World!&#39;;
+    &#125;
+&#125;
+class MyHelloWorld
+&#123;
+    // 将SayWorld中的成员包含进来
+    use SayWorld;
+&#125;
+
+$xxoo = new MyHelloWorld();
+// sayHello() 函数是来自 SayWorld 构件的
+$xxoo-&gt;sayHello();
+</code></pre>
+<h4 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h4><p>基类中的成员函数将被Traits中的函数覆盖，当前类中的成员函数将覆盖Traits中的函数。</p>
+<p><a href="https://www.lmlphp.com/user/62946/article/item/713865/">php5.4新功能Traits介绍</a></p>
+<h3 id="内置-Web-服务器"><a href="#内置-Web-服务器" class="headerlink" title="内置 Web 服务器"></a><strong>内置 Web 服务器</strong></h3><p>PHP从5.4开始内置一个轻量级的Web服务器，不支持并发，定位是用于开发和调试环境。<br>在开发环境使用它的确非常方便。</p>
+<pre><code class="php">php -S localhost:8000
+</code></pre>
+<h3 id="动态访问静态方法"><a href="#动态访问静态方法" class="headerlink" title="动态访问静态方法"></a>动态访问静态方法</h3><pre><code class="php">$func = &quot;funcXXOO&quot;;
+A::&#123;$func&#125;();
+</code></pre>
+<h3 id="实例化时访问类成员"><a href="#实例化时访问类成员" class="headerlink" title="实例化时访问类成员"></a>实例化时访问类成员</h3><pre><code class="php">(new MyClass)-&gt;xxoo();
+</code></pre>
+<p><a href="https://www.cnblogs.com/L-moye/p/14367169.html">php5.4总结</a></p>
+<h2 id="PHP5-5"><a href="#PHP5-5" class="headerlink" title="PHP5.5"></a>PHP5.5</h2><h3 id="yield关键字"><a href="#yield关键字" class="headerlink" title="yield关键字"></a>yield关键字</h3><p>yield关键字用于当函数需要返回一个迭代器的时候，逐个返回值。</p>
+<pre><code class="php">function number10()
+&#123;
+    for($i = 1; $i &lt;= 10; $i += 1)
+        yield $i;
+&#125;
+</code></pre>
+<h3 id="list-用于-foreach"><a href="#list-用于-foreach" class="headerlink" title="list() 用于 foreach"></a>list() 用于 foreach</h3><pre><code class="php">$array = [
+    [1, 2, 3],
+    [4, 5, 6],
+];
+foreach ($array as list($a, $b, $c))
+    echo &quot;&#123;$a&#125; &#123;$b&#125; &#123;$c&#125;\n&quot;;
+</code></pre>
+<h3 id="细节修改"><a href="#细节修改" class="headerlink" title="细节修改"></a>细节修改</h3><ul>
+<li>不推荐使用 mysql 函数，推荐使用 PDO 或 MySQLi</li>
+<li>不再支持Windows XP.</li>
+</ul>
+<ul>
+<li>可用 MyClass::class 取到一个类的完整限定名(包括命名空间)</li>
+<li>empty() 支持表达式作为参数</li>
+<li>try-catch 结构新增 finally 块</li>
+</ul>
+<h2 id="PHP5-6"><a href="#PHP5-6" class="headerlink" title="PHP5.6"></a>PHP5.6</h2><h3 id="常量增强"><a href="#常量增强" class="headerlink" title="常量增强"></a>常量增强</h3><ol>
+<li><p>定义常量时允许使用之前定义的常量进行计算</p>
+<pre><code class="php">const A = 2;
+const B = A + 1;
+</code></pre>
+</li>
+<li><p>允许常量作为函数参数默认值</p>
+<pre><code class="php">function func($arg = C::STR2)asdf 
+</code></pre>
+</li>
+</ol>
+<h3 id="可变函数参数"><a href="#可变函数参数" class="headerlink" title="可变函数参数"></a>可变函数参数</h3><p>用于代替 func_get_args()</p>
+<pre><code class="php">function add(...$args)
+&#123;
+ //...
+&#125;
+</code></pre>
+<p>同时可以在调用函数时，把数组展开为函数参数：</p>
+<pre><code class="php">$arr = [2, 3];
+add(1, ...$arr);
+</code></pre>
+<h3 id="命名空间增强"><a href="#命名空间增强" class="headerlink" title="命名空间增强"></a>命名空间增强</h3><p>命名空间支持常量和函数</p>
+<p><a href="https://www.cnblogs.com/L-moye/p/14367188.html">PHP5.6总结</a></p>
+<h2 id="PHP7-0"><a href="#PHP7-0" class="headerlink" title="PHP7.0"></a>PHP7.0</h2><h3 id="标量类型声明"><a href="#标量类型声明" class="headerlink" title="标量类型声明"></a><strong>标量类型声明</strong></h3><p>四种标量类型：boolean （布尔型），integer （整型），float （浮点型, 也称作 double)，string （字符串）</p>
+<pre><code class="php">function typeString(string $a)
+&#123;
+    echo $a;
+&#125;
+typeString(&#39;sad&#39;); //sad
+</code></pre>
+<h3 id="返回值类型声明"><a href="#返回值类型声明" class="headerlink" title="返回值类型声明"></a>返回值类型声明</h3><pre><code class="php">function returnErrorArray(): array
+&#123;
+    return &#39;1456546&#39;;
+&#125;
+print_r(returnErrorArray());
+/*
+Array
+Fatal error: Uncaught TypeError: Return value of returnArray() must be of the type array, string returned in 
+*/
+</code></pre>
+<h3 id="define-定义数组"><a href="#define-定义数组" class="headerlink" title="define 定义数组"></a>define 定义数组</h3><pre><code class="php">define(&#39;ANIMALS&#39;, [
+    &#39;dog&#39;,
+    &#39;cat&#39;,
+    &#39;bird&#39;
+]);
+echo ANIMALS[1]; // 输出 &quot;cat&quot;
+</code></pre>
+<h3 id="匿名类"><a href="#匿名类" class="headerlink" title="匿名类"></a>匿名类</h3><p><strong>匿名类就像一个没有事先定义的类，而在定义的时候直接就进行了实例化。</strong> </p>
+<pre><code class="php">// 直接定义
+$objA = new class&#123;
+    public function getName()&#123;
+        echo &quot;I&#39;m objA&quot;;
+    &#125;
+&#125;;
+$objA-&gt;getName();
+</code></pre>
+<p><a href="https://blog.csdn.net/angryshan/article/details/116458994">PHP7 匿名类的用法</a></p>
+<h3 id="null-合并运算符"><a href="#null-合并运算符" class="headerlink" title="null 合并运算符"></a>null 合并运算符</h3><pre><code class="php">$username = $_GET[&#39;user&#39;] ?? &#39;nobody&#39;;
+//这两个是等效的  当不存在user 则返回?? 后面的参数
+$username = isset($_GET[&#39;user&#39;]) ? $_GET[&#39;user&#39;] : &#39;nobody&#39;;
+</code></pre>
+<h2 id="PHP7-1"><a href="#PHP7-1" class="headerlink" title="PHP7.1"></a>PHP7.1</h2><h3 id="可为空类型"><a href="#可为空类型" class="headerlink" title="可为空类型"></a><strong>可为空类型</strong></h3><p>参数以及返回值的类型现在可以通过在类型前加上一个问号使之允许为空。 </p>
+<p>当启用这个特性时，传入的参数或者函数返回的结果要么是给定的类型，要么是 null 。</p>
+<pre><code class="php">&lt;?php
+  function testReturn(): ?string&#123;
+    return &#39;elePHPant&#39;;
+  &#125;
+</code></pre>
+<h3 id="void类型"><a href="#void类型" class="headerlink" title="void类型"></a>void类型</h3><pre><code class="php">&lt;?php
+  function swap(&amp;$left, &amp;$right) : void&#123;
+    //...
+  &#125;
+</code></pre>
+<h3 id="多异常捕获"><a href="#多异常捕获" class="headerlink" title="多异常捕获"></a>多异常捕获</h3><pre><code class="php">&lt;?php
+try &#123;
+    // some code
+&#125; catch (FirstException | SecondException $e) &#123;
+    // ...
+&#125;
+</code></pre>
+<h2 id="PHP7-2"><a href="#PHP7-2" class="headerlink" title="PHP7.2"></a>PHP7.2</h2><h3 id="新的对象类型object"><a href="#新的对象类型object" class="headerlink" title="新的对象类型object"></a>新的对象类型object</h3><pre><code class="php">&lt;?php
+ 
+function test(object $obj) : object
+&#123;
+    return new SplQueue();
+&#125;
+ 
+test(new StdClass());
+</code></pre>
+<h3 id="允许重写抽象方法"><a href="#允许重写抽象方法" class="headerlink" title="允许重写抽象方法"></a><strong>允许重写抽象方法</strong></h3><p>当一个抽象类继承于另外一个抽象类的时候，继承后的抽象类可以重写被继承的抽象类的抽象方法。</p>
+<pre><code class="php">&lt;?php
+ 
+abstract class A
+&#123;
+    abstract function test(string $s);
+&#125;
+abstract class B extends A
+&#123;
+    // overridden - still maintaining contravariance for parameters and covariance for return
+    abstract function test($s) : int;
+&#125;
+</code></pre>
+<h2 id="PHP7-4"><a href="#PHP7-4" class="headerlink" title="PHP7.4"></a>PHP7.4</h2><h3 id="类属性支持类型声明"><a href="#类属性支持类型声明" class="headerlink" title="类属性支持类型声明"></a>类属性支持类型声明</h3><pre><code class="php">&lt;?php
+class User &#123;
+    public int $id;
+    public string $name;
+&#125;
+</code></pre>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a><strong>箭头函数</strong></h3><p>使用隐式按值作用域绑定定义函数的简写语法。</p>
+<pre><code class="php">&lt;?php
+  $factor = 10;
+  $nums = array_map(fn($n) =&gt; $n * $factor, [1, 2, 3, 4]);
+  // $nums = array(10, 20, 30, 40);?&gt;
+</code></pre>
+<h3 id="Null-合并运算符支持方法"><a href="#Null-合并运算符支持方法" class="headerlink" title="Null 合并运算符支持方法"></a><strong>Null 合并运算符支持方法</strong></h3><pre><code class="php">&lt;?php
+  $array[&#39;key&#39;] ??= computeDefault();
+  //if (!isset($array[&#39;key&#39;])) &#123;$array[&#39;key&#39;] = computeDefault();&#125;
+?&gt;
+</code></pre>
+<h3 id="Opcache-预加载"><a href="#Opcache-预加载" class="headerlink" title="Opcache 预加载"></a>Opcache 预加载</h3><p>Opcache将获取您的PHP源文件，将其编译为“ opcodes”，然后将这些编译后的文件存储在磁盘上。opcache会跳过源文件和PHP解释器在运行时实际需要之间的转换步骤。</p>
+<p><a href="https://www.php.cn/topic/php7/473781.html">掌握PHP 7.x 各个版本的新特性</a></p>
+<p><a href="https://www.sky8g.com/technology/3208/#mcetoc_1dncjv3p40">PHP7.0<del>PHP7.1</del>PHP7.2<del>PHP7.3</del>PHP7.4新特性</a></p>
+<h2 id="PHP8-0"><a href="#PHP8-0" class="headerlink" title="PHP8.0"></a>PHP8.0</h2><h3 id="JIT即时编译"><a href="#JIT即时编译" class="headerlink" title="JIT即时编译"></a>JIT即时编译</h3><p>PHP8的JIT目前是在Opcache之中提供的</p>
+<p>JIT在Opcache优化之后的基础上，结合Runtime的信息再次优化，直接生成机器码</p>
+<p>JIT不是原来Opcache优化的替代，是增强</p>
+<p>目前PHP8只支持x86架构的CPU</p>
+<h3 id="命名参数"><a href="#命名参数" class="headerlink" title="命名参数"></a>命名参数</h3><blockquote>
+<p>就是具名参数，在调用函数的时候，可以指定参数名称，指定参数名称后，参数顺序可以不安装原函数参数顺序传</p>
+</blockquote>
+<pre><code class="php">//传统方式调用
+balance(100, 20);
+//php8 使用命名参数调用
+balance(amount: 100, payment: 20);
+</code></pre>
+<h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><p>使用注解可以将类定义成一个一个低解耦，高内聚的元数据类。在使用的时候通过注解灵活引入，反射注解类实例的时候达到调用的目的。<br>注解类只有在被实例化的时候才会调用</p>
+<h3 id="联合类型"><a href="#联合类型" class="headerlink" title="联合类型"></a>联合类型</h3><p>在不确定参数类型的场景下，可以使用</p>
+<pre><code class="php">function printSomeThing(string|int $value)
+&#123;
+    var_dump($value);
+&#125;
+</code></pre>
+<h3 id="Match表达式"><a href="#Match表达式" class="headerlink" title="Match表达式"></a>Match表达式</h3><p>和switch cash差不多，不过是严格===匹配</p>
+<pre><code class="php">&lt;?php
+$key = &#39;b&#39;;
+$str = match($key) &#123;
+    &#39;a&#39; =&gt; &#39;this a&#39;,
+    &#39;c&#39; =&gt; &#39;this c&#39;,
+     0  =&gt; &#39;this 0&#39;,
+    &#39;b&#39; =&gt; &#39;last b&#39;,
+  &#125;;
+echo $str;//输出 last b
+</code></pre>
+<h3 id="Nullsafe-运算符"><a href="#Nullsafe-运算符" class="headerlink" title="Nullsafe 运算符"></a>Nullsafe 运算符</h3><pre><code class="php">//不实例 User 类，设置为null
+$user = null;
+echo $user-&gt;getName();//php8之前调用,报错
+echo $user?-&gt;getName();//php8调用,不报错，返回空
+</code></pre>
+<h3 id="构造器属性提升"><a href="#构造器属性提升" class="headerlink" title="构造器属性提升"></a>构造器属性提升</h3><p>在构造函数中可以声明类属性的修饰词作用域</p>
+<pre><code class="php">&lt;?php
+    // php8之前
+    class User
+    &#123;
+        protected string $name;
+        protected int $age;
+        public function __construct(string $name, int $age)
+        &#123;
+            $this-&gt;name = $name;
+            $this-&gt;age = $age;
+        &#125;
+    &#125;
+    //php8写法，
+    class User
+    &#123;
+        public function __construct(
+            protected string $name,
+            protected int $age
+        ) &#123;&#125;
+    &#125;
+</code></pre>
+<p><a href="https://www.php.cn/topic/php8/485216.html">结合示例讲解PHP8的新特性</a></p>
+]]></content>
+      <categories>
+        <category>PHP</category>
+      </categories>
+      <tags>
+        <tag>后端</tag>
+        <tag>PHP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>幼麟实验室Golang02-slice</title>
+    <url>/2022/07/22/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang02-slice/</url>
+    <content><![CDATA[<h2 id="Slice"><a href="#Slice" class="headerlink" title="Slice"></a>Slice</h2><p>data: 元素（底层数组的起始地址）</p>
+<p>len: 长度</p>
+<p>cap: 容量</p>
+<h3 id="var"><a href="#var" class="headerlink" title="var"></a>var</h3><pre><code>var ints []int
+
+data=nil 
+len=0
+cap=0
+</code></pre>
+<h3 id="make"><a href="#make" class="headerlink" title="make"></a>make</h3><pre><code>var ints []int = make([]int, 2, 5)
+</code></pre>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24kj17wmrj20ok07nmxc.jpg"></p>
+<p>添加/修改元素</p>
+<pre><code>var ints []int = make([]int, 2, 5)
+ints = append(ints, 1) //长度变为3
+ints[0] = 1
+</code></pre>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24kl2qoshj20on07hjrp.jpg"></p>
+<p><strong>越界访问</strong>：已存储的元素可以安全读写，超出范围则发生panic（如读写ints[4]~ints[5]）</p>
+<h3 id="new"><a href="#new" class="headerlink" title="new"></a>new</h3><p>new不负责底层数组的分配，只返回slice结构的起始地址</p>
+<pre><code>ps := new([]string) // data = nil len = 0 cap = 0
+(*ps)[0] = &quot;test&quot;   //报错，因为没有底层数组
+*ps = append(*ps, &quot;test&quot;) //分配底层数组
+</code></pre>
+<p>字符串类型：字符串内容 + 字节长度</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24ku6ipmzj20gz0de74k.jpg"></p>
+<h3 id="共用底层数组"><a href="#共用底层数组" class="headerlink" title="共用底层数组"></a>共用底层数组</h3><ul>
+<li><p>数组容量，内容声明后不可改变</p>
+</li>
+<li><p>不同slice可指向同一个底层数组</p>
+</li>
+</ul>
+<pre><code class="go">arr := [10]int&#123;0,1,2,3,4,5,6,7,8,9&#125;
+var s1 []int = arr[1:4] //长度3，容量9
+var s2 []int = arr[7:]  //长度3，容量3
+</code></pre>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24kyjuihgj20sp075wez.jpg"></p>
+<h3 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h3><pre><code class="go">s2 = append(s2, 10) //长度3 =&gt; 4，容量3 =&gt; 6
+</code></pre>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24l500mk3j20lr09b3yy.jpg"></p>
+<h3 id="扩容规则"><a href="#扩容规则" class="headerlink" title="扩容规则"></a>扩容规则</h3><ol>
+<li><p>预估扩容后容量</p>
+<pre><code>1.切片容量翻倍如果小于预估容量，则扩容到预估容量；
+2.切片容量翻倍如果大于预估容量：
+  - 切片的容量如果小于1024，那么直接翻倍
+  - 如果大于等于1024，每次扩1/4，直到新容量超过所需容量。
+</code></pre>
+</li>
+<li><p>计算所需内存</p>
+<pre><code>所需内存 = 预估容量 x 元素类型大小
+</code></pre>
+</li>
+<li><p>分配内存，匹配合适的内存规格</p>
+</li>
+</ol>
+<p>例：string类型每个元素占16字节</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24lah54v2j20lv0j6wfn.jpg"></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.bilibili.com/video/BV1hv411x7we">幼麟实验室</a></p>
+<p><a href="https://www.jianshu.com/p/0a777dc7f7ae">go map深度解析</a></p>
+]]></content>
+      <categories>
+        <category>GO</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>幼麟实验室Golang01-string</title>
+    <url>/2022/07/21/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang01-string/</url>
+    <content><![CDATA[<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><p>string的底层结构是StringHeader，它包含2个字段，Data和Len；前8字节Data是指针(指向字符串值的地址)，后8个字节Len是int类型(标识字符串的长度)，所以一共占16个字节</p>
+<p>注：</p>
+<p>1位 = 1比特（Bit）</p>
+<p>1字节 = 8比特</p>
+<h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><p>字符集：ASCII</p>
+<p>中文字符集：GB2312</p>
+<p>通用字符集：  Unicode</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h214s034nxj20de0c33zi.jpg">VBl<img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h214tbhkzej20br08bmxh.jpg"></p>
+<p>定长编码：占用4字节，高位补零</p>
+<p>变长编码：</p>
+<ul>
+<li>编号[0,127]，占用1字节，标识位0</li>
+<li>编号[128,2047]，占用2字节，标识位110+10</li>
+<li>编号[2048,65535]，占用3字节，标识位1110+10+10</li>
+<li>… </li>
+</ul>
+<p>举例：界，十进制30028，二进制111010101001100，对应编码11100111 10010101 10001100</p>
+<h3 id="数据结构：data-len"><a href="#数据结构：data-len" class="headerlink" title="数据结构：data + len"></a>数据结构：data + len</h3><p>data：数据</p>
+<p>len：字节个数</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h214vs3mvdj20vg0fpaat.jpg" alt="image-20220508173947505"></p>
+<p>注意：</p>
+<ul>
+<li>字符串变量会分配到只读内存段，不允许修改</li>
+<li>字符串变量可以共用底层字符串内容</li>
+</ul>
+<pre><code>fmt.Printf(&quot;%c\n&quot;, s1[2]) //正确
+s1[2] = &#39;o&#39; //错误
+
+s1 = &quot;Hello&quot; //正确，存储的地址会指向新的内容，并没有修改原来 的内容
+
+bs := ([]byte)(s1) //为slice重新分配一段内存，并Copy原字符串内容
+bs[2] = &#39;o&#39;
+fmt.Printf(&quot;%c\n&quot;, bs[2]) //正确
+</code></pre>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.bilibili.com/video/BV1hv411x7we">幼麟实验室</a></p>
+<p><a href="https://www.jianshu.com/p/0a777dc7f7ae">go map深度解析</a></p>
+]]></content>
+      <categories>
+        <category>GO</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>幼麟实验室Golang03-内存对齐</title>
+    <url>/2022/07/23/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang03-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/</url>
+    <content><![CDATA[<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="地址总线和数据总线"><a href="#地址总线和数据总线" class="headerlink" title="地址总线和数据总线"></a>地址总线和数据总线</h3><ul>
+<li>CPU是通过地址总线来对存储单元进行寻址的，8根地址总线[0,255]可寻址256Byte内存，32根地址总线[0,2^32-1]可寻址4G内存。</li>
+<li>CPU与内存或者其他器件之间的数据传输时通过数据总线来进行的。数据总线的宽度决定了CPU和外界的数据传输速度。8根数据总线一次即可传送8位二进制数据（1个字节）；16位即可一次传送两个字节。每次操作的字节数称为机器字长。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4k3yau2n2j20kk0aw3yw.jpg"></p>
+<h2 id="内存对齐"><a href="#内存对齐" class="headerlink" title="内存对齐"></a>内存对齐</h2><p>现代计算机中内存空间都是按照字节(byte)进行划分的，编译器会把各种类型数据安排合适的地址，并占用合适的长度，这种就称为内存对齐，内存对齐是指首地址对齐。</p>
+<p>为什么要内存对齐？</p>
+<ul>
+<li>有些<code>CPU</code>只能在特定地址访问数据，不同硬件平台具有差异性，在编译时将分配的内存进行对齐，这就具有平台可以移植性了</li>
+<li><code>CPU</code> 访问内存时，并不是逐个字节访问，而是以字长（word size）为单位访问，所以数据结构应该尽可能地在自然边界上对齐，如果访问未对齐的内存，处理器需要做两次内存访问，而对齐的内存访问仅需要一次访问，内存对齐后可以提升性能</li>
+</ul>
+<p>现代计算机中内存空间都是按照字节(byte)进行划分的，编译器会把各种类型数据安排合适的地址，并占用合适的长度，这种就称为内存对齐，内存对齐是指首地址对齐。</p>
+<h3 id="对齐边界"><a href="#对齐边界" class="headerlink" title="对齐边界"></a>对齐边界</h3><p>每种类型的对齐值就是它的对齐边界。</p>
+<p>内存对齐要求数据存储地址及占用的字节数都要是它对齐边界的倍数。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24tjdcqm9j20y10figmd.jpg"></p>
+<h4 id="每种类型的对齐边界"><a href="#每种类型的对齐边界" class="headerlink" title="每种类型的对齐边界"></a>每种类型的对齐边界</h4><p>32位平台指针宽度PtrSize和寄存器宽度RegSize都是4字节，64位平台都是8字节。</p>
+<p>RegSize可以理解为机器字长，也是平台对应的最大对齐边界。</p>
+<ul>
+<li>有些<code>CPU</code>只能在特定地址访问数据，不同硬件平台具有差异性，在编译时将分配的内存进行对齐，这就具有平台可以移植性了</li>
+<li><code>CPU</code> 访问内存时，并不是逐个字节访问，而是以字长（word size）为单位访问，所以数据结构应该尽可能地在自然边界上对齐，如果访问未对齐的内存，处理器需要做两次内存访问，而对齐的内存访问仅需要一次访问，内存对齐后可以提升性能</li>
+</ul>
+<h3 id="内存对齐边界"><a href="#内存对齐边界" class="headerlink" title="内存对齐边界"></a>内存对齐边界</h3><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24tmard8ij20u40i83zg.jpg"></p>
+<h4 id="数据类型对齐边界"><a href="#数据类型对齐边界" class="headerlink" title="数据类型对齐边界"></a>数据类型对齐边界</h4><p>取类型大小与平台最大对齐边界中较小的值。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24spadmccj20rx0d0dh9.jpg"></p>
+<h3 id="结构体内存对齐"><a href="#结构体内存对齐" class="headerlink" title="结构体内存对齐"></a>结构体内存对齐</h3><ul>
+<li>结构体对齐边界是成员中最大的对齐边界</li>
+<li>结构体占用字节数需要是类型对齐边界的倍数</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24tnj8hg4j20pi07q3yu.jpg"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h24tpdnnxej20wj0c7jsh.jpg"></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.jianshu.com/p/0a777dc7f7ae">幼麟实验室</a></p>
+]]></content>
+      <categories>
+        <category>GO</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>幼麟实验室Golang06-传参和返回值</title>
+    <url>/2022/07/26/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang06-%E4%BC%A0%E5%8F%82%E5%92%8C%E8%BF%94%E5%9B%9E%E5%80%BC/</url>
+    <content><![CDATA[<h2 id="传参和返回值"><a href="#传参和返回值" class="headerlink" title="传参和返回值"></a>传参和返回值</h2><h3 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h3><p>示例1：</p>
+<pre><code class="go">func swap(a,b int) &#123;
+    a,b = b,a
+&#125;
+func main() &#123;
+    a,b := 1,2
+    swap(a, b)
+    fmt.Println(a, b) //1, 2
+&#125;
+</code></pre>
+<p>函数在栈中的分配如下：</p>
+<ul>
+<li>首先分配局部变量的空间，然后把局部变量存进去。</li>
+<li>然后分配被调用函数的参数，从右至左分配。先入栈第二个参数，再入栈第一个参数。传参是值拷贝，所以把两个参数的值压入栈。</li>
+<li>接下来是call指令存入的返回地址。也就是fmt.Println这一行代码所对应的指令</li>
+<li>再接下来就是swap函数栈帧了</li>
+<li>当swap函数执行到<code>a,b=b,a</code>时，就会修改参数对应的值，但是调用者的局部变量a和b在上面，交换的并不是它们，所以最终结果显示没有交换成功。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4klsa7ieej20h10c63yx.jpg"></p>
+<p>示例2：</p>
+<pre><code class="go">func swap(a,b *int) &#123;
+    *a,*b = *b,*a
+&#125;
+func main() &#123;
+    a,b := 1,2
+    swap(&amp;a, &amp;b)
+    fmt.Println(a, b) //2, 1
+&#125;
+</code></pre>
+<p>把指针作为参数，函数参数还是值类型，所以会拷贝两个地址的值。</p>
+<p>在swap函数中，会将对应地址的值进行交换，修改的是调用者的局部变量<code>a</code>和<code>b</code>，所以最终修改成功。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4kluvqz87j20bu0aymxe.jpg"></p>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>通常，返回值是通过寄存器传递的，但是Go语言支持多返回值，所以在栈上分配返回值更合适。</p>
+<h4 id="匿名返回值"><a href="#匿名返回值" class="headerlink" title="匿名返回值"></a>匿名返回值</h4><pre><code class="go">func incr(a int) int &#123;
+    var b int 
+    defer func() &#123;
+          a++
+          b++    
+    &#125;()    
+    a++
+    b=a
+    return b    
+&#125;
+func main() &#123;
+    var a,b int
+      b = incr(a)    
+      fmt.Println(a, b) //0 1
+&#125;
+</code></pre>
+<ol>
+<li>一次性分配main函数栈帧，sp直接到达对应的位置。</li>
+<li>把局部变量压入栈</li>
+<li>压入栈函数返回值（默认为0）——因为栈是先入后出的缘故，所以一个函数的执行步骤要从后往前的压入栈。</li>
+<li>把函数参数压入栈</li>
+<li>保存调用者函数main的栈基地址以方便最后回到main函数。</li>
+<li>接下来进入函数incr的函数栈帧。 首先初始化局部变量b，默认为0,</li>
+<li>然后执行a++指令，把局部变量a的值加1.</li>
+<li>运行到b=a的指令，把参数a赋给局部变量b。</li>
+<li>接下来就是返回值和defer函数的问题。 在Go语言中，是先给返回值赋值，然后再执行defer函数。</li>
+<li>把局部变量b的值，拷贝到返回值空间。</li>
+<li>执行注册的defer函数，在defer函数中，参数a再次自增1，局部变量b也加1。但是需要注意的是它让局部变量b自增1，不代表就把返回值自增1，因为在defer之前，已经给返回值赋值过了，可以看下图，b的值是2，但是返回值还是1.</li>
+<li>把返回值给局部变量b</li>
+<li>输出a，b——0,1</li>
+</ol>
+<h4 id="命名返回值"><a href="#命名返回值" class="headerlink" title="命名返回值"></a>命名返回值</h4><p>注：命名返回值不在函数栈帧里</p>
+<pre><code class="go">func incr(a int) (b int) &#123;
+    defer func() &#123;
+          a++
+          b++    
+    &#125;()    
+    a++
+    return a    
+&#125;
+func main() &#123;
+    var a,b int
+      b = incr(a)    
+      fmt.Println(a, b) //0 2
+&#125;
+</code></pre>
+<ol>
+<li><code>incr</code>函数的<code>a++</code>指令，然后把参数a的值加1.</li>
+<li><code>return a</code>指令赋值a变量的值给返回值局部变量b，此时b=a=1.</li>
+<li>运行defer函数，a++，b++，a和b都是2.</li>
+<li>此时返回值的位置为2，所以会把main函数中的局部变量b赋值为2.</li>
+<li>打印0,2</li>
+</ol>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4km6baipyj20cq0c9aac.jpg"></p>
+<h4 id="调用多个函数"><a href="#调用多个函数" class="headerlink" title="调用多个函数"></a>调用多个函数</h4><pre><code class="go">func A()&#123;
+  r1, r2 := B(p1, p2, p3)
+  r1 = C(p1)
+&#125;
+</code></pre>
+<p>当函数A中调用函数B和函数C时，栈的寻址策略：</p>
+<ol>
+<li>首先分配A函数的局部变量空间。</li>
+<li>因为后面有两个函数要执行，又因为<strong>Go是一次性分配空间的，会分配最大的参数和返回值空间</strong>，函数B比函数C的空间要大，就以函数B所需要的空间标准来分配，如下图<code>r2~p1</code>这么大的空间。</li>
+<li>接下来把函数B的参数和返回值压入栈，进入函数B的栈帧。</li>
+<li>当函数B执行完毕之后，会释放这两片空间，<code>r1</code>和<code>p1</code>分配到最下面，和函数C的栈指针挨着，再把函数C的参数和返回值压入栈。这样虽然上面会空出来一块，但是被调用者通过栈指针相对寻址自己的参数和返回值时会比较方便。</li>
+</ol>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4kmjbh4ubj20dj0ejaad.jpg"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4kmisoc24j20ds0e0aab.jpg" alt="image-20220726205629075"></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.bilibili.com/video/BV1hv411x7we">幼麟实验室</a></p>
+]]></content>
+      <categories>
+        <category>GO</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>幼麟实验室Golang07-闭包</title>
+    <url>/2022/07/27/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang07-%E9%97%AD%E5%8C%85/</url>
+    <content><![CDATA[<h2 id="函数调用栈"><a href="#函数调用栈" class="headerlink" title="函数调用栈"></a>函数调用栈</h2><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.bilibili.com/video/BV1hv411x7we">幼麟实验室</a></p>
+]]></content>
+      <categories>
+        <category>GO</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>幼麟实验室Golang04-map</title>
+    <url>/2022/07/24/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang04-map/</url>
+    <content><![CDATA[<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><h3 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h3><p><a href="https://baike.baidu.com/item/%E6%95%A3%E5%88%97%E8%A1%A8/10027933">散列表</a>（Hash table，也叫哈希表），是根据关键码值(Key value)而直接进行访问的<a href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/1450">数据结构</a>。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做<a href="https://baike.baidu.com/item/%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0/2366288">散列函数</a>，存放记录的<a href="https://baike.baidu.com/item/%E6%95%B0%E7%BB%84/3794097">数组</a>叫做<a href="https://baike.baidu.com/item/%E6%95%A3%E5%88%97%E8%A1%A8/10027933">散列表</a>。</p>
+<p>通常用一堆buckets(桶)来存储键值对。通过Hash函数处理key，对应[0,m-1]桶编号中的一个。</p>
+<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><ol>
+<li>取模法：hash % m</li>
+<li>与运算法：hash &amp; (m-1) ，注意m需要是2的整数次幂，否则会出现空桶(绝对不会选中)</li>
+</ol>
+<h4 id="哈希冲突"><a href="#哈希冲突" class="headerlink" title="哈希冲突"></a>哈希冲突</h4><ol>
+<li>开放地址法： 当冲突时，查找下一个位置继续判断是否冲突，直到无冲突为止</li>
+<li>拉链法：冲突时在位置上再建立一条链，存储相应映射到该位置的数据，查找时，也是对于链上元素进行<a href="https://so.csdn.net/so/search?q=%E9%81%8D%E5%8E%86&spm=1001.2101.3001.7020">遍历</a>，删除时只需要打上标记，通常不实际进行删除。</li>
+</ol>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h27sblmtywj20vb0i50ts.jpg"></p>
+<p>哈希冲突会影响哈希表的读写效率，解决方法：</p>
+<ul>
+<li>选择散列均匀的哈希函数</li>
+<li>适时进行扩容</li>
+</ul>
+<h4 id="Hash扩容"><a href="#Hash扩容" class="headerlink" title="Hash扩容"></a>Hash扩容</h4><p>负载因子：在HashMap中，负载因子决定了数据量多少了以后可以进行扩容。<strong>Go语言默认负载因子是6.5</strong>。</p>
+<pre><code>负载因子 = 填入哈希表中的元素个数 / 哈希表的长度
+</code></pre>
+<h4 id="渐进式扩容"><a href="#渐进式扩容" class="headerlink" title="渐进式扩容"></a>渐进式扩容</h4><p>把键值对迁移时间分摊到多次哈希表操作中的方式。可以避免一次性扩容带来的性能瞬时抖动。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h27sizj6obj20s50jwjsn.jpg"></p>
+<h3 id="Map类型"><a href="#Map类型" class="headerlink" title="Map类型"></a>Map类型</h3><p>Go语言中Map类型的底层实现就是哈希表。实现了快速查找、添加、删除的功能。</p>
+<p>map类型变量本质上是一个指针，指向hmap结构体。</p>
+<ul>
+<li>count：已经存储的键值对数目</li>
+<li>B：桶的数目是2的多少次幂（与运算法）</li>
+<li>buckets：桶（bmap）</li>
+<li>oldbuckets：扩容阶段，保存旧桶</li>
+<li>nevacuate：渐进式扩容下一个要迁移的旧桶编号</li>
+<li>extra：指向mapextra结构体，记录溢出桶相关信息</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h27ss0zma9j20vd0ex3zn.jpg" alt="hmap"> </p>
+<h4 id="bmap的结构"><a href="#bmap的结构" class="headerlink" title="bmap的结构"></a>bmap的结构</h4><ul>
+<li>8个tophash：对应hash值的高8位</li>
+<li>8个key在一起</li>
+<li>8个value在一起</li>
+<li>bmap类型的指针，指向溢出桶</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h27t718uipj20bm08y0t2.jpg" alt="bmap"></p>
+<h4 id="溢出桶"><a href="#溢出桶" class="headerlink" title="溢出桶"></a>溢出桶</h4><p>哈希表要分配的桶数目大于2^4时，使用溢出桶的概率较大，会预分配2^(B-4)个溢出桶备用；这些溢出桶与常规桶内存中是连续的，只是前2^4作为常规桶，后面作为溢出桶。</p>
+<p>mapextra：溢出桶信息</p>
+<ul>
+<li>overflow：已使用的溢出桶地址</li>
+<li>oldoverflow：旧桶使用的溢出桶地址</li>
+<li>nextoverflow：下个空闲溢出桶地址</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h27t81v4m8j20wc0ipdhm.jpg"></p>
+<h3 id="扩容规则"><a href="#扩容规则" class="headerlink" title="扩容规则"></a>扩容规则</h3><h4 id="翻倍扩容"><a href="#翻倍扩容" class="headerlink" title="翻倍扩容"></a>翻倍扩容</h4><p>Go语言默认负载因子是6.5，超过这个数会触发翻倍扩容</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h27tfmhh7ij20n50g9q3t.jpg"> </p>
+<h4 id="等量扩容"><a href="#等量扩容" class="headerlink" title="等量扩容"></a>等量扩容</h4><p>负载因子没有超标，但溢出桶较多，会触发等量扩容。</p>
+<p>常规桶数量 = 2 的 B 次方</p>
+<p>等量扩容：适用于删除元素较多的情况，可以使桶内元素排列更加紧密，减少溢出桶的使用。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.bilibili.com/video/BV1hv411x7we">幼麟实验室</a></p>
+<p><a href="https://www.jianshu.com/p/0a777dc7f7ae">go map深度解析</a></p>
+]]></content>
+      <categories>
+        <category>GO</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>幼麟实验室Golang05-函数调用栈</title>
+    <url>/2022/07/25/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang05-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/</url>
+    <content><![CDATA[<h2 id="函数调用栈"><a href="#函数调用栈" class="headerlink" title="函数调用栈"></a>函数调用栈</h2><p>我们在编程中写的函数，会被<a href="https://so.csdn.net/so/search?q=%E7%BC%96%E8%AF%91%E5%99%A8&spm=1001.2101.3001.7020">编译器</a>编译为机器指令，写入可执行文件，程序执行的时候，会把这个可执行文件加载到内存，在虚拟地址空间中的<code>代码段</code>存放。</p>
+<p>如果在一个函数中调用另一个函数，编译器就会对应生成一条<code>call</code>指令，当程序执行到这条call指令时，就会跳到对应的函数入口处开始执行，而每一个函数的最后，都有一条<code>ret</code>指令，负责在函数结束后跳回到调用处继续执行。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4k6x75rdyj20yx0hvwfp.jpg"></p>
+<h3 id="栈区"><a href="#栈区" class="headerlink" title="栈区"></a>栈区</h3><p>函数执行的时候需要有足够的内存空间来存放局部变量，参数，返回值等数据，这些数据存在上图中的栈中。</p>
+<p>栈先入后出，先入栈的在底部。</p>
+<p>虚拟地址空间的栈区，上面是高地址，下面是低地址，栈底通常称为栈基，栈顶又叫栈指针。</p>
+<p>具体的栈帧布局是：</p>
+<ul>
+<li><p>调用者栈基地址（也就是谁调用了这个函数）</p>
+</li>
+<li><p>局部变量</p>
+</li>
+<li><p>调用函数的返回值</p>
+</li>
+<li><p>参数</p>
+</li>
+</ul>
+<p><strong>通过栈指针加上偏移来定位到每个参数和返回值。</strong></p>
+<p>比如栈指针+8字节处，就是栈指针的上一格，通过这种方式来进行偏移。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4k7jbw6c8j20mi0avq3j.jpg"></p>
+<p>当在A函数中调用B函数时，会在A函数中插入一条<code>call</code>指令，当执行到<code>call</code>指令的时候，会去B函数开始处运行。那么<code>call</code>指令做的事情就是：</p>
+<ol>
+<li>首先把A函数中下一条指令的地址入栈（栈基地址，当B函数执行完之后，可以再通过这个地址回到A函数的调用处继续执行A函数。）</li>
+<li>跳转到被调用函数的入口处执行（也就是被调用函数的栈帧，而所有的函数栈帧布局都遵循统一的结构约定。）</li>
+</ol>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4k7l8jbdtj20ox0k2t9w.jpg"></p>
+<h3 id="入栈策略"><a href="#入栈策略" class="headerlink" title="入栈策略"></a>入栈策略</h3><p>程序执行时，CPU通过特定的寄存器来存运行时的栈基和栈指针，也有指令指针寄存器用来存储下一条要执行的指令地址。</p>
+<p>执行指令的过程有两种，第一种是逐步扩张：</p>
+<h4 id="逐步扩张"><a href="#逐步扩张" class="headerlink" title="逐步扩张"></a>逐步扩张</h4><ul>
+<li>如果要执行入栈3这条指令，CPU读取之后，会先把指令指针移向下一条指令，然后栈指针向下移动，入栈数字3。</li>
+<li>然后再执行入栈4这条指令，CPU读取之后，再把指令指针移向下一条指令，然后栈指针向下移动，入栈数字4。</li>
+<li>一直往复。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4k7mqgm0ej20o80af74o.jpg"></p>
+<h4 id="一次性分配"><a href="#一次性分配" class="headerlink" title="一次性分配"></a>一次性分配</h4><p>Go语言中的是第二种——<code>一次性分配</code>，它会直接将栈指针移动到所需最大栈空间的位置，然后通过右边这种相对寻址的方式，来把对应的值入栈。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4k7obwkrxj20ov0ataal.jpg"></p>
+<p>Go语言选择使用一次性分配的策略是有原因的，拿下图来讲，下面三个goroutine，初始分配的栈空间只有那么大，如果要逐步扩张的话，如果g2执行到最后了，但是接下来要执行的函数又要用掉很多的空间，如果函数栈是逐步扩张的，执行时就可能会发生栈访问越界。</p>
+<p>函数栈帧的大小可以在编译时期确定， 对于栈消耗大的函数，Go编译器会在函数头部插入检测代码，如果发现需要进行栈增长，则会另外分配一段足够大的空间，然后把原来的内容移过来，并释放原来的空间。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4k7p6fverj20dv0es0t4.jpg"></p>
+<h4 id="call和ret的细节"><a href="#call和ret的细节" class="headerlink" title="call和ret的细节"></a>call和ret的细节</h4><p>首先我们可以看到，下面是<code>栈区</code>和<code>代码段</code>。</p>
+<p>当代码段执行到对应的指令时，就会给栈中添加对应的元素，最终再把栈全部出栈。</p>
+<p>假如说，我们是在函数A中的a1处调用函数B（函数B开始位置为b1）。</p>
+<p>首先，在最开始的时候，寄存器在栈中的情况是这样的：</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4k7r8287gj20j10k1gm9.jpg"></p>
+<p>ip寄存器中存的是下一条要运行的指令，那么当我们的代码段运行到<code>a1</code>的call指令时，会做两件事：</p>
+<p>首先会入栈返回地址a2，然后栈指针sp向下一格，然后给ip寄存器b1的指令地址，接下来要去B函数的开始处运行。call指令就结束了。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4k7ue3k87j20q50f53z8.jpg"></p>
+<p>接下来就要运行四步函数都要做的事：</p>
+<ul>
+<li>第一步是先把栈指针sp移动到足够大的位置——<code>s7</code>上。</li>
+<li>第二步是存储一下之前栈基<code>bp</code>寄存器的值，这样可以在运行完之后，还能回到原来的栈基地址。</li>
+<li>第三步是把<code>s5</code>存入栈基地址。</li>
+<li>接下来就要做函数剩下的指令了——参数，代码等，并一一入栈。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4kleyimy7j20jc0jvt9n.jpg"></p>
+<p>在函数B运行到最后——ret指令之前，编译器还会插入两条指令：</p>
+<ul>
+<li>恢复调用者栈基。最开始我们分配了多少空间，此时就释放多少空间，修改bp寄存器为之前入栈的s1，bp继续指向s1处。</li>
+<li>然后就到ret指令了，它首先会弹出call指令压栈的返回地址a2，sp赋值为s3。然后跳转到这个返回地址a2，把ip寄存器赋值为a2。 接下来可以从a2这里继续执行了。</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4klfhvlc3j20pn0ez3zl.jpg"></p>
+<p>简单来说，call指令会分配栈帧，ret指令又会释放栈帧，恢复到call之前的样子。通过这些指令的配合，就能实现函数的层层嵌套了。</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.bilibili.com/video/BV1hv411x7we">幼麟实验室</a></p>
+<p><a href="https://blog.csdn.net/qq_29582443/article/details/123937089">函数调用栈</a></p>
+]]></content>
+      <categories>
+        <category>GO</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>幼麟实验室Golang08-方法</title>
+    <url>/2022/07/28/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang08-%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="函数调用栈"><a href="#函数调用栈" class="headerlink" title="函数调用栈"></a>函数调用栈</h2><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.bilibili.com/video/BV1hv411x7we">幼麟实验室</a></p>
+]]></content>
+      <categories>
+        <category>GO</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>幼麟实验室Golang11-panic和revocer</title>
+    <url>/2022/08/01/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang11-panic%E5%92%8Crevocer/</url>
+    <content><![CDATA[<h2 id="函数调用栈"><a href="#函数调用栈" class="headerlink" title="函数调用栈"></a>函数调用栈</h2><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://www.bilibili.com/video/BV1hv411x7we">幼麟实验室</a></p>
+]]></content>
+      <categories>
+        <category>GO</category>
+      </categories>
+      <tags>
+        <tag>GO</tag>
       </tags>
   </entry>
 </search>
