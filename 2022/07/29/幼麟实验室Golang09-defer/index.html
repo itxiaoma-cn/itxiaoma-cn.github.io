@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>IT小马</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="IT小马">
+  <title>幼麟实验室Golang09-defer | IT小马</title>
+  <meta name="keywords" content=" GO ">
+  <meta name="description" content="幼麟实验室Golang09-defer | IT小马">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="函数调用栈Reference幼麟实验室">
 <meta property="og:type" content="article">
@@ -57,7 +57,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -1188,12 +1188,47 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-幼麟实验室Golang09-defer" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#IT%E5%B0%8F%E9%A9%AC"><span class="toc-text">IT小马</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="toc-text">技术栈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a></li></ol></li></ol>
+        <h1 class="article-title">幼麟实验室Golang09-defer</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="GO">GO</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">GO</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2022-07-26 20:59:32'>2022-07-29 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88"><span class="toc-text">函数调用栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1206,159 +1241,27 @@
     }
 </style>
 </div>
-            <h1 id="IT小马"><a href="#IT小马" class="headerlink" title="IT小马"></a>IT小马</h1><blockquote>
-<p>技术的长河奔涌向前，永不停歇。我愿取一瓢于此地，与君同饮。</p>
-</blockquote>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h3tsyiqmprj21410u010s.jpg" alt="2022 · 琼库什台"></p>
-<h3 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h3><table>
-<thead>
-<tr>
-<th>方向</th>
-<th>技术</th>
-<th>熟练度</th>
-<th>相关文章</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>后端</td>
-<td>Php</td>
-<td>★★★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Go</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Java</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td>数据库</td>
-<td>Mysql</td>
-<td>★★★★</td>
-<td></td>
-</tr>
-<tr>
-<td>缓存</td>
-<td>Redis</td>
-<td>★★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Mongo</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td>前端</td>
-<td>Vue</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Angular</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Layui</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>微服务</td>
-<td>Go + Grpc</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td>容器化</td>
-<td>Docker</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>容器编排</td>
-<td>K8s</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>代码仓库</td>
-<td>Gitlab</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td>持续集成</td>
-<td>Jenkins</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>消息队列</td>
-<td>Beanstalk</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>RocketMQ</td>
-<td>★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>Kafka</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>日志系统</td>
-<td>Loki</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>ELK</td>
-<td>★★</td>
-<td></td>
-</tr>
-<tr>
-<td>守护进程</td>
-<td>Supervisor</td>
-<td>★★★</td>
-<td></td>
-</tr>
-<tr>
-<td>运维</td>
-<td>Shell</td>
-<td>★★</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>无：没有使用过，正在学习中；</p>
-<p>★：使用过基础功能；</p>
-<p>★★：使用过，可以搭建和配置环境；</p>
-<p>★★★：可以熟练使用；</p>
-<p>★★★★：可以独立完成项目；</p>
-<p>★★★★★：项目经验丰富</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>SegmentFault个人主页：<a target="_blank" rel="noopener" href="https://segmentfault.com/u/itxiaoma">https://segmentfault.com/u/itxiaoma</a></p>
-<p>本站全部内容均为原创，欢迎转载，但请注明出处。</p>
-<p>本站通过 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> 生成，部署在 <a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a>主题 <a target="_blank" rel="noopener" href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> </p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="函数调用栈"><a href="#函数调用栈" class="headerlink" title="函数调用栈"></a>函数调用栈</h2><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hv411x7we">幼麟实验室</a></p>
 
-        </article>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry"><span class="miit">
@@ -1369,11 +1272,11 @@
     ©2012-2022 itxiaoma.cn
 </p>
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 </body>

@@ -79,7 +79,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(99)</small>
+                <small>(100)</small>
             
         </div>
     </li>
@@ -90,7 +90,7 @@
                     <div data-rel="GO">
                         
                         GO
-                        <small>(28)</small>
+                        <small>(29)</small>
                         
                     </div>
                     
@@ -251,7 +251,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="99">
+<input type="hidden" id="yelog_site_posts_number" value="100">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -378,6 +378,14 @@
            data-author="" >
             <span class="post-title" title="幼麟实验室Golang11-panic和revocer">幼麟实验室Golang11-panic和revocer</span>
             <span class="post-date" title="2022-08-01 00:00:00">2022/08/01</span>
+        </a>
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/29/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang09-defer/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang09-defer">幼麟实验室Golang09-defer</span>
+            <span class="post-date" title="2022-07-29 00:00:00">2022/07/29</span>
         </a>
         
         <a  class="全部文章 GO "
@@ -1209,7 +1217,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2022-07-26 11:19:17'>2022-07-27 00:00</time>
+            发布时间 : <time class="date" title='最后更新: 2022-07-26 21:51:44'>2022-07-27 00:00</time>
         
     </div>
     <div class="article-meta">
@@ -1220,7 +1228,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88"><span class="toc-text">函数调用栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-text">闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Function-Value"><span class="toc-text">Function Value</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85-1"><span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%95%E8%8E%B7%E5%88%97%E8%A1%A8"><span class="toc-text">捕获列表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A2%AB%E6%8D%95%E8%8E%B7%E7%9A%84%E5%8F%98%E9%87%8F%E6%B2%A1%E6%9C%89%E8%A2%AB%E4%BF%AE%E6%94%B9%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-text">被捕获的变量没有被修改的情况</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A2%AB%E6%8D%95%E8%8E%B7%E7%9A%84%E5%8F%98%E9%87%8F%E8%A2%AB%E4%BF%AE%E6%94%B9%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-text">被捕获的变量被修改的情况</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%89%E4%BF%AE%E6%94%B9%E5%B9%B6%E8%A2%AB%E6%8D%95%E8%8E%B7%E7%9A%84%E6%98%AF%E5%8F%82%E6%95%B0"><span class="toc-text">有修改并被捕获的是参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A2%AB%E6%8D%95%E8%8E%B7%E7%9A%84%E6%98%AF%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-text">被捕获的是返回值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1236,7 +1244,47 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="函数调用栈"><a href="#函数调用栈" class="headerlink" title="函数调用栈"></a>函数调用栈</h2><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hv411x7we">幼麟实验室</a></p>
+        <h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><h3 id="Function-Value"><a href="#Function-Value" class="headerlink" title="Function Value"></a>Function Value</h3><p>go中函数是头等对象，可以作为<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92&spm=1001.2101.3001.7020">参数传递</a>，可以作为返回值，也可以绑定到变量。go中称这样的参数，返回值或者变量为Function Value。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4knv038dpj20jy0c33yu.jpg"></p>
+<p>函数指令在编译期间生成，而function value本质是上一个指针，但是并不直接指向函数的指令入口。而是指向一个runtime.funcval<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%BB%93%E6%9E%84%E4%BD%93&spm=1001.2101.3001.7020">结构体</a>，这个结构体里只有一个地址，就是这个函数指令的入口地址</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4knvk9jtcj20pm0hy0tq.jpg"></p>
+<p>函数A被赋值给f1和f2两个变量，这种情况，编译器会做出优化，让f1和f2共用一个funcval结构体</p>
+<p>如果函数A的指令在这，入口地址addr1，编译阶段，会在只读数据段分配一个funcval结构体，fn指向函数A指令入口，而它本身的起始地址，会在执行阶段赋给f1和f2。通过f1来执行函数，就会通过它存储的地址找到对应的funcval结构体，拿到函数入口地址，然后调转执行。</p>
+<p>既然只要有函数入口地址就能调用 ，为什么要通过funcval结构体包装这个地址，然后使用一个二级指针来调用呢？这里主要是为了处理闭包的情况。</p>
+<h3 id="闭包-1"><a href="#闭包-1" class="headerlink" title="闭包"></a>闭包</h3><ul>
+<li>第一：必须要有在函数外部定义，但在函数内部引用的“自由变量”</li>
+<li>第二：脱离了形成闭包的上下文，闭包也能照常使用这些自由变量</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4kny6nnvaj20he0e50td.jpg"></p>
+<p>函数create的返回值是一个函数，但这个函数内部使用了外部定义的变量c，即使create执行结束，通过f1和f2依然能正常调用这个闭包函数。并使用定义在create函数内部的局部变量c，所以这里符合闭包的定义。通常称这个变量c为捕获变量。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4knyswrw3j20qh0eodgz.jpg"></p>
+<p>闭包函数的指令自然也是在编译阶段生成，但因为每个闭包对象都要保存自己的捕获变量。所以要到执行阶段才创建对应的闭包对象。</p>
+<p>到执行阶段，main函数栈帧有两个局部变量，然后是返回值空间。到create函数栈帧这里，有一个局部变量c=2。</p>
+<p>create函数会在堆上分配一个funcval结构体，fn指向闭包函数入口，除此之外，还有一个捕获列表，这里只捕获一个变量c，然后这个结构体的起始地址就作为返回值写入返回值空间，所以f1被赋值为addr2，下面再次调用create函数，它就会再次创建一个funcval结构体，同样捕获变量c，然后这个起始地址addr3作为返回值写入，最终f2<br>被赋值为addr3。</p>
+<p>通过f1和f2调用闭包函数，就会找到各自对应的funcval结构体，拿到同一个函数入口，但是通过f1调用时要使用addr2上面的捕获列表，f2调用时要使用addr3上面的捕获列表，这就是称闭包为有状态的函数的原因</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4knzapo2zj20nf0f8t9k.jpg"></p>
+<p>那究竟函数如何找到对应的捕获列表呢，go语言中通过一个function value调用函数时，会把对应的funcval结构体地址存入特定寄存器，例如amd64平台使用的是DX寄存器。</p>
+<p>这样在闭包函数中，就可以通过寄存器取出funcval结构体的地址，然后加上相应的偏移来找到每一个被捕获的变量。所以go语言中闭包就是有捕获列表的function value，而没有捕获列表的function value直接忽略这个寄存器的值就好了</p>
+<h3 id="捕获列表"><a href="#捕获列表" class="headerlink" title="捕获列表"></a>捕获列表</h3><p>被闭包捕获的变量，要在外层函数与闭包函数中表现一致，好像它们在使用同一个变量，为此，go语言的编译器针对不同情况做了不同的处理。</p>
+<h4 id="被捕获的变量没有被修改的情况"><a href="#被捕获的变量没有被修改的情况" class="headerlink" title="被捕获的变量没有被修改的情况"></a>被捕获的变量没有被修改的情况</h4><p>最简单的情况就像上面那个例子，被捕获的变量除了初始化赋值外，在任何地方都没有被修改过，所以直接拷贝值到捕获列表就ok了</p>
+<h4 id="被捕获的变量被修改的情况"><a href="#被捕获的变量被修改的情况" class="headerlink" title="被捕获的变量被修改的情况"></a>被捕获的变量被修改的情况</h4><p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4ko0jyle2j20cm0fwmxm.jpg"></p>
+<p>如果除了初始化赋值外还被修改过，那就要再做细分了，在这个例子中，被捕获的是局部变量i，而且除了初始化赋值(i:=0)外还被修改(i++)过</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4ko11h89yj20qg0brjs5.jpg"></p>
+<p>闭包函数指令入口addrf，main函数栈帧中，局部变量fs是一个长度为2的function value类型数组，返回值为零值，到create函数栈帧，由于被闭包捕获并修改，<strong>局部变量i改为堆分配，在栈上只存一个地址</strong>。</p>
+<p>第一次for循环。在堆上创建funcval结构体，捕获i的地址，这样闭包函数就和外层函数操作同一个变量了，返回值第一个元素存储addr0，第一次for循环结束，i自增1</p>
+<p>第二次for循环开始，再次堆分配一个funcval，捕获变量i的地址，第二个元素存储addr1，第二次循环结束，i再次自增1，create函数结束，把返回值拷贝到局部变量fs。</p>
+<p>通过fs[0]调用函数时，把addr0存入寄存器。闭包函数通过寄存器存储的地址加上偏移找到捕获变量i的地址。fs[1]同理，被捕获的地址都指向它，所以每次都会打印2。</p>
+<p><strong>闭包导致的局部变量堆分配，也是变量逃逸的一种场景。</strong></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4ko24tf6oj20q60fadh3.jpg" alt="image-20220726214940296"></p>
+<h4 id="有修改并被捕获的是参数"><a href="#有修改并被捕获的是参数" class="headerlink" title="有修改并被捕获的是参数"></a>有修改并被捕获的是参数</h4><p>如果有修改并被捕获的是参数，涉及到函数原型，就不能像局部变量那样处理了。</p>
+<p>参数依然通过调用者栈帧传入，但是编译器会把栈上这个参数拷贝到堆上一份。然后外层函数和闭包函数都使用堆上分配的这一个。</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4ko3atmynj20b70keq3c.jpg"></p>
+<h4 id="被捕获的是返回值"><a href="#被捕获的是返回值" class="headerlink" title="被捕获的是返回值"></a>被捕获的是返回值</h4><p>如果被捕获的是返回值，处理方式又有些不同</p>
+<p>调用者栈帧上依然会分配返回值的空间，不过闭包的外层函数会在堆上也分配一个，外层函数和闭包函数都使用堆上这个，但是在外层函数返回前，需要把堆上的返回值拷贝到栈上的返回值空间</p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24ely1h4ko3u39rfj20bn0inq3o.jpg"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>处理方式虽然多样，但是目标只有一个，就是保存捕获变量在外层函数和闭包函数中的一致性</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hv411x7we">幼麟实验室</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42956653/article/details/121082600">Golang底层原理剖析之闭包</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 本站全部内容均为原创，欢迎转载，但请注明出处。 </span>
