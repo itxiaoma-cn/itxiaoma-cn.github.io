@@ -1,0 +1,2699 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PHP-RabbitMQ-2高级特性 | IT小马</title>
+  <meta name="keywords" content=" PHP , RabbitMQ ">
+  <meta name="description" content="PHP-RabbitMQ-2高级特性 | IT小马">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="00 基础原型链原型链是JavaScript中的一个重要概念，它描述了对象之间的继承关系。在JavaScript中，每个对象都有一个原型（prototype），并且可以通过原型链来访问和继承其他对象的属性和方法。 当我们访问一个对象的属性或方法时，如果该对象本身没有定义这个属性或方法，JavaScript会沿着原型链向上查找，直到找到对应的属性或方法或者到达原型链的顶端（即Object.proto">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01TS核心概念">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2023/08/01/Nest01/index.html">
+<meta property="og:site_name" content="IT小马">
+<meta property="og:description" content="00 基础原型链原型链是JavaScript中的一个重要概念，它描述了对象之间的继承关系。在JavaScript中，每个对象都有一个原型（prototype），并且可以通过原型链来访问和继承其他对象的属性和方法。 当我们访问一个对象的属性或方法时，如果该对象本身没有定义这个属性或方法，JavaScript会沿着原型链向上查找，直到找到对应的属性或方法或者到达原型链的顶端（即Object.proto">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-07-21T07:01:51.104Z">
+<meta property="article:author" content="IT小马">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="Nest">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.0.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>IT小马</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="facebook"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-facebook"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+            <a title="instagram"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="reddit"
+               href="https://www.reddit.com/user/yelog/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-reddit"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="weibo"
+               href="http://weibo.com/u/2307534817"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-weibo"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="https://www.jianshu.com/u/ff56736de7cf"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="zhihu"
+               href="https://www.zhihu.com/people/jaytp/activities"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-zhihu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="oschina"
+               href="https://my.oschina.net/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:jaytp@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="kugou"
+               href="https://www.kugou.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-kugou"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=88151013"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(153)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="运维">
+            
+            运维
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="面试">
+            
+            面试
+            <small>(10)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="前端">
+            <i class="fold iconfont icon-right"></i>
+            前端
+            <small>(16)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;CSS">
+            
+            CSS
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;ES6">
+            
+            ES6
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;HTML">
+            
+            HTML
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;JS">
+            
+            JS
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;Nest">
+            
+            Nest
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;Vue">
+            
+            Vue
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="英语">
+            <i class="fold iconfont icon-right"></i>
+            英语
+            <small>(2)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="英语&lt;---&gt;语法">
+            
+            语法
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="游戏">
+            
+            游戏
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="DOCKER">
+            
+            DOCKER
+            <small>(8)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="GO">
+            
+            GO
+            <small>(30)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="JAVA">
+            
+            JAVA
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="K8S">
+            <i class="fold iconfont icon-right"></i>
+            K8S
+            <small>(31)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="K8S&lt;---&gt;K3S">
+            
+            K3S
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="K8S&lt;---&gt;K8S基础">
+            
+            K8S基础
+            <small>(11)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="K8S&lt;---&gt;K8S架构师">
+            
+            K8S架构师
+            <small>(15)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="MYSQL">
+            
+            MYSQL
+            <small>(11)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="PHP">
+            <i class="fold iconfont icon-right"></i>
+            PHP
+            <small>(12)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="PHP&lt;---&gt;基础">
+            
+            基础
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="PHP&lt;---&gt;中间件">
+            
+            中间件
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="PHP&lt;---&gt;Laravel">
+            
+            Laravel
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="PHP&lt;---&gt;Symfony">
+            
+            Symfony
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="REDIS">
+            
+            REDIS
+            <small>(18)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="WEB">
+            
+            WEB
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="153">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>后端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>面试</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>前端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>容器</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>学习笔记</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>英语</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>游戏</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>语法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>运维</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>CKA</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Cocos</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>CSS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Docker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>DOCKER</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ELK</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ES6</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GOPL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>HTML</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JavaScript</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Jmeter</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>K3S</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>K8S</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Laravel</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MYSQL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Nest</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>PHP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RabbitMQ</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>REDIS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Swoole</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Symfony</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>WEB</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 前端 Nest "
+           href="/2023/08/02/Nest02/"
+           data-tag="前端,Nest"
+           data-author="" >
+            <span class="post-title" title="02CURD操作及分页">02CURD操作及分页</span>
+            <span class="post-date" title="2023-08-02 00:00:00">2023/08/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 Nest "
+           href="/2023/08/01/Nest01/"
+           data-tag="前端,Nest"
+           data-author="" >
+            <span class="post-title" title="01TS核心概念">01TS核心概念</span>
+            <span class="post-date" title="2023-08-01 00:00:00">2023/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Symfony "
+           href="/2023/07/04/Symfony04/"
+           data-tag="PHP,Symfony"
+           data-author="" >
+            <span class="post-title" title="Symfony04">Symfony04</span>
+            <span class="post-date" title="2023-07-04 00:00:00">2023/07/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Symfony "
+           href="/2023/07/03/Symfony03/"
+           data-tag="PHP,Symfony"
+           data-author="" >
+            <span class="post-title" title="Symfony03">Symfony03</span>
+            <span class="post-date" title="2023-07-03 00:00:00">2023/07/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Symfony "
+           href="/2023/07/02/Symfony02/"
+           data-tag="PHP,Symfony"
+           data-author="" >
+            <span class="post-title" title="Symfony02">Symfony02</span>
+            <span class="post-date" title="2023-07-02 00:00:00">2023/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Symfony "
+           href="/2023/07/01/Symfony01/"
+           data-tag="PHP,Symfony"
+           data-author="" >
+            <span class="post-title" title="Symfony01">Symfony01</span>
+            <span class="post-date" title="2023-07-01 00:00:00">2023/07/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 英语 语法 "
+           href="/2023/07/01/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%9501%E6%A1%86%E6%9E%B6/"
+           data-tag="英语,语法"
+           data-author="" >
+            <span class="post-title" title="01语法框架">01语法框架</span>
+            <span class="post-date" title="2023-07-01 00:00:00">2023/07/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2023/06/03/Go%E5%AE%9E%E6%88%9803/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题03-实战">Go面试题03-实战</span>
+            <span class="post-date" title="2023-06-03 00:00:00">2023/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2023/06/02/Go%E5%AE%9E%E6%88%9802/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题02-进阶">Go面试题02-进阶</span>
+            <span class="post-date" title="2023-06-02 00:00:00">2023/06/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2023/06/01/Go%E5%AE%9E%E6%88%9801/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题01-基础">Go面试题01-基础</span>
+            <span class="post-date" title="2023-06-01 00:00:00">2023/06/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 运维 "
+           href="/2023/05/03/ElasticSearh03%E6%A6%82%E5%BF%B5/"
+           data-tag="后端,ELK"
+           data-author="" >
+            <span class="post-title" title="ElasticSearh 03概念">ElasticSearh 03概念</span>
+            <span class="post-date" title="2023-05-03 00:00:00">2023/05/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 运维 "
+           href="/2023/05/02/ElasticSearh02%E6%90%AD%E5%BB%BA/"
+           data-tag="后端,ELK"
+           data-author="" >
+            <span class="post-title" title="ElasticSearh 02环境搭建">ElasticSearh 02环境搭建</span>
+            <span class="post-date" title="2023-05-02 00:00:00">2023/05/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 运维 "
+           href="/2023/05/01/ElasticSearh01%E5%8E%9F%E7%90%86/"
+           data-tag="后端,ELK"
+           data-author="" >
+            <span class="post-title" title="ElasticSearh 01原理">ElasticSearh 01原理</span>
+            <span class="post-date" title="2023-05-01 00:00:00">2023/05/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S "
+           href="/2023/01/01/CKA%E8%AE%A4%E8%AF%8101/"
+           data-tag="K8S,CKA"
+           data-author="" >
+            <span class="post-title" title="CKA认证01">CKA认证01</span>
+            <span class="post-date" title="2023-01-01 00:00:00">2023/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K3S "
+           href="/2022/12/04/K3S04-%E5%AE%89%E8%A3%85Mysql%E9%9B%86%E7%BE%A4/"
+           data-tag="K8S,容器,K3S"
+           data-author="" >
+            <span class="post-title" title="K3S03-安装Mysql集群">K3S03-安装Mysql集群</span>
+            <span class="post-date" title="2022-12-04 00:00:00">2022/12/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/12/04/Redis%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B031-38/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis核心技术笔记31-38">Redis核心技术笔记31-38</span>
+            <span class="post-date" title="2022-12-04 00:00:00">2022/12/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K3S "
+           href="/2022/12/03/K3S03-%E5%AE%89%E8%A3%85Rancher/"
+           data-tag="K8S,容器,K3S"
+           data-author="" >
+            <span class="post-title" title="K3S03-安装Rancher">K3S03-安装Rancher</span>
+            <span class="post-date" title="2022-12-03 00:00:00">2022/12/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/12/03/Redis%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B021-30/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis核心技术笔记21-30">Redis核心技术笔记21-30</span>
+            <span class="post-date" title="2022-12-03 00:00:00">2022/12/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K3S "
+           href="/2022/12/02/K3S02-%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/"
+           data-tag="K8S,容器,K3S"
+           data-author="" >
+            <span class="post-title" title="K3S02-基础使用">K3S02-基础使用</span>
+            <span class="post-date" title="2022-12-02 00:00:00">2022/12/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/12/02/Redis%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B011-20/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis核心技术笔记11-20">Redis核心技术笔记11-20</span>
+            <span class="post-date" title="2022-12-02 00:00:00">2022/12/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/12/01/Redis%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B001-10/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis核心技术笔记01-10">Redis核心技术笔记01-10</span>
+            <span class="post-date" title="2022-12-01 00:00:00">2022/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/11/09/Go%E7%AC%94%E8%AE%B001-Go%E5%9F%BA%E7%A1%80/"
+           data-tag="GO,学习笔记"
+           data-author="" >
+            <span class="post-title" title="Go笔记01-Go基础">Go笔记01-Go基础</span>
+            <span class="post-date" title="2022-11-09 00:00:00">2022/11/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP 中间件 "
+           href="/2022/11/06/PHP-RabbitMQ-2%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/"
+           data-tag="PHP,RabbitMQ"
+           data-author="" >
+            <span class="post-title" title="PHP-RabbitMQ-2高级特性">PHP-RabbitMQ-2高级特性</span>
+            <span class="post-date" title="2022-11-06 00:00:00">2022/11/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP 中间件 "
+           href="/2022/11/05/PHP-RabbitMQ-1%E5%9F%BA%E7%A1%80/"
+           data-tag="PHP,RabbitMQ"
+           data-author="" >
+            <span class="post-title" title="PHP-RabbitMQ-1基础">PHP-RabbitMQ-1基础</span>
+            <span class="post-date" title="2022-11-05 00:00:00">2022/11/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 运维 "
+           href="/2022/10/22/Jmeter/"
+           data-tag="运维,Jmeter"
+           data-author="" >
+            <span class="post-title" title="Jemter压测工具安装使用总结">Jemter压测工具安装使用总结</span>
+            <span class="post-date" title="2022-10-22 00:00:00">2022/10/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 游戏 "
+           href="/2022/10/10/CocosCreator03/"
+           data-tag="游戏,Cocos"
+           data-author="" >
+            <span class="post-title" title="CocosCreator03">CocosCreator03</span>
+            <span class="post-date" title="2022-10-10 00:00:00">2022/10/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 游戏 "
+           href="/2022/10/06/CocosCreator02/"
+           data-tag="游戏,Cocos"
+           data-author="" >
+            <span class="post-title" title="CocosCreator02">CocosCreator02</span>
+            <span class="post-date" title="2022-10-06 00:00:00">2022/10/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 游戏 "
+           href="/2022/10/03/CocosCreator01/"
+           data-tag="游戏,Cocos"
+           data-author="" >
+            <span class="post-title" title="CocosCreator01">CocosCreator01</span>
+            <span class="post-date" title="2022-10-03 00:00:00">2022/10/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 Vue "
+           href="/2022/08/13/Vuex/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="Vuex">Vuex</span>
+            <span class="post-date" title="2022-08-13 00:00:00">2022/08/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 Vue "
+           href="/2022/08/12/VueCLI/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="Vue CLI">Vue CLI</span>
+            <span class="post-date" title="2022-08-12 00:00:00">2022/08/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 Vue "
+           href="/2022/08/11/Vue-%E6%A0%B8%E5%BF%83/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="Vue-核心">Vue-核心</span>
+            <span class="post-date" title="2022-08-11 00:00:00">2022/08/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 ES6 "
+           href="/2022/08/10/ECMAScript6(3)/"
+           data-tag="前端,JS,ES6"
+           data-author="" >
+            <span class="post-title" title="ECMAScript6(3)">ECMAScript6(3)</span>
+            <span class="post-date" title="2022-08-10 00:00:00">2022/08/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 ES6 "
+           href="/2022/08/09/ECMAScript6(2)/"
+           data-tag="前端,JS,ES6"
+           data-author="" >
+            <span class="post-title" title="ECMAScript6(2)">ECMAScript6(2)</span>
+            <span class="post-date" title="2022-08-09 00:00:00">2022/08/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 ES6 "
+           href="/2022/08/08/ECMAScript6(1)/"
+           data-tag="前端,JS,ES6"
+           data-author="" >
+            <span class="post-title" title="ECMAScript6(1)">ECMAScript6(1)</span>
+            <span class="post-date" title="2022-08-08 00:00:00">2022/08/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 JS "
+           href="/2022/08/07/JavaScript%E5%9F%BA%E7%A1%801/"
+           data-tag="前端,JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript基础1">JavaScript基础1</span>
+            <span class="post-date" title="2022-08-07 00:00:00">2022/08/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 JS "
+           href="/2022/08/07/JavaScript%E5%9F%BA%E7%A1%802/"
+           data-tag="前端,JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript基础2">JavaScript基础2</span>
+            <span class="post-date" title="2022-08-07 00:00:00">2022/08/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 HTML "
+           href="/2022/08/06/%E7%A7%BB%E5%8A%A8Web%E5%B8%83%E5%B1%802/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="移动Web布局2">移动Web布局2</span>
+            <span class="post-date" title="2022-08-06 00:00:00">2022/08/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 HTML "
+           href="/2022/08/05/%E7%A7%BB%E5%8A%A8Web%E5%B8%83%E5%B1%801/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="移动Web布局1">移动Web布局1</span>
+            <span class="post-date" title="2022-08-05 00:00:00">2022/08/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 HTML "
+           href="/2022/08/04/HTML5&CSS3/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="HTML5&amp;CSS3">HTML5&amp;CSS3</span>
+            <span class="post-date" title="2022-08-04 00:00:00">2022/08/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 CSS "
+           href="/2022/08/03/CSS%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%9302/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="CSS基础总结02">CSS基础总结02</span>
+            <span class="post-date" title="2022-08-03 00:00:00">2022/08/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 CSS "
+           href="/2022/08/02/CSS%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%9301/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="CSS基础总结01">CSS基础总结01</span>
+            <span class="post-date" title="2022-08-02 00:00:00">2022/08/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 HTML "
+           href="/2022/08/01/HTML%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="前端,HTML"
+           data-author="" >
+            <span class="post-title" title="HTML基础总结">HTML基础总结</span>
+            <span class="post-date" title="2022-08-01 00:00:00">2022/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/08/01/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang11-panic%E5%92%8Crevocer/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang11-panic和revocer">幼麟实验室Golang11-panic和revocer</span>
+            <span class="post-date" title="2022-08-01 00:00:00">2022/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/07/29/Redis%E5%BA%95%E5%B1%82%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis底层设计与源码分析">Redis底层设计与源码分析</span>
+            <span class="post-date" title="2022-07-29 00:00:00">2022/07/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/29/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang09-defer/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang09-defer">幼麟实验室Golang09-defer</span>
+            <span class="post-date" title="2022-07-29 00:00:00">2022/07/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/28/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang08-%E6%96%B9%E6%B3%95/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang08-方法">幼麟实验室Golang08-方法</span>
+            <span class="post-date" title="2022-07-28 00:00:00">2022/07/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/27/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang07-%E9%97%AD%E5%8C%85/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang07-闭包">幼麟实验室Golang07-闭包</span>
+            <span class="post-date" title="2022-07-27 00:00:00">2022/07/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/26/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang06-%E4%BC%A0%E5%8F%82%E5%92%8C%E8%BF%94%E5%9B%9E%E5%80%BC/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang06-传参和返回值">幼麟实验室Golang06-传参和返回值</span>
+            <span class="post-date" title="2022-07-26 00:00:00">2022/07/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/25/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang05-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang05-函数调用栈">幼麟实验室Golang05-函数调用栈</span>
+            <span class="post-date" title="2022-07-25 00:00:00">2022/07/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/24/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang04-map/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang04-map">幼麟实验室Golang04-map</span>
+            <span class="post-date" title="2022-07-24 00:00:00">2022/07/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/23/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang03-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang03-内存对齐">幼麟实验室Golang03-内存对齐</span>
+            <span class="post-date" title="2022-07-23 00:00:00">2022/07/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP 基础 "
+           href="/2022/07/22/PHP5-8%E5%90%84%E7%89%88%E6%9C%AC%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/"
+           data-tag="后端,PHP"
+           data-author="" >
+            <span class="post-title" title="PHP5-8各版本特性详解">PHP5-8各版本特性详解</span>
+            <span class="post-date" title="2022-07-22 00:00:00">2022/07/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/22/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang02-slice/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang02-slice">幼麟实验室Golang02-slice</span>
+            <span class="post-date" title="2022-07-22 00:00:00">2022/07/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/21/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang01-string/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang01-string">幼麟实验室Golang01-string</span>
+            <span class="post-date" title="2022-07-21 00:00:00">2022/07/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/15/K8S%E6%9E%B6%E6%9E%84%E5%B8%8815/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="15中间件容器化-Helm">15中间件容器化-Helm</span>
+            <span class="post-date" title="2022-07-15 00:00:00">2022/07/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/14/K8S%E6%9E%B6%E6%9E%84%E5%B8%8814/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="14云原生存储">14云原生存储</span>
+            <span class="post-date" title="2022-07-14 00:00:00">2022/07/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/13/K8S%E6%9E%B6%E6%9E%84%E5%B8%8813/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="13权限控制">13权限控制</span>
+            <span class="post-date" title="2022-07-13 00:00:00">2022/07/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/12/K8S%E6%9E%B6%E6%9E%84%E5%B8%8812/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="12资源配额">12资源配额</span>
+            <span class="post-date" title="2022-07-12 00:00:00">2022/07/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/11/K8S%E6%9E%B6%E6%9E%84%E5%B8%8811/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="11计划任务-污点-亲和力">11计划任务-污点-亲和力</span>
+            <span class="post-date" title="2022-07-11 00:00:00">2022/07/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/09/K8S%E6%9E%B6%E6%9E%84%E5%B8%8810/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="10持久化存储">10持久化存储</span>
+            <span class="post-date" title="2022-07-09 00:00:00">2022/07/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/09/K8S%E6%9E%B6%E6%9E%84%E5%B8%8809/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="09配置管理">09配置管理</span>
+            <span class="post-date" title="2022-07-09 00:00:00">2022/07/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/08/K8S%E6%9E%B6%E6%9E%84%E5%B8%8808/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="08服务发布">08服务发布</span>
+            <span class="post-date" title="2022-07-08 00:00:00">2022/07/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/07/K8S%E6%9E%B6%E6%9E%84%E5%B8%8807/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="07资源调度">07资源调度</span>
+            <span class="post-date" title="2022-07-07 00:00:00">2022/07/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/06/K8S%E6%9E%B6%E6%9E%84%E5%B8%8806/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="06基本概念">06基本概念</span>
+            <span class="post-date" title="2022-07-06 00:00:00">2022/07/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/05/K8S%E6%9E%B6%E6%9E%84%E5%B8%8805/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="05容器基础">05容器基础</span>
+            <span class="post-date" title="2022-07-05 00:00:00">2022/07/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/03/K8S%E6%9E%B6%E6%9E%84%E5%B8%8803/"
+           data-tag="K8S"
+           data-author="" >
+            <span class="post-title" title="03Kubeadm高可用集群下">03Kubeadm高可用集群下</span>
+            <span class="post-date" title="2022-07-03 00:00:00">2022/07/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/03/K8S%E6%9E%B6%E6%9E%84%E5%B8%8804/"
+           data-tag="K8S"
+           data-author="" >
+            <span class="post-title" title="04二进制高可用集群">04二进制高可用集群</span>
+            <span class="post-date" title="2022-07-03 00:00:00">2022/07/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/02/K8S%E6%9E%B6%E6%9E%84%E5%B8%8802/"
+           data-tag="K8S"
+           data-author="" >
+            <span class="post-title" title="02Kubeadm高可用集群上">02Kubeadm高可用集群上</span>
+            <span class="post-date" title="2022-07-02 00:00:00">2022/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 英语 语法 "
+           href="/2022/07/02/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%9502%E8%AF%8D%E6%80%A7/"
+           data-tag="英语,语法"
+           data-author="" >
+            <span class="post-title" title="02词性">02词性</span>
+            <span class="post-date" title="2022-07-02 00:00:00">2022/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/01/K8S%E6%9E%B6%E6%9E%84%E5%B8%8801/"
+           data-tag="K8S"
+           data-author="" >
+            <span class="post-title" title="01准备工作">01准备工作</span>
+            <span class="post-date" title="2022-07-01 00:00:00">2022/07/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/04/GoWeb04-Zap%E6%97%A5%E5%BF%97/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb高级04-Zap日志">GoWeb高级04-Zap日志</span>
+            <span class="post-date" title="2022-06-04 00:00:00">2022/06/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/03/GoWeb03-Mysql%E5%92%8CRedis/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb高级03-Mysql和Redis">GoWeb高级03-Mysql和Redis</span>
+            <span class="post-date" title="2022-06-03 00:00:00">2022/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/02/GoWeb02-Gin%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb02-Gin源码解析">GoWeb02-Gin源码解析</span>
+            <span class="post-date" title="2022-06-02 00:00:00">2022/06/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/01/GoWeb01-Gin%E5%9F%BA%E7%A1%80/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb01-Gin基础">GoWeb01-Gin基础</span>
+            <span class="post-date" title="2022-06-01 00:00:00">2022/06/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/12/Golang%E7%9A%84GC%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang的GC回收机制">Golang的GC回收机制</span>
+            <span class="post-date" title="2022-05-12 00:00:00">2022/05/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/11/Golang%E7%9A%84GMP%E8%AF%A6%E8%A7%A3/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang的GMP详解">Golang的GMP详解</span>
+            <span class="post-date" title="2022-05-11 00:00:00">2022/05/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/02/Golang%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang内存管理">Golang内存管理</span>
+            <span class="post-date" title="2022-05-02 00:00:00">2022/05/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/12/K8S12-%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S12-集群资源监控">K8S12-集群资源监控</span>
+            <span class="post-date" title="2022-04-12 00:00:00">2022/04/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/11/K8S11-NFS%E7%BD%91%E7%BB%9C%E5%AD%98%E5%82%A8/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S11-NFS网络存储">K8S11-NFS网络存储</span>
+            <span class="post-date" title="2022-04-11 00:00:00">2022/04/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/10/K8S10-Helm/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S10-Helm">K8S10-Helm</span>
+            <span class="post-date" title="2022-04-10 00:00:00">2022/04/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/09/K8S09-Ingress/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S09-Ingress">K8S09-Ingress</span>
+            <span class="post-date" title="2022-04-09 00:00:00">2022/04/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/08/K8S08-RBAC/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S08-RBAC">K8S08-RBAC</span>
+            <span class="post-date" title="2022-04-08 00:00:00">2022/04/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/07/K8S07-Secret-ConfigMap/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S07-Secret-ConfigMap">K8S07-Secret-ConfigMap</span>
+            <span class="post-date" title="2022-04-07 00:00:00">2022/04/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/06/K8S06-Service-Job/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S06-Service-Job">K8S06-Service-Job</span>
+            <span class="post-date" title="2022-04-06 00:00:00">2022/04/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/05/K8S05-Controller-Deployment/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S05-Controller-Deployment">K8S05-Controller-Deployment</span>
+            <span class="post-date" title="2022-04-05 00:00:00">2022/04/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/04/K8S04-POD%E5%92%8CLabel/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S04-POD和Label">K8S04-POD和Label</span>
+            <span class="post-date" title="2022-04-04 00:00:00">2022/04/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/03/K8S03-YAML/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S03-YAML">K8S03-YAML</span>
+            <span class="post-date" title="2022-04-03 00:00:00">2022/04/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/02/K8S02-Kubectl/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S02-kubectl">K8S02-kubectl</span>
+            <span class="post-date" title="2022-04-02 00:00:00">2022/04/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/01/K8S01-%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S01-安装环境">K8S01-安装环境</span>
+            <span class="post-date" title="2022-04-01 00:00:00">2022/04/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/02/22/Golang%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang常见错误">Golang常见错误</span>
+            <span class="post-date" title="2022-02-22 00:00:00">2022/02/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/13/Redis13-%E6%80%BB%E7%BB%93/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis13-总结">Redis13-总结</span>
+            <span class="post-date" title="2022-02-13 00:00:00">2022/02/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/12/Redis12-%E6%96%B0%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis12-新功能介绍">Redis12-新功能介绍</span>
+            <span class="post-date" title="2022-02-12 00:00:00">2022/02/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/11/Redis11-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis11-分布式锁">Redis11-分布式锁</span>
+            <span class="post-date" title="2022-02-11 00:00:00">2022/02/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/10/Redis10-%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%C2%B7%E5%87%BB%E7%A9%BF%C2%B7%E9%9B%AA%E5%B4%A9/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis10-缓存穿透·击穿·雪崩">Redis10-缓存穿透·击穿·雪崩</span>
+            <span class="post-date" title="2022-02-10 00:00:00">2022/02/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/09/Redis09-%E9%9B%86%E7%BE%A4/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis09-集群">Redis09-集群</span>
+            <span class="post-date" title="2022-02-09 00:00:00">2022/02/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/08/Redis08-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis08-主从复制">Redis08-主从复制</span>
+            <span class="post-date" title="2022-02-08 00:00:00">2022/02/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/07/Redis07-%E6%8C%81%E4%B9%85%E5%8C%96/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis07-持久化">Redis07-持久化</span>
+            <span class="post-date" title="2022-02-07 00:00:00">2022/02/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/06/Redis06-%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E3%80%81%E7%A7%92%E6%9D%80/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis06-事务、锁、秒杀">Redis06-事务、锁、秒杀</span>
+            <span class="post-date" title="2022-02-06 00:00:00">2022/02/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/05/Redis05-Jedis%E3%80%81SprintBoot%E6%95%B4%E5%90%88Redis/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis05-Jedis、SprintBoot整合Redis">Redis05-Jedis、SprintBoot整合Redis</span>
+            <span class="post-date" title="2022-02-05 00:00:00">2022/02/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/04/Redis04-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis04-新数据类型">Redis04-新数据类型</span>
+            <span class="post-date" title="2022-02-04 00:00:00">2022/02/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/03/Redis03-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis03-配置文件、发布和订阅">Redis03-配置文件、发布和订阅</span>
+            <span class="post-date" title="2022-02-03 00:00:00">2022/02/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis02-常用五大数据类型">Redis02-常用五大数据类型</span>
+            <span class="post-date" title="2022-02-02 00:00:00">2022/02/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/01/Redis01-%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%AE%89%E8%A3%85/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis01-基础及安装">Redis01-基础及安装</span>
+            <span class="post-date" title="2022-02-01 00:00:00">2022/02/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/25/JavaWeb03-JSP/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb03-JSP">JavaWeb03-JSP</span>
+            <span class="post-date" title="2021-11-25 00:00:00">2021/11/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/22/JavaWeb02-Servlet%E3%80%81Cookie%E3%80%81Session/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb02-Servlet、Cookie、Session">JavaWeb02-Servlet、Cookie、Session</span>
+            <span class="post-date" title="2021-11-22 00:00:00">2021/11/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/21/JavaWeb01-Tomcat%E3%80%81Maven%E9%85%8D%E7%BD%AE/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb01-Tomcat、Maven配置">JavaWeb01-Tomcat、Maven配置</span>
+            <span class="post-date" title="2021-11-21 00:00:00">2021/11/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/15/Java02-JDBC/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="Java01-JDBC">Java01-JDBC</span>
+            <span class="post-date" title="2021-11-15 00:00:00">2021/11/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/14/Java01-JavaSE/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="Java01-JavaSE">Java01-JavaSE</span>
+            <span class="post-date" title="2021-11-14 00:00:00">2021/11/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/10/04/Laravel%E5%BA%95%E5%B1%8204-%E5%8A%A0%E8%BD%BD%E5%B9%B6%E5%90%AF%E5%8A%A8ServiceProvider/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层04-加载并启动ServiceProvider">Laravel底层04-加载并启动ServiceProvider</span>
+            <span class="post-date" title="2021-10-04 00:00:00">2021/10/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/10/03/Laravel%E5%BA%95%E5%B1%8203-make%E5%92%8Cbuild/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层03-make和build">Laravel底层03-make和build</span>
+            <span class="post-date" title="2021-10-03 00:00:00">2021/10/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/10/02/Laravel%E5%BA%95%E5%B1%8202-%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%EF%BC%8C%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层02-服务容器，服务提供者">Laravel底层02-服务容器，服务提供者</span>
+            <span class="post-date" title="2021-10-02 00:00:00">2021/10/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/10/01/Laravel%E5%BA%95%E5%B1%8201-%E6%A1%86%E6%9E%B6%E6%A0%B8%E5%BF%83%EF%BC%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E9%97%AD%E5%8C%85/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层01-框架核心，依赖注入，闭包">Laravel底层01-框架核心，依赖注入，闭包</span>
+            <span class="post-date" title="2021-10-01 00:00:00">2021/10/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/08/Docker08-DockerCompose/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker08-DockerCompose">Docker08-DockerCompose</span>
+            <span class="post-date" title="2021-08-08 00:00:00">2021/08/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/07/Docker07-%E7%BD%91%E7%BB%9C/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker07-网络">Docker07-网络</span>
+            <span class="post-date" title="2021-08-07 00:00:00">2021/08/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/06/Docker06-%E6%95%B0%E6%8D%AE%E5%8D%B7%E5%AE%B9%E5%99%A8%E5%92%8CDockerfile/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker06-数据卷容器和Dockerfile">Docker06-数据卷容器和Dockerfile</span>
+            <span class="post-date" title="2021-08-06 00:00:00">2021/08/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/05/Docker05-%E6%95%B0%E6%8D%AE%E6%8C%82%E8%BD%BD/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker05-数据挂载">Docker05-数据挂载</span>
+            <span class="post-date" title="2021-08-05 00:00:00">2021/08/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/04/Docker04-%E9%95%9C%E5%83%8F%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E6%8F%90%E4%BA%A4/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker04-镜像的原理和提交">Docker04-镜像的原理和提交</span>
+            <span class="post-date" title="2021-08-04 00:00:00">2021/08/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/03/Docker03-%E5%AE%89%E8%A3%85Nginx,Elasticsearch,Portainer%E5%8F%AF%E8%A7%86%E5%8C%96/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker03-安装Nginx,Elasticsearch,Portainer可视化">Docker03-安装Nginx,Elasticsearch,Portainer可视化</span>
+            <span class="post-date" title="2021-08-03 00:00:00">2021/08/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/02/Docker02-%E6%A6%82%E5%BF%B5%E5%92%8C%E5%91%BD%E4%BB%A4/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker02-概念和命令">Docker02-概念和命令</span>
+            <span class="post-date" title="2021-08-02 00:00:00">2021/08/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/01/Docker01-%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker01-安装和卸载">Docker01-安装和卸载</span>
+            <span class="post-date" title="2021-08-01 00:00:00">2021/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/08/01/Laravel-Swoole%E5%95%86%E5%9F%8E01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="Swoole,PHP"
+           data-author="" >
+            <span class="post-title" title="Laravel-Swoole01-环境搭建.md">Laravel-Swoole01-环境搭建.md</span>
+            <span class="post-date" title="2021-08-01 00:00:00">2021/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/11/GOPL11-%E5%8F%8D%E5%B0%84/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL11-反射">GOPL11-反射</span>
+            <span class="post-date" title="2021-07-11 00:00:00">2021/07/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/10/GOPL10-%E6%B5%8B%E8%AF%95/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL10-测试">GOPL10-测试</span>
+            <span class="post-date" title="2021-07-10 00:00:00">2021/07/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/09/GOPL09-%E5%8C%85%E5%92%8C%E5%B7%A5%E5%85%B7/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL09-包和工具">GOPL09-包和工具</span>
+            <span class="post-date" title="2021-07-09 00:00:00">2021/07/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/08/GOPL08-%E5%9F%BA%E4%BA%8E%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL08-基于共享变量的并发">GOPL08-基于共享变量的并发</span>
+            <span class="post-date" title="2021-07-08 00:00:00">2021/07/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/07/GOPL07-Goroutines%E5%92%8CChannels/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL07-Goroutines和Channels">GOPL07-Goroutines和Channels</span>
+            <span class="post-date" title="2021-07-07 00:00:00">2021/07/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/06/GOPL06-%E6%8E%A5%E5%8F%A3/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL06-接口">GOPL06-接口</span>
+            <span class="post-date" title="2021-07-06 00:00:00">2021/07/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/05/GOPL05-%E6%96%B9%E6%B3%95/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL05-方法">GOPL05-方法</span>
+            <span class="post-date" title="2021-07-05 00:00:00">2021/07/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/04/GOPL04-%E5%87%BD%E6%95%B0/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL04-函数">GOPL04-函数</span>
+            <span class="post-date" title="2021-07-04 00:00:00">2021/07/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/03/GOPL03-%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL03-复合数据类型">GOPL03-复合数据类型</span>
+            <span class="post-date" title="2021-07-03 00:00:00">2021/07/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/02/GOPL02-%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL02-基础数据类型">GOPL02-基础数据类型</span>
+            <span class="post-date" title="2021-07-02 00:00:00">2021/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/01/GOPL01-%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL01-程序结构">GOPL01-程序结构</span>
+            <span class="post-date" title="2021-07-01 00:00:00">2021/07/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/21/Mysql45%E8%AE%B221-%E5%8A%A0%E9%94%81%E8%A7%84%E5%88%99/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲21-加锁规则">Mysql45讲21-加锁规则</span>
+            <span class="post-date" title="2021-06-21 00:00:00">2021/06/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/20/Mysql45%E8%AE%B220-%E5%B9%BB%E8%AF%BB-%E9%97%B4%E9%9A%99%E9%94%81/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲20-幻读-间隙锁">Mysql45讲20-幻读-间隙锁</span>
+            <span class="post-date" title="2021-06-20 00:00:00">2021/06/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/19/Mysql45%E8%AE%B219-%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲19-问题排查">Mysql45讲19-问题排查</span>
+            <span class="post-date" title="2021-06-19 00:00:00">2021/06/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/17/Mysql45%E8%AE%B217-18-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲17-18-随机查询">Mysql45讲17-18-随机查询</span>
+            <span class="post-date" title="2021-06-17 00:00:00">2021/06/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/06/Mysql45%E8%AE%B206-%E8%AE%A1%E6%95%B0%EF%BC%8C%E6%8E%92%E5%BA%8F/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲06-计数，排序">Mysql45讲06-计数，排序</span>
+            <span class="post-date" title="2021-06-06 00:00:00">2021/06/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/05/Mysql45%E8%AE%B205-%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%88%B7%E7%9B%98/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲05-前缀索引，刷盘">Mysql45讲05-前缀索引，刷盘</span>
+            <span class="post-date" title="2021-06-05 00:00:00">2021/06/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/04/Mysql45%E8%AE%B204-%E6%99%AE%E9%80%9A%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲04-普通索引，唯一索引">Mysql45讲04-普通索引，唯一索引</span>
+            <span class="post-date" title="2021-06-04 00:00:00">2021/06/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/03/Mysql45%E8%AE%B203-%E9%94%81/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲03-锁">Mysql45讲03-锁</span>
+            <span class="post-date" title="2021-06-03 00:00:00">2021/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/02/Mysql45%E8%AE%B202-%E4%BA%8B%E5%8A%A1%E5%92%8C%E7%B4%A2%E5%BC%95/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲02-事务和索引">Mysql45讲02-事务和索引</span>
+            <span class="post-date" title="2021-06-02 00:00:00">2021/06/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/02/Mysql45%E8%AE%B202-%E6%97%A5%E5%BF%97/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲02-日志">Mysql45讲02-日志</span>
+            <span class="post-date" title="2021-06-02 00:00:00">2021/06/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲01-基础架构">Mysql45讲01-基础架构</span>
+            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/18/Go%E9%9D%A2%E8%AF%95%E9%A2%9805/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题05">Go面试题05</span>
+            <span class="post-date" title="2021-05-18 00:00:00">2021/05/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/17/Go%E9%9D%A2%E8%AF%95%E9%A2%9804/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题04">Go面试题04</span>
+            <span class="post-date" title="2021-05-17 00:00:00">2021/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/16/Go%E9%9D%A2%E8%AF%95%E9%A2%9803/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题03">Go面试题03</span>
+            <span class="post-date" title="2021-05-16 00:00:00">2021/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/15/Go%E9%9D%A2%E8%AF%95%E9%A2%9802/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题02">Go面试题02</span>
+            <span class="post-date" title="2021-05-15 00:00:00">2021/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/14/Go%E9%9D%A2%E8%AF%95%E9%A2%9801/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题01">Go面试题01</span>
+            <span class="post-date" title="2021-05-14 00:00:00">2021/05/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/03/%E9%AB%98%E6%80%A7%E8%83%BDWeb03-%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="高性能Web03-并发处理">高性能Web03-并发处理</span>
+            <span class="post-date" title="2021-05-03 00:00:00">2021/05/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/02/%E9%AB%98%E6%80%A7%E8%83%BDWeb02-%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="高性能Web02-网络传输">高性能Web02-网络传输</span>
+            <span class="post-date" title="2021-05-02 00:00:00">2021/05/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/01/%E9%AB%98%E6%80%A7%E8%83%BDWeb01-%E7%BB%AA%E8%AE%BA/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="构建高性能Web站点01">构建高性能Web站点01</span>
+            <span class="post-date" title="2021-05-01 00:00:00">2021/05/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/04/11/Mysql%E9%9D%A2%E8%AF%95%E9%A2%9801/"
+           data-tag="面试,Mysql"
+           data-author="" >
+            <span class="post-title" title="Mysql面试题01">Mysql面试题01</span>
+            <span class="post-date" title="2021-04-11 00:00:00">2021/04/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/04/01/PHP%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="面试,PHP"
+           data-author="" >
+            <span class="post-title" title="PHP面试题">PHP面试题</span>
+            <span class="post-date" title="2021-04-01 00:00:00">2021/04/01</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-PHP-RabbitMQ-2高级特性" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">PHP-RabbitMQ-2高级特性</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="PHP">PHP</a> > 
+            
+            <a  data-rel="PHP&lt;---&gt;中间件">中间件</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">PHP</a>
+            
+            <a class="color4">RabbitMQ</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-07-14 18:15:02'>2022-11-06 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">常见问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PhpAmqpLib"><span class="toc-text">PhpAmqpLib</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7"><span class="toc-text">高级特性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-ACK%EF%BC%88confirm%E6%9C%BA%E5%88%B6%EF%BC%89"><span class="toc-text">1 ACK（confirm机制）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%BA%94%E7%AD%94"><span class="toc-text">自动应答</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E5%BA%94%E7%AD%94%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">消息应答的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85"><span class="toc-text">生产者</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85"><span class="toc-text">消费者</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A1%AE%E4%BF%9D%E7%99%BE%E5%88%86%E7%99%BE%E6%8A%95%E9%80%92%E6%88%90%E5%8A%9F"><span class="toc-text">2 确保百分百投递成功</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80-%E6%B6%88%E6%81%AF%E8%90%BD%E5%BA%93%E6%89%93%E6%A0%87%EF%BC%88%E5%B8%B8%E7%94%A8%EF%BC%89"><span class="toc-text">方案一 消息落库打标（常用）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B"><span class="toc-text">实现流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C-%E6%B6%88%E6%81%AF%E4%BA%8C%E6%AC%A1%E7%A1%AE%E8%AE%A4"><span class="toc-text">方案二 消息二次确认</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%B9%82%E7%AD%89%E6%80%A7"><span class="toc-text">3 幂等性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-return%E6%9C%BA%E5%88%B6"><span class="toc-text">4 return机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E9%99%90%E6%B5%81%E6%9C%BA%E5%88%B6"><span class="toc-text">5 限流机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%90%E6%B5%81%E8%AE%BE%E7%BD%AE"><span class="toc-text">限流设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%8B%E5%B7%A5ACK"><span class="toc-text">手工ACK</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-1"><span class="toc-text">实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E9%87%8D%E5%9B%9E%E9%98%9F%E5%88%97"><span class="toc-text">6 重回队列</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E5%9B%9E%E9%98%9F%E5%88%97"><span class="toc-text">重回队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-text">具体实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-TTL"><span class="toc-text">7 TTL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-2"><span class="toc-text">实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97"><span class="toc-text">8 死信队列</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%A7%E7%94%9F%E5%9C%BA%E6%99%AF"><span class="toc-text">产生场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B"><span class="toc-text">处理过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-text">配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0-3"><span class="toc-text">实现</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-1"><span class="toc-text">常见问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><ul>
+<li>生产者消息送达失败</li>
+<li>重复消费</li>
+<li>消息没有成功消费</li>
+<li>消息N年后一直没有被销毁</li>
+<li>高并发</li>
+<li>消息丢失后无法找回</li>
+</ul>
+<h1 id="PhpAmqpLib"><a href="#PhpAmqpLib" class="headerlink" title="PhpAmqpLib"></a>PhpAmqpLib</h1><p>php-amqplib是Advanced Message Queuing Protocol (AMQP)的一个PHP开源实现。</p>
+<p>高级消息队列协议（AMQP）是一个异步消息传递所使用的应用层协议规范。作为线路层协议，而不是API（例如JMS），AMQP 客户端能够无视消息的来源任意发送和接受信息。</p>
+<p>安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer require php-amqplib/php-amqplib</span><br></pre></td></tr></table></figure>
+
+<p>或直接引用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;autoload&quot;: &#123;</span><br><span class="line">        &quot;psr-4&quot;: &#123;</span><br><span class="line">            &quot;PhpAmqpLib\\&quot;: &quot;PhpAmqpLib/&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>使用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Connection</span>\<span class="title">AMQPStreamConnection</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Message</span>\<span class="title">AMQPMessage</span>;</span><br></pre></td></tr></table></figure>
+
+<p>示例下载：php-amqplib-master</p>
+<p>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1tk26bbQyL8frNPZRf8EJug">https://pan.baidu.com/s/1tk26bbQyL8frNPZRf8EJug</a> 提取码: d5ad</p>
+<h1 id="高级特性"><a href="#高级特性" class="headerlink" title="高级特性"></a>高级特性</h1><ul>
+<li><p>ACK(confirm机制) </p>
+</li>
+<li><p>如何保证消息百分百投递成功 </p>
+</li>
+<li><p>幂等性</p>
+</li>
+<li><p>return机制</p>
+</li>
+<li><p>限流</p>
+</li>
+<li><p>重回队列 </p>
+</li>
+<li><p>TTL </p>
+</li>
+<li><p>死信队列 </p>
+</li>
+</ul>
+<h2 id="1-ACK（confirm机制）"><a href="#1-ACK（confirm机制）" class="headerlink" title="1 ACK（confirm机制）"></a>1 ACK（confirm机制）</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>消费者完成一个任务可能需要一段时间，如果其中一个消费者处理一个长的任务并仅只完成了部分突然它挂掉了，会导致消息丢失。RabbitMQ 一旦向消费者传递了一条消息，便立即将该消息标记为删除。在这种情况下，突然有个消费者挂掉了，我们将丢失正在处理的消息。以及后续发送给该消费这的消息，因为它无法接收到。</p>
+<p>为了保证消息在发送过程中不丢失，rabbitmq 引入消息应答机制，消息应答就是:消费者在接收到消息并且处理该消息之后，告诉 rabbitmq 它已经处理了，rabbitmq 可以把该消息删除了。</p>
+<p><img src="https://i0.wp.com/tva1.sinaimg.cn/large/008vxvgGly1h7v4q0ogf5j30lt0dnq3v.jpg"></p>
+<h3 id="自动应答"><a href="#自动应答" class="headerlink" title="自动应答"></a>自动应答</h3><p>消息发送后立即被认为已经传送成功</p>
+<p>弊端：如果消息在接收到之前，消费者那边出现连接或者 信道 关闭，那么消息就丢 失了,当然另一方面这种模式消费者那边可以传递过载的消息，没有对传递的消息数量进行限制， 当然这样有可能使得消费者这边由于接收太多还来不及处理的消息，导致这些消息的积压，最终 使得内存耗尽，最终这些消费者线程被操作系统杀死</p>
+<p>所以在实际开发中我们应选择<strong>手动应答</strong></p>
+<h3 id="消息应答的方法"><a href="#消息应答的方法" class="headerlink" title="消息应答的方法"></a>消息应答的方法</h3><p>Channel.basicAck()：用于肯定确认</p>
+<p>RabbitMQ 已知道该消息并且成功的处理消息，可以将其丢弃了</p>
+<p>Channel.basicNack()：用于否定确认</p>
+<p>Channel.basicReject()：用于否定确认 （<strong>推荐使用</strong>）</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ol>
+<li>在channel上开启确认模式:<code>$channel-&gt;confirm_select();</code></li>
+<li>在channel上添加监听:<code>$channel-&gt;wait_for_pending_acks();</code>监听成功和失败的返回结果，根据具体的结果对消息进行重新发送、或记录日志等后续处理。</li>
+</ol>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require_once</span> <span class="keyword">__DIR__</span>.<span class="string">&#x27;/vendor/autoload.php&#x27;</span>;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Connection</span>\<span class="title">AMQPStreamConnection</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Message</span>\<span class="title">AMQPMessage</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//申明连接参数</span></span><br><span class="line"><span class="variable">$config</span> = [</span><br><span class="line">    <span class="string">&#x27;host&#x27;</span> =&gt; <span class="string">&#x27;192.168.31.51&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;vhost&#x27;</span> =&gt; <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;port&#x27;</span> =&gt; <span class="number">5672</span>,</span><br><span class="line">    <span class="string">&#x27;login&#x27;</span> =&gt; <span class="string">&#x27;test&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;password&#x27;</span> =&gt; <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">];</span><br><span class="line"><span class="variable">$exchange</span> = <span class="string">&#x27;ack_exchange&#x27;</span>;</span><br><span class="line"><span class="variable">$connection</span> = <span class="keyword">new</span> <span class="title class_">AMQPStreamConnection</span>(<span class="variable">$config</span>[<span class="string">&#x27;host&#x27;</span>], <span class="variable">$config</span>[<span class="string">&#x27;port&#x27;</span>], <span class="variable">$config</span>[<span class="string">&#x27;login&#x27;</span>], <span class="variable">$config</span>[<span class="string">&#x27;password&#x27;</span>], <span class="variable">$config</span>[<span class="string">&#x27;vhost&#x27;</span>]);</span><br><span class="line"><span class="variable">$channel</span> = <span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">channel</span>();</span><br><span class="line"><span class="comment">//推送成功</span></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">set_ack_handler</span>(</span><br><span class="line">    function (AMQPMessage <span class="variable">$message</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;set_ack_handler:&quot;</span> . <span class="variable">$message</span>-&gt;body . PHP_EOL;</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br><span class="line"><span class="comment">//推送失败</span></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">set_nack_handler</span>(</span><br><span class="line">    function (AMQPMessage <span class="variable">$message</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;set_nack_handler:&quot;</span> . <span class="variable">$message</span>-&gt;body . PHP_EOL;</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">confirm_select</span>();</span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">exchange_declare</span>(<span class="variable">$exchange</span>, <span class="string">&#x27;fanout&#x27;</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="variable">$msg</span> = <span class="keyword">new</span> <span class="title class_">AMQPMessage</span>(<span class="string">&#x27;xxx&#x27;</span>, <span class="keyword">array</span>(<span class="string">&#x27;content_type&#x27;</span> =&gt; <span class="string">&#x27;text/plain&#x27;</span>));</span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">basic_publish</span>(<span class="variable">$msg</span>, <span class="variable">$exchange</span>);</span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">wait_for_pending_acks</span>();</span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br><span class="line"><span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require_once</span> <span class="keyword">__DIR__</span>.<span class="string">&#x27;/vendor/autoload.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Connection</span>\<span class="title">AMQPStreamConnection</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Exchange</span>\<span class="title">AMQPExchangeType</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$config</span> = [</span><br><span class="line">    <span class="string">&#x27;host&#x27;</span>=&gt;<span class="string">&#x27;192.168.31.51&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;vhost&#x27;</span>=&gt;<span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;port&#x27;</span>=&gt;<span class="number">5672</span>,</span><br><span class="line">    <span class="string">&#x27;login&#x27;</span>=&gt;<span class="string">&#x27;test&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;password&#x27;</span>=&gt;<span class="string">&#x27;123456&#x27;</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="variable">$exchange</span> = <span class="string">&#x27;ack_exchange&#x27;</span>;</span><br><span class="line"><span class="variable">$queue</span> = <span class="string">&#x27;ack_queue&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$connection</span> = <span class="keyword">new</span> <span class="title class_">AMQPStreamConnection</span>(<span class="variable">$config</span>[<span class="string">&#x27;host&#x27;</span>], <span class="variable">$config</span>[<span class="string">&#x27;port&#x27;</span>], <span class="variable">$config</span>[<span class="string">&#x27;login&#x27;</span>], <span class="variable">$config</span>[<span class="string">&#x27;password&#x27;</span>], <span class="variable">$config</span>[<span class="string">&#x27;vhost&#x27;</span>]);</span><br><span class="line"><span class="variable">$channel</span> = <span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">channel</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">queue_declare</span>(<span class="variable">$queue</span>, <span class="literal">false</span>, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">exchange_declare</span>(<span class="variable">$exchange</span>, AMQP_EX_TYPE_FANOUT, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">queue_bind</span>(<span class="variable">$queue</span>, <span class="variable">$exchange</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">process_message</span>(<span class="params"><span class="variable">$message</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;成功收到消息，消息内容为：&quot;</span>.<span class="variable">$message</span>-&gt;body ;</span><br><span class="line">    <span class="comment">//消费完消息之后进行应答，告诉rabbit我已经消费了，可以发送下一组了</span></span><br><span class="line">    <span class="variable">$message</span>-&gt;delivery_info[<span class="string">&#x27;channel&#x27;</span>]-&gt;<span class="title function_ invoke__">basic_ack</span>(<span class="variable">$message</span>-&gt;delivery_info[<span class="string">&#x27;delivery_tag&#x27;</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">basic_consume</span>(<span class="variable">$queue</span>, <span class="string">&#x27;&#x27;</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="string">&#x27;process_message&#x27;</span>);</span><br><span class="line"><span class="keyword">while</span> (<span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">is_consuming</span>()) &#123;</span><br><span class="line">    <span class="comment">// After 10 seconds there will be a timeout exception.</span></span><br><span class="line">    <span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">wait</span>(<span class="literal">null</span>, <span class="literal">false</span>, <span class="number">30000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-确保百分百投递成功"><a href="#2-确保百分百投递成功" class="headerlink" title="2 确保百分百投递成功"></a>2 确保百分百投递成功</h2><h3 id="方案一-消息落库打标（常用）"><a href="#方案一-消息落库打标（常用）" class="headerlink" title="方案一 消息落库打标（常用）"></a>方案一 消息落库打标（常用）</h3><p>将消息持久化到DB并设置状态值，收到Consumer的应答就改变当前记录的状态。<br>再轮询重新发送没接收到应答的消息，注意这里要设置重试次数。</p>
+<p><img src="https://i0.wp.com/tva1.sinaimg.cn/large/008vxvgGly1h7vmgeauryj30p90dn3zi.jpg"></p>
+<h4 id="实现流程"><a href="#实现流程" class="headerlink" title="实现流程"></a>实现流程</h4><p>下单成功：</p>
+<ol>
+<li> 对订单数据入BIZ DB订单库，并对因此生成的业务消息入MSG DB消息库（状态0）</li>
+</ol>
+<p>   注：一定要保证消息都存储成功了，生产端再进行消息发送。如果失败了就进行快速失败机制</p>
+<ol start="2">
+<li><p>发送消息到 MQ 服务上</p>
+</li>
+<li><p>生产端有一个 Confirm Listener，异步监听Broker回送的响应，从而判断消息是否投递成功</p>
+<ol>
+<li>如果成功,去数据库查询该消息,并将消息状态更新为1</li>
+<li>如果出现意外情况，消费者未接收到或者 Listener 接收确认时发生网络闪断，导致生产端的Listener就永远收不到这条消息的confirm应答了，也就是说这条消息的状态就一直为0了，这时候就需要用到我们的分布式定时任务来从 MSG 数据库抓取那些超时了还未被消费的消息，重新发送一遍。</li>
+<li>此时我们需要设置一个规则，比如说消息在入库时候设置一个临界值timeout，5分钟之后如果还是0的状态那就需要把消息抽取出来。这里我们使用的是分布式定时任务，去定时抓取DB中距离消息创建时间超过5分钟的且状态为0的消息。</li>
+</ol>
+</li>
+<li><p>把抓取出来的消息进行重新投递(Retry Send)，也就是从第二步开始继续往下走</p>
+</li>
+<li><p>有些消息可能就是由于一些实际的问题无法路由到Broker，比如routingKey设置不对，对应的队列被误删除了，那么这种消息即使重试多次也仍然无法投递成功，所以需要对重试次数做限制，比如限制3次， 如果投递次数大于三次，那么就将消息状态更新为2，表示这个消息最终投递失败,然后通过补偿机制，人工去处理。实际生产中，这种情况还是比较少的，但是你不能没有这个补偿机制，要不然就做不到可靠性了。 </p>
+</li>
+</ol>
+<p>缺点: 在第一步需要更新或者插入操作数据库2次；在大厂中 都不会加事务，都是进行的补偿操作。</p>
+<p>优化:不需要消息进行持久化 只需要业务持久化</p>
+<h3 id="方案二-消息二次确认"><a href="#方案二-消息二次确认" class="headerlink" title="方案二 消息二次确认"></a>方案二 消息二次确认</h3><p>消息的延迟投递，做二次确认，回调检查(不常用，大厂在用的高并发方案)</p>
+<p><img src="https://i0.wp.com/tva1.sinaimg.cn/large/008vxvgGly1h7vmupl5qwj30o00iqq4i.jpg"></p>
+<ol>
+<li>(上游服务:Upstream service)业务入库 然后send 消息到broker</li>
+<li>进行消息延迟发送到新的queue(延迟时间为5分钟:业务决定) </li>
+<li>(下游服务:Downstream service)监听到消息然后处理消息</li>
+<li>下游服务send confirm生成新的消息到broker (这里是一个新的queue) </li>
+<li>callback service 去监听这个消息 并且入库 如果监听到表示这个消息已经消费成功</li>
+<li>callback service 去检查 第二步投递的延迟消息是否 在msgDB里面是否消费成功，不存在或者消费失败就会 Resend command </li>
+<li>如果在第1,2,4步失败 ，如果成功 broker会给我们一个confirm，失败当然没有，这是消息可靠性投递的重要保障 </li>
+</ol>
+<h2 id="3-幂等性"><a href="#3-幂等性" class="headerlink" title="3 幂等性"></a>3 幂等性</h2><p>定义：用户对于同一操作发起的一次请求或者多次请求的结果是一致的。</p>
+<p>实现方案：<strong>唯一ID+指纹码，利用数据库主键去重</strong></p>
+<p>唯一ID: 业务表的主键 指纹码:为了区别每次正常操作的码，每次操作时生成指纹码;可以用时间戳+业务编号或者标志位(具体视业务场景而定) </p>
+<p>缺点：高并发下有数据库写入的性能瓶颈 </p>
+<p>解决方案：根据ID进行分库分表算法路由 </p>
+<h2 id="4-return机制"><a href="#4-return机制" class="headerlink" title="4 return机制"></a>4 return机制</h2><p>Return Listener用于处理未找到交换机或未路由到队列的消息。也是生产段添加的一个监听。</p>
+<p><img src="https://i0.wp.com/tva1.sinaimg.cn/large/008vxvgGly1h7vqi02nefj30l70d5q47.jpg"></p>
+<p>示例：打印错误信息</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">require_once</span> <span class="keyword">__DIR__</span> . <span class="string">&#x27;/../vendor/autoload.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Connection</span>\<span class="title">AMQPStreamConnection</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Exchange</span>\<span class="title">AMQPExchangeType</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Message</span>\<span class="title">AMQPMessage</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$connection</span> = <span class="keyword">new</span> <span class="title class_">AMQPStreamConnection</span>(<span class="string">&#x27;localhost&#x27;</span>, <span class="number">5672</span>, <span class="string">&#x27;guest&#x27;</span>, <span class="string">&#x27;guest&#x27;</span>);</span><br><span class="line"><span class="variable">$channel</span> = <span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">channel</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// declare  exchange but don`t bind any queue</span></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">exchange_declare</span>(<span class="string">&#x27;hidden_exchange&#x27;</span>, <span class="title class_">AMQPExchangeType</span>::<span class="variable constant_">TOPIC</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$message</span> = <span class="keyword">new</span> <span class="title class_">AMQPMessage</span>(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$wait</span> = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$returnListener</span> = <span class="function"><span class="keyword">function</span>(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="variable">$replyCode</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="variable">$replyText</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="variable">$exchange</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="variable">$routingKey</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="variable">$message</span></span></span></span><br><span class="line"><span class="params"><span class="function"></span>) <span class="keyword">use</span> (<span class="params"><span class="variable">$wait</span></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$GLOBALS</span>[<span class="string">&#x27;wait&#x27;</span>] = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;return:&quot;</span>,</span><br><span class="line">    <span class="variable">$replyCode</span>,<span class="string">&quot;\n&quot;</span>,</span><br><span class="line">    <span class="variable">$replyText</span>,<span class="string">&quot;\n&quot;</span>,</span><br><span class="line">    <span class="variable">$exchange</span>,<span class="string">&quot;\n&quot;</span>,</span><br><span class="line">    <span class="variable">$routingKey</span>,<span class="string">&quot;\n&quot;</span>,</span><br><span class="line">    <span class="variable">$message</span>-&gt;body,<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">set_return_listener</span>(<span class="variable">$returnListener</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//echo &quot; [x] Sent non-mandatory ...&quot;;</span></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">basic_publish</span>(</span><br><span class="line">    <span class="variable">$message</span>,</span><br><span class="line">    <span class="string">&#x27;hidden_exchange&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;rkey&#x27;</span>,</span><br><span class="line">    ture</span><br><span class="line">);</span><br><span class="line"><span class="comment">//echo &quot; done.\n&quot;;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (<span class="variable">$wait</span>) &#123;</span><br><span class="line">    <span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">wait</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br><span class="line"><span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-限流机制"><a href="#5-限流机制" class="headerlink" title="5 限流机制"></a>5 限流机制</h2><p>RabbitMQ提供了一种qos (服务质量保证)功能,即在非自动确认消息的前提下,如果一定数目的消息 (通过基于Con或者channel设置Qos的值) 未被确认前,不消费新的消息</p>
+<h4 id="限流设置"><a href="#限流设置" class="headerlink" title="限流设置"></a>限流设置</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">basic_qos</span>(<span class="variable">$prefetchSize</span>, <span class="number">20</span>, <span class="variable">$global</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>prefetchSize: 单条消息的大小限制，Con通常设置为0，表示不做限制</li>
+<li>prefetchCount: 一次最多能处理多少条消息</li>
+<li>global: 是否将上面设置true应用于channel级别还是取false代表Con级别</li>
+</ul>
+<p>注：prefetchCount在 autoAck=false 的情况下生效,即在自动应答的情况下该值无效</p>
+<h4 id="手工ACK"><a href="#手工ACK" class="headerlink" title="手工ACK"></a>手工ACK</h4><p>prefetchCount在 autoAck=false 的情况下生效,即在自动应答的情况下该值无效</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$message</span>-&gt;delivery_info[<span class="string">&#x27;channel&#x27;</span>]-&gt;<span class="title function_ invoke__">basic_ack</span>(<span class="variable">$message</span>-&gt;delivery_info[<span class="string">&#x27;delivery_tag&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>调用这个方法就会主动回送给Broker一个应答，表示这条消息我处理完了，你可以给我下一条了。</p>
+<p>参数multiple表示是否批量签收，由于我们是一次处理一条消息，所以设置为false</p>
+<p>如果注释掉这行，会反复消费</p>
+<h4 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>(<span class="keyword">__DIR__</span> . <span class="string">&#x27;/config.php&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Connection</span>\<span class="title">AMQPStreamConnection</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$connection</span> = <span class="keyword">new</span> <span class="title class_">AMQPStreamConnection</span>(HOST, PORT, USER, PASS, VHOST);</span><br><span class="line"></span><br><span class="line"><span class="variable">$channel</span> = <span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">channel</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">queue_declare</span>(<span class="string">&#x27;qos_queue&#x27;</span>, <span class="literal">false</span>, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//第二个参数代表：每次只消费100条</span></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">basic_qos</span>(<span class="literal">null</span>, <span class="number">109</span>, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">process_message</span>(<span class="params"><span class="variable">$message</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*业务逻辑*/</span></span><br><span class="line">    <span class="comment">//消费完消息之后进行应答，告诉rabbit我已经消费了，可以发送下一组了</span></span><br><span class="line">    <span class="variable">$message</span>-&gt;delivery_info[<span class="string">&#x27;channel&#x27;</span>]-&gt;<span class="title function_ invoke__">basic_ack</span>(<span class="variable">$message</span>-&gt;delivery_info[<span class="string">&#x27;delivery_tag&#x27;</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">basic_consume</span>(<span class="string">&#x27;qos_queue&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="string">&#x27;process_message&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (<span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">is_consuming</span>()) &#123;</span><br><span class="line">    <span class="comment">// After 10 seconds there will be a timeout exception.</span></span><br><span class="line">    <span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">wait</span>(<span class="literal">null</span>, <span class="literal">false</span>, <span class="number">30000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注：<code>$message-&gt;ack();</code>就是封装过的<code>$channel-&gt;basic_ack();</code></p>
+<h2 id="6-重回队列"><a href="#6-重回队列" class="headerlink" title="6 重回队列"></a>6 重回队列</h2><p>当我们设置 <code>autoACK=false</code>时，就可以使用手工ACK方式了，其实手工方式包括了手工ACK与NACK。</p>
+<ul>
+<li><p>手工 ACK 时，会发送给Broker一个应答，代表消息处理成功，Broker就可回送响应给Pro；</p>
+</li>
+<li><p>NACK 表示消息处理失败，如果设置了重回队列，Broker端就会将没有成功处理的消息重新发送。</p>
+</li>
+</ul>
+<h4 id="重回队列"><a href="#重回队列" class="headerlink" title="重回队列"></a>重回队列</h4><ul>
+<li>重回队列是为了对没有处理成功的消息,将消息重新投递给Broker</li>
+<li>重回队列,会把消费失败的消息重新添加到队列的尾端,供Con继续消费</li>
+<li>一般在实际应用中,都会关闭重回队列,即设置为false</li>
+</ul>
+<h4 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * - Start this consumer in one window by calling: php demo/basic_nack.php</span></span><br><span class="line"><span class="comment"> * - Then on a separate window publish a message like this: php demo/amqp_publisher.php good</span></span><br><span class="line"><span class="comment"> *   that message should be &quot;ack&#x27;ed&quot;</span></span><br><span class="line"><span class="comment"> * - Then publish a message like this: php demo/amqp_publisher.php bad</span></span><br><span class="line"><span class="comment"> *   that message should be &quot;nack&#x27;ed&quot;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">include</span>(<span class="keyword">__DIR__</span> . <span class="string">&#x27;/config.php&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Connection</span>\<span class="title">AMQPStreamConnection</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Exchange</span>\<span class="title">AMQPExchangeType</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$exchange</span> = <span class="string">&#x27;router&#x27;</span>;</span><br><span class="line"><span class="variable">$queue</span> = <span class="string">&#x27;msgs&#x27;</span>;</span><br><span class="line"><span class="variable">$consumerTag</span> = <span class="string">&#x27;consumer&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$connection</span> = <span class="keyword">new</span> <span class="title class_">AMQPStreamConnection</span>(HOST, PORT, USER, PASS, VHOST);</span><br><span class="line"><span class="variable">$channel</span> = <span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">channel</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">queue_declare</span>(<span class="variable">$queue</span>, <span class="literal">false</span>, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">exchange_declare</span>(<span class="variable">$exchange</span>, <span class="title class_">AMQPExchangeType</span>::<span class="variable constant_">DIRECT</span>, <span class="literal">false</span>, <span class="literal">true</span>, <span class="literal">false</span>);</span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">queue_bind</span>(<span class="variable">$queue</span>, <span class="variable">$exchange</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> \PhpAmqpLib\Message\AMQPMessage $message</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">process_message</span>(<span class="params"><span class="variable">$message</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    if(插入成功)&#123;</span></span><br><span class="line"><span class="comment">        echo &quot;将消息删除：&quot;;</span></span><br><span class="line"><span class="comment">        服务器死掉，相当于exit;</span></span><br><span class="line"><span class="comment">        $message-&gt;ack(true);</span></span><br><span class="line"><span class="comment">    &#125;else if(插入失败)&#123;</span></span><br><span class="line"><span class="comment">        echo &quot;将消息不要删除，等着下次消费&quot;;</span></span><br><span class="line"><span class="comment">        $message-&gt;nack(true);</span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$message</span>-&gt;body == <span class="string">&#x27;good&#x27;</span>) &#123;</span><br><span class="line">        <span class="variable">$message</span>-&gt;<span class="title function_ invoke__">ack</span>();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;成功收到消息，消息内容为：&quot;</span>.<span class="variable">$message</span>-&gt;body ;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;将消息打回,重回队列：&quot;</span>;</span><br><span class="line">        <span class="variable">$message</span>-&gt;<span class="title function_ invoke__">nack</span>(<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Send a message with the string &quot;quit&quot; to cancel the consumer.</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$message</span>-&gt;body === <span class="string">&#x27;quit&#x27;</span>) &#123;</span><br><span class="line">        <span class="variable">$message</span>-&gt;<span class="title function_ invoke__">getChannel</span>()-&gt;<span class="title function_ invoke__">basic_cancel</span>(<span class="variable">$message</span>-&gt;<span class="title function_ invoke__">getConsumerTag</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">basic_consume</span>(<span class="variable">$queue</span>, <span class="variable">$consumerTag</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="string">&#x27;process_message&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> \PhpAmqpLib\Channel\AMQPChannel $channel</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> \PhpAmqpLib\Connection\AbstractConnection $connection</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shutdown</span>(<span class="params"><span class="variable">$channel</span>, <span class="variable">$connection</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br><span class="line">    <span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">register_shutdown_function</span>(<span class="string">&#x27;shutdown&#x27;</span>, <span class="variable">$channel</span>, <span class="variable">$connection</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Loop as long as the channel has callbacks registered</span></span><br><span class="line"><span class="keyword">while</span> (<span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">is_consuming</span>()) &#123;</span><br><span class="line">    <span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">wait</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-TTL"><a href="#7-TTL" class="headerlink" title="7 TTL"></a>7 TTL</h2><ul>
+<li>TTL(Time To Live),即生存时间</li>
+<li>RabbitMQ支持消息的过期时间，在消息发送时可以进行指定</li>
+<li>RabbitMQ支持为每个队列设置消息的超时时间，从消息入队列开始计算，只要超过了队列的超时时间配置，那么消息会被自动清除</li>
+</ul>
+<h4 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 消息过期方式:设置 queue.normal 队列中的消息10s之后过期 </span></span><br><span class="line"><span class="variable">$args</span>-&gt;<span class="title function_ invoke__">set</span>(<span class="string">&#x27;x-message-ttl&#x27;</span>, <span class="number">10000</span>);</span><br><span class="line"><span class="variable">$args</span>-&gt;<span class="title function_ invoke__">set</span>(<span class="string">&#x27;x-dead-letter-exchange&#x27;</span>, <span class="string">&#x27;exchange.dlx&#x27;</span>);</span><br><span class="line"><span class="variable">$args</span>-&gt;<span class="title function_ invoke__">set</span>(<span class="string">&#x27;x-dead-letter-routing-key&#x27;</span>, <span class="string">&#x27;routingkey&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-死信队列"><a href="#8-死信队列" class="headerlink" title="8 死信队列"></a>8 死信队列</h2><p>DLX - 死信队列(dead-letter-exchange) 利用DLX,当消息在一个队列中变成死信 (dead message) 之后,它能被重新publish到另一个Exchange中,这个Exchange就是DLX.</p>
+<h4 id="产生场景"><a href="#产生场景" class="headerlink" title="产生场景"></a>产生场景</h4><p>消息被拒绝(basic.reject / basic.nack),并且requeue = false 消息因TTL过期 队列达到最大长度</p>
+<h4 id="处理过程"><a href="#处理过程" class="headerlink" title="处理过程"></a>处理过程</h4><p>DLX亦为一个普通的Exchange,它能在任何队列上被指定,实际上就是设置某个队列的属性 当某队列中有死信时,RabbitMQ会自动地将该消息重新发布到设置的Exchange,进而被路由到另一个队列 可以监听这个队列中的消息做相应的处理.该特性可以弥补RabbitMQ 3.0以前支持的immediate参数的功能</p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>设置死信队列的exchange和queue,然后进行绑定 - Exchange:dlx.exchange - Queue: dlx.queue  - RoutingKey:# 正常声明交换机、队列、绑定，只不过我们需要在队列加上一个参数即可arguments.put(“ x-dead-letter- exchange”，”dlx.exchange”); </p>
+<p>这样消息在过期、requeue、 队列在达到最大长度时，消息就可以直接路由到死信队列! </p>
+<h4 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span>(<span class="keyword">__DIR__</span> . <span class="string">&#x27;/config.php&#x27;</span>);</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Wire</span>\<span class="title">AMQPTable</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Message</span>\<span class="title">AMQPMessage</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Exchange</span>\<span class="title">AMQPExchangeType</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">PhpAmqpLib</span>\<span class="title">Connection</span>\<span class="title">AMQPStreamConnection</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 死信队列测试</span></span><br><span class="line"><span class="comment"> * 1、创建两个交换器 exchange.normal 和 exchange.dlx, 分别绑定两个队列 queue.normal 和 queue.dlx</span></span><br><span class="line"><span class="comment"> * 2、把 queue.normal 队列里面的消息配置过期时间，然后通过 x-dead-letter-exchange 指定死信交换器为 exchange.dlx</span></span><br><span class="line"><span class="comment"> * 3、发送消息到 queue.normal 中，消息过期之后流入 exchange.dlx，然后路由到 queue.dlx 队列中，进行消费</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// todo 更改配置</span></span><br><span class="line"><span class="comment">//$connection = new AMQPStreamConnection(&#x27;192.168.33.1&#x27;, 5672, &#x27;zhangcs&#x27;, &#x27;zhangcs&#x27;, &#x27;/&#x27;);</span></span><br><span class="line"><span class="variable">$connection</span> = <span class="keyword">new</span> <span class="title class_">AMQPStreamConnection</span>(HOST, PORT, USER, PASS, VHOST);</span><br><span class="line"></span><br><span class="line"><span class="variable">$channel</span> = <span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">channel</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">exchange_declare</span>(<span class="string">&#x27;exchange.dlx&#x27;</span>, <span class="title class_">AMQPExchangeType</span>::<span class="variable constant_">DIRECT</span>, <span class="literal">false</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">exchange_declare</span>(<span class="string">&#x27;exchange.normal&#x27;</span>, <span class="title class_">AMQPExchangeType</span>::<span class="variable constant_">FANOUT</span>, <span class="literal">false</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="variable">$args</span> = <span class="keyword">new</span> <span class="title class_">AMQPTable</span>();</span><br><span class="line"><span class="comment">// 消息过期方式：设置 queue.normal 队列中的消息10s之后过期</span></span><br><span class="line"><span class="variable">$args</span>-&gt;<span class="title function_ invoke__">set</span>(<span class="string">&#x27;x-message-ttl&#x27;</span>, <span class="number">10000</span>);</span><br><span class="line"><span class="comment">// 设置队列最大长度方式： x-max-length</span></span><br><span class="line"><span class="comment">//$args-&gt;set(&#x27;x-max-length&#x27;, 1);</span></span><br><span class="line"><span class="variable">$args</span>-&gt;<span class="title function_ invoke__">set</span>(<span class="string">&#x27;x-dead-letter-exchange&#x27;</span>, <span class="string">&#x27;exchange.dlx&#x27;</span>);</span><br><span class="line"><span class="variable">$args</span>-&gt;<span class="title function_ invoke__">set</span>(<span class="string">&#x27;x-dead-letter-routing-key&#x27;</span>, <span class="string">&#x27;routingkey&#x27;</span>);</span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">queue_declare</span>(<span class="string">&#x27;queue.normal&#x27;</span>, <span class="literal">false</span>, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="literal">false</span>, <span class="variable">$args</span>);</span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">queue_declare</span>(<span class="string">&#x27;queue.dlx&#x27;</span>, <span class="literal">false</span>, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">queue_bind</span>(<span class="string">&#x27;queue.normal&#x27;</span>, <span class="string">&#x27;exchange.normal&#x27;</span>);</span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">queue_bind</span>(<span class="string">&#x27;queue.dlx&#x27;</span>, <span class="string">&#x27;exchange.dlx&#x27;</span>, <span class="string">&#x27;routingkey&#x27;</span>);</span><br><span class="line"><span class="variable">$message</span> = <span class="keyword">new</span> <span class="title class_">AMQPMessage</span>(<span class="string">&#x27;Hello DLX Message&#x27;</span>);</span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">basic_publish</span>(<span class="variable">$message</span>, <span class="string">&#x27;exchange.normal&#x27;</span>, <span class="string">&#x27;rk&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$channel</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br><span class="line"><span class="variable">$connection</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br></pre></td></tr></table></figure>
+
+<h1 id="常见问题-1"><a href="#常见问题-1" class="headerlink" title="常见问题"></a>常见问题</h1><p>1.Docker环境安装扩展时报错git was not found in your PATH, skipping source download</p>
+<p>解决：<a target="_blank" rel="noopener" href="https://blog.csdn.net/phpstory/article/details/116016980">https://blog.csdn.net/phpstory/article/details/116016980</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">apt --fix-broken install</span><br><span class="line">apt-get update</span><br><span class="line">apt-get upgrade</span><br><span class="line"> </span><br><span class="line">apt-get install zip</span><br></pre></td></tr></table></figure>
+
+<p>2.Call to undefined function PhpAmqpLib\Wire\bcmod</p>
+<p>原因：PHP缺少bcmath扩展</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-php-ext-install -j$(nproc) bcmath</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV13p4y167PD?p=3&vd_source=d10fe4736a847679924050cc2e246b90">PHP进阶 RabbitMQ深入浅出</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2020 Yelog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

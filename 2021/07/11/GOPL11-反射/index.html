@@ -1,0 +1,2723 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>GOPL11-反射 | IT小马</title>
+  <meta name="keywords" content=" GO , GOPL ">
+  <meta name="description" content="GOPL11-反射 | IT小马">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="00 基础原型链原型链是JavaScript中的一个重要概念，它描述了对象之间的继承关系。在JavaScript中，每个对象都有一个原型（prototype），并且可以通过原型链来访问和继承其他对象的属性和方法。 当我们访问一个对象的属性或方法时，如果该对象本身没有定义这个属性或方法，JavaScript会沿着原型链向上查找，直到找到对应的属性或方法或者到达原型链的顶端（即Object.proto">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01TS核心概念">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2023/08/01/Nest01/index.html">
+<meta property="og:site_name" content="IT小马">
+<meta property="og:description" content="00 基础原型链原型链是JavaScript中的一个重要概念，它描述了对象之间的继承关系。在JavaScript中，每个对象都有一个原型（prototype），并且可以通过原型链来访问和继承其他对象的属性和方法。 当我们访问一个对象的属性或方法时，如果该对象本身没有定义这个属性或方法，JavaScript会沿着原型链向上查找，直到找到对应的属性或方法或者到达原型链的顶端（即Object.proto">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-07-21T07:01:51.104Z">
+<meta property="article:author" content="IT小马">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="Nest">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.0.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>IT小马</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="facebook"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-facebook"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+            <a title="instagram"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="reddit"
+               href="https://www.reddit.com/user/yelog/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-reddit"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="weibo"
+               href="http://weibo.com/u/2307534817"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-weibo"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="https://www.jianshu.com/u/ff56736de7cf"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="zhihu"
+               href="https://www.zhihu.com/people/jaytp/activities"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-zhihu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="oschina"
+               href="https://my.oschina.net/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:jaytp@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="kugou"
+               href="https://www.kugou.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-kugou"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=88151013"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(153)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="运维">
+            
+            运维
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="面试">
+            
+            面试
+            <small>(10)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="前端">
+            <i class="fold iconfont icon-right"></i>
+            前端
+            <small>(16)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;CSS">
+            
+            CSS
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;ES6">
+            
+            ES6
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;HTML">
+            
+            HTML
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;JS">
+            
+            JS
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;Nest">
+            
+            Nest
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;Vue">
+            
+            Vue
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="英语">
+            <i class="fold iconfont icon-right"></i>
+            英语
+            <small>(2)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="英语&lt;---&gt;语法">
+            
+            语法
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="游戏">
+            
+            游戏
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="DOCKER">
+            
+            DOCKER
+            <small>(8)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="GO">
+            
+            GO
+            <small>(30)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="JAVA">
+            
+            JAVA
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="K8S">
+            <i class="fold iconfont icon-right"></i>
+            K8S
+            <small>(31)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="K8S&lt;---&gt;K3S">
+            
+            K3S
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="K8S&lt;---&gt;K8S基础">
+            
+            K8S基础
+            <small>(11)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="K8S&lt;---&gt;K8S架构师">
+            
+            K8S架构师
+            <small>(15)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="MYSQL">
+            
+            MYSQL
+            <small>(11)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="PHP">
+            <i class="fold iconfont icon-right"></i>
+            PHP
+            <small>(12)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="PHP&lt;---&gt;基础">
+            
+            基础
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="PHP&lt;---&gt;中间件">
+            
+            中间件
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="PHP&lt;---&gt;Laravel">
+            
+            Laravel
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="PHP&lt;---&gt;Symfony">
+            
+            Symfony
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="REDIS">
+            
+            REDIS
+            <small>(18)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="WEB">
+            
+            WEB
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="153">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>后端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>面试</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>前端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>容器</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>学习笔记</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>英语</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>游戏</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>语法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>运维</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>CKA</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Cocos</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>CSS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Docker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>DOCKER</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ELK</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ES6</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GOPL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>HTML</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JavaScript</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Jmeter</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>K3S</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>K8S</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Laravel</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MYSQL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Nest</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>PHP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RabbitMQ</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>REDIS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Swoole</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Symfony</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>WEB</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 前端 Nest "
+           href="/2023/08/02/Nest02/"
+           data-tag="前端,Nest"
+           data-author="" >
+            <span class="post-title" title="02CURD操作及分页">02CURD操作及分页</span>
+            <span class="post-date" title="2023-08-02 00:00:00">2023/08/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 Nest "
+           href="/2023/08/01/Nest01/"
+           data-tag="前端,Nest"
+           data-author="" >
+            <span class="post-title" title="01TS核心概念">01TS核心概念</span>
+            <span class="post-date" title="2023-08-01 00:00:00">2023/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Symfony "
+           href="/2023/07/04/Symfony04/"
+           data-tag="PHP,Symfony"
+           data-author="" >
+            <span class="post-title" title="Symfony04">Symfony04</span>
+            <span class="post-date" title="2023-07-04 00:00:00">2023/07/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Symfony "
+           href="/2023/07/03/Symfony03/"
+           data-tag="PHP,Symfony"
+           data-author="" >
+            <span class="post-title" title="Symfony03">Symfony03</span>
+            <span class="post-date" title="2023-07-03 00:00:00">2023/07/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Symfony "
+           href="/2023/07/02/Symfony02/"
+           data-tag="PHP,Symfony"
+           data-author="" >
+            <span class="post-title" title="Symfony02">Symfony02</span>
+            <span class="post-date" title="2023-07-02 00:00:00">2023/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Symfony "
+           href="/2023/07/01/Symfony01/"
+           data-tag="PHP,Symfony"
+           data-author="" >
+            <span class="post-title" title="Symfony01">Symfony01</span>
+            <span class="post-date" title="2023-07-01 00:00:00">2023/07/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 英语 语法 "
+           href="/2023/07/01/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%9501%E6%A1%86%E6%9E%B6/"
+           data-tag="英语,语法"
+           data-author="" >
+            <span class="post-title" title="01语法框架">01语法框架</span>
+            <span class="post-date" title="2023-07-01 00:00:00">2023/07/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2023/06/03/Go%E5%AE%9E%E6%88%9803/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题03-实战">Go面试题03-实战</span>
+            <span class="post-date" title="2023-06-03 00:00:00">2023/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2023/06/02/Go%E5%AE%9E%E6%88%9802/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题02-进阶">Go面试题02-进阶</span>
+            <span class="post-date" title="2023-06-02 00:00:00">2023/06/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2023/06/01/Go%E5%AE%9E%E6%88%9801/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题01-基础">Go面试题01-基础</span>
+            <span class="post-date" title="2023-06-01 00:00:00">2023/06/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 运维 "
+           href="/2023/05/03/ElasticSearh03%E6%A6%82%E5%BF%B5/"
+           data-tag="后端,ELK"
+           data-author="" >
+            <span class="post-title" title="ElasticSearh 03概念">ElasticSearh 03概念</span>
+            <span class="post-date" title="2023-05-03 00:00:00">2023/05/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 运维 "
+           href="/2023/05/02/ElasticSearh02%E6%90%AD%E5%BB%BA/"
+           data-tag="后端,ELK"
+           data-author="" >
+            <span class="post-title" title="ElasticSearh 02环境搭建">ElasticSearh 02环境搭建</span>
+            <span class="post-date" title="2023-05-02 00:00:00">2023/05/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 运维 "
+           href="/2023/05/01/ElasticSearh01%E5%8E%9F%E7%90%86/"
+           data-tag="后端,ELK"
+           data-author="" >
+            <span class="post-title" title="ElasticSearh 01原理">ElasticSearh 01原理</span>
+            <span class="post-date" title="2023-05-01 00:00:00">2023/05/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S "
+           href="/2023/01/01/CKA%E8%AE%A4%E8%AF%8101/"
+           data-tag="K8S,CKA"
+           data-author="" >
+            <span class="post-title" title="CKA认证01">CKA认证01</span>
+            <span class="post-date" title="2023-01-01 00:00:00">2023/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K3S "
+           href="/2022/12/04/K3S04-%E5%AE%89%E8%A3%85Mysql%E9%9B%86%E7%BE%A4/"
+           data-tag="K8S,容器,K3S"
+           data-author="" >
+            <span class="post-title" title="K3S03-安装Mysql集群">K3S03-安装Mysql集群</span>
+            <span class="post-date" title="2022-12-04 00:00:00">2022/12/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/12/04/Redis%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B031-38/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis核心技术笔记31-38">Redis核心技术笔记31-38</span>
+            <span class="post-date" title="2022-12-04 00:00:00">2022/12/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K3S "
+           href="/2022/12/03/K3S03-%E5%AE%89%E8%A3%85Rancher/"
+           data-tag="K8S,容器,K3S"
+           data-author="" >
+            <span class="post-title" title="K3S03-安装Rancher">K3S03-安装Rancher</span>
+            <span class="post-date" title="2022-12-03 00:00:00">2022/12/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/12/03/Redis%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B021-30/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis核心技术笔记21-30">Redis核心技术笔记21-30</span>
+            <span class="post-date" title="2022-12-03 00:00:00">2022/12/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K3S "
+           href="/2022/12/02/K3S02-%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/"
+           data-tag="K8S,容器,K3S"
+           data-author="" >
+            <span class="post-title" title="K3S02-基础使用">K3S02-基础使用</span>
+            <span class="post-date" title="2022-12-02 00:00:00">2022/12/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/12/02/Redis%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B011-20/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis核心技术笔记11-20">Redis核心技术笔记11-20</span>
+            <span class="post-date" title="2022-12-02 00:00:00">2022/12/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/12/01/Redis%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B001-10/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis核心技术笔记01-10">Redis核心技术笔记01-10</span>
+            <span class="post-date" title="2022-12-01 00:00:00">2022/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/11/09/Go%E7%AC%94%E8%AE%B001-Go%E5%9F%BA%E7%A1%80/"
+           data-tag="GO,学习笔记"
+           data-author="" >
+            <span class="post-title" title="Go笔记01-Go基础">Go笔记01-Go基础</span>
+            <span class="post-date" title="2022-11-09 00:00:00">2022/11/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP 中间件 "
+           href="/2022/11/06/PHP-RabbitMQ-2%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/"
+           data-tag="PHP,RabbitMQ"
+           data-author="" >
+            <span class="post-title" title="PHP-RabbitMQ-2高级特性">PHP-RabbitMQ-2高级特性</span>
+            <span class="post-date" title="2022-11-06 00:00:00">2022/11/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP 中间件 "
+           href="/2022/11/05/PHP-RabbitMQ-1%E5%9F%BA%E7%A1%80/"
+           data-tag="PHP,RabbitMQ"
+           data-author="" >
+            <span class="post-title" title="PHP-RabbitMQ-1基础">PHP-RabbitMQ-1基础</span>
+            <span class="post-date" title="2022-11-05 00:00:00">2022/11/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 运维 "
+           href="/2022/10/22/Jmeter/"
+           data-tag="运维,Jmeter"
+           data-author="" >
+            <span class="post-title" title="Jemter压测工具安装使用总结">Jemter压测工具安装使用总结</span>
+            <span class="post-date" title="2022-10-22 00:00:00">2022/10/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 游戏 "
+           href="/2022/10/10/CocosCreator03/"
+           data-tag="游戏,Cocos"
+           data-author="" >
+            <span class="post-title" title="CocosCreator03">CocosCreator03</span>
+            <span class="post-date" title="2022-10-10 00:00:00">2022/10/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 游戏 "
+           href="/2022/10/06/CocosCreator02/"
+           data-tag="游戏,Cocos"
+           data-author="" >
+            <span class="post-title" title="CocosCreator02">CocosCreator02</span>
+            <span class="post-date" title="2022-10-06 00:00:00">2022/10/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 游戏 "
+           href="/2022/10/03/CocosCreator01/"
+           data-tag="游戏,Cocos"
+           data-author="" >
+            <span class="post-title" title="CocosCreator01">CocosCreator01</span>
+            <span class="post-date" title="2022-10-03 00:00:00">2022/10/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 Vue "
+           href="/2022/08/13/Vuex/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="Vuex">Vuex</span>
+            <span class="post-date" title="2022-08-13 00:00:00">2022/08/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 Vue "
+           href="/2022/08/12/VueCLI/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="Vue CLI">Vue CLI</span>
+            <span class="post-date" title="2022-08-12 00:00:00">2022/08/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 Vue "
+           href="/2022/08/11/Vue-%E6%A0%B8%E5%BF%83/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="Vue-核心">Vue-核心</span>
+            <span class="post-date" title="2022-08-11 00:00:00">2022/08/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 ES6 "
+           href="/2022/08/10/ECMAScript6(3)/"
+           data-tag="前端,JS,ES6"
+           data-author="" >
+            <span class="post-title" title="ECMAScript6(3)">ECMAScript6(3)</span>
+            <span class="post-date" title="2022-08-10 00:00:00">2022/08/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 ES6 "
+           href="/2022/08/09/ECMAScript6(2)/"
+           data-tag="前端,JS,ES6"
+           data-author="" >
+            <span class="post-title" title="ECMAScript6(2)">ECMAScript6(2)</span>
+            <span class="post-date" title="2022-08-09 00:00:00">2022/08/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 ES6 "
+           href="/2022/08/08/ECMAScript6(1)/"
+           data-tag="前端,JS,ES6"
+           data-author="" >
+            <span class="post-title" title="ECMAScript6(1)">ECMAScript6(1)</span>
+            <span class="post-date" title="2022-08-08 00:00:00">2022/08/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 JS "
+           href="/2022/08/07/JavaScript%E5%9F%BA%E7%A1%801/"
+           data-tag="前端,JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript基础1">JavaScript基础1</span>
+            <span class="post-date" title="2022-08-07 00:00:00">2022/08/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 JS "
+           href="/2022/08/07/JavaScript%E5%9F%BA%E7%A1%802/"
+           data-tag="前端,JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript基础2">JavaScript基础2</span>
+            <span class="post-date" title="2022-08-07 00:00:00">2022/08/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 HTML "
+           href="/2022/08/06/%E7%A7%BB%E5%8A%A8Web%E5%B8%83%E5%B1%802/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="移动Web布局2">移动Web布局2</span>
+            <span class="post-date" title="2022-08-06 00:00:00">2022/08/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 HTML "
+           href="/2022/08/05/%E7%A7%BB%E5%8A%A8Web%E5%B8%83%E5%B1%801/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="移动Web布局1">移动Web布局1</span>
+            <span class="post-date" title="2022-08-05 00:00:00">2022/08/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 HTML "
+           href="/2022/08/04/HTML5&CSS3/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="HTML5&amp;CSS3">HTML5&amp;CSS3</span>
+            <span class="post-date" title="2022-08-04 00:00:00">2022/08/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 CSS "
+           href="/2022/08/03/CSS%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%9302/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="CSS基础总结02">CSS基础总结02</span>
+            <span class="post-date" title="2022-08-03 00:00:00">2022/08/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 CSS "
+           href="/2022/08/02/CSS%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%9301/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="CSS基础总结01">CSS基础总结01</span>
+            <span class="post-date" title="2022-08-02 00:00:00">2022/08/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 HTML "
+           href="/2022/08/01/HTML%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="前端,HTML"
+           data-author="" >
+            <span class="post-title" title="HTML基础总结">HTML基础总结</span>
+            <span class="post-date" title="2022-08-01 00:00:00">2022/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/08/01/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang11-panic%E5%92%8Crevocer/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang11-panic和revocer">幼麟实验室Golang11-panic和revocer</span>
+            <span class="post-date" title="2022-08-01 00:00:00">2022/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/07/29/Redis%E5%BA%95%E5%B1%82%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis底层设计与源码分析">Redis底层设计与源码分析</span>
+            <span class="post-date" title="2022-07-29 00:00:00">2022/07/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/29/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang09-defer/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang09-defer">幼麟实验室Golang09-defer</span>
+            <span class="post-date" title="2022-07-29 00:00:00">2022/07/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/28/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang08-%E6%96%B9%E6%B3%95/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang08-方法">幼麟实验室Golang08-方法</span>
+            <span class="post-date" title="2022-07-28 00:00:00">2022/07/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/27/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang07-%E9%97%AD%E5%8C%85/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang07-闭包">幼麟实验室Golang07-闭包</span>
+            <span class="post-date" title="2022-07-27 00:00:00">2022/07/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/26/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang06-%E4%BC%A0%E5%8F%82%E5%92%8C%E8%BF%94%E5%9B%9E%E5%80%BC/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang06-传参和返回值">幼麟实验室Golang06-传参和返回值</span>
+            <span class="post-date" title="2022-07-26 00:00:00">2022/07/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/25/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang05-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang05-函数调用栈">幼麟实验室Golang05-函数调用栈</span>
+            <span class="post-date" title="2022-07-25 00:00:00">2022/07/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/24/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang04-map/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang04-map">幼麟实验室Golang04-map</span>
+            <span class="post-date" title="2022-07-24 00:00:00">2022/07/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/23/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang03-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang03-内存对齐">幼麟实验室Golang03-内存对齐</span>
+            <span class="post-date" title="2022-07-23 00:00:00">2022/07/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP 基础 "
+           href="/2022/07/22/PHP5-8%E5%90%84%E7%89%88%E6%9C%AC%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/"
+           data-tag="后端,PHP"
+           data-author="" >
+            <span class="post-title" title="PHP5-8各版本特性详解">PHP5-8各版本特性详解</span>
+            <span class="post-date" title="2022-07-22 00:00:00">2022/07/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/22/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang02-slice/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang02-slice">幼麟实验室Golang02-slice</span>
+            <span class="post-date" title="2022-07-22 00:00:00">2022/07/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/21/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang01-string/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang01-string">幼麟实验室Golang01-string</span>
+            <span class="post-date" title="2022-07-21 00:00:00">2022/07/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/15/K8S%E6%9E%B6%E6%9E%84%E5%B8%8815/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="15中间件容器化-Helm">15中间件容器化-Helm</span>
+            <span class="post-date" title="2022-07-15 00:00:00">2022/07/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/14/K8S%E6%9E%B6%E6%9E%84%E5%B8%8814/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="14云原生存储">14云原生存储</span>
+            <span class="post-date" title="2022-07-14 00:00:00">2022/07/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/13/K8S%E6%9E%B6%E6%9E%84%E5%B8%8813/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="13权限控制">13权限控制</span>
+            <span class="post-date" title="2022-07-13 00:00:00">2022/07/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/12/K8S%E6%9E%B6%E6%9E%84%E5%B8%8812/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="12资源配额">12资源配额</span>
+            <span class="post-date" title="2022-07-12 00:00:00">2022/07/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/11/K8S%E6%9E%B6%E6%9E%84%E5%B8%8811/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="11计划任务-污点-亲和力">11计划任务-污点-亲和力</span>
+            <span class="post-date" title="2022-07-11 00:00:00">2022/07/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/09/K8S%E6%9E%B6%E6%9E%84%E5%B8%8810/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="10持久化存储">10持久化存储</span>
+            <span class="post-date" title="2022-07-09 00:00:00">2022/07/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/09/K8S%E6%9E%B6%E6%9E%84%E5%B8%8809/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="09配置管理">09配置管理</span>
+            <span class="post-date" title="2022-07-09 00:00:00">2022/07/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/08/K8S%E6%9E%B6%E6%9E%84%E5%B8%8808/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="08服务发布">08服务发布</span>
+            <span class="post-date" title="2022-07-08 00:00:00">2022/07/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/07/K8S%E6%9E%B6%E6%9E%84%E5%B8%8807/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="07资源调度">07资源调度</span>
+            <span class="post-date" title="2022-07-07 00:00:00">2022/07/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/06/K8S%E6%9E%B6%E6%9E%84%E5%B8%8806/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="06基本概念">06基本概念</span>
+            <span class="post-date" title="2022-07-06 00:00:00">2022/07/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/05/K8S%E6%9E%B6%E6%9E%84%E5%B8%8805/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="05容器基础">05容器基础</span>
+            <span class="post-date" title="2022-07-05 00:00:00">2022/07/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/03/K8S%E6%9E%B6%E6%9E%84%E5%B8%8803/"
+           data-tag="K8S"
+           data-author="" >
+            <span class="post-title" title="03Kubeadm高可用集群下">03Kubeadm高可用集群下</span>
+            <span class="post-date" title="2022-07-03 00:00:00">2022/07/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/03/K8S%E6%9E%B6%E6%9E%84%E5%B8%8804/"
+           data-tag="K8S"
+           data-author="" >
+            <span class="post-title" title="04二进制高可用集群">04二进制高可用集群</span>
+            <span class="post-date" title="2022-07-03 00:00:00">2022/07/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/02/K8S%E6%9E%B6%E6%9E%84%E5%B8%8802/"
+           data-tag="K8S"
+           data-author="" >
+            <span class="post-title" title="02Kubeadm高可用集群上">02Kubeadm高可用集群上</span>
+            <span class="post-date" title="2022-07-02 00:00:00">2022/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 英语 语法 "
+           href="/2022/07/02/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%9502%E8%AF%8D%E6%80%A7/"
+           data-tag="英语,语法"
+           data-author="" >
+            <span class="post-title" title="02词性">02词性</span>
+            <span class="post-date" title="2022-07-02 00:00:00">2022/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/01/K8S%E6%9E%B6%E6%9E%84%E5%B8%8801/"
+           data-tag="K8S"
+           data-author="" >
+            <span class="post-title" title="01准备工作">01准备工作</span>
+            <span class="post-date" title="2022-07-01 00:00:00">2022/07/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/04/GoWeb04-Zap%E6%97%A5%E5%BF%97/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb高级04-Zap日志">GoWeb高级04-Zap日志</span>
+            <span class="post-date" title="2022-06-04 00:00:00">2022/06/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/03/GoWeb03-Mysql%E5%92%8CRedis/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb高级03-Mysql和Redis">GoWeb高级03-Mysql和Redis</span>
+            <span class="post-date" title="2022-06-03 00:00:00">2022/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/02/GoWeb02-Gin%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb02-Gin源码解析">GoWeb02-Gin源码解析</span>
+            <span class="post-date" title="2022-06-02 00:00:00">2022/06/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/01/GoWeb01-Gin%E5%9F%BA%E7%A1%80/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb01-Gin基础">GoWeb01-Gin基础</span>
+            <span class="post-date" title="2022-06-01 00:00:00">2022/06/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/12/Golang%E7%9A%84GC%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang的GC回收机制">Golang的GC回收机制</span>
+            <span class="post-date" title="2022-05-12 00:00:00">2022/05/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/11/Golang%E7%9A%84GMP%E8%AF%A6%E8%A7%A3/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang的GMP详解">Golang的GMP详解</span>
+            <span class="post-date" title="2022-05-11 00:00:00">2022/05/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/02/Golang%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang内存管理">Golang内存管理</span>
+            <span class="post-date" title="2022-05-02 00:00:00">2022/05/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/12/K8S12-%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S12-集群资源监控">K8S12-集群资源监控</span>
+            <span class="post-date" title="2022-04-12 00:00:00">2022/04/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/11/K8S11-NFS%E7%BD%91%E7%BB%9C%E5%AD%98%E5%82%A8/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S11-NFS网络存储">K8S11-NFS网络存储</span>
+            <span class="post-date" title="2022-04-11 00:00:00">2022/04/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/10/K8S10-Helm/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S10-Helm">K8S10-Helm</span>
+            <span class="post-date" title="2022-04-10 00:00:00">2022/04/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/09/K8S09-Ingress/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S09-Ingress">K8S09-Ingress</span>
+            <span class="post-date" title="2022-04-09 00:00:00">2022/04/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/08/K8S08-RBAC/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S08-RBAC">K8S08-RBAC</span>
+            <span class="post-date" title="2022-04-08 00:00:00">2022/04/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/07/K8S07-Secret-ConfigMap/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S07-Secret-ConfigMap">K8S07-Secret-ConfigMap</span>
+            <span class="post-date" title="2022-04-07 00:00:00">2022/04/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/06/K8S06-Service-Job/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S06-Service-Job">K8S06-Service-Job</span>
+            <span class="post-date" title="2022-04-06 00:00:00">2022/04/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/05/K8S05-Controller-Deployment/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S05-Controller-Deployment">K8S05-Controller-Deployment</span>
+            <span class="post-date" title="2022-04-05 00:00:00">2022/04/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/04/K8S04-POD%E5%92%8CLabel/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S04-POD和Label">K8S04-POD和Label</span>
+            <span class="post-date" title="2022-04-04 00:00:00">2022/04/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/03/K8S03-YAML/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S03-YAML">K8S03-YAML</span>
+            <span class="post-date" title="2022-04-03 00:00:00">2022/04/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/02/K8S02-Kubectl/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S02-kubectl">K8S02-kubectl</span>
+            <span class="post-date" title="2022-04-02 00:00:00">2022/04/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/01/K8S01-%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S01-安装环境">K8S01-安装环境</span>
+            <span class="post-date" title="2022-04-01 00:00:00">2022/04/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/02/22/Golang%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang常见错误">Golang常见错误</span>
+            <span class="post-date" title="2022-02-22 00:00:00">2022/02/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/13/Redis13-%E6%80%BB%E7%BB%93/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis13-总结">Redis13-总结</span>
+            <span class="post-date" title="2022-02-13 00:00:00">2022/02/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/12/Redis12-%E6%96%B0%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis12-新功能介绍">Redis12-新功能介绍</span>
+            <span class="post-date" title="2022-02-12 00:00:00">2022/02/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/11/Redis11-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis11-分布式锁">Redis11-分布式锁</span>
+            <span class="post-date" title="2022-02-11 00:00:00">2022/02/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/10/Redis10-%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%C2%B7%E5%87%BB%E7%A9%BF%C2%B7%E9%9B%AA%E5%B4%A9/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis10-缓存穿透·击穿·雪崩">Redis10-缓存穿透·击穿·雪崩</span>
+            <span class="post-date" title="2022-02-10 00:00:00">2022/02/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/09/Redis09-%E9%9B%86%E7%BE%A4/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis09-集群">Redis09-集群</span>
+            <span class="post-date" title="2022-02-09 00:00:00">2022/02/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/08/Redis08-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis08-主从复制">Redis08-主从复制</span>
+            <span class="post-date" title="2022-02-08 00:00:00">2022/02/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/07/Redis07-%E6%8C%81%E4%B9%85%E5%8C%96/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis07-持久化">Redis07-持久化</span>
+            <span class="post-date" title="2022-02-07 00:00:00">2022/02/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/06/Redis06-%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E3%80%81%E7%A7%92%E6%9D%80/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis06-事务、锁、秒杀">Redis06-事务、锁、秒杀</span>
+            <span class="post-date" title="2022-02-06 00:00:00">2022/02/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/05/Redis05-Jedis%E3%80%81SprintBoot%E6%95%B4%E5%90%88Redis/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis05-Jedis、SprintBoot整合Redis">Redis05-Jedis、SprintBoot整合Redis</span>
+            <span class="post-date" title="2022-02-05 00:00:00">2022/02/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/04/Redis04-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis04-新数据类型">Redis04-新数据类型</span>
+            <span class="post-date" title="2022-02-04 00:00:00">2022/02/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/03/Redis03-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis03-配置文件、发布和订阅">Redis03-配置文件、发布和订阅</span>
+            <span class="post-date" title="2022-02-03 00:00:00">2022/02/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis02-常用五大数据类型">Redis02-常用五大数据类型</span>
+            <span class="post-date" title="2022-02-02 00:00:00">2022/02/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/01/Redis01-%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%AE%89%E8%A3%85/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis01-基础及安装">Redis01-基础及安装</span>
+            <span class="post-date" title="2022-02-01 00:00:00">2022/02/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/25/JavaWeb03-JSP/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb03-JSP">JavaWeb03-JSP</span>
+            <span class="post-date" title="2021-11-25 00:00:00">2021/11/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/22/JavaWeb02-Servlet%E3%80%81Cookie%E3%80%81Session/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb02-Servlet、Cookie、Session">JavaWeb02-Servlet、Cookie、Session</span>
+            <span class="post-date" title="2021-11-22 00:00:00">2021/11/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/21/JavaWeb01-Tomcat%E3%80%81Maven%E9%85%8D%E7%BD%AE/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb01-Tomcat、Maven配置">JavaWeb01-Tomcat、Maven配置</span>
+            <span class="post-date" title="2021-11-21 00:00:00">2021/11/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/15/Java02-JDBC/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="Java01-JDBC">Java01-JDBC</span>
+            <span class="post-date" title="2021-11-15 00:00:00">2021/11/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/14/Java01-JavaSE/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="Java01-JavaSE">Java01-JavaSE</span>
+            <span class="post-date" title="2021-11-14 00:00:00">2021/11/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/10/04/Laravel%E5%BA%95%E5%B1%8204-%E5%8A%A0%E8%BD%BD%E5%B9%B6%E5%90%AF%E5%8A%A8ServiceProvider/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层04-加载并启动ServiceProvider">Laravel底层04-加载并启动ServiceProvider</span>
+            <span class="post-date" title="2021-10-04 00:00:00">2021/10/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/10/03/Laravel%E5%BA%95%E5%B1%8203-make%E5%92%8Cbuild/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层03-make和build">Laravel底层03-make和build</span>
+            <span class="post-date" title="2021-10-03 00:00:00">2021/10/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/10/02/Laravel%E5%BA%95%E5%B1%8202-%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%EF%BC%8C%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层02-服务容器，服务提供者">Laravel底层02-服务容器，服务提供者</span>
+            <span class="post-date" title="2021-10-02 00:00:00">2021/10/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/10/01/Laravel%E5%BA%95%E5%B1%8201-%E6%A1%86%E6%9E%B6%E6%A0%B8%E5%BF%83%EF%BC%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E9%97%AD%E5%8C%85/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层01-框架核心，依赖注入，闭包">Laravel底层01-框架核心，依赖注入，闭包</span>
+            <span class="post-date" title="2021-10-01 00:00:00">2021/10/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/08/Docker08-DockerCompose/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker08-DockerCompose">Docker08-DockerCompose</span>
+            <span class="post-date" title="2021-08-08 00:00:00">2021/08/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/07/Docker07-%E7%BD%91%E7%BB%9C/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker07-网络">Docker07-网络</span>
+            <span class="post-date" title="2021-08-07 00:00:00">2021/08/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/06/Docker06-%E6%95%B0%E6%8D%AE%E5%8D%B7%E5%AE%B9%E5%99%A8%E5%92%8CDockerfile/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker06-数据卷容器和Dockerfile">Docker06-数据卷容器和Dockerfile</span>
+            <span class="post-date" title="2021-08-06 00:00:00">2021/08/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/05/Docker05-%E6%95%B0%E6%8D%AE%E6%8C%82%E8%BD%BD/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker05-数据挂载">Docker05-数据挂载</span>
+            <span class="post-date" title="2021-08-05 00:00:00">2021/08/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/04/Docker04-%E9%95%9C%E5%83%8F%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E6%8F%90%E4%BA%A4/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker04-镜像的原理和提交">Docker04-镜像的原理和提交</span>
+            <span class="post-date" title="2021-08-04 00:00:00">2021/08/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/03/Docker03-%E5%AE%89%E8%A3%85Nginx,Elasticsearch,Portainer%E5%8F%AF%E8%A7%86%E5%8C%96/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker03-安装Nginx,Elasticsearch,Portainer可视化">Docker03-安装Nginx,Elasticsearch,Portainer可视化</span>
+            <span class="post-date" title="2021-08-03 00:00:00">2021/08/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/02/Docker02-%E6%A6%82%E5%BF%B5%E5%92%8C%E5%91%BD%E4%BB%A4/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker02-概念和命令">Docker02-概念和命令</span>
+            <span class="post-date" title="2021-08-02 00:00:00">2021/08/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/01/Docker01-%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker01-安装和卸载">Docker01-安装和卸载</span>
+            <span class="post-date" title="2021-08-01 00:00:00">2021/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/08/01/Laravel-Swoole%E5%95%86%E5%9F%8E01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="Swoole,PHP"
+           data-author="" >
+            <span class="post-title" title="Laravel-Swoole01-环境搭建.md">Laravel-Swoole01-环境搭建.md</span>
+            <span class="post-date" title="2021-08-01 00:00:00">2021/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/11/GOPL11-%E5%8F%8D%E5%B0%84/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL11-反射">GOPL11-反射</span>
+            <span class="post-date" title="2021-07-11 00:00:00">2021/07/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/10/GOPL10-%E6%B5%8B%E8%AF%95/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL10-测试">GOPL10-测试</span>
+            <span class="post-date" title="2021-07-10 00:00:00">2021/07/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/09/GOPL09-%E5%8C%85%E5%92%8C%E5%B7%A5%E5%85%B7/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL09-包和工具">GOPL09-包和工具</span>
+            <span class="post-date" title="2021-07-09 00:00:00">2021/07/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/08/GOPL08-%E5%9F%BA%E4%BA%8E%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL08-基于共享变量的并发">GOPL08-基于共享变量的并发</span>
+            <span class="post-date" title="2021-07-08 00:00:00">2021/07/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/07/GOPL07-Goroutines%E5%92%8CChannels/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL07-Goroutines和Channels">GOPL07-Goroutines和Channels</span>
+            <span class="post-date" title="2021-07-07 00:00:00">2021/07/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/06/GOPL06-%E6%8E%A5%E5%8F%A3/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL06-接口">GOPL06-接口</span>
+            <span class="post-date" title="2021-07-06 00:00:00">2021/07/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/05/GOPL05-%E6%96%B9%E6%B3%95/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL05-方法">GOPL05-方法</span>
+            <span class="post-date" title="2021-07-05 00:00:00">2021/07/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/04/GOPL04-%E5%87%BD%E6%95%B0/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL04-函数">GOPL04-函数</span>
+            <span class="post-date" title="2021-07-04 00:00:00">2021/07/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/03/GOPL03-%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL03-复合数据类型">GOPL03-复合数据类型</span>
+            <span class="post-date" title="2021-07-03 00:00:00">2021/07/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/02/GOPL02-%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL02-基础数据类型">GOPL02-基础数据类型</span>
+            <span class="post-date" title="2021-07-02 00:00:00">2021/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/01/GOPL01-%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL01-程序结构">GOPL01-程序结构</span>
+            <span class="post-date" title="2021-07-01 00:00:00">2021/07/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/21/Mysql45%E8%AE%B221-%E5%8A%A0%E9%94%81%E8%A7%84%E5%88%99/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲21-加锁规则">Mysql45讲21-加锁规则</span>
+            <span class="post-date" title="2021-06-21 00:00:00">2021/06/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/20/Mysql45%E8%AE%B220-%E5%B9%BB%E8%AF%BB-%E9%97%B4%E9%9A%99%E9%94%81/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲20-幻读-间隙锁">Mysql45讲20-幻读-间隙锁</span>
+            <span class="post-date" title="2021-06-20 00:00:00">2021/06/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/19/Mysql45%E8%AE%B219-%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲19-问题排查">Mysql45讲19-问题排查</span>
+            <span class="post-date" title="2021-06-19 00:00:00">2021/06/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/17/Mysql45%E8%AE%B217-18-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲17-18-随机查询">Mysql45讲17-18-随机查询</span>
+            <span class="post-date" title="2021-06-17 00:00:00">2021/06/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/06/Mysql45%E8%AE%B206-%E8%AE%A1%E6%95%B0%EF%BC%8C%E6%8E%92%E5%BA%8F/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲06-计数，排序">Mysql45讲06-计数，排序</span>
+            <span class="post-date" title="2021-06-06 00:00:00">2021/06/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/05/Mysql45%E8%AE%B205-%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%88%B7%E7%9B%98/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲05-前缀索引，刷盘">Mysql45讲05-前缀索引，刷盘</span>
+            <span class="post-date" title="2021-06-05 00:00:00">2021/06/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/04/Mysql45%E8%AE%B204-%E6%99%AE%E9%80%9A%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲04-普通索引，唯一索引">Mysql45讲04-普通索引，唯一索引</span>
+            <span class="post-date" title="2021-06-04 00:00:00">2021/06/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/03/Mysql45%E8%AE%B203-%E9%94%81/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲03-锁">Mysql45讲03-锁</span>
+            <span class="post-date" title="2021-06-03 00:00:00">2021/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/02/Mysql45%E8%AE%B202-%E4%BA%8B%E5%8A%A1%E5%92%8C%E7%B4%A2%E5%BC%95/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲02-事务和索引">Mysql45讲02-事务和索引</span>
+            <span class="post-date" title="2021-06-02 00:00:00">2021/06/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/02/Mysql45%E8%AE%B202-%E6%97%A5%E5%BF%97/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲02-日志">Mysql45讲02-日志</span>
+            <span class="post-date" title="2021-06-02 00:00:00">2021/06/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲01-基础架构">Mysql45讲01-基础架构</span>
+            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/18/Go%E9%9D%A2%E8%AF%95%E9%A2%9805/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题05">Go面试题05</span>
+            <span class="post-date" title="2021-05-18 00:00:00">2021/05/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/17/Go%E9%9D%A2%E8%AF%95%E9%A2%9804/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题04">Go面试题04</span>
+            <span class="post-date" title="2021-05-17 00:00:00">2021/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/16/Go%E9%9D%A2%E8%AF%95%E9%A2%9803/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题03">Go面试题03</span>
+            <span class="post-date" title="2021-05-16 00:00:00">2021/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/15/Go%E9%9D%A2%E8%AF%95%E9%A2%9802/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题02">Go面试题02</span>
+            <span class="post-date" title="2021-05-15 00:00:00">2021/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/14/Go%E9%9D%A2%E8%AF%95%E9%A2%9801/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题01">Go面试题01</span>
+            <span class="post-date" title="2021-05-14 00:00:00">2021/05/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/03/%E9%AB%98%E6%80%A7%E8%83%BDWeb03-%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="高性能Web03-并发处理">高性能Web03-并发处理</span>
+            <span class="post-date" title="2021-05-03 00:00:00">2021/05/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/02/%E9%AB%98%E6%80%A7%E8%83%BDWeb02-%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="高性能Web02-网络传输">高性能Web02-网络传输</span>
+            <span class="post-date" title="2021-05-02 00:00:00">2021/05/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/01/%E9%AB%98%E6%80%A7%E8%83%BDWeb01-%E7%BB%AA%E8%AE%BA/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="构建高性能Web站点01">构建高性能Web站点01</span>
+            <span class="post-date" title="2021-05-01 00:00:00">2021/05/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/04/11/Mysql%E9%9D%A2%E8%AF%95%E9%A2%9801/"
+           data-tag="面试,Mysql"
+           data-author="" >
+            <span class="post-title" title="Mysql面试题01">Mysql面试题01</span>
+            <span class="post-date" title="2021-04-11 00:00:00">2021/04/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/04/01/PHP%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="面试,PHP"
+           data-author="" >
+            <span class="post-title" title="PHP面试题">PHP面试题</span>
+            <span class="post-date" title="2021-04-01 00:00:00">2021/04/01</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-GOPL11-反射" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">GOPL11-反射</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="GO">GO</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">GO</a>
+            
+            <a class="color5">GOPL</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2022-07-08 20:42:09'>2021-07-11 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-text">反射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BD%95%E9%9C%80%E8%A6%81%E5%8F%8D%E5%B0%84"><span class="toc-text">为何需要反射?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reflect-Type-%E5%92%8C-reflect-Value"><span class="toc-text">reflect.Type 和 reflect.Value</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Type"><span class="toc-text">Type</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Value"><span class="toc-text">Value</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Display%EF%BC%8C%E4%B8%80%E4%B8%AA%E9%80%92%E5%BD%92%E7%9A%84%E5%80%BC%E6%89%93%E5%8D%B0%E5%99%A8"><span class="toc-text">Display，一个递归的值打印器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-%E7%BC%96%E7%A0%81%E4%B8%BAS%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">示例: 编码为S表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87reflect-Value%E4%BF%AE%E6%94%B9%E5%80%BC"><span class="toc-text">通过reflect.Value修改值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CanAddr"><span class="toc-text">CanAddr</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%BB%93%E6%9E%84%E4%BD%93%E5%AD%97%E6%AE%B5%E6%A0%87%E7%AD%BE"><span class="toc-text">获取结构体字段标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E4%B8%80%E4%B8%AA%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95%E9%9B%86"><span class="toc-text">显示一个类型的方法集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%A0%E7%82%B9%E5%BF%A0%E5%91%8A"><span class="toc-text">几点忠告</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-text">反射</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BD%95%E9%9C%80%E8%A6%81%E5%8F%8D%E5%B0%84"><span class="toc-text">为何需要反射?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reflect-Type-%E5%92%8C-reflect-Value"><span class="toc-text">reflect.Type 和 reflect.Value</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Type"><span class="toc-text">Type</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Value"><span class="toc-text">Value</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Display%EF%BC%8C%E4%B8%80%E4%B8%AA%E9%80%92%E5%BD%92%E7%9A%84%E5%80%BC%E6%89%93%E5%8D%B0%E5%99%A8"><span class="toc-text">Display，一个递归的值打印器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-%E7%BC%96%E7%A0%81%E4%B8%BAS%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">示例: 编码为S表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87reflect-Value%E4%BF%AE%E6%94%B9%E5%80%BC"><span class="toc-text">通过reflect.Value修改值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CanAddr"><span class="toc-text">CanAddr</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%BB%93%E6%9E%84%E4%BD%93%E5%AD%97%E6%AE%B5%E6%A0%87%E7%AD%BE"><span class="toc-text">获取结构体字段标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E4%B8%80%E4%B8%AA%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%96%B9%E6%B3%95%E9%9B%86"><span class="toc-text">显示一个类型的方法集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%A0%E7%82%B9%E5%BF%A0%E5%91%8A"><span class="toc-text">几点忠告</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li></ol></div></p>
+<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><h3 id="为何需要反射"><a href="#为何需要反射" class="headerlink" title="为何需要反射?"></a>为何需要反射?</h3><p>有时候我们需要编写一个函数能够处理一类并不满足普通公共接口的类型的值，也可能是因为它们并没有确定的表示方式，或者是在我们设计该函数的时候这些类型可能还不存在。</p>
+<p>一个大家熟悉的例子是fmt.Fprintf函数提供的字符串格式化处理逻辑，它可以用来对任意类型的值格式化并打印，甚至支持用户自定义的类型。让我们也来尝试实现一个类似功能的函数。为了简单起见，我们的函数只接收一个参数，然后返回和fmt.Sprint类似的格式化后的字符串。我们实现的函数名也叫Sprint。</p>
+<p>我们首先用switch类型分支来测试输入参数是否实现了String方法，如果是的话就调用该方法。然后继续增加类型测试分支，检查这个值的动态类型是否是string、int、bool等基础类型，并在每种情况下执行相应的格式化操作。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Sprint</span><span class="params">(x <span class="keyword">interface</span>&#123;&#125;)</span></span> <span class="type">string</span> &#123;</span><br><span class="line">    <span class="keyword">type</span> stringer <span class="keyword">interface</span> &#123;</span><br><span class="line">        String() <span class="type">string</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">switch</span> x := x.(<span class="keyword">type</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> stringer:</span><br><span class="line">        <span class="keyword">return</span> x.String()</span><br><span class="line">    <span class="keyword">case</span> <span class="type">string</span>:</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    <span class="keyword">case</span> <span class="type">int</span>:</span><br><span class="line">        <span class="keyword">return</span> strconv.Itoa(x)</span><br><span class="line">    <span class="comment">// ...similar cases for int16, uint32, and so on...</span></span><br><span class="line">    <span class="keyword">case</span> <span class="type">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> x &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;true&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;false&quot;</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="comment">// array, chan, func, map, pointer, slice, struct</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;???&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>switch类型分支也不可能包含每个类似url.Values的类型，这会导致对这些库的依赖。</p>
+<p>没有办法来检查未知类型的表示方式，我们被卡住了。这就是我们为何需要反射的原因。</p>
+<h3 id="reflect-Type-和-reflect-Value"><a href="#reflect-Type-和-reflect-Value" class="headerlink" title="reflect.Type 和 reflect.Value"></a>reflect.Type 和 reflect.Value</h3><p>反射是由 reflect 包提供的。它定义了两个重要的类型，Type 和 Value。</p>
+<h4 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h4><p>一个 Type 表示一个Go类型。它是一个接口，有许多方法来区分类型以及检查它们的组成部分，例如一个结构体的成员或一个函数的参数等。唯一能反映 reflect.Type 实现的是接口的类型描述信息（§7.5），也正是这个实体标识了接口值的动态类型。</p>
+<p>函数 reflect.TypeOf 接受任意的 interface{} 类型，并以 reflect.Type 形式返回其动态类型：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t := reflect.TypeOf(<span class="number">3</span>)  <span class="comment">// a reflect.Type</span></span><br><span class="line">fmt.Println(t.String()) <span class="comment">// &quot;int&quot;</span></span><br><span class="line">fmt.Println(t)          <span class="comment">// &quot;int&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中 TypeOf(3) 调用将值 3 传给 interface{} 参数。回到 7.5节 的将一个具体的值转为接口类型会有一个隐式的接口转换操作，它会创建一个包含两个信息的接口值：操作数的动态类型（这里是 int）和它的动态的值（这里是 3）。</p>
+<p>因为 reflect.TypeOf 返回的是一个动态类型的接口值，它总是返回具体的类型。因此，下面的代码将打印 “*os.File” 而不是 “io.Writer”。稍后，我们将看到能够表达接口类型的 reflect.Type。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> w io.Writer = os.Stdout</span><br><span class="line">fmt.Println(reflect.TypeOf(w)) <span class="comment">// &quot;*os.File&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>要注意的是 reflect.Type 接口是满足 fmt.Stringer 接口的。因为打印一个接口的动态类型对于调试和日志是有帮助的，<strong>fmt.Printf 提供了一个缩写 %T 参数，内部使用 reflect.TypeOf 来输出：</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fmt.Printf(<span class="string">&quot;%T\n&quot;</span>, <span class="number">3</span>) <span class="comment">// &quot;int&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Value"><a href="#Value" class="headerlink" title="Value"></a>Value</h4><p>reflect 包中另一个重要的类型是 Value。一个 reflect.Value 可以装载任意类型的值。</p>
+<p>函数 reflect.ValueOf 接受任意的 interface{} 类型，并返回一个装载着其动态值的 reflect.Value。和 reflect.TypeOf 类似，reflect.ValueOf 返回的结果也是具体的类型，但是 reflect.Value 也可以持有一个接口值。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">v := reflect.ValueOf(<span class="number">3</span>) <span class="comment">// a reflect.Value</span></span><br><span class="line">fmt.Println(v)          <span class="comment">// &quot;3&quot;</span></span><br><span class="line">fmt.Printf(<span class="string">&quot;%v\n&quot;</span>, v)   <span class="comment">// &quot;3&quot;</span></span><br><span class="line">fmt.Println(v.String()) <span class="comment">// <span class="doctag">NOTE:</span> &quot;&lt;int Value&gt;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>和 reflect.Type 类似，reflect.Value 也满足 fmt.Stringer 接口，但是除非 Value 持有的是字符串，否则 String 方法只返回其类型。而使用 fmt 包的 %v 标志参数会对 reflect.Values 特殊处理。</p>
+<p>对 Value 调用 Type 方法将返回具体类型所对应的 reflect.Type：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t := v.Type()           <span class="comment">// a reflect.Type</span></span><br><span class="line">fmt.Println(t.String()) <span class="comment">// &quot;int&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>reflect.ValueOf 的逆操作是 reflect.Value.Interface 方法。它返回一个 interface{} 类型，装载着与 reflect.Value 相同的具体值：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">v := reflect.ValueOf(<span class="number">3</span>) <span class="comment">// a reflect.Value</span></span><br><span class="line">x := v.Interface()      <span class="comment">// an interface&#123;&#125;</span></span><br><span class="line">i := x.(<span class="type">int</span>)            <span class="comment">// an int</span></span><br><span class="line">fmt.Printf(<span class="string">&quot;%d\n&quot;</span>, i)   <span class="comment">// &quot;3&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>reflect.Value 和 interface{} 都能装载任意的值。所不同的是，一个空的接口隐藏了值内部的表示方式和所有方法，因此只有我们知道具体的动态类型才能使用类型断言来访问内部的值（就像上面那样），内部值我们没法访问。相比之下，一个 Value 则有很多方法来检查其内容，无论它的具体类型是什么。让我们再次尝试实现我们的格式化函数 format.Any。</p>
+<p>我们使用 reflect.Value 的 Kind 方法来替代之前的类型 switch。虽然还是有无穷多的类型，但是它们的 kinds 类型却是有限的：Bool、String 和 所有数字类型的基础类型；Array 和 Struct 对应的聚合类型；Chan、Func、Ptr、Slice 和 Map 对应的引用类型；interface 类型；还有表示空值的 Invalid 类型。（空的 reflect.Value 的 kind 即为 Invalid。）</p>
+<h3 id="Display，一个递归的值打印器"><a href="#Display，一个递归的值打印器" class="headerlink" title="Display，一个递归的值打印器"></a>Display，一个递归的值打印器</h3><p>接下来，让我们看看如何改善聚合数据类型的显示。我们并不想完全克隆一个fmt.Sprint函数，我们只是构建一个用于调试用的Display函数：给定任意一个复杂类型 x，打印这个值对应的完整结构，同时标记每个元素的发现路径。让我们从一个例子开始。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">e, _ := eval.Parse(<span class="string">&quot;sqrt(A / pi)&quot;</span>)</span><br><span class="line">Display(<span class="string">&quot;e&quot;</span>, e)</span><br></pre></td></tr></table></figure>
+
+<p>在上面的调用中，传入Display函数的参数是在7.9节一个表达式求值函数返回的语法树。Display函数的输出如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Display e (eval.call):</span><br><span class="line">e.fn = <span class="string">&quot;sqrt&quot;</span></span><br><span class="line">e.args[<span class="number">0</span>].<span class="keyword">type</span> = eval.binary</span><br><span class="line">e.args[<span class="number">0</span>].value.op = <span class="number">47</span></span><br><span class="line">e.args[<span class="number">0</span>].value.x.<span class="keyword">type</span> = eval.Var</span><br><span class="line">e.args[<span class="number">0</span>].value.x.value = <span class="string">&quot;A&quot;</span></span><br><span class="line">e.args[<span class="number">0</span>].value.y.<span class="keyword">type</span> = eval.Var</span><br><span class="line">e.args[<span class="number">0</span>].value.y.value = <span class="string">&quot;pi&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>应该尽量避免在一个包的API中暴露涉及反射的接口。</strong></p>
+<p>我们将定义一个未导出的display函数用于递归处理工作，导出的是Display函数，它只是display函数简单的包装以接受interface{}类型的参数：</p>
+<p><em>gopl.io/ch12/display</em></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Display</span><span class="params">(name <span class="type">string</span>, x <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;Display %s (%T):\n&quot;</span>, name, x)</span><br><span class="line">    display(name, reflect.ValueOf(x))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在display函数中，我们使用了前面定义的打印基础类型——基本类型、函数和chan等——元素值的formatAtom函数，但是我们会使用reflect.Value的方法来递归显示复杂类型的每一个成员。在递归下降过程中，path字符串，从最开始传入的起始值（这里是“e”），将逐步增长来表示是如何达到当前值（例如“e.args[0].value”）的。</p>
+<p>因为我们不再模拟fmt.Sprint函数，我们将直接使用fmt包来简化我们的例子实现。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">display</span><span class="params">(path <span class="type">string</span>, v reflect.Value)</span></span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> v.Kind() &#123;</span><br><span class="line">    <span class="keyword">case</span> reflect.Invalid:</span><br><span class="line">        fmt.Printf(<span class="string">&quot;%s = invalid\n&quot;</span>, path)</span><br><span class="line">    <span class="keyword">case</span> reflect.Slice, reflect.Array:</span><br><span class="line">        <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; v.Len(); i++ &#123;</span><br><span class="line">            display(fmt.Sprintf(<span class="string">&quot;%s[%d]&quot;</span>, path, i), v.Index(i))</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">case</span> reflect.Struct:</span><br><span class="line">        <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; v.NumField(); i++ &#123;</span><br><span class="line">            fieldPath := fmt.Sprintf(<span class="string">&quot;%s.%s&quot;</span>, path, v.Type().Field(i).Name)</span><br><span class="line">            display(fieldPath, v.Field(i))</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">case</span> reflect.Map:</span><br><span class="line">        <span class="keyword">for</span> _, key := <span class="keyword">range</span> v.MapKeys() &#123;</span><br><span class="line">            display(fmt.Sprintf(<span class="string">&quot;%s[%s]&quot;</span>, path,</span><br><span class="line">                formatAtom(key)), v.MapIndex(key))</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">case</span> reflect.Ptr:</span><br><span class="line">        <span class="keyword">if</span> v.IsNil() &#123;</span><br><span class="line">            fmt.Printf(<span class="string">&quot;%s = nil\n&quot;</span>, path)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            display(fmt.Sprintf(<span class="string">&quot;(*%s)&quot;</span>, path), v.Elem())</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">case</span> reflect.Interface:</span><br><span class="line">        <span class="keyword">if</span> v.IsNil() &#123;</span><br><span class="line">            fmt.Printf(<span class="string">&quot;%s = nil\n&quot;</span>, path)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            fmt.Printf(<span class="string">&quot;%s.type = %s\n&quot;</span>, path, v.Elem().Type())</span><br><span class="line">            display(path+<span class="string">&quot;.value&quot;</span>, v.Elem())</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">default</span>: <span class="comment">// basic types, channels, funcs</span></span><br><span class="line">        fmt.Printf(<span class="string">&quot;%s = %s\n&quot;</span>, path, formatAtom(v))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>让我们针对不同类型分别讨论。</p>
+<p><strong>Slice和数组：</strong> 两种的处理逻辑是一样的。Len方法返回slice或数组值中的元素个数，Index(i)获得索引i对应的元素，返回的也是一个reflect.Value；如果索引i超出范围的话将导致panic异常，这与数组或slice类型内建的len(a)和a[i]操作类似。display针对序列中的每个元素递归调用自身处理，我们通过在递归处理时向path附加“[i]”来表示访问路径。</p>
+<p>虽然reflect.Value类型带有很多方法，但是只有少数的方法能对任意值都安全调用。例如，Index方法只能对Slice、数组或字符串类型的值调用，如果对其它类型调用则会导致panic异常。</p>
+<p><strong>结构体：</strong> NumField方法报告结构体中成员的数量，Field(i)以reflect.Value类型返回第i个成员的值。成员列表也包括通过匿名字段提升上来的成员。为了在path添加“.f”来表示成员路径，我们必须获得结构体对应的reflect.Type类型信息，然后访问结构体第i个成员的名字。</p>
+<p><strong>Maps:</strong> MapKeys方法返回一个reflect.Value类型的slice，每一个元素对应map的一个key。和往常一样，遍历map时顺序是随机的。MapIndex(key)返回map中key对应的value。我们向path添加“[key]”来表示访问路径。（我们这里有一个未完成的工作。其实map的key的类型并不局限于formatAtom能完美处理的类型；数组、结构体和接口都可以作为map的key。针对这种类型，完善key的显示信息是练习12.1的任务。）</p>
+<p><strong>指针：</strong> Elem方法返回指针指向的变量，依然是reflect.Value类型。即使指针是nil，这个操作也是安全的，在这种情况下指针是Invalid类型，但是我们可以用IsNil方法来显式地测试一个空指针，这样我们可以打印更合适的信息。我们在path前面添加“*”，并用括弧包含以避免歧义。</p>
+<p><strong>接口：</strong> 再一次，我们使用IsNil方法来测试接口是否是nil，如果不是，我们可以调用v.Elem()来获取接口对应的动态值，并且打印对应的类型和值。</p>
+<p>现在我们的Display函数总算完工了，让我们看看它的表现吧。下面的Movie类型是在4.5节的电影类型上演变来的：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Movie <span class="keyword">struct</span> &#123;</span><br><span class="line">    Title, Subtitle <span class="type">string</span></span><br><span class="line">    Year            <span class="type">int</span></span><br><span class="line">    Color           <span class="type">bool</span></span><br><span class="line">    Actor           <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span></span><br><span class="line">    Oscars          []<span class="type">string</span></span><br><span class="line">    Sequel          *<span class="type">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>让我们声明一个该类型的变量，然后看看Display函数如何显示它：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">strangelove := Movie&#123;</span><br><span class="line">    Title:    <span class="string">&quot;Dr. Strangelove&quot;</span>,</span><br><span class="line">    Subtitle: <span class="string">&quot;How I Learned to Stop Worrying and Love the Bomb&quot;</span>,</span><br><span class="line">    Year:     <span class="number">1964</span>,</span><br><span class="line">    Color:    <span class="literal">false</span>,</span><br><span class="line">    Actor: <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;</span><br><span class="line">        <span class="string">&quot;Dr. Strangelove&quot;</span>:            <span class="string">&quot;Peter Sellers&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Grp. Capt. Lionel Mandrake&quot;</span>: <span class="string">&quot;Peter Sellers&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Pres. Merkin Muffley&quot;</span>:       <span class="string">&quot;Peter Sellers&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Gen. Buck Turgidson&quot;</span>:        <span class="string">&quot;George C. Scott&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Brig. Gen. Jack D. Ripper&quot;</span>:  <span class="string">&quot;Sterling Hayden&quot;</span>,</span><br><span class="line">        <span class="string">`Maj. T.J. &quot;King&quot; Kong`</span>:      <span class="string">&quot;Slim Pickens&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    Oscars: []<span class="type">string</span>&#123;</span><br><span class="line">        <span class="string">&quot;Best Actor (Nomin.)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Best Adapted Screenplay (Nomin.)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Best Director (Nomin.)&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Best Picture (Nomin.)&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Display(“strangelove”, strangelove)调用将显示（strangelove电影对应的中文名是《奇爱博士》）：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Display strangelove (display.Movie):</span><br><span class="line">strangelove.Title = <span class="string">&quot;Dr. Strangelove&quot;</span></span><br><span class="line">strangelove.Subtitle = <span class="string">&quot;How I Learned to Stop Worrying and Love the Bomb&quot;</span></span><br><span class="line">strangelove.Year = <span class="number">1964</span></span><br><span class="line">strangelove.Color = <span class="literal">false</span></span><br><span class="line">strangelove.Actor[<span class="string">&quot;Gen. Buck Turgidson&quot;</span>] = <span class="string">&quot;George C. Scott&quot;</span></span><br><span class="line">strangelove.Actor[<span class="string">&quot;Brig. Gen. Jack D. Ripper&quot;</span>] = <span class="string">&quot;Sterling Hayden&quot;</span></span><br><span class="line">strangelove.Actor[<span class="string">&quot;Maj. T.J. \&quot;King\&quot; Kong&quot;</span>] = <span class="string">&quot;Slim Pickens&quot;</span></span><br><span class="line">strangelove.Actor[<span class="string">&quot;Dr. Strangelove&quot;</span>] = <span class="string">&quot;Peter Sellers&quot;</span></span><br><span class="line">strangelove.Actor[<span class="string">&quot;Grp. Capt. Lionel Mandrake&quot;</span>] = <span class="string">&quot;Peter Sellers&quot;</span></span><br><span class="line">strangelove.Actor[<span class="string">&quot;Pres. Merkin Muffley&quot;</span>] = <span class="string">&quot;Peter Sellers&quot;</span></span><br><span class="line">strangelove.Oscars[<span class="number">0</span>] = <span class="string">&quot;Best Actor (Nomin.)&quot;</span></span><br><span class="line">strangelove.Oscars[<span class="number">1</span>] = <span class="string">&quot;Best Adapted Screenplay (Nomin.)&quot;</span></span><br><span class="line">strangelove.Oscars[<span class="number">2</span>] = <span class="string">&quot;Best Director (Nomin.)&quot;</span></span><br><span class="line">strangelove.Oscars[<span class="number">3</span>] = <span class="string">&quot;Best Picture (Nomin.)&quot;</span></span><br><span class="line">strangelove.Sequel = <span class="literal">nil</span></span><br></pre></td></tr></table></figure>
+
+<p>我们也可以使用Display函数来显示标准库中类型的内部结构，例如<code>*os.File</code>类型：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Display(<span class="string">&quot;os.Stderr&quot;</span>, os.Stderr)</span><br><span class="line"><span class="comment">// Output:</span></span><br><span class="line"><span class="comment">// Display os.Stderr (*os.File):</span></span><br><span class="line"><span class="comment">// (*(*os.Stderr).file).fd = 2</span></span><br><span class="line"><span class="comment">// (*(*os.Stderr).file).name = &quot;/dev/stderr&quot;</span></span><br><span class="line"><span class="comment">// (*(*os.Stderr).file).nepipe = 0</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看出，<strong>反射能够访问到结构体中未导出的成员。</strong>需要当心的是这个例子的输出在不同操作系统上可能是不同的，并且随着标准库的发展也可能导致结果不同。（这也是将这些成员定义为私有成员的原因之一！）我们甚至可以用Display函数来显示reflect.Value 的内部构造（在这里设置为<code>*os.File</code>的类型描述体）。<code>Display(&quot;rV&quot;, reflect.ValueOf(os.Stderr))</code>调用的输出如下，当然不同环境得到的结果可能有差异：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Display rV (reflect.Value):</span><br><span class="line">(*rV.typ).size = <span class="number">8</span></span><br><span class="line">(*rV.typ).hash = <span class="number">871609668</span></span><br><span class="line">(*rV.typ).align = <span class="number">8</span></span><br><span class="line">(*rV.typ).fieldAlign = <span class="number">8</span></span><br><span class="line">(*rV.typ).kind = <span class="number">22</span></span><br><span class="line">(*(*rV.typ).<span class="type">string</span>) = <span class="string">&quot;*os.File&quot;</span></span><br><span class="line"></span><br><span class="line">(*(*(*rV.typ).uncommonType).methods[<span class="number">0</span>].name) = <span class="string">&quot;Chdir&quot;</span></span><br><span class="line">(*(*(*(*rV.typ).uncommonType).methods[<span class="number">0</span>].mtyp).<span class="type">string</span>) = <span class="string">&quot;func() error&quot;</span></span><br><span class="line">(*(*(*(*rV.typ).uncommonType).methods[<span class="number">0</span>].typ).<span class="type">string</span>) = <span class="string">&quot;func(*os.File) error&quot;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>观察下面两个例子的区别：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i <span class="keyword">interface</span>&#123;&#125; = <span class="number">3</span></span><br><span class="line"></span><br><span class="line">Display(<span class="string">&quot;i&quot;</span>, i)</span><br><span class="line"><span class="comment">// Output:</span></span><br><span class="line"><span class="comment">// Display i (int):</span></span><br><span class="line"><span class="comment">// i = 3</span></span><br><span class="line"></span><br><span class="line">Display(<span class="string">&quot;&amp;i&quot;</span>, &amp;i)</span><br><span class="line"><span class="comment">// Output:</span></span><br><span class="line"><span class="comment">// Display &amp;i (*interface &#123;&#125;):</span></span><br><span class="line"><span class="comment">// (*&amp;i).type = int</span></span><br><span class="line"><span class="comment">// (*&amp;i).value = 3</span></span><br></pre></td></tr></table></figure>
+
+<p>在第一个例子中，Display函数调用reflect.ValueOf(i)，它返回一个Int类型的值。正如我们在12.2节中提到的，reflect.ValueOf总是返回一个具体类型的 Value，因为它是从一个接口值提取的内容。</p>
+<p>在第二个例子中，Display函数调用的是reflect.ValueOf(&amp;i)，它返回一个指向i的指针，对应Ptr类型。在switch的Ptr分支中，对这个值调用 Elem 方法，返回一个Value来表示变量 i 本身，对应Interface类型。像这样一个间接获得的Value，可能代表任意类型的值，包括接口类型。display函数递归调用自身，这次它分别打印了这个接口的动态类型和值。</p>
+<p>对于目前的实现，如果遇到对象图中含有回环，Display将会陷入死循环，例如下面这个首尾相连的链表：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a struct that points to itself</span></span><br><span class="line"><span class="keyword">type</span> Cycle <span class="keyword">struct</span>&#123; Value <span class="type">int</span>; Tail *Cycle &#125;</span><br><span class="line"><span class="keyword">var</span> c Cycle</span><br><span class="line">c = Cycle&#123;<span class="number">42</span>, &amp;c&#125;</span><br><span class="line">Display(<span class="string">&quot;c&quot;</span>, c)</span><br></pre></td></tr></table></figure>
+
+<p>Display会永远不停地进行深度递归打印：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Display c (display.Cycle):</span><br><span class="line">c.Value = <span class="number">42</span></span><br><span class="line">(*c.Tail).Value = <span class="number">42</span></span><br><span class="line">(*(*c.Tail).Tail).Value = <span class="number">42</span></span><br><span class="line">(*(*(*c.Tail).Tail).Tail).Value = <span class="number">42</span></span><br><span class="line">...ad infinitum...</span><br></pre></td></tr></table></figure>
+
+<p>许多Go语言程序都包含了一些循环的数据。让Display支持这类带环的数据结构需要些技巧，需要额外记录迄今访问的路径；相应会带来成本。通用的解决方案是采用 unsafe 的语言特性，我们将在13.3节看到具体的解决方案。</p>
+<p>带环的数据结构很少会对fmt.Sprint函数造成问题，因为它很少尝试打印完整的数据结构。例如，当它遇到一个指针的时候，它只是简单地打印指针的数字值。在打印包含自身的slice或map时可能卡住，但是这种情况很罕见，不值得付出为了处理回环所需的开销。</p>
+<h3 id="示例-编码为S表达式"><a href="#示例-编码为S表达式" class="headerlink" title="示例: 编码为S表达式"></a>示例: 编码为S表达式</h3><p>Display是一个用于显示结构化数据的调试工具，但是它并不能将任意的Go语言对象编码为通用消息然后用于进程间通信。</p>
+<p>正如我们在4.5节中中看到的，Go语言的标准库支持了包括JSON、XML和ASN.1等多种编码格式。还有另一种依然被广泛使用的格式是S表达式格式，采用Lisp语言的语法。但是和其他编码格式不同的是，Go语言自带的标准库并不支持S表达式，主要是因为它没有一个公认的标准规范。</p>
+<p>在本节中，我们将定义一个包用于将任意的Go语言对象编码为S表达式格式，它支持以下结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">42          integer</span><br><span class="line">&quot;hello&quot;     string（带有Go风格的引号）</span><br><span class="line">foo         symbol（未用引号括起来的名字）</span><br><span class="line">(1 2 3)     list  （括号包起来的0个或多个元素）</span><br></pre></td></tr></table></figure>
+
+<p>布尔型习惯上使用t符号表示true，空列表或nil符号表示false，但是为了简单起见，我们暂时忽略布尔类型。同时忽略的还有chan管道和函数，因为通过反射并无法知道它们的确切状态。我们忽略的还有浮点数、复数和interface。支持它们是练习12.3的任务。</p>
+<p>我们将Go语言的类型编码为S表达式的方法如下。整数和字符串以显而易见的方式编码。空值编码为nil符号。数组和slice被编码为列表。</p>
+<p>结构体被编码为成员对象的列表，每个成员对象对应一个有两个元素的子列表，子列表的第一个元素是成员的名字，第二个元素是成员的值。Map被编码为键值对的列表。传统上，S表达式使用点状符号列表(key . value)结构来表示key/value对，而不是用一个含双元素的列表，不过为了简单我们忽略了点状符号列表。</p>
+<p>编码是由一个encode递归函数完成，如下所示。它的结构本质上和前面的Display函数类似：</p>
+<p><em>gopl.io/ch12/sexpr</em></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">encode</span><span class="params">(buf *bytes.Buffer, v reflect.Value)</span></span> <span class="type">error</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> v.Kind() &#123;</span><br><span class="line">    <span class="keyword">case</span> reflect.Invalid:</span><br><span class="line">        buf.WriteString(<span class="string">&quot;nil&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> reflect.Int, reflect.Int8, reflect.Int16,</span><br><span class="line">        reflect.Int32, reflect.Int64:</span><br><span class="line">        fmt.Fprintf(buf, <span class="string">&quot;%d&quot;</span>, v.Int())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> reflect.Uint, reflect.Uint8, reflect.Uint16,</span><br><span class="line">        reflect.Uint32, reflect.Uint64, reflect.Uintptr:</span><br><span class="line">        fmt.Fprintf(buf, <span class="string">&quot;%d&quot;</span>, v.Uint())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> reflect.String:</span><br><span class="line">        fmt.Fprintf(buf, <span class="string">&quot;%q&quot;</span>, v.String())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> reflect.Ptr:</span><br><span class="line">        <span class="keyword">return</span> encode(buf, v.Elem())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> reflect.Array, reflect.Slice: <span class="comment">// (value ...)</span></span><br><span class="line">        buf.WriteByte(<span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; v.Len(); i++ &#123;</span><br><span class="line">            <span class="keyword">if</span> i &gt; <span class="number">0</span> &#123;</span><br><span class="line">                buf.WriteByte(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> err := encode(buf, v.Index(i)); err != <span class="literal">nil</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> err</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        buf.WriteByte(<span class="string">&#x27;)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> reflect.Struct: <span class="comment">// ((name value) ...)</span></span><br><span class="line">        buf.WriteByte(<span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; v.NumField(); i++ &#123;</span><br><span class="line">            <span class="keyword">if</span> i &gt; <span class="number">0</span> &#123;</span><br><span class="line">                buf.WriteByte(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            fmt.Fprintf(buf, <span class="string">&quot;(%s &quot;</span>, v.Type().Field(i).Name)</span><br><span class="line">            <span class="keyword">if</span> err := encode(buf, v.Field(i)); err != <span class="literal">nil</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> err</span><br><span class="line">            &#125;</span><br><span class="line">            buf.WriteByte(<span class="string">&#x27;)&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        buf.WriteByte(<span class="string">&#x27;)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> reflect.Map: <span class="comment">// ((key value) ...)</span></span><br><span class="line">        buf.WriteByte(<span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> i, key := <span class="keyword">range</span> v.MapKeys() &#123;</span><br><span class="line">            <span class="keyword">if</span> i &gt; <span class="number">0</span> &#123;</span><br><span class="line">                buf.WriteByte(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">            buf.WriteByte(<span class="string">&#x27;(&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> err := encode(buf, key); err != <span class="literal">nil</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> err</span><br><span class="line">            &#125;</span><br><span class="line">            buf.WriteByte(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> err := encode(buf, v.MapIndex(key)); err != <span class="literal">nil</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> err</span><br><span class="line">            &#125;</span><br><span class="line">            buf.WriteByte(<span class="string">&#x27;)&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        buf.WriteByte(<span class="string">&#x27;)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span>: <span class="comment">// float, complex, bool, chan, func, interface</span></span><br><span class="line">        <span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;unsupported type: %s&quot;</span>, v.Type())</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Marshal函数是对encode的包装，以保持和encoding/…下其它包有着相似的API：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Marshal encodes a Go value in S-expression form.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Marshal</span><span class="params">(v <span class="keyword">interface</span>&#123;&#125;)</span></span> ([]<span class="type">byte</span>, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> buf bytes.Buffer</span><br><span class="line">    <span class="keyword">if</span> err := encode(&amp;buf, reflect.ValueOf(v)); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> buf.Bytes(), <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面是Marshal对12.3节的strangelove变量编码后的结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">((Title &quot;Dr. Strangelove&quot;) (Subtitle &quot;How I Learned to Stop Worrying and Lo</span><br><span class="line">ve the Bomb&quot;) (Year 1964) (Actor ((&quot;Grp. Capt. Lionel Mandrake&quot; &quot;Peter Sell</span><br><span class="line">ers&quot;) (&quot;Pres. Merkin Muffley&quot; &quot;Peter Sellers&quot;) (&quot;Gen. Buck Turgidson&quot; &quot;Geor</span><br><span class="line">ge C. Scott&quot;) (&quot;Brig. Gen. Jack D. Ripper&quot; &quot;Sterling Hayden&quot;) (&quot;Maj. T.J. \</span><br><span class="line">&quot;King\&quot; Kong&quot; &quot;Slim Pickens&quot;) (&quot;Dr. Strangelove&quot; &quot;Peter Sellers&quot;))) (Oscars</span><br><span class="line">(&quot;Best Actor (Nomin.)&quot; &quot;Best Adapted Screenplay (Nomin.)&quot; &quot;Best Director (N</span><br><span class="line">omin.)&quot; &quot;Best Picture (Nomin.)&quot;)) (Sequel nil))</span><br></pre></td></tr></table></figure>
+
+<p>整个输出编码为一行中以减少输出的大小，但是也很难阅读。下面是对S表达式手动格式化的结果。编写一个S表达式的美化格式化函数将作为一个具有挑战性的练习任务；不过 <a target="_blank" rel="noopener" href="http://gopl.io/">http://gopl.io</a> 也提供了一个简单的版本。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">((Title &quot;Dr. Strangelove&quot;)</span><br><span class="line"> (Subtitle &quot;How I Learned to Stop Worrying and Love the Bomb&quot;)</span><br><span class="line"> (Year 1964)</span><br><span class="line"> (Actor ((&quot;Grp. Capt. Lionel Mandrake&quot; &quot;Peter Sellers&quot;)</span><br><span class="line">         (&quot;Pres. Merkin Muffley&quot; &quot;Peter Sellers&quot;)</span><br><span class="line">         (&quot;Gen. Buck Turgidson&quot; &quot;George C. Scott&quot;)</span><br><span class="line">         (&quot;Brig. Gen. Jack D. Ripper&quot; &quot;Sterling Hayden&quot;)</span><br><span class="line">         (&quot;Maj. T.J. \&quot;King\&quot; Kong&quot; &quot;Slim Pickens&quot;)</span><br><span class="line">         (&quot;Dr. Strangelove&quot; &quot;Peter Sellers&quot;)))</span><br><span class="line"> (Oscars (&quot;Best Actor (Nomin.)&quot;</span><br><span class="line">          &quot;Best Adapted Screenplay (Nomin.)&quot;</span><br><span class="line">          &quot;Best Director (Nomin.)&quot;</span><br><span class="line">          &quot;Best Picture (Nomin.)&quot;))</span><br><span class="line"> (Sequel nil))</span><br></pre></td></tr></table></figure>
+
+<p>和fmt.Print、json.Marshal、Display函数类似，sexpr.Marshal函数处理带环的数据结构也会陷入死循环。</p>
+<p>在12.6节中，我们将给出S表达式解码器的实现步骤，但是在那之前，我们还需要先了解如何通过反射技术来更新程序的变量。</p>
+<h3 id="通过reflect-Value修改值"><a href="#通过reflect-Value修改值" class="headerlink" title="通过reflect.Value修改值"></a>通过reflect.Value修改值</h3><p>到目前为止，反射还只是程序中变量的另一种读取方式。然而，在本节中我们将重点讨论如何通过反射机制来修改变量。</p>
+<p>回想一下，Go语言中类似x、x.f[1]和*p形式的表达式都可以表示变量，但是其它如x + 1和f(2)则不是变量。一个变量就是一个可寻址的内存空间，里面存储了一个值，并且存储的值可以通过内存地址来更新。</p>
+<p>对于reflect.Values也有类似的区别。有一些reflect.Values是可取地址的；其它一些则不可以。考虑以下的声明语句：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x := <span class="number">2</span>                   <span class="comment">// value   type    variable?</span></span><br><span class="line">a := reflect.ValueOf(<span class="number">2</span>)  <span class="comment">// 2       int     no</span></span><br><span class="line">b := reflect.ValueOf(x)  <span class="comment">// 2       int     no</span></span><br><span class="line">c := reflect.ValueOf(&amp;x) <span class="comment">// &amp;x      *int    no</span></span><br><span class="line">d := c.Elem()            <span class="comment">// 2       int     yes (x)</span></span><br></pre></td></tr></table></figure>
+
+<p>其中a对应的变量不可取地址。因为a中的值仅仅是整数2的拷贝副本。b中的值也同样不可取地址。c中的值还是不可取地址，它只是一个指针<code>&amp;x</code>的拷贝。</p>
+<p><strong>实际上，所有通过reflect.ValueOf(x)返回的reflect.Value都是不可取地址的。</strong></p>
+<p>但是对于d，它是c的解引用方式生成的，指向另一个变量，因此是可取地址的。我们可以通过调用reflect.ValueOf(&amp;x).Elem()，来获取任意变量x对应的可取地址的Value。</p>
+<h4 id="CanAddr"><a href="#CanAddr" class="headerlink" title="CanAddr"></a>CanAddr</h4><p>我们可以通过调用reflect.Value的CanAddr方法来判断其是否可以被取地址：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(a.CanAddr()) <span class="comment">// &quot;false&quot;</span></span><br><span class="line">fmt.Println(b.CanAddr()) <span class="comment">// &quot;false&quot;</span></span><br><span class="line">fmt.Println(c.CanAddr()) <span class="comment">// &quot;false&quot;</span></span><br><span class="line">fmt.Println(d.CanAddr()) <span class="comment">// &quot;true&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>每当我们通过指针间接地获取的reflect.Value都是可取地址的，即使开始的是一个不可取地址的Value。</strong></p>
+<p>在反射机制中，所有关于是否支持取地址的规则都是类似的。例如，slice的索引表达式e[i]将隐式地包含一个指针，它就是可取地址的，即使开始的e表达式不支持也没有关系。以此类推，reflect.ValueOf(e).Index(i)对应的值也是可取地址的，即使原始的reflect.ValueOf(e)不支持也没有关系。</p>
+<p>要从变量对应的可取地址的reflect.Value来访问变量需要三个步骤。第一步是调用Addr()方法，它返回一个Value，里面保存了指向变量的指针。然后是在Value上调用Interface()方法，也就是返回一个interface{}，里面包含指向变量的指针。最后，如果我们知道变量的类型，我们可以使用类型的断言机制将得到的interface{}类型的接口强制转为普通的类型指针。这样我们就可以通过这个普通指针来更新变量了：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x := <span class="number">2</span></span><br><span class="line">d := reflect.ValueOf(&amp;x).Elem()   <span class="comment">// d refers to the variable x</span></span><br><span class="line">px := d.Addr().Interface().(*<span class="type">int</span>) <span class="comment">// px := &amp;x</span></span><br><span class="line">*px = <span class="number">3</span>                           <span class="comment">// x = 3</span></span><br><span class="line">fmt.Println(x)                    <span class="comment">// &quot;3&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者，不使用指针，而是通过调用可取地址的reflect.Value的reflect.Value.Set方法来更新对应的值：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.Set(reflect.ValueOf(<span class="number">4</span>))</span><br><span class="line">fmt.Println(x) <span class="comment">// &quot;4&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Set方法将在运行时执行和编译时进行类似的可赋值性约束的检查。以上代码，变量和值都是int类型，但是如果变量是int64类型，那么程序将抛出一个panic异常，所以关键问题是要确保改类型的变量可以接受对应的值：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d.Set(reflect.ValueOf(<span class="type">int64</span>(<span class="number">5</span>))) <span class="comment">// panic: int64 is not assignable to int</span></span><br></pre></td></tr></table></figure>
+
+<p>同样，对一个不可取地址的reflect.Value调用Set方法也会导致panic异常：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x := <span class="number">2</span></span><br><span class="line">b := reflect.ValueOf(x)</span><br><span class="line">b.Set(reflect.ValueOf(<span class="number">3</span>)) <span class="comment">// panic: Set using unaddressable value</span></span><br></pre></td></tr></table></figure>
+
+<p>这里有很多用于基本数据类型的Set方法：SetInt、SetUint、SetString和SetFloat等。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d := reflect.ValueOf(&amp;x).Elem()</span><br><span class="line">d.SetInt(<span class="number">3</span>)</span><br><span class="line">fmt.Println(x) <span class="comment">// &quot;3&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>从某种程度上说，这些Set方法总是尽可能地完成任务。以SetInt为例，只要变量是某种类型的有符号整数就可以工作，即使是一些命名的类型、甚至只要底层数据类型是有符号整数就可以，而且如果对于变量类型值太大的话会被自动截断。但需要谨慎的是：对于一个引用interface{}类型的reflect.Value调用SetInt会导致panic异常，即使那个interface{}变量对于整数类型也不行。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">x := <span class="number">1</span></span><br><span class="line">rx := reflect.ValueOf(&amp;x).Elem()</span><br><span class="line">rx.SetInt(<span class="number">2</span>)                     <span class="comment">// OK, x = 2</span></span><br><span class="line">rx.Set(reflect.ValueOf(<span class="number">3</span>))       <span class="comment">// OK, x = 3</span></span><br><span class="line">rx.SetString(<span class="string">&quot;hello&quot;</span>)            <span class="comment">// panic: string is not assignable to int</span></span><br><span class="line">rx.Set(reflect.ValueOf(<span class="string">&quot;hello&quot;</span>)) <span class="comment">// panic: string is not assignable to int</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> y <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">ry := reflect.ValueOf(&amp;y).Elem()</span><br><span class="line">ry.SetInt(<span class="number">2</span>)                     <span class="comment">// panic: SetInt called on interface Value</span></span><br><span class="line">ry.Set(reflect.ValueOf(<span class="number">3</span>))       <span class="comment">// OK, y = int(3)</span></span><br><span class="line">ry.SetString(<span class="string">&quot;hello&quot;</span>)            <span class="comment">// panic: SetString called on interface Value</span></span><br><span class="line">ry.Set(reflect.ValueOf(<span class="string">&quot;hello&quot;</span>)) <span class="comment">// OK, y = &quot;hello&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们用Display显示os.Stdout结构时，我们发现<strong>反射可以越过Go语言的导出规则的限制读取结构体中未导出的成员</strong>，比如在类Unix系统上os.File结构体中的fd int成员。然而，利用反射机制并不能修改这些未导出的成员：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">stdout := reflect.ValueOf(os.Stdout).Elem() <span class="comment">// *os.Stdout, an os.File var</span></span><br><span class="line">fmt.Println(stdout.Type())                  <span class="comment">// &quot;os.File&quot;</span></span><br><span class="line">fd := stdout.FieldByName(<span class="string">&quot;fd&quot;</span>)</span><br><span class="line">fmt.Println(fd.Int()) <span class="comment">// &quot;1&quot;</span></span><br><span class="line">fd.SetInt(<span class="number">2</span>)          <span class="comment">// panic: unexported field</span></span><br></pre></td></tr></table></figure>
+
+<p>####CanSet</p>
+<p>一个可取地址的reflect.Value会记录一个结构体成员是否是未导出成员，如果是的话则拒绝修改操作。因此，CanAddr方法并不能正确反映一个变量是否是可以被修改的。另一个相关的方法CanSet是用于检查对应的reflect.Value是否是可取地址并可被修改的：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(fd.CanAddr(), fd.CanSet()) <span class="comment">// &quot;true false&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="获取结构体字段标签"><a href="#获取结构体字段标签" class="headerlink" title="获取结构体字段标签"></a>获取结构体字段标签</h3><p>在4.5节我们使用构体成员标签用于设置对应JSON对应的名字。其中json成员标签让我们可以选择成员的名字和抑制零值成员的输出。</p>
+<p>在本节，我们将看到如何通过反射机制类获取成员标签。</p>
+<p>对于一个web服务，大部分HTTP处理函数要做的第一件事情就是展开请求中的参数到本地变量中。我们定义了一个工具函数，叫params.Unpack，通过使用结构体成员标签机制来让HTTP处理函数解析请求参数更方便。</p>
+<p>首先，我们看看如何使用它。下面的search函数是一个HTTP请求处理函数。它定义了一个匿名结构体类型的变量，用结构体的每个成员表示HTTP请求的参数。其中结构体成员标签指明了对于请求参数的名字，为了减少URL的长度这些参数名通常都是神秘的缩略词。Unpack将请求参数填充到合适的结构体成员中，这样我们可以方便地通过合适的类型类来访问这些参数。</p>
+<p><em>gopl.io/ch12/search</em></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;gopl.io/ch12/params&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// search implements the /search URL endpoint.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">search</span><span class="params">(resp http.ResponseWriter, req *http.Request)</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> data <span class="keyword">struct</span> &#123;</span><br><span class="line">        Labels     []<span class="type">string</span> <span class="string">`http:&quot;l&quot;`</span></span><br><span class="line">        MaxResults <span class="type">int</span>      <span class="string">`http:&quot;max&quot;`</span></span><br><span class="line">        Exact      <span class="type">bool</span>     <span class="string">`http:&quot;x&quot;`</span></span><br><span class="line">    &#125;</span><br><span class="line">    data.MaxResults = <span class="number">10</span> <span class="comment">// set default</span></span><br><span class="line">    <span class="keyword">if</span> err := params.Unpack(req, &amp;data); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        http.Error(resp, err.Error(), http.StatusBadRequest) <span class="comment">// 400</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...rest of handler...</span></span><br><span class="line">    fmt.Fprintf(resp, <span class="string">&quot;Search: %+v\n&quot;</span>, data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面的Unpack函数主要完成三件事情。</p>
+<p>第一，它调用req.ParseForm()来解析HTTP请求。然后，req.Form将包含所有的请求参数，不管HTTP客户端使用的是GET还是POST请求方法。</p>
+<p>下一步，Unpack函数将构建每个结构体成员有效参数名字到成员变量的映射。如果结构体成员有成员标签的话，有效参数名字可能和实际的成员名字不相同。reflect.Type的Field方法将返回一个reflect.StructField，里面含有每个成员的名字、类型和可选的成员标签等信息。其中成员标签信息对应reflect.StructTag类型的字符串，并且提供了Get方法用于解析和根据特定key提取的子串，例如这里的http:”…”形式的子串。</p>
+<p><em>gopl.io/ch12/params</em></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Unpack populates the fields of the struct pointed to by ptr</span></span><br><span class="line"><span class="comment">// from the HTTP request parameters in req.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Unpack</span><span class="params">(req *http.Request, ptr <span class="keyword">interface</span>&#123;&#125;)</span></span> <span class="type">error</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> err := req.ParseForm(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> err</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Build map of fields keyed by effective name.</span></span><br><span class="line">    fields := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]reflect.Value)</span><br><span class="line">    v := reflect.ValueOf(ptr).Elem() <span class="comment">// the struct variable</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; v.NumField(); i++ &#123;</span><br><span class="line">        fieldInfo := v.Type().Field(i) <span class="comment">// a reflect.StructField</span></span><br><span class="line">        tag := fieldInfo.Tag           <span class="comment">// a reflect.StructTag</span></span><br><span class="line">        name := tag.Get(<span class="string">&quot;http&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> name == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">            name = strings.ToLower(fieldInfo.Name)</span><br><span class="line">        &#125;</span><br><span class="line">        fields[name] = v.Field(i)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update struct field for each parameter in the request.</span></span><br><span class="line">    <span class="keyword">for</span> name, values := <span class="keyword">range</span> req.Form &#123;</span><br><span class="line">        f := fields[name]</span><br><span class="line">        <span class="keyword">if</span> !f.IsValid() &#123;</span><br><span class="line">            <span class="keyword">continue</span> <span class="comment">// ignore unrecognized HTTP parameters</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> _, value := <span class="keyword">range</span> values &#123;</span><br><span class="line">            <span class="keyword">if</span> f.Kind() == reflect.Slice &#123;</span><br><span class="line">                elem := reflect.New(f.Type().Elem()).Elem()</span><br><span class="line">                <span class="keyword">if</span> err := populate(elem, value); err != <span class="literal">nil</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;%s: %v&quot;</span>, name, err)</span><br><span class="line">                &#125;</span><br><span class="line">                f.Set(reflect.Append(f, elem))</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> err := populate(f, value); err != <span class="literal">nil</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;%s: %v&quot;</span>, name, err)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后，Unpack遍历HTTP请求的name/valu参数键值对，并且根据更新相应的结构体成员。回想一下，同一个名字的参数可能出现多次。如果发生这种情况，并且对应的结构体成员是一个slice，那么就将所有的参数添加到slice中。其它情况，对应的成员值将被覆盖，只有最后一次出现的参数值才是起作用的。</p>
+<p>populate函数小心用请求的字符串类型参数值来填充单一的成员v（或者是slice类型成员中的单一的元素）。目前，它仅支持字符串、有符号整数和布尔型。其中其它的类型将留做练习任务。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">populate</span><span class="params">(v reflect.Value, value <span class="type">string</span>)</span></span> <span class="type">error</span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> v.Kind() &#123;</span><br><span class="line">    <span class="keyword">case</span> reflect.String:</span><br><span class="line">        v.SetString(value)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> reflect.Int:</span><br><span class="line">        i, err := strconv.ParseInt(value, <span class="number">10</span>, <span class="number">64</span>)</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> err</span><br><span class="line">        &#125;</span><br><span class="line">        v.SetInt(i)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> reflect.Bool:</span><br><span class="line">        b, err := strconv.ParseBool(value)</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> err</span><br><span class="line">        &#125;</span><br><span class="line">        v.SetBool(b)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;unsupported kind %s&quot;</span>, v.Type())</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们上上面的处理程序添加到一个web服务器，则可以产生以下的会话：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ go build gopl.io/ch12/search</span><br><span class="line">$ ./search &amp;</span><br><span class="line">$ ./fetch &#x27;http://localhost:12345/search&#x27;</span><br><span class="line">Search: &#123;Labels:[] MaxResults:10 Exact:false&#125;</span><br><span class="line">$ ./fetch &#x27;http://localhost:12345/search?l=golang&amp;l=programming&#x27;</span><br><span class="line">Search: &#123;Labels:[golang programming] MaxResults:10 Exact:false&#125;</span><br><span class="line">$ ./fetch &#x27;http://localhost:12345/search?l=golang&amp;l=programming&amp;max=100&#x27;</span><br><span class="line">Search: &#123;Labels:[golang programming] MaxResults:100 Exact:false&#125;</span><br><span class="line">$ ./fetch &#x27;http://localhost:12345/search?x=true&amp;l=golang&amp;l=programming&#x27;</span><br><span class="line">Search: &#123;Labels:[golang programming] MaxResults:10 Exact:true&#125;</span><br><span class="line">$ ./fetch &#x27;http://localhost:12345/search?q=hello&amp;x=123&#x27;</span><br><span class="line">x: strconv.ParseBool: parsing &quot;123&quot;: invalid syntax</span><br><span class="line">$ ./fetch &#x27;http://localhost:12345/search?q=hello&amp;max=lots&#x27;</span><br><span class="line">max: strconv.ParseInt: parsing &quot;lots&quot;: invalid syntax</span><br></pre></td></tr></table></figure>
+
+<h3 id="显示一个类型的方法集"><a href="#显示一个类型的方法集" class="headerlink" title="显示一个类型的方法集"></a>显示一个类型的方法集</h3><p>我们的最后一个例子是使用reflect.Type来打印任意值的类型和枚举它的方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Print prints the method set of the value x.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Print</span><span class="params">(x <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">    v := reflect.ValueOf(x)</span><br><span class="line">    t := v.Type()</span><br><span class="line">    fmt.Printf(<span class="string">&quot;type %s\n&quot;</span>, t)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; v.NumMethod(); i++ &#123;</span><br><span class="line">        methType := v.Method(i).Type()</span><br><span class="line">        fmt.Printf(<span class="string">&quot;func (%s) %s%s\n&quot;</span>, t, t.Method(i).Name,</span><br><span class="line">            strings.TrimPrefix(methType.String(), <span class="string">&quot;func&quot;</span>))</span><br><span class="line">      <span class="comment">//strings.TrimPrefix 删除前缀</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>reflect.Type和reflect.Value都提供了一个Method方法。每次t.Method(i)调用将一个reflect.Method的实例，对应一个用于描述一个方法的名称和类型的结构体。每次v.Method(i)方法调用都返回一个reflect.Value以表示对应的值（§6.4），也就是一个方法是帮到它的接收者的。使用reflect.Value.Call方法（我们这里没有演示），将可以调用一个Func类型的Value，但是这个例子中只用到了它的类型。</p>
+<p>这是属于time.Duration和<code>*strings.Replacer</code>两个类型的方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">methods.Print(time.Hour)</span><br><span class="line"><span class="comment">// Output:</span></span><br><span class="line"><span class="comment">// type time.Duration</span></span><br><span class="line"><span class="comment">// func (time.Duration) Hours() float64</span></span><br><span class="line"><span class="comment">// func (time.Duration) Minutes() float64</span></span><br><span class="line"><span class="comment">// func (time.Duration) Nanoseconds() int64</span></span><br><span class="line"><span class="comment">// func (time.Duration) Seconds() float64</span></span><br><span class="line"><span class="comment">// func (time.Duration) String() string</span></span><br><span class="line"></span><br><span class="line">methods.Print(<span class="built_in">new</span>(strings.Replacer))</span><br><span class="line"><span class="comment">// Output:</span></span><br><span class="line"><span class="comment">// type *strings.Replacer</span></span><br><span class="line"><span class="comment">// func (*strings.Replacer) Replace(string) string</span></span><br><span class="line"><span class="comment">// func (*strings.Replacer) WriteString(io.Writer, string) (int, error)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="几点忠告"><a href="#几点忠告" class="headerlink" title="几点忠告"></a>几点忠告</h3><p>虽然反射提供的API远多于我们讲到的，我们前面的例子主要是给出了一个方向，通过反射可以实现哪些功能。反射是一个强大并富有表达力的工具，但是它应该被小心地使用，原因有三。</p>
+<p>第一个原因是，基于反射的代码是比较脆弱的。对于每一个会导致编译器报告类型错误的问题，在反射中都有与之相对应的误用问题，不同的是编译器会在构建时马上报告错误，而反射则是在真正运行到的时候才会抛出panic异常，可能是写完代码很久之后了，而且程序也可能运行了很长的时间。</p>
+<p>以前面的readList函数（§12.6）为例，为了从输入读取字符串并填充int类型的变量而调用的reflect.Value.SetString方法可能导致panic异常。绝大多数使用反射的程序都有类似的风险，需要非常小心地检查每个reflect.Value的对应值的类型、是否可取地址，还有是否可以被修改等。</p>
+<p>避免这种因反射而导致的脆弱性的问题的最好方法，是将所有的反射相关的使用控制在包的内部，如果可能的话避免在包的API中直接暴露reflect.Value类型，这样可以限制一些非法输入。如果无法做到这一点，在每个有风险的操作前指向额外的类型检查。以标准库中的代码为例，当fmt.Printf收到一个非法的操作数时，它并不会抛出panic异常，而是打印相关的错误信息。程序虽然还有BUG，但是会更加容易诊断。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fmt.Printf(<span class="string">&quot;%d %s\n&quot;</span>, <span class="string">&quot;hello&quot;</span>, <span class="number">42</span>) <span class="comment">// &quot;%!d(string=hello) %!s(int=42)&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>反射同样降低了程序的安全性，还影响了自动化重构和分析工具的准确性，因为它们无法识别运行时才能确认的类型信息。</strong></p>
+<p><strong>避免使用反射的第二个原因是，即使对应类型提供了相同文档，但是反射的操作不能做静态类型检查，而且大量反射的代码通常难以理解。</strong>总是需要小心翼翼地为每个导出的类型和其它接受interface{}或reflect.Value类型参数的函数维护说明文档。</p>
+<p><strong>第三个原因，基于反射的代码通常比正常的代码运行速度慢一到两个数量级。</strong>对于一个典型的项目，大部分函数的性能和程序的整体性能关系不大，所以当反射能使程序更加清晰的时候可以考虑使用。</p>
+<p>测试是一个特别适合使用反射的场景，因为每个测试的数据集都很小。</p>
+<p><strong>但是对于性能关键路径的函数，最好避免使用反射。</strong></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="http://books.studygolang.com/gopl-zh">Go语言圣经（中文版）</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2020 Yelog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
