@@ -1,0 +1,2913 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Go面试题01 | IT小马</title>
+  <meta name="keywords" content=" GO , 面试 ">
+  <meta name="description" content="Go面试题01 | IT小马">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="CURD操作及分页安装配置依赖库 lodash是常用的工具库 typeorm一个TS编写的node.js ORM @nestjs&#x2F;typeorm Nestjs的TypeOrm整合模块 mysql2是Node的Mysql操作库 sanitize-html过滤html标签,防注入攻击 @nestjs&#x2F;platform-fastify是Nestjs适配fastify框架的HTTP驱动  1pnpm ad">
+<meta property="og:type" content="article">
+<meta property="og:title" content="02CURD操作及分页">
+<meta property="og:url" content="https://blog.itxiaoma.cn/2023/08/02/Nest02/index.html">
+<meta property="og:site_name" content="IT小马">
+<meta property="og:description" content="CURD操作及分页安装配置依赖库 lodash是常用的工具库 typeorm一个TS编写的node.js ORM @nestjs&#x2F;typeorm Nestjs的TypeOrm整合模块 mysql2是Node的Mysql操作库 sanitize-html过滤html标签,防注入攻击 @nestjs&#x2F;platform-fastify是Nestjs适配fastify框架的HTTP驱动  1pnpm ad">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-07-21T10:40:19.477Z">
+<meta property="article:author" content="IT小马">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="Nest">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar1.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.0.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar1.jpg"/>
+</a>
+<div class="author">
+    <span>IT小马</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="facebook"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-facebook"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+            <a title="instagram"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="reddit"
+               href="https://www.reddit.com/user/yelog/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-reddit"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="weibo"
+               href="http://weibo.com/u/2307534817"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-weibo"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="https://www.jianshu.com/u/ff56736de7cf"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="zhihu"
+               href="https://www.zhihu.com/people/jaytp/activities"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-zhihu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="oschina"
+               href="https://my.oschina.net/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:jaytp@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="kugou"
+               href="https://www.kugou.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-kugou"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=88151013"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(153)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="运维">
+            
+            运维
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="面试">
+            
+            面试
+            <small>(10)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="前端">
+            <i class="fold iconfont icon-right"></i>
+            前端
+            <small>(16)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;CSS">
+            
+            CSS
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;ES6">
+            
+            ES6
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;HTML">
+            
+            HTML
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;JS">
+            
+            JS
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;Nest">
+            
+            Nest
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="前端&lt;---&gt;Vue">
+            
+            Vue
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="英语">
+            <i class="fold iconfont icon-right"></i>
+            英语
+            <small>(2)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="英语&lt;---&gt;语法">
+            
+            语法
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="游戏">
+            
+            游戏
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="DOCKER">
+            
+            DOCKER
+            <small>(8)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="GO">
+            
+            GO
+            <small>(30)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="JAVA">
+            
+            JAVA
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="K8S">
+            <i class="fold iconfont icon-right"></i>
+            K8S
+            <small>(31)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="K8S&lt;---&gt;K3S">
+            
+            K3S
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="K8S&lt;---&gt;K8S基础">
+            
+            K8S基础
+            <small>(11)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="K8S&lt;---&gt;K8S架构师">
+            
+            K8S架构师
+            <small>(15)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="MYSQL">
+            
+            MYSQL
+            <small>(11)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="PHP">
+            <i class="fold iconfont icon-right"></i>
+            PHP
+            <small>(12)</small>
+        </div>
+        
+            <ul class="sub hide">
+                
+                    
+    <li>
+        <div data-rel="PHP&lt;---&gt;基础">
+            
+            基础
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="PHP&lt;---&gt;中间件">
+            
+            中间件
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="PHP&lt;---&gt;Laravel">
+            
+            Laravel
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+                
+                    
+    <li>
+        <div data-rel="PHP&lt;---&gt;Symfony">
+            
+            Symfony
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+                
+            </ul>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="REDIS">
+            
+            REDIS
+            <small>(18)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="WEB">
+            
+            WEB
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="153">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>后端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>面试</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>前端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>容器</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>学习笔记</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>英语</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>游戏</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>语法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>运维</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>CKA</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Cocos</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>CSS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Docker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>DOCKER</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ELK</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ES6</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GO</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>GOPL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>HTML</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JavaScript</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Jmeter</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>K3S</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>K8S</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Laravel</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MYSQL</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Nest</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>PHP</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RabbitMQ</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>REDIS</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Swoole</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Symfony</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>WEB</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 前端 Nest "
+           href="/2023/08/02/Nest02/"
+           data-tag="前端,Nest"
+           data-author="" >
+            <span class="post-title" title="02CURD操作及分页">02CURD操作及分页</span>
+            <span class="post-date" title="2023-08-02 00:00:00">2023/08/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 Nest "
+           href="/2023/08/01/Nest01/"
+           data-tag="前端,Nest"
+           data-author="" >
+            <span class="post-title" title="01TS核心概念">01TS核心概念</span>
+            <span class="post-date" title="2023-08-01 00:00:00">2023/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Symfony "
+           href="/2023/07/04/Symfony04/"
+           data-tag="PHP,Symfony"
+           data-author="" >
+            <span class="post-title" title="Symfony04">Symfony04</span>
+            <span class="post-date" title="2023-07-04 00:00:00">2023/07/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Symfony "
+           href="/2023/07/03/Symfony03/"
+           data-tag="PHP,Symfony"
+           data-author="" >
+            <span class="post-title" title="Symfony03">Symfony03</span>
+            <span class="post-date" title="2023-07-03 00:00:00">2023/07/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Symfony "
+           href="/2023/07/02/Symfony02/"
+           data-tag="PHP,Symfony"
+           data-author="" >
+            <span class="post-title" title="Symfony02">Symfony02</span>
+            <span class="post-date" title="2023-07-02 00:00:00">2023/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Symfony "
+           href="/2023/07/01/Symfony01/"
+           data-tag="PHP,Symfony"
+           data-author="" >
+            <span class="post-title" title="Symfony01">Symfony01</span>
+            <span class="post-date" title="2023-07-01 00:00:00">2023/07/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 英语 语法 "
+           href="/2023/07/01/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%9501%E6%A1%86%E6%9E%B6/"
+           data-tag="英语,语法"
+           data-author="" >
+            <span class="post-title" title="01语法框架">01语法框架</span>
+            <span class="post-date" title="2023-07-01 00:00:00">2023/07/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2023/06/03/Go%E5%AE%9E%E6%88%9803/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题03-实战">Go面试题03-实战</span>
+            <span class="post-date" title="2023-06-03 00:00:00">2023/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2023/06/02/Go%E5%AE%9E%E6%88%9802/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题02-进阶">Go面试题02-进阶</span>
+            <span class="post-date" title="2023-06-02 00:00:00">2023/06/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2023/06/01/Go%E5%AE%9E%E6%88%9801/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题01-基础">Go面试题01-基础</span>
+            <span class="post-date" title="2023-06-01 00:00:00">2023/06/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 运维 "
+           href="/2023/05/03/ElasticSearh03%E6%A6%82%E5%BF%B5/"
+           data-tag="后端,ELK"
+           data-author="" >
+            <span class="post-title" title="ElasticSearh 03概念">ElasticSearh 03概念</span>
+            <span class="post-date" title="2023-05-03 00:00:00">2023/05/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 运维 "
+           href="/2023/05/02/ElasticSearh02%E6%90%AD%E5%BB%BA/"
+           data-tag="后端,ELK"
+           data-author="" >
+            <span class="post-title" title="ElasticSearh 02环境搭建">ElasticSearh 02环境搭建</span>
+            <span class="post-date" title="2023-05-02 00:00:00">2023/05/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 运维 "
+           href="/2023/05/01/ElasticSearh01%E5%8E%9F%E7%90%86/"
+           data-tag="后端,ELK"
+           data-author="" >
+            <span class="post-title" title="ElasticSearh 01原理">ElasticSearh 01原理</span>
+            <span class="post-date" title="2023-05-01 00:00:00">2023/05/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S "
+           href="/2023/01/01/CKA%E8%AE%A4%E8%AF%8101/"
+           data-tag="K8S,CKA"
+           data-author="" >
+            <span class="post-title" title="CKA认证01">CKA认证01</span>
+            <span class="post-date" title="2023-01-01 00:00:00">2023/01/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K3S "
+           href="/2022/12/04/K3S04-%E5%AE%89%E8%A3%85Mysql%E9%9B%86%E7%BE%A4/"
+           data-tag="K8S,容器,K3S"
+           data-author="" >
+            <span class="post-title" title="K3S03-安装Mysql集群">K3S03-安装Mysql集群</span>
+            <span class="post-date" title="2022-12-04 00:00:00">2022/12/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/12/04/Redis%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B031-38/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis核心技术笔记31-38">Redis核心技术笔记31-38</span>
+            <span class="post-date" title="2022-12-04 00:00:00">2022/12/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K3S "
+           href="/2022/12/03/K3S03-%E5%AE%89%E8%A3%85Rancher/"
+           data-tag="K8S,容器,K3S"
+           data-author="" >
+            <span class="post-title" title="K3S03-安装Rancher">K3S03-安装Rancher</span>
+            <span class="post-date" title="2022-12-03 00:00:00">2022/12/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/12/03/Redis%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B021-30/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis核心技术笔记21-30">Redis核心技术笔记21-30</span>
+            <span class="post-date" title="2022-12-03 00:00:00">2022/12/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K3S "
+           href="/2022/12/02/K3S02-%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/"
+           data-tag="K8S,容器,K3S"
+           data-author="" >
+            <span class="post-title" title="K3S02-基础使用">K3S02-基础使用</span>
+            <span class="post-date" title="2022-12-02 00:00:00">2022/12/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/12/02/Redis%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B011-20/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis核心技术笔记11-20">Redis核心技术笔记11-20</span>
+            <span class="post-date" title="2022-12-02 00:00:00">2022/12/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/12/01/Redis%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B001-10/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis核心技术笔记01-10">Redis核心技术笔记01-10</span>
+            <span class="post-date" title="2022-12-01 00:00:00">2022/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/11/09/Go%E7%AC%94%E8%AE%B001-Go%E5%9F%BA%E7%A1%80/"
+           data-tag="GO,学习笔记"
+           data-author="" >
+            <span class="post-title" title="Go笔记01-Go基础">Go笔记01-Go基础</span>
+            <span class="post-date" title="2022-11-09 00:00:00">2022/11/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP 中间件 "
+           href="/2022/11/06/PHP-RabbitMQ-2%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/"
+           data-tag="PHP,RabbitMQ"
+           data-author="" >
+            <span class="post-title" title="PHP-RabbitMQ-2高级特性">PHP-RabbitMQ-2高级特性</span>
+            <span class="post-date" title="2022-11-06 00:00:00">2022/11/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP 中间件 "
+           href="/2022/11/05/PHP-RabbitMQ-1%E5%9F%BA%E7%A1%80/"
+           data-tag="PHP,RabbitMQ"
+           data-author="" >
+            <span class="post-title" title="PHP-RabbitMQ-1基础">PHP-RabbitMQ-1基础</span>
+            <span class="post-date" title="2022-11-05 00:00:00">2022/11/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 运维 "
+           href="/2022/10/22/Jmeter/"
+           data-tag="运维,Jmeter"
+           data-author="" >
+            <span class="post-title" title="Jemter压测工具安装使用总结">Jemter压测工具安装使用总结</span>
+            <span class="post-date" title="2022-10-22 00:00:00">2022/10/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 游戏 "
+           href="/2022/10/10/CocosCreator03/"
+           data-tag="游戏,Cocos"
+           data-author="" >
+            <span class="post-title" title="CocosCreator03">CocosCreator03</span>
+            <span class="post-date" title="2022-10-10 00:00:00">2022/10/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 游戏 "
+           href="/2022/10/06/CocosCreator02/"
+           data-tag="游戏,Cocos"
+           data-author="" >
+            <span class="post-title" title="CocosCreator02">CocosCreator02</span>
+            <span class="post-date" title="2022-10-06 00:00:00">2022/10/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 游戏 "
+           href="/2022/10/03/CocosCreator01/"
+           data-tag="游戏,Cocos"
+           data-author="" >
+            <span class="post-title" title="CocosCreator01">CocosCreator01</span>
+            <span class="post-date" title="2022-10-03 00:00:00">2022/10/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 Vue "
+           href="/2022/08/13/Vuex/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="Vuex">Vuex</span>
+            <span class="post-date" title="2022-08-13 00:00:00">2022/08/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 Vue "
+           href="/2022/08/12/VueCLI/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="Vue CLI">Vue CLI</span>
+            <span class="post-date" title="2022-08-12 00:00:00">2022/08/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 Vue "
+           href="/2022/08/11/Vue-%E6%A0%B8%E5%BF%83/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="Vue-核心">Vue-核心</span>
+            <span class="post-date" title="2022-08-11 00:00:00">2022/08/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 ES6 "
+           href="/2022/08/10/ECMAScript6(3)/"
+           data-tag="前端,JS,ES6"
+           data-author="" >
+            <span class="post-title" title="ECMAScript6(3)">ECMAScript6(3)</span>
+            <span class="post-date" title="2022-08-10 00:00:00">2022/08/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 ES6 "
+           href="/2022/08/09/ECMAScript6(2)/"
+           data-tag="前端,JS,ES6"
+           data-author="" >
+            <span class="post-title" title="ECMAScript6(2)">ECMAScript6(2)</span>
+            <span class="post-date" title="2022-08-09 00:00:00">2022/08/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 ES6 "
+           href="/2022/08/08/ECMAScript6(1)/"
+           data-tag="前端,JS,ES6"
+           data-author="" >
+            <span class="post-title" title="ECMAScript6(1)">ECMAScript6(1)</span>
+            <span class="post-date" title="2022-08-08 00:00:00">2022/08/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 JS "
+           href="/2022/08/07/JavaScript%E5%9F%BA%E7%A1%801/"
+           data-tag="前端,JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript基础1">JavaScript基础1</span>
+            <span class="post-date" title="2022-08-07 00:00:00">2022/08/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 JS "
+           href="/2022/08/07/JavaScript%E5%9F%BA%E7%A1%802/"
+           data-tag="前端,JavaScript"
+           data-author="" >
+            <span class="post-title" title="JavaScript基础2">JavaScript基础2</span>
+            <span class="post-date" title="2022-08-07 00:00:00">2022/08/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 HTML "
+           href="/2022/08/06/%E7%A7%BB%E5%8A%A8Web%E5%B8%83%E5%B1%802/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="移动Web布局2">移动Web布局2</span>
+            <span class="post-date" title="2022-08-06 00:00:00">2022/08/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 HTML "
+           href="/2022/08/05/%E7%A7%BB%E5%8A%A8Web%E5%B8%83%E5%B1%801/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="移动Web布局1">移动Web布局1</span>
+            <span class="post-date" title="2022-08-05 00:00:00">2022/08/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 HTML "
+           href="/2022/08/04/HTML5&CSS3/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="HTML5&amp;CSS3">HTML5&amp;CSS3</span>
+            <span class="post-date" title="2022-08-04 00:00:00">2022/08/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 CSS "
+           href="/2022/08/03/CSS%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%9302/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="CSS基础总结02">CSS基础总结02</span>
+            <span class="post-date" title="2022-08-03 00:00:00">2022/08/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 CSS "
+           href="/2022/08/02/CSS%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%9301/"
+           data-tag="前端,CSS"
+           data-author="" >
+            <span class="post-title" title="CSS基础总结01">CSS基础总结01</span>
+            <span class="post-date" title="2022-08-02 00:00:00">2022/08/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 前端 HTML "
+           href="/2022/08/01/HTML%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"
+           data-tag="前端,HTML"
+           data-author="" >
+            <span class="post-title" title="HTML基础总结">HTML基础总结</span>
+            <span class="post-date" title="2022-08-01 00:00:00">2022/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/08/01/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang11-panic%E5%92%8Crevocer/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang11-panic和revocer">幼麟实验室Golang11-panic和revocer</span>
+            <span class="post-date" title="2022-08-01 00:00:00">2022/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/07/29/Redis%E5%BA%95%E5%B1%82%E8%AE%BE%E8%AE%A1%E4%B8%8E%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis底层设计与源码分析">Redis底层设计与源码分析</span>
+            <span class="post-date" title="2022-07-29 00:00:00">2022/07/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/29/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang09-defer/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang09-defer">幼麟实验室Golang09-defer</span>
+            <span class="post-date" title="2022-07-29 00:00:00">2022/07/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/28/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang08-%E6%96%B9%E6%B3%95/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang08-方法">幼麟实验室Golang08-方法</span>
+            <span class="post-date" title="2022-07-28 00:00:00">2022/07/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/27/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang07-%E9%97%AD%E5%8C%85/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang07-闭包">幼麟实验室Golang07-闭包</span>
+            <span class="post-date" title="2022-07-27 00:00:00">2022/07/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/26/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang06-%E4%BC%A0%E5%8F%82%E5%92%8C%E8%BF%94%E5%9B%9E%E5%80%BC/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang06-传参和返回值">幼麟实验室Golang06-传参和返回值</span>
+            <span class="post-date" title="2022-07-26 00:00:00">2022/07/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/25/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang05-%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang05-函数调用栈">幼麟实验室Golang05-函数调用栈</span>
+            <span class="post-date" title="2022-07-25 00:00:00">2022/07/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/24/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang04-map/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang04-map">幼麟实验室Golang04-map</span>
+            <span class="post-date" title="2022-07-24 00:00:00">2022/07/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/23/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang03-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang03-内存对齐">幼麟实验室Golang03-内存对齐</span>
+            <span class="post-date" title="2022-07-23 00:00:00">2022/07/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP 基础 "
+           href="/2022/07/22/PHP5-8%E5%90%84%E7%89%88%E6%9C%AC%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/"
+           data-tag="后端,PHP"
+           data-author="" >
+            <span class="post-title" title="PHP5-8各版本特性详解">PHP5-8各版本特性详解</span>
+            <span class="post-date" title="2022-07-22 00:00:00">2022/07/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/22/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang02-slice/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang02-slice">幼麟实验室Golang02-slice</span>
+            <span class="post-date" title="2022-07-22 00:00:00">2022/07/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/07/21/%E5%B9%BC%E9%BA%9F%E5%AE%9E%E9%AA%8C%E5%AE%A4Golang01-string/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="幼麟实验室Golang01-string">幼麟实验室Golang01-string</span>
+            <span class="post-date" title="2022-07-21 00:00:00">2022/07/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/15/K8S%E6%9E%B6%E6%9E%84%E5%B8%8815/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="15中间件容器化-Helm">15中间件容器化-Helm</span>
+            <span class="post-date" title="2022-07-15 00:00:00">2022/07/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/14/K8S%E6%9E%B6%E6%9E%84%E5%B8%8814/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="14云原生存储">14云原生存储</span>
+            <span class="post-date" title="2022-07-14 00:00:00">2022/07/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/13/K8S%E6%9E%B6%E6%9E%84%E5%B8%8813/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="13权限控制">13权限控制</span>
+            <span class="post-date" title="2022-07-13 00:00:00">2022/07/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/12/K8S%E6%9E%B6%E6%9E%84%E5%B8%8812/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="12资源配额">12资源配额</span>
+            <span class="post-date" title="2022-07-12 00:00:00">2022/07/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/11/K8S%E6%9E%B6%E6%9E%84%E5%B8%8811/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="11计划任务-污点-亲和力">11计划任务-污点-亲和力</span>
+            <span class="post-date" title="2022-07-11 00:00:00">2022/07/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/09/K8S%E6%9E%B6%E6%9E%84%E5%B8%8809/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="09配置管理">09配置管理</span>
+            <span class="post-date" title="2022-07-09 00:00:00">2022/07/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/09/K8S%E6%9E%B6%E6%9E%84%E5%B8%8810/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="10持久化存储">10持久化存储</span>
+            <span class="post-date" title="2022-07-09 00:00:00">2022/07/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/08/K8S%E6%9E%B6%E6%9E%84%E5%B8%8808/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="08服务发布">08服务发布</span>
+            <span class="post-date" title="2022-07-08 00:00:00">2022/07/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/07/K8S%E6%9E%B6%E6%9E%84%E5%B8%8807/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="07资源调度">07资源调度</span>
+            <span class="post-date" title="2022-07-07 00:00:00">2022/07/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/06/K8S%E6%9E%B6%E6%9E%84%E5%B8%8806/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="06基本概念">06基本概念</span>
+            <span class="post-date" title="2022-07-06 00:00:00">2022/07/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/05/K8S%E6%9E%B6%E6%9E%84%E5%B8%8805/"
+           data-tag="K8S,Docker"
+           data-author="" >
+            <span class="post-title" title="05容器基础">05容器基础</span>
+            <span class="post-date" title="2022-07-05 00:00:00">2022/07/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/03/K8S%E6%9E%B6%E6%9E%84%E5%B8%8803/"
+           data-tag="K8S"
+           data-author="" >
+            <span class="post-title" title="03Kubeadm高可用集群下">03Kubeadm高可用集群下</span>
+            <span class="post-date" title="2022-07-03 00:00:00">2022/07/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/03/K8S%E6%9E%B6%E6%9E%84%E5%B8%8804/"
+           data-tag="K8S"
+           data-author="" >
+            <span class="post-title" title="04二进制高可用集群">04二进制高可用集群</span>
+            <span class="post-date" title="2022-07-03 00:00:00">2022/07/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/02/K8S%E6%9E%B6%E6%9E%84%E5%B8%8802/"
+           data-tag="K8S"
+           data-author="" >
+            <span class="post-title" title="02Kubeadm高可用集群上">02Kubeadm高可用集群上</span>
+            <span class="post-date" title="2022-07-02 00:00:00">2022/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 英语 语法 "
+           href="/2022/07/02/%E8%8B%B1%E8%AF%AD%E8%AF%AD%E6%B3%9502%E8%AF%8D%E6%80%A7/"
+           data-tag="英语,语法"
+           data-author="" >
+            <span class="post-title" title="02词性">02词性</span>
+            <span class="post-date" title="2022-07-02 00:00:00">2022/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S架构师 "
+           href="/2022/07/01/K8S%E6%9E%B6%E6%9E%84%E5%B8%8801/"
+           data-tag="K8S"
+           data-author="" >
+            <span class="post-title" title="01准备工作">01准备工作</span>
+            <span class="post-date" title="2022-07-01 00:00:00">2022/07/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/04/GoWeb04-Zap%E6%97%A5%E5%BF%97/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb高级04-Zap日志">GoWeb高级04-Zap日志</span>
+            <span class="post-date" title="2022-06-04 00:00:00">2022/06/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/03/GoWeb03-Mysql%E5%92%8CRedis/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb高级03-Mysql和Redis">GoWeb高级03-Mysql和Redis</span>
+            <span class="post-date" title="2022-06-03 00:00:00">2022/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/02/GoWeb02-Gin%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb02-Gin源码解析">GoWeb02-Gin源码解析</span>
+            <span class="post-date" title="2022-06-02 00:00:00">2022/06/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/06/01/GoWeb01-Gin%E5%9F%BA%E7%A1%80/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="GoWeb01-Gin基础">GoWeb01-Gin基础</span>
+            <span class="post-date" title="2022-06-01 00:00:00">2022/06/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/12/Golang%E7%9A%84GC%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang的GC回收机制">Golang的GC回收机制</span>
+            <span class="post-date" title="2022-05-12 00:00:00">2022/05/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/11/Golang%E7%9A%84GMP%E8%AF%A6%E8%A7%A3/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang的GMP详解">Golang的GMP详解</span>
+            <span class="post-date" title="2022-05-11 00:00:00">2022/05/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/05/02/Golang%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang内存管理">Golang内存管理</span>
+            <span class="post-date" title="2022-05-02 00:00:00">2022/05/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S "
+           href="/2022/04/12/K8S12-%E9%9B%86%E7%BE%A4%E8%B5%84%E6%BA%90%E7%9B%91%E6%8E%A7/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S12-集群资源监控">K8S12-集群资源监控</span>
+            <span class="post-date" title="2022-04-12 00:00:00">2022/04/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/11/K8S11-NFS%E7%BD%91%E7%BB%9C%E5%AD%98%E5%82%A8/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S11-NFS网络存储">K8S11-NFS网络存储</span>
+            <span class="post-date" title="2022-04-11 00:00:00">2022/04/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/10/K8S10-Helm/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S10-Helm">K8S10-Helm</span>
+            <span class="post-date" title="2022-04-10 00:00:00">2022/04/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/09/K8S09-Ingress/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S09-Ingress">K8S09-Ingress</span>
+            <span class="post-date" title="2022-04-09 00:00:00">2022/04/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/08/K8S08-RBAC/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S08-RBAC">K8S08-RBAC</span>
+            <span class="post-date" title="2022-04-08 00:00:00">2022/04/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/07/K8S07-Secret-ConfigMap/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S07-Secret-ConfigMap">K8S07-Secret-ConfigMap</span>
+            <span class="post-date" title="2022-04-07 00:00:00">2022/04/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/06/K8S06-Service-Job/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S06-Service-Job">K8S06-Service-Job</span>
+            <span class="post-date" title="2022-04-06 00:00:00">2022/04/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/05/K8S05-Controller-Deployment/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S05-Controller-Deployment">K8S05-Controller-Deployment</span>
+            <span class="post-date" title="2022-04-05 00:00:00">2022/04/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/04/K8S04-POD%E5%92%8CLabel/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S04-POD和Label">K8S04-POD和Label</span>
+            <span class="post-date" title="2022-04-04 00:00:00">2022/04/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/03/K8S03-YAML/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S03-YAML">K8S03-YAML</span>
+            <span class="post-date" title="2022-04-03 00:00:00">2022/04/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/02/K8S02-Kubectl/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S02-kubectl">K8S02-kubectl</span>
+            <span class="post-date" title="2022-04-02 00:00:00">2022/04/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 K8S K8S基础 "
+           href="/2022/04/01/K8S01-%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83/"
+           data-tag="K8S,容器"
+           data-author="" >
+            <span class="post-title" title="K8S01-安装环境">K8S01-安装环境</span>
+            <span class="post-date" title="2022-04-01 00:00:00">2022/04/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2022/02/22/Golang%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/"
+           data-tag="GO"
+           data-author="" >
+            <span class="post-title" title="Golang常见错误">Golang常见错误</span>
+            <span class="post-date" title="2022-02-22 00:00:00">2022/02/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/13/Redis13-%E6%80%BB%E7%BB%93/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis13-总结">Redis13-总结</span>
+            <span class="post-date" title="2022-02-13 00:00:00">2022/02/13</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/12/Redis12-%E6%96%B0%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis12-新功能介绍">Redis12-新功能介绍</span>
+            <span class="post-date" title="2022-02-12 00:00:00">2022/02/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/11/Redis11-%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis11-分布式锁">Redis11-分布式锁</span>
+            <span class="post-date" title="2022-02-11 00:00:00">2022/02/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/10/Redis10-%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%C2%B7%E5%87%BB%E7%A9%BF%C2%B7%E9%9B%AA%E5%B4%A9/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis10-缓存穿透·击穿·雪崩">Redis10-缓存穿透·击穿·雪崩</span>
+            <span class="post-date" title="2022-02-10 00:00:00">2022/02/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/09/Redis09-%E9%9B%86%E7%BE%A4/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis09-集群">Redis09-集群</span>
+            <span class="post-date" title="2022-02-09 00:00:00">2022/02/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/08/Redis08-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis08-主从复制">Redis08-主从复制</span>
+            <span class="post-date" title="2022-02-08 00:00:00">2022/02/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/07/Redis07-%E6%8C%81%E4%B9%85%E5%8C%96/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis07-持久化">Redis07-持久化</span>
+            <span class="post-date" title="2022-02-07 00:00:00">2022/02/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/06/Redis06-%E4%BA%8B%E5%8A%A1%E3%80%81%E9%94%81%E3%80%81%E7%A7%92%E6%9D%80/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis06-事务、锁、秒杀">Redis06-事务、锁、秒杀</span>
+            <span class="post-date" title="2022-02-06 00:00:00">2022/02/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/05/Redis05-Jedis%E3%80%81SprintBoot%E6%95%B4%E5%90%88Redis/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis05-Jedis、SprintBoot整合Redis">Redis05-Jedis、SprintBoot整合Redis</span>
+            <span class="post-date" title="2022-02-05 00:00:00">2022/02/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/04/Redis04-%E6%96%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis04-新数据类型">Redis04-新数据类型</span>
+            <span class="post-date" title="2022-02-04 00:00:00">2022/02/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/03/Redis03-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E3%80%81%E5%8F%91%E5%B8%83%E5%92%8C%E8%AE%A2%E9%98%85/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis03-配置文件、发布和订阅">Redis03-配置文件、发布和订阅</span>
+            <span class="post-date" title="2022-02-03 00:00:00">2022/02/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/02/Redis02-%E4%BA%94%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis02-常用五大数据类型">Redis02-常用五大数据类型</span>
+            <span class="post-date" title="2022-02-02 00:00:00">2022/02/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 REDIS "
+           href="/2022/02/01/Redis01-%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%AE%89%E8%A3%85/"
+           data-tag="后端,REDIS"
+           data-author="" >
+            <span class="post-title" title="Redis01-基础及安装">Redis01-基础及安装</span>
+            <span class="post-date" title="2022-02-01 00:00:00">2022/02/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/25/JavaWeb03-JSP/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb03-JSP">JavaWeb03-JSP</span>
+            <span class="post-date" title="2021-11-25 00:00:00">2021/11/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/22/JavaWeb02-Servlet%E3%80%81Cookie%E3%80%81Session/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb02-Servlet、Cookie、Session">JavaWeb02-Servlet、Cookie、Session</span>
+            <span class="post-date" title="2021-11-22 00:00:00">2021/11/22</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/21/JavaWeb01-Tomcat%E3%80%81Maven%E9%85%8D%E7%BD%AE/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="JavaWeb01-Tomcat、Maven配置">JavaWeb01-Tomcat、Maven配置</span>
+            <span class="post-date" title="2021-11-21 00:00:00">2021/11/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/15/Java02-JDBC/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="Java01-JDBC">Java01-JDBC</span>
+            <span class="post-date" title="2021-11-15 00:00:00">2021/11/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 JAVA "
+           href="/2021/11/14/Java01-JavaSE/"
+           data-tag="后端,Java"
+           data-author="" >
+            <span class="post-title" title="Java01-JavaSE">Java01-JavaSE</span>
+            <span class="post-date" title="2021-11-14 00:00:00">2021/11/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/10/04/Laravel%E5%BA%95%E5%B1%8204-%E5%8A%A0%E8%BD%BD%E5%B9%B6%E5%90%AF%E5%8A%A8ServiceProvider/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层04-加载并启动ServiceProvider">Laravel底层04-加载并启动ServiceProvider</span>
+            <span class="post-date" title="2021-10-04 00:00:00">2021/10/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/10/03/Laravel%E5%BA%95%E5%B1%8203-make%E5%92%8Cbuild/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层03-make和build">Laravel底层03-make和build</span>
+            <span class="post-date" title="2021-10-03 00:00:00">2021/10/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/10/02/Laravel%E5%BA%95%E5%B1%8202-%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%EF%BC%8C%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层02-服务容器，服务提供者">Laravel底层02-服务容器，服务提供者</span>
+            <span class="post-date" title="2021-10-02 00:00:00">2021/10/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/10/01/Laravel%E5%BA%95%E5%B1%8201-%E6%A1%86%E6%9E%B6%E6%A0%B8%E5%BF%83%EF%BC%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E9%97%AD%E5%8C%85/"
+           data-tag="后端,PHP,Laravel"
+           data-author="" >
+            <span class="post-title" title="Laravel底层01-框架核心，依赖注入，闭包">Laravel底层01-框架核心，依赖注入，闭包</span>
+            <span class="post-date" title="2021-10-01 00:00:00">2021/10/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/08/Docker08-DockerCompose/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker08-DockerCompose">Docker08-DockerCompose</span>
+            <span class="post-date" title="2021-08-08 00:00:00">2021/08/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/07/Docker07-%E7%BD%91%E7%BB%9C/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker07-网络">Docker07-网络</span>
+            <span class="post-date" title="2021-08-07 00:00:00">2021/08/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/06/Docker06-%E6%95%B0%E6%8D%AE%E5%8D%B7%E5%AE%B9%E5%99%A8%E5%92%8CDockerfile/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker06-数据卷容器和Dockerfile">Docker06-数据卷容器和Dockerfile</span>
+            <span class="post-date" title="2021-08-06 00:00:00">2021/08/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/05/Docker05-%E6%95%B0%E6%8D%AE%E6%8C%82%E8%BD%BD/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker05-数据挂载">Docker05-数据挂载</span>
+            <span class="post-date" title="2021-08-05 00:00:00">2021/08/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/04/Docker04-%E9%95%9C%E5%83%8F%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E6%8F%90%E4%BA%A4/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker04-镜像的原理和提交">Docker04-镜像的原理和提交</span>
+            <span class="post-date" title="2021-08-04 00:00:00">2021/08/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/03/Docker03-%E5%AE%89%E8%A3%85Nginx,Elasticsearch,Portainer%E5%8F%AF%E8%A7%86%E5%8C%96/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker03-安装Nginx,Elasticsearch,Portainer可视化">Docker03-安装Nginx,Elasticsearch,Portainer可视化</span>
+            <span class="post-date" title="2021-08-03 00:00:00">2021/08/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/02/Docker02-%E6%A6%82%E5%BF%B5%E5%92%8C%E5%91%BD%E4%BB%A4/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker02-概念和命令">Docker02-概念和命令</span>
+            <span class="post-date" title="2021-08-02 00:00:00">2021/08/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 DOCKER "
+           href="/2021/08/01/Docker01-%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD/"
+           data-tag="DOCKER,容器"
+           data-author="" >
+            <span class="post-title" title="Docker01-安装和卸载">Docker01-安装和卸载</span>
+            <span class="post-date" title="2021-08-01 00:00:00">2021/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 PHP Laravel "
+           href="/2021/08/01/Laravel-Swoole%E5%95%86%E5%9F%8E01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+           data-tag="Swoole,PHP"
+           data-author="" >
+            <span class="post-title" title="Laravel-Swoole01-环境搭建.md">Laravel-Swoole01-环境搭建.md</span>
+            <span class="post-date" title="2021-08-01 00:00:00">2021/08/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/11/GOPL11-%E5%8F%8D%E5%B0%84/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL11-反射">GOPL11-反射</span>
+            <span class="post-date" title="2021-07-11 00:00:00">2021/07/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/10/GOPL10-%E6%B5%8B%E8%AF%95/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL10-测试">GOPL10-测试</span>
+            <span class="post-date" title="2021-07-10 00:00:00">2021/07/10</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/09/GOPL09-%E5%8C%85%E5%92%8C%E5%B7%A5%E5%85%B7/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL09-包和工具">GOPL09-包和工具</span>
+            <span class="post-date" title="2021-07-09 00:00:00">2021/07/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/08/GOPL08-%E5%9F%BA%E4%BA%8E%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL08-基于共享变量的并发">GOPL08-基于共享变量的并发</span>
+            <span class="post-date" title="2021-07-08 00:00:00">2021/07/08</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/07/GOPL07-Goroutines%E5%92%8CChannels/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL07-Goroutines和Channels">GOPL07-Goroutines和Channels</span>
+            <span class="post-date" title="2021-07-07 00:00:00">2021/07/07</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/06/GOPL06-%E6%8E%A5%E5%8F%A3/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL06-接口">GOPL06-接口</span>
+            <span class="post-date" title="2021-07-06 00:00:00">2021/07/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/05/GOPL05-%E6%96%B9%E6%B3%95/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL05-方法">GOPL05-方法</span>
+            <span class="post-date" title="2021-07-05 00:00:00">2021/07/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/04/GOPL04-%E5%87%BD%E6%95%B0/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL04-函数">GOPL04-函数</span>
+            <span class="post-date" title="2021-07-04 00:00:00">2021/07/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/03/GOPL03-%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL03-复合数据类型">GOPL03-复合数据类型</span>
+            <span class="post-date" title="2021-07-03 00:00:00">2021/07/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/02/GOPL02-%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL02-基础数据类型">GOPL02-基础数据类型</span>
+            <span class="post-date" title="2021-07-02 00:00:00">2021/07/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 GO "
+           href="/2021/07/01/GOPL01-%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/"
+           data-tag="GO,GOPL"
+           data-author="" >
+            <span class="post-title" title="GOPL01-程序结构">GOPL01-程序结构</span>
+            <span class="post-date" title="2021-07-01 00:00:00">2021/07/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/21/Mysql45%E8%AE%B221-%E5%8A%A0%E9%94%81%E8%A7%84%E5%88%99/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲21-加锁规则">Mysql45讲21-加锁规则</span>
+            <span class="post-date" title="2021-06-21 00:00:00">2021/06/21</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/20/Mysql45%E8%AE%B220-%E5%B9%BB%E8%AF%BB-%E9%97%B4%E9%9A%99%E9%94%81/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲20-幻读-间隙锁">Mysql45讲20-幻读-间隙锁</span>
+            <span class="post-date" title="2021-06-20 00:00:00">2021/06/20</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/19/Mysql45%E8%AE%B219-%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲19-问题排查">Mysql45讲19-问题排查</span>
+            <span class="post-date" title="2021-06-19 00:00:00">2021/06/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/17/Mysql45%E8%AE%B217-18-%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲17-18-随机查询">Mysql45讲17-18-随机查询</span>
+            <span class="post-date" title="2021-06-17 00:00:00">2021/06/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/06/Mysql45%E8%AE%B206-%E8%AE%A1%E6%95%B0%EF%BC%8C%E6%8E%92%E5%BA%8F/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲06-计数，排序">Mysql45讲06-计数，排序</span>
+            <span class="post-date" title="2021-06-06 00:00:00">2021/06/06</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/05/Mysql45%E8%AE%B205-%E5%89%8D%E7%BC%80%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%88%B7%E7%9B%98/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲05-前缀索引，刷盘">Mysql45讲05-前缀索引，刷盘</span>
+            <span class="post-date" title="2021-06-05 00:00:00">2021/06/05</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/04/Mysql45%E8%AE%B204-%E6%99%AE%E9%80%9A%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%94%AF%E4%B8%80%E7%B4%A2%E5%BC%95/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲04-普通索引，唯一索引">Mysql45讲04-普通索引，唯一索引</span>
+            <span class="post-date" title="2021-06-04 00:00:00">2021/06/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/03/Mysql45%E8%AE%B203-%E9%94%81/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲03-锁">Mysql45讲03-锁</span>
+            <span class="post-date" title="2021-06-03 00:00:00">2021/06/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/02/Mysql45%E8%AE%B202-%E6%97%A5%E5%BF%97/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲02-日志">Mysql45讲02-日志</span>
+            <span class="post-date" title="2021-06-02 00:00:00">2021/06/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/02/Mysql45%E8%AE%B202-%E4%BA%8B%E5%8A%A1%E5%92%8C%E7%B4%A2%E5%BC%95/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲02-事务和索引">Mysql45讲02-事务和索引</span>
+            <span class="post-date" title="2021-06-02 00:00:00">2021/06/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 MYSQL "
+           href="/2021/06/01/Mysql45%E8%AE%B201-%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/"
+           data-tag="后端,MYSQL"
+           data-author="" >
+            <span class="post-title" title="Mysql45讲01-基础架构">Mysql45讲01-基础架构</span>
+            <span class="post-date" title="2021-06-01 00:00:00">2021/06/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/18/Go%E9%9D%A2%E8%AF%95%E9%A2%9805/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题05">Go面试题05</span>
+            <span class="post-date" title="2021-05-18 00:00:00">2021/05/18</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/17/Go%E9%9D%A2%E8%AF%95%E9%A2%9804/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题04">Go面试题04</span>
+            <span class="post-date" title="2021-05-17 00:00:00">2021/05/17</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/16/Go%E9%9D%A2%E8%AF%95%E9%A2%9803/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题03">Go面试题03</span>
+            <span class="post-date" title="2021-05-16 00:00:00">2021/05/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/15/Go%E9%9D%A2%E8%AF%95%E9%A2%9802/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题02">Go面试题02</span>
+            <span class="post-date" title="2021-05-15 00:00:00">2021/05/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/05/14/Go%E9%9D%A2%E8%AF%95%E9%A2%9801/"
+           data-tag="GO,面试"
+           data-author="" >
+            <span class="post-title" title="Go面试题01">Go面试题01</span>
+            <span class="post-date" title="2021-05-14 00:00:00">2021/05/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/03/%E9%AB%98%E6%80%A7%E8%83%BDWeb03-%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="高性能Web03-并发处理">高性能Web03-并发处理</span>
+            <span class="post-date" title="2021-05-03 00:00:00">2021/05/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/02/%E9%AB%98%E6%80%A7%E8%83%BDWeb02-%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="高性能Web02-网络传输">高性能Web02-网络传输</span>
+            <span class="post-date" title="2021-05-02 00:00:00">2021/05/02</span>
+        </a>
+        
+        
+        <a  class="全部文章 WEB "
+           href="/2021/05/01/%E9%AB%98%E6%80%A7%E8%83%BDWeb01-%E7%BB%AA%E8%AE%BA/"
+           data-tag="WEB"
+           data-author="" >
+            <span class="post-title" title="构建高性能Web站点01">构建高性能Web站点01</span>
+            <span class="post-date" title="2021-05-01 00:00:00">2021/05/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/04/11/Mysql%E9%9D%A2%E8%AF%95%E9%A2%9801/"
+           data-tag="面试,Mysql"
+           data-author="" >
+            <span class="post-title" title="Mysql面试题01">Mysql面试题01</span>
+            <span class="post-date" title="2021-04-11 00:00:00">2021/04/11</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试 "
+           href="/2021/04/01/PHP%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="面试,PHP"
+           data-author="" >
+            <span class="post-title" title="PHP面试题">PHP面试题</span>
+            <span class="post-date" title="2021-04-01 00:00:00">2021/04/01</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-Go面试题01" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Go面试题01</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="面试">面试</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">GO</a>
+            
+            <a class="color3">面试</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-05-27 12:04:41'>2021-05-14 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GO%E5%9F%BA%E7%A1%80"><span class="toc-text">GO基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%8E%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%9B%B8%E6%AF%94%EF%BC%8C%E4%BD%BF%E7%94%A8Go%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A4%84"><span class="toc-text">1.与其他语言相比，使用Go有什么好处?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Golang-%E4%BD%BF%E7%94%A8%E4%BB%80%E4%B9%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">2.Golang 使用什么数据类型?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-GO%E4%B8%AD%E7%9A%84%E5%8C%85%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">3.GO中的包是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Go-%E6%94%AF%E6%8C%81%E4%BB%80%E4%B9%88%E5%BD%A2%E5%BC%8F%E7%9A%84%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%EF%BC%9F%E5%B0%86%E6%95%B4%E6%95%B0%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-text">4.Go 支持什么形式的类型转换？将整数转换为浮点数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E4%BB%80%E4%B9%88%E6%98%AF-Goroutine%EF%BC%9F%E5%A6%82%E4%BD%95%E5%81%9C%E6%AD%A2%E5%AE%83%EF%BC%9F"><span class="toc-text">5. 什么是 Goroutine？如何停止它？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%A6%82%E4%BD%95%E5%9C%A8%E8%BF%90%E8%A1%8C%E6%97%B6%E6%A3%80%E6%9F%A5%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B%EF%BC%9F"><span class="toc-text">6.如何在运行时检查变量类型？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Go%E4%B8%A4%E4%B8%AA%E6%8E%A5%E5%8F%A3%E4%B9%8B%E9%97%B4%E5%8F%AF%E4%BB%A5%E5%AD%98%E5%9C%A8%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB"><span class="toc-text">7.Go两个接口之间可以存在什么关系?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Go-%E5%BD%93%E4%B8%AD%E5%90%8C%E6%AD%A5%E9%94%81%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%9F%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">8. Go 当中同步锁有什么特点？作用是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-Go-%E8%AF%AD%E8%A8%80%E5%BD%93%E4%B8%AD-Channel%EF%BC%88%E9%80%9A%E9%81%93%EF%BC%89%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9%EF%BC%8C%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">9. Go 语言当中 Channel（通道）有什么特点，需要注意什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-Go%E8%AF%AD%E8%A8%80%E5%BD%93%E4%B8%ADChannel%E7%BC%93%E5%86%B2%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E7%82%B9"><span class="toc-text">10.Go语言当中Channel缓冲有什么特点?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-Go-%E8%AF%AD%E8%A8%80%E4%B8%AD-cap-%E5%87%BD%E6%95%B0%E5%8F%AF%E4%BB%A5%E4%BD%9C%E7%94%A8%E4%BA%8E%E5%93%AA%E4%BA%9B%E5%86%85%E5%AE%B9%EF%BC%9F"><span class="toc-text">11.Go 语言中 cap 函数可以作用于哪些内容？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-Go-Convey-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%80%E8%88%AC%E7%94%A8%E6%9D%A5%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">12.Go Convey 是什么？一般用来做什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-Go%E8%AF%AD%E8%A8%80%E5%BD%93%E4%B8%ADnew%EF%BC%8Cmake%E7%9A%84%E4%BD%9C%E7%94%A8%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">13.Go语言当中new，make的作用是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-make%E5%92%8Cnew%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-text">14. make和new的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-Printf-%EF%BC%8CSprintf-%EF%BC%8CFprintF-%E9%83%BD%E6%98%AF%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C%EF%BC%9F"><span class="toc-text">15. Printf()，Sprintf()，FprintF() 都是格式化输出，有什么不同？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-Go%E8%AF%AD%E8%A8%80%E5%BD%93%E4%B8%AD%E6%95%B0%E7%BB%84%E5%92%8C%E5%88%87%E7%89%87%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">16. Go语言当中数组和切片的区别是什么?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-Go%E8%AF%AD%E8%A8%80%E5%BD%93%E4%B8%AD%E5%80%BC%E4%BC%A0%E9%80%92%E5%92%8C%E5%9C%B0%E5%9D%80%E4%BC%A0%E9%80%92-%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92-%E5%A6%82%E4%BD%95%E8%BF%90%E7%94%A8-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB-%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="toc-text">17. Go语言当中值传递和地址传递(引用传递)如何运用?有什么区别?举例说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-Go%E8%AF%AD%E8%A8%80%E5%BD%93%E4%B8%AD%E6%95%B0%E7%BB%84%E5%92%8C%E5%88%87%E7%89%87%E5%9C%A8%E4%BC%A0%E9%80%92%E7%9A%84%E6%97%B6%E5%80%99%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">18. Go语言当中数组和切片在传递的时候的区别是什么?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-Go%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%87%E7%89%87%E6%89%A9%E5%AE%B9%EF%BC%9F"><span class="toc-text">19.Go语言如何实现切片扩容？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-defer%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%E6%98%AF%E4%BB%80%E4%B9%88-defer%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E7%89%B9%E7%82%B9%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">20.defer的执行顺序是什么? defer的作用和特点是什么?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-Golang-Slice%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="toc-text">21. Golang Slice的底层实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-%E6%89%A9%E5%AE%B9%E5%89%8D%E5%90%8E%E7%9A%84-Slice-%E6%98%AF%E5%90%A6%E7%9B%B8%E5%90%8C"><span class="toc-text">23. 扩容前后的 Slice 是否相同?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-Golang%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92%E3%80%81%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="toc-text">24. Golang的参数传递、引用类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-Golang-Map%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="toc-text">25.Golang Map底层实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26-Golang-Map%E5%A6%82%E4%BD%95%E6%89%A9%E5%AE%B9"><span class="toc-text">26.Golang Map如何扩容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#27-Golang-Map-%E6%9F%A5%E6%89%BE"><span class="toc-text">27. Golang Map 查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#28-%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B-Channel"><span class="toc-text">28. 介绍一下 Channel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#29-Channel-%E7%9A%84-ring-buffer%E5%AE%9E%E7%8E%B0"><span class="toc-text">29.Channel 的 ring buffer实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Go-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="toc-text">Go 并发编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Mutex%E5%87%A0%E7%A7%8D%E7%8A%B6%E6%80%81"><span class="toc-text">1. Mutex几种状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Mutex%E6%AD%A3%E5%B8%B8%E6%A8%A1%E5%BC%8F%E5%92%8C%E9%A5%A5%E9%A5%BF%E6%A8%A1%E5%BC%8F"><span class="toc-text">2. Mutex正常模式和饥饿模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Mutex-%E5%85%81%E8%AE%B8%E8%87%AA%E6%97%8B%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="toc-text">3. Mutex 允许自旋的条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-RWMutex%E5%AE%9E%E7%8E%B0"><span class="toc-text">4. RWMutex实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-RWMutex%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">5.RWMutex注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Cond%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">6. Cond是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Cond%E4%B8%ADBroadcast%E5%92%8CSignal%E5%8C%BA%E5%88%AB"><span class="toc-text">7.Cond中Broadcast和Signal区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Cond%E4%B8%ADWait%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">8. Cond中Wait的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-WaitGroup%E7%94%A8%E6%B3%95"><span class="toc-text">9. WaitGroup用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-WaitGroup%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-text">10. WaitGroup实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E4%BB%80%E4%B9%88%E6%98%AFsync-Once"><span class="toc-text">11. 什么是sync.Once</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E4%BB%80%E4%B9%88%E6%93%8D%E4%BD%9C%E5%8F%AB%E5%81%9A%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C"><span class="toc-text">12. 什么操作叫做原子操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E5%92%8C%E9%94%81%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">13. 原子操作和锁的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E4%BB%80%E4%B9%88%E6%98%AFCAS"><span class="toc-text">14. 什么是CAS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-sync-Pool%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8"><span class="toc-text">15. sync.Pool有什么用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Go-Runtime"><span class="toc-text">Go Runtime</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Goroutine%E5%AE%9A%E4%B9%89"><span class="toc-text">1.Goroutine定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-GMP"><span class="toc-text">2.GMP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-0%E4%B9%8B%E5%89%8DGM%E8%B0%83%E5%BA%A6%E6%A8%A1%E5%9E%8B"><span class="toc-text">3.1.0之前GM调度模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-GMP%E8%B0%83%E5%BA%A6%E6%B5%81%E7%A8%8B"><span class="toc-text">4.GMP调度流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-work-stealing-%E6%9C%BA%E5%88%B6"><span class="toc-text">5. work stealing 机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-hand-off-%E6%9C%BA%E5%88%B6"><span class="toc-text">6. hand off 机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%8D%8F%E4%BD%9C%E5%BC%8F%E7%9A%84%E6%8A%A2%E5%8D%A0%E5%BC%8F%E8%B0%83%E5%BA%A6"><span class="toc-text">7. 协作式的抢占式调度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E5%9F%BA%E4%BA%8E%E4%BF%A1%E5%8F%B7%E7%9A%84%E6%8A%A2%E5%8D%A0%E5%BC%8F%E8%B0%83%E5%BA%A6"><span class="toc-text">8. 基于信号的抢占式调度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#sysmon%E5%87%BD%E6%95%B0"><span class="toc-text">sysmon函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A2%E5%8D%A0%E8%BF%9B%E8%A1%8C%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84P"><span class="toc-text">抢占进行系统调用的P</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A2%E5%8D%A0%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E8%BF%87%E9%95%BF%E7%9A%84P"><span class="toc-text">抢占运行时间过长的P</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-GMP-%E8%B0%83%E5%BA%A6%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%AD%98%E5%9C%A8%E5%93%AA%E4%BA%9B%E9%98%BB%E5%A1%9E"><span class="toc-text">9. GMP 调度过程中存在哪些阻塞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-Sysmon-%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8"><span class="toc-text">10.Sysmon 有什么作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0"><span class="toc-text">11. 三色标记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E4%B8%89%E8%89%B2%E4%B8%8D%E5%8F%98%E5%BC%8F"><span class="toc-text">12. 三色不变式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E6%8F%92%E5%85%A5%E5%86%99%E5%B1%8F%E9%9A%9C"><span class="toc-text">13. 插入写屏障</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E5%88%A0%E9%99%A4%E5%86%99%E5%B1%8F%E9%9A%9C"><span class="toc-text">14. 删除写屏障</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E6%B7%B7%E5%90%88%E5%86%99%E5%B1%8F%E9%9A%9C"><span class="toc-text">15. 混合写屏障</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-GC%E8%A7%A6%E5%8F%91%E6%9C%BA%E5%88%B6"><span class="toc-text">16. GC触发机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-GC%E6%B5%81%E7%A8%8B"><span class="toc-text">17. GC流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-GC%E5%A6%82%E4%BD%95%E8%B0%83%E4%BC%98"><span class="toc-text">18. GC如何调优</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-Mutex%E6%98%AF%E4%B9%90%E8%A7%82%E9%94%81%E8%BF%98%E6%98%AF%E6%82%B2%E8%A7%82%E9%94%81%EF%BC%8C%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-text">19. Mutex是乐观锁还是悲观锁，执行过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-Golang%E7%9A%84%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B0%8F%E5%AF%B9%E8%B1%A1%E5%A4%9A%E4%BA%86%E4%BC%9A%E9%80%A0%E6%88%90gc%E5%8E%8B%E5%8A%9B%E3%80%82"><span class="toc-text">20. Golang的内存模型，为什么小对象多了会造成gc压力。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-Go%E5%93%AA%E4%BA%9B%E5%AF%B9%E8%B1%A1%E5%88%86%E9%85%8D%E5%9C%A8%E5%A0%86%E4%B8%8A%EF%BC%8C%E5%93%AA%E4%BA%9B%E5%AF%B9%E8%B1%A1%E5%88%86%E9%85%8D%E5%9C%A8%E6%A0%88%E4%B8%8A"><span class="toc-text">21.Go哪些对象分配在堆上，哪些对象分配在栈上</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="GO基础"><a href="#GO基础" class="headerlink" title="GO基础"></a>GO基础</h2><h3 id="1-与其他语言相比，使用Go有什么好处"><a href="#1-与其他语言相比，使用Go有什么好处" class="headerlink" title="1.与其他语言相比，使用Go有什么好处?"></a>1.与其他语言相比，使用Go有什么好处?</h3><ul>
+<li>可直接编译成机器码，不依赖其他库</li>
+<li>语言层面支持并发</li>
+<li>内置runtime，支持垃圾回收</li>
+<li>丰富的标准库</li>
+<li>跨平台编译（交叉编译）</li>
+</ul>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36484519/article/details/115969208">go语言与php优势,go语言有什么优点？</a></p>
+<h3 id="2-Golang-使用什么数据类型"><a href="#2-Golang-使用什么数据类型" class="headerlink" title="2.Golang 使用什么数据类型?"></a>2.Golang 使用什么数据类型?</h3><ul>
+<li>基础类型：数字（整数，浮点数，复数）、字符串和布尔型</li>
+<li>复合数据类型：数组array，结构体struct</li>
+<li>引用类型：指针pointer、切片slice、字典map、函数function、通道chan</li>
+<li>接口类型：interface</li>
+</ul>
+<h3 id="3-GO中的包是什么？"><a href="#3-GO中的包是什么？" class="headerlink" title="3.GO中的包是什么？"></a>3.GO中的包是什么？</h3><p>包是 Go 工作区中包含Go源文件或其他包的目录。</p>
+<p>包声明：<code>package test</code></p>
+<p>包导入：<code>import test</code></p>
+<h3 id="4-Go-支持什么形式的类型转换？将整数转换为浮点数"><a href="#4-Go-支持什么形式的类型转换？将整数转换为浮点数" class="headerlink" title="4.Go 支持什么形式的类型转换？将整数转换为浮点数"></a>4.Go 支持什么形式的类型转换？将整数转换为浮点数</h3><ul>
+<li><p>显式类型转换：<strong>切换同一基础类型不同精度范围</strong>，比如整数转换为浮点数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a := 7</span><br><span class="line">b := float64(a)</span><br></pre></td></tr></table></figure></li>
+<li><p>断言：用来判断 interface{} 的类型，语法x.( T )，x 指的是类型为 interface{} 的变量，T 是我们断言它可能是的类型。该语法返回两个参数，第一个参数是 <strong>x 转化为 T 类型后的变量</strong>，第二个值是一个布尔值，若为true 则表示断言成功，false 则表示断言失败。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var a interface&#123;&#125; = 1</span><br><span class="line">v, ok := a.(int)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="5-什么是-Goroutine？如何停止它？"><a href="#5-什么是-Goroutine？如何停止它？" class="headerlink" title="5. 什么是 Goroutine？如何停止它？"></a>5. 什么是 Goroutine？如何停止它？</h3><p>goroutine是协程，比标准线程更轻量级，执行goroutine只需极少的栈内存(大概是4~5KB)</p>
+<p>在 Go 语言中，goroutine 只能自己主动退出，一般通过 channel 来控制：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qcrao/article/details/120915548">https://blog.csdn.net/qcrao/article/details/120915548</a></p>
+<ol>
+<li><p>通过channel的close机制关闭</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">string</span>, <span class="number">6</span>)</span><br><span class="line"> <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="keyword">for</span> &#123;</span><br><span class="line">   v, ok := &lt;-ch <span class="comment">//当关闭 channel 时，根据其返回结果跳出</span></span><br><span class="line">   <span class="keyword">if</span> !ok &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;结束&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">   &#125;</span><br><span class="line">   fmt.Println(v)</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;()</span><br><span class="line"> </span><br><span class="line"> ch &lt;- <span class="string">&quot;煎鱼还没进锅里...&quot;</span></span><br><span class="line"> ch &lt;- <span class="string">&quot;煎鱼进脑子里了！&quot;</span></span><br><span class="line"> <span class="built_in">close</span>(ch)</span><br><span class="line"> time.Sleep(time.Second)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>定期轮询 channel</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> quit := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">bool</span>)</span><br><span class="line"> <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">  <span class="keyword">for</span> &#123;</span><br><span class="line">   <span class="keyword">select</span> &#123;</span><br><span class="line">   <span class="keyword">case</span> &lt;-quit:</span><br><span class="line">     fmt.Println(<span class="string">&quot;结束&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;()</span><br><span class="line"> quit &lt;- <span class="literal">true</span></span><br><span class="line"> time.Sleep(time.Second)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>通过上下文context控制</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;time&quot;</span></span><br><span class="line">    <span class="string">&quot;context&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">struct</span>&#123;&#125;)</span><br><span class="line"> ctx, cancel := context.WithCancel(context.Background())</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">(ctx context.Context)</span></span> &#123;</span><br><span class="line">  <span class="keyword">for</span> &#123;</span><br><span class="line">   <span class="keyword">select</span> &#123;</span><br><span class="line">   <span class="keyword">case</span> &lt;-ctx.Done():</span><br><span class="line">    ch &lt;- <span class="keyword">struct</span>&#123;&#125;&#123;&#125;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">   <span class="keyword">default</span>:</span><br><span class="line">    fmt.Println(<span class="string">&quot;煎鱼还没到锅里...&quot;</span>)</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   time.Sleep(<span class="number">500</span> * time.Millisecond)</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;(ctx)</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">  time.Sleep(<span class="number">3</span> * time.Second)</span><br><span class="line">  cancel()</span><br><span class="line"> &#125;()</span><br><span class="line"> </span><br><span class="line"> &lt;-ch</span><br><span class="line"> fmt.Println(<span class="string">&quot;结束&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="6-如何在运行时检查变量类型？"><a href="#6-如何在运行时检查变量类型？" class="headerlink" title="6.如何在运行时检查变量类型？"></a>6.如何在运行时检查变量类型？</h3><p>类型开关(Type Switch)是在运行时检查变量类型的最佳方式。</p>
+<p>类型开关按类型 而不是值来评估变量。</p>
+<p>每个 Switch 至少包含一个 case 用作条件语句，如果没 有一个 case 为真，则执行 default。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var i interface&#123;&#125;</span><br><span class="line">// 这里的 v 是类型的值</span><br><span class="line">switch v := i.(type) &#123;</span><br><span class="line">case T:</span><br><span class="line">    // 值 v 的类型为 T</span><br><span class="line">case S:</span><br><span class="line">    // 值 v 的类型为 S</span><br><span class="line">default:</span><br><span class="line">    // 没有匹配，v 的类型与 i 的底层值类型相同，只是没有确定具体是哪个类型</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-Go两个接口之间可以存在什么关系"><a href="#7-Go两个接口之间可以存在什么关系" class="headerlink" title="7.Go两个接口之间可以存在什么关系?"></a>7.Go两个接口之间可以存在什么关系?</h3><ul>
+<li><p>如果两个接口有相同的方法列表，那么他们就是等价的，可以相互赋值</p>
+</li>
+<li><p>如果接口 A 的方法列表是接口 B 的方法列表的子集，那么接口 B 可以赋值给接口A</p>
+</li>
+</ul>
+<h3 id="8-Go-当中同步锁有什么特点？作用是什么"><a href="#8-Go-当中同步锁有什么特点？作用是什么" class="headerlink" title="8. Go 当中同步锁有什么特点？作用是什么"></a>8. Go 当中同步锁有什么特点？作用是什么</h3><p>特点：</p>
+<p>当一个 Goroutine（协程）获得了 Mutex 后，其他 Goroutine（协程）就只能乖 乖的等待，除非该 Goroutine 释放了该 Mutex。</p>
+<p>RWMutex 在读锁占用的情况下， 会阻止写，但不阻止读 RWMutex。 在写锁占用情况下，会阻止任何其他 Goroutine（无论读和写）进来，整个锁相当于由该 Goroutine 独占 。</p>
+<p>作用：</p>
+<p>保证资源在使用时的独有性，不会因为并发而导致数据错乱， 保证系统的稳定性。</p>
+<h3 id="9-Go-语言当中-Channel（通道）有什么特点，需要注意什么？"><a href="#9-Go-语言当中-Channel（通道）有什么特点，需要注意什么？" class="headerlink" title="9. Go 语言当中 Channel（通道）有什么特点，需要注意什么？"></a>9. Go 语言当中 Channel（通道）有什么特点，需要注意什么？</h3><p>如果给一个 nil 的 channel 发送数据，会造成永远阻塞。</p>
+<p>如果从一个 nil 的 channel 中接收数据，也会造成永久阻塞。 </p>
+<p>给一个已经关闭的 channel 发送数据， 会引起 panic </p>
+<p>从一个已经关闭的 channel 接收数据， 如果缓冲区不为空，返回结果+true；如果缓冲区为空，则返回零值+false。</p>
+<h3 id="10-Go语言当中Channel缓冲有什么特点"><a href="#10-Go语言当中Channel缓冲有什么特点" class="headerlink" title="10.Go语言当中Channel缓冲有什么特点?"></a>10.Go语言当中Channel缓冲有什么特点?</h3><p>无缓冲的 channel 是同步的，而有缓冲的 channel 是非同步的。</p>
+<h3 id="11-Go-语言中-cap-函数可以作用于哪些内容？"><a href="#11-Go-语言中-cap-函数可以作用于哪些内容？" class="headerlink" title="11.Go 语言中 cap 函数可以作用于哪些内容？"></a>11.Go 语言中 cap 函数可以作用于哪些内容？</h3><ul>
+<li>array(数组)  </li>
+<li>slice(切片)   </li>
+<li>channel(通道)</li>
+</ul>
+<h3 id="12-Go-Convey-是什么？一般用来做什么？"><a href="#12-Go-Convey-是什么？一般用来做什么？" class="headerlink" title="12.Go Convey 是什么？一般用来做什么？"></a>12.Go Convey 是什么？一般用来做什么？</h3><p>go convey 是一个支持 Golang 的单元测试框架 </p>
+<p>go convey 能够自动监控文件修改并启动测试，并可以将测试结果实时输出 到 Web 界面 </p>
+<p>go convey 提供了丰富的断言简化测试用例的编写</p>
+<h3 id="13-Go语言当中new，make的作用是什么？"><a href="#13-Go语言当中new，make的作用是什么？" class="headerlink" title="13.Go语言当中new，make的作用是什么？"></a>13.Go语言当中new，make的作用是什么？</h3><ol>
+<li><p>new 创建一个该类型的实例，并且返回指向该实例的指针</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func new(Type) *Type </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>传递给 new 函数的是一个类型，而不是一个值</li>
+<li>返回值是指向这个新分配的地址的指针</li>
+</ul>
+</li>
+<li><p>make 的作用是为引用类型（ slice, map or chan ）初始化，然后返回该类型的引用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func make(Type, size IntegerType) Type</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="14-make和new的区别？"><a href="#14-make和new的区别？" class="headerlink" title="14. make和new的区别？"></a>14. make和new的区别？</h3><p>make和new都是用来分配内存的內建函数，在堆上分配内存</p>
+<p>make用于引用类型slice、map以及channel的初始化（非零值），返回的是类型的引用而不是指针</p>
+<p>new可以分配任意类型数据，并返回指向内存地址的指针，指针指向的内容的值为零(zero value)</p>
+<h3 id="15-Printf-，Sprintf-，FprintF-都是格式化输出，有什么不同？"><a href="#15-Printf-，Sprintf-，FprintF-都是格式化输出，有什么不同？" class="headerlink" title="15. Printf()，Sprintf()，FprintF() 都是格式化输出，有什么不同？"></a>15. Printf()，Sprintf()，FprintF() 都是格式化输出，有什么不同？</h3><p>Printf 是标准输出，一般是屏幕，也可以重定向。 </p>
+<p>Sprintf()是把格式化字符串输出到指定的字符串中。 </p>
+<p>Fprintf()是把格式化字符串输出到文件中。</p>
+<h3 id="16-Go语言当中数组和切片的区别是什么"><a href="#16-Go语言当中数组和切片的区别是什么" class="headerlink" title="16. Go语言当中数组和切片的区别是什么?"></a>16. Go语言当中数组和切片的区别是什么?</h3><ol>
+<li>数组固定长度，切片可以改变长度。</li>
+<li>数组长度是数组类型的一部分，且大小不可改变。切片不需要指定大小。</li>
+<li>数组是值类型，切片是引用类型。</li>
+</ol>
+<h3 id="17-Go语言当中值传递和地址传递-引用传递-如何运用-有什么区别-举例说明"><a href="#17-Go语言当中值传递和地址传递-引用传递-如何运用-有什么区别-举例说明" class="headerlink" title="17. Go语言当中值传递和地址传递(引用传递)如何运用?有什么区别?举例说明"></a>17. Go语言当中值传递和地址传递(引用传递)如何运用?有什么区别?举例说明</h3><ul>
+<li>值传递只会把参数的值复制一份放进对应的函数，两个变量的地址不同， 不可相互修改。</li>
+<li>地址传递(引用传递)会将变量本身传入对应的函数，在函数中可以对该变量进行值内容的修改。</li>
+</ul>
+<h3 id="18-Go语言当中数组和切片在传递的时候的区别是什么"><a href="#18-Go语言当中数组和切片在传递的时候的区别是什么" class="headerlink" title="18. Go语言当中数组和切片在传递的时候的区别是什么?"></a>18. Go语言当中数组和切片在传递的时候的区别是什么?</h3><ul>
+<li>数组是值传递，传递数组值的副本</li>
+<li>切片是引用传递，传递的是指针的副本</li>
+</ul>
+<h3 id="19-Go语言如何实现切片扩容？"><a href="#19-Go语言如何实现切片扩容？" class="headerlink" title="19.Go语言如何实现切片扩容？"></a>19.Go语言如何实现切片扩容？</h3><ol>
+<li><p>预估扩容后容量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.切片容量翻倍如果小于预估容量，则扩容到预估容量；</span><br><span class="line">2.切片容量翻倍如果大于预估容量：</span><br><span class="line">  - 切片的容量如果小于1024，那么直接翻倍</span><br><span class="line">  - 如果大于等于1024，每次扩1/4，直到新容量超过所需容量</span><br></pre></td></tr></table></figure></li>
+<li><p>计算所需内存 = 预估容量 x 元素类型大小</p>
+</li>
+<li><p>分配内存，匹配合适的内存规格</p>
+</li>
+</ol>
+<h3 id="20-defer的执行顺序是什么-defer的作用和特点是什么"><a href="#20-defer的执行顺序是什么-defer的作用和特点是什么" class="headerlink" title="20.defer的执行顺序是什么? defer的作用和特点是什么?"></a>20.defer的执行顺序是什么? defer的作用和特点是什么?</h3><p>顺序：</p>
+<ul>
+<li>包含该defer语句的函数执行完毕时，defer后的函数才会被执行。 </li>
+<li>一个函数中执行多条defer语句时，它们的执行顺序与声明顺序相反。</li>
+</ul>
+<p>作用特点：</p>
+<ul>
+<li>defer语句经常被用于处理成对的操作，如打开、关闭、连接、断开连接、加锁、释放锁。</li>
+<li>defer机制能保证在任何执行路径下，资源被释放。释放资源的defer应该直接跟在请求资源的语句后。</li>
+</ul>
+<h3 id="21-Golang-Slice的底层实现"><a href="#21-Golang-Slice的底层实现" class="headerlink" title="21. Golang Slice的底层实现"></a>21. Golang Slice的底层实现</h3><ul>
+<li><p>切片是基于数组实现的，可以理解为对底层数组的抽象。</p>
+</li>
+<li><p>切片内部通过指针引用底层数组，设定相关属性将数据读写操作限定在指定的区域内。</p>
+</li>
+<li><p>切片本身是一个只读对象，其工作机制类似数组指针的一种封装。</p>
+</li>
+</ul>
+<h3 id="23-扩容前后的-Slice-是否相同"><a href="#23-扩容前后的-Slice-是否相同" class="headerlink" title="23. 扩容前后的 Slice 是否相同?"></a>23. 扩容前后的 Slice 是否相同?</h3><p>情况一:</p>
+<p>原数组还有容量可以扩容(实际容量没有填充完)，这种情况下，扩容以后的数组还是指向原来的数组，对一个切片的操作可能影响多个指针指向相同地址的Slice。</p>
+<p>情况二:</p>
+<p>原来数组的容量已经达到了最大值，再扩容会新开一片内存，把原来的值拷贝过来，然后再执行 append() 操作。这种情况丝毫不影响原数组。</p>
+<p>要复制一个 Slice，最好使用 Copy 函数。</p>
+<h3 id="24-Golang的参数传递、引用类型"><a href="#24-Golang的参数传递、引用类型" class="headerlink" title="24. Golang的参数传递、引用类型"></a>24. Golang的参数传递、引用类型</h3><p>Go 语言中所有的传参都是值传递(传值)，都是一个副本，一个拷贝：</p>
+<ul>
+<li>非引用类型(int、string、struct 等)在函数中就无法修改原内容数据</li>
+<li>引用类型(指针、map、slice、chan 等)在函数中可以修改原内容数据</li>
+</ul>
+<h3 id="25-Golang-Map底层实现"><a href="#25-Golang-Map底层实现" class="headerlink" title="25.Golang Map底层实现"></a>25.Golang Map底层实现</h3><p>map的底层实现是一个散列表(Hash表)，因此实现 map 的过程实际上就是实现散表的过程。</p>
+<p>map类型变量本质上是一个指针，指向hmap结构体。hmap中包含bmap(bucket)</p>
+<h3 id="26-Golang-Map如何扩容"><a href="#26-Golang-Map如何扩容" class="headerlink" title="26.Golang Map如何扩容"></a>26.<strong>Golang Map</strong>如何扩容</h3><ul>
+<li>渐进式扩容：把键值对迁移时间分摊到多次哈希表操作中。</li>
+</ul>
+<ul>
+<li><p>翻倍扩容：负载因子超标时进行</p>
+</li>
+<li><p>等量扩容：负载因子不超标，但溢出桶较多时进行</p>
+</li>
+</ul>
+<h3 id="27-Golang-Map-查找"><a href="#27-Golang-Map-查找" class="headerlink" title="27. Golang Map 查找"></a>27. <strong>Golang Map</strong> <strong>查找</strong></h3><p>Go 语言中 map 采用的是哈希查找表，由一个 key 通过哈希函数得到哈希值，由这个哈希值将 key 对应存到不同的桶 (bucket)中，当有多个哈希映射到相同的的桶中时，使用链表解决哈希冲突（链表法）。  </p>
+<h3 id="28-介绍一下-Channel"><a href="#28-介绍一下-Channel" class="headerlink" title="28. 介绍一下 Channel"></a>28. 介绍一下 Channel</h3><p>Go 语言中，不要通过共享内存来通信，而要通过通信来实现内存共享。</p>
+<p>Go 的CSP(Communicating Sequential Process)并发模型，中文可以叫做通信顺序进程，是通过 goroutine 和 channel 来实现的。</p>
+<p>channel 收发遵循先进先出 FIFO 的原则。分为有缓冲区和无缓冲区，channel通过ring buffer 记录实现。当 channel 因为缓冲区不足而阻塞了队列，则使用双向链表存储。</p>
+<h3 id="29-Channel-的-ring-buffer实现"><a href="#29-Channel-的-ring-buffer实现" class="headerlink" title="29.Channel 的 ring buffer实现"></a>29.<strong>Channel</strong> <strong>的</strong> <strong>ring buffer</strong>实现</h3><p>channel 中使用了 ring buffer(环形缓冲区) 来缓存写入的数据。</p>
+<p><img src="https://i0.wp.com/tva1.sinaimg.cn/large/e6c9d24ely1h237d9qmszj20d5082q32.jpg"></p>
+<p>上图为一个缓冲区为 8 的 channel buffer，recvx 指向最早被读取的数据，sendx 指向再次写入时插入的位置。</p>
+<h2 id="Go-并发编程"><a href="#Go-并发编程" class="headerlink" title="Go 并发编程"></a>Go 并发编程</h2><h3 id="1-Mutex几种状态"><a href="#1-Mutex几种状态" class="headerlink" title="1. Mutex几种状态"></a>1. <strong>Mutex</strong>几种状态</h3><p>数据结构</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Mutex <span class="keyword">struct</span> &#123;</span><br><span class="line">    state <span class="type">int32</span></span><br><span class="line">    sema  <span class="type">uint32</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>state表示mutex的状态，是32位的整型变量，内部实现时把该变量分成四份，用于记录Mutex的四种状态:</p>
+<ul>
+<li><p>Locked: 表示该Mutex是否已被锁定，0：没有锁定 1：已被锁定。</p>
+</li>
+<li><p>Woken: 表示是否有协程已被唤醒，0：没有协程唤醒 1：已有协程唤醒，正在加锁过程中。 </p>
+</li>
+<li><p>Starving：表示该Mutex是否处于饥饿状态，0：没有饥饿 1：饥饿状态，说明有协程阻塞了超过1ms。</p>
+</li>
+<li><p>Waiter: 表示阻塞等待锁的协程个数，协程解锁时根据此值来判断是否需要释放信号量。</p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.csdn.net/tags/MtTaMg4sNzg4MDkwLWJsb2cO0O0O.html">go mutex详解</a></p>
+<h3 id="2-Mutex正常模式和饥饿模式"><a href="#2-Mutex正常模式和饥饿模式" class="headerlink" title="2. Mutex正常模式和饥饿模式"></a>2. Mutex正常模式和饥饿模式</h3><p><strong>正常模式(非公平锁)</strong> </p>
+<p>正常模式下，所有等待锁的 goroutine 按照 FIFO(先进先出)顺序等待。唤醒的 goroutine 不会直接拥有锁，而是会和新请求 goroutine 竞争锁。新请求的 goroutine 更容易抢占:因为它正在 CPU 上执行，所以刚刚唤醒的goroutine有很大可能在锁竞争中失败。在这种情况下，这个被唤醒的 goroutine 会加入到等待队列的前面。</p>
+<p><strong>饥饿模式(公平锁)</strong> </p>
+<p>为了解决了等待 goroutine 队列的长尾问题</p>
+<p>饥饿模式下，直接由unlock把锁交给等待队列中排在第一位的 goroutine (队头)，同时，饥饿模式下，新进来的 goroutine 不会参与抢锁也不会进入自旋状态，会直接进入等待队列的尾部。这样很好的解决了老的goroutine一直抢不到锁的场景。</p>
+<p>饥饿模式的触发条件:当一个goroutine等待锁时间超过1毫秒时，或者当前队列只剩下一个goroutine的时候，Mutex切换到饥饿模式。 </p>
+<p><strong>总结</strong> </p>
+<p>对于两种模式，正常模式下的性能是最好的，goroutine 可以连续多次获取锁，饥饿模式解决了取锁公平的问题，但是性能会下降，这其实是性能和公平 的一个平衡模式。 </p>
+<h3 id="3-Mutex-允许自旋的条件"><a href="#3-Mutex-允许自旋的条件" class="headerlink" title="3. Mutex 允许自旋的条件"></a>3. <strong>Mutex</strong> <strong>允许自旋的条件</strong></h3><p>加锁时程序会自动判断是否可以自旋，自旋必须满足以下所有条件：</p>
+<ul>
+<li>锁已被占用，并且锁不处于饥饿模式</li>
+<li>积累的自旋次数小于最大自旋次数(active_spin=4)</li>
+<li>CPU核数要大于1，否则自旋没有意义，因为此时不可能有其他协程释放锁</li>
+<li>协程调度机制中的Process数量要大于1，比如使用GOMAXPROCS()将处理器设置为1就不能启用自旋</li>
+<li>协程调度机制中的可运行队列必须为空，否则会延迟协程调度</li>
+</ul>
+<h3 id="4-RWMutex实现"><a href="#4-RWMutex实现" class="headerlink" title="4. RWMutex实现"></a>4. RWMutex实现</h3><p>通过记录 readerCount 读锁的数量来进行控制，当有一个写锁的时候，会将读锁数量设置为负数 1&lt;&lt;30。</p>
+<p>目的是让新进入的读锁等待之前的写锁释放通知读锁。同样的当有写锁进行抢占时，也会等待之前的读锁都释放完毕，才会开始进行后续的操作。 </p>
+<p>而等写锁释放完之后，会将值重新加上 1&lt;&lt;30, 并通知刚才新进入的读锁(rw.readerSem)，两者互相限制。</p>
+<h3 id="5-RWMutex注意事项"><a href="#5-RWMutex注意事项" class="headerlink" title="5.RWMutex注意事项"></a>5.RWMutex注意事项</h3><ul>
+<li>RWMutex 是单写多读锁，该锁可以加多个读锁或者一个写锁，适用于读多写少的场景 </li>
+<li>读锁占用的情况下会阻止写，不会阻止读，多个 Goroutine 可以同时获取读锁 </li>
+<li>写锁会阻止其他 Goroutine(无论读和写)进来，整个锁由该 Goroutine独占 </li>
+<li>RWMutex 类型变量的零值是一个未锁定状态的互斥锁 </li>
+<li>RWMutex 在首次被使用之后就不能再被拷贝 </li>
+<li>RWMutex 的读锁或写锁在未锁定状态，解锁操作都会引发 panic </li>
+<li>RWMutex 的一个写锁去锁定临界区的共享资源，如果临界区的共享资源已被(读锁或写锁)锁定，这个写锁操作的 goroutine 将被阻塞直到解锁 </li>
+<li>RWMutex 的读锁不要用于递归调用，比较容易产生死锁 </li>
+<li>RWMutex 的锁定状态与特定的 goroutine 没有关联。一个 goroutine 可以 RLock(Lock)，另一个 goroutine 可以 RUnlock(Unlock) </li>
+<li>写锁被解锁后，所有因操作锁定读锁而被阻塞的 goroutine 会被唤醒，并都可以成功锁定读锁 </li>
+<li>读锁被解锁后，在没有被其他读锁锁定的前提下，所有因操作锁定写锁而被阻塞的 Goroutine，其中等待时间最长的一个 Goroutine 会被唤醒 </li>
+</ul>
+<h3 id="6-Cond是什么"><a href="#6-Cond是什么" class="headerlink" title="6. Cond是什么"></a>6. Cond是什么</h3><p>Cond 实现了一种条件变量，可以使用在多个 Reader 等待共享资源 ready 的场景(如果只有一读一写，一个锁或者 channel 就搞定了)</p>
+<p>每个 Cond 都会关联一个 Lock(*sync.Mutex or *sync.RWMutex)，当修改条件或者调用Wait方法时，必须加锁，保护 condition。 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// myCondDes project main.go</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;sync&quot;</span></span><br><span class="line">    <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> mutex sync.Mutex</span><br><span class="line">    cond := sync.Cond&#123;L: &amp;mutex&#125; <span class="comment">//或sync.NewCond(&amp;mutex)</span></span><br><span class="line">    condition := <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line">    cond.L.Lock() <span class="comment">// mutex.lock()</span></span><br><span class="line">        fmt.Println(<span class="string">&quot;子goroutine已经锁定...&quot;</span>)</span><br><span class="line">        fmt.Println(<span class="string">&quot;子goroutine更改条件数值，并发送通知...&quot;</span>)</span><br><span class="line">        condition = <span class="literal">true</span> <span class="comment">//更改数值</span></span><br><span class="line">        cond.Signal()    <span class="comment">//发送通知：一个goroutine</span></span><br><span class="line">        fmt.Println(<span class="string">&quot;子goroutine...继续...&quot;</span>)</span><br><span class="line">        time.Sleep(<span class="number">5</span> * time.Second)</span><br><span class="line">        fmt.Println(<span class="string">&quot;子goroutine已经解锁!&quot;</span>)</span><br><span class="line">        cond.L.Unlock()</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    cond.L.Lock()</span><br><span class="line">    fmt.Println(<span class="string">&quot;main 已经锁定...&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> !condition &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;main 即将等待...&quot;</span>)</span><br><span class="line">        <span class="comment">//1.wait尝试解锁</span></span><br><span class="line">        <span class="comment">//2.等待--&gt;当前的goroutine进入阻塞状态，等待被唤醒: signal(), broadcast()</span></span><br><span class="line">        <span class="comment">//3.一旦被唤醒后，又被锁定</span></span><br><span class="line">        cond.Wait()</span><br><span class="line">        fmt.Println(<span class="string">&quot;main 被唤醒...&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fmt.Println(<span class="string">&quot;main 继续&quot;</span>)</span><br><span class="line">    fmt.Println(<span class="string">&quot;main 解锁...&quot;</span>)</span><br><span class="line">    cond.L.Unlock()</span><br><span class="line"></span><br><span class="line">    time.Sleep(<span class="number">3</span> * time.Second)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">输出：</span></span><br><span class="line"><span class="comment">main 已经锁定...</span></span><br><span class="line"><span class="comment">main 即将等待...</span></span><br><span class="line"><span class="comment">子goroutine已经锁定...</span></span><br><span class="line"><span class="comment">子goroutine更改条件数值，并发送通知...</span></span><br><span class="line"><span class="comment">子goroutine...继续...</span></span><br><span class="line"><span class="comment">子goroutine已经解锁!</span></span><br><span class="line"><span class="comment">main 被唤醒...</span></span><br><span class="line"><span class="comment">main 继续</span></span><br><span class="line"><span class="comment">main 解锁...</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-Cond中Broadcast和Signal区别"><a href="#7-Cond中Broadcast和Signal区别" class="headerlink" title="7.Cond中Broadcast和Signal区别"></a>7.<strong>Cond</strong>中Broadcast和<strong>Signal</strong>区别</h3><p>Cond里的方法:</p>
+<ul>
+<li>func NewCond(l Locker) *Cond<br>使⽤锁 I 创建一个 *Cond。 Cond条件变量，总是要和锁结合使用。</li>
+<li>func (c *Cond) Broadcast()<br>Broadcast唤醒所有等待c的线程。调⽤者在调⽤本⽅法时，建议（但并⾮必须）保持c.L的锁定。</li>
+<li>func (c *Cond) Signal()<br>Signal唤醒等待c的⼀个线程（如果存在）。调⽤者在调⽤本⽅法时，建议（但并⾮必须）保持c.L的锁定。 发送通知给⼀个⼈。</li>
+</ul>
+<h3 id="8-Cond中Wait的使用"><a href="#8-Cond中Wait的使用" class="headerlink" title="8. Cond中Wait的使用"></a>8. Cond中Wait的使用</h3><ul>
+<li><p>func (c *Cond) Wait()<br>a) Wait⾃⾏解锁c.L并阻塞当前线程，在之后线程恢复执⾏时， Wait⽅法会在返回前锁定c.L。和其他系统不同， Wait除⾮被Broadcast或者Signal唤醒，不会主动返回。 ⼴播给所有⼈。</p>
+<p>b) 因为线程中Wait⽅法是第⼀个恢复执⾏的，⽽此时c.L未加锁。调⽤者不应假设Wait恢复时条件已满⾜，相反，调⽤者应在循环中等待。</p>
+</li>
+</ul>
+<h3 id="9-WaitGroup用法"><a href="#9-WaitGroup用法" class="headerlink" title="9. WaitGroup用法"></a>9. WaitGroup用法</h3><p>一个 WaitGroup 对象可以等待一组协程结束。使用方法是:</p>
+<ul>
+<li>main 协程通过调用 wg.Add(delta int) 设置 worker 协程的个数，然后创建 worker 协程;</li>
+<li>worker 协程执行结束以后，都要调用 wg.Done();</li>
+<li>main 协程调用 wg.Wait() 且被 block，直到所有 worker 协程全部执行结束后返回。</li>
+</ul>
+<h3 id="10-WaitGroup实现原理"><a href="#10-WaitGroup实现原理" class="headerlink" title="10. WaitGroup实现原理"></a>10. WaitGroup实现原理</h3><ul>
+<li>WaitGroup 主要维护了 2 个计数器，一个是请求计数器 v，一个是等待计数器 w，二者组成一个64bit的值，请求计数器占高 32bit，等待计数器占低 32bit。 </li>
+<li>每次Add执行，请求计数器v加1，Done方法执行，等待计数器减1，v为 0 时通过信号量唤醒 Wait()。 </li>
+</ul>
+<h3 id="11-什么是sync-Once"><a href="#11-什么是sync-Once" class="headerlink" title="11. 什么是sync.Once"></a>11. 什么是sync.Once</h3><ul>
+<li><p>Once 可以用来执行且仅仅执行一次动作，常常用于单例对象的初始化场景。 </p>
+</li>
+<li><p>Once 常常用来初始化单例资源，或者并发访问只需初始化一次的共享资源，或者在测试的时候初始化一次测试资源。 </p>
+</li>
+<li><p>sync.Once 只暴露了一个方法 Do，你可以多次调用 Do 方法，但是只有第一次调用 Do 方法时 f 参数才会执行，这里的 f 是一个无参数无返回值的函数。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(o *Once)</span></span> Do(f <span class="function"><span class="keyword">func</span><span class="params">()</span></span>) &#123;&#125; </span><br></pre></td></tr></table></figure>
+
+<p>注意：如果要执行的函数f需要传递参数就需要搭配闭包来使用。</p>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;sync&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">var</span> once sync.Once</span><br><span class="line"><span class="keyword">var</span> person *Person</span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</span><br><span class="line">    Name <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewPerson</span><span class="params">(name <span class="type">string</span>)</span></span>*Person &#123;</span><br><span class="line">    once.Do(<span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        person = <span class="built_in">new</span>(Person)</span><br><span class="line">        person.Name = name</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> person</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//p1 := &amp;Person&#123;Name:&quot;hallen1&quot;&#125;</span></span><br><span class="line">    <span class="comment">//p2 := &amp;Person&#123;Name:&quot;hallen2&quot;&#125;</span></span><br><span class="line">    <span class="comment">//fmt.Printf(&quot;%p\n&quot;,p1)  //0x14000110220</span></span><br><span class="line">    <span class="comment">//fmt.Printf(&quot;%p\n&quot;,p2)  // 0x14000110230</span></span><br><span class="line">    </span><br><span class="line">    p1 := NewPerson(<span class="string">&quot;hallen1&quot;</span>) </span><br><span class="line">    p2 := NewPerson(<span class="string">&quot;hallen2&quot;</span>) </span><br><span class="line">    fmt.Printf(<span class="string">&quot;%p\n&quot;</span>,p1)  <span class="comment">// 0x14000010240</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;%p\n&quot;</span>,p2)  <span class="comment">// 0x14000010240</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-什么操作叫做原子操作"><a href="#12-什么操作叫做原子操作" class="headerlink" title="12. 什么操作叫做原子操作"></a>12. <strong>什么操作叫做原子操作</strong></h3><p><strong>原子操作即是进行过程中不能被中断的操作</strong>，针对某个值的原子操作在被进行的过程中，CPU 绝不会再去进行其他的针对该值的操作。</p>
+<p>为了实现这样的严谨性，原子操作仅会由一个独立的 CPU 指令代表和完成。原子操作是无锁的，常常直接通过 CPU指令直接实现。 事实上，其它同步技术的实现常常依赖于原子操作。</p>
+<h3 id="13-原子操作和锁的区别"><a href="#13-原子操作和锁的区别" class="headerlink" title="13. 原子操作和锁的区别"></a>13. <strong>原子操作和锁的区别</strong></h3><p>原子操作由底层硬件支持，而锁则由操作系统的调度器实现。</p>
+<p>锁应当用来保护一段逻辑，对于一个变量更新的保护。</p>
+<p>原子操作通常执行上会更有效率，并且更能利用计算机多核的优势，如果要更新的是一个复合对象，则应当使用 atomic.Value 封装好的实现。 </p>
+<p>atomic.Value类型可以原子更新 interface{}。里面其实维护的就是一个 interface{}. 然后提供原子的更新这个interface{}的方法。</p>
+<h3 id="14-什么是CAS"><a href="#14-什么是CAS" class="headerlink" title="14. 什么是CAS"></a>14. 什么是CAS</h3><p>CAS 的全称为 Compare And Swap，直译就是比较交换。是一条 CPU 的原子指令，其作用是让 CPU 先进行比较两个值是否相等，然后原子地更新某个位置的值，其实现方式是给予硬件平台的汇编指令，在 intel 的 CPU 中，使用的cmpxchg 指令，就是说 CAS 是靠硬件实现的，从而在硬件层面提升效率。</p>
+<p>go中的Cas操作与java中类似，都是借用了CPU提供的原子性指令来实现。CAS操作修改共享变量时候不需要对共享变量加锁，而是通过类似乐观锁的方式进行检查，本质还是不断的占用CPU 资源换取加锁带来的开销（比如上下文切换开销）。</p>
+<p>go中CAS操作可以有效的减少使用锁所带来的开销，但是需要注意在高并发下这是使用cpu资源做交换的。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;sync&quot;</span></span><br><span class="line">    <span class="string">&quot;sync/atomic&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    counter <span class="type">int32</span>          <span class="comment">//计数器</span></span><br><span class="line">    wg      sync.WaitGroup <span class="comment">//信号量</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    threadNum := <span class="number">5</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//1. 五个信号量</span></span><br><span class="line">    wg.Add(threadNum)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.开启5个线程</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; threadNum; i++ &#123;</span><br><span class="line">        <span class="keyword">go</span> incCounter(i)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.等待子线程结束</span></span><br><span class="line">    wg.Wait()</span><br><span class="line">    fmt.Println(counter)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">incCounter</span><span class="params">(index <span class="type">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">defer</span> wg.Done()</span><br><span class="line"></span><br><span class="line">    spinNum := <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="comment">//2.1原子操作</span></span><br><span class="line">        old := counter</span><br><span class="line">        ok := atomic.CompareAndSwapInt32(&amp;counter, old, old+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> ok &#123;</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            spinNum++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fmt.Printf(<span class="string">&quot;thread,%d,spinnum,%d\n&quot;</span>,index,spinNum)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如上代码main线程首先创建了5个信号量，然后开启五个线程执行incCounter方法</li>
+<li>incCounter内部执行代码2.1 使用cas操作递增counter的值， atomic.CompareAndSwapInt32具有三个参数，第一个是变量的地址，第二个是变量当前值，第三个是要修改变量为多少，该函数如果发现传递的old值等于当前变量的值，则使用第三个变量替换变量的值并返回true，否则返回false。</li>
+<li>这里之所以使用无限循环是因为在高并发下每个线程执行CAS并不是每次都成功，失败了的线程需要重写获取变量当前的值，然后重新执行CAS操作。读者可以把线程数改为10000或者更多会发现输出thread,5329,spinnum,1其中1说明该线程尝试了两个CAS操作，第二次才成功。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/56733484">Go并发编程之美-CAS操作</a></p>
+<h3 id="15-sync-Pool有什么用"><a href="#15-sync-Pool有什么用" class="headerlink" title="15. sync.Pool有什么用"></a>15. sync.Pool有什么用</h3><p>用来保存和复用临时对象，以减少内存分配，降低GC压力。</p>
+<p>Pool对外暴露的主要有三个接口：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *Pool)</span></span> Get() <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *Pool)</span></span> Put(x <span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line"></span><br><span class="line">New <span class="function"><span class="keyword">func</span><span class="params">()</span></span> <span class="keyword">interface</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Get 返回 Pool 中的任意一个对象。如果 Pool 为空，则调用 New 返回一个新创建的对象。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;log&quot;</span></span><br><span class="line">    <span class="string">&quot;sync&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">    <span class="comment">// 建立对象</span></span><br><span class="line">    <span class="keyword">var</span> pipe = &amp;sync.Pool&#123;New:<span class="function"><span class="keyword">func</span><span class="params">()</span></span><span class="keyword">interface</span>&#123;&#125;&#123;<span class="keyword">return</span> <span class="string">&quot;Hello, BeiJing&quot;</span>&#125;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 准备放入的字符串</span></span><br><span class="line">    val := <span class="string">&quot;Hello,World!&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 放入</span></span><br><span class="line">    pipe.Put(val)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 取出</span></span><br><span class="line">    first := pipe.Get().(<span class="type">string</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 再取就没有了,会自动调用NEW</span></span><br><span class="line">    second := pipe.Get().(<span class="type">string</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Go-Runtime"><a href="#Go-Runtime" class="headerlink" title="Go Runtime"></a><strong>Go Runtime</strong></h2><h3 id="1-Goroutine定义"><a href="#1-Goroutine定义" class="headerlink" title="1.Goroutine定义"></a>1.Goroutine定义</h3><p>Go中协程被称为goroutine，它非常轻量，一个goroutine只占几KB，</p>
+<p>goroutine让一组可复用的函数运行在一组线程之上，即使有协程阻塞，该线程的其他协程也可以被<code>runtime</code>调度，转移到其他可运行的线程上。特点：</p>
+<ul>
+<li>占用内存更小（几kb），支持高并发</li>
+<li>调度更灵活(runtime调度)，切换成本低</li>
+</ul>
+<h3 id="2-GMP"><a href="#2-GMP" class="headerlink" title="2.GMP"></a>2.GMP</h3><ul>
+<li>G(Goroutine)：我们所说的协程，每个 Goroutine对象中的 sched 保存着其上下文信息。</li>
+<li>M(Machine)：对内核级线程的封装，数量对应真实的 CPU 数(真正干活的对象)。 </li>
+<li>P(Processor)：即为G和M的调度对象，用来调度G和M之间的关联关系，通过GOMAXPROCS设置数量，默认为核心数。 </li>
+</ul>
+<h3 id="3-1-0之前GM调度模型"><a href="#3-1-0之前GM调度模型" class="headerlink" title="3.1.0之前GM调度模型"></a>3.1.0之前GM调度模型</h3><p>全局Goroutine(G)队列，轮询利用多个thread(M)调度</p>
+<ol>
+<li>创建、销毁、调度G都需要每个M获取锁，这就形成了<strong>激烈的锁竞争</strong>。</li>
+<li>M转移G会造成<strong>延迟和额外的系统负载</strong>。</li>
+<li>系统调用(CPU在M之间的切换)导致<strong>频繁的线程阻塞和取消阻塞操作增加了系统开销</strong>。</li>
+</ol>
+<h3 id="4-GMP调度流程"><a href="#4-GMP调度流程" class="headerlink" title="4.GMP调度流程"></a>4.GMP调度流程</h3><p><img src="https://i0.wp.com/tva1.sinaimg.cn/large/e6c9d24ely1h249evuvz8j20p70eo3zp.jpg"></p>
+<ol>
+<li>创建Goroutine</li>
+<li>G加入P局部队列，局部队列满了会把G放到全局队列。每个P的本地队列最大容量为256。</li>
+<li>每个P和一个M绑定，M从绑定的P的局部队列获取 G 来执行 </li>
+<li>当M绑定的P的局部队列为空时，M会从全局队列获取到本地队列来执行G (流程 3.1)，当从全局队列中没有获取到可执行的 G 时候，M 会从其他 P 的局部队列中偷取 G 来执行(流程 3.2)，这种从其他 P 偷的方式称为 work stealing </li>
+<li>当G因系统调用(syscall)阻塞时会阻塞M，此时P会和M解绑即hand off，并寻找新的闲置的 M，若没有闲置的 M就会新建一个 M(流程 5.1) </li>
+<li>当 G 因 channel 或者 network I/O 阻塞时，不会阻塞 M，M 会寻找其他 runnable 的 G;当阻塞的 G 恢复后会重新进入P队列等待执行</li>
+</ol>
+<h3 id="5-work-stealing-机制"><a href="#5-work-stealing-机制" class="headerlink" title="5. work stealing 机制"></a>5. <strong>work stealing</strong> <strong>机制</strong></h3><p>Goroutine 仅在本地队列满载之后才会加入到全局队列；它也会在Go往调度器中批量注入时被加到全局队列，例如，网络轮询器（network poller） 或者在垃圾回收期间等待的 Goroutine。</p>
+<p>获取 P 本地队列，当从绑定 P 本地队列上找不到可执行的 G，尝试从全局链表中拿，再拿不到从网络轮询器netpoll 和事件池里拿，最后会会随机的选择其他的 P，并尝试从其队列中偷取一半可运行的G</p>
+<h3 id="6-hand-off-机制"><a href="#6-hand-off-机制" class="headerlink" title="6. hand off 机制"></a>6. hand off 机制</h3><p>当本线程 M 因为 G 进行的系统调用阻塞时，线程释放绑定的 P，把 P 转移给其他空闲的 M 执行。</p>
+<p>细节: 当发生上线文切换时，需要对执行现场进行保护，以便下次被调度执行时进行现场恢复。</p>
+<p>Go 调度器 M 的栈保存在 G 对象上，只需要将 M 所需要的寄存器(SP、PC 等)保存到 G 对象上就可以实现现场保护。当这些寄存器数据被保护起来，就随时可以做上下文切换了，在中断之前把现场保存起来。</p>
+<p>如果此时G 任务还没有执行完，M 可以将任务重新丢到 P 的任务队列，等待下一次被调度执行。当再次被调度执行时，M 通过访问 G 的 vdsoSP、vdsoPC 寄存器进行现场恢复(从上次中断位置继续执行)。</p>
+<h3 id="7-协作式的抢占式调度"><a href="#7-协作式的抢占式调度" class="headerlink" title="7. 协作式的抢占式调度"></a>7. <strong>协作式的抢占式调度</strong></h3><p>在 1.14 版本之前，程序只能依靠 Goroutine 主动让出 CPU 资源才能触发调度。这种方式存在问题有:</p>
+<ul>
+<li>某些 Goroutine 可以长时间占用线程，造成其它 Goroutine 的饥饿</li>
+<li>垃圾回收需要暂停整个程序(Stop-the-world，STW)，最长可能需要几分钟的时间，导致整个程序无法工作</li>
+</ul>
+<h3 id="8-基于信号的抢占式调度"><a href="#8-基于信号的抢占式调度" class="headerlink" title="8. 基于信号的抢占式调度"></a>8. <strong>基于信号的抢占式调度</strong></h3><h4 id="sysmon函数"><a href="#sysmon函数" class="headerlink" title="sysmon函数"></a>sysmon函数</h4><p>决定Go抢占时机的核心函数叫做<code>sysmon</code>，它不依赖P，可以直接绑定在M上执行。这个函数是一个无限循环，它将始终运行在后台，执行监控任务。我们不妨将sysmon绑定的M记为Ms。</p>
+<h4 id="抢占进行系统调用的P"><a href="#抢占进行系统调用的P" class="headerlink" title="抢占进行系统调用的P"></a>抢占进行系统调用的P</h4><p>P不想被抢占，必须同时满足以下条件：</p>
+<ol>
+<li>P的本地运行队列里面没有等待运行的goroutine；</li>
+<li>有处于自旋状态的M或者有空闲的P；</li>
+<li>从上一次<code>sysmon</code>观察到P对应的M处于系统调用之中至今已超过10ms。</li>
+</ol>
+<p>只要有一个条件满足了，<code>sysmon</code>就可以抢占当前的P。</p>
+<h4 id="抢占运行时间过长的P"><a href="#抢占运行时间过长的P" class="headerlink" title="抢占运行时间过长的P"></a>抢占运行时间过长的P</h4><p>对于运行时间过长的P，先把它的抢占标志改掉，这样下一次发生函数调用时就能抢占该P</p>
+<p>如果当前系统支持异步抢占，将直接发送<code>_SIGURG</code>信号给当前P对应的M，由<code>sighandler</code>决定如何处理。</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/533402588">Go语言抢占机制详解</a></p>
+<h3 id="9-GMP-调度过程中存在哪些阻塞"><a href="#9-GMP-调度过程中存在哪些阻塞" class="headerlink" title="9. GMP 调度过程中存在哪些阻塞"></a>9. <strong>GMP</strong> <strong>调度过程中存在哪些阻塞</strong></h3><ul>
+<li>I/O，select</li>
+<li>block on syscall</li>
+<li>channel</li>
+<li>等待锁</li>
+<li>runtime.Gosched() 让当前goroutine让出CPU,好让其它的goroutine获得执行的机会</li>
+</ul>
+<h3 id="10-Sysmon-有什么作用"><a href="#10-Sysmon-有什么作用" class="headerlink" title="10.Sysmon 有什么作用"></a>10.<strong>Sysmon</strong> <strong>有什么作用</strong></h3><p>Sysmon 也叫监控线程，变动的周期性检查，好处</p>
+<ul>
+<li>释放闲置超过 5 分钟的 span 物理内存;</li>
+<li>如果超过2分钟没有垃圾回收，强制执行;</li>
+<li>将长时间未处理的网络轮询器 netpoll 添加到全局队列;</li>
+<li>向长时间运行的 G 任务发出抢占调度(超过 10ms 的 g，会进行 retake); </li>
+<li>收回因 syscall 长时间阻塞的 P</li>
+</ul>
+<h3 id="11-三色标记"><a href="#11-三色标记" class="headerlink" title="11. 三色标记"></a>11. 三色标记</h3><ul>
+<li><p>先把所有的对象都放到白色的集合中</p>
+</li>
+<li><p>从根节点开始遍历对象，遍历到的白色对象从白色集合中放到灰色集合中</p>
+</li>
+<li><p>遍历灰色集合中的对象，把灰色对象引用的白色集合的对象放入到灰色集合中，同时把遍历过的灰色集合中的对象放到黑色的集合中</p>
+</li>
+<li><p>循环步骤3，直到灰色集合中没有对象</p>
+</li>
+<li><p>步骤4结束后，白色集合中的对象就是不可达对象，也就是垃圾，进行回收</p>
+</li>
+</ul>
+<h3 id="12-三色不变式"><a href="#12-三色不变式" class="headerlink" title="12. 三色不变式"></a>12. 三色不变式</h3><p>GC回收器满足下面两种情况之一时，即可保对象不丢失。 这两种方式就是“强三色不变式”和“ 弱三色不变式”。</p>
+<ul>
+<li>强三色不变式：不存在黑色对象引用到白色对象的指针。</li>
+<li>弱三色不变式：所有被黑色对象引用的白色对象都处于灰色保护状态。</li>
+</ul>
+<h3 id="13-插入写屏障"><a href="#13-插入写屏障" class="headerlink" title="13. 插入写屏障"></a>13. 插入写屏障</h3><p><code>具体操作</code>：在A对象引用B对象的时候，B对象被标记为灰色。(将B挂在A下游，B必须被标记为灰色)</p>
+<p><code>满足</code>： <strong>强三色不变式</strong>. (不存在黑色对象引用白色对象的情况了， 因为白色会强制变成灰色)</p>
+<p>插入屏障机制，在<strong>栈空间的对象操作中不使用</strong>， 仅仅使用在堆空间对象的操作中。</p>
+<h3 id="14-删除写屏障"><a href="#14-删除写屏障" class="headerlink" title="14. 删除写屏障"></a>14. 删除写屏障</h3><p><code>具体操作</code>: 被删除的对象，如果自身为灰色或者白色，那么被标记为灰色。</p>
+<p><code>满足</code>: <strong>弱三色不变式</strong>. (保护灰色对象到白色对象的路径不会断)</p>
+<h3 id="15-混合写屏障"><a href="#15-混合写屏障" class="headerlink" title="15. 混合写屏障"></a>15. 混合写屏障</h3><p>1、GC开始将栈上的对象全部扫描并标记为黑色(之后不再进行第二次重复扫描，无需STW)，</p>
+<p>2、GC期间，任何在栈上创建的新对象，均为黑色。</p>
+<p>3、被删除的对象标记为灰色。</p>
+<p>4、被添加的对象标记为灰色。</p>
+<h3 id="16-GC触发机制"><a href="#16-GC触发机制" class="headerlink" title="16. GC触发机制"></a>16. GC触发机制</h3><p><strong>主动触发</strong>: 调用 runtime.GC </p>
+<p><strong>被动触发</strong>: </p>
+<p>使用系统监控，该触发条件由 runtime.forcegcperiod 变量控制，默认为 2 分 钟。当超过两分钟没有产生任何 GC 时，强制触发 GC。 </p>
+<h3 id="17-GC流程"><a href="#17-GC流程" class="headerlink" title="17. GC流程"></a>17. GC流程</h3><p>Go1.14 版本以 STW 为界限，可以将 GC 划分为五个阶段:</p>
+<ul>
+<li>GCMark 标记准备阶段，为并发标记做准备工作，启动写屏障</li>
+<li>STWGCMark 扫描标记阶段，与赋值器并发执行，写屏障开启并发 </li>
+<li>GCMarkTermination 标记终止阶段，保证一个周期内标记任务完成，停止写屏障 </li>
+<li>GCoff 内存清扫阶段，将需要回收的内存归还到堆中，写屏障关闭 </li>
+<li>GCoff 内存归还阶段，将过多的内存归还给操作系统，写屏障关闭。 </li>
+</ul>
+<h3 id="18-GC如何调优"><a href="#18-GC如何调优" class="headerlink" title="18. GC如何调优"></a>18. GC如何调优</h3><p>通过 go tool pprof 和 go tool trace 等工具 </p>
+<ul>
+<li>控制内存分配的速度，限制 Goroutine 的数量，从而提高赋值器对 CPU 的利用率。 </li>
+<li>减少并复用内存，例如使用 sync.Pool 来复用需要频繁创建临时对象，例如提前分配足够的内存来降低多余的拷贝。</li>
+<li>需要时，增大 GOGC 的值，降低 GC 的运行频率。 </li>
+</ul>
+<h3 id="19-Mutex是乐观锁还是悲观锁，执行过程"><a href="#19-Mutex是乐观锁还是悲观锁，执行过程" class="headerlink" title="19. Mutex是乐观锁还是悲观锁，执行过程"></a>19. Mutex是乐观锁还是悲观锁，执行过程</h3><p>Mutex会去做自旋，然后CAS操作，自旋到了次数才去block等待唤醒</p>
+<h3 id="20-Golang的内存模型，为什么小对象多了会造成gc压力。"><a href="#20-Golang的内存模型，为什么小对象多了会造成gc压力。" class="headerlink" title="20. Golang的内存模型，为什么小对象多了会造成gc压力。"></a>20. Golang的内存模型，为什么小对象多了会造成gc压力。</h3><p>通常小对象过多会导致GC三色法消耗过多的GPU。优化思路是，减少对象分配</p>
+<h3 id="21-Go哪些对象分配在堆上，哪些对象分配在栈上"><a href="#21-Go哪些对象分配在堆上，哪些对象分配在栈上" class="headerlink" title="21.Go哪些对象分配在堆上，哪些对象分配在栈上"></a>21.Go哪些对象分配在堆上，哪些对象分配在栈上</h3><p>go中，会通过逃逸分析，把那些一次性的对象分配到栈区，如果后续还有变量指向，那么就放到堆区。</p>
+<p>go编译器会判断变量的生命周期：</p>
+<ul>
+<li>如果一个函数结束之后外部没有引用，那么优先分配到栈中(如果申请的内存过大，栈区存不下，会分配到堆)。</li>
+<li>如果一个函数结束之后外部还有引用，那么必定分配到堆中</li>
+</ul>
+<p>通过命令<code>go build -gcflags &quot;-m -l&quot; xxx.go</code>观察golang是如何进行逃逸分析的</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2020 Yelog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

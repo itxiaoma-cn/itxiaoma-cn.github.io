@@ -668,7 +668,7 @@
   </url>
   
   <url>
-    <loc>https://blog.itxiaoma.cn/2021/07/07/GOPL07-Goroutines%E5%92%8CChannels/</loc>
+    <loc>https://blog.itxiaoma.cn/2021/07/06/GOPL06-%E6%8E%A5%E5%8F%A3/</loc>
     
     <lastmod>2023-05-27</lastmod>
     
@@ -677,7 +677,7 @@
   </url>
   
   <url>
-    <loc>https://blog.itxiaoma.cn/2021/07/06/GOPL06-%E6%8E%A5%E5%8F%A3/</loc>
+    <loc>https://blog.itxiaoma.cn/2021/07/07/GOPL07-Goroutines%E5%92%8CChannels/</loc>
     
     <lastmod>2023-05-27</lastmod>
     
@@ -776,15 +776,6 @@
   </url>
   
   <url>
-    <loc>https://blog.itxiaoma.cn/2022/02/07/Redis07-%E6%8C%81%E4%B9%85%E5%8C%96/</loc>
-    
-    <lastmod>2023-05-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.itxiaoma.cn/2022/02/08/Redis08-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/</loc>
     
     <lastmod>2023-05-27</lastmod>
@@ -795,6 +786,15 @@
   
   <url>
     <loc>https://blog.itxiaoma.cn/2022/02/09/Redis09-%E9%9B%86%E7%BE%A4/</loc>
+    
+    <lastmod>2023-05-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.itxiaoma.cn/2022/02/07/Redis07-%E6%8C%81%E4%B9%85%E5%8C%96/</loc>
     
     <lastmod>2023-05-27</lastmod>
     
@@ -1500,13 +1500,6 @@
   </url>
   
   <url>
-    <loc>https://blog.itxiaoma.cn/tags/Java/</loc>
-    <lastmod>2023-07-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://blog.itxiaoma.cn/tags/HTML/</loc>
     <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -1514,14 +1507,14 @@
   </url>
   
   <url>
-    <loc>https://blog.itxiaoma.cn/tags/JavaScript/</loc>
+    <loc>https://blog.itxiaoma.cn/tags/Java/</loc>
     <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.itxiaoma.cn/tags/K3S/</loc>
+    <loc>https://blog.itxiaoma.cn/tags/JavaScript/</loc>
     <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1536,6 +1529,13 @@
   
   <url>
     <loc>https://blog.itxiaoma.cn/tags/Jmeter/</loc>
+    <lastmod>2023-07-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.itxiaoma.cn/tags/K3S/</loc>
     <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1698,14 +1698,14 @@
   </url>
   
   <url>
-    <loc>https://blog.itxiaoma.cn/categories/JAVA/</loc>
+    <loc>https://blog.itxiaoma.cn/categories/%E5%89%8D%E7%AB%AF/HTML/</loc>
     <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://blog.itxiaoma.cn/categories/%E5%89%8D%E7%AB%AF/HTML/</loc>
+    <loc>https://blog.itxiaoma.cn/categories/JAVA/</loc>
     <lastmod>2023-07-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
